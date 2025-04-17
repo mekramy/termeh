@@ -51,7 +51,7 @@ $-colors: () !default;
 
 /// Gets color variant with auto-generation
 /// @param {String} $name - Base color name
-/// @param {String} $variant - Variant name
+/// @param {String} $variant - Variant name (active, light, light-active, mute, mute-active, readable, foreground, decorator or color)
 /// @param {Color} $fallback [null] - Fallback color
 /// @param {Color} $base [null] - Base color for theming (light or dark)
 /// @return {Color} Variant color
@@ -92,7 +92,7 @@ $-colors: () !default;
         $v: if($tone == "light", "700", "200");
         $c: palette.palette($color, $v);
         @return color.mix($base, $color, 10%);
-    } @else if $variant == "color" {
+    } @else if $variant == "foreground" {
         $v: if($tone == "light", "900", "100");
         $c: palette.palette($color, $v);
         @return color.mix($base, $color, 95%);
