@@ -19,9 +19,9 @@
 /// Applies margin styles to non-last children unless marginless
 /// @param {Boolean} $exceptLast [true] - Whether to exclude last child
 /// @content Margin styles to apply
-@mixin marged($exceptLast: true) {
-    $exceptLast: util.bool-of($exceptLast, "marged", "exceptLast");
-    @if $exceptLast {
+@mixin marged($except-last: true) {
+    $except-last: util.bool-of($except-last, "marged", "except-last");
+    @if $except-last {
         &:not(:last-child, .is-marginless) {
             @content;
         }
@@ -331,7 +331,7 @@
 /// @termeh [8px] - `var("gap", "micro")`
 @function control-padding() {
     $gap: var.var("gap", "micro", 8px);
-    @return $gap ($gap * 2);
+    @return $gap($gap * 2);
 }
 
 /// Standard transition effect

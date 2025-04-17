@@ -13,7 +13,6 @@ $-units: () !default;
     $-units: map.set($-units, $name, $unit) !global;
 }
 
-/* stylelint-disable scss/no-global-function-names */
 /// Gets unit value by name
 /// @param {String} $name - Unit name
 /// @return {Number} Unit value
@@ -25,7 +24,6 @@ $-units: () !default;
     }
     @return map.get($-units, $name);
 }
-/* stylelint-enable scss/no-global-function-names */
 
 /// Gets filtered map of units
 /// @param {List} $includes [null] - Units to include
