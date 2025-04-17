@@ -6,7 +6,8 @@
     "license": "ISC",
     "scripts": {
         "lint": "npx stylelint \"src/**/*.scss\"",
-        "fix": "npx stylelint \"src/**/*.scss\" --fix"
+        "fix": "npx stylelint \"src/**/*.scss\" --fix",
+        "demo": "npx sass demo/style.scss demo/style.css"
     },
     "keywords": [
         "responsive",
