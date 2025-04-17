@@ -1,0 +1,42 @@
+@use "sass:map";
+@use "util";
+
+$-weights: (
+    "lighter": 100,
+    "light": 300,
+    "normal": 400,
+    "medium": 500,
+    "semibold": 600,
+    "bold": 700,
+    "bolder": 900,
+) !default;
+$-defs: map.keys($-weights);
+
+/// Gets font weight value by name
+/// @param {String} $name - Weight name
+/// @return {Number} Weight value
+/// @throws Error if font weight not found
+@function weight($name) {
+    $name: util.string-of($name, "weight", "name");
+    @if not map.has-key($-weights, $name) {
+        @error "Font weight '#{$name}' not found. Available weights: #{$-defs}";
+    }
+    @return map.get($-weights, $name);
+}
+
+/// Gets filtered map of font weights
+/// @param {List} $includes [null] - Weights to include
+/// @param {List} $excludes [null] - Weights to exclude
+/// @return {Map} Filtered weights
+@function weights($includes: null, $excludes: null) {
+    $includes: util.list-safe($includes, "weights", "includes", $-defs);
+    $excludes: util.list-safe($excludes, "weights", "excludes", ());
+
+    $result: ();
+    @each $name, $weight in $-weights {
+        @if util.should-include($name, $includes, $excludes) {
+            $result: map.set($result, $name, $weight);
+        }
+    }
+    @return $result;
+}

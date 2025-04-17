@@ -9,14 +9,14 @@
         "fix": "npx stylelint \"src/**/*.scss\" --fix"
     },
     "keywords": [
-        "css",
-        "sass",
-        "layout",
-        "grid",
-        "flexbox",
         "responsive",
-        "framework",
-        "css-framework"
+        "ui-design",
+        "css-grid",
+        "theming",
+        "css-framework",
+        "css-component",
+        "ui-component",
+        "responsive-design"
     ],
     "authors": [
         {

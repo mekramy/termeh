@@ -1,0 +1,157 @@
+@use "sass:map";
+@use "util";
+
+$-queries: (
+    "until-fullhd": "screen and (max-width: 1407px)",
+    "until-widescreen": "screen and (max-width: 1215px)",
+    "until-desktop": "screen and (max-width: 1023px)",
+    "tablet": "screen and (min-width: 769px)",
+    "desktop": "screen and (min-width: 1024px)",
+    "widescreen": "screen and (min-width: 1216px)",
+    "fullhd": "screen and (min-width: 1408px)",
+    "mobile": "screen and (max-width: 768px)",
+    "tablet-only": "screen and (min-width: 769px) and (max-width: 1023px)",
+    "desktop-only": "screen and (min-width: 1024px) and (max-width: 1215px)",
+    "widescreen-only": "screen and (min-width: 1216px) and (max-width: 1407px)",
+) !default;
+$-defs: map.keys($-queries);
+
+/// Gets media query by name
+/// @param {String} $name - Query name
+/// @return {String} Media query
+/// @throws Error if query not found
+@function media-query($name) {
+    $name: util.string-of($name, "media-query", "name");
+    @if not map.has-key($-queries, $name) {
+        @error "Media query '#{$name}' not found. Available: #{$-defs}";
+    }
+    @return map.get($-queries, $name);
+}
+
+/// Gets filtered media queries
+/// @param {List} $includes [null] - Names to include
+/// @param {List} $excludes [null] - Names to exclude
+/// @return {Map} Filtered queries
+@function media-queries($includes: null, $excludes: null) {
+    $includes: util.list-safe($includes, "media-queries", "includes", $-defs);
+    $excludes: util.list-safe($excludes, "media-queries", "excludes", ());
+
+    $included: ();
+    @each $name, $query in $-queries {
+        @if util.should-include($name, $includes, $excludes) {
+            $included: map.set($included, $name, $query);
+        }
+    }
+
+    $result: ();
+    @each $name in $-defs {
+        @if map.has-key($included, $name) {
+            $result: map.set($result, $name, map.get($included, $name));
+        }
+    }
+    @return $result;
+}
+
+/// Applies styles for non-touch devices
+/// @content Styles to apply
+@mixin non-touch() {
+    @media (hover: hover) {
+        @content;
+    }
+}
+
+/// Applies styles for touch devices
+/// @content Styles to apply
+@mixin touch() {
+    @media (hover: none) {
+        @content;
+    }
+}
+
+/// Applies styles for mobile devices (max-width: 768px)
+/// @content Styles to apply
+@mixin mobile() {
+    @media #{media-query("mobile")} {
+        @content;
+    }
+}
+
+/// Applies styles for tablet devices (min-width: 769px)
+/// @content Styles to apply
+@mixin tablet() {
+    @media #{media-query("tablet")} {
+        @content;
+    }
+}
+
+/// Applies styles for tablet-only devices (769px-1023px)
+/// @content Styles to apply
+@mixin tablet-only() {
+    @media #{media-query("tablet-only")} {
+        @content;
+    }
+}
+
+/// Applies styles for devices smaller than desktop (max-width: 1023px)
+/// @content Styles to apply
+@mixin until-desktop() {
+    @media #{media-query("until-desktop")} {
+        @content;
+    }
+}
+
+/// Applies styles for desktop devices (min-width: 1024px)
+/// @content Styles to apply
+@mixin desktop() {
+    @media #{media-query("desktop")} {
+        @content;
+    }
+}
+
+/// Applies styles for desktop-only devices (1024px-1215px)
+/// @content Styles to apply
+@mixin desktop-only() {
+    @media #{media-query("desktop-only")} {
+        @content;
+    }
+}
+
+/// Applies styles for devices smaller than widescreen (max-width: 1215px)
+/// @content Styles to apply
+@mixin until-widescreen() {
+    @media #{media-query("until-widescreen")} {
+        @content;
+    }
+}
+
+/// Applies styles for widescreen devices (min-width: 1216px)
+/// @content Styles to apply
+@mixin widescreen() {
+    @media #{media-query("widescreen")} {
+        @content;
+    }
+}
+
+/// Applies styles for widescreen-only devices (1216px-1407px)
+/// @content Styles to apply
+@mixin widescreen-only() {
+    @media #{media-query("widescreen-only")} {
+        @content;
+    }
+}
+
+/// Applies styles for devices smaller than fullhd (max-width: 1407px)
+/// @content Styles to apply
+@mixin until-fullhd() {
+    @media #{media-query("until-fullhd")} {
+        @content;
+    }
+}
+
+/// Applies styles for fullhd devices (min-width: 1408px)
+/// @content Styles to apply
+@mixin fullhd() {
+    @media #{media-query("fullhd")} {
+        @content;
+    }
+}

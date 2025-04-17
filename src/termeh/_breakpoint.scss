@@ -1,0 +1,57 @@
+@use "sass:map";
+@use "sass:math";
+@use "util";
+
+$-breakpoints: (
+    "tablet": 769px,
+    "desktop": 1024px,
+    "widescreen": 1216px,
+    "fullhd": 1408px,
+) !default;
+$-defs: map.keys($-breakpoints);
+
+/// Gets breakpoint value by name
+/// @param {String} $name - Breakpoint name
+/// @return {Number} Breakpoint value
+/// @throws Error if breakpoint not found
+@function breakpoint($name) {
+    $name: util.string-of($name, "breakpoint", "name");
+    @if not map.has-key($-breakpoints, $name) {
+        @error "Breakpoint '#{$name}' not found. Available: #{$-defs}";
+    }
+    @return map.get($-breakpoints, $name);
+}
+
+/// Gets all breakpoints
+/// @return {Map} All breakpoints
+@function breakpoints() {
+    @return $-breakpoints;
+}
+
+/// Applies styles from breakpoint
+/// @param {String} $device - Breakpoint name
+/// @content Styles to apply
+@mixin from($device) {
+    $device: util.string-of($device, "from", "device");
+    @if not map.has-key($-breakpoints, $name) {
+        @error "Breakpoint '#{$name}' not found. Available: #{$-defs}";
+    }
+
+    @media screen and (min-width: breakpoint($device)) {
+        @content;
+    }
+}
+
+/// Applies styles until breakpoint
+/// @param {String} $device - Breakpoint name
+/// @content Styles to apply
+@mixin until($device) {
+    $device: util.string-of($device, "until", "device");
+    @if not map.has-key($-breakpoints, $name) {
+        @error "Breakpoint '#{$name}' not found. Available: #{$-defs}";
+    }
+
+    @media screen and (max-width: math.sub(breakpoint($device), 1px)) {
+        @content;
+    }
+}
