@@ -1,0 +1,25 @@
+@use "termeh/color";
+@use "termeh/gap";
+@use "termeh/size";
+@use "termeh/unit";
+@use "termeh/var";
+
+// Base styles
+@include var.define("base", "color", white);
+@include var.define("base", "section", #f8f9fa);
+@include var.define("base", "separator", #e1e6ea);
+@include var.define("base", "direction", ltr);
+
+@include var.define("gap", "micro", 8px);
+@include var.define("gap", "macro", 1.6rem);
+
+@include var.define("transition", "ease", ease);
+@include var.define("transition", "duration", 250ms);
+
+@include var.define("input", "disabled", #f0f2f5);
+@include var.define("input", "disabled-color", #879aab);
+@include var.define("input", "disabled-border", #e1e6ea);
+
+@include var.define("scroll", "size", 8px);
+// @include var.define("scroll", "track", null);
+// @include var.define("scroll", "thumb", null);

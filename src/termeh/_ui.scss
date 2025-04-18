@@ -351,9 +351,9 @@
 @mixin disabled() {
     pointer-events: none;
     user-select: none;
+    color: var.var("input", "disabled-color");
     background-color: var.var("input", "disabled");
     border-color: var.var("input", "disabled-border");
-    color: var.var("input", "disabled-color");
 }
 
 /// Text selection styling

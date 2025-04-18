@@ -8,5 +8,6 @@ module.exports = {
         "scss/no-global-function-names": null,
         "scss/dollar-variable-empty-line-before": null,
         "scss/at-mixin-argumentless-call-parentheses": null,
+        "scss/double-slash-comment-empty-line-before": null,
     },
 };
