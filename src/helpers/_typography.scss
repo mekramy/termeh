@@ -1,6 +1,6 @@
 @use "../termeh/termeh";
 
-/// Applies text style utility classes
+/// Generates text style utility classes
 /// @output Classes for text styling like italic, underline, etc.
 @mixin use-text() {
     @at-root {
@@ -40,7 +40,7 @@
     }
 }
 
-/// Applies text color utility classes
+/// Generates text color utility classes
 /// @param {List} $colors [()] - List of registered color names to include. Pass null to include all registered palettes
 @mixin use-text-colors($colors: ()) {
     @at-root {
@@ -53,7 +53,7 @@
     }
 }
 
-/// Applies text size utility classes
+/// Generates text size utility classes
 /// @param {List} $sizes [()] - List of registered size names to include. Pass null to include all registered sizes
 @mixin use-text-sizes($sizes: ()) {
     @at-root {
@@ -65,7 +65,7 @@
     }
 }
 
-/// Applies text weight utility classes
+/// Generates text weight utility classes
 /// @param {List} $weights [()] - List of registered weight names to include. Pass null to include all font-weights
 @mixin use-text-weights($weights: ()) {
     @at-root {
@@ -77,7 +77,7 @@
     }
 }
 
-/// Applies text alignment utility classes
+/// Generates text alignment utility classes
 /// @param {List} $aligns [()] - List of registered alignment names to include. Pass null to include all registered text-aligns
 @mixin use-text-aligns($aligns: ()) {
     @at-root {
