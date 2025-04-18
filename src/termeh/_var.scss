@@ -25,7 +25,5 @@ $-vars: () !default;
     $com: util.string-of($com, "var", "component");
     $prop: util.string-of($prop, "var", "property");
 
-    $values: util.alter($-vars, $com, ());
-    $value: map.get($values, $prop);
-    @return if($value != null, $value, $fallback);
+    @return map.get($-vars, $com, $prop) or $fallback;
 }
