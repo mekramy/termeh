@@ -1,0 +1,57 @@
+@use "../termeh/termeh";
+
+/// Generates container element styles with configurable paddings
+/// @param {List} $paddings [()] - List of registered gap names to include for padding
+/// @termeh {Number} [1.6rem] - var("gap", "macro")
+/// @termeh {Number} [960px] - var("container", "desktop")
+/// @termeh {Number} [1200px] - var("container", "widescreen")
+/// @termeh {Number} [1500px] - var("container", "fullhd")
+@mixin use-container($paddings: ()) {
+    @at-root {
+        $gap-macro: termeh.var("gap", "macro", 1.6rem);
+        $desktop: termeh.var("container", "desktop", 960px);
+        $widescreen: termeh.var("container", "widescreen", 1200px);
+        $fullhd: termeh.var("container", "fullhd", 1500px);
+
+        .container {
+            max-width: 100%;
+            display: block;
+            position: relative;
+            box-sizing: border-box;
+
+            @include termeh.marged() {
+                margin-bottom: $gap-macro;
+            }
+
+            &:not(.is-fullwidth) {
+                @include termeh.desktop() {
+                    margin-left: auto;
+                    margin-right: auto;
+                    max-width: $desktop;
+                }
+
+                @include termeh.widescreen() {
+                    margin-left: auto;
+                    margin-right: auto;
+                    max-width: $widescreen;
+                }
+
+                @include termeh.fullhd() {
+                    margin-left: auto;
+                    margin-right: auto;
+                    max-width: $fullhd;
+                }
+            }
+
+            @include termeh.padded() {
+                padding: $gap-macro;
+
+                @each $name, $gap in termeh.gaps($includes: $paddings) {
+                    &.is-#{$name}-padded {
+                        padding: $gap;
+                    }
+                }
+            }
+        }
+    }
+}

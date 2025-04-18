@@ -64,3 +64,7 @@
 // @include termeh.define("table", "sort-background", null);
 // @include termeh.define("table", "sort-foreground", null);
 // @include termeh.define("table", "strong-weight", null);
+
+@include termeh.define("container", "desktop", 960px);
+@include termeh.define("container", "widescreen", 1200px);
+@include termeh.define("container", "fullhd", 1500px);
