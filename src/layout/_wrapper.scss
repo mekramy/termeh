@@ -1,0 +1,40 @@
+@use "../termeh/termeh";
+
+/// Generates wrapper element styles with configurable gaps
+/// @param {List} $gaps [()] - List of registered gap names to include. Pass null to include all registered gaps
+/// @termeh {Number} [8px] - var("gap", "micro")
+@mixin use-wrapper($gaps: ()) {
+    @at-root {
+        $gap-micro: termeh.var("gap", "micro", 8px);
+
+        .wrapper {
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
+            box-sizing: border-box;
+
+            > * {
+                flex: 1 1 0;
+                box-sizing: border-box;
+            }
+
+            &:not(.is-gapless) {
+                margin: termeh.negate(termeh.half($gap-micro));
+
+                > * {
+                    margin: termeh.half($gap-micro);
+                }
+
+                @each $name, $gap in termeh.gaps($includes: $gaps) {
+                    &.is-#{$name}-gap {
+                        margin: termeh.negate(termeh.half($gap));
+
+                        > * {
+                            margin: termeh.half($gap);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
