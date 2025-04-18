@@ -1,0 +1,180 @@
+@use "../termeh/termeh";
+
+/// Generates gaper element styles with configurable gaps and alignments
+/// @param {List} $gaps [()] - List of registered gap names to include
+/// @termeh {Color} [null] - var("base", "separator")
+/// @termeh {Number} [8px] - var("gap", "micro")
+@mixin use-gaper($gaps: ()) {
+    @at-root {
+        $separator: termeh.var("base", "separator");
+        $gap-micro: termeh.var("gap", "micro", 8px);
+
+        .gaper {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: flex-start;
+            box-sizing: border-box;
+
+            > * {
+                flex: 0 0 auto;
+            }
+
+            > .filler {
+                flex: 1 1 0;
+            }
+
+            > .divider,
+            > .gutter {
+                display: none;
+                align-self: stretch;
+                width: 1px;
+            }
+
+            > .divider {
+                background-color: $separator;
+            }
+
+            &.is-stacked {
+                flex-direction: column;
+            }
+
+            &.is-stacked-reverse {
+                flex-direction: column-reverse;
+            }
+
+            &.is-stacked,
+            &.is-stacked-reverse {
+                > .divider,
+                > .gutter {
+                    height: 1px;
+                    width: unset;
+                }
+            }
+
+            @each $name, $align in termeh.flex-aligns() {
+                &.is-#{$name}-align {
+                    align-items: $align;
+                }
+            }
+
+            @each $name, $justify in termeh.flex-justifies() {
+                &.is-#{$name}-justify {
+                    justify-content: $justify;
+                }
+            }
+
+            &:not(.is-gapless) {
+                > .divider,
+                > .gutter {
+                    display: block;
+                }
+
+                &.is-auto {
+                    margin: termeh.negate($gap-micro);
+
+                    > * {
+                        margin: $gap-micro;
+                    }
+
+                    @each $name, $gap in termeh.gaps($includes: $gaps) {
+                        &.is-#{$name}-gap {
+                            margin: termeh.negate(termeh.half($gap));
+
+                            > * {
+                                margin: termeh.half($gap);
+                            }
+                        }
+                    }
+                }
+
+                &:not(.is-auto) {
+                    > .divider,
+                    > .gutter {
+                        margin: 0 termeh.half($gap-micro);
+                    }
+
+                    &.is-stacked,
+                    &.is-stacked-reverse {
+                        > .divider,
+                        > .gutter {
+                            margin: termeh.half($gap-micro) 0;
+                        }
+                    }
+
+                    @each $name, $gap in termeh.gaps($includes: $gaps) {
+                        &.is-#{$name}-gap {
+                            > .divider,
+                            > .gutter {
+                                margin: 0 termeh.half($gap);
+                            }
+
+                            &.is-stacked,
+                            &.is-stacked-reverse {
+                                > .divider,
+                                > .gutter {
+                                    margin: termeh.half($gap) 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            @each $device, $query in termeh.media-queries() {
+                @media #{$query} {
+                    &.is-#{$device}-stacked {
+                        flex-direction: column;
+                    }
+
+                    &.is-#{$device}-stacked-reverse {
+                        flex-direction: column-reverse;
+                    }
+
+                    &.is-#{$device}-stacked,
+                    &.is-#{$device}-stacked-reverse {
+                        > .divider,
+                        > .gutter {
+                            height: 1px;
+                            width: unset;
+                        }
+                    }
+
+                    @each $name, $align in termeh.flex-aligns() {
+                        &.is-#{$device}-#{$name}-align {
+                            align-items: $align;
+                        }
+                    }
+
+                    @each $name, $justify in termeh.flex-justifies() {
+                        &.is-#{$device}-#{$name}-justify {
+                            justify-content: $justify;
+                        }
+                    }
+
+                    &:not(.is-gapless, .is-auto) {
+                        &.is-#{$device}-stacked,
+                        &.is-#{$device}-stacked-reverse {
+                            > .divider,
+                            > .gutter {
+                                margin: termeh.half($gap-micro) 0;
+                            }
+                        }
+
+                        @each $name, $gap in termeh.gaps($includes: $gaps) {
+                            &.is-#{$name}-gap {
+                                &.is-#{$device}-stacked,
+                                &.is-#{$device}-stacked-reverse {
+                                    > .divider,
+                                    > .gutter {
+                                        margin: termeh.half($gap) 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
