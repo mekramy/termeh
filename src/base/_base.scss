@@ -1,0 +1,17 @@
+@forward "reset";
+@use "generic";
+@use "heading";
+@use "image";
+@use "reset";
+@use "table";
+
+/// Applies all base styles including reset, generics, headings, images, and tables
+/// @param {List} $image-sizes [null] - Image size variants to include
+/// @param {List} $table-colors [null] - Table color variants to include
+@mixin use-base($image-sizes: null, $table-colors: null) {
+    @include reset.mini-reset();
+    @include generic.use-generic();
+    @include heading.use-heading();
+    @include image.use-image($image-sizes);
+    @include table.use-table($table-colors);
+}

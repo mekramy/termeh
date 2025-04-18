@@ -1,13 +1,33 @@
 @use "termeh/termeh";
 
+// Palettes
+@include termeh.define-palette("shade", #8d99ae);
+@include termeh.define-palette("primary", #2196f3);
+
+// Font sizes
+@include termeh.define-size("small", 0.8em);
+@include termeh.define-size("normal", 1em);
+@include termeh.define-size("medium", 1.25em);
+@include termeh.define-size("large", 1.5em);
+@include termeh.define-size("big", 2em);
+@include termeh.define-size("huge", 2.5em);
+@include termeh.define-size("massive", 3em);
+
 // Base styles
 @include termeh.define("base", "color", white);
+@include termeh.define("base", "foreground", #081e30);
 @include termeh.define("base", "section", #f8f9fa);
 @include termeh.define("base", "separator", #e1e6ea);
+
 @include termeh.define("base", "direction", ltr);
+@include termeh.define("base", "min-width", 300px);
 
 @include termeh.define("gap", "micro", 8px);
 @include termeh.define("gap", "macro", 1.6rem);
+
+@include termeh.define("radius", "normal", 2px);
+@include termeh.define("radius", "circle", 50%);
+@include termeh.define("radius", "rounded", 290486px);
 
 @include termeh.define("transition", "ease", ease);
 @include termeh.define("transition", "duration", 250ms);
@@ -16,6 +36,31 @@
 @include termeh.define("input", "disabled-color", #879aab);
 @include termeh.define("input", "disabled-border", #e1e6ea);
 
+@include termeh.define("line-height", "normal", 1.6em);
+@include termeh.define("line-height", "medium", 1.4em);
+@include termeh.define("line-height", "large", 1.2em);
+@include termeh.define("line-height", "inline", 1.8em);
+
+@include termeh.define("font", "family", "'Segoe UI', Tahoma, Geneva, Verdana");
+@include termeh.define("font", "size", 12px);
+@include termeh.define("font", "weight", normal);
+@include termeh.define("font", "code-family", monospace);
+@include termeh.define("font", "code-size", 1rem);
+
+// @include termeh.define("strong", "color", null);
+@include termeh.define("strong", "weight", bold);
+
 @include termeh.define("scroll", "size", 8px);
 // @include termeh.define("scroll", "track", null);
 // @include termeh.define("scroll", "thumb", null);
+
+// @include termeh.define("table", "background", null);
+// @include termeh.define("table", "foreground", null);
+// @include termeh.define("table", "even", null);
+// @include termeh.define("table", "hover", null);
+// @include termeh.define("table", "grid", null);
+// @include termeh.define("table", "divider", null);
+// @include termeh.define("table", "separator", null);
+// @include termeh.define("table", "sort-background", null);
+// @include termeh.define("table", "sort-foreground", null);
+// @include termeh.define("table", "strong-weight", null);

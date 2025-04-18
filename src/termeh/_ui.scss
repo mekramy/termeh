@@ -310,7 +310,7 @@
 
 /// LTR direction specific styles
 /// @content LTR-only styles
-/// @termeh [ltr] - `var("base", "direction")`
+/// @termeh {String} [ltr] - `var("base", "direction")`
 @mixin ltr() {
     @if var.var("base", "direction", "ltr") == "ltr" {
         @content;
@@ -319,7 +319,7 @@
 
 /// RTL direction specific styles
 /// @content RTL-only styles
-/// @termeh [ltr] - `var("base", "direction")`
+/// @termeh {String} [ltr] - `var("base", "direction")`
 @mixin rtl() {
     @if var.var("base", "direction", "ltr") == "rtl" {
         @content;
@@ -328,7 +328,7 @@
 
 /// Returns standard control padding values
 /// @return {List} Padding values
-/// @termeh [8px] - `var("gap", "micro")`
+/// @termeh {Number} [8px] - `var("gap", "micro")`
 @function control-padding() {
     $gap: var.var("gap", "micro", 8px);
     @return $gap($gap * 2);
@@ -336,8 +336,8 @@
 
 /// Standard transition effect
 /// @param {String} $fields - Properties to transition
-/// @termeh [250ms] - `var("transition", "duration")`
-/// @termeh [ease] - `var("transition", "ease")`
+/// @termeh {Number} [250ms] - `var("transition", "duration")`
+/// @termeh {String} [ease] - `var("transition", "ease")`
 @mixin transition($fields) {
     transition-property: $fields;
     transition-duration: var.var("transition", "duration", 250ms);
@@ -345,9 +345,9 @@
 }
 
 /// Disabled state styling
-/// @termeh - `var("input", "disabled")`
-/// @termeh - `var("input", "disabled-border")`
-/// @termeh - `var("input", "disabled-color")`
+/// @termeh {Color} [null] - `var("input", "disabled")`
+/// @termeh {Color} [null] - `var("input", "disabled-border")`
+/// @termeh {Color} [null] - `var("input", "disabled-color")`
 @mixin disabled() {
     pointer-events: none;
     user-select: none;
@@ -370,9 +370,9 @@
 
 /// Scrollable container with themed scrollbar
 /// @param {Color} $color - Scrollbar thumb hover color
-/// @termeh [1rem] - `var("scroll", "size")`
-/// @termeh [var("base", "section")] - `var("scroll", "track")`
-/// @termeh [var("base", "separator")] - `var("scroll", "thumb")`
+/// @termeh {Number} [1rem] - `var("scroll", "size")`
+/// @termeh {Color} [var("base", "section")] - `var("scroll", "track")`
+/// @termeh {Color} [var("base", "separator")] - `var("scroll", "thumb")`
 @mixin scrollable($color) {
     $color: util.color-of($color, "scrollable", "color");
 
