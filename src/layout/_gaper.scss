@@ -1,7 +1,7 @@
 @use "../termeh/termeh";
 
 /// Generates gaper element styles with configurable gaps and alignments
-/// @param {List} $gaps [()] - List of registered gap names to include
+/// @param {List} $gaps [()] - List of registered gap names to include. Pass null to include all registered gaps
 /// @termeh {Color} [null] - var("base", "separator")
 /// @termeh {Number} [8px] - var("gap", "micro")
 @mixin use-gaper($gaps: ()) {
@@ -26,9 +26,9 @@
 
             > .divider,
             > .gutter {
+                width: 1px;
                 display: none;
                 align-self: stretch;
-                width: 1px;
             }
 
             > .divider {

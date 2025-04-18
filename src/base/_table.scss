@@ -198,23 +198,28 @@
                     &:last-child {
                         border-bottom: 1px solid $table-divider;
                     }
+                }
+            }
 
-                    @if $table-grid {
-                        @include termeh.ltr() {
-                            td {
-                                &:not(:first-child) {
-                                    border-left: 1px solid $table-grid;
-                                }
-                            }
-                        }
-                        @include termeh.rtl() {
-                            td {
-                                &:not(:first-child) {
-                                    border-right: 1px solid $table-grid;
-                                }
-                            }
-                        }
+            @if $table-grid {
+                @include termeh.ltr() {
+                    tbody tr td:not(:first-child) {
+                        border-left: 1px solid $table-grid;
                     }
+                }
+
+                @include termeh.rtl() {
+                    tbody tr td:not(:first-child) {
+                        border-right: 1px solid $table-grid;
+                    }
+                }
+
+                &.ltr tbody tr td:not(:first-child) {
+                    border-left: 1px solid $table-grid;
+                }
+
+                &.rtl tbody tr td:not(:first-child) {
+                    border-right: 1px solid $table-grid;
                 }
             }
 
