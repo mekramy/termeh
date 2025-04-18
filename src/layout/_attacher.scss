@@ -1,0 +1,100 @@
+@use "../termeh/termeh";
+
+/// Generates attacher element styles with configurable alignments
+/// @termeh {Color} [null] - var("base", "separator")
+@mixin use-attacher() {
+    @at-root {
+        $separator: termeh.var("base", "separator");
+
+        .attacher {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: stretch;
+            box-sizing: border-box;
+
+            > * {
+                flex: 0 0 auto;
+                margin: 0 !important;
+            }
+
+            @include termeh.ltr() {
+                > * {
+                    &:not(:first-child) {
+                        border-top-left-radius: 0 !important;
+                        border-bottom-left-radius: 0 !important;
+                    }
+
+                    &:not(:last-child) {
+                        border-top-right-radius: 0 !important;
+                        border-bottom-right-radius: 0 !important;
+                    }
+                }
+            }
+
+            @include termeh.rtl() {
+                > * {
+                    &:not(:first-child) {
+                        border-top-right-radius: 0 !important;
+                        border-bottom-right-radius: 0 !important;
+                    }
+
+                    &:not(:last-child) {
+                        border-top-left-radius: 0 !important;
+                        border-bottom-left-radius: 0 !important;
+                    }
+                }
+            }
+
+            &.is-ltr {
+                > * {
+                    &:not(:first-child) {
+                        border-top-left-radius: 0 !important;
+                        border-bottom-left-radius: 0 !important;
+                    }
+
+                    &:not(:last-child) {
+                        border-top-right-radius: 0 !important;
+                        border-bottom-right-radius: 0 !important;
+                    }
+                }
+            }
+
+            &.is-rtl {
+                > * {
+                    &:not(:first-child) {
+                        border-top-right-radius: 0 !important;
+                        border-bottom-right-radius: 0 !important;
+                    }
+
+                    &:not(:last-child) {
+                        border-top-left-radius: 0 !important;
+                        border-bottom-left-radius: 0 !important;
+                    }
+                }
+            }
+
+            > .filler {
+                flex: 1 1 0;
+            }
+
+            > .divider {
+                width: 1px;
+                display: block;
+                align-self: stretch;
+                background-color: $separator;
+            }
+
+            @each $name, $align in termeh.flex-aligns() {
+                &.is-#{$name}-align {
+                    align-items: $align;
+                }
+            }
+
+            @each $name, $justify in termeh.flex-justifies() {
+                &.is-#{$name}-justify {
+                    justify-content: $justify;
+                }
+            }
+        }
+    }
+}
