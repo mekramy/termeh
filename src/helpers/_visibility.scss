@@ -1,0 +1,108 @@
+@use "../termeh/termeh";
+
+/// Visibility utility classes for responsive hiding/showing
+@mixin use-visibilities() {
+    @at-root {
+        .is-hidden {
+            display: none !important;
+        }
+
+        @include termeh.until-fullhd() {
+            .is-until-fullhd-hidden {
+                display: none !important;
+            }
+        }
+
+        @include termeh.until-widescreen() {
+            .is-until-widescreen-hidden {
+                display: none !important;
+            }
+        }
+
+        @include termeh.until-desktop() {
+            .is-until-desktop-hidden {
+                display: none !important;
+            }
+        }
+
+        @include termeh.tablet() {
+            .is-mobile-only,
+            .is-tablet-hidden,
+            .is-desktop-only,
+            .is-widescreen-only,
+            .is-fullhd-only {
+                display: none !important;
+            }
+        }
+
+        @include termeh.desktop() {
+            .is-mobile-only,
+            .is-tablet-only,
+            .is-desktop-hidden,
+            .is-widescreen-only,
+            .is-fullhd-only {
+                display: none !important;
+            }
+        }
+
+        @include termeh.widescreen() {
+            .is-mobile-only,
+            .is-tablet-only,
+            .is-desktop-only,
+            .is-widescreen-hidden,
+            .is-fullhd-only {
+                display: none !important;
+            }
+        }
+
+        @include termeh.fullhd() {
+            .is-mobile-only,
+            .is-tablet-only,
+            .is-desktop-only,
+            .is-widescreen-only,
+            .is-fullhd-hidden {
+                display: none !important;
+            }
+        }
+
+        @include termeh.mobile() {
+            .is-mobile-hidden,
+            .is-tablet-only,
+            .is-desktop-only,
+            .is-widescreen-only,
+            .is-fullhd-only {
+                display: none !important;
+            }
+        }
+
+        @include termeh.tablet-only() {
+            .is-tablet-only-hidden {
+                display: none !important;
+            }
+        }
+
+        @include termeh.desktop-only() {
+            .is-desktop-only-hidden {
+                display: none !important;
+            }
+        }
+
+        @include termeh.widescreen-only() {
+            .is-widescreen-only-hidden {
+                display: none !important;
+            }
+        }
+
+        @include termeh.non-touch() {
+            .is-touch-only {
+                display: none !important;
+            }
+        }
+
+        @include termeh.touch() {
+            .is-touch-hidden {
+                display: none !important;
+            }
+        }
+    }
+}

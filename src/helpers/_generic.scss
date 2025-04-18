@@ -1,0 +1,54 @@
+@use "../termeh/termeh";
+
+/// Layout utility classes for common layout operations
+/// @termeh {Color} [error] - color("primary")
+@mixin use-helpers() {
+    @at-root {
+        .is-clearfix {
+            @include termeh.clearfix();
+        }
+
+        .is-ltr {
+            direction: ltr !important;
+        }
+
+        .is-rtl {
+            direction: rtl !important;
+        }
+
+        .is-clipped {
+            overflow: hidden !important;
+        }
+
+        .is-radiusless {
+            border-radius: 0 !important;
+        }
+
+        .is-shadowless {
+            box-shadow: none !important;
+        }
+
+        .is-clickable {
+            cursor: pointer !important;
+            pointer-events: all !important;
+        }
+
+        .is-unselectable {
+            @include termeh.unselectable();
+        }
+
+        .is-selectable {
+            @include termeh.selectable();
+        }
+
+        .is-locked {
+            @include termeh.locked();
+        }
+
+        .is-scrollable {
+            overflow: hidden;
+            overflow-y: auto;
+            @include termeh.scrollable(termeh.color("primary"));
+        }
+    }
+}
