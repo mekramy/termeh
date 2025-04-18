@@ -1,25 +1,21 @@
-@use "termeh/color";
-@use "termeh/gap";
-@use "termeh/size";
-@use "termeh/unit";
-@use "termeh/var";
+@use "termeh/termeh";
 
 // Base styles
-@include var.define("base", "color", white);
-@include var.define("base", "section", #f8f9fa);
-@include var.define("base", "separator", #e1e6ea);
-@include var.define("base", "direction", ltr);
+@include termeh.define("base", "color", white);
+@include termeh.define("base", "section", #f8f9fa);
+@include termeh.define("base", "separator", #e1e6ea);
+@include termeh.define("base", "direction", ltr);
 
-@include var.define("gap", "micro", 8px);
-@include var.define("gap", "macro", 1.6rem);
+@include termeh.define("gap", "micro", 8px);
+@include termeh.define("gap", "macro", 1.6rem);
 
-@include var.define("transition", "ease", ease);
-@include var.define("transition", "duration", 250ms);
+@include termeh.define("transition", "ease", ease);
+@include termeh.define("transition", "duration", 250ms);
 
-@include var.define("input", "disabled", #f0f2f5);
-@include var.define("input", "disabled-color", #879aab);
-@include var.define("input", "disabled-border", #e1e6ea);
+@include termeh.define("input", "disabled", #f0f2f5);
+@include termeh.define("input", "disabled-color", #879aab);
+@include termeh.define("input", "disabled-border", #e1e6ea);
 
-@include var.define("scroll", "size", 8px);
-// @include var.define("scroll", "track", null);
-// @include var.define("scroll", "thumb", null);
+@include termeh.define("scroll", "size", 8px);
+// @include termeh.define("scroll", "track", null);
+// @include termeh.define("scroll", "thumb", null);
