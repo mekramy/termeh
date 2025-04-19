@@ -1,0 +1,125 @@
+@use "../termeh/termeh";
+
+/// Generates gallery element styles with configurable gaps
+/// @param {List} $gaps [()] - List of registered gap names to include. Pass null to include all registered gaps
+/// @termeh {Number} [8px] - var("gap", "micro")
+/// @termeh {Number} [300px] - var("gallery", "height")
+/// @termeh {Number} [200px] - var("gallery", "height-tablet")
+/// @termeh {Number} [100px] - var("gallery", "height-mobile")
+@mixin use-gallery($gaps: ()) {
+    @at-root {
+        $gap-micro: termeh.var("gap", "micro", 8px);
+        $height: termeh.var("gallery", "height", 300px);
+        $height-tablet: termeh.var("gallery", "height-tablet", 200px);
+        $height-mobile: termeh.var("gallery", "height-mobile", 100px);
+
+        .gallery {
+            display: flex;
+            overflow: hidden;
+            flex-wrap: wrap;
+
+            &::after {
+                height: 0;
+                content: "";
+                flex-grow: 999999999;
+                min-width: $height-mobile;
+            }
+
+            > .item {
+                flex-grow: 1;
+                display: block;
+                position: relative;
+                text-decoration: none;
+
+                > img,
+                .thumbnail {
+                    max-width: 100%;
+                    min-width: 100%;
+                    object-fit: cover;
+                    vertical-align: bottom;
+                }
+
+                &.is-block {
+                    width: 100%;
+                    height: auto;
+
+                    > img,
+                    .thumbnail {
+                        height: auto;
+                    }
+                }
+
+                &:not(.is-block) {
+                    height: $height-mobile;
+
+                    > img,
+                    .thumbnail {
+                        height: $height-mobile;
+                    }
+                }
+            }
+
+            &:not(.is-gapless) {
+                margin: termeh.negate(termeh.half($gap-micro));
+
+                > .item {
+                    margin: termeh.half($gap-micro);
+                }
+
+                @each $name, $gap in termeh.gaps($includes: $gaps) {
+                    &.is-#{$name}-gap {
+                        margin: termeh.negate(termeh.half($gap));
+
+                        > .item {
+                            margin: termeh.half($gap);
+                        }
+                    }
+                }
+            }
+
+            @include termeh.mobile() {
+                &.is-stackable {
+                    > .item {
+                        width: 100%;
+                        height: auto;
+
+                        > img,
+                        .thumbnail {
+                            height: auto;
+                        }
+                    }
+                }
+            }
+
+            @include termeh.tablet() {
+                &::after {
+                    min-width: $height-tablet;
+                }
+
+                > .item:not(.is-block) {
+                    height: $height-tablet;
+
+                    > img,
+                    .thumbnail {
+                        height: $height-tablet;
+                    }
+                }
+            }
+
+            @include termeh.desktop() {
+                &::after {
+                    min-width: $height;
+                }
+
+                > .item:not(.is-block) {
+                    height: $height;
+
+                    > img,
+                    .thumbnail {
+                        height: $height;
+                    }
+                }
+            }
+        }
+    }
+}
