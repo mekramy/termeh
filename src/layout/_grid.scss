@@ -1,0 +1,104 @@
+@use "../termeh/termeh";
+
+/// Generates grid element styles with configurable gaps and units
+/// @param {List} $gaps [()] - List of registered gap names to include. Pass null to include all registered gaps
+/// @param {List} $units [()] - List of registered unit names to include. Pass null to include all registered units
+/// @termeh {Number} [1.6rem] - var("gap", "macro")
+@mixin use-grid($gaps: (), $units: ()) {
+    @at-root {
+        $gap-macro: termeh.var("gap", "macro", 1.6rem);
+
+        .grid {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            box-sizing: border-box;
+
+            > .break {
+                height: 0;
+                display: block;
+                flex-basis: 100%;
+            }
+
+            > .column {
+                flex: 1 1 0;
+                display: block;
+                min-width: 0;
+                max-width: 100%;
+                box-sizing: border-box;
+
+                @each $name, $unit in termeh.units($includes: $units) {
+                    &.is-#{$name} {
+                        width: $unit;
+                        flex: 0 0 auto;
+                    }
+                }
+
+                &.is-fit {
+                    width: auto;
+                    flex: 0 0 auto;
+                }
+            }
+
+            &:not(.is-gapless) {
+                margin: termeh.negate(termeh.half($gap-macro));
+
+                > .column {
+                    padding: termeh.half($gap-macro);
+                }
+
+                @each $name, $gap in termeh.gaps($includes: $gaps) {
+                    &.is-#{$name}-gap {
+                        margin: termeh.negate(termeh.half($gap));
+
+                        > .column {
+                            padding: termeh.half($gap);
+                        }
+                    }
+                }
+            }
+
+            @each $name, $align in termeh.flex-aligns() {
+                &.is-#{$name}-align {
+                    align-items: $align;
+                }
+            }
+
+            @each $name, $justify in termeh.flex-justifies() {
+                &.is-#{$name}-justify {
+                    justify-content: $justify;
+                }
+            }
+
+            @each $device, $query in termeh.media-queries() {
+                @media #{$query} {
+                    > .column {
+                        @each $name, $unit in termeh.units($includes: $units) {
+                            &.is-#{$device}-#{$name} {
+                                width: $unit;
+                                flex: 0 0 auto;
+                            }
+                        }
+
+                        &.is-#{$device}-fit {
+                            width: auto;
+                            flex: 0 0 auto;
+                        }
+                    }
+
+                    @each $name, $align in termeh.flex-aligns() {
+                        &.is-#{$device}-#{$name}-align {
+                            align-items: $align;
+                        }
+                    }
+
+                    @each $name, $justify in termeh.flex-justifies() {
+                        &.is-#{$device}-#{$name}-justify {
+                            justify-content: $justify;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
