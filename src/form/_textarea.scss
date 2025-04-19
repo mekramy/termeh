@@ -71,8 +71,9 @@
                 }
             }
 
+            &:invalid,
             &.is-failed,
-            &:invalid {
+            .field.is-failed & {
                 border-color: $error;
                 animation: shake 0.5s ease;
             }
