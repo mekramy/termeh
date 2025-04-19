@@ -214,12 +214,18 @@
                     }
                 }
 
-                &.ltr tbody tr td:not(:first-child) {
-                    border-left: 1px solid $table-grid;
+                &.ltr,
+                &:dir(ltr) {
+                    tbody tr td:not(:first-child) {
+                        border-left: 1px solid $table-grid;
+                    }
                 }
 
-                &.rtl tbody tr td:not(:first-child) {
-                    border-right: 1px solid $table-grid;
+                &.rtl,
+                &:dir(rtl) {
+                    tbody tr td:not(:first-child) {
+                        border-right: 1px solid $table-grid;
+                    }
                 }
             }
 

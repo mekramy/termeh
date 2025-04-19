@@ -45,7 +45,8 @@
                 }
             }
 
-            &.is-ltr {
+            &.is-ltr,
+            &:dir(ltr) {
                 > * {
                     &:not(:first-child) {
                         border-top-left-radius: 0 !important;
@@ -59,7 +60,8 @@
                 }
             }
 
-            &.is-rtl {
+            &.is-rtl,
+            &:dir(rtl) {
                 > * {
                     &:not(:first-child) {
                         border-top-right-radius: 0 !important;
