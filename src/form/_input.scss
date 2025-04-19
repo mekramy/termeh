@@ -2,8 +2,8 @@
 @use "../animation";
 
 /// Generates input element styles with configurable gaps and colors
-/// @param {List} $gaps [()] - List of registered gap names to include
-/// @param {List} $colors [()] - List of registered color names to include
+/// @param {List} $gaps [()] - List of registered gap names to include. Pass null to include all registered gaps
+/// @param {List} $colors [()] - List of registered color names to include. Pass null to include all registered colors
 /// @termeh {Color} [error] - color("error")
 /// @termeh {Color} [error] - color("primary")
 /// @termeh {Number} [null] - var("radius", "normal")
@@ -96,16 +96,14 @@
             }
 
             &:invalid,
-            &.is-failed,
-            .field.is-failed & {
+            &.is-failed {
                 border-color: $error;
                 animation: shake 0.5s ease;
             }
 
             &[disabled],
             &.is-disabled,
-            fieldset[disabled] &,
-            .field.is-disabled & {
+            fieldset[disabled] & {
                 @include termeh.disabled();
             }
         }

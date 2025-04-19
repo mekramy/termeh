@@ -58,16 +58,14 @@
             }
 
             &:invalid,
-            &.is-failed,
-            .field.is-failed & {
+            &.is-failed {
                 border-color: $error;
                 animation: shake 0.5s ease;
             }
 
             &[disabled],
             &.is-disabled,
-            fieldset[disabled] &,
-            .field.is-disabled & {
+            fieldset[disabled] & {
                 @include termeh.disabled();
             }
         }
