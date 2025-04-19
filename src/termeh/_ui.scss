@@ -6,16 +6,6 @@
 @use "util";
 @use "../animation";
 
-/// Unifies current selector with a child selector at root level
-/// @param {String} $child - Child selector to unify with parent
-/// @content Styles to apply within unified selector
-@mixin unify-parent($child) {
-    $child: util.string-of($child, "unify-parent", "child");
-    @at-root #{selector.unify(&, $child)} {
-        @content;
-    }
-}
-
 /// Applies margin styles to non-last children unless marginless
 /// @param {Boolean} $exceptLast [true] - Whether to exclude last child
 /// @content Margin styles to apply
