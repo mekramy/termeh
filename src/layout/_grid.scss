@@ -10,8 +10,7 @@
 
         .grid {
             display: flex;
-            flex-wrap: wrap;
-            flex-direction: row;
+            flex-flow: row wrap;
             box-sizing: border-box;
 
             > .break {
