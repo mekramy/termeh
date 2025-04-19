@@ -3,6 +3,7 @@
 // Palettes
 @include termeh.define-palette("shade", #8d99ae);
 @include termeh.define-palette("primary", #2196f3);
+@include termeh.define-palette("error", #c00021);
 
 // Font sizes
 @include termeh.define-size("small", 0.8em);
@@ -110,8 +111,11 @@
 @include termeh.define("transition", "ease", ease);
 @include termeh.define("transition", "duration", 250ms);
 
+@include termeh.define("input", "background", white);
+// @include termeh.define("input", "border", #f0f2f5);
+// @include termeh.define("input", "placeholder", #f0f2f5);
 @include termeh.define("input", "disabled", #f0f2f5);
-@include termeh.define("input", "disabled-color", #879aab);
+@include termeh.define("input", "disabled-color", #98a7b3);
 @include termeh.define("input", "disabled-border", #e1e6ea);
 
 @include termeh.define("line-height", "normal", 1.6em);

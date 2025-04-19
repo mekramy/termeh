@@ -1,0 +1,75 @@
+@use "../termeh/termeh";
+@use "../animation";
+
+/// Generates select input styles with configurable colors
+/// @param {List} $colors [()] - List of registered color names to include
+/// @termeh {Color} [error] - color("error")
+/// @termeh {Color} [error] - color("primary")
+/// @termeh {Color} [error] - color("shade")
+/// @termeh {Color} [#eee] - var("base", "separator")
+/// @termeh {Number} [null] - var("radius", "normal")
+/// @termeh {Color} [white] - `var("input", "background")`
+/// @termeh {Color} [var("base", "separator")] - `var("input", "border")`
+/// @termeh {Color} [color("shade")] - `var("input", "placeholder")`
+@mixin use-select($colors: ()) {
+    @at-root {
+        $error: termeh.color("error");
+        $primary: termeh.color("primary");
+        $shade: termeh.variant("shade", "mute");
+        $separator: termeh.var("base", "separator", #eee);
+        $radius: termeh.var("radius", "normal");
+
+        $background: termeh.var("input", "background", white);
+        $border: termeh.var("input", "border", $separator);
+        $placeholder: termeh.var("input", "placeholder", $shade);
+
+        @include animation.shake();
+
+        select {
+            @include termeh.control();
+
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            border: 1px solid $border;
+            border-radius: $radius;
+            accent-color: $primary;
+            background-color: $background;
+            padding: termeh.control-padding();
+
+            @include termeh.placeholder() {
+                color: $placeholder;
+            }
+
+            &:focus,
+            &.is-focused {
+                border-color: $primary;
+            }
+
+            @each $name, $color in termeh.colors($includes: $colors) {
+                &.is-#{$name} {
+                    accent-color: $color;
+
+                    &:focus,
+                    &.is-focused {
+                        border-color: $color;
+                    }
+
+                    @include termeh.selection($name);
+                }
+            }
+
+            &.is-failed,
+            &:invalid {
+                border-color: $error;
+                animation: shake 0.5s ease;
+            }
+
+            &[disabled],
+            fieldset[disabled] &,
+            &.is-disabled {
+                @include termeh.disabled();
+            }
+        }
+    }
+}
