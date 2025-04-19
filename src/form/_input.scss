@@ -1,0 +1,113 @@
+@use "../termeh/termeh";
+@use "../animation";
+
+/// Generates input element styles with configurable gaps and colors
+/// @param {List} $gaps [()] - List of registered gap names to include
+/// @param {List} $colors [()] - List of registered color names to include
+/// @termeh {Color} [error] - color("error")
+/// @termeh {Color} [error] - color("primary")
+/// @termeh {Number} [null] - var("radius", "normal")
+/// @termeh {Number} [8px] - var("gap", "micro")
+/// @termeh {Color} [white] - `var("input", "background")`
+/// @termeh {Color} [var("base", "separator")] - `var("input", "border")`
+/// @termeh {Color} [color("shade")] - `var("input", "placeholder")`
+@mixin use-input($gaps: (), $colors: ()) {
+    @at-root {
+        $error: termeh.color("error");
+        $primary: termeh.color("primary");
+        $shade: termeh.variant("shade", "mute");
+        $separator: termeh.var("base", "separator", #eee);
+
+        $radius: termeh.var("radius", "normal");
+        $gap-micro: termeh.var("gap", "micro", 8px);
+
+        $border: termeh.var("input", "border", $separator);
+        $background: termeh.var("input", "background", white);
+        $placeholder: termeh.var("input", "placeholder", $shade);
+
+        @include animation.shake();
+
+        .input {
+            display: flex;
+            align-items: center;
+            flex-flow: row nowrap;
+            border-radius: $radius;
+            border: 1px solid $border;
+            background-color: $background;
+            padding: termeh.control-padding();
+
+            > .divider {
+                width: 1px;
+                display: block;
+                align-self: stretch;
+                margin: 0 $gap-micro;
+                background-color: $border;
+            }
+
+            > .gutter {
+                display: block;
+                flex: 0 0 auto;
+                width: $gap-micro * 2;
+                box-sizing: border-box;
+            }
+
+            > * {
+                line-height: 1em !important;
+            }
+
+            input {
+                @include termeh.control();
+
+                display: block;
+                flex: 1 1 0;
+                border-radius: 0;
+
+                @include termeh.placeholder {
+                    color: $placeholder;
+                }
+            }
+
+            &.is-focused,
+            &:focus-within {
+                border-color: $primary;
+            }
+
+            @each $name, $gap in termeh.gaps($includes: $gaps) {
+                &.is-#{$name}-gap {
+                    > .divider {
+                        margin: 0 termeh.half($gap);
+                    }
+
+                    > .gutter {
+                        width: $gap;
+                    }
+                }
+            }
+
+            @each $name, $color in termeh.colors($includes: $colors) {
+                &.is-#{$name} {
+                    &.is-focused,
+                    &:focus-within {
+                        border-color: $color;
+                    }
+
+                    @include termeh.selection($name);
+                }
+            }
+
+            &:invalid,
+            &.is-failed,
+            .field.is-failed & {
+                border-color: $error;
+                animation: shake 0.5s ease;
+            }
+
+            &[disabled],
+            &.is-disabled,
+            fieldset[disabled] &,
+            .field.is-disabled & {
+                @include termeh.disabled();
+            }
+        }
+    }
+}
