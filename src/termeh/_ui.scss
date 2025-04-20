@@ -76,6 +76,18 @@
     @return $x $y ($max * 3) util.negate($max) $color;
 }
 
+/// Generates flat box shadow with transparency
+/// @param {Number} $size - Blur radius
+/// @param {Color} $color - Shadow base color
+/// @return {List} Box shadow value
+/// @termeh Uses util.number-of, util.color-of
+@function flat-shadow($size, $color) {
+    $size: util.number-of($size, "flat-shadow", "size");
+    $color: util.color-of($color, "flat-shadow", "color");
+
+    @return 0 0 $size $size $color;
+}
+
 /// Clearfix implementation using ::after pseudo-element
 @mixin clearfix() {
     &::after {
@@ -305,6 +317,11 @@
     @if var.var("base", "direction", "ltr") == "ltr" {
         @content;
     }
+
+    &.is-ltr,
+    &:dir(ltr) {
+        @content;
+    }
 }
 
 /// RTL direction specific styles
@@ -312,6 +329,11 @@
 /// @termeh {String} [ltr] - `var("base", "direction")`
 @mixin rtl() {
     @if var.var("base", "direction", "ltr") == "rtl" {
+        @content;
+    }
+
+    &.is-rtl,
+    &:dir(rtl) {
         @content;
     }
 }
