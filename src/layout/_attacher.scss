@@ -17,7 +17,7 @@
                 margin: 0 !important;
             }
 
-            @include termeh.ltr() {
+            @include termeh.is-ltr() {
                 > * {
                     &:not(:first-child) {
                         border-top-left-radius: 0 !important;
@@ -31,7 +31,7 @@
                 }
             }
 
-            @include termeh.rtl() {
+            @include termeh.is-rtl() {
                 > * {
                     &:not(:first-child) {
                         border-top-right-radius: 0 !important;

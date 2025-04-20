@@ -202,13 +202,13 @@
             }
 
             @if $table-grid {
-                @include termeh.ltr() {
+                @include termeh.is-ltr() {
                     tbody tr td:not(:first-child) {
                         border-left: 1px solid $table-grid;
                     }
                 }
 
-                @include termeh.rtl() {
+                @include termeh.is-rtl() {
                     tbody tr td:not(:first-child) {
                         border-right: 1px solid $table-grid;
                     }

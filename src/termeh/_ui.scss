@@ -321,7 +321,7 @@
 /// LTR direction specific styles
 /// @content LTR-only styles
 /// @termeh {String} [ltr] - `var("base", "direction")`
-@mixin ltr() {
+@mixin is-ltr() {
     @if var.var("base", "direction", "ltr") == "ltr" {
         @content;
     }
@@ -335,13 +335,38 @@
 /// RTL direction specific styles
 /// @content RTL-only styles
 /// @termeh {String} [ltr] - `var("base", "direction")`
-@mixin rtl() {
+@mixin is-rtl() {
     @if var.var("base", "direction", "ltr") == "rtl" {
         @content;
     }
 
     &.is-rtl,
     &:dir(rtl) {
+        @content;
+    }
+}
+
+/// Applies styles for invalid state
+/// @content Styles to apply when element is invalid or has is-failed class
+@mixin is-invalid() {
+    &:invalid,
+    &.is-failed {
+        @content;
+    }
+}
+
+/// Applies styles for disabled state
+/// @content Styles to apply when element is disabled or within disabled context
+@mixin is-disabled() {
+    @at-root {
+        fieldset:disabled #{&},
+        fieldset.is-disabled #{&} {
+            @content;
+        }
+    }
+
+    &:disabled,
+    &.is-disabled {
         @content;
     }
 }
