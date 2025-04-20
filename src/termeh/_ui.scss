@@ -88,6 +88,14 @@
     @return 0 0 $size $size $color;
 }
 
+/// Calculates the border radius for a child element based on parent radius and padding
+/// @param {Number} $parent-radius - The border radius of the parent element
+/// @param {Number} $padding - The padding between parent and child elements
+/// @return {Number} Calculated child border radius
+@function child-radius($parent-radius, $padding) {
+    @return calc($parent-radius - $padding);
+}
+
 /// Clearfix implementation using ::after pseudo-element
 @mixin clearfix() {
     &::after {
