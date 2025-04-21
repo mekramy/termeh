@@ -1,7 +1,7 @@
 @use "termeh/termeh";
 
 // Palettes
-@include termeh.define-palette("shade", #8d99ae);
+@include termeh.define-palette("shade", #667085);
 @include termeh.define-palette("primary", #2196f3);
 @include termeh.define-palette("error", #c00021);
 
@@ -96,7 +96,7 @@
 @include termeh.define("base", "color", white);
 @include termeh.define("base", "foreground", #081e30);
 @include termeh.define("base", "section", #f8f9fa);
-@include termeh.define("base", "separator", #e1e6ea);
+@include termeh.define("base", "separator", #e0e4eb);
 
 @include termeh.define("base", "direction", ltr);
 @include termeh.define("base", "min-width", 300px);
@@ -111,20 +111,21 @@
 @include termeh.define("transition", "ease", ease);
 @include termeh.define("transition", "duration", 250ms);
 
+@include termeh.define("input", "height", 2.8rem);
 @include termeh.define("input", "background", white);
-// @include termeh.define("input", "border", #f0f2f5);
-// @include termeh.define("input", "placeholder", #f0f2f5);
+@include termeh.define("input", "border", #d1d6e0);
+// @include termeh.define("input", "placeholder", #d1d6e0);
 @include termeh.define("input", "disabled", #f0f2f5);
-@include termeh.define("input", "disabled-color", #98a7b3);
-@include termeh.define("input", "disabled-border", #e1e6ea);
+@include termeh.define("input", "disabled-color", #bfc6d4);
+@include termeh.define("input", "disabled-border", #d1d6e0);
 
 @include termeh.define("line-height", "normal", 1.6em);
 @include termeh.define("line-height", "medium", 1.4em);
 @include termeh.define("line-height", "large", 1.2em);
 @include termeh.define("line-height", "inline", 1.8em);
 
-@include termeh.define("font", "family", "'Segoe UI', Tahoma, Geneva, Verdana");
-@include termeh.define("font", "size", 12px);
+@include termeh.define("font", "family", ("Segoe UI", Tahoma, Geneva, Verdana));
+@include termeh.define("font", "size", 14px);
 @include termeh.define("font", "weight", normal);
 @include termeh.define("font", "code-family", monospace);
 @include termeh.define("font", "code-size", 1rem);

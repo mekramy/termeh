@@ -1,23 +1,23 @@
 @use "../termeh/termeh";
 
-/// Generates checkbox input styles with configurable colors
+/// Generates radio input styles with configurable colors
 /// @param {List} $colors [()] - List of registered color names to include. Pass null to include all registered colors
 /// @termeh {Color} [error] - color("error")
 /// @termeh {Color} [error] - color("primary")
-/// @termeh {Number} [null] - var("radius", "normal")
+/// @termeh {Number} [50%] - var("radius", "circle")
 /// @termeh {Number} [8px] - var("gap", "micro")
 /// @termeh {Number} [1.8rem] - var("input", "height")
 /// @termeh {Number} [1.2em] - var("input", "checkbox")
 /// @termeh {Color} [var("base", "separator")] - var("input", "border")
 /// @termeh {Color} [null] - var("input", "disabled-color")
 /// @termeh {Color} [null] - var("input", "disabled-border")
-@mixin use-checkbox($colors: ()) {
+@mixin use-radio($colors: ()) {
     @at-root {
         $error: termeh.color("error");
         $primary: termeh.color("primary");
         $separator: termeh.var("base", "separator", #eee);
 
-        $radius: termeh.var("radius", "normal");
+        $radius: termeh.var("radius", "circle", 50%);
         $gap-micro: termeh.var("gap", "micro", 8px);
 
         $height: termeh.var("input", "height", 1.8rem);
@@ -27,7 +27,7 @@
         $disabled: termeh.var("input", "disabled-color");
         $disabled-border: termeh.var("input", "disabled-border");
 
-        label.checkbox {
+        label.radio {
             display: flex;
             align-items: center;
             flex-flow: row nowrap;
@@ -38,7 +38,7 @@
             cursor: pointer;
             box-sizing: border-box;
 
-            input[type="checkbox"] {
+            input[type="radio"] {
                 -webkit-appearance: none;
                 -moz-appearance: none;
                 appearance: none;

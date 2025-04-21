@@ -8,9 +8,9 @@
 /// @termeh {Number} [null] - var("radius", "normal")
 /// @termeh {Number} [8px] - var("gap", "micro")
 /// @termeh {Number} [1.6rem] - var("line-height", "normal")
-/// @termeh {Color} [white] - `var("input", "background")`
-/// @termeh {Color} [var("base", "separator")] - `var("input", "border")`
-/// @termeh {Color} [color("shade")] - `var("input", "placeholder")`
+/// @termeh {Color} [var("base", "separator")] - var("input", "border")
+/// @termeh {Color} [white] - var("input", "background")
+/// @termeh {Color} [color("shade")] - var("input", "placeholder")
 @mixin use-textarea($colors: ()) {
     @at-root {
         $error: termeh.color("error");
@@ -71,15 +71,12 @@
                 }
             }
 
-            &:invalid,
-            &.is-failed {
+            @include termeh.is-invalid() {
                 border-color: $error;
                 animation: shake 0.5s ease;
             }
 
-            &[disabled],
-            &.is-disabled,
-            fieldset[disabled] & {
+            @include termeh.is-disabled() {
                 @include termeh.disabled();
             }
         }

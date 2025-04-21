@@ -1,0 +1,73 @@
+@use "../termeh/termeh";
+
+/// Generates field element styles with configurable colors
+/// @param {List} $colors [()] - List of registered color names to include. Pass null to include all registered colors
+/// @termeh {Color} [error] - color("shade")
+/// @termeh {Color} [error] - color("error")
+/// @termeh {Color} [error] - color("primary")
+/// @termeh {Number} [8px] - var("gap", "micro")
+/// @termeh {Number} [1.6rem] - var("gap", "macro")
+@mixin use-field($colors: ()) {
+    @at-root {
+        $shade: termeh.variant("shade", "readable");
+        $primary: termeh.variant("primary", "readable");
+        $error: termeh.variant("error", "readable");
+        $gap-micro: termeh.var("gap", "micro", 8px);
+        $gap-macro: termeh.var("gap", "macro", 1.6rem);
+
+        .field {
+            display: block;
+
+            @include termeh.marged() {
+                margin-bottom: $gap-macro;
+            }
+
+            > :not(:last-child, .is-marginless, .help, .error) {
+                margin-bottom: $gap-micro;
+            }
+
+            > label,
+            .help {
+                display: block;
+            }
+
+            .help {
+                color: $shade;
+            }
+
+            .error {
+                display: none;
+                color: $error;
+            }
+
+            &.is-required {
+                > label::after,
+                .field-label::after {
+                    content: " *";
+                    color: $primary;
+                    font-weight: bold;
+                }
+            }
+
+            @each $name, $color in termeh.colors($includes: $colors) {
+                &.is-#{$name} {
+                    &.is-required {
+                        > label::after,
+                        .field-label::after {
+                            color: termeh.variant($name, "readable");
+                        }
+                    }
+
+                    @include termeh.selection($name);
+                }
+            }
+
+            &:invalid,
+            &.is-failed {
+                .error {
+                    display: block;
+                }
+            }
+        }
+    }
+}

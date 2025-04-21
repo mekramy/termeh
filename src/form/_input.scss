@@ -7,20 +7,20 @@
 /// @termeh {Color} [error] - color("error")
 /// @termeh {Color} [error] - color("primary")
 /// @termeh {Number} [null] - var("radius", "normal")
-/// @termeh {Number} [8px] - var("gap", "micro")
-/// @termeh {Color} [white] - `var("input", "background")`
-/// @termeh {Color} [var("base", "separator")] - `var("input", "border")`
-/// @termeh {Color} [color("shade")] - `var("input", "placeholder")`
+/// @termeh {Number} [2.8rem] - var("input", "height")
+/// @termeh {Color} [var("base", "separator")] - var("input", "border")
+/// @termeh {Color} [white] - var("input", "background")
+/// @termeh {Color} [variant("shade", "mute")] - var("input", "placeholder")
 @mixin use-input($gaps: (), $colors: ()) {
     @at-root {
+        $radius: termeh.var("radius", "normal");
+
         $error: termeh.color("error");
         $primary: termeh.color("primary");
         $shade: termeh.variant("shade", "mute");
         $separator: termeh.var("base", "separator", #eee);
 
-        $radius: termeh.var("radius", "normal");
-        $gap-micro: termeh.var("gap", "micro", 8px);
-
+        $height: termeh.var("input", "height", 2.8rem);
         $border: termeh.var("input", "border", $separator);
         $background: termeh.var("input", "background", white);
         $placeholder: termeh.var("input", "placeholder", $shade);
@@ -31,23 +31,26 @@
             display: flex;
             align-items: center;
             flex-flow: row nowrap;
+            height: $height;
+            line-height: 1em;
             border-radius: $radius;
             border: 1px solid $border;
             background-color: $background;
             padding: termeh.control-padding();
+            @include termeh.transition(all);
 
             > .divider {
                 width: 1px;
+                height: 1em;
                 display: block;
-                align-self: stretch;
-                margin: 0 $gap-micro;
-                background-color: $border;
+                margin: 0 1em;
+                background-color: $separator;
             }
 
             > .gutter {
                 display: block;
                 flex: 0 0 auto;
-                width: $gap-micro * 2;
+                width: 1em;
                 box-sizing: border-box;
             }
 
@@ -95,15 +98,12 @@
                 }
             }
 
-            &:invalid,
-            &.is-failed {
+            @include termeh.is-invalid() {
                 border-color: $error;
                 animation: shake 0.5s ease;
             }
 
-            &[disabled],
-            &.is-disabled,
-            fieldset[disabled] & {
+            @include termeh.is-disabled() {
                 @include termeh.disabled();
             }
         }

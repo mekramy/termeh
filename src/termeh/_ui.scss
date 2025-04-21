@@ -349,6 +349,13 @@
 /// Applies styles for invalid state
 /// @content Styles to apply when element is invalid or has is-failed class
 @mixin is-invalid() {
+    @at-root {
+        .field:invalid #{&},
+        .field.is-failed #{&} {
+            @content;
+        }
+    }
+
     &:invalid,
     &.is-failed {
         @content;
@@ -360,7 +367,9 @@
 @mixin is-disabled() {
     @at-root {
         fieldset:disabled #{&},
-        fieldset.is-disabled #{&} {
+        fieldset.is-disabled #{&},
+        .field:disabled #{&},
+        .field.is-disabled #{&} {
             @content;
         }
     }
