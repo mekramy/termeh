@@ -29,10 +29,65 @@ export default defineConfig({
         sidebar: [
             {
                 text: "Introduction",
+                collapsed: false,
                 items: [
                     {
                         text: "Introduction",
                         link: "/guide/introduction",
+                    },
+                ],
+            },
+            {
+                text: "Core Concept",
+                collapsed: false,
+                items: [
+                    {
+                        text: "Core Concepts",
+                        link: "/guide/core/intro",
+                    },
+                    {
+                        text: "Responsive",
+                        link: "/guide/core/responsive",
+                    },
+                    {
+                        text: "Variable",
+                        link: "/guide/core/variable",
+                    },
+                    {
+                        text: "Gap",
+                        link: "/guide/core/gap",
+                    },
+                    {
+                        text: "Unit",
+                        link: "/guide/core/unit",
+                    },
+                    {
+                        text: "Text",
+                        link: "/guide/core/text",
+                    },
+                    {
+                        text: "Flexbox",
+                        link: "/guide/core/flex",
+                    },
+                    {
+                        text: "Color",
+                        link: "/guide/core/color",
+                    },
+                    {
+                        text: "Palette",
+                        link: "/guide/core/palette",
+                    },
+                    {
+                        text: "Contrast",
+                        link: "/guide/core/contrast",
+                    },
+                    {
+                        text: "UI",
+                        link: "/guide/core/ui",
+                    },
+                    {
+                        text: "Utils",
+                        link: "/guide/core/utils",
                     },
                 ],
             },

@@ -16,7 +16,7 @@ hero:
       link: /guide/introduction
     - theme: alt
       text: Get Started
-      link: /guide/core
+      link: /guide/core/intro
 
 features:
   - title: Modular
