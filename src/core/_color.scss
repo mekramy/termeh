@@ -1,0 +1,125 @@
+@use "sass:map";
+@use "sass:color";
+@use "contrast";
+@use "palette";
+@use "util";
+@use "var";
+
+$-colors: () !default;
+
+/// Defines a palette color
+/// @param {String} $name - Color name (e.g. "primary", "secondary")
+/// @param {Color} $color - Color value (e.g. #6200ee, #03dac6)
+@mixin define-palette($name, $color) {
+    $name: util.string-of($name, "define-palette", "name");
+    $color: util.color-of($color, "define-palette", "color");
+
+    $vars: map.set((), "color", $color);
+    $-colors: map.set($-colors, $name, $vars) !global;
+}
+
+/// Defines a color variant
+/// @param {String} $name - Base color name
+/// @param {String} $variant - Variant name (e.g. "light", "dark")
+/// @param {Color} $color - Variant color
+/// @throws Error if base color not found
+@mixin define-variant($name, $variant, $color) {
+    $name: util.string-of($name, "define-variant", "name");
+    $variant: util.string-of($variant, "define-variant", "variant");
+    $color: util.color-of($color, "define-variant", "color");
+
+    @if not map.has-key($-colors, $name) {
+        @error "Color '#{$name}' not defined!";
+    }
+
+    $vars: util.alter($-colors, $name, ());
+    $vars: map.set($vars, $variant, $color);
+    $-colors: map.set($-colors, $name, $vars) !global;
+}
+
+/// Gets base color value
+/// @param {String} $name - Color name
+/// @return {Color} Color value
+/// @throws Error if color not found
+@function color($name) {
+    $name: util.string-of($name, "color", "name");
+    @if not map.has-key($-colors, $name) {
+        @error "Color '#{$name}' not defined!";
+    }
+    @return map.get($-colors, $name, "color");
+}
+
+/// Gets color variant with auto-generation
+/// @param {String} $name - Base color name
+/// @param {String} $variant - Variant name (active, light, light-active, mute, mute-active, readable, foreground, decorator or color)
+/// @param {Color} $fallback [null] - Fallback color
+/// @param {Color} $base [null] - Base color for theming (light or dark)
+/// @return {Color} Variant color
+@function variant($name, $variant, $fallback: null, $base: null) {
+    $name: util.string-of($name, "variant", "name");
+    $variant: util.string-of($variant, "variant", "variant");
+    $fallback: util.color-safe($fallback, "variant", "fallback", null);
+    $base: util.color-safe($base, "variant", "base", null);
+
+    $defined: map.get($-colors, $name, $variant);
+    @if $defined {
+        @return $defined;
+    }
+
+    $base: if($base, $base, var.var("base", "color", white));
+    $tone: contrast.tone($base);
+    $color: map.get($-colors, $name, "color");
+
+    @if $variant == "active" {
+        $v: if($tone == "light", "700", "300");
+        @return palette.palette($color, $v);
+    } @else if $variant == "light" {
+        $v: if($tone == "light", "800", "200");
+        $c: palette.palette($color, $v);
+        @return color.mix($base, $color, 85%);
+    } @else if $variant == "light-active" {
+        $v: if($tone == "light", "800", "200");
+        $c: palette.palette($color, $v);
+        @return color.mix($base, $color, 70%);
+    } @else if $variant == "mute" {
+        $v: if($tone == "light", "800", "200");
+        $c: palette.palette($color, $v);
+        @return color.mix($base, $color, 65%);
+    } @else if $variant == "mute-active" {
+        $v: if($tone == "light", "800", "200");
+        $c: palette.palette($color, $v);
+        @return color.mix($base, $color, 65%);
+    } @else if $variant == "readable" {
+        $v: if($tone == "light", "700", "200");
+        $c: palette.palette($color, $v);
+        @return color.mix($base, $color, 10%);
+    } @else if $variant == "foreground" {
+        $v: if($tone == "light", "900", "100");
+        $c: palette.palette($color, $v);
+        @return color.mix($base, $color, 95%);
+    } @else if $variant == "decorator" {
+        $v: if($tone == "light", "800", "200");
+        $c: palette.palette($color, $v);
+        @return color.mix($base, $color, 40%);
+    }
+
+    @return $fallback;
+}
+
+/// Gets filtered palette colors
+/// @param {List} $includes [null] - Colors to include
+/// @param {List} $excludes [null] - Colors to exclude
+/// @return {Map} Filtered colors
+@function colors($includes: null, $excludes: null) {
+    $-defs: map.keys($-colors);
+    $includes: util.list-safe($includes, "colors", "includes", $-defs);
+    $excludes: util.list-safe($excludes, "colors", "excludes", ());
+
+    $result: ();
+    @each $name, $variants in $-colors {
+        @if util.should-include($name, $includes, $excludes) {
+            $result: map.set($result, $name, map.get($variants, "color"));
+        }
+    }
+    @return $result;
+}

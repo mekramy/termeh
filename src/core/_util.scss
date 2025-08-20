@@ -1,0 +1,268 @@
+@use "sass:math";
+@use "sass:meta";
+@use "sass:map";
+@use "sass:list";
+@use "sass:string";
+
+/// Returns the negated value of a number
+/// @param {Number} $value - Input number to negate
+/// @return {Number} Negated value
+@function negate($value) {
+    $value: number-of($value, "negate", "value");
+    @return -$value;
+}
+
+/// Returns half of a number
+/// @param {Number} $value - Input number to halve
+/// @return {Number} Half of input value
+@function half($value) {
+    $value: number-of($value, "half", "value");
+    @return math.div($value, 2);
+}
+
+/// Gets a value from map with fallback if key doesn't exist
+/// @param {Map} $map - Map to get value from
+/// @param {String} $key - Key to look up in map
+/// @param {*} $alt - Fallback value if key not found
+/// @return {*} Value from map or fallback value
+@function alter($map, $key, $alt) {
+    @return if(map.has-key($map, $key), map.get($map, $key), $alt);
+}
+
+/// Determines if key should be included based on filters
+/// @param {String} $key - Key to check
+/// @param {List} $includes - List of keys to include
+/// @param {List} $excludes - List of keys to exclude
+/// @return {Bool} Whether key should be included
+@function should-include($key, $includes, $excludes) {
+    $key: string-of($key, "should-include", "key");
+    $includes: list-of($includes, "should-include", "includes");
+    $excludes: list-of($excludes, "should-include", "excludes");
+
+    $in-includes: list.length($includes) == 0 or list.index($includes, $key) != null;
+    $not-in-excludes: list.length($excludes) == 0 or list.index($excludes, $key) == null;
+
+    @return $in-includes and $not-in-excludes;
+}
+
+/// Creates type error message
+/// @param {*} $value - Invalid value
+/// @param {String} $func - Function name
+/// @param {String} $param - Parameter name
+/// @param {String} $expected - Expected type
+/// @return {String} Error message
+@function throw-error($value, $func, $param, $expected) {
+    $kind: meta.type-of($value);
+    $real: meta.inspect($value);
+    @return '#{$func}: #{$param} must be a #{$expected}, but got "#{$kind}" (#{$real})';
+}
+
+/// Validates number input
+/// @param {*} $value - Value to check
+/// @param {String} $func - Caller function
+/// @param {String} $param - Parameter name
+/// @return {Number} Validated number
+/// @throws Error if type mismatch
+@function number-of($value, $func, $param) {
+    @if meta.type-of($value) != number {
+        @error throw-error($value, $func, $param, "number");
+    }
+    @return $value;
+}
+
+/// Validates number input with null safety
+/// @param {*} $value - Value to check
+/// @param {String} $func - Caller function
+/// @param {String} $param - Parameter name
+/// @param {Number} $fallback [0] - Value to return if input is null
+/// @return {Number} Validated number
+/// @throws Error if type mismatch
+@function number-safe($value, $func, $param, $fallback: 0) {
+    @if not $value {
+        @return $fallback;
+    }
+    @if meta.type-of($value) != number {
+        @error throw-error($value, $func, $param, "number");
+    }
+    @return $value;
+}
+
+/// Validates string input
+/// @param {*} $value - Value to check
+/// @param {String} $func - Caller function
+/// @param {String} $param - Parameter name
+/// @return {String} Validated string
+/// @throws Error if type mismatch
+@function string-of($value, $func, $param) {
+    @if meta.type-of($value) != string {
+        @error throw-error($value, $func, $param, "string");
+    }
+    @return string.quote($value);
+}
+
+/// Validates string input with null safety
+/// @param {*} $value - Value to check
+/// @param {String} $func - Caller function
+/// @param {String} $param - Parameter name
+/// @param {String} $fallback [""] - Value to return if input is null
+/// @return {String} Validated string
+/// @throws Error if type mismatch
+@function string-safe($value, $func, $param, $fallback: "") {
+    @if not $value {
+        @return $fallback;
+    }
+    @if meta.type-of($value) != string {
+        @error throw-error($value, $func, $param, "string");
+    }
+    @return string.quote($value);
+}
+
+/// Validates color input
+/// @param {*} $value - Value to check
+/// @param {String} $func - Caller function
+/// @param {String} $param - Parameter name
+/// @return {Color} Validated color
+/// @throws Error if type mismatch
+@function color-of($value, $func, $param) {
+    @if meta.type-of($value) != color {
+        @error throw-error($value, $func, $param, "color");
+    }
+    @return $value;
+}
+
+/// Validates color input with null safety
+/// @param {*} $value - Value to check
+/// @param {String} $func - Caller function
+/// @param {String} $param - Parameter name
+/// @param {Color} $fallback [null] - Value to return if input is null
+/// @return {Color} Validated color
+/// @throws Error if type mismatch
+@function color-safe($value, $func, $param, $fallback: null) {
+    @if not $value {
+        @return $fallback;
+    }
+    @if meta.type-of($value) != color {
+        @error throw-error($value, $func, $param, "color");
+    }
+    @return $value;
+}
+
+/// Validates list input
+/// @param {*} $value - Value to check
+/// @param {String} $func - Caller function
+/// @param {String} $param - Parameter name
+/// @return {List} Validated list
+/// @throws Error if type mismatch
+@function list-of($value, $func, $param) {
+    @if meta.type-of($value) != list {
+        @error throw-error($value, $func, $param, "list");
+    }
+    @return $value;
+}
+
+/// Validates list input with null safety
+/// @param {*} $value - Value to check
+/// @param {String} $func - Caller function
+/// @param {String} $param - Parameter name
+/// @param {List} $fallback [()] - Value to return if input is null
+/// @return {List} Validated list (returns empty list if null)
+/// @throws Error if type mismatch
+@function list-safe($value, $func, $param, $fallback: ()) {
+    @if not $value {
+        @return $fallback;
+    }
+    @if meta.type-of($value) != list {
+        @error throw-error($value, $func, $param, "list");
+    }
+    @return $value;
+}
+
+/// Validates map input
+/// @param {*} $value - Value to check
+/// @param {String} $func - Caller function
+/// @param {String} $param - Parameter name
+/// @return {Map} Validated map
+/// @throws Error if type mismatch
+@function map-of($value, $func, $param) {
+    @if meta.type-of($value) != map {
+        @error throw-error($value, $func, $param, "map");
+    }
+    @return $value;
+}
+
+/// Validates map input with null safety
+/// @param {*} $value - Value to check
+/// @param {String} $func - Caller function
+/// @param {String} $param - Parameter name
+/// @param {Map} $fallback [()] - Value to return if input is null
+/// @return {Map} Validated map
+/// @throws Error if type mismatch
+@function map-safe($value, $func, $param, $fallback: ()) {
+    @if not $value {
+        @return $fallback;
+    }
+    @if meta.type-of($value) != map {
+        @error throw-error($value, $func, $param, "map");
+    }
+    @return $value;
+}
+
+/// Validates boolean input
+/// @param {*} $value - Value to check
+/// @param {String} $func - Caller function
+/// @param {String} $param - Parameter name
+/// @return {Bool} Validated boolean
+/// @throws Error if type mismatch
+@function bool-of($value, $func, $param) {
+    @if meta.type-of($value) != bool {
+        @error throw-error($value, $func, $param, "bool");
+    }
+    @return $value;
+}
+
+/// Validates boolean input with null safety
+/// @param {*} $value - Value to check
+/// @param {String} $func - Caller function
+/// @param {String} $param - Parameter name
+/// @param {Number} $fallback [false] - Value to return if input is null
+/// @return {Bool} Validated boolean
+/// @throws Error if type mismatch
+@function bool-safe($value, $func, $param, $fallback: false) {
+    @if not $value {
+        @return $fallback;
+    }
+    @if meta.type-of($value) != bool {
+        @error throw-error($value, $func, $param, "bool");
+    }
+    @return $value;
+}
+
+/// Validates function input
+/// @param {*} $value - Value to check
+/// @param {String} $func - Caller function
+/// @param {String} $param - Parameter name
+/// @return {Function} Validated function
+/// @throws Error if type mismatch
+@function function-of($value, $func, $param) {
+    @if meta.type-of($value) != function {
+        @error throw-error($value, $func, $param, "function");
+    }
+    @return $value;
+}
+
+/// Validates function input with null safety
+/// @param {*} $value - Value to check
+/// @param {String} $func - Caller function
+/// @param {String} $param - Parameter name
+/// @param {Number} $fallback [null] - Value to return if input is null
+/// @return {Function} Validated function
+/// @throws Error if type mismatch
+@function function-safe($value, $func, $param, $fallback: null) {
+    @if not $value {
+        @return $fallback;
+    }
+    @if meta.type-of($value) != function {
+        @error throw-error($value, $func, $param, "function");
+    }
+    @return $value;
+}

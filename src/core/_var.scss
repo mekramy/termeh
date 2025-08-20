@@ -1,0 +1,29 @@
+@use "sass:map";
+@use "util";
+
+$-vars: () !default;
+
+/// Defines a scoped variable
+/// @param {String} $com - Component name
+/// @param {String} $prop - Property name
+/// @param {*} $value - Value to assign
+@mixin define($com, $prop, $value) {
+    $com: util.string-of($com, "define", "component");
+    $prop: util.string-of($prop, "define", "property");
+
+    $values: util.alter($-vars, $com, ());
+    $values: map.set($values, $prop, $value);
+    $-vars: map.set($-vars, $com, $values) !global;
+}
+
+/// Gets component variable value
+/// @param {String} $com - Component name
+/// @param {String} $prop - Property name
+/// @param {*} $fallback [null] - Fallback value
+/// @return {*} Property value or fallback
+@function var($com, $prop, $fallback: null) {
+    $com: util.string-of($com, "var", "component");
+    $prop: util.string-of($prop, "var", "property");
+
+    @return map.get($-vars, $com, $prop) or $fallback;
+}

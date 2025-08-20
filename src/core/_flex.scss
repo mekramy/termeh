@@ -1,0 +1,55 @@
+@use "sass:map";
+@use "util";
+
+/// Returns flex align-items values
+/// @param {List} $includes [null] - Alignments to include
+/// @param {List} $excludes [null] - Alignments to exclude
+/// @return {Map} Map of alignment values
+@function flex-aligns($includes: null, $excludes: null) {
+    $-aligns: (
+        "stretch": stretch,
+        "flex-start": flex-start,
+        "flex-end": flex-end,
+        "center": center,
+        "baseline": baseline,
+    );
+    $-defs: map.keys($-aligns);
+
+    $includes: util.list-safe($includes, "flex-aligns", "includes", $-defs);
+    $excludes: util.list-safe($excludes, "flex-aligns", "excludes", ());
+
+    $result: ();
+    @each $name, $align in $-aligns {
+        @if util.should-include($name, $includes, $excludes) {
+            $result: map.set($result, $name, $align);
+        }
+    }
+    @return $result;
+}
+
+/// Returns flex justify-content values
+/// @param {List} $includes [null] - Justifications to include
+/// @param {List} $excludes [null] - Justifications to exclude
+/// @return {Map} Map of justification values
+@function flex-justifies($includes: null, $excludes: null) {
+    $-justifies: (
+        "flex-start": flex-start,
+        "flex-end": flex-end,
+        "center": center,
+        "space-between": space-between,
+        "space-around": space-around,
+        "space-evenly": space-evenly,
+    );
+    $-defs: map.keys($-justifies);
+
+    $includes: util.list-safe($includes, "flex-justifies", "includes", $-defs);
+    $excludes: util.list-safe($excludes, "flex-justifies", "excludes", ());
+
+    $result: ();
+    @each $name, $justify in $-justifies {
+        @if util.should-include($name, $includes, $excludes) {
+            $result: map.set($result, $name, $justify);
+        }
+    }
+    @return $result;
+}

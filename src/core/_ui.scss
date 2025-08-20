@@ -1,0 +1,439 @@
+@use "sass:math";
+@use "sass:selector";
+@use "sass:color" as col;
+@use "color";
+@use "var";
+@use "util";
+@use "../animation";
+
+/// Applies margin styles to non-last children unless marginless
+/// @param {Boolean} $exceptLast [true] - Whether to exclude last child
+/// @content Margin styles to apply
+@mixin marged($except-last: true) {
+    $except-last: util.bool-of($except-last, "marged", "except-last");
+    @if $except-last {
+        &:not(:last-child, .is-marginless) {
+            @content;
+        }
+    } @else {
+        &:not(.is-marginless) {
+            @content;
+        }
+    }
+}
+
+/// Removes bottom margin from non-last, non-marginless elements
+@mixin marginless() {
+    &:not(:last-child, .is-marginless) {
+        margin-bottom: 0;
+    }
+}
+
+/// Applies padding styles unless element has .is-paddingless
+/// @content Padding styles to apply
+@mixin padded() {
+    &:not(.is-paddingless) {
+        @content;
+    }
+}
+
+/// Removes padding from elements with .is-paddingless
+@mixin paddingless() {
+    &:not(.is-paddingless) {
+        padding: 0;
+    }
+}
+
+/// Generates standard box shadow with transparency
+/// @param {Number} $x - Horizontal offset
+/// @param {Number} $y - Vertical offset
+/// @param {Color} $color - Shadow base color
+/// @return {List} Box shadow value
+@function shadow($x, $y, $color) {
+    $x: util.number-of($x, "shadow", "x");
+    $y: util.number-of($y, "shadow", "y");
+    $color: util.color-of($color, "shadow", "color");
+
+    $max: math.max(math.abs($x), math.abs($y));
+    $color: col.change($color, $alpha: 0.3);
+
+    @return $x $y ($max * 2) 0 $color;
+}
+
+/// Generates soft diffused shadow effect
+/// @param {Number} $x - Horizontal offset
+/// @param {Number} $y - Vertical offset
+/// @param {Color} $color - Shadow base color
+/// @return {List} Box shadow value
+@function soft-shadow($x, $y, $color) {
+    $x: util.number-of($x, "soft-shadow", "x");
+    $y: util.number-of($y, "soft-shadow", "y");
+    $color: util.color-of($color, "soft-shadow", "color");
+
+    $max: math.max(math.abs($x), math.abs($y));
+    $color: col.change($color, $alpha: 0.15);
+
+    @return $x $y ($max * 3) util.negate($max) $color;
+}
+
+/// Generates flat box shadow with transparency
+/// @param {Number} $size - Blur radius
+/// @param {Color} $color - Shadow base color
+/// @return {List} Box shadow value
+@function flat-shadow($size, $color) {
+    $size: util.number-of($size, "flat-shadow", "size");
+    $color: util.color-of($color, "flat-shadow", "color");
+
+    @return 0 0 $size $size $color;
+}
+
+/// Calculates the border radius for a child element based on parent radius and padding
+/// @param {Number} $parent-radius - The border radius of the parent element
+/// @param {Number} $padding - The padding between parent and child elements
+/// @return {Number} Calculated child border radius
+@function child-radius($parent-radius, $padding) {
+    @return calc($parent-radius - $padding);
+}
+
+/// Clearfix implementation using ::after pseudo-element
+@mixin clearfix() {
+    &::after {
+        clear: both;
+        content: " ";
+        display: table;
+    }
+}
+
+/// Enables smooth scrolling on iOS devices
+@mixin overflow-touch() {
+    -webkit-overflow-scrolling: touch;
+}
+
+/// Disables pointer events and text selection
+@mixin locked() {
+    pointer-events: none;
+    user-select: none;
+}
+
+/// Disables text selection across browsers
+@mixin unselectable() {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/// Enables text selection across browsers
+@mixin selectable() {
+    -webkit-touch-callout: default;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+/// Styles placeholder text across browsers
+/// @content Placeholder styles
+@mixin placeholder() {
+    $placeholders: ":-moz" ":-webkit-input" "-moz" "-ms-input";
+    @each $placeholder in $placeholders {
+        &:#{$placeholder}-placeholder {
+            @content;
+        }
+    }
+}
+
+/// Resets form element styles to baseline
+@mixin reset() {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    box-sizing: border-box;
+    box-shadow: none;
+    background: none;
+    position: relative;
+    border: none;
+    color: currentcolor;
+    font-family: inherit;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    font-size: 1em;
+    line-height: 1em;
+    overflow: hidden;
+}
+
+/// Base control styles for form elements
+@mixin control() {
+    @include reset();
+
+    &:focus,
+    &.is-focused,
+    &:active,
+    &.is-active {
+        outline: none;
+    }
+
+    &:invalid {
+        outline: none;
+    }
+
+    &[disabled],
+    fieldset[disabled] &,
+    &.is-disabled {
+        cursor: default;
+        pointer-events: none;
+        user-select: none;
+    }
+
+    &::-moz-focus-inner {
+        border: 0;
+    }
+}
+
+/// Custom scrollbar styling
+/// @param {Number} $width - Scrollbar width
+/// @param {Color} $track - Track color
+/// @param {Color} $thumb - Thumb color
+/// @param {Color} $thumb-hover - Thumb hover color
+@mixin scrollbar($width, $track: null, $thumb: null, $thumb-hover: null) {
+    $width: util.number-of($width, "scrollbar", "width");
+    $track: util.color-of($track, "scrollbar", "track");
+    $thumb: util.color-of($thumb, "scrollbar", "thumb");
+    $thumb-hover: util.color-of($thumb-hover, "scrollbar", "thumb-hover");
+
+    &::-webkit-scrollbar {
+        width: $width;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: $track;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $thumb;
+        transition: background 200ms linear;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: $thumb-hover;
+    }
+}
+
+/// Updates scrollbar thumb hover color
+/// @param {Color} $color - New hover color
+@mixin scroll-color($color) {
+    $color: util.color-of($color, "scroll-color", "color");
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: $color;
+    }
+}
+
+/// Spinner base styles
+/// @param {Number} $size - Spinner diameter
+/// @param {Color} $color - Spinner color
+/// @param {Number} $width - Spinner stroke width
+@mixin spinner($size, $color, $width) {
+    $size: util.number-of($size, "spinner", "size");
+    $color: util.color-of($color, "spinner", "color");
+    $width: util.number-of($width, "spinner", "width");
+
+    text-rendering: optimizelegibility;
+    display: block;
+    position: absolute;
+    box-sizing: border-box;
+    content: " ";
+    width: $size;
+    height: $size;
+    border: $width solid $color;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: spin 500ms infinite linear;
+
+    @include animation.spin();
+}
+
+/// Updates spinner color
+/// @param {Color} $color - New spinner color
+@mixin spinner-color($color) {
+    $color: util.color-of($color, "spinner-color", "color");
+
+    border-left-color: $color;
+    border-bottom-color: $color;
+}
+
+/// Centered loading spinner
+/// @param {Number} $size - Spinner diameter
+/// @param {Color} $color - Spinner color
+/// @param {Number} $width - Spinner stroke width
+@mixin loader($size, $color, $width) {
+    $size: util.number-of($size, "loader", "size");
+    $color: util.color-of($color, "loader", "color");
+    $width: util.number-of($width, "loader", "width");
+
+    z-index: 0;
+    position: relative;
+
+    &::after {
+        @include spinner($size, $color, $width);
+
+        z-index: 2;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/// Updates loader spinner color
+/// @param {Color} $color - New spinner color
+@mixin loader-color($color) {
+    $color: util.color-of($color, "loader-color", "color");
+
+    &::after {
+        border-left-color: $color;
+        border-bottom-color: $color;
+    }
+}
+
+/// Overlay layer with optional backdrop filter
+/// @param {Color} $color - Overlay color
+/// @param {String} $filter - Backdrop filter value
+@mixin overlay($color, $filter) {
+    $color: util.color-of($color, "overlay", "color");
+
+    z-index: 0;
+    position: relative;
+
+    &::before {
+        content: " ";
+        position: absolute;
+        z-index: 1;
+        inset: 0;
+        background: $color;
+        backdrop-filter: $filter;
+    }
+}
+
+/// LTR direction specific styles
+/// @content LTR-only styles
+/// @termeh {String} [ltr] - `var("base", "direction")`
+@mixin is-ltr() {
+    @if var.var("base", "direction", "ltr") == "ltr" {
+        @content;
+    }
+
+    &.is-ltr,
+    &:dir(ltr) {
+        @content;
+    }
+}
+
+/// RTL direction specific styles
+/// @content RTL-only styles
+/// @termeh {String} [ltr] - `var("base", "direction")`
+@mixin is-rtl() {
+    @if var.var("base", "direction", "ltr") == "rtl" {
+        @content;
+    }
+
+    &.is-rtl,
+    &:dir(rtl) {
+        @content;
+    }
+}
+
+/// Applies styles for invalid state
+/// @content Styles to apply when element is invalid or has is-failed class
+@mixin is-invalid() {
+    @at-root {
+        .field:invalid #{&},
+        .field.is-failed #{&} {
+            @content;
+        }
+    }
+
+    &:invalid,
+    &.is-failed {
+        @content;
+    }
+}
+
+/// Applies styles for disabled state
+/// @content Styles to apply when element is disabled or within disabled context
+@mixin is-disabled() {
+    @at-root {
+        fieldset:disabled #{&},
+        fieldset.is-disabled #{&},
+        .field:disabled #{&},
+        .field.is-disabled #{&} {
+            @content;
+        }
+    }
+
+    &:disabled,
+    &.is-disabled {
+        @content;
+    }
+}
+
+/// Returns standard control padding values
+/// @return {List} Padding values
+/// @termeh {Number} [8px] - `var("gap", "micro")`
+@function control-padding() {
+    $gap: var.var("gap", "micro", 8px);
+    @return $gap($gap * 2);
+}
+
+/// Standard transition effect
+/// @param {String} $fields - Properties to transition
+/// @termeh {Number} [250ms] - `var("transition", "duration")`
+/// @termeh {String} [ease] - `var("transition", "ease")`
+@mixin transition($fields) {
+    transition-property: $fields;
+    transition-duration: var.var("transition", "duration", 250ms);
+    transition-timing-function: var.var("transition", "ease", ease);
+}
+
+/// Disabled state styling
+/// @termeh {Color} [null] - `var("input", "disabled")`
+/// @termeh {Color} [null] - `var("input", "disabled-border")`
+/// @termeh {Color} [null] - `var("input", "disabled-color")`
+@mixin disabled() {
+    opacity: 0.75;
+    pointer-events: none;
+    user-select: none;
+    color: var.var("input", "disabled-color");
+    background-color: var.var("input", "disabled");
+    border-color: var.var("input", "disabled-border");
+}
+
+/// Text selection styling
+/// @param {String} $name - Color palette name
+@mixin selection($name) {
+    $name: util.string-of($name, "selection", "name");
+
+    &::selection,
+    *::selection {
+        color: color.variant($name, "foreground");
+        background-color: color.color($name);
+    }
+}
+
+/// Scrollable container with themed scrollbar
+/// @param {Color} $color - Scrollbar thumb hover color
+/// @termeh {Number} [1rem] - `var("scroll", "size")`
+/// @termeh {Color} [var("base", "section")] - `var("scroll", "track")`
+/// @termeh {Color} [var("base", "separator")] - `var("scroll", "thumb")`
+@mixin scrollable($color) {
+    $color: util.color-of($color, "scrollable", "color");
+
+    @include scrollbar(
+        var.var("scroll", "size", 1rem),
+        var.var("scroll", "track", var.var("base", "section", null)),
+        var.var("scroll", "thumb", var.var("base", "separator", null)),
+        $color
+    );
+}

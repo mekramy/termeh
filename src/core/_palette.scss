@@ -1,0 +1,131 @@
+@use "sass:list";
+@use "sass:map";
+@use "sass:color";
+@use "util";
+
+/// Color ranges based on HSL values
+/// Format: (name, from hue, to hue, dark hue, light hue)
+$-color-spaces: (
+    red 355deg 360deg 0deg 355deg,
+    red 0deg 11deg 0deg 11deg,
+    red_orange 11deg 21deg 10deg 21deg,
+    orange 21deg 40deg 20deg 41deg,
+    orange_yellow 41deg 51deg 35deg 51deg,
+    yellow 51deg 61deg 40deg 61deg,
+    yellow_green 61deg 81deg 55deg 81deg,
+    green 81deg 121deg 121deg 80deg,
+    green 121deg 141deg 120deg 141deg,
+    green_cyan 141deg 170deg 141deg 170deg,
+    cyan 170deg 201deg 201deg 170deg,
+    cyan_blue 201deg 221deg 221deg 201deg,
+    blue 221deg 241deg 241deg 221deg,
+    blue_magenta 241deg 281deg 250deg 281deg,
+    magenta 281deg 321deg 280deg 321deg,
+    magenta_pink 321deg 331deg 315deg 331deg,
+    pink 331deg 342deg 328deg 342deg,
+    pink_red 342deg 355deg 359deg 342deg
+);
+
+/// Color variant definitions
+/// Format: (percentage, variant-type)
+$-color-mixes: (
+    "50": 95% brightest,
+    "100": 85% brightest,
+    "200": 60% brightest,
+    "300": 35% brightest,
+    "400": 20% brightest,
+    "600": 20% darkest,
+    "700": 40% darkest,
+    "800": 75% darkest,
+    "900": 90% darkest,
+);
+
+/// Checks if value is within range
+/// @param {Number} $v - Value to check
+/// @param {Number} $min - Minimum bound
+/// @param {Number} $max - Maximum bound
+/// @return {Boolean} True if within range
+@function -between($v, $min, $max) {
+    @return $v >= $min and $v <= $max;
+}
+
+/// Finds color range for given hue
+/// @param {Color} $color - Input color
+/// @return {List|null} Color range definition
+@function -find($color) {
+    $hue: color.channel($color, "hue", $space: hsl);
+
+    @each $space in $-color-spaces {
+        $from: list.nth($space, 2);
+        $to: list.nth($space, 3);
+
+        @if -between($hue, $from, $to) {
+            @return $space;
+        }
+    }
+    @return null;
+}
+
+/// Generates darkest variant of color
+/// @param {Color} $color - Base color
+/// @return {Color} Darkest variant
+@function -darkest($color) {
+    $record: -find($color);
+    $hue: list.nth($record, 4);
+
+    // Adjust saturation and lightness based on the color's properties.
+    $sat: if(color.channel($color, "saturation", $space: hsl) > 40%, 100%, 50%);
+    $sat: if(color.channel($color, "saturation", $space: hsl) == 0%, 0%, $sat);
+
+    // Calculate the darkest version based on lightness.
+    $lgh: if(color.channel($color, "lightness", $space: hsl) >= 50%, 40%, 17%);
+    @return hsl($hue, $sat, $lgh);
+}
+
+/// Generates brightest variant of color
+/// @param {Color} $color - Base color
+/// @return {Color} Brightest variant
+@function -brightest($color) {
+    $record: -find($color);
+    $hue: list.nth($record, 5);
+
+    // Generate the brightest version with 95% lightness.
+    @return hsl($hue, color.saturation($color), 95%);
+}
+
+/// Validates color variant
+/// @param {String} $var - Variant to validate
+/// @return {String} Validated variant
+/// @throws Error if invalid
+@function -validate($var) {
+    $var: util.string-of($var, "palette", "variant");
+    $valid-variants: "50" "100" "200" "300" "400" "500" "600" "700" "800" "900";
+
+    @if not list.index($valid-variants, $var) {
+        @error "Invalid color variant: '#{$var}'. Must be one of: #{$valid-variants}";
+    }
+
+    @return $var;
+}
+
+/// Generates color variant
+/// @param {Color} $color - Base color
+/// @param {String} $variant - Desired variant
+/// @return {Color} Resulting color variant
+@function palette($color, $variant) {
+    $color: util.color-of($color, "palette", "color");
+    $variant: -validate($variant);
+    $data: map.get($-color-mixes, $variant);
+
+    @if not $data {
+        @return $color;
+    }
+
+    $amount: list.nth($data, 1);
+    $base: if(
+        list.nth($data, 2) == brightest,
+        -brightest($color),
+        -darkest($color)
+    );
+    @return color.mix($base, $color, $amount);
+}

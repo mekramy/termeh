@@ -1,0 +1,44 @@
+@use "sass:map";
+@use "util";
+
+$-sizes: () !default;
+
+/// Defines a new size
+/// @param {String} $name - Size name (e.g. "small", "medium")
+/// @param {Number} $size - Size value (e.g. 12px, 1rem)
+@mixin define-size($name, $size) {
+    $name: util.string-of($name, "define-size", "name");
+    $size: util.number-of($size, "define-size", "size");
+
+    $-sizes: map.set($-sizes, $name, $size) !global;
+}
+
+/// Gets size value by name
+/// @param {String} $name - Size name
+/// @return {Number} Size value
+/// @throws Error if size not found
+@function size($name) {
+    $name: util.string-of($name, "size", "name");
+    @if not map.has-key($-sizes, $name) {
+        @error "Size '#{$name}' not defined!";
+    }
+    @return map.get($-sizes, $name);
+}
+
+/// Gets filtered map of sizes
+/// @param {List} $includes [null] - Sizes to include
+/// @param {List} $excludes [null] - Sizes to exclude
+/// @return {Map} Filtered sizes
+@function sizes($includes: null, $excludes: null) {
+    $-defs: map.keys($-sizes);
+    $includes: util.list-safe($includes, "sizes", "includes", $-defs);
+    $excludes: util.list-safe($excludes, "sizes", "excludes", ());
+
+    $result: ();
+    @each $name, $size in $-sizes {
+        @if util.should-include($name, $includes, $excludes) {
+            $result: map.set($result, $name, $size);
+        }
+    }
+    @return $result;
+}

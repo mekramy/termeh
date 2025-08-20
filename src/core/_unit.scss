@@ -1,0 +1,44 @@
+@use "sass:map";
+@use "util";
+
+$-units: () !default;
+
+/// Defines a new grid unit
+/// @param {String} $name - Unit name (e.g. "full", "1-of-3")
+/// @param {Number} $unit - Unit value (e.g. 100%, 33.333%)
+@mixin define-unit($name, $unit) {
+    $name: util.string-of($name, "define-unit", "name");
+    $unit: util.number-of($unit, "define-unit", "unit");
+
+    $-units: map.set($-units, $name, $unit) !global;
+}
+
+/// Gets unit value by name
+/// @param {String} $name - Unit name
+/// @return {Number} Unit value
+/// @throws Error if unit not found
+@function unit($name) {
+    $name: util.string-of($name, "unit", "name");
+    @if not map.has-key($-units, $name) {
+        @error "Unit '#{$name}' not defined!";
+    }
+    @return map.get($-units, $name);
+}
+
+/// Gets filtered map of units
+/// @param {List} $includes [null] - Units to include
+/// @param {List} $excludes [null] - Units to exclude
+/// @return {Map} Filtered units
+@function units($includes: null, $excludes: null) {
+    $-defs: map.keys($-units);
+    $includes: util.list-safe($includes, "units", "includes", $-defs);
+    $excludes: util.list-safe($excludes, "units", "excludes", ());
+
+    $result: ();
+    @each $name, $unit in $-units {
+        @if util.should-include($name, $includes, $excludes) {
+            $result: map.set($result, $name, $unit);
+        }
+    }
+    @return $result;
+}

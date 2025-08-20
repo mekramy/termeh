@@ -1,0 +1,44 @@
+@use "sass:map";
+@use "util";
+
+$-gaps: () !default;
+
+/// Defines a new gap
+/// @param {String} $name - Gap name (e.g. "small", "medium")
+/// @param {Number} $gap - Gap value (e.g. 8px, 1rem)
+@mixin define-gap($name, $gap) {
+    $name: util.string-of($name, "define-gap", "name");
+    $gap: util.number-of($gap, "define-gap", "gap");
+
+    $-gaps: map.set($-gaps, $name, $gap) !global;
+}
+
+/// Gets gap value by name
+/// @param {String} $name - Gap name
+/// @return {Number} Gap value
+/// @throws Error if gap not found
+@function gap($name) {
+    $name: util.string-of($name, "gap", "name");
+    @if not map.has-key($-gaps, $name) {
+        @error "Gap '#{$name}' not defined!";
+    }
+    @return map.get($-gaps, $name);
+}
+
+/// Gets filtered map of gaps
+/// @param {List} $includes [null] - Gaps to include
+/// @param {List} $excludes [null] - Gaps to exclude
+/// @return {Map} Filtered gaps
+@function gaps($includes: null, $excludes: null) {
+    $-defs: map.keys($-gaps);
+    $includes: util.list-safe($includes, "gaps", "includes", $-defs);
+    $excludes: util.list-safe($excludes, "gaps", "excludes", ());
+
+    $result: ();
+    @each $name, $gap in $-gaps {
+        @if util.should-include($name, $includes, $excludes) {
+            $result: map.set($result, $name, $gap);
+        }
+    }
+    @return $result;
+}

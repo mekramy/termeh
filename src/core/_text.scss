@@ -1,0 +1,27 @@
+@use "sass:map";
+@use "util";
+
+/// Returns text alignment values based on includes/excludes
+/// @param {List} $includes [null] - List of alignments to include
+/// @param {List} $excludes [null] - List of alignments to exclude
+/// @return {Map} Map of alignment names and values
+@function text-aligns($includes: null, $excludes: null) {
+    $-aligns: (
+        "left": left,
+        "right": right,
+        "center": center,
+        "justify": justify,
+    );
+    $-defs: map.keys($-aligns);
+
+    $includes: util.list-safe($includes, "text-aligns", "includes", $-defs);
+    $excludes: util.list-safe($excludes, "text-aligns", "excludes", ());
+
+    $result: ();
+    @each $name, $align in $-aligns {
+        @if util.should-include($name, $includes, $excludes) {
+            $result: map.set($result, $name, $align);
+        }
+    }
+    @return $result;
+}

@@ -1,0 +1,111 @@
+@use "sass:color";
+@use "sass:math";
+@use "util";
+
+/// Normalizes RGB value for luminance calculation
+/// @param {Number} $v - RGB value (0-255)
+/// @return {Number} Normalized value (0-1)
+@function -normalize($v) {
+    $v: math.div($v, 255);
+    @return if(
+        $v < 0.0393,
+        math.div($v, 12.92),
+        math.pow(math.div($v + 0.055, 1.055), 2.4)
+    );
+}
+
+/// Calculates color luminance (WCAG standard)
+/// @param {Color} $color - Color to analyze
+/// @return {Number} Luminance value
+@function luminance($color) {
+    $color: util.color-of($color, "luminance", "color");
+    $red: -normalize(color.channel($color, "red", $space: rgb));
+    $green: -normalize(color.channel($color, "green", $space: rgb));
+    $blue: -normalize(color.channel($color, "blue", $space: rgb));
+    @return 0.2126 * $red + 0.7152 * $green + 0.0722 * $blue;
+}
+
+/// Returns darker color based on luminance
+/// @param {Color} $color1 - First color
+/// @param {Color} $color2 - Second color
+/// @return {Color} Darker color
+@function darkest($color1, $color2) {
+    $color1: util.color-of($color1, "darkest", "color1");
+    $color2: util.color-of($color2, "darkest", "color2");
+    @return if(luminance($color1) < luminance($color2), $color1, $color2);
+}
+
+/// Returns lighter color based on luminance
+/// @param {Color} $color1 - First color
+/// @param {Color} $color2 - Second color
+/// @return {Color} Lighter color
+@function lightest($color1, $color2) {
+    $color1: util.color-of($color1, "lightest", "color1");
+    $color2: util.color-of($color2, "lightest", "color2");
+    @return if(luminance($color1) > luminance($color2), $color1, $color2);
+}
+
+/// Calculates WCAG contrast ratio
+/// @param {Color} $back - Background color
+/// @param {Color} $color - Foreground color
+/// @return {Number} Contrast ratio
+@function contrast-ratio($back, $color) {
+    $back: util.color-of($back, "contrast-ratio", "back");
+    $color: util.color-of($color, "contrast-ratio", "color");
+    $back-lum: luminance($back) + 0.05;
+    $color-lum: luminance($color) + 0.05;
+    @return math.div(
+        math.max($back-lum, $color-lum),
+        math.min($back-lum, $color-lum)
+    );
+}
+
+/// Determines if color is light or dark
+/// @param {Color} $color - Color to analyze
+/// @return {String} "light" or "dark"
+@function tone($color) {
+    $color: util.color-of($color, "tone", "color");
+    $light-cnt: contrast-ratio($color, white);
+    $dark-cnt: contrast-ratio($color, rgba(black, 0.87));
+    @return if($light-cnt < 3.1 and $dark-cnt > $light-cnt, "light", "dark");
+}
+
+/// Selects higher contrast color
+/// @param {Color} $base - Base color
+/// @param {Color} $color1 - First option
+/// @param {Color} $color2 - Second option
+/// @return {Color} Higher contrast color
+@function contrast($base, $color1, $color2) {
+    $base: util.color-of($base, "contrast", "base");
+    $color1: util.color-of($color1, "contrast", "color1");
+    $color2: util.color-of($color2, "contrast", "color2");
+    $color1-cnt: contrast-ratio(
+        darkest($base, $color1),
+        lightest($base, $color1)
+    );
+    $color2-cnt: contrast-ratio(
+        darkest($base, $color2),
+        lightest($base, $color2)
+    );
+    @return if($color1-cnt > $color2-cnt, $color1, $color2);
+}
+
+/// Selects more harmonious color
+/// @param {Color} $base - Base color
+/// @param {Color} $color1 - First option
+/// @param {Color} $color2 - Second option
+/// @return {Color} More harmonious color
+@function harmony($base, $color1, $color2) {
+    $base: util.color-of($base, "harmony", "base");
+    $color1: util.color-of($color1, "harmony", "color1");
+    $color2: util.color-of($color2, "harmony", "color2");
+    $color1-cnt: contrast-ratio(
+        darkest($base, $color1),
+        lightest($base, $color1)
+    );
+    $color2-cnt: contrast-ratio(
+        darkest($base, $color2),
+        lightest($base, $color2)
+    );
+    @return if($color1-cnt < $color2-cnt, $color1, $color2);
+}
