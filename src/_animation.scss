@@ -1,0 +1,47 @@
+$-spin-defined: false !default;
+$-shake-defined: false !default;
+
+/// Generates continuous 360-degree rotation animation keyframes
+/// @output spin keyframes
+@mixin spin() {
+    @if not $-spin-defined {
+        $-spin-defined: true !global;
+        @at-root {
+            @keyframes spin {
+                from {
+                    transform: translate(-50%, -50%) rotate(0deg);
+                }
+
+                to {
+                    transform: translate(-50%, -50%) rotate(360deg);
+                }
+            }
+        }
+    }
+}
+
+/// Generates subtle shaking animation keyframes
+/// @output shake keyframes
+@mixin shake() {
+    @if not $-shake-defined {
+        $-shake-defined: true !global;
+        @at-root {
+            @keyframes shake {
+                5%,
+                40% {
+                    transform: translateX(-5px);
+                }
+
+                25%,
+                60% {
+                    transform: translateX(5px);
+                }
+
+                0%,
+                100% {
+                    transform: translateX(0);
+                }
+            }
+        }
+    }
+}
