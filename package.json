@@ -1,10 +1,16 @@
 {
     "name": "termeh",
-    "version": "0.0.1-alpha",
+    "version": "0.0.0-alpha",
     "license": "ISC",
     "private": false,
     "homepage": "https://termeh.ekramy.ir",
     "description": "Modern, responsive, and modular CSS framework for scalable UIs.",
+    "style": "termeh.scss",
+    "sass": "termeh.scss",
+    "files": [
+        "src",
+        "termeh.scss"
+    ],
     "keywords": [
         "responsive",
         "ui-design",
@@ -14,14 +20,6 @@
         "css-component",
         "ui-component",
         "responsive-design"
-    ],
-    "authors": [
-        {
-            "email": "m.ajamekramy@gmail.com",
-            "homepage": "github.com/mekramy",
-            "name": "Mojtaba Ekramy",
-            "role": "Developer"
-        }
     ],
     "scripts": {
         "lint": "npx stylelint \"src/**/*.scss\"",
@@ -34,6 +32,14 @@
     "repository": {
         "type": "git",
         "url": "git+https://github.com/mekramy/termeh.git"
+    },
+    "author": {
+        "name": "Mojtaba Ekramy",
+        "email": "m.ajamekramy@gmail.com",
+        "url": "https://github.com/mekramy"
+    },
+    "peerDependencies": {
+        "sass": ">=1.62.0"
     },
     "devDependencies": {
         "@catppuccin/vitepress": "^0.1.2",
