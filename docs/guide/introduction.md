@@ -29,3 +29,24 @@ pnpm add -D termeh
 ```
 
 :::
+
+## Usage
+
+To use it in your project, simply import the termeh package in your **Sass** file and use the termeh functions and components.
+
+::: code-group
+
+```scss [app.scss]
+@use "termeh";
+
+// Define variables
+@include termeh.define-palette("primary", #2196f3);
+
+// use components
+@include termeh.use-base();
+@include termeh.use-container();
+@include termeh.use-grid($gaps: ("mini" "normal" "large"));
+@include termeh.use-button($colors: ("primary" "secondary" "blue"));
+```
+
+:::

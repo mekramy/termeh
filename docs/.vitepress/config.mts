@@ -23,7 +23,7 @@ export default defineConfig({
 
         nav: [
             { text: "Home", link: "/" },
-            { text: "Guide", link: "/pages/introduction/what-is-termeh" },
+            { text: "Guide", link: "/guide/introduction" },
         ],
 
         sidebar: [
@@ -32,7 +32,7 @@ export default defineConfig({
                 items: [
                     {
                         text: "Introduction",
-                        link: "/pages/introduction/what-is-termeh",
+                        link: "/guide/introduction",
                     },
                 ],
             },
