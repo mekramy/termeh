@@ -93,6 +93,37 @@ export default defineConfig({
                     },
                 ],
             },
+
+            {
+                text: "Generic",
+                collapsed: true,
+                items: [
+                    {
+                        text: "Generic Package",
+                        link: "/guide/generic/intro",
+                    },
+                    {
+                        text: "Mini Reset",
+                        link: "/guide/generic/minireset",
+                    },
+                    {
+                        text: "Base Styles",
+                        link: "/guide/generic/base",
+                    },
+                    {
+                        text: "Heading Styles",
+                        link: "/guide/generic/heading",
+                    },
+                    {
+                        text: "Image Styles",
+                        link: "/guide/generic/image",
+                    },
+                    {
+                        text: "Table Styles",
+                        link: "/guide/generic/table",
+                    },
+                ],
+            },
         ],
 
         socialLinks: [

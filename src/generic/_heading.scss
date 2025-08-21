@@ -1,0 +1,73 @@
+@use "../core/module.scss";
+
+/// Applies consistent heading styles
+/// @output Styles for h1-h6 elements
+/// @termeh {Number} [error] - size("small")
+/// @termeh {Number} [error] - size("normal")
+/// @termeh {Number} [error] - size("medium")
+/// @termeh {Number} [error] - size("large")
+/// @termeh {Number} [error] - size("big")
+/// @termeh {Number} [error] - size("huge")
+/// @termeh {Number} [error] - size("massive")
+/// @termeh {Number} [1.6rem] - var("gap", "macro")
+/// @termeh {Number} [1.6em] - var("line-height", "normal")
+/// @termeh {Number} [1.4em] - var("line-height", "medium")
+/// @termeh {Number} [1.2em] - var("line-height", "large")
+@mixin use-heading() {
+    @at-root {
+        $size-massive: module.size("massive");
+        $size-huge: module.size("huge");
+        $size-big: module.size("big");
+        $size-large: module.size("large");
+        $size-medium: module.size("medium");
+        $size-normal: module.size("normal");
+
+        $line-large: module.var("line-height", "large", 1.2em);
+        $line-medium: module.var("line-height", "medium", 1.4em);
+        $line-normal: module.var("line-height", "normal", 1.6em);
+
+        $gap-macro: module.var("gap", "macro", 1.6rem);
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: bold;
+            @include module.marged() {
+                margin-bottom: $gap-macro;
+            }
+        }
+
+        h1 {
+            font-size: $size-massive;
+            line-height: $line-large;
+        }
+
+        h2 {
+            font-size: $size-huge;
+            line-height: $line-large;
+        }
+
+        h3 {
+            font-size: $size-big;
+            line-height: $line-medium;
+        }
+
+        h4 {
+            font-size: $size-large;
+            line-height: $line-medium;
+        }
+
+        h5 {
+            font-size: $size-medium;
+            line-height: $line-normal;
+        }
+
+        h6 {
+            font-size: $size-normal;
+            line-height: $line-normal;
+        }
+    }
+}
