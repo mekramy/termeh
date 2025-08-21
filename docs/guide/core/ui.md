@@ -450,8 +450,9 @@ LTR-only styles. Applies content when the reading direction is left-to-right and
 
 :::
 
-::: details Requirements
-Reads the base direction termeh global variable or applies style when element has `.is-ltr` or `dir(ltr)` selector.
+::: extra Termeh Variables
+
+Uses the **base direction** (`ltr` by default) or the `.is-ltr` class and `dir(ltr)` selector to detect layout direction.
 
 ```scss
 $direction: termeh.var("base", "direction", "ltr");
@@ -482,11 +483,12 @@ RTL-only styles. Applies content when the reading direction is right-to-left and
 
 :::
 
-::: details Requirements
-Reads the base direction termeh global variable or applies style when element has `.is-rtl` or `dir(rtl)` selector.
+::: extra Termeh Variables
+
+Uses the **base direction** (`ltr` by default) or the `.is-rtl` class and `dir(rtl)` selector to detect layout direction.
 
 ```scss
-$direction: termeh.var("base", "direction", "rtl");
+$direction: termeh.var("base", "direction", "ltr");
 ```
 
 :::
@@ -553,11 +555,12 @@ Returns the standard control padding as a shorthand list.
 
 :::
 
-::: details Requirements
-Uses the micro gap size for control rhythm.
+::: extra Termeh Variables
+
+Uses the **micro gap** size (`8px` by default) for control padding.
 
 ```scss
-$gap-micro: termeh.var("gap", "micro");
+$gap-micro: termeh.var("gap", "micro", 8px);
 ```
 
 :::
@@ -580,12 +583,13 @@ Applies a standard transition using theme duration and easing.
 
 :::
 
-::: details Requirements
-Reads transition timing termeh global variable.
+::: extra Termeh Variables
+
+Uses the **transition ease** (`ease` by default) and **transition duration** (`250ms` by default) to generate transitions.
 
 ```scss
-$duration: termeh.var("transition", "duration");
-$ease: termeh.var("transition", "ease");
+$ease: termeh.var("transition", "ease", ease);
+$duration: termeh.var("transition", "duration", 250ms);
 ```
 
 :::
@@ -609,13 +613,14 @@ Applies disabled theming to form controls (colors and borders).
 
 :::
 
-::: details Requirements
-Reads disabled palette termeh global variable.
+::: extra Termeh Variables
+
+Uses the **input disabled**, **input disabled-color**, and **input disabled-border** for styling disabled inputs, and ignores them if values are not defined or set to null.
 
 ```scss
 $disabled-bg: termeh.var("input", "disabled");
-$disabled-border: termeh.var("input", "disabled-border");
 $disabled-color: termeh.var("input", "disabled-color");
+$disabled-border: termeh.var("input", "disabled-border");
 ```
 
 :::
@@ -657,8 +662,9 @@ Scrollable container with themed scrollbar; only the hover thumb color is passed
 
 :::
 
-::: details Requirements
-Uses scroll metrics and base colors termeh global variable.
+::: extra Termeh Variables
+
+Uses the **scroll size**, **scroll track**, and **scroll thumb** to generate a custom scrollbar, ignoring values if not defined or set to null.
 
 ```scss
 $size: termeh.var("scroll", "size");

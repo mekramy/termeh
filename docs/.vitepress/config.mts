@@ -3,6 +3,7 @@ import {
     groupIconMdPlugin,
     groupIconVitePlugin,
 } from "vitepress-plugin-group-icons";
+import container from "markdown-it-container";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -103,6 +104,21 @@ export default defineConfig({
     markdown: {
         config(md) {
             md.use(groupIconMdPlugin);
+
+            md.use(container, "extra", {
+                render(tokens, idx) {
+                    const token = tokens[idx];
+                    if (token.nesting === 1) {
+                        const title = token.info.trim().slice(5).trim();
+                        const titleEl = title
+                            ? `<p class="custom-block-title">${title}</p>`
+                            : `<p class="custom-block-title">Extra</p>`;
+                        return `<section class="custom-block extra">${titleEl}\n`;
+                    } else {
+                        return `</section>\n`;
+                    }
+                },
+            });
         },
     },
     vite: {

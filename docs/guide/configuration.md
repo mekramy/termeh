@@ -76,7 +76,7 @@ Termeh provides a set of **default variables** defined in Sass. You can override
 - **placeholder** → Placeholder text color.
 - **disabled** → Disabled input background.
 - **disabled-color** → Disabled input text color.
-- **disabled-border** → Disabled input border.
+- **disabled-border** → Disabled input border color.
 
 ## Line Heights
 
@@ -138,12 +138,23 @@ Termeh provides a set of **default variables** defined in Sass. You can override
 @include module.define("table", "even", null);
 @include module.define("table", "hover", null);
 @include module.define("table", "grid", null);
-@include module.define("table", "divider", null);
 @include module.define("table", "separator", null);
+@include module.define("table", "divider", null);
 @include module.define("table", "sort-background", null);
 @include module.define("table", "sort-foreground", null);
 @include module.define("table", "strong-weight", null);
 ```
+
+- **background** → Table background color.
+- **foreground** → Table text color.
+- **even** → Background for even rows.
+- **hover** → Background when row is hovered.
+- **grid** → Column divider color.
+- **separator** → Row divider color.
+- **divider** → Section divider color (header, body, footer).
+- **sort-background** → Background of sorted column.
+- **sort-foreground** → Text color of sorted column.
+- **strong-weight** → Font weight for emphasized table text.
 
 ## Containers
 
@@ -153,6 +164,10 @@ Termeh provides a set of **default variables** defined in Sass. You can override
 @include module.define("container", "fullhd", 1500px);
 ```
 
+- **desktop** → Width for desktop layout.
+- **widescreen** → Width for widescreen layout.
+- **fullhd** → Width for very large screens.
+
 ## Gallery
 
 ```scss
@@ -160,6 +175,10 @@ Termeh provides a set of **default variables** defined in Sass. You can override
 @include module.define("gallery", "height-tablet", 200px);
 @include module.define("gallery", "height-mobile", 100px);
 ```
+
+- **height** → Default gallery height (desktop).
+- **height-tablet** → Gallery height for tablet devices.
+- **height-mobile** → Gallery height for mobile devices.
 
 ## Overlay
 
@@ -169,6 +188,10 @@ Termeh provides a set of **default variables** defined in Sass. You can override
 @include module.define("overlay", "filter", none);
 ```
 
+- **background** → Overlay background color.
+- **color** → Overlay text color.
+- **filter** → CSS filter for overlay backdrop filter (e.g., blur).
+
 ## Decorators
 
 ```scss
@@ -176,7 +199,12 @@ Termeh provides a set of **default variables** defined in Sass. You can override
 @include module.define("decorator", "spinner", 2rem);
 ```
 
+- **size** → Default size for decorator elements (borders, underlines, etc.).
+- **spinner** → Default size for loading spinners.
+
 ## Color Palettes
+
+Theme color definitions used across components (e.g. primary, error, neutral tones).
 
 ```scss
 @include module.define-palette("shade", #667085);
@@ -184,7 +212,13 @@ Termeh provides a set of **default variables** defined in Sass. You can override
 @include module.define-palette("error", #c00021);
 ```
 
+- **shade** → Neutral shade color.
+- **primary** → Primary theme color.
+- **error** → Error or danger color.
+
 ## Gaps
+
+Standard spacing scale for margins, paddings, and layout spacing.
 
 ```scss
 @include module.define-gap("mini", 0.5em);
@@ -198,6 +232,8 @@ Termeh provides a set of **default variables** defined in Sass. You can override
 
 ## Text Sizes
 
+Consistent font sizing scale for text and headings.
+
 ```scss
 @include module.define-size("small", 0.8em);
 @include module.define-size("normal", 1em);
@@ -209,6 +245,8 @@ Termeh provides a set of **default variables** defined in Sass. You can override
 ```
 
 ## Grid Units
+
+Percentage-based units for building responsive multi-column layouts (2–12 columns).
 
 ```scss
 @include module.define-unit("full", 100%);
@@ -247,5 +285,35 @@ Termeh provides a set of **default variables** defined in Sass. You can override
 @include module.define-unit("5-of-9", 55.5555%);
 @include module.define-unit("6-of-9", 66.6667%);
 @include module.define-unit("7-of-9", 77.7778%);
-@include module.define-unit("
+@include module.define-unit("8-of-9", 88.8889%);
+@include module.define-unit("1-of-10", 10%);
+@include module.define-unit("2-of-10", 20%);
+@include module.define-unit("3-of-10", 30%);
+@include module.define-unit("4-of-10", 40%);
+@include module.define-unit("5-of-10", 50%);
+@include module.define-unit("6-of-10", 60%);
+@include module.define-unit("7-of-10", 70%);
+@include module.define-unit("8-of-10", 80%);
+@include module.define-unit("9-of-10", 90%);
+@include module.define-unit("1-of-11", 9.0909%);
+@include module.define-unit("2-of-11", 18.1818%);
+@include module.define-unit("3-of-11", 27.2727%);
+@include module.define-unit("4-of-11", 36.3636%);
+@include module.define-unit("5-of-11", 45.4545%);
+@include module.define-unit("6-of-11", 54.5454%);
+@include module.define-unit("7-of-11", 63.6363%);
+@include module.define-unit("8-of-11", 72.7272%);
+@include module.define-unit("9-of-11", 81.8181%);
+@include module.define-unit("10-of-11", 90.909%);
+@include module.define-unit("1-of-12", 8.3333%);
+@include module.define-unit("2-of-12", 16.6667%);
+@include module.define-unit("3-of-12", 25%);
+@include module.define-unit("4-of-12", 33.3333%);
+@include module.define-unit("5-of-12", 41.6667%);
+@include module.define-unit("6-of-12", 50%);
+@include module.define-unit("7-of-12", 58.3333%);
+@include module.define-unit("8-of-12", 66.6667%);
+@include module.define-unit("9-of-12", 75%);
+@include module.define-unit("10-of-12", 83.3333%);
+@include module.define-unit("11-of-12", 91.6667%);
 ```
