@@ -13,7 +13,7 @@ export default defineConfig({
     title: "Termeh",
     description: "Modern, responsive, and modular CSS framework.",
 
-    head: [["link", { rel: "icon", href: "/static/logo.png" }]],
+    head: [["link", { rel: "icon", href: "/assets/logo.png" }]],
 
     // https://vitepress.dev/reference/default-theme-config
     themeConfig: {

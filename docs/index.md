@@ -8,8 +8,8 @@ hero:
   tagline: Designed For Scalable UIs
   image:
     alt: Termeh
-    light: ./static/hero-light.png
-    dark: ./static/hero-dark.png
+    light: /assets/hero-light.png
+    dark: /assets/hero-dark.png
   actions:
     - theme: brand
       text: What Is Termeh?
