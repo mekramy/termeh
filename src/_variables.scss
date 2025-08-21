@@ -1,0 +1,161 @@
+@use "core/module";
+
+// Layout
+@include module.define("base", "direction", ltr); // App direction
+@include module.define("base", "min-width", 300px); // Minimum document width
+
+// Scheme
+@include module.define(
+    "base",
+    "color",
+    white
+); // Theme color (detect light/dark mode)
+@include module.define("base", "foreground", #081e30); // Default text color
+@include module.define("base", "section", #f8f9fa); // Section background
+@include module.define("base", "separator", #e0e4eb); // Separator background
+
+// Layout Gaps
+@include module.define("gap", "micro", 8px); // Small gap within components/text
+@include module.define(
+    "gap",
+    "macro",
+    1.6rem
+); // Large gap for layout structure
+
+// Border radius
+@include module.define("radius", "normal", 2px); // Base border-radius
+@include module.define("radius", "circle", 50%); // Circular border-radius
+@include module.define(
+    "radius",
+    "rounded",
+    290486px
+); // Fully rounded border-radius
+
+// Transitions
+@include module.define("transition", "ease", ease); // Default transition timing
+@include module.define(
+    "transition",
+    "duration",
+    250ms
+); // Default transition duration
+
+// Inputs
+@include module.define("input", "height", 2.8rem); // Input height
+@include module.define("input", "background", white); // Input background
+@include module.define("input", "border", #d1d6e0); // Input border
+@include module.define("input", "placeholder", null); // Input placeholder color
+@include module.define(
+    "input",
+    "disabled",
+    #f0f2f5
+); // Disabled input background
+@include module.define(
+    "input",
+    "disabled-color",
+    #bfc6d4
+); // Disabled input text color
+@include module.define(
+    "input",
+    "disabled-border",
+    #d1d6e0
+); // Disabled input border
+
+// Line heights
+@include module.define("line-height", "normal", 1.6em); // Default line height
+@include module.define(
+    "line-height",
+    "medium",
+    1.4em
+); // Medium text line height
+@include module.define("line-height", "large", 1.2em); // Large text line height
+@include module.define(
+    "line-height",
+    "inline",
+    1.8em
+); // Inline element line height
+
+// Fonts
+@include module.define(
+    "font",
+    "family",
+    ("Segoe UI", Tahoma, Geneva, Verdana)
+); // Font family
+@include module.define("font", "size", 14px); // Font size
+@include module.define("font", "weight", normal); // Font weight
+@include module.define("font", "code-family", monospace); // Code font family
+@include module.define("font", "code-size", 1rem); // Code font size
+
+@include module.define("strong", "color", null); // Strong text color
+@include module.define("strong", "weight", bold); // Strong text weight
+
+// Scrollbar
+@include module.define("scroll", "size", 8px); // Scrollbar width
+@include module.define("scroll", "track", null); // Scrollbar track background
+@include module.define("scroll", "thumb", null); // Scrollbar thumb background
+
+// Table
+@include module.define("table", "background", null); // Table background
+@include module.define("table", "foreground", null); // Table text color
+@include module.define("table", "even", null); // Even row background
+@include module.define("table", "hover", null); // Hover row background
+@include module.define("table", "grid", null); // Column divider background
+@include module.define("table", "divider", null); // Section divider background
+@include module.define("table", "separator", null); // Row divider background
+@include module.define(
+    "table",
+    "sort-background",
+    null
+); // Sorted column background
+@include module.define(
+    "table",
+    "sort-foreground",
+    null
+); // Sorted column text color
+@include module.define("table", "strong-weight", null); // Strong content weight
+
+// Container
+@include module.define(
+    "container",
+    "desktop",
+    960px
+); // Desktop container width
+@include module.define(
+    "container",
+    "widescreen",
+    1200px
+); // Widescreen container width
+@include module.define(
+    "container",
+    "fullhd",
+    1500px
+); // Full HD container width
+
+// Gallery
+@include module.define(
+    "gallery",
+    "height",
+    300px
+); // Default gallery row height
+@include module.define(
+    "gallery",
+    "height-tablet",
+    200px
+); // Tablet gallery row height
+@include module.define(
+    "gallery",
+    "height-mobile",
+    100px
+); // Mobile gallery row height
+
+// Overlay
+@include module.define(
+    "overlay",
+    "background",
+    rgba(white, 0.75)
+); // Overlay background
+@include module.define("overlay", "color", null); // Overlay text color
+@include module.define("overlay", "filter", none); // Overlay backdrop filter
+
+// Decorators
+@include module.define("decorator", "size", 2px); // Decorator border width
+@include module.define("decorator", "spinner", 2rem); // Spinner size

@@ -1,0 +1,9 @@
+@use "core/module";
+
+@include module.define-gap("mini", 0.5em);
+@include module.define-gap("small", 0.85em);
+@include module.define-gap("normal", 1em);
+@include module.define-gap("medium", 1.5em);
+@include module.define-gap("large", 2em);
+@include module.define-gap("huge", 2.5em);
+@include module.define-gap("massive", 3em);

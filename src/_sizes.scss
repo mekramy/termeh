@@ -1,0 +1,9 @@
+@use "core/module";
+
+@include module.define-size("small", 0.8em);
+@include module.define-size("normal", 1em);
+@include module.define-size("medium", 1.25em);
+@include module.define-size("large", 1.5em);
+@include module.define-size("big", 2em);
+@include module.define-size("huge", 2.5em);
+@include module.define-size("massive", 3em);

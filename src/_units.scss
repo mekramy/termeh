@@ -1,0 +1,69 @@
+@use "core/module";
+
+@include module.define-unit("full", 100%); // 1-column layout
+@include module.define-unit("half", 50%); // 2-column layout
+@include module.define-unit("1-of-3", 33.3333%); // 3-column layout
+@include module.define-unit("2-of-3", 66.6667%);
+@include module.define-unit("1-of-4", 25%); // 4-column layout
+@include module.define-unit("2-of-4", 50%);
+@include module.define-unit("3-of-4", 75%);
+@include module.define-unit("1-of-5", 20%); // 5-column layout
+@include module.define-unit("2-of-5", 40%);
+@include module.define-unit("3-of-5", 60%);
+@include module.define-unit("4-of-5", 80%);
+@include module.define-unit("1-of-6", 16.6667%); // 6-column layout
+@include module.define-unit("2-of-6", 33.3333%);
+@include module.define-unit("3-of-6", 50%);
+@include module.define-unit("4-of-6", 66.6667%);
+@include module.define-unit("5-of-6", 83.3333%);
+@include module.define-unit("1-of-7", 14.2857%); // 7-column layout
+@include module.define-unit("2-of-7", 28.5714%);
+@include module.define-unit("3-of-7", 42.8571%);
+@include module.define-unit("4-of-7", 57.1428%);
+@include module.define-unit("5-of-7", 71.4285%);
+@include module.define-unit("6-of-7", 85.7142%);
+@include module.define-unit("1-of-8", 12.5%); // 8-column layout
+@include module.define-unit("2-of-8", 25%);
+@include module.define-unit("3-of-8", 37.5%);
+@include module.define-unit("4-of-8", 50%);
+@include module.define-unit("5-of-8", 62.5%);
+@include module.define-unit("6-of-8", 75%);
+@include module.define-unit("7-of-8", 87.5%);
+@include module.define-unit("1-of-9", 11.1111%); // 9-column layout
+@include module.define-unit("2-of-9", 22.2222%);
+@include module.define-unit("3-of-9", 33.3333%);
+@include module.define-unit("4-of-9", 44.4444%);
+@include module.define-unit("5-of-9", 55.5555%);
+@include module.define-unit("6-of-9", 66.6667%);
+@include module.define-unit("7-of-9", 77.7778%);
+@include module.define-unit("8-of-9", 88.8889%);
+@include module.define-unit("1-of-10", 10%); // 10-column layout
+@include module.define-unit("2-of-10", 20%);
+@include module.define-unit("3-of-10", 30%);
+@include module.define-unit("4-of-10", 40%);
+@include module.define-unit("5-of-10", 50%);
+@include module.define-unit("6-of-10", 60%);
+@include module.define-unit("7-of-10", 70%);
+@include module.define-unit("8-of-10", 80%);
+@include module.define-unit("9-of-10", 90%);
+@include module.define-unit("1-of-11", 9.0909%); // 11-column layout
+@include module.define-unit("2-of-11", 18.1818%);
+@include module.define-unit("3-of-11", 27.2727%);
+@include module.define-unit("4-of-11", 36.3636%);
+@include module.define-unit("5-of-11", 45.4545%);
+@include module.define-unit("6-of-11", 54.5454%);
+@include module.define-unit("7-of-11", 63.6363%);
+@include module.define-unit("8-of-11", 72.7272%);
+@include module.define-unit("9-of-11", 81.8181%);
+@include module.define-unit("10-of-11", 90.909%);
+@include module.define-unit("1-of-12", 8.3333%); // 12-column layout
+@include module.define-unit("2-of-12", 16.6667%);
+@include module.define-unit("3-of-12", 25%);
+@include module.define-unit("4-of-12", 33.3333%);
+@include module.define-unit("5-of-12", 41.6667%);
+@include module.define-unit("6-of-12", 50%);
+@include module.define-unit("7-of-12", 58.3333%);
+@include module.define-unit("8-of-12", 66.6667%);
+@include module.define-unit("9-of-12", 75%);
+@include module.define-unit("10-of-12", 83.3333%);
+@include module.define-unit("11-of-12", 91.6667%);
