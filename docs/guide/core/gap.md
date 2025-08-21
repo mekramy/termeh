@@ -20,8 +20,6 @@ Defines a new gap value.
 
 :::
 
----
-
 ## Gap
 
 Retrieves a defined gap value by its name.
@@ -38,8 +36,6 @@ $medium-gap: gap("medium"); // 16px
 ```
 
 :::
-
----
 
 ## Gaps
 

@@ -19,8 +19,6 @@ Defines a scoped variable for a component.
 
 :::
 
----
-
 ## Var
 
 Retrieves the value of a previously defined component variable. Returns a fallback value if the variable is not set.

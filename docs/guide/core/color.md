@@ -3,8 +3,6 @@
 The color system provides a consistent way to define, manage, and retrieve colors and their variants across the design system.
 It supports base palettes, custom variants, and auto-generated variants based on theme contrast.
 
----
-
 ## Define Palette
 
 Defines a new base color in the palette.
@@ -21,8 +19,6 @@ Defines a new base color in the palette.
 ```
 
 :::
-
----
 
 ## Define Variant
 
@@ -41,8 +37,6 @@ Defines a custom variant for an existing color.
 
 :::
 
----
-
 ## Color
 
 Gets the base color value by name.
@@ -58,8 +52,6 @@ $primary: color("primary"); // #6200ee
 ```
 
 :::
-
----
 
 ## Variant
 
@@ -94,8 +86,6 @@ $color` → registered color
 ```
 
 :::
-
----
 
 ## Colors
 

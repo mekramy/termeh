@@ -20,8 +20,6 @@ Defines a new grid unit.
 
 :::
 
----
-
 ## Unit
 
 Gets a unit value by its name.
@@ -38,8 +36,6 @@ $full: unit("full"); // 100%
 ```
 
 :::
-
----
 
 ## Units
 

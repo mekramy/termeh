@@ -1,17 +1,19 @@
 # UI Utility Mixin And Functions
 
+A collection of utility mixins and functions for layout, spacing, controls, and state management.
+
 ## Marged
 
-Applies margin styles to non-last children unless marginless.
+Applies margin styles to non-last children unless the element has `.is-marginless`.
 
 ::: code-group
 
 ```scss [usage.scss]
-@mixin marged($except-last: true) { … }
+@mixin marged($except-last: true);
 ```
 
 ```scss [example.scss]
-.items {
+.list-item {
   @include marged {
     margin-bottom: 1rem;
   }
@@ -20,8 +22,6 @@ Applies margin styles to non-last children unless marginless.
 
 :::
 
----
-
 ## Marginless
 
 Removes bottom margin from non-last, non-marginless elements.
@@ -29,27 +29,25 @@ Removes bottom margin from non-last, non-marginless elements.
 ::: code-group
 
 ```scss [usage.scss]
-@mixin marginless() { … }
+@mixin marginless();
 ```
 
 ```scss [example.scss]
-.list {
+.list-item {
   @include marginless;
 }
 ```
 
 :::
 
----
-
 ## Padded
 
-Applies padding styles unless element has `.is-paddingless`.
+Applies padding styles unless the element has `.is-paddingless`.
 
 ::: code-group
 
 ```scss [usage.scss]
-@mixin padded() { … }
+@mixin padded();
 ```
 
 ```scss [example.scss]
@@ -62,8 +60,6 @@ Applies padding styles unless element has `.is-paddingless`.
 
 :::
 
----
-
 ## Paddingless
 
 Removes padding from elements with `.is-paddingless`.
@@ -71,22 +67,20 @@ Removes padding from elements with `.is-paddingless`.
 ::: code-group
 
 ```scss [usage.scss]
-@mixin paddingless() { … }
+@mixin paddingless();
 ```
 
 ```scss [example.scss]
-.box {
+.card {
   @include paddingless;
 }
 ```
 
 :::
 
----
-
 ## Shadow
 
-Generates standard box shadow with transparency.
+Generates a standard box-shadow with transparency based on offsets and base color.
 
 ::: code-group
 
@@ -95,18 +89,16 @@ Generates standard box shadow with transparency.
 ```
 
 ```scss [example.scss]
-.card {
+.panel {
   box-shadow: shadow(2px, 4px, #000);
 }
 ```
 
 :::
 
----
+## Soft-Shadow
 
-## Soft Shadow
-
-Generates soft diffused shadow effect.
+Generates a softer, more diffused shadow.
 
 ::: code-group
 
@@ -116,17 +108,15 @@ Generates soft diffused shadow effect.
 
 ```scss [example.scss]
 .panel {
-  box-shadow: soft-shadow(0, 6px, #000);
+  box-shadow: soft-shadow(2px, 6px, #000);
 }
 ```
 
 :::
 
----
+## Flat-Shadow
 
-## Flat Shadow
-
-Generates flat box shadow with transparency.
+Generates a flat, even drop shadow.
 
 ::: code-group
 
@@ -135,18 +125,16 @@ Generates flat box shadow with transparency.
 ```
 
 ```scss [example.scss]
-.badge {
-  box-shadow: flat-shadow(4px, rgba(0, 0, 0, 0.2));
+.box {
+  box-shadow: flat-shadow(10px, rgba(0, 0, 0, 0.2));
 }
 ```
 
 :::
 
----
+## Child-Radius
 
-## Child Radius
-
-Calculates the border radius for a child element.
+Computes child border-radius given parent radius and inner padding.
 
 ::: code-group
 
@@ -155,43 +143,39 @@ Calculates the border radius for a child element.
 ```
 
 ```scss [example.scss]
-.avatar {
-  border-radius: child-radius(2rem, 4px);
+.card__media {
+  border-radius: child-radius(16px, 8px);
 }
 ```
 
 :::
 
----
-
 ## Clearfix
 
-Clearfix implementation using `::after`.
+Classic clearfix using `::after`.
 
 ::: code-group
 
 ```scss [usage.scss]
-@mixin clearfix() { … }
+@mixin clearfix();
 ```
 
 ```scss [example.scss]
-.container {
+.columns {
   @include clearfix;
 }
 ```
 
 :::
 
----
+## Overflow-Touch
 
-## Overflow Touch
-
-Enables smooth scrolling on iOS.
+Enables momentum scrolling on iOS.
 
 ::: code-group
 
 ```scss [usage.scss]
-@mixin overflow-touch() { … }
+@mixin overflow-touch();
 ```
 
 ```scss [example.scss]
@@ -202,8 +186,6 @@ Enables smooth scrolling on iOS.
 
 :::
 
----
-
 ## Locked
 
 Disables pointer events and text selection.
@@ -211,18 +193,16 @@ Disables pointer events and text selection.
 ::: code-group
 
 ```scss [usage.scss]
-@mixin locked() { … }
+@mixin locked();
 ```
 
 ```scss [example.scss]
-.modal {
+.modal.is-blocking {
   @include locked;
 }
 ```
 
 :::
-
----
 
 ## Unselectable
 
@@ -231,332 +211,333 @@ Disables text selection across browsers.
 ::: code-group
 
 ```scss [usage.scss]
-@mixin unselectable() { … }
+@mixin unselectable();
 ```
 
 ```scss [example.scss]
-.button {
+.badge {
   @include unselectable;
 }
 ```
 
 :::
 
----
-
 ## Selectable
 
-Enables text selection.
+Re-enables text selection.
 
 ::: code-group
 
 ```scss [usage.scss]
-@mixin selectable() { … }
+@mixin selectable();
 ```
 
 ```scss [example.scss]
-.input {
+.code {
   @include selectable;
 }
 ```
 
 :::
 
----
-
 ## Placeholder
 
-Styles placeholder text across browsers.
+Cross-browser placeholder styling.
 
 ::: code-group
 
 ```scss [usage.scss]
-@mixin placeholder() { … }
+@mixin placeholder() {
+  /* styles */
+}
 ```
 
 ```scss [example.scss]
-input {
+input[type="text"] {
   @include placeholder {
-    color: gray;
+    color: rgba(0, 0, 0, 0.45);
   }
 }
 ```
 
 :::
 
----
-
 ## Reset
 
-Resets form element styles to baseline.
+Resets form-control styles to a clean baseline.
 
 ::: code-group
 
 ```scss [usage.scss]
-@mixin reset() { … }
+@mixin reset();
 ```
 
 ```scss [example.scss]
-input {
+input,
+select,
+textarea {
   @include reset;
 }
 ```
 
 :::
 
----
-
 ## Control
 
-Base control styles for form elements.
+Base control styling (includes `reset` and focus/disabled normalization).
 
 ::: code-group
 
 ```scss [usage.scss]
-@mixin control() { … }
+@mixin control();
 ```
 
 ```scss [example.scss]
-button {
+.input,
+.select {
   @include control;
 }
 ```
 
 :::
 
----
-
 ## Scrollbar
 
-Custom scrollbar styling.
+Customizes scrollbar width, track, thumb, and hover thumb color (WebKit).
 
 ::: code-group
 
 ```scss [usage.scss]
-@mixin scrollbar($width, $track: null, $thumb: null, $thumb-hover: null) { … }
+@mixin scrollbar($width, $track: null, $thumb: null, $thumb-hover: null);
 ```
 
 ```scss [example.scss]
-.content {
-  @include scrollbar(8px, #f5f5f5, #ccc, #999);
+.table-wrapper {
+  @include scrollbar(8px, #f6f6f6, #bfbfbf, #8c8c8c);
 }
 ```
 
 :::
 
----
+## Scroll-Color
 
-## Scroll Color
-
-Updates scrollbar thumb hover color.
+Updates only the scrollbar thumb hover color.
 
 ::: code-group
 
 ```scss [usage.scss]
-@mixin scroll-color($color) { … }
+@mixin scroll-color($color);
 ```
 
 ```scss [example.scss]
-.content {
-  @include scroll-color(red);
+.table-wrapper.dark {
+  @include scroll-color(#666);
 }
 ```
 
 :::
-
----
 
 ## Spinner
 
-Spinner base styles.
+Base spinner element (intended for pseudo-elements).
 
 ::: code-group
 
 ```scss [usage.scss]
-@mixin spinner($size, $color, $width) { … }
+@mixin spinner($size, $color, $width);
 ```
 
 ```scss [example.scss]
-.loader::before {
-  @include spinner(24px, blue, 2px);
+.button.is-loading::after {
+  @include spinner(1.25rem, #3498db, 2px);
 }
 ```
 
 :::
 
----
+## Spinner-Color
 
-## Spinner Color
-
-Updates spinner color.
+Updates the spinner’s visible stroke color.
 
 ::: code-group
 
 ```scss [usage.scss]
-@mixin spinner-color($color) { … }
+@mixin spinner-color($color);
 ```
 
 ```scss [example.scss]
-.loader::before {
-  @include spinner-color(green);
+.button.is-loading::after {
+  @include spinner-color(#e74c3c);
 }
 ```
 
 :::
-
----
 
 ## Loader
 
-Centered loading spinner.
+Centered loading spinner via `::after`.
 
 ::: code-group
 
 ```scss [usage.scss]
-@mixin loader($size, $color, $width) { … }
+@mixin loader($size, $color, $width);
 ```
 
 ```scss [example.scss]
-.button {
-  @include loader(20px, red, 2px);
+.card.is-loading {
+  @include loader(2rem, #555, 3px);
 }
 ```
 
 :::
 
----
+## Loader-Color
 
-## Loader Color
-
-Updates loader spinner color.
+Updates the loader’s spinner color.
 
 ::: code-group
 
 ```scss [usage.scss]
-@mixin loader-color($color) { … }
+@mixin loader-color($color);
 ```
 
 ```scss [example.scss]
-.button {
-  @include loader-color(orange);
+.card.is-loading.theme-danger {
+  @include loader-color(#c0392b);
 }
 ```
 
 :::
-
----
 
 ## Overlay
 
-Overlay layer with optional backdrop filter.
+Creates a full-cover overlay via `::before`, with optional backdrop-filter.
 
 ::: code-group
 
 ```scss [usage.scss]
-@mixin overlay($color, $filter) { … }
+@mixin overlay($color, $filter);
 ```
 
 ```scss [example.scss]
-.dialog {
-  @include overlay(rgba(0, 0, 0, 0.6), blur(4px));
+.dialog[aria-modal="true"] {
+  @include overlay(rgba(0, 0, 0, 0.5), blur(6px));
 }
 ```
 
 :::
 
----
+## Is-Ltr
 
-## Is LTR
-
-LTR direction specific styles.
+LTR-only styles. Applies content when the reading direction is left-to-right and mirrors it with helper selectors.
 
 ::: code-group
 
 ```scss [usage.scss]
-@mixin is-ltr() { … }
+@mixin is-ltr() {
+  /* styles */
+}
 ```
 
 ```scss [example.scss]
 .container {
   @include is-ltr {
     text-align: left;
+    margin-left: auto;
   }
 }
 ```
 
 :::
 
----
+::: details Requirements
+Reads the base direction termeh global variable or applies style when element has `.is-ltr` or `dir(ltr)` selector.
 
-## Is RTL
+```scss
+$direction: termeh.var("base", "direction", "ltr");
+```
 
-RTL direction specific styles.
+:::
+
+## Is-Rtl
+
+RTL-only styles. Applies content when the reading direction is right-to-left and mirrors it with helper selectors.
 
 ::: code-group
 
 ```scss [usage.scss]
-@mixin is-rtl() { … }
+@mixin is-rtl() {
+  /* styles */
+}
 ```
 
 ```scss [example.scss]
 .container {
   @include is-rtl {
     text-align: right;
+    margin-right: auto;
   }
 }
 ```
 
 :::
 
----
+::: details Requirements
+Reads the base direction termeh global variable or applies style when element has `.is-rtl` or `dir(rtl)` selector.
 
-## Is Invalid
+```scss
+$direction: termeh.var("base", "direction", "rtl");
+```
 
-Applies styles for invalid state.
+:::
+
+## Is-Invalid
+
+Styles for invalid state (works for elements and within `.field` containers).
 
 ::: code-group
 
 ```scss [usage.scss]
-@mixin is-invalid() { … }
+@mixin is-invalid() {
+  /* styles */
+}
 ```
 
 ```scss [example.scss]
-input {
+.input {
   @include is-invalid {
-    border-color: red;
+    border-color: #e74c3c;
   }
 }
 ```
 
 :::
 
----
+## Is-Disabled
 
-## Is Disabled
-
-Applies styles for disabled state.
+Styles for disabled state (element itself or within disabled fieldset/field).
 
 ::: code-group
 
 ```scss [usage.scss]
-@mixin is-disabled() { … }
+@mixin is-disabled() {
+  /* styles */
+}
 ```
 
 ```scss [example.scss]
-input {
+.button {
   @include is-disabled {
-    opacity: 0.5;
+    opacity: 0.6;
   }
 }
 ```
 
 :::
 
----
+## Control-Padding
 
-## Control Padding
-
-Returns standard control padding values.
+Returns the standard control padding as a shorthand list.
 
 ::: code-group
 
@@ -572,82 +553,117 @@ Returns standard control padding values.
 
 :::
 
----
+::: details Requirements
+Uses the micro gap size for control rhythm.
+
+```scss
+$gap-micro: termeh.var("gap", "micro");
+```
+
+:::
 
 ## Transition
 
-Standard transition effect.
+Applies a standard transition using theme duration and easing.
 
 ::: code-group
 
 ```scss [usage.scss]
-@mixin transition($fields) { … }
+@mixin transition($fields);
 ```
 
 ```scss [example.scss]
 .button {
-  @include transition(all);
+  @include transition(background-color, color);
 }
 ```
 
 :::
 
----
+::: details Requirements
+Reads transition timing termeh global variable.
+
+```scss
+$duration: termeh.var("transition", "duration");
+$ease: termeh.var("transition", "ease");
+```
+
+:::
 
 ## Disabled
 
-Disabled state styling.
+Applies disabled theming to form controls (colors and borders).
 
 ::: code-group
 
 ```scss [usage.scss]
-@mixin disabled() { … }
+@mixin disabled();
 ```
 
 ```scss [example.scss]
-.input {
+.input[disabled],
+.input.is-disabled {
   @include disabled;
 }
 ```
 
 :::
 
----
+::: details Requirements
+Reads disabled palette termeh global variable.
+
+```scss
+$disabled-bg: termeh.var("input", "disabled");
+$disabled-border: termeh.var("input", "disabled-border");
+$disabled-color: termeh.var("input", "disabled-color");
+```
+
+:::
 
 ## Selection
 
-Text selection styling.
+Styles selection color pair based on a palette name (foreground & background).
 
 ::: code-group
 
 ```scss [usage.scss]
-@mixin selection($name) { … }
+@mixin selection($name);
 ```
 
 ```scss [example.scss]
-p {
-  @include selection(primary);
+p,
+.prose {
+  @include selection("primary");
 }
 ```
 
 :::
 
----
-
 ## Scrollable
 
-Scrollable container with themed scrollbar.
+Scrollable container with themed scrollbar; only the hover thumb color is passed directly.
 
 ::: code-group
 
 ```scss [usage.scss]
-@mixin scrollable($color) { … }
+@mixin scrollable($color);
 ```
 
 ```scss [example.scss]
 .sidebar {
-  @include scrollable(blue);
+  @include scrollable(#7f8c8d);
 }
+```
+
+:::
+
+::: details Requirements
+Uses scroll metrics and base colors termeh global variable.
+
+```scss
+$size: termeh.var("scroll", "size");
+$track: termeh.var("scroll", "track");
+$thumb: termeh.var("scroll", "thumb");
 ```
 
 :::

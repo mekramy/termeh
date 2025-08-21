@@ -18,8 +18,6 @@ $luminance: luminance(#3498db);
 
 :::
 
----
-
 ## Darkest
 
 Returns the darker color based on luminance.
@@ -35,8 +33,6 @@ $dark: darkest(#ff0000, #00ff00);
 ```
 
 :::
-
----
 
 ## Lightest
 
@@ -54,8 +50,6 @@ $light: lightest(#ff0000, #00ff00);
 
 :::
 
----
-
 ## Contrast Ratio
 
 Calculates the WCAG contrast ratio between background and foreground colors.
@@ -71,8 +65,6 @@ $ratio: contrast-ratio(#ffffff, #333333);
 ```
 
 :::
-
----
 
 ## Tone
 
@@ -90,8 +82,6 @@ $tone: tone(#f1c40f);
 
 :::
 
----
-
 ## Contrast
 
 Selects the color with higher contrast relative to a base color.
@@ -107,8 +97,6 @@ $best-contrast: contrast(#ffffff, #3498db, #e74c3c);
 ```
 
 :::
-
----
 
 ## Harmony
 

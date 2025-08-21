@@ -2,8 +2,6 @@
 
 Provides utility functions for commonly used `align-items` and `justify-content` values in flexbox layouts.
 
----
-
 ## Flex Aligns
 
 Returns a filtered map of available `align-items` values.
@@ -34,8 +32,6 @@ $space-evenly → space-evenly
 ```
 
 :::
-
----
 
 ## Flex Justifies
 

@@ -2,8 +2,6 @@
 
 Termeh provides helper functions for mathematical operations, map/list handling, type validation, and error handling.
 
----
-
 ## Negate
 
 Returns the negated value of a number.
@@ -21,8 +19,6 @@ $negated: negate($value); // -10px
 
 :::
 
----
-
 ## Half
 
 Returns half of a number.
@@ -39,8 +35,6 @@ $half-value: half($value); // 10px
 ```
 
 :::
-
----
 
 ## Alter
 
@@ -62,8 +56,6 @@ $secondary: alter($colors, "secondary", #000); // #000
 
 :::
 
----
-
 ## Should Include
 
 Determines if a key should be included based on includes/excludes lists.
@@ -81,8 +73,6 @@ $excluded: should-include("large", ("small", "medium"), ("large")); // false
 ```
 
 :::
-
----
 
 ## Type Validators
 
@@ -152,8 +142,6 @@ $safe-fn: function-safe(null, "example", "fn", my-func);
 ```
 
 :::
-
----
 
 ## Throw Error
 

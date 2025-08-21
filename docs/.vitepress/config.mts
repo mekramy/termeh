@@ -46,10 +46,6 @@ export default defineConfig({
                         link: "/guide/core/intro",
                     },
                     {
-                        text: "Responsive",
-                        link: "/guide/core/responsive",
-                    },
-                    {
                         text: "Variable",
                         link: "/guide/core/variable",
                     },
@@ -68,6 +64,10 @@ export default defineConfig({
                     {
                         text: "Flexbox",
                         link: "/guide/core/flex",
+                    },
+                    {
+                        text: "Responsive",
+                        link: "/guide/core/responsive",
                     },
                     {
                         text: "Color",

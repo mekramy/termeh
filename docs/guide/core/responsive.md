@@ -27,8 +27,6 @@ $available: "tablet" "desktop" "widescreen" "fullhd";
 
 :::
 
----
-
 ## Breakpoints
 
 Returns a map of all defined breakpoints.
@@ -44,8 +42,6 @@ $all-breakpoints: breakpoints();
 ```
 
 :::
-
----
 
 ## From
 
@@ -74,8 +70,6 @@ $available: "tablet" "desktop" "widescreen" "fullhd";
 ```
 
 :::
-
----
 
 ## Until
 
@@ -131,8 +125,6 @@ $available: "until-fullhd" "until-widescreen" "until-desktop" "tablet" "desktop"
 
 :::
 
----
-
 ## Media Queries
 
 Gets a map of filtered media queries.
@@ -150,13 +142,13 @@ $without-mobile: media-queries(null, ("mobile"));
 
 :::
 
----
-
 ## Device Interaction Mixins
 
 ### Non-Touch
 
 Applies styles for devices that support hover (non-touch devices).
+
+::: code-group
 
 ```scss [usage.scss]
 @mixin non-touch();
@@ -170,9 +162,13 @@ Applies styles for devices that support hover (non-touch devices).
 }
 ```
 
+:::
+
 ### Touch
 
 Applies styles for devices without hover (touch devices).
+
+::: code-group
 
 ```scss [usage.scss]
 @mixin touch();
@@ -186,7 +182,7 @@ Applies styles for devices without hover (touch devices).
 }
 ```
 
----
+:::
 
 ## Device Size Mixins
 
