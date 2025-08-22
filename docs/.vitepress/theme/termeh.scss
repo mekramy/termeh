@@ -1,5 +1,5 @@
 @use "../../../termeh.scss";
-@use "./extra.scss";
 @use "./style.scss";
+@use "./block.scss";
 
 @include termeh.mini-reset();

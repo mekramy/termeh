@@ -136,17 +136,22 @@ export default defineConfig({
         config(md) {
             md.use(groupIconMdPlugin);
 
-            md.use(container, "extra", {
+            md.use(container, "termeh", {
                 render(tokens, idx) {
                     const token = tokens[idx];
                     if (token.nesting === 1) {
-                        const title = token.info.trim().slice(5).trim();
-                        const titleEl = title
-                            ? `<p class="custom-block-title">${title}</p>`
-                            : `<p class="custom-block-title">Extra</p>`;
-                        return `<section class="custom-block extra">${titleEl}\n`;
+                        const title = token.info.trim().slice(6).trim();
+                        const titleEl = `<summary class="custom-block-title">
+                                <img src="/assets/icon-light.png" class="light-only">
+                                <img src="/assets/icon-dark.png" class="dark-only">
+                                <span class="title">${
+                                    title || "Dependencies & Variables"
+                                }</span>
+                                <span class="termeh-arrow"></span>
+                            </summary>`;
+                        return `<details class="custom-block termeh">${titleEl}\n`;
                     } else {
-                        return `</section>\n`;
+                        return `</details>\n`;
                     }
                 },
             });
