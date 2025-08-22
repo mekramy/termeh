@@ -22,3 +22,20 @@ html {
         }
     }
 }
+
+table {
+    display: table !important;
+    table-layout: fixed;
+    width: 100%;
+
+    thead,
+    tbody,
+    tfoot {
+        width: 100%;
+    }
+
+    td {
+        width: 1px;
+        white-space: nowrap;
+    }
+}

@@ -136,6 +136,17 @@ export default defineConfig({
         config(md) {
             md.use(groupIconMdPlugin);
 
+            md.use(container, "definition", {
+                render(tokens, idx) {
+                    const token = tokens[idx];
+                    if (token.nesting === 1) {
+                        return `<div class="custom-block definition">\n`;
+                    } else {
+                        return "</div>\n";
+                    }
+                },
+            });
+
             md.use(container, "termeh", {
                 render(tokens, idx) {
                     const token = tokens[idx];
@@ -145,7 +156,7 @@ export default defineConfig({
                                 <img src="/assets/icon-light.png" class="light-only">
                                 <img src="/assets/icon-dark.png" class="dark-only">
                                 <span class="title">${
-                                    title || "Dependencies & Variables"
+                                    title || "Dependencies"
                                 }</span>
                                 <span class="termeh-arrow"></span>
                             </summary>`;
