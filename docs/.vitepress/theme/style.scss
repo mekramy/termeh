@@ -8,16 +8,3 @@
     --vp-font-family-mono: "Google Sans Code", monospace, Menlo, Monaco,
         Consolas;
 }
-
-.custom-block.extra {
-    display: block;
-    border-radius: 0;
-    box-sizing: border-box;
-    background: none;
-    border: 1px solid var(--vp-c-divider);
-    border-left: 3px solid var(--vp-home-hero-name-color);
-}
-
-.custom-block.extra .custom-block-title {
-    color: var(--vp-home-hero-name-color);
-}
