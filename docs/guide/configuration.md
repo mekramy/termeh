@@ -1,3 +1,7 @@
+---
+outline: deep
+---
+
 # Default Configuration
 
 Termeh provides a set of _default variables_ defined in Sass. You can override them in your project.

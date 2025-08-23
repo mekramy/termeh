@@ -1,4 +1,4 @@
-# Color Utilities
+# Color
 
 The color system provides a consistent way to define, manage, and retrieve colors and their variants across the design system. It supports base palettes, custom variants, and automatically generated variants based on theme contrast.
 

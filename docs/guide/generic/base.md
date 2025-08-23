@@ -1,3 +1,7 @@
+---
+outline: 1
+---
+
 # Base Styles
 
 Applies common base styles for HTML elements. This includes root font settings, colors, line heights, spacing, default display rules for semantic elements, form input styles, code blocks, tables, lists, and interactive elements like links. It ensures a consistent foundation across your UI.

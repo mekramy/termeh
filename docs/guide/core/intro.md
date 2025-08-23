@@ -1,5 +1,5 @@
 ---
-outline: deep
+aside: false
 ---
 
 # Core Concepts

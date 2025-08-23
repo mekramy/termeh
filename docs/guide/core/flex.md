@@ -1,4 +1,4 @@
-# Flex Utilities Package
+# Flex Utilities
 
 Provides utility functions for commonly used `align-items` and `justify-content` values in flexbox layouts.
 

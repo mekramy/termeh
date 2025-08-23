@@ -34,7 +34,7 @@ pnpm add -D termeh
 
 ## Usage
 
-To use it in your project, simply import the termeh package in your _Sass_ file and use the termeh functions and components.
+To use it in your project, simply import the termeh in your _Sass_ file and use the termeh functions and components.
 
 ::: code-group
 
