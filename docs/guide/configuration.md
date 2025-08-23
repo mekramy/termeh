@@ -6,6 +6,10 @@ outline: deep
 
 Termeh provides a set of _default variables_ defined in Sass. You can override them in your project.
 
+## Animation
+
+By default, two `@keyframes` are defined: one for _loaders_ (`spin`) and one for _invalid_ inputs (`shake`). You can customize them for your project if needed.
+
 ## Layout
 
 ```scss
