@@ -41,7 +41,7 @@ Applies consistent heading styles for `h1`–`h6` elements. This includes font s
 **Example:**
 
 ```scss
-@include use-heading();
+@include termeh.use-heading();
 ```
 
 :::

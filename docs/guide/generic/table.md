@@ -98,10 +98,10 @@ Provides fully-featured table styles with configurable colors, row behaviors, ho
 
 ```scss
 // Apply all registered color variants
-@include use-table();
+@include termeh.use-table();
 
 // Apply only specific color variants
-@include use-table(("primary", "error"));
+@include termeh.use-table(("primary", "error"));
 ```
 
 :::

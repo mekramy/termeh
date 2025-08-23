@@ -100,7 +100,7 @@ export default defineConfig({
                 collapsed: true,
                 items: [
                     {
-                        text: "Generic Package",
+                        text: "Generic Module",
                         link: "/guide/generic/intro",
                     },
                     {
@@ -122,6 +122,33 @@ export default defineConfig({
                     {
                         text: "Table Styles",
                         link: "/guide/generic/table",
+                    },
+                ],
+            },
+
+            {
+                text: "Helper",
+                collapsed: true,
+                items: [
+                    {
+                        text: "Helper Module",
+                        link: "/guide/helper/intro",
+                    },
+                    {
+                        text: "Layout",
+                        link: "/guide/helper/layout",
+                    },
+                    {
+                        text: "Attachment",
+                        link: "/guide/helper/attachment",
+                    },
+                    {
+                        text: "Visibility",
+                        link: "/guide/helper/visibility",
+                    },
+                    {
+                        text: "Typography",
+                        link: "/guide/helper/typography",
                     },
                 ],
             },

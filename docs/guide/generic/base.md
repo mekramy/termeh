@@ -17,7 +17,7 @@ Applies common base styles for HTML elements. This includes root font settings, 
 **Example:**
 
 ```scss
-@include use-base();
+@include termeh.use-base();
 ```
 
 :::

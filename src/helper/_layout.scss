@@ -1,0 +1,54 @@
+@use "../core/module";
+
+/// Layout utility classes for common layout operations
+/// @termeh {Color} [error] - color("primary")
+@mixin use-layout-helper() {
+    @at-root {
+        .is-clearfix {
+            @include module.clearfix();
+        }
+
+        .is-ltr {
+            direction: ltr !important;
+        }
+
+        .is-rtl {
+            direction: rtl !important;
+        }
+
+        .is-clipped {
+            overflow: hidden !important;
+        }
+
+        .is-radiusless {
+            border-radius: 0 !important;
+        }
+
+        .is-shadowless {
+            box-shadow: none !important;
+        }
+
+        .is-clickable {
+            cursor: pointer !important;
+            pointer-events: all !important;
+        }
+
+        .is-unselectable {
+            @include module.unselectable();
+        }
+
+        .is-selectable {
+            @include module.selectable();
+        }
+
+        .is-locked {
+            @include module.locked();
+        }
+
+        .is-scrollable {
+            overflow: hidden;
+            overflow-y: auto;
+            @include module.scrollable(module.color("primary"));
+        }
+    }
+}

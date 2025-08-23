@@ -71,6 +71,44 @@ Gets a filtered map of text sizes, returning both names and values, for iteratio
 
 :::
 
+## Text Aligns
+
+Gets a filtered map of text aligns, returning both names and values, for iteration.
+
+::: definition
+
+**Signature:**
+
+```scss
+@function text-aligns($includes: LIST = null, $excludes: LIST = null):
+    MAP<STRING, STRING>;
+```
+
+**Example:**
+
+```scss
+span {
+  @each $name, $align in termeh.text-aligns(null, ("bolder")) {
+    &.is-#{$name} {
+      text-align: $align;
+    }
+  }
+}
+```
+
+:::
+
+::: termeh Available Text Aligns
+
+| Key       | Value            |
+| --------- | ---------------- |
+| `left`    | _left aligned_   |
+| `right`   | _right aligned_  |
+| `center`  | _center aligned_ |
+| `justify` | _justified_      |
+
+:::
+
 ## Font Weight
 
 Gets the numeric font-weight value by its name or generates an _error_ if the weight is invalid.
@@ -122,7 +160,7 @@ Gets a filtered map of font weights, returning both names and values, for iterat
 
 ```scss
 span {
-  @each $name, $weight in termeh.gaps(null, ("bolder")) {
+  @each $name, $weight in termeh.weights(null, ("bolder")) {
     &.is-#{$name} {
       font-weight: $weight;
     }

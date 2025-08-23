@@ -62,9 +62,9 @@ Gets a filtered map of units, returning both names and values, for iteration.
 ```scss
 .my-grid {
   .column {
-    @each $name, $size in termeh.units(null, ("full")) {
+    @each $name, $unit in termeh.units(null, ("full")) {
       &.is-#{$name} {
-        width: $size;
+        width: $unit;
       }
     }
   }

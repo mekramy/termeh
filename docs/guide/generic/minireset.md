@@ -17,7 +17,7 @@ Applies a minimal CSS reset based on **minireset.css v0.0.6**, resetting default
 **Example:**
 
 ```scss
-@include mini-reset();
+@include termeh.mini-reset();
 ```
 
 :::

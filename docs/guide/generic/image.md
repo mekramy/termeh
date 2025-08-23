@@ -45,8 +45,8 @@ Applies image styles with utility classes for centering, rounded or circular bor
 **Example:**
 
 ```scss
-@include use-image(); // Apply all registered sizes
-@include use-image(("small", "medium", "large")); // Apply specific sizes only
+@include termeh.use-image(); // Apply all registered sizes
+@include termeh.use-image(("small", "medium", "large")); // Apply specific sizes only
 ```
 
 :::
