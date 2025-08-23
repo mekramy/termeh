@@ -1,14 +1,14 @@
-@use "../core/module.scss";
+@use "../core/module";
 
 /// Applies image styles and size classes
 /// @param {List} $sizes [()] - List of registered size names to include. Pass null to include all registered sizes
 /// @termeh {Number} [0.2rem] - var("radius", "normal")
 /// @termeh {Number} [50%] - var("radius", "circle")
 @mixin use-image($sizes: ()) {
-    @at-root {
-        $radius-normal: module.var("radius", "normal", 0.2rem);
-        $radius-circle: module.var("radius", "circle", 50%);
+    $radius-normal: module.var("radius", "normal", 0.2rem);
+    $radius-circle: module.var("radius", "circle", 50%);
 
+    @at-root {
         img {
             &.is-centered {
                 margin: auto;

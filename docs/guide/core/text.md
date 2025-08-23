@@ -1,103 +1,133 @@
 # Text
 
-Termeh provides utilities to define and retrieve text sizes for your UI components.
+Termeh provides utilities to define and retrieve text sizes and styles for UI components.
 
 ## Define Text Size
 
-Defines a new text size.
+Register a new text size.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@mixin define-size($name, $size);
+**Signature:**
+
+```scss
+@mixin define-size($name: STRING, $size: NUMBER);
 ```
 
-```scss [example.scss]
-@include define-size("small", 12px);
-@include define-size("medium", 16px);
-@include define-size("large", 24px);
+**Example:**
+
+```scss
+@include termeh.define-size("small", 12px);
+@include termeh.define-size("medium", 16px);
+@include termeh.define-size("large", 24px);
 ```
 
 :::
 
 ## Text Size
 
-Gets a text size value by its name.
+Retrieves a defined text size value by its name or generates an _error_ if the size is not defined.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@function size($name);
+**Signature:**
+
+```scss
+@function size($name: STRING): NUMBER;
 ```
 
-```scss [example.scss]
-$small-text: size("small"); // 12px
-$large-text: size("large"); // 24px
+**Example:**
+
+```scss
+$small-text: termeh.size("small"); // 12px
+$large-text: termeh.size("large"); // 24px
 ```
 
 :::
 
 ## Text Sizes
 
-Gets a filtered map of text sizes.
+Gets a filtered map of text sizes, returning both names and values, for iteration.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@function sizes($includes: null, $excludes: null);
+**Signature:**
+
+```scss
+@function sizes($includes: LIST = null, $excludes: LIST = null): MAP<STRING, NUMBER>;
 ```
 
-```scss [example.scss]
-$some-sizes: sizes(("small", "medium"));
-$all-but-large: sizes(null, ("large"));
+**Example:**
+
+```scss
+.badge {
+  @each $name, $size in termeh.sizes(("small", "medium")) {
+    &.is-#{$name} {
+      font-size: $size;
+    }
+  }
+}
 ```
 
 :::
 
 ## Font Weight
 
-Gets the numeric font-weight value by its name.
+Gets the numeric font-weight value by its name or generates an _error_ if the weight is invalid.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@function weight($name);
+**Signature:**
+
+```scss
+@function weight($name: STRING): NUMBER;
 ```
 
-```scss [example.scss]
-$bold: weight("bold"); // 700
-$light: weight("light"); // 300
+**Example:**
+
+```scss
+$bold: termeh.weight("bold"); // 700
+$light: termeh.weight("light"); // 300
 ```
 
 :::
 
-::: details Available
+::: termeh Available Weights
 
-```scss
-- $lighter → 100
-- $light → 300
-- $normal → 400
-- $medium → 500
-- $semibold → 600
-- $bold → 700
-- $bolder → 900
-```
+| Key        | Value |
+| ---------- | ----- |
+| `lighter`  | _100_ |
+| `light`    | _300_ |
+| `normal`   | _400_ |
+| `medium`   | _500_ |
+| `semibold` | _600_ |
+| `bold`     | _700_ |
+| `bolder`   | _900_ |
 
 :::
 
 ## Font Weights
 
-Gets a filtered map of font weights.
+Gets a filtered map of font weights, returning both names and values, for iteration.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@function weights($includes: null, $excludes: null);
+**Signature:**
+
+```scss
+@function weights($includes: LIST = null, $excludes: LIST = null): MAP<STRING, NUMBER>;
 ```
 
-```scss [example.scss]
-$only-bold: weights(("bold"));
-$no-light: weights(null, ("light"));
+**Example:**
+
+```scss
+span {
+  @each $name, $weight in termeh.gaps(null, ("bolder")) {
+    &.is-#{$name} {
+      font-weight: $weight;
+    }
+  }
+}
 ```
 
 :::

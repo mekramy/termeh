@@ -1,106 +1,143 @@
 # Color Utilities
 
-The color system provides a consistent way to define, manage, and retrieve colors and their variants across the design system.
-It supports base palettes, custom variants, and auto-generated variants based on theme contrast.
+The color system provides a consistent way to define, manage, and retrieve colors and their variants across the design system. It supports base palettes, custom variants, and automatically generated variants based on theme contrast.
 
 ## Define Palette
 
-Defines a new base color in the palette.
+Register a new base color in the palette.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@mixin define-palette($name, $color);
+**Signature:**
+
+```scss
+@mixin define-palette($name: STRING, $color: COLOR);
 ```
 
-```scss [example.scss]
-@include define-palette("primary", #6200ee);
-@include define-palette("secondary", #03dac6);
+**Example:**
+
+```scss
+@include termeh.define-palette("primary", #6200ee);
+@include termeh.define-palette("secondary", #03dac6);
 ```
 
 :::
 
 ## Define Variant
 
-Defines a custom variant for an existing color.
+Set a custom variant for an existing color or _override_ its default variant.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@mixin define-variant($name, $variant, $color);
+**Signature:**
+
+```scss
+@mixin define-variant($name: STRING, $variant: STRING, $color: COLOR);
 ```
 
-```scss [example.scss]
-@include define-variant("primary", "dark", #3700b3);
-@include define-variant("secondary", "light", #a7ffeb);
+**Example:**
+
+```scss
+@include termeh.define-variant("primary", "active", #3700b3);
+@include termeh.define-variant("primary", "icons", #2700a0);
 ```
 
 :::
 
 ## Color
 
-Gets the base color value by name.
+Gets the base color value by name or generates an _error_ if the color is not defined.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@function color($name);
+**Signature:**
+
+```scss
+@function color($name: STRING): COLOR;
 ```
 
-```scss [example.scss]
-$primary: color("primary"); // #6200ee
+**Example:**
+
+```scss
+$primary: termeh.color("primary"); // #6200ee
 ```
 
 :::
 
 ## Variant
 
-Gets a color variant. If not explicitly defined, the variant is auto-generated based on the base color and theme tone.
+Gets a color variant. If not explicitly defined, the variant is _auto-generated_ based on the base color and theme tone or generates an _error_ if the color is not defined.
 
-::: code-group
+If the base color is not provided, the globally defined Termeh base color is used.
 
-```scss [usage.scss]
-@function variant($name, $variant, $fallback: null, $base: null);
+::: definition
+
+**Signature:**
+
+```scss
+@function variant(
+    $name: STRING,
+    $variant: STRING,
+    $fallback: COLOR = null,
+    $base: COLOR = null
+  ): COLOR;
 ```
 
-```scss [example.scss]
-$primary-active: variant("primary", "active");
-$secondary-light: variant("secondary", "light");
-$unknown: variant("danger", "shadow", #ff0000); // fallback
+**Example:**
+
+```scss
+$primary-active: termeh.variant("primary", "active");
+$secondary-light: termeh.variant("secondary", "light");
+$unknown: termeh.variant("danger", "shadow", #a8220f); // fallback
 ```
 
 :::
 
-::: details Available Variants
+::: termeh Available Variants
 
-```scss
-$active → active state
-$light → light variant
-$light-active → light active state
-$mute → muted text variant
-$mute-active → muted text active variant
-$readable → readable text color
-$foreground → foreground color
-$decorator → decorator color (separator, etc...)
-$color` → registered color
-```
+By default, Termeh resolves these variants through _auto-generation_:
+
+| Key            | Description                         |
+| -------------- | ----------------------------------- |
+| `active`       | Active state                        |
+| `light`        | Light version of color              |
+| `light-active` | Light version active state          |
+| `mute`         | Muted text                          |
+| `mute-active`  | Muted text active state             |
+| `readable`     | Readable text color                 |
+| `foreground`   | Foreground color                    |
+| `decorator`    | Decorator color (separator, etc...) |
+| `color`        | Registered color itself             |
 
 :::
 
 ## Colors
 
-Returns a filtered map of all defined base colors.
+Gets a filtered map of colors, returning both names and values, for iteration.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@function colors($includes: null, $excludes: null);
+**Signature:**
+
+```scss
+@function colors($includes: LIST = null, $excludes: LIST = null): MAP<STRING, COLOR>;
 ```
 
-```scss [example.scss]
-$all: colors();
-$only-primary: colors(("primary"));
-$without-secondary: colors(null, ("secondary"));
+**Example:**
+
+```scss
+.button {
+  @each $name, $color in termeh.colors(null, ("shade")) {
+    &.is-#{$name} {
+      background: $color;
+      color: termeh.variant($name, "foreground");
+
+      &:hover {
+        background: termeh.variant($name, "active");
+      }
+    }
+  }
+}
 ```
 
 :::

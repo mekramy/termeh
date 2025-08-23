@@ -1,5 +1,5 @@
 @use "sass:color";
-@use "../core/module.scss";
+@use "../core/module";
 
 /// Applies table styles with configurable colors and behaviors
 /// @param {List} $colors [()] - List of registered color variants to generate. Pass null to include all registered palettes
@@ -21,31 +21,31 @@
 /// @termeh {Color} [null] - var("table", "sort-foreground")
 /// @termeh {String} [null] - var("table", "strong-weight")
 @mixin use-table($colors: ()) {
+    $shade: module.color("shade");
+    $primary: module.color("primary");
+
+    $base-color: module.var("base", "color", white);
+    $base-section: module.var("base", "section");
+    $base-separator: module.var("base", "separator");
+    $base-sort: rgba($shade, 0.05);
+    $base-hover: color.mix($base-section, $shade, 90%);
+    $base-strong: module.var("strong", "weight", bold);
+
+    $table-color: module.var("table", "background", $base-color);
+    $table-fg: module.var("table", "foreground");
+    $table-even: module.var("table", "even", $base-section);
+    $table-hover: module.var("table", "hover", $base-hover);
+    $table-grid: module.var("table", "grid", null);
+    $table-divider: module.var("table", "divider", $base-separator);
+    $table-separator: module.var("table", "separator", $base-separator);
+    $table-decorator: module.var("table", "decorator", $shade);
+
+    $sort-background: module.var("table", "sort-background", $base-sort);
+    $sort-foreground: module.var("table", "sort-foreground", null);
+
+    $table-strong: module.var("table", "strong-weight", $base-strong);
+
     @at-root {
-        $shade: module.color("shade");
-        $primary: module.color("primary");
-
-        $base-color: module.var("base", "color", white);
-        $base-section: module.var("base", "section");
-        $base-separator: module.var("base", "separator");
-        $base-sort: rgba($shade, 0.05);
-        $base-hover: color.mix($base-section, $shade, 90%);
-        $base-strong: module.var("strong", "weight", bold);
-
-        $table-color: module.var("table", "background", $base-color);
-        $table-fg: module.var("table", "foreground");
-        $table-even: module.var("table", "even", $base-section);
-        $table-hover: module.var("table", "hover", $base-hover);
-        $table-grid: module.var("table", "grid", null);
-        $table-divider: module.var("table", "divider", $base-separator);
-        $table-separator: module.var("table", "separator", $base-separator);
-        $table-decorator: module.var("table", "decorator", $shade);
-
-        $sort-background: module.var("table", "sort-background", $base-sort);
-        $sort-foreground: module.var("table", "sort-foreground", null);
-
-        $table-strong: module.var("table", "strong-weight", $base-strong);
-
         .table-container {
             display: block;
             overflow: auto visible;

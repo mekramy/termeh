@@ -4,16 +4,20 @@ Termeh provides a set of color helper functions for luminance, contrast, and col
 
 ## Luminance
 
-Calculates the luminance of a color (WCAG standard).
+Calculates the luminance of a color (_WCAG_ standard).
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@function luminance($color);
+**Signature:**
+
+```scss
+@function luminance($color: COLOR): NUMBER;
 ```
 
-```scss [example.scss]
-$luminance: luminance(#3498db);
+**Example:**
+
+```scss
+$luminance: termeh.luminance(#3498db);
 ```
 
 :::
@@ -22,14 +26,18 @@ $luminance: luminance(#3498db);
 
 Returns the darker color based on luminance.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@function darkest($color1, $color2);
+**Signature:**
+
+```scss
+@function darkest($color1: COLOR, $color2: COLOR): COLOR;
 ```
 
-```scss [example.scss]
-$dark: darkest(#ff0000, #00ff00);
+**Example:**
+
+```scss
+$dark: termeh.darkest(#ff0000, #00ff00);
 ```
 
 :::
@@ -38,14 +46,18 @@ $dark: darkest(#ff0000, #00ff00);
 
 Returns the lighter color based on luminance.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@function lightest($color1, $color2);
+**Signature:**
+
+```scss
+@function lightest($color1: COLOR, $color2: COLOR): COLOR;
 ```
 
-```scss [example.scss]
-$light: lightest(#ff0000, #00ff00);
+**Example:**
+
+```scss
+$light: termeh.lightest(#ff0000, #00ff00);
 ```
 
 :::
@@ -54,30 +66,38 @@ $light: lightest(#ff0000, #00ff00);
 
 Calculates the WCAG contrast ratio between background and foreground colors.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@function contrast-ratio($back, $color);
+**Signature:**
+
+```scss
+@function contrast-ratio($back: COLOR, $color: COLOR): NUMBER;
 ```
 
-```scss [example.scss]
-$ratio: contrast-ratio(#ffffff, #333333);
+**Example:**
+
+```scss
+$ratio: termeh.contrast-ratio(#ffffff, #333333);
 ```
 
 :::
 
 ## Tone
 
-Determines whether a color is **light** or **dark**.
+Determines whether a color is _light_ or _dark_.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@function tone($color);
+**Signature:**
+
+```scss
+@function tone($color: COLOR): "light" | "dark";
 ```
 
-```scss [example.scss]
-$tone: tone(#f1c40f);
+**Example:**
+
+```scss
+$tone: termeh.tone(#f1c40f);
 ```
 
 :::
@@ -86,14 +106,18 @@ $tone: tone(#f1c40f);
 
 Selects the color with higher contrast relative to a base color.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@function contrast($base, $color1, $color2);
+**Signature:**
+
+```scss
+@function contrast($base: COLOR, $color1: COLOR, $color2: COLOR): COLOR;
 ```
 
-```scss [example.scss]
-$best-contrast: contrast(#ffffff, #3498db, #e74c3c);
+**Example:**
+
+```scss
+$best-contrast: termeh.contrast(#ffffff, #3498db, #e74c3c);
 ```
 
 :::
@@ -102,14 +126,18 @@ $best-contrast: contrast(#ffffff, #3498db, #e74c3c);
 
 Selects the more harmonious color relative to a base color.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@function harmony($base, $color1, $color2);
+**Signature:**
+
+```scss
+@function harmony($base: COLOR, $color1: COLOR, $color2: COLOR): COLOR;
 ```
 
-```scss [example.scss]
-$best-harmony: harmony(#ffffff, #3498db, #e74c3c);
+**Example:**
+
+```scss
+$best-harmony: termeh.harmony(#ffffff, #3498db, #e74c3c);
 ```
 
 :::

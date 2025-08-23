@@ -2,13 +2,101 @@
 
 Provides fully-featured table styles with configurable colors, row behaviors, hover effects, sorting, expandable rows, and alignment utilities.
 
-::: code-group
+::: tabs
 
-```scss [usage.scss]
+== Preview
+
+<Preview>
+  <table class="is-fullwidth is-hoverable is-stripped is-primary is-ellipsis">
+    <thead>
+      <tr>
+        <th class="is-left-aligned is-filler is-sortable">Name</th>
+        <th class="is-center-aligned is-sortable is-sorted is-asc">Age</th>
+        <th class="is-sortable">Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="is-left-aligned is-filler is-ellipsis">John Doe</td>
+        <td class="is-center-aligned is-sorted">20</td>
+        <td>john@example.com</td>
+      </tr>
+      <tr>
+        <td class="is-left-aligned is-filler is-ellipsis">Jane Smith</td>
+        <td class="is-center-aligned is-sorted">25</td>
+        <td>jane.smith@example.com</td>
+      </tr>
+      <tr>
+        <td class="is-left-aligned is-filler is-ellipsis">Jack Ma</td>
+        <td class="is-center-aligned is-sorted">39</td>
+        <td>jack.ma@example.com</td>
+      </tr>
+      <tr>
+        <td class="is-left-aligned is-filler is-ellipsis">
+          Lorem ipsum dolor sit amet consectetur adipiscing elit quisque faucibus
+          ex sapien vitae pellentesque sem placerat in id cursus mi.
+        </td>
+        <td class="is-center-aligned is-sorted">44</td>
+        <td>jack.ma@example.com</td>
+      </tr>
+    </tbody>
+  </table>
+</Preview>
+
+== Source
+
+```html
+<table class="is-fullwidth is-hoverable is-stripped is-primary is-ellipsis">
+  <thead>
+    <tr>
+      <th class="is-left-aligned is-filler is-sortable">Name</th>
+      <th class="is-center-aligned is-sortable is-sorted is-asc">Age</th>
+      <th class="is-sortable">Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="is-left-aligned is-filler is-ellipsis">John Doe</td>
+      <td class="is-center-aligned is-sorted">20</td>
+      <td>john@example.com</td>
+    </tr>
+    <tr>
+      <td class="is-left-aligned is-filler is-ellipsis">Jane Smith</td>
+      <td class="is-center-aligned is-sorted">25</td>
+      <td>jane.smith@example.com</td>
+    </tr>
+    <tr>
+      <td class="is-left-aligned is-filler is-ellipsis">Jack Ma</td>
+      <td class="is-center-aligned is-sorted">39</td>
+      <td>jack.ma@example.com</td>
+    </tr>
+    <tr>
+      <td class="is-left-aligned is-filler is-ellipsis">
+        Lorem ipsum dolor sit amet consectetur adipiscing elit quisque faucibus
+        ex sapien vitae pellentesque sem placerat in id cursus mi.
+      </td>
+      <td class="is-center-aligned is-sorted">44</td>
+      <td>jack.ma@example.com</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+:::
+
+## Usage
+
+::: definition
+
+**Signature:**
+
+```scss
 @mixin use-table($colors: ());
 ```
 
-```scss [example.scss]
+**Example:**
+
+```scss
 // Apply all registered color variants
 @include use-table();
 
@@ -18,123 +106,59 @@ Provides fully-featured table styles with configurable colors, row behaviors, ho
 
 :::
 
-::: extra Termeh Variables
+::: termeh
 
-```scss
-$shade: termeh.color("shade");
-$primary: termeh.color("primary");
+Table module uses the following Termeh registered `color()`
 
-$base-color: termeh.var("base", "color", white);
-$base-section: termeh.var("base", "section");
-$base-separator: termeh.var("base", "separator");
-$base-sort: rgba($shade, 0.05);
-$base-hover: color.mix($base-section, $shade, 90%);
-$base-strong: termeh.var("strong", "weight", bold);
+| Color     | Usage                                     |
+| --------- | ----------------------------------------- |
+| `shade`   | Base shade for hover, sort, and decorator |
+| `primary` | Scrollbar color inside `.table-container` |
 
-$table-color: termeh.var("table", "background", $base-color);
-$table-fg: termeh.var("table", "foreground");
-$table-even: termeh.var("table", "even", $base-section);
-$table-hover: termeh.var("table", "hover", $base-hover);
-$table-grid: termeh.var("table", "grid", null);
-$table-divider: termeh.var("table", "divider", $base-separator);
-$table-separator: termeh.var("table", "separator", $base-separator);
-$table-decorator: termeh.var("table", "decorator", $shade);
+Table module uses the following Termeh global `var()`
 
-$sort-background: termeh.var("table", "sort-background", $base-sort);
-$sort-foreground: termeh.var("table", "sort-foreground", null);
+| Component                   | Type     | Usage                                                   |
+| --------------------------- | -------- | ------------------------------------------------------- |
+| `base` → `color`            | _Color_  | _Default_ table background                              |
+| `base` → `section`          | _Color_  | _Default_ even row background                           |
+| `base` → `separator`        | _Color_  | _Default_ Divider/separator border colors               |
+| `strong` → `weight`         | _String_ | _Default_ strong font-weight for headers                |
+| `table` → `background`      | _Color_  | Table background color                                  |
+| `table` → `foreground`      | _Color_  | Text color inside cells and headers                     |
+| `table` → `even`            | _Color_  | Background for even rows                                |
+| `table` → `hover`           | _Color_  | Background color on row hover                           |
+| `table` → `grid`            | _Color_  | Vertical cell borders (grid lines)                      |
+| `table` → `divider`         | _Color_  | Border color for section (head, body, footer) separator |
+| `table` → `separator`       | _Color_  | Row separator borders                                   |
+| `table` → `decorator`       | _Color_  | Border color for sorted columns                         |
+| `table` → `sort-background` | _Color_  | Background for sorted cells                             |
+| `table` → `sort-foreground` | _Color_  | Text color for sorted header cells                      |
+| `table` → `strong-weight`   | _String_ | Font-weight for strong table headers                    |
 
-$table-strong: termeh.var("table", "strong-weight", $base-strong);
-```
+Table module uses the following Termeh registered `colors()`
 
-- `$shade` → Accent color for row hover, decorators, and subtle highlights.
-- `$primary` → Brand primary color for scrollable areas and selections.
-- `$table-color` → Table body background (alternative).
-- `$table-fg` → Text color for table cells.
-- `$table-even` → Background for even rows.
-- `$table-hover` → Row hover color.
-- `$table-grid` → Optional column border color.
-- `$table-divider` → Bottom border color for last row.
-- `$table-separator` → Row separator color.
-- `$table-decorator` → Color for sorting indicators.
-- `$sort-background` → Background for sorted column/cell.
-- `$sort-foreground` → Text color for sorted column/cell.
-- `$table-strong` → Font weight for header cells.
+| Color Variant        | Usage                                      |
+| -------------------- | ------------------------------------------ |
+| any registered color | Overrides table selection and sort styling |
 
 :::
 
-## Available Classes
+## Available classes
 
-### Table Layout & Structure
-
-- _`.is-fullwidth`_ → Table spans full container width.
-- _`.is-stripped`_ → Alternating background for even rows.
-- _`.is-hoverable`_ → Row highlights on hover.
-- _`.table-container`_ → Wrap table to enable horizontal scrolling.
-
-### Expandable Rows
-
-- _`.is-expanded`_ → Shows associated `.extra` row.
-- _`.extra`_ → Hidden content shown only for expanded row.
-
-### Column Alignment
-
-- _`.is-left-aligned`_ → Align text left.
-- _`.is-center-aligned`_ → Align text center.
-- _`.is-right-aligned`_ → Align text right.
-
-### Text Overflow
-
-- _`.is-ellipsis`_ → Truncate overflow text with ellipsis.
-- _`.is-filler`_ → Fills remaining width, truncates overflow.
-
-### Sorting
-
-- _`.is-sortable`_ → Makes column sortable; pointer cursor added.
-
-  - `.is-asc` → Sorted ascending.
-  - `.is-desc` → Sorted descending.
-
-- _`.is-sorted`_ → Highlights sorted column/cell.
-
-### Color Variants
-
-- `.is-primary`, `.is-error`, `.is-warning`, etc.
-- Changes hover, sorted column, and decorator colors.
-
-## Colors
-
-- `$colors` → List of color variants to include. Defaults to `()` (all registered).
-  Example: `("primary", "error")` to include only those two variants.
-
-## Example
-
-```html
-<div class="table-container">
-  <table class="is-fullwidth is-hoverable is-stripped is-primary">
-    <thead>
-      <tr>
-        <th class="is-left-aligned is-filler is-sortable is-sorted is-asc">
-          Name
-        </th>
-        <th class="is-center-aligned">Age</th>
-        <th class="is-right-aligned is-ellipsis">Email</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="is-expanded">
-        <td class="is-left-aligned is-filler is-sorted">John Doe</td>
-        <td class="is-center-aligned">30</td>
-        <td class="is-right-aligned is-ellipsis">john@example.com</td>
-      </tr>
-      <tr class="extra">
-        <td colspan="3">Extra info for John Doe</td>
-      </tr>
-      <tr class="is-even">
-        <td class="is-left-aligned is-filler is-sorted">Jane Smith</td>
-        <td class="is-center-aligned">25</td>
-        <td class="is-right-aligned is-ellipsis">jane.smith@example.com</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-```
+- `.table-container` → wraps the table with scrollable container
+- `.is-fullwidth` → makes the table span 100% width
+- `.is-stripped` → applies alternating background to even rows
+- `.is-hoverable` → highlights rows on hover
+- `.is-center-aligned` → centers text inside `th`/`td`
+- `.is-right-aligned` → right-aligns text inside `th`/`td`
+- `.is-left-aligned` → left-aligns text inside `th`/`td`
+- `.is-ellipsis` → truncates overflowing text in `th`/`td` with ellipsis
+- `.is-filler` → expands `th`/`td` to fill remaining space
+- `.is-multiline` → allows multi-line text inside `td`
+- `.is-sorted` → marks a column as sorted (`th`/`td`)
+- `.is-sortable` → makes a column sortable (`th`)
+- `.is-asc` → marks sorted column as ascending (`th`)
+- `.is-desc` → marks sorted column as descending (`th`)
+- `.is-even` → applies alternate background to even `tr` rows
+- `.is-expanded` → expands a `tr` and reveals the following `.extra` row
+- `.is-<color>` → applies a themed color variant to the table (e.g., `.is-primary`, `.is-error`)

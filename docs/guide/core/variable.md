@@ -6,32 +6,40 @@ Termeh provides a centralized system for defining and retrieving component-speci
 
 Defines a scoped variable for a component.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@mixin define($Component, $Property, $Value);
+**Signature:**
+
+```scss
+@mixin define($Component: STRING, $Property: STRING, $Value: ANY);
 ```
 
-```scss [example.scss]
-@include define("button", "border-radius", 8px);
-@include define("card", "padding", 16px);
+**Example:**
+
+```scss
+@include termeh.define("button", "border-radius", 8px);
+@include termeh.define("card", "padding", 16px);
 ```
 
 :::
 
 ## Var
 
-Retrieves the value of a previously defined component variable. Returns a fallback value if the variable is not set or `null`.
+Retrieves the value of a previously defined component variable. Returns a _fallback_ value if the variable is _not set_ or _null_.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@function var($Component, $Property, $Fallback: null);
+**Signature:**
+
+```scss
+@function var($Component: STRING, $Property: STRING, $Fallback: ANY = null): ANY;
 ```
 
-```scss [example.scss]
-$radius: var("button", "border-radius", 4px);
-$padding: var("card", "padding", 8px);
+**Example:**
+
+```scss
+$radius: termeh.var("radius", "normal", 4px);
+$padding: termeh.var("card", "padding", 8px);
 ```
 
 :::

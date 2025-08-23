@@ -6,13 +6,17 @@ Additionally, it offers standardized templates for images and tables, ensuring p
 
 By using the `generic` package, developers can focus on content and functionality while relying on a polished, theme-consistent foundation.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@mixin use-generic($image-sizes: null, $table-colors: null);
+**Signature:**
+
+```scss
+@mixin use-generic($image-sizes: LIST = null, $table-colors: LIST = null);
 ```
 
-```scss [example.scss]
+**Example:**
+
+```scss
 @include use-generic();
 @include use-generic(("small" "large"), ("primary"));
 ```

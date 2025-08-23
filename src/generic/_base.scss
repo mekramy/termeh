@@ -1,4 +1,4 @@
-@use "../core/module.scss";
+@use "../core/module";
 
 /// Applies common base styles for HTML elements
 /// @output Styles for root elements and common HTML tags
@@ -25,34 +25,34 @@
 /// @termeh {Number} [1.6rem] - var("line-height", "normal")
 /// @termeh {Number} [null] - var("radius", "normal")
 @mixin use-base() {
+    $base-color: module.var("base", "color", white);
+    $base-foreground: module.var("base", "foreground", black);
+    $base-section: module.var("base", "section");
+    $base-separator: module.var("base", "separator");
+
+    $primary-color: module.color("primary");
+    $primary-readable: module.variant("primary", "readable");
+    $primary-background: module.variant("primary", "active");
+    $primary-foreground: module.variant("primary", "foreground");
+
+    $size-small: module.size("small");
+    $font-family: module.var("font", "family");
+    $font-size: module.var("font", "size", 12px);
+    $font-weight: module.var("font", "weight", normal);
+    $code-family: module.var("font", "code-family");
+    $code-size: module.var("font", "code-size");
+
+    $strong-color: module.var("strong", "color");
+    $strong-weight: module.var("strong", "weight", bold);
+
+    $gap-micro: module.var("gap", "micro", 8px);
+    $gap-macro: module.var("gap", "macro", 1.6rem);
+    $direction: module.var("base", "direction", ltr);
+    $min-width: module.var("base", "min-width", 300px);
+    $line-normal: module.var("line-height", "normal", 1.6em);
+    $radius-normal: module.var("radius", "normal");
+
     @at-root {
-        $base-color: module.var("base", "color", white);
-        $base-foreground: module.var("base", "foreground", black);
-        $base-section: module.var("base", "section");
-        $base-separator: module.var("base", "separator");
-
-        $primary-color: module.color("primary");
-        $primary-readable: module.variant("primary", "readable");
-        $primary-background: module.variant("primary", "active");
-        $primary-foreground: module.variant("primary", "foreground");
-
-        $size-small: module.size("small");
-        $font-family: module.var("font", "family");
-        $font-size: module.var("font", "size", 12px);
-        $font-weight: module.var("font", "weight", normal);
-        $code-family: module.var("font", "code-family");
-        $code-size: module.var("font", "code-size");
-
-        $strong-color: module.var("strong", "color");
-        $strong-weight: module.var("strong", "weight", bold);
-
-        $gap-micro: module.var("gap", "micro", 8px);
-        $gap-macro: module.var("gap", "macro", 1.6rem);
-        $direction: module.var("base", "direction", ltr);
-        $min-width: module.var("base", "min-width", 300px);
-        $line-normal: module.var("line-height", "normal", 1.6em);
-        $radius-normal: module.var("radius", "normal");
-
         :root {
             font-size: $font-size;
         }

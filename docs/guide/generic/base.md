@@ -2,74 +2,59 @@
 
 Applies common base styles for HTML elements. This includes root font settings, colors, line heights, spacing, default display rules for semantic elements, form input styles, code blocks, tables, lists, and interactive elements like links. It ensures a consistent foundation across your UI.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
+**Signature:**
+
+```scss
 @mixin use-base();
 ```
 
-```scss [example.scss]
+**Example:**
+
+```scss
 @include use-base();
 ```
 
 :::
 
-::: extra Termeh Variables
+::: termeh
 
-This mixin uses many Termeh variables to define colors, typography, spacing, and other base styles:
+Base module uses the following Termeh global `var()`
 
-```scss
-$base-color: termeh.var("base", "color", white);
-$base-foreground: termeh.var("base", "foreground", black);
-$base-section: termeh.var("base", "section");
-$base-separator: termeh.var("base", "separator");
+| Component                | Type     | Usage                                                        |
+| ------------------------ | -------- | ------------------------------------------------------------ |
+| `font` → `family`        | _String_ | Base font-family for text elements (`html`, `body`)          |
+| `font` → `size`          | _Number_ | Base font-size for `html`, default 12px                      |
+| `font` → `weight`        | _String_ | Base font-weight for text, default `normal`                  |
+| `font` → `code-family`   | _String_ | Font-family for `<code>` and `<pre>`                         |
+| `font` → `code-size`     | _Number_ | Font-size for `<code>` and `<pre>`                           |
+| `base` → `color`         | _Color_  | Background color for root `<html>` element                   |
+| `base` → `foreground`    | _Color_  | Default text color for `<body>` and common elements          |
+| `base` → `section`       | _Color_  | Background for sections, `blockquote`, `code`, etc.          |
+| `base` → `separator`     | _Color_  | Color for separators like `<hr>` and list markers            |
+| `base` → `direction`     | _String_ | Text direction (`ltr` / `rtl`)                               |
+| `base` → `min-width`     | _Number_ | Minimum width of the layout (`<html>`)                       |
+| `line-height` → `normal` | _Number_ | Line-height for body text                                    |
+| `radius` → `normal`      | _Number_ | Border-radius for blocks like `<blockquote>`                 |
+| `strong` → `color`       | _Color_  | Color for `<strong>`                                         |
+| `strong` → `weight`      | _String_ | Font-weight for `<strong>`                                   |
+| `gap` → `micro`          | _Number_ | Small spacing for margins and list items                     |
+| `gap` → `macro`          | _Number_ | Large spacing for section separation, paragraphs, and blocks |
 
-$primary-color: termeh.color("primary");
-$primary-readable: termeh.variant("primary", "readable");
-$primary-background: termeh.variant("primary", "active");
-$primary-foreground: termeh.variant("primary", "foreground");
+Base module uses the following Termeh registered `color()` and `variant()`
 
-$size-small: termeh.size("small");
-$font-family: termeh.var("font", "family");
-$font-size: termeh.var("font", "size", 12px);
-$font-weight: termeh.var("font", "weight", normal);
-$code-family: termeh.var("font", "code-family");
-$code-size: termeh.var("font", "code-size");
+| Palette                  | Usage                                                           |
+| ------------------------ | --------------------------------------------------------------- |
+| `primary` → `color`      | Main interactive color (used for focus, accent, and scrollbars) |
+| `primary` → `readable`   | Readable color for links and interactive text                   |
+| `primary` → `active`     | Background for selected text (`::selection`)                    |
+| `primary` → `foreground` | Foreground for selected text (`::selection`)                    |
 
-$strong-color: termeh.var("strong", "color");
-$strong-weight: termeh.var("strong", "weight", bold);
+Base module uses the following Termeh registered `size()`
 
-$gap-micro: termeh.var("gap", "micro", 8px);
-$gap-macro: termeh.var("gap", "macro", 1.6rem);
-$direction: termeh.var("base", "direction", ltr);
-$min-width: termeh.var("base", "min-width", 300px);
-$line-normal: termeh.var("line-height", "normal", 1.6em);
-$radius-normal: termeh.var("radius", "normal");
-```
-
-Each variable ensures consistent styling across all base elements:
-
-- _`$base-color`_ → background color for root `<html>` element
-- _`$base-foreground`_ → default text color for `<body>` and common elements
-- _`$base-section`_ → background color for sections, `blockquote`, `code`, etc.
-- _`$base-separator`_ → color for separators like `<hr>` and list markers
-- _`$primary-color`_ → main interactive color (used for focus, accent, and scrollbars)
-- _`$primary-readable`_ → readable color for links and interactive text
-- _`$primary-background`_ → background for selected text (`::selection`)
-- _`$primary-foreground`_ → foreground for selected text (`::selection`)
-- _`$size-small`_ → font size for `<small>` elements
-- _`$font-family`_ → base font-family for text elements
-- _`$font-size`_ → base font-size for `<html>` and `<body>`
-- _`$font-weight`_ → base font-weight for text
-- _`$code-family`_ → font-family for `<code>` and `<pre>`
-- _`$code-size`_ → font-size for `<code>` and `<pre>`
-- _`$strong-color`_ → color for `<strong>` elements
-- _`$strong-weight`_ → font-weight for `<strong>` elements
-- _`$gap-micro`_ → small spacing for margins and list items
-- _`$gap-macro`_ → larger spacing for section separation, paragraphs, and blocks
-- _`$direction`_ → text direction (`ltr`/`rtl`)
-- _`$min-width`_ → minimum width of the layout (`<html>`)
-- _`$line-normal`_ → line-height for body text
-- _`$radius-normal`_ → border-radius for blocks like `<blockquote>`
+| size  | Usage                            |
+| ----- | -------------------------------- |
+| small | Font-size for `<small>` elements |
 
 :::

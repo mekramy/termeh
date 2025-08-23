@@ -4,62 +4,84 @@ Provides utility functions for commonly used `align-items` and `justify-content`
 
 ## Flex Aligns
 
-Returns a filtered map of available `align-items` values.
+Gets a filtered map of flex aligns, returning both names and values, for iteration.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@function flex-aligns($includes: null, $excludes: null);
+**Signature:**
+
+```scss
+@function flex-aligns($includes: LIST = null, $excludes: LIST = null):
+    MAP<STRING, FLEX-ALIGN>;
 ```
 
-```scss [example.scss]
-$all-aligns: flex-aligns();
-$only-center: flex-aligns(("center"));
-$no-stretch: flex-aligns(null, ("stretch"));
+**Example:**
+
+```scss
+.my-grid {
+  display: flex;
+
+  @each $name, $align in termeh.flex-aligns(null, ("stretch")) {
+    &.is-#{$name}-aligned {
+      flex-align: $align;
+    }
+  }
+}
 ```
 
 :::
 
-::: details Available
+::: termeh Available Aligns
 
-```scss
-$flex-start → flex-start
-$flex-end → flex-end
-$center → center
-$space-between → space-between
-$space-around → space-around
-$space-evenly → space-evenly
-```
+| Key             | Value           |
+| --------------- | --------------- |
+| `flex-start`    | _flex-start_    |
+| `flex-end`      | _flex-end_      |
+| `center`        | _center_        |
+| `space-between` | _space-between_ |
+| `space-around`  | _space-around_  |
+| `space-evenly`  | _space-evenly_  |
 
 :::
 
 ## Flex Justifies
 
-Returns a filtered map of available `justify-content` values.
+Gets a filtered map of flex justifies, returning both names and values, for iteration.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@function flex-justifies($includes: null, $excludes: null);
+**Signature:**
+
+```scss
+@function flex-justifies($includes: LIST = null, $excludes: LIST = null):
+    MAP<STRING, FLEX-ALIGN>;
 ```
 
-```scss [example.scss]
-$all-justifies: flex-justifies();
-$only-center: flex-justifies(("center"));
-$without-around: flex-justifies(null, ("space-around"));
+**Example:**
+
+```scss
+.my-grid {
+  display: flex;
+
+  @each $name, $justify in termeh.flex-justifies(null, ("stretch")) {
+    &.is-#{$name}-justified {
+      justify-content: $align;
+    }
+  }
+}
 ```
 
 :::
 
-::: details Available
+::: termeh Available Aligns
 
-```scss
-$flex-start → flex-start
-$flex-end → flex-end
-$center → center
-$space-between → space-between
-$space-around → space-around
-$space-evenly → space-evenly
-```
+| Key             | Value           |
+| --------------- | --------------- |
+| `flex-start`    | _flex-start_    |
+| `flex-end`      | _flex-end_      |
+| `center`        | _center_        |
+| `space-between` | _space-between_ |
+| `space-around`  | _space-around_  |
+| `space-evenly`  | _space-evenly_  |
 
 :::

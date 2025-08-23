@@ -4,52 +4,71 @@ Termeh provides utilities to define and retrieve grid size units. These units ca
 
 ## Define Unit
 
-Defines a new grid unit.
+Register a new grid unit.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@mixin define-unit($name, $unit);
+**Signature:**
+
+```scss
+@mixin define-unit($name: STRING, $unit: NUMBER);
 ```
 
-```scss [example.scss]
-@include define-unit("full", 100%);
-@include define-unit("1-of-3", 33.333%);
-@include define-unit("2-of-3", 66.666%);
+**Example:**
+
+```scss
+@include termeh.define-unit("full", 100%);
+@include termeh.define-unit("1-of-3", 33.333%);
+@include termeh.define-unit("2-of-3", 66.666%);
 ```
 
 :::
 
 ## Unit
 
-Gets a unit value by its name.
+Gets a unit value by its name or generates an _error_ if the unit is not defined.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@function unit($name);
+**Signature:**
+
+```scss
+@function unit($name: STRING): NUMBER;
 ```
 
-```scss [example.scss]
-$one-third: unit("1-of-3"); // 33.333%
-$full: unit("full"); // 100%
+**Example:**
+
+```scss
+$one-third: termeh.unit("1-of-3"); // 33.333%
+$full: termeh.unit("full"); // 100%
 ```
 
 :::
 
 ## Units
 
-Gets a filtered map of units.
+Gets a filtered map of units, returning both names and values, for iteration.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@function units($includes: null, $excludes: null);
+**Signature:**
+
+```scss
+@function units($includes: LIST = null, $excludes: LIST = null): MAP<STRING, NUMBER>;
 ```
 
-```scss [example.scss]
-$some-units: units(("1-of-3", "2-of-3"));
-$all-but-full: units(null, ("full"));
+**Example:**
+
+```scss
+.my-grid {
+  .column {
+    @each $name, $size in termeh.units(null, ("full")) {
+      &.is-#{$name} {
+        width: $size;
+      }
+    }
+  }
+}
 ```
 
 :::

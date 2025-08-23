@@ -3,6 +3,7 @@ import {
     groupIconMdPlugin,
     groupIconVitePlugin,
 } from "vitepress-plugin-group-icons";
+import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
 import container from "markdown-it-container";
 
 // https://vitepress.dev/reference/site-config
@@ -135,6 +136,7 @@ export default defineConfig({
     markdown: {
         config(md) {
             md.use(groupIconMdPlugin);
+            md.use(tabsMarkdownPlugin);
 
             md.use(container, "definition", {
                 render(tokens, idx) {

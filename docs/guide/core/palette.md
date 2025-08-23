@@ -4,25 +4,38 @@ Termeh provides a comprehensive set of functions to generate and manipulate colo
 
 ## Palette
 
-Generates a color variant based on a base color and a variant string. Variants typically range from `"50"` (brightest) to `"900"` (darkest).
+Generates a color variant based on a base color and a variant string. Variants typically range from _50_ (brightest) to _900_ (darkest).
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@function palette($color, $variant);
+**Signature:**
+
+```scss
+@function palette($color: COLOR, $variant: STRING): COLOR;
 ```
 
-```scss [example.scss]
-$primary200: palette(#3498db, "200");
-$primary700: palette(#3498db, "700");
+**Example:**
+
+```scss
+$primary200: termeh.palette(#3498db, "200");
+$primary700: termeh.palette(#3498db, "700");
 ```
 
 :::
 
-::: details Available Variants
+::: termeh Available Variants
 
-```scss
-$available: "50" "100" "200" "300" "400" "600" "700" "800" "900";
-```
+| Key   | Description                    |
+| ----- | ------------------------------ |
+| `50`  | Brightest variant              |
+| `100` | Very light variant             |
+| `200` | Light variant                  |
+| `300` | Moderately light variant       |
+| `400` | Slightly light / base-adjacent |
+| `500` | Base / Original color          |
+| `600` | Slightly dark / base-adjacent  |
+| `700` | Moderately dark variant        |
+| `800` | Dark variant                   |
+| `900` | Darkest variant                |
 
 :::

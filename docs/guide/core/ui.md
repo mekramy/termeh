@@ -6,15 +6,19 @@ A collection of utility mixins and functions for layout, spacing, controls, and 
 
 Applies margin styles to non-last children unless the element has `.is-marginless`.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@mixin marged($except-last: true);
+**Signature:**
+
+```scss
+@mixin marged($except-last: BOOLEAN = true);
 ```
 
-```scss [example.scss]
+**Example:**
+
+```scss
 .list-item {
-  @include marged {
+  @include termeh.marged {
     margin-bottom: 1rem;
   }
 }
@@ -26,15 +30,19 @@ Applies margin styles to non-last children unless the element has `.is-marginles
 
 Removes bottom margin from non-last, non-marginless elements.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
+**Signature:**
+
+```scss
 @mixin marginless();
 ```
 
-```scss [example.scss]
+**Example:**
+
+```scss
 .list-item {
-  @include marginless;
+  @include termeh.marginless;
 }
 ```
 
@@ -44,15 +52,19 @@ Removes bottom margin from non-last, non-marginless elements.
 
 Applies padding styles unless the element has `.is-paddingless`.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
+**Signature:**
+
+```scss
 @mixin padded();
 ```
 
-```scss [example.scss]
+**Example:**
+
+```scss
 .card {
-  @include padded {
+  @include termeh.padded {
     padding: 1rem;
   }
 }
@@ -64,15 +76,19 @@ Applies padding styles unless the element has `.is-paddingless`.
 
 Removes padding from elements with `.is-paddingless`.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
+**Signature:**
+
+```scss
 @mixin paddingless();
 ```
 
-```scss [example.scss]
+**Example:**
+
+```scss
 .card {
-  @include paddingless;
+  @include termeh.paddingless;
 }
 ```
 
@@ -82,15 +98,19 @@ Removes padding from elements with `.is-paddingless`.
 
 Generates a standard box-shadow with transparency based on offsets and base color.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@function shadow($x, $y, $color);
+**Signature:**
+
+```scss
+@function shadow($x: NUMBER, $y: NUMBER, $color: COLOR): LIST;
 ```
 
-```scss [example.scss]
+**Example:**
+
+```scss
 .panel {
-  box-shadow: shadow(2px, 4px, #000);
+  box-shadow: termeh.shadow(2px, 4px, #000);
 }
 ```
 
@@ -100,15 +120,19 @@ Generates a standard box-shadow with transparency based on offsets and base colo
 
 Generates a softer, more diffused shadow.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@function soft-shadow($x, $y, $color);
+**Signature:**
+
+```scss
+@function soft-shadow($x: NUMBER, $y: NUMBER, $color: COLOR): LIST;
 ```
 
-```scss [example.scss]
+**Example:**
+
+```scss
 .panel {
-  box-shadow: soft-shadow(2px, 6px, #000);
+  box-shadow: termeh.soft-shadow(2px, 6px, #000);
 }
 ```
 
@@ -118,15 +142,19 @@ Generates a softer, more diffused shadow.
 
 Generates a flat, even drop shadow.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@function flat-shadow($size, $color);
+**Signature:**
+
+```scss
+@function flat-shadow($size: NUMBER, $color: COLOR): LIST;
 ```
 
-```scss [example.scss]
+**Example:**
+
+```scss
 .box {
-  box-shadow: flat-shadow(10px, rgba(0, 0, 0, 0.2));
+  box-shadow: termeh.flat-shadow(10px, rgba(0, 0, 0, 0.2));
 }
 ```
 
@@ -136,15 +164,19 @@ Generates a flat, even drop shadow.
 
 Computes child border-radius given parent radius and inner padding.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@function child-radius($parent-radius, $padding);
+**Signature:**
+
+```scss
+@function child-radius($parent-radius: NUMBER, $padding: NUMBER): NUMBER;
 ```
 
-```scss [example.scss]
-.card__media {
-  border-radius: child-radius(16px, 8px);
+**Example:**
+
+```scss
+.card .media {
+  border-radius: termeh.child-radius(16px, 8px);
 }
 ```
 
@@ -154,15 +186,19 @@ Computes child border-radius given parent radius and inner padding.
 
 Classic clearfix using `::after`.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
+**Signature:**
+
+```scss
 @mixin clearfix();
 ```
 
-```scss [example.scss]
+**Example:**
+
+```scss
 .columns {
-  @include clearfix;
+  @include termeh.clearfix;
 }
 ```
 
@@ -172,15 +208,19 @@ Classic clearfix using `::after`.
 
 Enables momentum scrolling on iOS.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
+**Signature:**
+
+```scss
 @mixin overflow-touch();
 ```
 
-```scss [example.scss]
+**Example:**
+
+```scss
 .scroll-area {
-  @include overflow-touch;
+  @include termeh.overflow-touch;
 }
 ```
 
@@ -190,15 +230,22 @@ Enables momentum scrolling on iOS.
 
 Disables pointer events and text selection.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
+**Signature:**
+
+```scss
 @mixin locked();
 ```
 
-```scss [example.scss]
-.modal.is-blocking {
-  @include locked;
+**Example:**
+
+```scss
+button {
+  &.is-disabled,
+  &.is-loading {
+    @include termeh.locked;
+  }
 }
 ```
 
@@ -208,15 +255,19 @@ Disables pointer events and text selection.
 
 Disables text selection across browsers.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
+**Signature:**
+
+```scss
 @mixin unselectable();
 ```
 
-```scss [example.scss]
+**Example:**
+
+```scss
 .badge {
-  @include unselectable;
+  @include termeh.unselectable;
 }
 ```
 
@@ -226,15 +277,19 @@ Disables text selection across browsers.
 
 Re-enables text selection.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
+**Signature:**
+
+```scss
 @mixin selectable();
 ```
 
-```scss [example.scss]
-.code {
-  @include selectable;
+**Example:**
+
+```scss
+.non-disabled {
+  @include termeh.selectable;
 }
 ```
 
@@ -244,17 +299,19 @@ Re-enables text selection.
 
 Cross-browser placeholder styling.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@mixin placeholder() {
-  /* styles */
-}
+**Signature:**
+
+```scss
+@mixin placeholder();
 ```
 
-```scss [example.scss]
+**Example:**
+
+```scss
 input[type="text"] {
-  @include placeholder {
+  @include termeh.placeholder {
     color: rgba(0, 0, 0, 0.45);
   }
 }
@@ -266,17 +323,21 @@ input[type="text"] {
 
 Resets form-control styles to a clean baseline.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
+**Signature:**
+
+```scss
 @mixin reset();
 ```
 
-```scss [example.scss]
+**Example:**
+
+```scss
 input,
 select,
 textarea {
-  @include reset;
+  @include termeh.reset;
 }
 ```
 
@@ -286,16 +347,21 @@ textarea {
 
 Base control styling (includes `reset` and focus/disabled normalization).
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
+**Signature:**
+
+```scss
 @mixin control();
 ```
 
-```scss [example.scss]
+**Example:**
+
+```scss
 .input,
-.select {
-  @include control;
+.select,
+button {
+  @include termeh.control;
 }
 ```
 
@@ -305,15 +371,24 @@ Base control styling (includes `reset` and focus/disabled normalization).
 
 Customizes scrollbar width, track, thumb, and hover thumb color (WebKit).
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@mixin scrollbar($width, $track: null, $thumb: null, $thumb-hover: null);
+**Signature:**
+
+```scss
+@mixin scrollbar(
+  $width: NUMBER,
+  $track: COLOR = null,
+  $thumb: COLOR = null,
+  $thumb-hover: COLOR = null
+);
 ```
 
-```scss [example.scss]
+**Example:**
+
+```scss
 .table-wrapper {
-  @include scrollbar(8px, #f6f6f6, #bfbfbf, #8c8c8c);
+  @include termeh.scrollbar(8px, #f6f6f6, #bfbfbf, #8c8c8c);
 }
 ```
 
@@ -323,15 +398,21 @@ Customizes scrollbar width, track, thumb, and hover thumb color (WebKit).
 
 Updates only the scrollbar thumb hover color.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@mixin scroll-color($color);
+**Signature:**
+
+```scss
+@mixin scroll-color($color: COLOR);
 ```
 
-```scss [example.scss]
-.table-wrapper.dark {
-  @include scroll-color(#666);
+**Example:**
+
+```scss
+.table-wrapper {
+  &.is-dark {
+    @include termeh.scroll-color(#666);
+  }
 }
 ```
 
@@ -341,15 +422,21 @@ Updates only the scrollbar thumb hover color.
 
 Base spinner element (intended for pseudo-elements).
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@mixin spinner($size, $color, $width);
+**Signature:**
+
+```scss
+@mixin spinner($size: NUMBER, $color: COLOR, $width: NUMBER);
 ```
 
-```scss [example.scss]
-.button.is-loading::after {
-  @include spinner(1.25rem, #3498db, 2px);
+**Example:**
+
+```scss
+.button {
+  &.is-loading::after {
+    @include termeh.spinner(1.25rem, #3498db, 2px);
+  }
 }
 ```
 
@@ -359,15 +446,23 @@ Base spinner element (intended for pseudo-elements).
 
 Updates the spinner’s visible stroke color.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@mixin spinner-color($color);
+**Signature:**
+
+```scss
+@mixin spinner-color($color: COLOR);
 ```
 
-```scss [example.scss]
-.button.is-loading::after {
-  @include spinner-color(#e74c3c);
+**Example:**
+
+```scss
+.button {
+  &.is-red {
+    &.is-loading::after {
+      @include termeh.spinner-color(#e74c3c);
+    }
+  }
 }
 ```
 
@@ -377,15 +472,21 @@ Updates the spinner’s visible stroke color.
 
 Centered loading spinner via `::after`.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@mixin loader($size, $color, $width);
+**Signature:**
+
+```scss
+@mixin loader($size: NUMBER, $color: COLOR, $width: NUMBER);
 ```
 
-```scss [example.scss]
-.card.is-loading {
-  @include loader(2rem, #555, 3px);
+**Example:**
+
+```scss
+.card {
+  &.is-loading {
+    @include termeh.loader(2rem, #555, 3px);
+  }
 }
 ```
 
@@ -395,15 +496,23 @@ Centered loading spinner via `::after`.
 
 Updates the loader’s spinner color.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@mixin loader-color($color);
+**Signature:**
+
+```scss
+@mixin loader-color($color: COLOR);
 ```
 
-```scss [example.scss]
-.card.is-loading.theme-danger {
-  @include loader-color(#c0392b);
+**Example:**
+
+```scss
+.card {
+  &.is-red {
+    &.is-loading {
+      @include termeh.loader-color(#c0392b);
+    }
+  }
 }
 ```
 
@@ -413,15 +522,19 @@ Updates the loader’s spinner color.
 
 Creates a full-cover overlay via `::before`, with optional backdrop-filter.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@mixin overlay($color, $filter);
+**Signature:**
+
+```scss
+@mixin overlay($color: COLOR, $filter: CSS-FILTER);
 ```
 
-```scss [example.scss]
+**Example:**
+
+```scss
 .dialog[aria-modal="true"] {
-  @include overlay(rgba(0, 0, 0, 0.5), blur(6px));
+  @include termeh.overlay(rgba(0, 0, 0, 0.5), blur(6px));
 }
 ```
 
@@ -429,19 +542,21 @@ Creates a full-cover overlay via `::before`, with optional backdrop-filter.
 
 ## Is-Ltr
 
-LTR-only styles. Applies content when the reading direction is left-to-right and mirrors it with helper selectors.
+LTR-only styles. Applies styles when the global direction is _left-to-right_, or the element has the `.is-ltr` class, or matches the `:dir(ltr)` selector.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@mixin is-ltr() {
-  /* styles */
-}
+**Signature:**
+
+```scss
+@mixin is-ltr();
 ```
 
-```scss [example.scss]
+**Example:**
+
+```scss
 .container {
-  @include is-ltr {
+  @include termeh.is-ltr {
     text-align: left;
     margin-left: auto;
   }
@@ -450,31 +565,33 @@ LTR-only styles. Applies content when the reading direction is left-to-right and
 
 :::
 
-::: extra Termeh Variables
+::: termeh
 
-Uses the **base direction** (`ltr` by default) or the `.is-ltr` class and `dir(ltr)` selector to detect layout direction.
+Global direction detected from the following Termeh global `var()`:
 
-```scss
-$direction: termeh.var("base", "direction", "ltr");
-```
+| Component | Variable    | Type         | Default |
+| --------- | ----------- | ------------ | ------- |
+| `base`    | `direction` | _ltr \| rtl_ | `ltr`   |
 
 :::
 
 ## Is-Rtl
 
-RTL-only styles. Applies content when the reading direction is right-to-left and mirrors it with helper selectors.
+RTL-only styles. Applies styles when the global direction is _right-to-left_, or the element has the `.is-rtl` class, or matches the `:dir(rtl)` selector.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@mixin is-rtl() {
-  /* styles */
-}
+**Signature:**
+
+```scss
+@mixin is-rtl();
 ```
 
-```scss [example.scss]
+**Example:**
+
+```scss
 .container {
-  @include is-rtl {
+  @include termeh.is-rtl {
     text-align: right;
     margin-right: auto;
   }
@@ -483,13 +600,13 @@ RTL-only styles. Applies content when the reading direction is right-to-left and
 
 :::
 
-::: extra Termeh Variables
+::: termeh
 
-Uses the **base direction** (`ltr` by default) or the `.is-rtl` class and `dir(rtl)` selector to detect layout direction.
+Global direction detected from the following Termeh global `var()`:
 
-```scss
-$direction: termeh.var("base", "direction", "ltr");
-```
+| Component | Variable    | Type         | Default |
+| --------- | ----------- | ------------ | ------- |
+| `base`    | `direction` | _ltr \| rtl_ | `ltr`   |
 
 :::
 
@@ -497,17 +614,19 @@ $direction: termeh.var("base", "direction", "ltr");
 
 Styles for invalid state (works for elements and within `.field` containers).
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@mixin is-invalid() {
-  /* styles */
-}
+**Signature:**
+
+```scss
+@mixin is-invalid();
 ```
 
-```scss [example.scss]
+**Example:**
+
+```scss
 .input {
-  @include is-invalid {
+  @include termeh.is-invalid {
     border-color: #e74c3c;
   }
 }
@@ -519,17 +638,19 @@ Styles for invalid state (works for elements and within `.field` containers).
 
 Styles for disabled state (element itself or within disabled fieldset/field).
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@mixin is-disabled() {
-  /* styles */
-}
+**Signature:**
+
+```scss
+@mixin is-disabled();
 ```
 
-```scss [example.scss]
+**Example:**
+
+```scss
 .button {
-  @include is-disabled {
+  @include termeh.is-disabled {
     opacity: 0.6;
   }
 }
@@ -541,27 +662,31 @@ Styles for disabled state (element itself or within disabled fieldset/field).
 
 Returns the standard control padding as a shorthand list.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@function control-padding();
+**Signature:**
+
+```scss
+@function control-padding(): LIST;
 ```
 
-```scss [example.scss]
+**Example:**
+
+```scss
 .input {
-  padding: control-padding();
+  padding: termeh.control-padding();
 }
 ```
 
 :::
 
-::: extra Termeh Variables
+::: termeh
 
-Uses the **micro gap** size (`8px` by default) for control padding.
+Control padding is calculated from the following Termeh global `var()`:
 
-```scss
-$gap-micro: termeh.var("gap", "micro", 8px);
-```
+| Component | Variable | Type     | Default |
+| --------- | -------- | -------- | ------- |
+| `gap`     | `micro`  | _NUMBER_ | `8px`   |
 
 :::
 
@@ -569,28 +694,32 @@ $gap-micro: termeh.var("gap", "micro", 8px);
 
 Applies a standard transition using theme duration and easing.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@mixin transition($fields);
+**Signature:**
+
+```scss
+@mixin transition($fields: LIST);
 ```
 
-```scss [example.scss]
+**Example:**
+
+```scss
 .button {
-  @include transition(background-color, color);
+  @include termeh.transition(background-color, color);
 }
 ```
 
 :::
 
-::: extra Termeh Variables
+::: termeh
 
-Uses the **transition ease** (`ease` by default) and **transition duration** (`250ms` by default) to generate transitions.
+UI transitions are calculated from the following Termeh global `var()`:
 
-```scss
-$ease: termeh.var("transition", "ease", ease);
-$duration: termeh.var("transition", "duration", 250ms);
-```
+| Component    | Variable   | Type       | Default |
+| ------------ | ---------- | ---------- | ------- |
+| `transition` | `ease`     | _easing_   | `ease`  |
+| `transition` | `duration` | _duration_ | `250ms` |
 
 :::
 
@@ -598,30 +727,34 @@ $duration: termeh.var("transition", "duration", 250ms);
 
 Applies disabled theming to form controls (colors and borders).
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
+**Signature:**
+
+```scss
 @mixin disabled();
 ```
 
-```scss [example.scss]
+**Example:**
+
+```scss
 .input[disabled],
 .input.is-disabled {
-  @include disabled;
+  @include termeh.disabled;
 }
 ```
 
 :::
 
-::: extra Termeh Variables
+::: termeh
 
-Uses the **input disabled**, **input disabled-color**, and **input disabled-border** for styling disabled inputs, and ignores them if values are not defined or set to null.
+The disabled style is derived from the following Termeh global `var()`. Styles will be ignored if the disable variables are not defined or are `null`:
 
-```scss
-$disabled-bg: termeh.var("input", "disabled");
-$disabled-color: termeh.var("input", "disabled-color");
-$disabled-border: termeh.var("input", "disabled-border");
-```
+| Component | Variable          | Type    | Default |
+| --------- | ----------------- | ------- | ------- |
+| `input`   | `disabled`        | _color_ | `null`  |
+| `input`   | `disabled-color`  | _color_ | `null`  |
+| `input`   | `disabled-border` | _color_ | `null`  |
 
 :::
 
@@ -629,16 +762,20 @@ $disabled-border: termeh.var("input", "disabled-border");
 
 Styles selection color pair based on a palette name (foreground & background).
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@mixin selection($name);
+**Signature:**
+
+```scss
+@mixin selection($name: STRING);
 ```
 
-```scss [example.scss]
+**Example:**
+
+```scss
 p,
 .prose {
-  @include selection("primary");
+  @include termeh.selection("primary");
 }
 ```
 
@@ -646,30 +783,34 @@ p,
 
 ## Scrollable
 
-Scrollable container with themed scrollbar; only the hover thumb color is passed directly.
+Provides a scrollable style with a themed scrollbar, where only the hover thumb color is applied directly.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@mixin scrollable($color);
+**Signature:**
+
+```scss
+@mixin scrollable($color: COLOR);
 ```
 
-```scss [example.scss]
+**Example:**
+
+```scss
 .sidebar {
-  @include scrollable(#7f8c8d);
+  @include termeh.scrollable(#7f8c8d);
 }
 ```
 
 :::
 
-::: extra Termeh Variables
+::: termeh
 
-Uses the **scroll size**, **scroll track**, and **scroll thumb** to generate a custom scrollbar, ignoring values if not defined or set to null.
+The scrollbar style is derived from the following Termeh global `var()`:
 
-```scss
-$size: termeh.var("scroll", "size");
-$track: termeh.var("scroll", "track");
-$thumb: termeh.var("scroll", "thumb");
-```
+| Component | Variable | Type    | Default |
+| --------- | -------- | ------- | ------- |
+| `scroll`  | `size`   | _color_ | `1rem`  |
+| `scroll`  | `track`  | _color_ | `null`  |
+| `scroll`  | `thumb`  | _color_ | `null`  |
 
 :::

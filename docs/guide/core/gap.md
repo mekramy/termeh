@@ -4,52 +4,77 @@ Termeh provides utilities to define and retrieve spacing gaps in a consistent an
 
 ## Define Gap
 
-Defines a new gap value.
+Register a new gap value.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@mixin define-gap($name, $gap);
+**Signature:**
+
+```scss
+@mixin define-gap($name: STRING, $gap: NUMBER);
 ```
 
-```scss [example.scss]
-@include define-gap("small", 8px);
-@include define-gap("medium", 16px);
-@include define-gap("large", 32px);
+**Example:**
+
+```scss
+@include termeh.define-gap("small", 8px);
+@include termeh.define-gap("medium", 16px);
+@include termeh.define-gap("large", 32px);
 ```
 
 :::
 
 ## Gap
 
-Retrieves a defined gap value by its name.
+Retrieves a defined gap value by its name or generates an _error_ if the gap is not defined.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@function gap($name);
+**Signature:**
+
+```scss
+@function gap($name: STRING): NUMBER;
 ```
 
-```scss [example.scss]
-$small-gap: gap("small"); // 8px
-$medium-gap: gap("medium"); // 16px
+**Example:**
+
+```scss
+$small-gap: termeh.gap("small"); // 8px
+$medium-gap: termeh.gap("medium"); // 16px
 ```
 
 :::
 
 ## Gaps
 
-Gets a filtered map of gaps.
+Gets a filtered map of gaps, returning both names and values, for iteration.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@function gaps($includes: null, $excludes: null);
+**Signature:**
+
+```scss
+@function gaps($includes: LIST = null, $excludes: LIST = null): MAP<STRING, NUMBER>;
 ```
 
-```scss [example.scss]
-$some-gaps: gaps(("small", "medium")); // Only "small" and "medium"
-$all-but-large: gaps(null, ("large")); // All gaps except "large"
+**Example:**
+
+```scss
+.container {
+  // Only "small" and "medium"
+  @each $name, $gap in termeh.gaps(("small", "medium")) {
+    &.is-#{$name} {
+      padding: $gap;
+    }
+  }
+
+  // All gaps except "large"
+  @each $name, $gap in termeh.gaps(null, ("large")) {
+    &.is-#{$name} {
+      padding: $gap;
+    }
+  }
+}
 ```
 
 :::

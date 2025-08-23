@@ -6,15 +6,18 @@ Termeh provides helper functions for mathematical operations, map/list handling,
 
 Returns the negated value of a number.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@function negate($value);
+**Signature:**
+
+```scss
+@function negate($value: NUMBER): NUMBER;
 ```
 
-```scss [example.scss]
-$value: 10px;
-$negated: negate($value); // -10px
+**Example:**
+
+```scss
+$negated: termeh.negate(10px); // -10px
 ```
 
 :::
@@ -23,35 +26,42 @@ $negated: negate($value); // -10px
 
 Returns half of a number.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@function half($value);
+**Signature:**
+
+```scss
+@function half($value: NUMBER): NUMBER;
 ```
 
-```scss [example.scss]
-$value: 20px;
-$half-value: half($value); // 10px
+**Example:**
+
+```scss
+$negated: termeh.half(20px); // 10px
 ```
 
 :::
 
 ## Alter
 
-Gets a value from a map with a fallback if the key doesn't exist.
+Gets a value from a map with a _fallback_ if the key doesn't exist.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@function alter($map, $key, $alt);
+**Signature:**
+
+```scss
+@function alter($map: MAP, $key: STRING, $alt: ANY): ANY;
 ```
 
-```scss [example.scss]
+**Example:**
+
+```scss
 $colors: (
   "primary": #ff0000,
 );
-$primary: alter($colors, "primary", #000); // #ff0000
-$secondary: alter($colors, "secondary", #000); // #000
+$primary: termeh.alter($colors, "primary", #000); // #ff0000
+$secondary: termeh.alter($colors, "secondary", #000); // #000
 ```
 
 :::
@@ -60,70 +70,120 @@ $secondary: alter($colors, "secondary", #000); // #000
 
 Determines if a key should be included based on includes/excludes lists.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@function should-include($key, $includes, $excludes);
+**Signature:**
+
+```scss
+@function should-include($key: STRING, $includes: LIST, $excludes: LIST) BOOLEAN;
 ```
 
-```scss [example.scss]
+**Example:**
+
+```scss
 $keys: ("small", "medium", "large");
-$included: should-include("small", ("small", "medium"), ("large")); // true
-$excluded: should-include("large", ("small", "medium"), ("large")); // false
+$included: termeh.should-include(
+  "small",
+  ("small", "medium"),
+  ("large")
+); // true
+$excluded: termeh.should-include(
+  "large",
+  ("small", "medium"),
+  ("large")
+); // false
 ```
 
 :::
 
 ## Type Validators
 
-Functions to validate various types: `number-of`, `string-of`, `color-of`, `list-of`, `map-of`, `bool-of`, `function-of`.
-Each also has a `-safe` variant that allows a fallback value.
+Functions to validate _number_, _string_, _color_, _list_, _map_, _bool_, and _function_. They generate an _error_ if validation fails, referencing the `function` and `parameter` names. Each also has a `-safe` variant that returns a _fallback_ value when the input is `null`.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@function number-of($value, $func, $param);
-@function number-safe($value, $func, $param, $fallback: 0);
-@function string-of($value, $func, $param);
-@function string-safe($value, $func, $param, $fallback: "");
-@function color-of($value, $func, $param);
-@function color-safe($value, $func, $param, $fallback: null);
-@function list-of($value, $func, $param);
-@function list-safe($value, $func, $param, $fallback: ());
-@function map-of($value, $func, $param);
-@function map-safe($value, $func, $param, $fallback: ());
-@function bool-of($value, $func, $param);
-@function bool-safe($value, $func, $param, $fallback: false);
-@function function-of($value, $func, $param);
-@function function-safe($value, $func, $param, $fallback: null);
+**Signatures:**
+
+```scss
+@function number-of($value: ANY, $func: STRING, $param: STRING): NUMBER;
+@function number-safe(
+    $value: ANY,
+    $func: STRING,
+    $param: STRING,
+    $fallback: NUMBER = 0
+  ): NUMBER;
+@function string-of($value: ANY, $func: STRING, $param: STRING): STRING;
+@function string-safe(
+    $value: ANY,
+    $func: STRING,
+    $param: STRING,
+    $fallback: STRING = ""
+  ): STRING;
+@function color-of($value: ANY, $func: STRING, $param: STRING): COLOR;
+@function color-safe(
+    $value: ANY,
+    $func: STRING,
+    $param: STRING,
+    $fallback: COLOR = null
+  ): COLOR;
+@function list-of($value: ANY, $func: STRING, $param: STRING): LIST;
+@function list-safe(
+    $value: ANY,
+    $func: STRING,
+    $param: STRING,
+    $fallback: LIST = ()
+  ): LIST;
+@function map-of($value: ANY, $func: STRING, $param: STRING): MAP;
+@function map-safe(
+    $value: ANY,
+    $func: STRING,
+    $param: STRING,
+    $fallback: MAP = ()
+  ): MAP;
+@function bool-of($value: ANY, $func: STRING, $param: STRING): BOOLEAN;
+@function bool-safe(
+    $value: ANY,
+    $func: STRING,
+    $param: STRING,
+    $fallback: BOOLEAN = false
+  ): BOOLEAN;
+@function function-of($value: ANY, $func: STRING, $param: STRING): FUNCTION;
+@function function-safe(
+    $value: ANY,
+    $func: STRING,
+    $param: STRING,
+    $fallback: FUNCTION = null
+  ): FUNCTION;
 ```
 
-```scss [example.scss]
+**Example:**
+
+```scss
 // Number validation
-$num: number-of(10px, "example", "num"); // 10px
-$safe-num: number-safe(null, "example", "num", 5); // 5
+$num: termeh.number-of(10px, "example", "num"); // 10px
+$safe-num: termeh.number-safe(null, "example", "num", 5); // 5
 
 // String validation
-$str: string-of("hello", "example", "str"); // "hello"
-$safe-str: string-safe(null, "example", "str", "default"); // "default"
+$str: termeh.string-of("hello", "example", "str"); // "hello"
+$safe-str: termeh.string-safe(null, "example", "str", "default"); // "default"
 
 // Color validation
-$color: color-of(#ff0000, "example", "color"); // #ff0000
-$safe-color: color-safe(null, "example", "color", #000); // #000
+$color: termeh.color-of(#ff0000, "example", "color"); // #ff0000
+$safe-color: termeh.color-safe(null, "example", "color", #000); // #000
 
 // List validation
-$list: list-of(("a", "b"), "example", "list"); // ("a", "b")
-$safe-list: list-safe(null, "example", "list", ("x")); // ("x")
+$list: termeh.list-of(("a", "b"), "example", "list"); // ("a", "b")
+$safe-list: termeh.list-safe(null, "example", "list", ("x")); // ("x")
 
 // Map validation
-$map: map-of(
+$map: termeh.map-of(
   (
     "key": "value",
   ),
   "example",
   "map"
 ); // ("key": "value")
-$safe-map: map-safe(
+$safe-map: termeh.map-safe(
   null,
   "example",
   "map",
@@ -133,12 +193,12 @@ $safe-map: map-safe(
 ); // ("default": 1)
 
 // Boolean validation
-$bool: bool-of(true, "example", "bool"); // true
-$safe-bool: bool-safe(null, "example", "bool", true); // true
+$bool: termeh.bool-of(true, "example", "bool"); // true
+$safe-bool: termeh.bool-safe(null, "example", "bool", true); // true
 
 // Function validation
-$fn: function-of(my-func, "example", "fn");
-$safe-fn: function-safe(null, "example", "fn", my-func);
+$fn: termeh.function-of(my-func, "example", "fn");
+$safe-fn: termeh.function-safe(null, "example", "fn", my-func);
 ```
 
 :::
@@ -147,14 +207,23 @@ $safe-fn: function-safe(null, "example", "fn", my-func);
 
 Creates a detailed error message for type validation failures.
 
-::: code-group
+::: definition
 
-```scss [usage.scss]
-@function throw-error($value, $func, $param, $expected);
+**Signature:**
+
+```scss
+@function throw-error(
+  $value: ANY,
+  $func: STRING,
+  $param: STRING,
+  $expected: ANY
+);
 ```
 
-```scss [example.scss]
-@error throw-error("abc", "negate", "value", "number");
+**Example:**
+
+```scss
+@error termeh.throw-error("abc", "negate", "value", "number");
 // Output: negate: value must be a number, but got "string" ("abc")
 ```
 
