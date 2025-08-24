@@ -1,0 +1,138 @@
+@use "../core/module";
+
+/// Generates checkbox input styles with configurable colors
+/// @param {List} $colors [()] - List of registered color names to include. Pass null to include all registered colors
+/// @termeh {Color} [error] - color("error")
+/// @termeh {Color} [error] - color("primary")
+/// @termeh {Number} [null] - var("radius", "normal")
+/// @termeh {Number} [8px] - var("gap", "micro")
+/// @termeh {Number} [1.8rem] - var("input", "height")
+/// @termeh {Number} [1.2em] - var("input", "checkbox")
+/// @termeh {Color} [var("base", "separator")] - var("input", "border")
+/// @termeh {Color} [null] - var("input", "disabled-color")
+/// @termeh {Color} [null] - var("input", "disabled-border")
+@mixin use-checkbox($colors: ()) {
+    $error: module.color("error");
+    $primary: module.color("primary");
+    $separator: module.var("base", "separator", #eee);
+
+    $radius: module.var("radius", "normal");
+    $gap-micro: module.var("gap", "micro", 8px);
+
+    $height: module.var("input", "height", 1.8rem);
+    $size: module.var("input", "checkbox", 1.2em);
+
+    $border: module.var("input", "border", $separator);
+    $disabled: module.var("input", "disabled-color");
+    $disabled-border: module.var("input", "disabled-border");
+
+    @at-root {
+        label.checkbox {
+            display: flex;
+            align-items: center;
+            flex-flow: row nowrap;
+            margin: 0;
+            padding: 0;
+            height: $height;
+            line-height: 1em;
+            cursor: pointer;
+            box-sizing: border-box;
+
+            input[type="checkbox"] {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                display: grid;
+                place-content: center;
+                overflow: hidden;
+                margin: 0;
+                font: inherit;
+                width: $size;
+                height: $size;
+                border-radius: $radius;
+                border: 1px solid $border;
+                cursor: pointer;
+                flex: 0 0 auto;
+                box-shadow: module.flat-shadow(0, rgba($primary, 0.25));
+                @include module.transition(all);
+
+                &::after {
+                    content: "";
+                    width: $size;
+                    height: $size;
+                    display: block;
+                    box-sizing: border-box;
+                    transform: scale(0);
+                    border-radius: $radius;
+                    background-color: $primary;
+                    @include module.transition(all);
+                }
+
+                &:focus,
+                &:focus-within {
+                    border-color: $primary;
+                }
+
+                &:checked {
+                    box-shadow: module.flat-shadow(8px, rgba($primary, 0));
+
+                    &::after {
+                        transform: scale(0.6);
+                    }
+                }
+            }
+
+            @each $name, $color in module.colors($includes: $colors) {
+                &.is-#{$name} input {
+                    box-shadow: module.flat-shadow(0, rgba($color, 0.25));
+
+                    &::after {
+                        background-color: $color;
+                    }
+
+                    &:focus,
+                    &:focus-within {
+                        border-color: $color;
+                    }
+
+                    &:checked {
+                        box-shadow: module.flat-shadow(8px, rgba($color, 0));
+                    }
+                }
+            }
+
+            @include module.is-ltr() {
+                input {
+                    margin-left: 0;
+                    margin-right: $gap-micro;
+                }
+            }
+
+            @include module.is-rtl() {
+                input {
+                    margin-left: $gap-micro;
+                    margin-right: 0;
+                }
+            }
+
+            @include module.is-invalid() {
+                input {
+                    border-color: $error;
+                }
+            }
+
+            @include module.is-disabled() {
+                color: $disabled;
+
+                input {
+                    border-color: $disabled-border;
+
+                    &::after {
+                        background-color: $disabled;
+                    }
+                }
+                @include module.locked();
+            }
+        }
+    }
+}

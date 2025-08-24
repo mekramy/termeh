@@ -1,0 +1,84 @@
+@use "../animation";
+@use "../core/module";
+
+/// Generates textarea input styles with configurable colors
+/// @param {List} $colors [()] - List of registered color names to include. Pass null to include all registered colors
+/// @termeh {Color} [error] - color("error")
+/// @termeh {Color} [error] - color("primary")
+/// @termeh {Number} [null] - var("radius", "normal")
+/// @termeh {Number} [8px] - var("gap", "micro")
+/// @termeh {Number} [1.6rem] - var("line-height", "normal")
+/// @termeh {Color} [var("base", "separator")] - var("input", "border")
+/// @termeh {Color} [white] - var("input", "background")
+/// @termeh {Color} [color("shade")] - var("input", "placeholder")
+@mixin use-textarea($colors: ()) {
+    $error: module.color("error");
+    $primary: module.color("primary");
+    $shade: module.variant("shade", "mute");
+    $separator: module.var("base", "separator", #eee);
+
+    $radius: module.var("radius", "normal");
+    $gap-micro: module.var("gap", "micro", 8px);
+    $line-height: module.var("line-height", "normal", 1.6em);
+
+    $border: module.var("input", "border", $separator);
+    $background: module.var("input", "background", white);
+    $placeholder: module.var("input", "placeholder", $shade);
+
+    @at-root {
+        @include animation.shake();
+
+        textarea {
+            @include module.control();
+
+            width: 100%;
+            max-width: 100%;
+            resize: vertical;
+            overflow-y: auto;
+            padding: $gap-micro * 2;
+            line-height: $line-height;
+            border-radius: $radius;
+            border: 1px solid $border;
+            background-color: $background;
+            @include module.scrollable($primary);
+
+            &:not([rows]) {
+                max-height: 40em;
+                min-height: 8em;
+            }
+
+            &[rows] {
+                height: initial;
+            }
+
+            @include module.placeholder() {
+                color: $placeholder;
+            }
+
+            &:focus,
+            &.is-focused {
+                border-color: $primary;
+            }
+
+            @each $name, $color in module.colors($includes: $colors) {
+                &.is-#{$name} {
+                    &:focus,
+                    &.is-focused {
+                        border-color: $color;
+                    }
+
+                    @include module.selection($name);
+                }
+            }
+
+            @include module.is-invalid() {
+                border-color: $error;
+                animation: shake 0.5s ease;
+            }
+
+            @include module.is-disabled() {
+                @include module.disabled();
+            }
+        }
+    }
+}

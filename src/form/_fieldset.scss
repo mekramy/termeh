@@ -1,0 +1,33 @@
+@use "../core/module";
+
+/// Generates fieldset element styles
+/// @termeh {Number} [null] - var("radius", "normal")
+/// @termeh {Number} [1.6rem] - var("gap", "macro")
+/// @termeh {String} [normal] - var("input", "legend")
+/// @termeh {Color} [var("base", "separator")] - var("input", "border")
+@mixin use-fieldset() {
+    $separator: module.var("base", "separator");
+    $radius: module.var("radius", "normal");
+    $gap-macro: module.var("gap", "macro", 1.6rem);
+
+    $legend: module.var("input", "legend", normal);
+    $border: module.var("input", "border", $separator);
+
+    @at-root {
+        fieldset {
+            padding: $gap-macro;
+            border-radius: $radius;
+            border: 1px solid $border;
+
+            @include module.marged() {
+                margin-bottom: $gap-macro;
+            }
+
+            legend {
+                line-height: 1em;
+                font-weight: $legend;
+                padding: module.control-padding();
+            }
+        }
+    }
+}

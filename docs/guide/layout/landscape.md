@@ -51,12 +51,17 @@ It’s suitable for carousels, horizontally scrolling lists, or vertical scrolle
 
 ::: termeh
 
-Landscape module uses the following Termeh global `var()` and registered `color()`:
+Landscape module uses the following Termeh global `var()`
 
-| Component           | Type     | Usage                               | Fallback |
-| ------------------- | -------- | ----------------------------------- | -------- |
-| `gap` → `micro`     | _Number_ | Default spacing between items       | `8px`    |
-| `color` → `primary` | _Color_  | Scrollbar and scroll-thumb coloring | _error_  |
+| Component       | Type     | Usage                         | Fallback |
+| --------------- | -------- | ----------------------------- | -------- |
+| `gap` → `micro` | _Number_ | Default spacing between items | `8px`    |
+
+Landscape module uses the following Termeh registered `color()` and `variant()`
+
+| Palette             | Usage                               | Fallback |
+| ------------------- | ----------------------------------- | -------- |
+| `primary` → `color` | Scrollbar and scroll-thumb coloring | _error_  |
 
 :::
 

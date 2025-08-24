@@ -1,0 +1,164 @@
+@use "../animation";
+@use "../core/module";
+
+/// Generates select input styles with configurable colors
+/// @param {List} $colors [()] - List of registered color names to include. Pass null to include all registered colors
+/// @termeh {Color} [error] - color("error")
+/// @termeh {Color} [error] - color("primary")
+/// @termeh {Number} [null] - var("radius", "normal")
+/// @termeh {Number} [8px] - var("gap", "micro")
+/// @termeh {Number} [1.8rem] - var("input", "height")
+/// @termeh {Color} [var("base", "separator")] - var("input", "border")
+/// @termeh {Color} [white] - var("input", "background")
+/// @termeh {Color} [color("shade")] - var("input", "placeholder")
+/// @termeh {Color} [null] - var("input", "disabled-color")
+@mixin use-select($colors: ()) {
+    $error: module.color("error");
+    $primary: module.color("primary");
+    $primary-color: module.variant("primary", "foreground");
+    $primary-readable: module.variant("primary", "readable");
+    $shade: module.variant("shade", "mute");
+    $section: module.var("base", "section");
+    $separator: module.var("base", "separator", #eee);
+
+    $radius: module.var("radius", "normal");
+    $gap-micro: module.var("gap", "micro", 8px);
+
+    $height: module.var("input", "height", 2.8rem);
+    $border: module.var("input", "border", $separator);
+    $background: module.var("input", "background", white);
+    $placeholder: module.var("input", "placeholder", $shade);
+    $disabled: module.var("input", "disabled-color");
+
+    @at-root {
+        @include animation.shake();
+
+        select {
+            @include module.control();
+
+            display: flex;
+            align-items: center;
+            flex-flow: row nowrap;
+            width: 100%;
+            max-width: 100%;
+            height: $height;
+            line-height: 1em;
+            border-radius: $radius;
+            border: 1px solid $border;
+            background-color: $background;
+            padding: module.control-padding();
+            @include module.transition(all);
+
+            @include module.placeholder() {
+                color: $placeholder;
+            }
+
+            &,
+            &::picker(select) {
+                appearance: base-select;
+            }
+
+            &::picker(select) {
+                border: 1px solid $border;
+            }
+
+            &::picker-icon {
+                color: $placeholder;
+                @include module.transition(transform);
+            }
+
+            &:open {
+                &::picker-icon {
+                    transform: rotate(180deg);
+                }
+            }
+
+            option {
+                display: flex;
+                align-items: center;
+                gap: $gap-micro;
+                cursor: pointer;
+                padding: module.control-padding();
+
+                &:checked {
+                    color: $primary-readable;
+                    font-weight: bold;
+                }
+
+                &::checkmark {
+                    color: $primary-readable;
+                }
+
+                &:not(:disabled):hover {
+                    background-color: $section;
+                }
+
+                &:disabled {
+                    cursor: default;
+                    color: $disabled;
+                }
+            }
+
+            &:focus,
+            &:open,
+            &.is-focused {
+                border-color: $primary;
+                color: $primary-color;
+                background-color: $primary;
+
+                &::picker(select) {
+                    border-color: $primary;
+                }
+
+                &::picker-icon {
+                    color: $primary-color;
+                }
+            }
+
+            @each $name, $color in module.colors($includes: $colors) {
+                &.is-#{$name} {
+                    option {
+                        $-foreground: module.variant($name, "readable");
+                        &:checked {
+                            color: $-foreground;
+                        }
+
+                        &::checkmark {
+                            color: $-foreground;
+                        }
+                    }
+
+                    &:focus,
+                    &:open,
+                    &.is-focused {
+                        $-foreground: module.variant($name, "foreground");
+                        border-color: $color;
+                        color: $-foreground;
+                        background-color: $color;
+
+                        &::picker(select) {
+                            border-color: $color;
+                        }
+
+                        &::picker-icon {
+                            color: $-foreground;
+                        }
+                    }
+
+                    @include module.selection($name);
+                }
+            }
+
+            @include module.is-invalid() {
+                &:not(:focus, :open, .is-focused) {
+                    border-color: $error;
+                    animation: shake 0.5s ease;
+                }
+            }
+
+            @include module.is-disabled() {
+                @include module.disabled();
+            }
+        }
+    }
+}

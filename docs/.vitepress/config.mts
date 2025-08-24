@@ -184,6 +184,40 @@ export default defineConfig({
                     },
                 ],
             },
+            {
+                text: "Form",
+                collapsed: true,
+                items: [
+                    {
+                        text: "Fieldset",
+                        link: "/guide/form/fieldset",
+                    },
+                    {
+                        text: "Field",
+                        link: "/guide/form/field",
+                    },
+                    {
+                        text: "Input",
+                        link: "/guide/form/input",
+                    },
+                    {
+                        text: "Textarea",
+                        link: "/guide/form/textarea",
+                    },
+                    {
+                        text: "Select",
+                        link: "/guide/form/select",
+                    },
+                    {
+                        text: "Radio",
+                        link: "/guide/form/radio",
+                    },
+                    {
+                        text: "Checkbox",
+                        link: "/guide/form/checkbox",
+                    },
+                ],
+            },
         ],
 
         socialLinks: [

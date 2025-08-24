@@ -30,6 +30,14 @@
 @include termeh.use-padder();
 @include termeh.use-wrapper();
 
+@include termeh.use-checkbox();
+@include termeh.use-field();
+@include termeh.use-fieldset();
+@include termeh.use-input();
+@include termeh.use-radio();
+@include termeh.use-select();
+@include termeh.use-textarea();
+
 .placeholder {
     display: flex;
     padding: 1rem;
