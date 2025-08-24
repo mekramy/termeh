@@ -94,7 +94,6 @@ export default defineConfig({
                     },
                 ],
             },
-
             {
                 text: "Generic",
                 collapsed: true,
@@ -125,30 +124,63 @@ export default defineConfig({
                     },
                 ],
             },
-
             {
                 text: "Helper",
                 collapsed: true,
                 items: [
                     {
-                        text: "Helper Module",
-                        link: "/guide/helper/intro",
-                    },
-                    {
-                        text: "Layout",
+                        text: "Layout Helpers",
                         link: "/guide/helper/layout",
                     },
                     {
-                        text: "Attachment",
+                        text: "Attachment Helpers",
                         link: "/guide/helper/attachment",
                     },
                     {
-                        text: "Visibility",
+                        text: "Visibility Helpers",
                         link: "/guide/helper/visibility",
                     },
                     {
-                        text: "Typography",
+                        text: "Typography Helpers",
                         link: "/guide/helper/typography",
+                    },
+                ],
+            },
+            {
+                text: "Layout",
+                collapsed: true,
+                items: [
+                    {
+                        text: "Container",
+                        link: "/guide/layout/container",
+                    },
+                    {
+                        text: "Grid",
+                        link: "/guide/layout/grid",
+                    },
+                    {
+                        text: "Gaper",
+                        link: "/guide/layout/gaper",
+                    },
+                    {
+                        text: "Wrapper",
+                        link: "/guide/layout/wrapper",
+                    },
+                    {
+                        text: "Padder",
+                        link: "/guide/layout/padder",
+                    },
+                    {
+                        text: "Attacher",
+                        link: "/guide/layout/attacher",
+                    },
+                    {
+                        text: "Landscape",
+                        link: "/guide/layout/landscape",
+                    },
+                    {
+                        text: "Gallery",
+                        link: "/guide/layout/gallery",
                     },
                 ],
             },

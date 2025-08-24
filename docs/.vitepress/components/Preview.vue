@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount, watch } from "vue";
 
+const props = defineProps(["height"]);
 const slotRef = ref();
 const iframeRef = ref();
 const content = ref("");
@@ -62,7 +63,7 @@ watch(
             class="responsive-iframe"
             frameborder="0"
             sandbox="allow-same-origin allow-scripts"
-            style="width: 100%; border: 0"
+            :style="{ width: '100%', border: 0, height: height || 'unset' }"
         ></iframe>
     </div>
 </template>
@@ -77,6 +78,7 @@ watch(
     .responsive-iframe {
         width: 100%;
         min-height: 0;
+        overflow: visible;
     }
 }
 </style>

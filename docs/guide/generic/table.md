@@ -6,6 +6,7 @@ Provides fully-featured table styles with configurable colors, row behaviors, ho
 
 == Preview
 
+<!-- markdownlint-disable MD033 -->
 <Preview>
   <table class="is-fullwidth is-hoverable is-stripped is-primary is-ellipsis">
     <thead>
@@ -42,6 +43,7 @@ Provides fully-featured table styles with configurable colors, row behaviors, ho
     </tbody>
   </table>
 </Preview>
+<!-- markdownlint-enable MD033 -->
 
 == Source
 

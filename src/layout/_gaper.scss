@@ -1,0 +1,180 @@
+@use "../core/module";
+
+/// Generates gaper element styles with configurable gaps and alignments
+/// @param {List} $gaps [()] - List of registered gap names to include. Pass null to include all registered gaps
+/// @termeh {Color} [null] - var("base", "separator")
+/// @termeh {Number} [8px] - var("gap", "micro")
+@mixin use-gaper($gaps: ()) {
+    $separator: module.var("base", "separator");
+    $gap-micro: module.var("gap", "micro", 8px);
+
+    @at-root {
+        .gaper {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: flex-start;
+            box-sizing: border-box;
+
+            > * {
+                flex: 0 0 auto;
+            }
+
+            > .filler {
+                flex: 1 1 0;
+            }
+
+            > .divider,
+            > .gutter {
+                width: 1px;
+                display: none;
+                align-self: stretch;
+            }
+
+            > .divider {
+                background-color: $separator;
+            }
+
+            &.is-stacked {
+                flex-direction: column;
+            }
+
+            &.is-stacked-reverse {
+                flex-direction: column-reverse;
+            }
+
+            &.is-stacked,
+            &.is-stacked-reverse {
+                > .divider,
+                > .gutter {
+                    height: 1px;
+                    width: unset;
+                }
+            }
+
+            @each $name, $align in module.flex-aligns() {
+                &.is-#{$name}-align {
+                    align-items: $align;
+                }
+            }
+
+            @each $name, $justify in module.flex-justifies() {
+                &.is-#{$name}-justify {
+                    justify-content: $justify;
+                }
+            }
+
+            &:not(.is-gapless) {
+                > .divider,
+                > .gutter {
+                    display: block;
+                }
+
+                &.is-auto {
+                    margin: module.half(module.negate($gap-micro));
+
+                    > * {
+                        margin: module.half($gap-micro);
+                    }
+
+                    @each $name, $gap in module.gaps($includes: $gaps) {
+                        &.is-#{$name}-gap {
+                            margin: module.negate(module.half($gap));
+
+                            > * {
+                                margin: module.half($gap);
+                            }
+                        }
+                    }
+                }
+
+                &:not(.is-auto) {
+                    > .divider,
+                    > .gutter {
+                        margin: 0 module.half($gap-micro);
+                    }
+
+                    &.is-stacked,
+                    &.is-stacked-reverse {
+                        > .divider,
+                        > .gutter {
+                            margin: module.half($gap-micro) 0;
+                        }
+                    }
+
+                    @each $name, $gap in module.gaps($includes: $gaps) {
+                        &.is-#{$name}-gap {
+                            > .divider,
+                            > .gutter {
+                                margin: 0 module.half($gap);
+                            }
+
+                            &.is-stacked,
+                            &.is-stacked-reverse {
+                                > .divider,
+                                > .gutter {
+                                    margin: module.half($gap) 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            @each $device, $query in module.media-queries() {
+                @media #{$query} {
+                    &.is-#{$device}-stacked {
+                        flex-direction: column;
+                    }
+
+                    &.is-#{$device}-stacked-reverse {
+                        flex-direction: column-reverse;
+                    }
+
+                    &.is-#{$device}-stacked,
+                    &.is-#{$device}-stacked-reverse {
+                        > .divider,
+                        > .gutter {
+                            height: 1px;
+                            width: unset;
+                        }
+                    }
+
+                    @each $name, $align in module.flex-aligns() {
+                        &.is-#{$device}-#{$name}-align {
+                            align-items: $align;
+                        }
+                    }
+
+                    @each $name, $justify in module.flex-justifies() {
+                        &.is-#{$device}-#{$name}-justify {
+                            justify-content: $justify;
+                        }
+                    }
+
+                    &:not(.is-gapless, .is-auto) {
+                        &.is-#{$device}-stacked,
+                        &.is-#{$device}-stacked-reverse {
+                            > .divider,
+                            > .gutter {
+                                margin: module.half($gap-micro) 0;
+                            }
+                        }
+
+                        @each $name, $gap in module.gaps($includes: $gaps) {
+                            &.is-#{$name}-gap {
+                                &.is-#{$device}-stacked,
+                                &.is-#{$device}-stacked-reverse {
+                                    > .divider,
+                                    > .gutter {
+                                        margin: module.half($gap) 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

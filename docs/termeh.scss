@@ -20,3 +20,61 @@
 @include termeh.use-text-aligns($aligns: ());
 @include termeh.use-visibility-helper();
 @include termeh.use-attachment-helper();
+
+@include termeh.use-attacher();
+@include termeh.use-container();
+@include termeh.use-gallery();
+@include termeh.use-gaper();
+@include termeh.use-grid();
+@include termeh.use-landscape();
+@include termeh.use-padder();
+@include termeh.use-wrapper();
+
+.placeholder {
+    display: flex;
+    padding: 1rem;
+    text-align: center;
+    color: termeh.variant("primary", "foreground");
+    background-color: termeh.variant("primary", "color");
+
+    > * {
+        margin: auto;
+    }
+
+    &.is-light {
+        color: termeh.variant("primary", "readable");
+        background-color: termeh.variant("primary", "light");
+    }
+
+    &.is-1x {
+        min-width: 7;
+    }
+
+    &.is-2x {
+        min-width: 14rem;
+    }
+
+    &.is-3x {
+        min-width: 20rem;
+    }
+
+    &.is-4x {
+        min-width: 30rem;
+    }
+}
+
+.is-highlighted {
+    box-sizing: border-box;
+    border: 1px solid rgba(#ffc300, 0.35);
+    background-color: rgba(#ffc300, 0.08);
+
+    &.is-red {
+        border: 1px solid rgba(#800e13, 0.35);
+        background-color: rgba(#800e13, 0.08);
+    }
+
+    &.is-green {
+        border: 1px solid rgba(#52796f, 0.35);
+        background-color: rgba(#52796f, 0.08);
+    }
+}

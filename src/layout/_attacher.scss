@@ -1,0 +1,72 @@
+@use "../core/module";
+
+/// Generates attacher element styles with configurable alignments
+/// @termeh {Color} [null] - var("base", "separator")
+@mixin use-attacher() {
+    $separator: module.var("base", "separator");
+
+    @at-root {
+        .attacher {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: stretch;
+            box-sizing: border-box;
+
+            > * {
+                flex: 0 0 auto;
+                margin: 0 !important;
+            }
+
+            @include module.is-ltr() {
+                > * {
+                    &:not(:first-child) {
+                        border-top-left-radius: 0 !important;
+                        border-bottom-left-radius: 0 !important;
+                    }
+
+                    &:not(:last-child) {
+                        border-top-right-radius: 0 !important;
+                        border-bottom-right-radius: 0 !important;
+                    }
+                }
+            }
+
+            @include module.is-rtl() {
+                > * {
+                    &:not(:first-child) {
+                        border-top-right-radius: 0 !important;
+                        border-bottom-right-radius: 0 !important;
+                    }
+
+                    &:not(:last-child) {
+                        border-top-left-radius: 0 !important;
+                        border-bottom-left-radius: 0 !important;
+                    }
+                }
+            }
+
+            > .filler {
+                flex: 1 1 0;
+            }
+
+            > .divider {
+                width: 1px;
+                display: block;
+                align-self: stretch;
+                background-color: $separator;
+            }
+
+            @each $name, $align in module.flex-aligns() {
+                &.is-#{$name}-align {
+                    align-items: $align;
+                }
+            }
+
+            @each $name, $justify in module.flex-justifies() {
+                &.is-#{$name}-justify {
+                    justify-content: $justify;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,125 @@
+@use "../core/module";
+
+/// Generates gallery element styles with configurable gaps
+/// @param {List} $gaps [()] - List of registered gap names to include. Pass null to include all registered gaps
+/// @termeh {Number} [8px] - var("gap", "micro")
+/// @termeh {Number} [300px] - var("gallery", "height")
+/// @termeh {Number} [200px] - var("gallery", "height-tablet")
+/// @termeh {Number} [100px] - var("gallery", "height-mobile")
+@mixin use-gallery($gaps: ()) {
+    $gap-micro: module.var("gap", "micro", 8px);
+    $height: module.var("gallery", "height", 300px);
+    $height-tablet: module.var("gallery", "height-tablet", 200px);
+    $height-mobile: module.var("gallery", "height-mobile", 100px);
+
+    @at-root {
+        .gallery {
+            display: flex;
+            overflow: hidden;
+            flex-wrap: wrap;
+
+            &::after {
+                height: 0;
+                content: "";
+                flex-grow: 999999999;
+                min-width: $height-mobile;
+            }
+
+            > .item {
+                flex-grow: 1;
+                display: block;
+                position: relative;
+                text-decoration: none;
+
+                > img,
+                .thumbnail {
+                    max-width: 100%;
+                    min-width: 100%;
+                    object-fit: cover;
+                    vertical-align: bottom;
+                }
+
+                &.is-block {
+                    width: 100%;
+                    height: auto;
+
+                    > img,
+                    .thumbnail {
+                        height: auto;
+                    }
+                }
+
+                &:not(.is-block) {
+                    height: $height-mobile;
+
+                    > img,
+                    .thumbnail {
+                        height: $height-mobile;
+                    }
+                }
+            }
+
+            &:not(.is-gapless) {
+                margin: module.negate(module.half($gap-micro));
+
+                > .item {
+                    margin: module.half($gap-micro);
+                }
+
+                @each $name, $gap in module.gaps($includes: $gaps) {
+                    &.is-#{$name}-gap {
+                        margin: module.negate(module.half($gap));
+
+                        > .item {
+                            margin: module.half($gap);
+                        }
+                    }
+                }
+            }
+
+            @include module.mobile() {
+                &.is-stackable {
+                    > .item {
+                        width: 100%;
+                        height: auto;
+
+                        > img,
+                        .thumbnail {
+                            height: auto;
+                        }
+                    }
+                }
+            }
+
+            @include module.tablet() {
+                &::after {
+                    min-width: $height-tablet;
+                }
+
+                > .item:not(.is-block) {
+                    height: $height-tablet;
+
+                    > img,
+                    .thumbnail {
+                        height: $height-tablet;
+                    }
+                }
+            }
+
+            @include module.desktop() {
+                &::after {
+                    min-width: $height;
+                }
+
+                > .item:not(.is-block) {
+                    height: $height;
+
+                    > img,
+                    .thumbnail {
+                        height: $height;
+                    }
+                }
+            }
+        }
+    }
+}

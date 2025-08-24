@@ -1,0 +1,57 @@
+@use "../core/module";
+
+/// Generates container element styles with configurable paddings
+/// @param {List} $paddings [()] - List of registered gap names to include for padding
+/// @termeh {Number} [1.6rem] - var("gap", "macro")
+/// @termeh {Number} [960px] - var("container", "desktop")
+/// @termeh {Number} [1200px] - var("container", "widescreen")
+/// @termeh {Number} [1500px] - var("container", "fullhd")
+@mixin use-container($paddings: ()) {
+    $gap-macro: module.var("gap", "macro", 1.6rem);
+    $desktop: module.var("container", "desktop", 960px);
+    $widescreen: module.var("container", "widescreen", 1200px);
+    $fullhd: module.var("container", "fullhd", 1500px);
+
+    @at-root {
+        .container {
+            max-width: 100%;
+            display: block;
+            position: relative;
+            box-sizing: border-box;
+
+            @include module.marged() {
+                margin-bottom: $gap-macro;
+            }
+
+            &:not(.is-fullwidth) {
+                @include module.desktop() {
+                    margin-left: auto;
+                    margin-right: auto;
+                    max-width: $desktop;
+                }
+
+                @include module.widescreen() {
+                    margin-left: auto;
+                    margin-right: auto;
+                    max-width: $widescreen;
+                }
+
+                @include module.fullhd() {
+                    margin-left: auto;
+                    margin-right: auto;
+                    max-width: $fullhd;
+                }
+            }
+
+            @include module.padded() {
+                padding: $gap-macro;
+
+                @each $name, $gap in module.gaps($includes: $paddings) {
+                    &.is-#{$name}-padded {
+                        padding: $gap;
+                    }
+                }
+            }
+        }
+    }
+}

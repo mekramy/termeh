@@ -6,16 +6,18 @@ Applies image styles with utility classes for centering, rounded or circular bor
 
 == Preview
 
+<!-- markdownlint-disable MD033 -->
 <Preview>
   <div style="display: flex; gap: 1rem; align-items: flex-end; justify-content: center;">
-    <img src="/assets/image.png" style="height: 10rem" class="is-circular" />
-    <img src="/assets/image.png" style="height: 10rem" class="is-rounded" />
-    <img src="/assets/image.png" class="is-massive" />
-    <img src="/assets/image.png" class="is-large" />
-    <img src="/assets/image.png" class=" is-medium" />
-    <img src="/assets/image.png" class="is-small" />
+    <img src="/assets/image.png" alt="" style="height: 10rem" class="is-circular" />
+    <img src="/assets/image.png" alt="" style="height: 10rem" class="is-rounded" />
+    <img src="/assets/image.png" alt="" class="is-massive" />
+    <img src="/assets/image.png" alt="" class="is-large" />
+    <img src="/assets/image.png" alt="" class=" is-medium" />
+    <img src="/assets/image.png" alt="" class="is-small" />
   </div>
 </Preview>
+<!-- markdownlint-enable MD033 -->
 
 == Source
 
@@ -46,7 +48,9 @@ Applies image styles with utility classes for centering, rounded or circular bor
 
 ```scss
 @include termeh.use-image(); // Apply all registered sizes
-@include termeh.use-image(("small", "medium", "large")); // Apply specific sizes only
+@include termeh.use-image(
+  ("small", "medium", "large")
+); // Apply specific sizes only
 ```
 
 :::

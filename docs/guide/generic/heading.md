@@ -6,6 +6,7 @@ Applies consistent heading styles for `h1`–`h6` elements. This includes font s
 
 == Preview
 
+<!-- markdownlint-disable MD033 -->
 <Preview>
   <h1>Heading 1 – Has Massive Size</h1>
   <h2>Heading 2 – Has Huge Size</h2>
@@ -14,6 +15,7 @@ Applies consistent heading styles for `h1`–`h6` elements. This includes font s
   <h5>Heading 5 – Has Medium Size</h5>
   <h6>Heading 6 – Has Normal Size</h6>
 </Preview>
+<!-- markdownlint-enable MD033 -->
 
 == Source
 
