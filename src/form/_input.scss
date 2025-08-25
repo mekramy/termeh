@@ -36,7 +36,7 @@
             border-radius: $radius;
             border: 1px solid $border;
             background-color: $background;
-            padding: module.control-padding();
+            padding: module.inline-padding();
             @include module.transition(all);
 
             > .divider {

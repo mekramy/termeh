@@ -1,3 +1,4 @@
+@use "../animation";
 @use "../core/module";
 
 /// Generates radio input styles with configurable colors
@@ -27,6 +28,8 @@
     $disabled-border: module.var("input", "disabled-border");
 
     @at-root {
+        @include animation.shake();
+
         label.radio {
             display: flex;
             align-items: center;
@@ -118,6 +121,15 @@
             @include module.is-invalid() {
                 input {
                     border-color: $error;
+                    animation: shake 0.5s ease;
+
+                    &::after {
+                        background-color: $error;
+                    }
+
+                    &:checked {
+                        box-shadow: module.flat-shadow(8px, rgba($error, 0));
+                    }
                 }
             }
 

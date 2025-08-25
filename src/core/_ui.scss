@@ -380,10 +380,20 @@
 
 /// Returns standard control padding values
 /// @return {List} Padding values
-/// @termeh {Number} [8px] - `var("gap", "micro")`
+/// @termeh {Number} [0] - var("control", "v-padding")
+/// @termeh {Number} [1.2em] - var("control", "h-padding")
 @function control-padding() {
+    $v-padding: var.var("control", "v-padding", 0em);
+    $h-padding: var.var("control", "h-padding", 1.2em);
+    @return $v-padding $h-padding;
+}
+
+/// Returns standard inline element padding values
+/// @return {List} Padding values
+/// @termeh {Number} [8px] - `var("gap", "micro")`
+@function inline-padding() {
     $gap: var.var("gap", "micro", 8px);
-    @return $gap($gap * 2);
+    @return $gap $gap * 2;
 }
 
 /// Standard transition effect

@@ -60,6 +60,15 @@
     #d1d6e0
 ); // Disabled input border color
 
+// Control elements (button, link, badge, ...)
+@include module.define("control", "height", 2.2em); // control height
+@include module.define("control", "v-padding", 0em); // control vertical padding
+@include module.define(
+    "control",
+    "h-padding",
+    1.2em
+); // control horizontal padding
+
 // Line heights
 @include module.define("line-height", "normal", 1.6em); // Default line height
 @include module.define(
@@ -68,11 +77,6 @@
     1.4em
 ); // Medium text line height
 @include module.define("line-height", "large", 1.2em); // Large text line height
-@include module.define(
-    "line-height",
-    "inline",
-    1.8em
-); // Inline element line height
 
 // Fonts
 @include module.define(

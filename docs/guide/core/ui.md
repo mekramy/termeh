@@ -684,6 +684,39 @@ Returns the standard control padding as a shorthand list.
 
 Control padding is calculated from the following Termeh global `var()`:
 
+| Component | Variable    | Type     | Default |
+| --------- | ----------- | -------- | ------- |
+| `control` | `v-padding` | _NUMBER_ | `0`     |
+| `control` | `h-padding` | _NUMBER_ | `1.2em` |
+
+:::
+
+## Inline-Padding
+
+Returns the standard inline element padding as a shorthand list.
+
+::: definition
+
+**Signature:**
+
+```scss
+@function inline-padding(): LIST;
+```
+
+**Example:**
+
+```scss
+.input {
+  padding: termeh.inline-padding();
+}
+```
+
+:::
+
+::: termeh
+
+Control padding is calculated from the following Termeh global `var()`:
+
 | Component | Variable | Type     | Default |
 | --------- | -------- | -------- | ------- |
 | `gap`     | `micro`  | _NUMBER_ | `8px`   |

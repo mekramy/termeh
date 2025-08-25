@@ -86,19 +86,29 @@ By default, two `@keyframes` are defined: one for _loaders_ (`spin`) and one for
 - **disabled-color** → Disabled input text color.
 - **disabled-border** → Disabled input border color.
 
+## Control
+
+```scss
+@include termeh.define("control", "height", 2.2em);
+@include termeh.define("control", "v-padding", 0em);
+@include termeh.define("control", "h-padding", 1.2em);
+```
+
+- **height** → Default control height (`button`, `link`, `badge`, ...).
+- **v-padding** → Vertical control padding.
+- **h-padding** → Horizontal control padding.
+
 ## Line Heights
 
 ```scss
 @include termeh.define("line-height", "normal", 1.6em);
 @include termeh.define("line-height", "medium", 1.4em);
 @include termeh.define("line-height", "large", 1.2em);
-@include termeh.define("line-height", "inline", 1.8em);
 ```
 
 - **normal** → Default line height.
 - **medium** → Medium text line height.
 - **large** → Large text line height.
-- **inline** → Inline element line height.
 
 ## Fonts
 

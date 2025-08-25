@@ -21,7 +21,7 @@ The **Field** module provides a wrapper for form controls, helping manage spacin
       <div class="input">
         <input type="text" placeholder="Enter your email" />
       </div>
-      <p class="help">This field is required</p>
+      <p class="help">This field is disabled</p>
     </div>
   </div>
 </Preview>
@@ -42,7 +42,7 @@ The **Field** module provides a wrapper for form controls, helping manage spacin
   <div class="input">
     <input type="text" placeholder="Enter your email" />
   </div>
-  <p class="help">This field is required</p>
+  <p class="help">This field is disabled</p>
 </div>
 ```
 

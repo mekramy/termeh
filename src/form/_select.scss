@@ -46,7 +46,7 @@
             border-radius: $radius;
             border: 1px solid $border;
             background-color: $background;
-            padding: module.control-padding();
+            padding: module.inline-padding();
             @include module.transition(all);
 
             @include module.placeholder() {
@@ -78,7 +78,7 @@
                 align-items: center;
                 gap: $gap-micro;
                 cursor: pointer;
-                padding: module.control-padding();
+                padding: module.inline-padding();
 
                 &:checked {
                     color: $primary-readable;

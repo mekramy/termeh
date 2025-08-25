@@ -10,7 +10,7 @@ The **Fieldset** module provides consistent styling for `<fieldset>` and `<legen
 <Preview height="6rem">
   <div class="demo">
     <fieldset>
-      <legend>Example Legend</legend>
+      <legend>Example Fieldset</legend>
       <div class="field is-required">
         <label>Username</label>
         <div class="input">
@@ -19,7 +19,7 @@ The **Fieldset** module provides consistent styling for `<fieldset>` and `<legen
       </div>
     </fieldset>
     <fieldset class="is-disabled">
-      <legend>Example Legend</legend>
+      <legend>Disabled Fieldset</legend>
       <div class="field is-required">
         <label>Username</label>
         <div class="input">
@@ -35,8 +35,22 @@ The **Fieldset** module provides consistent styling for `<fieldset>` and `<legen
 
 ```html
 <fieldset>
-  <legend>Example Legend</legend>
-  <div>Form content here...</div>
+  <legend>Example Fieldset</legend>
+  <div class="field is-required">
+    <label>Username</label>
+    <div class="input">
+      <input type="text" placeholder="Enter your name" />
+    </div>
+  </div>
+</fieldset>
+<fieldset class="is-disabled">
+  <legend>Disabled Fieldset</legend>
+  <div class="field is-required">
+    <label>Username</label>
+    <div class="input">
+      <input type="text" placeholder="Enter your name" />
+    </div>
+  </div>
 </fieldset>
 ```
 

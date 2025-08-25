@@ -76,7 +76,7 @@
                         vertical-align: middle;
                         color: $table-fg;
                         font-weight: $table-strong;
-                        padding: module.control-padding();
+                        padding: module.inline-padding();
                         @include module.transition(all);
 
                         &.is-center-aligned {
@@ -137,7 +137,7 @@
                         font-weight: inherit;
                         vertical-align: middle;
                         color: $table-fg;
-                        padding: module.control-padding();
+                        padding: module.inline-padding();
                         @include module.transition(all);
 
                         &.is-center-aligned {

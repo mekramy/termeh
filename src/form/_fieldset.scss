@@ -26,7 +26,7 @@
             legend {
                 line-height: 1em;
                 font-weight: $legend;
-                padding: module.control-padding();
+                padding: module.inline-padding();
             }
         }
     }
