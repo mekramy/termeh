@@ -9,12 +9,14 @@ It’s suitable for carousels, horizontally scrolling lists, or vertical scrolle
 
 <!-- markdownlint-disable MD033 -->
 <Preview height="5rem">
-  <div class="landscape is-medium-gap">
-    <div class="placeholder is-4x is-light">ITEM 1</div>
-    <div class="placeholder is-4x">ITEM 2</div>
-    <div class="placeholder is-4x is-light">ITEM 3</div>
-    <div class="placeholder is-4x">ITEM 4</div>
-    <div class="placeholder is-4x is-light">ITEM 5</div>
+  <div class="demo">
+    <div class="landscape is-medium-gap">
+      <div class="placeholder is-4x is-light">ITEM 1</div>
+      <div class="placeholder is-4x">ITEM 2</div>
+      <div class="placeholder is-4x is-light">ITEM 3</div>
+      <div class="placeholder is-4x">ITEM 4</div>
+      <div class="placeholder is-4x is-light">ITEM 5</div>
+    </div>
   </div>
 </Preview>
 <!-- markdownlint-enable MD033 -->

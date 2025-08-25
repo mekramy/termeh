@@ -8,12 +8,14 @@ Applies consistent heading styles for `h1`–`h6` elements. This includes font s
 
 <!-- markdownlint-disable MD033 -->
 <Preview>
-  <h1>Heading 1 – Has Massive Size</h1>
-  <h2>Heading 2 – Has Huge Size</h2>
-  <h3>Heading 3 – Has Big Size</h3>
-  <h4>Heading 4 – Has Large Size</h4>
-  <h5>Heading 5 – Has Medium Size</h5>
-  <h6>Heading 6 – Has Normal Size</h6>
+  <div class="demo">
+    <h1>Heading 1 – Has Massive Size</h1>
+    <h2>Heading 2 – Has Huge Size</h2>
+    <h3>Heading 3 – Has Big Size</h3>
+    <h4>Heading 4 – Has Large Size</h4>
+    <h5>Heading 5 – Has Medium Size</h5>
+    <h6>Heading 6 – Has Normal Size</h6>
+  </div>
 </Preview>
 <!-- markdownlint-enable MD033 -->
 

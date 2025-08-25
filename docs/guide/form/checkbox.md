@@ -8,24 +8,26 @@ The **Checkbox** module provides customizable checkbox inputs with configurable 
 
 <!-- markdownlint-disable MD033 -->
 <Preview height="2.5rem">
-  <fieldset>
-    <label class="checkbox">
-      <input type="checkbox" />
-      Primary Checkbox
-    </label>
-    <label class="checkbox is-shade">
-      <input type="checkbox" />
-      Shade Checkbox
-    </label>
-    <label class="checkbox is-failed">
-      <input type="checkbox" checked />
-      Invalid Checkbox
-    </label>
-    <label class="checkbox is-disabled">
-      <input type="checkbox" checked />
-      Disabled Checkbox
-    </label>
-  </fieldset>
+  <div class="demo">
+    <fieldset>
+      <label class="checkbox">
+        <input type="checkbox" />
+        Primary Checkbox
+      </label>
+      <label class="checkbox is-shade">
+        <input type="checkbox" />
+        Shade Checkbox
+      </label>
+      <label class="checkbox is-failed">
+        <input type="checkbox" checked />
+        Invalid Checkbox
+      </label>
+      <label class="checkbox is-disabled">
+        <input type="checkbox" checked />
+        Disabled Checkbox
+      </label>
+    </fieldset>
+  </div>
 </Preview>
 <!-- markdownlint-enable MD033 -->
 

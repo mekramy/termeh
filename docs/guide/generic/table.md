@@ -8,40 +8,42 @@ Provides fully-featured table styles with configurable colors, row behaviors, ho
 
 <!-- markdownlint-disable MD033 -->
 <Preview>
-  <table class="is-fullwidth is-hoverable is-stripped is-primary is-ellipsis">
-    <thead>
-      <tr>
-        <th class="is-left-aligned is-filler is-sortable">Name</th>
-        <th class="is-center-aligned is-sortable is-sorted is-asc">Age</th>
-        <th class="is-sortable">Email</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="is-left-aligned is-filler is-ellipsis">John Doe</td>
-        <td class="is-center-aligned is-sorted">20</td>
-        <td>john@example.com</td>
-      </tr>
-      <tr>
-        <td class="is-left-aligned is-filler is-ellipsis">Jane Smith</td>
-        <td class="is-center-aligned is-sorted">25</td>
-        <td>jane.smith@example.com</td>
-      </tr>
-      <tr>
-        <td class="is-left-aligned is-filler is-ellipsis">Jack Ma</td>
-        <td class="is-center-aligned is-sorted">39</td>
-        <td>jack.ma@example.com</td>
-      </tr>
-      <tr>
-        <td class="is-left-aligned is-filler is-ellipsis">
-          Lorem ipsum dolor sit amet consectetur adipiscing elit quisque faucibus
-          ex sapien vitae pellentesque sem placerat in id cursus mi.
-        </td>
-        <td class="is-center-aligned is-sorted">44</td>
-        <td>jack.ma@example.com</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="demo">
+    <table class="is-fullwidth is-hoverable is-stripped is-primary is-ellipsis">
+      <thead>
+        <tr>
+          <th class="is-left-aligned is-filler is-sortable">Name</th>
+          <th class="is-center-aligned is-sortable is-sorted is-asc">Age</th>
+          <th class="is-sortable">Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="is-left-aligned is-filler is-ellipsis">John Doe</td>
+          <td class="is-center-aligned is-sorted">20</td>
+          <td>john@example.com</td>
+        </tr>
+        <tr>
+          <td class="is-left-aligned is-filler is-ellipsis">Jane Smith</td>
+          <td class="is-center-aligned is-sorted">25</td>
+          <td>jane.smith@example.com</td>
+        </tr>
+        <tr>
+          <td class="is-left-aligned is-filler is-ellipsis">Jack Ma</td>
+          <td class="is-center-aligned is-sorted">39</td>
+          <td>jack.ma@example.com</td>
+        </tr>
+        <tr>
+          <td class="is-left-aligned is-filler is-ellipsis">
+            Lorem ipsum dolor sit amet consectetur adipiscing elit quisque faucibus
+            ex sapien vitae pellentesque sem placerat in id cursus mi.
+          </td>
+          <td class="is-center-aligned is-sorted">44</td>
+          <td>jack.ma@example.com</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </Preview>
 <!-- markdownlint-enable MD033 -->
 

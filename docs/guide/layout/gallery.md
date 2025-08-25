@@ -8,27 +8,29 @@ The **Gallery** module provides a flexible grid for displaying images or content
 
 <!-- markdownlint-disable MD033 -->
 <Preview height="2rem">
-  <div class="gallery">
-    <div class="item"><img src="http://static.photos/800x360" alt="" /></div>
-    <div class="item"><img src="http://static.photos/360x800" alt="" /></div>
-    <div class="item"><img src="http://static.photos/720x400" alt="" /></div>
-    <div class="item"><img src="http://static.photos/380x640" alt="" /></div>
-    <div class="item"><img src="http://static.photos/790x360" alt="" /></div>
-    <div class="item"><img src="http://static.photos/360x750" alt="" /></div>
-    <div class="item"><img src="http://static.photos/640x480" alt="" /></div>
-    <div class="item"><img src="http://static.photos/360x600" alt="" /></div>
-    <div class="item"><img src="http://static.photos/800x500" alt="" /></div>
-    <div class="item"><img src="http://static.photos/480x360" alt="" /></div>
-    <div class="item"><img src="http://static.photos/360x820" alt="" /></div>
-    <div class="item"><img src="http://static.photos/600x360" alt="" /></div>
-    <div class="item"><img src="http://static.photos/370x900" alt="" /></div>
-    <div class="item"><img src="http://static.photos/640x360" alt="" /></div>
-    <div class="item"><img src="http://static.photos/360x800" alt="" /></div>
-    <div class="item"><img src="http://static.photos/780x370" alt="" /></div>
-    <div class="item"><img src="http://static.photos/360x470" alt="" /></div>
-    <div class="item"><img src="http://static.photos/750x360" alt="" /></div>
-    <div class="item"><img src="http://static.photos/400x640" alt="" /></div>
-    <div class="item"><img src="http://static.photos/360x750" alt="" /></div>
+  <div class="demo">
+    <div class="gallery">
+      <div class="item"><img src="http://static.photos/800x360" alt="" /></div>
+      <div class="item"><img src="http://static.photos/360x800" alt="" /></div>
+      <div class="item"><img src="http://static.photos/720x400" alt="" /></div>
+      <div class="item"><img src="http://static.photos/380x640" alt="" /></div>
+      <div class="item"><img src="http://static.photos/790x360" alt="" /></div>
+      <div class="item"><img src="http://static.photos/360x750" alt="" /></div>
+      <div class="item"><img src="http://static.photos/640x480" alt="" /></div>
+      <div class="item"><img src="http://static.photos/360x600" alt="" /></div>
+      <div class="item"><img src="http://static.photos/800x500" alt="" /></div>
+      <div class="item"><img src="http://static.photos/480x360" alt="" /></div>
+      <div class="item"><img src="http://static.photos/360x820" alt="" /></div>
+      <div class="item"><img src="http://static.photos/600x360" alt="" /></div>
+      <div class="item"><img src="http://static.photos/370x900" alt="" /></div>
+      <div class="item"><img src="http://static.photos/640x360" alt="" /></div>
+      <div class="item"><img src="http://static.photos/360x800" alt="" /></div>
+      <div class="item"><img src="http://static.photos/780x370" alt="" /></div>
+      <div class="item"><img src="http://static.photos/360x470" alt="" /></div>
+      <div class="item"><img src="http://static.photos/750x360" alt="" /></div>
+      <div class="item"><img src="http://static.photos/400x640" alt="" /></div>
+      <div class="item"><img src="http://static.photos/360x750" alt="" /></div>
+    </div>
   </div>
 </Preview>
 <!-- markdownlint-enable MD033 -->

@@ -9,12 +9,14 @@ It supports both horizontal and vertical layouts, configurable gaps, dividers, a
 
 <!-- markdownlint-disable MD033 -->
 <Preview height="3rem">
-  <div class="gaper is-auto">
-    <div class="placeholder is-light">CHILD</div>
-    <div class="placeholder is-item filler">FILLER</div>
-    <div class="divider"></div>
-    <div class="placeholder is-light">CHILD</div>
-    <div class="placeholder is-light">CHILD</div>
+  <div class="demo">
+    <div class="gaper is-auto">
+      <div class="placeholder is-light">CHILD</div>
+      <div class="placeholder is-item filler">FILLER</div>
+      <div class="divider"></div>
+      <div class="placeholder is-light">CHILD</div>
+      <div class="placeholder is-light">CHILD</div>
+    </div>
   </div>
 </Preview>
 <!-- markdownlint-enable MD033 -->

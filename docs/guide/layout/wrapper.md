@@ -9,16 +9,18 @@ It supports wrapping, responsive alignment, and configurable spacing using the T
 
 <!-- markdownlint-disable MD033 -->
 <Preview height="4rem">
-  <div class="wrapper">
-    <div class="placeholder is-light is-1x">CHILD</div>
-    <div class="placeholder is-light">CHILD</div>
-    <div class="placeholder is-light">CHILD</div>
-    <div class="placeholder is-4x">LONG CHILD</div>
-    <div class="placeholder is-light">CHILD</div>
-    <div class="placeholder is-light">CHILD</div>
-    <div class="placeholder is-light is-3x">CHILD</div>
-    <div class="placeholder is-light is-2x">CHILD</div>
-    <div class="placeholder is-light">CHILD</div>
+  <div class="demo">
+    <div class="wrapper">
+      <div class="placeholder is-light is-1x">CHILD</div>
+      <div class="placeholder is-light">CHILD</div>
+      <div class="placeholder is-light">CHILD</div>
+      <div class="placeholder is-4x">LONG CHILD</div>
+      <div class="placeholder is-light">CHILD</div>
+      <div class="placeholder is-light">CHILD</div>
+      <div class="placeholder is-light is-3x">CHILD</div>
+      <div class="placeholder is-light is-2x">CHILD</div>
+      <div class="placeholder is-light">CHILD</div>
+    </div>
   </div>
 </Preview>
 <!-- markdownlint-enable MD033 -->

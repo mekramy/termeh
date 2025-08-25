@@ -8,24 +8,26 @@ The **Radio** module provides customizable radio button inputs with configurable
 
 <!-- markdownlint-disable MD033 -->
 <Preview height="2.5rem">
-  <fieldset>
-    <label class="radio">
-      <input type="radio" />
-      Primary Radio
-    </label>
-    <label class="radio is-shade">
-      <input type="radio" />
-      Shade Radio
-    </label>
-    <label class="radio is-failed">
-      <input type="radio" checked />
-      Invalid Radio
-    </label>
-    <label class="radio is-disabled">
-      <input type="radio" checked />
-      Disabled Radio
-    </label>
-  </fieldset>
+  <div class="demo">
+    <fieldset>
+      <label class="radio">
+        <input type="radio" />
+        Primary Radio
+      </label>
+      <label class="radio is-shade">
+        <input type="radio" />
+        Shade Radio
+      </label>
+      <label class="radio is-failed">
+        <input type="radio" checked />
+        Invalid Radio
+      </label>
+      <label class="radio is-disabled">
+        <input type="radio" checked />
+        Disabled Radio
+      </label>
+    </fieldset>
+  </div>
 </Preview>
 <!-- markdownlint-enable MD033 -->
 

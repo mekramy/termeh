@@ -8,13 +8,15 @@ Applies image styles with utility classes for centering, rounded or circular bor
 
 <!-- markdownlint-disable MD033 -->
 <Preview>
-  <div style="display: flex; gap: 1rem; align-items: flex-end; justify-content: center;">
-    <img src="/assets/image.png" alt="" style="height: 10rem" class="is-circular" />
-    <img src="/assets/image.png" alt="" style="height: 10rem" class="is-rounded" />
-    <img src="/assets/image.png" alt="" class="is-massive" />
-    <img src="/assets/image.png" alt="" class="is-large" />
-    <img src="/assets/image.png" alt="" class=" is-medium" />
-    <img src="/assets/image.png" alt="" class="is-small" />
+  <div class="demo">
+    <div class="gaper is-auto">
+      <img src="/assets/image.png" alt="" style="height: 10rem" class="is-circular" />
+      <img src="/assets/image.png" alt="" style="height: 10rem" class="is-rounded" />
+      <img src="/assets/image.png" alt="" class="is-massive" />
+      <img src="/assets/image.png" alt="" class="is-large" />
+      <img src="/assets/image.png" alt="" class=" is-medium" />
+      <img src="/assets/image.png" alt="" class="is-small" />
+    </div>
   </div>
 </Preview>
 <!-- markdownlint-enable MD033 -->

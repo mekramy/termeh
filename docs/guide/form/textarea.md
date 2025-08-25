@@ -8,22 +8,24 @@ The **Textarea** module provides styled multi-line text inputs with configurable
 
 <!-- markdownlint-disable MD033 -->
 <Preview height="6rem">
-  <fieldset>
-    <div class="field is-required">
-      <label for="some">Primary Textarea:</label>
-      <textarea></textarea>
-      <div class="help">This is a help block</div>
-    </div>
-    <div class="field is-required is-failed">
-      <label for="some">Invalid Textarea:</label>
-      <textarea></textarea>
-      <div class="error">This is a error block</div>
-    </div>
-    <div class="field is-required is-disabled">
-      <label for="some">Disabled Textarea:</label>
-      <textarea></textarea>
-    </div>
-  </fieldset>
+  <div class="demo">
+    <fieldset>
+      <div class="field is-required">
+        <label for="some">Primary Textarea:</label>
+        <textarea></textarea>
+        <div class="help">This is a help block</div>
+      </div>
+      <div class="field is-required is-failed">
+        <label for="some">Invalid Textarea:</label>
+        <textarea></textarea>
+        <div class="error">This is a error block</div>
+      </div>
+      <div class="field is-required is-disabled">
+        <label for="some">Disabled Textarea:</label>
+        <textarea></textarea>
+      </div>
+    </fieldset>
+  </div>
 </Preview>
 <!-- markdownlint-enable MD033 -->
 

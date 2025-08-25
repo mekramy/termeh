@@ -8,8 +8,10 @@ The **Container** module provides a flexible wrapper with configurable maximum w
 
 <!-- markdownlint-disable MD033 -->
 <Preview height="4rem">
-  <div class="container is-highlighted">
-    <div class="placeholder">Container content</div>
+  <div class="demo">
+    <div class="container is-highlighted">
+      <div class="placeholder">Container content</div>
+    </div>
   </div>
 </Preview>
 <!-- markdownlint-enable MD033 -->

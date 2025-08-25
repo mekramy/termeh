@@ -8,12 +8,21 @@ The **Field** module provides a wrapper for form controls, helping manage spacin
 
 <!-- markdownlint-disable MD033 -->
 <Preview height="6rem">
-  <div class="field is-required">
-    <label>Username</label>
-    <div class="input">
-      <input type="text" placeholder="Enter your email" />
+  <div class="demo">
+    <div class="field is-required">
+      <label>Username</label>
+      <div class="input">
+        <input type="text" placeholder="Enter your email" />
+      </div>
+      <p class="help">This field is required</p>
     </div>
-    <p class="help">This field is required</p>
+    <div class="field is-required is-disabled">
+      <label>Username</label>
+      <div class="input">
+        <input type="text" placeholder="Enter your email" />
+      </div>
+      <p class="help">This field is required</p>
+    </div>
   </div>
 </Preview>
 <!-- markdownlint-enable MD033 -->
@@ -22,6 +31,13 @@ The **Field** module provides a wrapper for form controls, helping manage spacin
 
 ```html
 <div class="field is-required">
+  <label>Username</label>
+  <div class="input">
+    <input type="text" placeholder="Enter your email" />
+  </div>
+  <p class="help">This field is required</p>
+</div>
+<div class="field is-required is-disabled">
   <label>Username</label>
   <div class="input">
     <input type="text" placeholder="Enter your email" />
@@ -77,6 +93,7 @@ Field module uses the following Termeh registered `color()` and `variant()`
 ### Modifiers
 
 - `.is-required` → appends a `*` to labels for required fields
+- `.is-disabled` → disabled state
 - `.is-failed` / `:invalid` → displays error message
 
 ### Color Modifiers

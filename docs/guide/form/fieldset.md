@@ -8,8 +8,17 @@ The **Fieldset** module provides consistent styling for `<fieldset>` and `<legen
 
 <!-- markdownlint-disable MD033 -->
 <Preview height="6rem">
-  <div class="padder is-normal">
+  <div class="demo">
     <fieldset>
+      <legend>Example Legend</legend>
+      <div class="field is-required">
+        <label>Username</label>
+        <div class="input">
+          <input type="text" placeholder="Enter your name" />
+        </div>
+      </div>
+    </fieldset>
+    <fieldset class="is-disabled">
       <legend>Example Legend</legend>
       <div class="field is-required">
         <label>Username</label>
@@ -61,3 +70,7 @@ Fieldset module uses the following Termeh global `var()`:
 | `input` → `border`  | _Color_  | Border color of fieldset      | `var("base", "separator")` |
 
 :::
+
+## Available Classes
+
+- `.is-disabled` → disabled state

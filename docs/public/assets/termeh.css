@@ -6825,7 +6825,7 @@ label.checkbox input[type=checkbox]:focus, label.checkbox input[type=checkbox]:f
   border-color: #179299;
 }
 label.checkbox input[type=checkbox]:checked {
-  box-shadow: 0 0 8px 8px rgba(23, 146, 153, 0);
+  box-shadow: 0 0 0 8px rgba(23, 146, 153, 0);
 }
 label.checkbox input[type=checkbox]:checked::after {
   transform: scale(0.6);
@@ -6840,7 +6840,7 @@ label.checkbox.is-shade input:focus, label.checkbox.is-shade input:focus-within 
   border-color: #667085;
 }
 label.checkbox.is-shade input:checked {
-  box-shadow: 0 0 8px 8px rgba(102, 112, 133, 0);
+  box-shadow: 0 0 0 8px rgba(102, 112, 133, 0);
 }
 label.checkbox.is-primary input {
   box-shadow: 0 0 0 0 rgba(23, 146, 153, 0.25);
@@ -6852,7 +6852,7 @@ label.checkbox.is-primary input:focus, label.checkbox.is-primary input:focus-wit
   border-color: #179299;
 }
 label.checkbox.is-primary input:checked {
-  box-shadow: 0 0 8px 8px rgba(23, 146, 153, 0);
+  box-shadow: 0 0 0 8px rgba(23, 146, 153, 0);
 }
 label.checkbox.is-error input {
   box-shadow: 0 0 0 0 rgba(192, 0, 33, 0.25);
@@ -6864,7 +6864,7 @@ label.checkbox.is-error input:focus, label.checkbox.is-error input:focus-within 
   border-color: #c00021;
 }
 label.checkbox.is-error input:checked {
-  box-shadow: 0 0 8px 8px rgba(192, 0, 33, 0);
+  box-shadow: 0 0 0 8px rgba(192, 0, 33, 0);
 }
 label.checkbox input {
   margin-left: 0;
@@ -7161,21 +7161,21 @@ fieldset:disabled .input,
 fieldset.is-disabled .input,
 .field:disabled .input,
 .field.is-disabled .input {
-  opacity: 0.75;
+  opacity: 0.65;
   pointer-events: none;
   user-select: none;
-  color: #bfc6d4;
-  background-color: #f0f2f5;
-  border-color: #d1d6e0;
+  color: #bfc6d4 !important;
+  background-color: #f0f2f5 !important;
+  border-color: #d1d6e0 !important;
 }
 
 .input:disabled, .input.is-disabled {
-  opacity: 0.75;
+  opacity: 0.65;
   pointer-events: none;
   user-select: none;
-  color: #bfc6d4;
-  background-color: #f0f2f5;
-  border-color: #d1d6e0;
+  color: #bfc6d4 !important;
+  background-color: #f0f2f5 !important;
+  border-color: #d1d6e0 !important;
 }
 
 label.radio {
@@ -7226,7 +7226,7 @@ label.radio input[type=radio]:focus, label.radio input[type=radio]:focus-within 
   border-color: #179299;
 }
 label.radio input[type=radio]:checked {
-  box-shadow: 0 0 8px 8px rgba(23, 146, 153, 0);
+  box-shadow: 0 0 0 8px rgba(23, 146, 153, 0);
 }
 label.radio input[type=radio]:checked::after {
   transform: scale(0.6);
@@ -7241,7 +7241,7 @@ label.radio.is-shade input:focus, label.radio.is-shade input:focus-within {
   border-color: #667085;
 }
 label.radio.is-shade input:checked {
-  box-shadow: 0 0 8px 8px rgba(102, 112, 133, 0);
+  box-shadow: 0 0 0 8px rgba(102, 112, 133, 0);
 }
 label.radio.is-primary input {
   box-shadow: 0 0 0 0 rgba(23, 146, 153, 0.25);
@@ -7253,7 +7253,7 @@ label.radio.is-primary input:focus, label.radio.is-primary input:focus-within {
   border-color: #179299;
 }
 label.radio.is-primary input:checked {
-  box-shadow: 0 0 8px 8px rgba(23, 146, 153, 0);
+  box-shadow: 0 0 0 8px rgba(23, 146, 153, 0);
 }
 label.radio.is-error input {
   box-shadow: 0 0 0 0 rgba(192, 0, 33, 0.25);
@@ -7265,7 +7265,7 @@ label.radio.is-error input:focus, label.radio.is-error input:focus-within {
   border-color: #c00021;
 }
 label.radio.is-error input:checked {
-  box-shadow: 0 0 8px 8px rgba(192, 0, 33, 0);
+  box-shadow: 0 0 0 8px rgba(192, 0, 33, 0);
 }
 label.radio input {
   margin-left: 0;
@@ -7505,21 +7505,21 @@ fieldset:disabled select,
 fieldset.is-disabled select,
 .field:disabled select,
 .field.is-disabled select {
-  opacity: 0.75;
+  opacity: 0.65;
   pointer-events: none;
   user-select: none;
-  color: #bfc6d4;
-  background-color: #f0f2f5;
-  border-color: #d1d6e0;
+  color: #bfc6d4 !important;
+  background-color: #f0f2f5 !important;
+  border-color: #d1d6e0 !important;
 }
 
 select:disabled, select.is-disabled {
-  opacity: 0.75;
+  opacity: 0.65;
   pointer-events: none;
   user-select: none;
-  color: #bfc6d4;
-  background-color: #f0f2f5;
-  border-color: #d1d6e0;
+  color: #bfc6d4 !important;
+  background-color: #f0f2f5 !important;
+  border-color: #d1d6e0 !important;
 }
 
 textarea {
@@ -7636,21 +7636,21 @@ fieldset:disabled textarea,
 fieldset.is-disabled textarea,
 .field:disabled textarea,
 .field.is-disabled textarea {
-  opacity: 0.75;
+  opacity: 0.65;
   pointer-events: none;
   user-select: none;
-  color: #bfc6d4;
-  background-color: #f0f2f5;
-  border-color: #d1d6e0;
+  color: #bfc6d4 !important;
+  background-color: #f0f2f5 !important;
+  border-color: #d1d6e0 !important;
 }
 
 textarea:disabled, textarea.is-disabled {
-  opacity: 0.75;
+  opacity: 0.65;
   pointer-events: none;
   user-select: none;
-  color: #bfc6d4;
-  background-color: #f0f2f5;
-  border-color: #d1d6e0;
+  color: #bfc6d4 !important;
+  background-color: #f0f2f5 !important;
+  border-color: #d1d6e0 !important;
 }
 
 .placeholder {
@@ -7692,6 +7692,12 @@ textarea:disabled, textarea.is-disabled {
 .is-highlighted.is-green {
   border: 1px solid rgba(82, 121, 111, 0.35);
   background-color: rgba(82, 121, 111, 0.08);
+}
+
+.demo {
+  display: block;
+  box-sizing: border-box;
+  padding: 8px;
 }
 
 /*# sourceMappingURL=termeh.css.map */

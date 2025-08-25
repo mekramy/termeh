@@ -8,43 +8,45 @@ The **Select** module provides styled dropdown inputs with configurable colors, 
 
 <!-- markdownlint-disable MD033 -->
 <Preview height="3rem">
-  <fieldset>
-    <div class="field is-required">
-      <label for="some">Primary Select:</label>
-      <select>
-        <option value="a">option a</option>
-        <option value="b" disabled>option b</option>
-        <option value="c">option c</option>
-      </select>
-      <div class="help">This is a help block</div>
-    </div>
-    <div class="field is-required">
-      <label for="some">Shade Select:</label>
-      <select class="is-shade">
-        <option value="a">option a</option>
-        <option value="b">option b</option>
-        <option value="c">option c</option>
-      </select>
-      <div class="help">This is a help block</div>
-    </div>
-    <div class="field is-required is-failed">
-      <label for="some">Invalid Select:</label>
-      <select>
-        <option value="a">option a</option>
-        <option value="b">option b</option>
-        <option value="c">option c</option>
-      </select>
-      <div class="error">This is a error block</div>
-    </div>
-    <div class="field is-required is-disabled">
-      <label for="some">Disabled Select:</label>
-      <select>
-        <option value="a">option a</option>
-        <option value="b">option b</option>
-        <option value="c">option c</option>
-      </select>
-    </div>
-  </fieldset>
+  <div class="demo">
+    <fieldset>
+      <div class="field is-required">
+        <label for="some">Primary Select:</label>
+        <select>
+          <option value="a">option a</option>
+          <option value="b" disabled>option b</option>
+          <option value="c">option c</option>
+        </select>
+        <div class="help">This is a help block</div>
+      </div>
+      <div class="field is-required">
+        <label for="some">Shade Select:</label>
+        <select class="is-shade">
+          <option value="a">option a</option>
+          <option value="b">option b</option>
+          <option value="c">option c</option>
+        </select>
+        <div class="help">This is a help block</div>
+      </div>
+      <div class="field is-required is-failed">
+        <label for="some">Invalid Select:</label>
+        <select>
+          <option value="a">option a</option>
+          <option value="b">option b</option>
+          <option value="c">option c</option>
+        </select>
+        <div class="error">This is a error block</div>
+      </div>
+      <div class="field is-required is-disabled">
+        <label for="some">Disabled Select:</label>
+        <select>
+          <option value="a">option a</option>
+          <option value="b">option b</option>
+          <option value="c">option c</option>
+        </select>
+      </div>
+    </fieldset>
+  </div>
 </Preview>
 <!-- markdownlint-enable MD033 -->
 

@@ -8,11 +8,13 @@ The **Padder** module provides a simple utility container that applies uniform p
 
 <!-- markdownlint-disable MD033 -->
 <Preview height="8rem">
-  <div class="padder is-small is-highlighted">
-    <div class="placeholder">Small padding</div>
-  </div>
-  <div class="padder is-large is-highlighted" style="margin-top: .5rem">
-    <div class="placeholder">Large Padding</div>
+  <div class="demo">
+    <div class="padder is-small is-highlighted">
+      <div class="placeholder">Small padding</div>
+    </div>
+    <div class="padder is-large is-highlighted" style="margin-top: .5rem">
+      <div class="placeholder">Large Padding</div>
+    </div>
   </div>
 </Preview>
 <!-- markdownlint-enable MD033 -->

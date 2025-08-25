@@ -84,7 +84,7 @@
     $size: util.number-of($size, "flat-shadow", "size");
     $color: util.color-of($color, "flat-shadow", "color");
 
-    @return 0 0 $size $size $color;
+    @return 0 0 0 $size $color;
 }
 
 /// Calculates the border radius for a child element based on parent radius and padding
@@ -278,12 +278,11 @@
     position: relative;
 
     &::after {
-        @include spinner($size, $color, $width);
-
         z-index: 2;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
+        @include spinner($size, $color, $width);
     }
 }
 
@@ -402,12 +401,12 @@
 /// @termeh {Color} [null] - `var("input", "disabled-border")`
 /// @termeh {Color} [null] - `var("input", "disabled-color")`
 @mixin disabled() {
-    opacity: 0.75;
+    opacity: 0.65;
     pointer-events: none;
     user-select: none;
-    color: var.var("input", "disabled-color");
-    background-color: var.var("input", "disabled");
-    border-color: var.var("input", "disabled-border");
+    color: var.var("input", "disabled-color") !important;
+    background-color: var.var("input", "disabled") !important;
+    border-color: var.var("input", "disabled-border") !important;
 }
 
 /// Text selection styling

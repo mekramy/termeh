@@ -8,40 +8,42 @@ The **Input** module provides styled input wrappers with configurable gaps, colo
 
 <!-- markdownlint-disable MD033 -->
 <Preview height="3rem">
-  <fieldset>
-    <div class="field is-required">
-      <label for="some">Primary Input:</label>
-      <div class="input">
-        <span>A</span>
-        <div class="gutter"></div>
-        <input type="text" />
-        <div class="divider"></div>
-        <span>B</span>
+  <div class="demo">
+    <fieldset>
+      <div class="field is-required">
+        <label for="some">Primary Input:</label>
+        <div class="input">
+          <span>A</span>
+          <div class="gutter"></div>
+          <input type="text" />
+          <div class="divider"></div>
+          <span>B</span>
+        </div>
+        <div class="help">This is a help block</div>
       </div>
-      <div class="help">This is a help block</div>
-    </div>
-    <div class="field is-required is-failed">
-      <label for="some">Invalid Input:</label>
-      <div class="input">
-        <span>A</span>
-        <div class="gutter"></div>
-        <input type="text" />
-        <div class="divider"></div>
-        <span>B</span>
+      <div class="field is-required is-failed">
+        <label for="some">Invalid Input:</label>
+        <div class="input">
+          <span>A</span>
+          <div class="gutter"></div>
+          <input type="text" />
+          <div class="divider"></div>
+          <span>B</span>
+        </div>
+        <div class="error">This is a error block</div>
       </div>
-      <div class="error">This is a error block</div>
-    </div>
-    <div class="field is-required is-disabled">
-      <label for="some">Disabled Input:</label>
-      <div class="input">
-        <span>A</span>
-        <div class="gutter"></div>
-        <input type="text" />
-        <div class="divider"></div>
-        <span>B</span>
+      <div class="field is-required is-disabled">
+        <label for="some">Disabled Input:</label>
+        <div class="input">
+          <span>A</span>
+          <div class="gutter"></div>
+          <input type="text" />
+          <div class="divider"></div>
+          <span>B</span>
+        </div>
       </div>
-    </div>
-  </fieldset>
+    </fieldset>
+  </div>
 </Preview>
 <!-- markdownlint-enable MD033 -->
 

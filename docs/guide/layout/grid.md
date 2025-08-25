@@ -9,46 +9,48 @@ It supports configurable gaps, responsive column sizing via registered units, al
 
 <!-- markdownlint-disable MD033 -->
 <Preview height="5rem">
-  <div class="grid">
-    <div class="column">
-      <div class="placeholder">Auto</div>
-    </div>
-    <div class="column">
-      <div class="placeholder">Auto</div>
-    </div>
-    <div class="break"></div>
-    <div class="column">
-      <div class="placeholder">Auto</div>
-    </div>
-    <div class="column is-fit">
-      <div class="placeholder is-light">FIT</div>
-    </div>
-    <div class="break"></div>
-    <div class="column is-1-of-4">
-      <div class="placeholder is-light">1-of-4</div>
-    </div>
-    <div class="column">
-      <div class="placeholder">Auto</div>
-    </div>
-    <div class="break"></div>
-    <div class="column is-half">
-      <div class="placeholder is-light">Half</div>
-    </div>
-    <div class="column">
-      <div class="placeholder">Auto</div>
-    </div>
-    <div class="break"></div>
-    <div class="column is-1-of-5">
-      <div class="placeholder is-light">1-of-5</div>
-    </div>
-    <div class="column is-1-of-5">
-      <div class="placeholder is-light">1-of-5</div>
-    </div>
-    <div class="column is-1-of-5">
-      <div class="placeholder is-light">1-of-5</div>
-    </div>
-    <div class="column">
-      <div class="placeholder">Auto</div>
+  <div class="demo">
+    <div class="grid">
+      <div class="column">
+        <div class="placeholder">Auto</div>
+      </div>
+      <div class="column">
+        <div class="placeholder">Auto</div>
+      </div>
+      <div class="break"></div>
+      <div class="column">
+        <div class="placeholder">Auto</div>
+      </div>
+      <div class="column is-fit">
+        <div class="placeholder is-light">FIT</div>
+      </div>
+      <div class="break"></div>
+      <div class="column is-1-of-4">
+        <div class="placeholder is-light">1-of-4</div>
+      </div>
+      <div class="column">
+        <div class="placeholder">Auto</div>
+      </div>
+      <div class="break"></div>
+      <div class="column is-half">
+        <div class="placeholder is-light">Half</div>
+      </div>
+      <div class="column">
+        <div class="placeholder">Auto</div>
+      </div>
+      <div class="break"></div>
+      <div class="column is-1-of-5">
+        <div class="placeholder is-light">1-of-5</div>
+      </div>
+      <div class="column is-1-of-5">
+        <div class="placeholder is-light">1-of-5</div>
+      </div>
+      <div class="column is-1-of-5">
+        <div class="placeholder is-light">1-of-5</div>
+      </div>
+      <div class="column">
+        <div class="placeholder">Auto</div>
+      </div>
     </div>
   </div>
 </Preview>
