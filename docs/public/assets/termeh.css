@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import url("https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
 /* Reset margin and padding for structural elements */
 html,
 body,
@@ -97,9 +97,9 @@ th {
 html {
   overflow: hidden auto;
   scroll-behavior: smooth;
-  font-family: "Ubuntu", "Segoe UI", Roboto, sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   font-size: 14px;
-  font-weight: normal;
+  font-weight: 500;
   text-size-adjust: 100%;
   text-rendering: optimizelegibility;
   -moz-osx-font-smoothing: grayscale;
@@ -109,7 +109,7 @@ html {
   background-color: white;
 }
 html::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 html::-webkit-scrollbar-track {
   background: #f8f9fa;
@@ -148,11 +148,11 @@ select,
 textarea,
 select option {
   font-size: 1rem;
-  font-family: "Ubuntu", "Segoe UI", Roboto, sans-serif;
+  font-family: "Space Grotesk", sans-serif;
 }
 
 body {
-  color: #081e30;
+  color: #0d1b2a;
   line-height: 1.6em;
 }
 
@@ -166,8 +166,9 @@ code,
 pre {
   direction: ltr;
   padding: 1.6rem;
-  font-size: 1rem;
-  font-family: monospace;
+  font-size: 14px;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 500;
   background-color: #f8f9fa;
   -moz-osx-font-smoothing: auto;
   -webkit-font-smoothing: auto;
@@ -225,7 +226,7 @@ pre {
   -webkit-overflow-scrolling: touch;
 }
 pre::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 pre::-webkit-scrollbar-track {
   background: #f8f9fa;
@@ -357,7 +358,7 @@ img.is-massive {
   -webkit-overflow-scrolling: touch;
 }
 .table-container::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 .table-container::-webkit-scrollbar-track {
   background: #f8f9fa;
@@ -621,7 +622,7 @@ table.is-error tfoot tr td.is-sorted {
   overflow-y: auto;
 }
 .is-scrollable::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 .is-scrollable::-webkit-scrollbar-track {
   background: #f8f9fa;
@@ -6093,7 +6094,7 @@ table.is-error tfoot tr td.is-sorted {
   -webkit-overflow-scrolling: touch;
 }
 .landscape::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 .landscape::-webkit-scrollbar-track {
   background: #f8f9fa;
@@ -6777,6 +6778,17 @@ table.is-error tfoot tr td.is-sorted {
   margin: 1.5em;
 }
 
+@keyframes shake {
+  5%, 40% {
+    transform: translateX(-5px);
+  }
+  25%, 60% {
+    transform: translateX(5px);
+  }
+  0%, 100% {
+    transform: translateX(0);
+  }
+}
 label.checkbox {
   display: flex;
   align-items: center;
@@ -6878,13 +6890,34 @@ label.checkbox.is-rtl input, label.checkbox:dir(rtl) input {
   margin-left: 8px;
   margin-right: 0;
 }
+.field:invalid label.checkbox,
+.field.is-failed label.checkbox {
+  animation: shake 0.5s ease;
+}
 .field:invalid label.checkbox input,
 .field.is-failed label.checkbox input {
   border-color: #c00021;
 }
+.field:invalid label.checkbox input::after,
+.field.is-failed label.checkbox input::after {
+  background-color: #c00021;
+}
+.field:invalid label.checkbox input:checked,
+.field.is-failed label.checkbox input:checked {
+  box-shadow: 0 0 0 8px rgba(192, 0, 33, 0);
+}
 
+label.checkbox:invalid, label.checkbox.is-failed {
+  animation: shake 0.5s ease;
+}
 label.checkbox:invalid input, label.checkbox.is-failed input {
   border-color: #c00021;
+}
+label.checkbox:invalid input::after, label.checkbox.is-failed input::after {
+  background-color: #c00021;
+}
+label.checkbox:invalid input:checked, label.checkbox.is-failed input:checked {
+  box-shadow: 0 0 0 8px rgba(192, 0, 33, 0);
 }
 fieldset:disabled label.checkbox,
 fieldset.is-disabled label.checkbox,
@@ -6990,17 +7023,50 @@ fieldset legend {
   padding: 8px 16px;
 }
 
-@keyframes shake {
-  5%, 40% {
-    transform: translateX(-5px);
+form:not(:last-child, .is-marginless) {
+  margin-bottom: 1.6rem;
+}
+form.is-loading {
+  z-index: 0;
+  position: relative;
+  z-index: 0;
+  position: relative;
+}
+form.is-loading::before {
+  content: " ";
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: none;
+}
+form.is-loading::after {
+  z-index: 2;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-rendering: optimizelegibility;
+  display: block;
+  position: absolute;
+  box-sizing: border-box;
+  content: " ";
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid #0d1b2a;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 500ms infinite linear;
+}
+@keyframes spin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
   }
-  25%, 60% {
-    transform: translateX(5px);
-  }
-  0%, 100% {
-    transform: translateX(0);
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
   }
 }
+
 .input {
   display: flex;
   align-items: center;
@@ -7279,13 +7345,34 @@ label.radio.is-rtl input, label.radio:dir(rtl) input {
   margin-left: 8px;
   margin-right: 0;
 }
+.field:invalid label.radio,
+.field.is-failed label.radio {
+  animation: shake 0.5s ease;
+}
 .field:invalid label.radio input,
 .field.is-failed label.radio input {
   border-color: #c00021;
 }
+.field:invalid label.radio input::after,
+.field.is-failed label.radio input::after {
+  background-color: #c00021;
+}
+.field:invalid label.radio input:checked,
+.field.is-failed label.radio input:checked {
+  box-shadow: 0 0 0 8px rgba(192, 0, 33, 0);
+}
 
+label.radio:invalid, label.radio.is-failed {
+  animation: shake 0.5s ease;
+}
 label.radio:invalid input, label.radio.is-failed input {
   border-color: #c00021;
+}
+label.radio:invalid input::after, label.radio.is-failed input::after {
+  background-color: #c00021;
+}
+label.radio:invalid input:checked, label.radio.is-failed input:checked {
+  box-shadow: 0 0 0 8px rgba(192, 0, 33, 0);
 }
 fieldset:disabled label.radio,
 fieldset.is-disabled label.radio,
@@ -7564,7 +7651,7 @@ textarea::-moz-focus-inner {
   border: 0;
 }
 textarea::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 textarea::-webkit-scrollbar-track {
   background: #f8f9fa;

@@ -30,6 +30,10 @@ The **Gallery** module provides a flexible grid for displaying images or content
       <div class="item"><img src="http://static.photos/750x360" alt="" /></div>
       <div class="item"><img src="http://static.photos/400x640" alt="" /></div>
       <div class="item"><img src="http://static.photos/360x750" alt="" /></div>
+      <div class="item"><img src="http://static.photos/361x750" alt="" /></div>
+      <div class="item"><img src="http://static.photos/362x750" alt="" /></div>
+      <div class="item"><img src="http://static.photos/363x750" alt="" /></div>
+      <div class="item"><img src="http://static.photos/364x750" alt="" /></div>
     </div>
   </div>
 </Preview>
@@ -98,6 +102,18 @@ The **Gallery** module provides a flexible grid for displaying images or content
   </div>
   <div class="item">
     <img src="http://static.photos/360x750" alt="" />
+  </div>
+  <div class="item">
+    <img src="http://static.photos/361x750" alt="" />
+  </div>
+  <div class="item">
+    <img src="http://static.photos/362x750" alt="" />
+  </div>
+  <div class="item">
+    <img src="http://static.photos/363x750" alt="" />
+  </div>
+  <div class="item">
+    <img src="http://static.photos/364x750" alt="" />
   </div>
 </div>
 ```

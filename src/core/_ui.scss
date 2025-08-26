@@ -298,10 +298,12 @@
 }
 
 /// Overlay layer with optional backdrop filter
-/// @param {Color} $color - Overlay color
+/// @param {Color} $color - Overlay opacity
+/// @param {Number} $opacity - Overlay background opacity
 /// @param {String} $filter - Backdrop filter value
-@mixin overlay($color, $filter) {
+@mixin overlay($color, $opacity, $filter) {
     $color: util.color-of($color, "overlay", "color");
+    $opacity: util.number-of($opacity, "overlay", "opacity");
 
     z-index: 0;
     position: relative;
@@ -311,7 +313,7 @@
         position: absolute;
         z-index: 1;
         inset: 0;
-        background: $color;
+        background: rgba($color, $opacity);
         backdrop-filter: $filter;
     }
 }
@@ -439,10 +441,5 @@
 @mixin scrollable($color) {
     $color: util.color-of($color, "scrollable", "color");
 
-    @include scrollbar(
-        var.var("scroll", "size", 1rem),
-        var.var("scroll", "track", var.var("base", "section", null)),
-        var.var("scroll", "thumb", var.var("base", "separator", null)),
-        $color
-    );
+    @include scrollbar(var.var("scroll", "size", 1rem), var.var("scroll", "track", var.var("base", "section", null)), var.var("scroll", "thumb", var.var("base", "separator", null)), $color);
 }

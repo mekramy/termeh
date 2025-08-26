@@ -11,12 +11,13 @@
 /// @termeh {Color} [null] - variant("primary", "active")
 /// @termeh {Color} [null] - variant("primary", "foreground")
 /// @termeh {Number} [error] - size("small")
-/// @termeh {String|List} [null] - var("font", "family")
+/// @termeh {List} [null] - var("font", "family")
 /// @termeh {Number} [12px] - var("font", "size")
 /// @termeh {String} [normal] - var("font", "weight")
-/// @termeh {String|List} [null] - var("font", "code-family")
-/// @termeh {Number} [null] - var("font", "code-size")
-/// @termeh {Color} [null] - var("strong", "color")
+/// @termeh {List} [null] - var("mono", "family")
+/// @termeh {Number} [null] - var("mono", "size")
+/// @termeh {String} [null] - var("mono", "weight")
+/// @termeh {Color} [null] - var("strong", "froeground")
 /// @termeh {String} [bold] - var("strong", "weight")
 /// @termeh {Number} [8px] - var("gap", "micro")
 /// @termeh {Number} [1.6rem] - var("gap", "macro")
@@ -39,10 +40,12 @@
     $font-family: module.var("font", "family");
     $font-size: module.var("font", "size", 12px);
     $font-weight: module.var("font", "weight", normal);
-    $code-family: module.var("font", "code-family");
-    $code-size: module.var("font", "code-size");
 
-    $strong-color: module.var("strong", "color");
+    $mono-family: module.var("font", "family");
+    $mono-size: module.var("font", "size");
+    $mono-weight: module.var("font", "weight");
+
+    $strong-color: module.var("strong", "foreground");
     $strong-weight: module.var("strong", "weight", bold);
 
     $gap-micro: module.var("gap", "micro", 8px);
@@ -123,8 +126,9 @@
         pre {
             direction: ltr;
             padding: $gap-macro;
-            font-size: $code-size;
-            font-family: $code-family;
+            font-size: $mono-size;
+            font-family: $mono-family;
+            font-weight: $mono-weight;
             background-color: $base-section;
             -moz-osx-font-smoothing: auto;
             -webkit-font-smoothing: auto;

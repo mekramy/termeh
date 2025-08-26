@@ -11,11 +11,11 @@ It supports both horizontal and vertical layouts, configurable gaps, dividers, a
 <Preview height="3rem">
   <div class="demo">
     <div class="gaper is-auto">
-      <div class="placeholder is-light">CHILD</div>
-      <div class="placeholder is-item filler">FILLER</div>
+      <div class="placeholder is-light">Child</div>
+      <div class="placeholder is-item filler">Filler</div>
       <div class="divider"></div>
-      <div class="placeholder is-light">CHILD</div>
-      <div class="placeholder is-light">CHILD</div>
+      <div class="placeholder is-light">Child</div>
+      <div class="placeholder is-light">Child</div>
     </div>
   </div>
 </Preview>
@@ -25,11 +25,11 @@ It supports both horizontal and vertical layouts, configurable gaps, dividers, a
 
 ```html
 <div class="gaper is-auto">
-  <div>CHILD</div>
-  <div class="filler">FILLER</div>
+  <div>Child</div>
+  <div class="filler">Filler</div>
   <div class="divider"></div>
-  <div>CHILD</div>
-  <div>CHILD</div>
+  <div>Child</div>
+  <div>Child</div>
 </div>
 ```
 

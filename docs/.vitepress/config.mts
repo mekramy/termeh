@@ -42,7 +42,7 @@ export default defineConfig({
             },
             {
                 text: "Core Concept",
-                collapsed: false,
+                collapsed: true,
                 items: [
                     {
                         text: "Core Concepts",
@@ -188,6 +188,10 @@ export default defineConfig({
                 text: "Form",
                 collapsed: true,
                 items: [
+                    {
+                        text: "Form",
+                        link: "/guide/form/form",
+                    },
                     {
                         text: "Fieldset",
                         link: "/guide/form/fieldset",

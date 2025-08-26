@@ -527,14 +527,14 @@ Creates a full-cover overlay via `::before`, with optional backdrop-filter.
 **Signature:**
 
 ```scss
-@mixin overlay($color: COLOR, $filter: CSS-FILTER);
+@mixin overlay($color: COLOR, $opacity: NUMBER, $filter: CSS-FILTER);
 ```
 
 **Example:**
 
 ```scss
 .dialog[aria-modal="true"] {
-  @include termeh.overlay(rgba(0, 0, 0, 0.5), blur(6px));
+  @include termeh.overlay(black, 0.5, blur(6px));
 }
 ```
 

@@ -18,7 +18,6 @@
 /// @termeh {Color} [var("base", "separator")] - var("table", "separator")
 /// @termeh {Color} [color("shade")] - var("table", "decorator")
 /// @termeh {Color} [rgba(color("shade"))] - var("table", "sort-background")
-/// @termeh {Color} [null] - var("table", "sort-foreground")
 /// @termeh {String} [null] - var("table", "strong-weight")
 @mixin use-table($colors: ()) {
     $shade: module.color("shade");
@@ -41,7 +40,6 @@
     $table-decorator: module.var("table", "decorator", $shade);
 
     $sort-background: module.var("table", "sort-background", $base-sort);
-    $sort-foreground: module.var("table", "sort-foreground", null);
 
     $table-strong: module.var("table", "strong-weight", $base-strong);
 
@@ -103,7 +101,6 @@
                         }
 
                         &.is-sorted {
-                            color: $sort-foreground;
                             background-color: $sort-background;
                         }
 

@@ -30,7 +30,7 @@ By default, two `@keyframes` are defined: one for _loaders_ (`spin`) and one for
 ```
 
 - **color** → Theme base color (detect light/dark mode).
-- **foreground** → Default text color.
+- **foreground** → Default foreground.
 - **section** → Section background.
 - **separator** → Divider background.
 
@@ -66,6 +66,112 @@ By default, two `@keyframes` are defined: one for _loaders_ (`spin`) and one for
 - **ease** → Default transition timing.
 - **duration** → Default transition duration.
 
+## Line Heights
+
+```scss
+@include termeh.define("line-height", "normal", 1.6em);
+@include termeh.define("line-height", "medium", 1.4em);
+@include termeh.define("line-height", "large", 1.2em);
+```
+
+- **normal** → Default line height.
+- **medium** → Medium text line height.
+- **large** → Large text line height.
+
+## Fonts
+
+```scss
+@include termeh.define("font", "family", ("Segoe UI", Tahoma, Geneva, Verdana));
+@include termeh.define("font", "size", 14px);
+@include termeh.define("font", "weight", normal);
+```
+
+- **family** → Default Font family.
+- **size** → Default Font size.
+- **weight** → Default Font weight.
+
+## Monospace Fonts
+
+```scss
+@include termeh.define("mono", "family", monospace);
+@include termeh.define("mono", "size", 1rem);
+@include termeh.define("mono", "weight", normal);
+```
+
+- **family** → Code font family.
+- **size** → Code font size.
+- **weight** → Code font weight.
+
+## Strong Text
+
+```scss
+@include termeh.define("strong", "foreground", null);
+@include termeh.define("strong", "weight", bold);
+```
+
+- **foreground** → Strong text foreground.
+- **weight** → Strong text font-weight.
+
+## Scrollbar
+
+```scss
+@include termeh.define("scroll", "size", 10px);
+@include termeh.define("scroll", "track", null);
+@include termeh.define("scroll", "thumb", null);
+```
+
+- **size** → Scrollbar width.
+- **track** → Scrollbar track background.
+- **thumb** → Scrollbar thumb background.
+
+## Overlay
+
+```scss
+@include termeh.define("overlay", "background", white);
+@include termeh.define("overlay", "foreground", null);
+@include termeh.define("overlay", "opacity", 0.75);
+@include termeh.define("overlay", "filter", none);
+```
+
+- **background** → Overlay background color.
+- **foreground** → Overlay foreground.
+- **opacity** → Overlay background opacity.
+- **filter** → CSS filter for overlay backdrop filter (e.g., `blur(2px)`).
+
+## Decorators
+
+```scss
+@include termeh.define("decorator", "size", 2px);
+@include termeh.define("decorator", "spinner", 2rem);
+```
+
+- **size** → Default thickness for decorator elements (borders, underlines, etc.).
+- **spinner** → Default size for overlay loading spinners.
+
+## Tables
+
+```scss
+@include termeh.define("table", "background", null);
+@include termeh.define("table", "foreground", null);
+@include termeh.define("table", "even", null);
+@include termeh.define("table", "hover", null);
+@include termeh.define("table", "grid", null);
+@include termeh.define("table", "separator", null);
+@include termeh.define("table", "divider", null);
+@include termeh.define("table", "sort-background", null);
+@include termeh.define("table", "strong-weight", null);
+```
+
+- **background** → Table background color.
+- **foreground** → Table text color.
+- **even** → Background for even rows.
+- **hover** → Background when row is hovered.
+- **grid** → Column divider color.
+- **separator** → Row divider color.
+- **divider** → Section divider color (header, body, footer).
+- **sort-background** → Background of default sorted column.
+- **strong-weight** → Font weight for emphasized table text.
+
 ## Inputs
 
 ```scss
@@ -85,94 +191,6 @@ By default, two `@keyframes` are defined: one for _loaders_ (`spin`) and one for
 - **disabled** → Disabled input background.
 - **disabled-color** → Disabled input text color.
 - **disabled-border** → Disabled input border color.
-
-## Control
-
-```scss
-@include termeh.define("control", "height", 2.2em);
-@include termeh.define("control", "v-padding", 0em);
-@include termeh.define("control", "h-padding", 1.2em);
-```
-
-- **height** → Default control height (`button`, `link`, `badge`, ...).
-- **v-padding** → Vertical control padding.
-- **h-padding** → Horizontal control padding.
-
-## Line Heights
-
-```scss
-@include termeh.define("line-height", "normal", 1.6em);
-@include termeh.define("line-height", "medium", 1.4em);
-@include termeh.define("line-height", "large", 1.2em);
-```
-
-- **normal** → Default line height.
-- **medium** → Medium text line height.
-- **large** → Large text line height.
-
-## Fonts
-
-```scss
-@include termeh.define("font", "family", ("Segoe UI", Tahoma, Geneva, Verdana));
-@include termeh.define("font", "size", 14px);
-@include termeh.define("font", "weight", normal);
-@include termeh.define("font", "code-family", monospace);
-@include termeh.define("font", "code-size", 1rem);
-```
-
-- **family** → Font family.
-- **size** → Font size.
-- **weight** → Font weight.
-- **code-family** → Code font family.
-- **code-size** → Code font size.
-
-## Strong Text
-
-```scss
-@include termeh.define("strong", "color", null);
-@include termeh.define("strong", "weight", bold);
-```
-
-- **color** → Strong text color.
-- **weight** → Strong text font-weight.
-
-## Scrollbar
-
-```scss
-@include termeh.define("scroll", "size", 8px);
-@include termeh.define("scroll", "track", null);
-@include termeh.define("scroll", "thumb", null);
-```
-
-- **size** → Scrollbar width.
-- **track** → Track background.
-- **thumb** → Thumb background.
-
-## Tables
-
-```scss
-@include termeh.define("table", "background", null);
-@include termeh.define("table", "foreground", null);
-@include termeh.define("table", "even", null);
-@include termeh.define("table", "hover", null);
-@include termeh.define("table", "grid", null);
-@include termeh.define("table", "separator", null);
-@include termeh.define("table", "divider", null);
-@include termeh.define("table", "sort-background", null);
-@include termeh.define("table", "sort-foreground", null);
-@include termeh.define("table", "strong-weight", null);
-```
-
-- **background** → Table background color.
-- **foreground** → Table text color.
-- **even** → Background for even rows.
-- **hover** → Background when row is hovered.
-- **grid** → Column divider color.
-- **separator** → Row divider color.
-- **divider** → Section divider color (header, body, footer).
-- **sort-background** → Background of sorted column.
-- **sort-foreground** → Text color of sorted column.
-- **strong-weight** → Font weight for emphasized table text.
 
 ## Containers
 
@@ -198,27 +216,21 @@ By default, two `@keyframes` are defined: one for _loaders_ (`spin`) and one for
 - **height-tablet** → Gallery height for tablet devices.
 - **height-mobile** → Gallery height for mobile devices.
 
-## Overlay
+## Control
 
 ```scss
-@include termeh.define("overlay", "background", rgba(white, 0.75));
-@include termeh.define("overlay", "color", null);
-@include termeh.define("overlay", "filter", none);
+@include termeh.define("control", "height", 2.2em);
+@include termeh.define("control", "weight", 500);
+@include termeh.define("control", "strong", 700);
+@include termeh.define("control", "v-padding", 0em);
+@include termeh.define("control", "h-padding", 1.2em);
 ```
 
-- **background** → Overlay background color.
-- **color** → Overlay text color.
-- **filter** → CSS filter for overlay backdrop filter (e.g., blur).
-
-## Decorators
-
-```scss
-@include termeh.define("decorator", "size", 2px);
-@include termeh.define("decorator", "spinner", 2rem);
-```
-
-- **size** → Default size for decorator elements (borders, underlines, etc.).
-- **spinner** → Default size for loading spinners.
+- **height** → Default control height (`button`, `link`, `badge`, ...).
+- **weight** → Default control font weight.
+- **strong** → Control Strong element font weight.
+- **v-padding** → Vertical control padding.
+- **h-padding** → Horizontal control padding.
 
 ## Color Palettes
 

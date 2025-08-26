@@ -11,15 +11,15 @@ It supports wrapping, responsive alignment, and configurable spacing using the T
 <Preview height="4rem">
   <div class="demo">
     <div class="wrapper">
-      <div class="placeholder is-light is-1x">CHILD</div>
-      <div class="placeholder is-light">CHILD</div>
-      <div class="placeholder is-light">CHILD</div>
-      <div class="placeholder is-4x">LONG CHILD</div>
-      <div class="placeholder is-light">CHILD</div>
-      <div class="placeholder is-light">CHILD</div>
-      <div class="placeholder is-light is-3x">CHILD</div>
-      <div class="placeholder is-light is-2x">CHILD</div>
-      <div class="placeholder is-light">CHILD</div>
+      <div class="placeholder is-light is-1x">Child</div>
+      <div class="placeholder is-light">Child</div>
+      <div class="placeholder is-light">Child</div>
+      <div class="placeholder is-4x">Long Child</div>
+      <div class="placeholder is-light">Child</div>
+      <div class="placeholder is-light">Child</div>
+      <div class="placeholder is-light is-3x">Child</div>
+      <div class="placeholder is-light is-2x">Child</div>
+      <div class="placeholder is-light">Child</div>
     </div>
   </div>
 </Preview>
@@ -29,15 +29,15 @@ It supports wrapping, responsive alignment, and configurable spacing using the T
 
 ```html
 <div class="wrapper">
-  <div>CHILD</div>
-  <div>CHILD</div>
-  <div>CHILD</div>
-  <div>LONG CHILD</div>
-  <div>CHILD</div>
-  <div>CHILD</div>
-  <div>CHILD</div>
-  <div>CHILD</div>
-  <div>CHILD</div>
+  <div>Child</div>
+  <div>Child</div>
+  <div>Child</div>
+  <div>Long Child</div>
+  <div>Child</div>
+  <div>Child</div>
+  <div>Child</div>
+  <div>Child</div>
+  <div>Child</div>
 </div>
 ```
 

@@ -10,10 +10,10 @@ The **Attacher** module provides utility classes for arranging child elements in
 <Preview height="3rem">
   <div class="demo">
     <div class="attacher">
-      <div class="placeholder is-light">CHILD</div>
-      <div class="placeholder is-item filler">FILLER</div>
-      <div class="placeholder is-light">CHILD</div>
-      <div class="placeholder is-light">CHILD</div>
+      <div class="placeholder is-light">Child</div>
+      <div class="placeholder is-item filler">Filler</div>
+      <div class="placeholder is-light">Child</div>
+      <div class="placeholder is-light">Child</div>
     </div>
   </div>
 </Preview>
@@ -23,10 +23,10 @@ The **Attacher** module provides utility classes for arranging child elements in
 
 ```html
 <div class="attacher">
-  <div>CHILD</div>
-  <div class="filler">FILLER</div>
-  <div>CHILD</div>
-  <div>CHILD</div>
+  <div>Child</div>
+  <div class="filler">Filler</div>
+  <div>Child</div>
+  <div>Child</div>
 </div>
 ```
 

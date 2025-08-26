@@ -1,0 +1,11 @@
+{
+    "printWidth": 80,
+    "overrides": [
+        {
+            "files": "*.scss",
+            "options": {
+                "printWidth": 1000
+            }
+        }
+    ]
+}

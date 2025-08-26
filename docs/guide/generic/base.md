@@ -31,8 +31,9 @@ Base module uses the following Termeh global `var()`
 | `font` → `family`        | _String_ | Base font-family for text elements (`html`, `body`)          |
 | `font` → `size`          | _Number_ | Base font-size for `html`, default 12px                      |
 | `font` → `weight`        | _String_ | Base font-weight for text, default `normal`                  |
-| `font` → `code-family`   | _String_ | Font-family for `<code>` and `<pre>`                         |
-| `font` → `code-size`     | _Number_ | Font-size for `<code>` and `<pre>`                           |
+| `mono` → `family`        | _String_ | Font-family for `<code>` and `<pre>`                         |
+| `mono` → `size`          | _Number_ | Font-size for `<code>` and `<pre>`                           |
+| `mono` → `weight`        | _String_ | Font-weight for `<code>` and `<pre>`                         |
 | `base` → `color`         | _Color_  | Background color for root `<html>` element                   |
 | `base` → `foreground`    | _Color_  | Default text color for `<body>` and common elements          |
 | `base` → `section`       | _Color_  | Background for sections, `blockquote`, `code`, etc.          |
@@ -41,7 +42,7 @@ Base module uses the following Termeh global `var()`
 | `base` → `min-width`     | _Number_ | Minimum width of the layout (`<html>`)                       |
 | `line-height` → `normal` | _Number_ | Line-height for body text                                    |
 | `radius` → `normal`      | _Number_ | Border-radius for blocks like `<blockquote>`                 |
-| `strong` → `color`       | _Color_  | Color for `<strong>`                                         |
+| `strong` → `forground`   | _Color_  | Foreground for `<strong>`                                    |
 | `strong` → `weight`      | _String_ | Font-weight for `<strong>`                                   |
 | `gap` → `micro`          | _Number_ | Small spacing for margins and list items                     |
 | `gap` → `macro`          | _Number_ | Large spacing for section separation, paragraphs, and blocks |

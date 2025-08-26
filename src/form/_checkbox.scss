@@ -119,9 +119,10 @@
             }
 
             @include module.is-invalid() {
+                animation: shake 0.5s ease;
+
                 input {
                     border-color: $error;
-                    animation: shake 0.5s ease;
 
                     &::after {
                         background-color: $error;

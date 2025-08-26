@@ -136,7 +136,6 @@ Table module uses the following Termeh global `var()`
 | `table` → `separator`       | _Color_  | Row separator borders                                   |
 | `table` → `decorator`       | _Color_  | Border color for sorted columns                         |
 | `table` → `sort-background` | _Color_  | Background for sorted cells                             |
-| `table` → `sort-foreground` | _Color_  | Text color for sorted header cells                      |
 | `table` → `strong-weight`   | _String_ | Font-weight for strong table headers                    |
 
 Table module uses the following Termeh registered `colors()`

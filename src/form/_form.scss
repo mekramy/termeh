@@ -1,0 +1,35 @@
+@use "../core/module";
+
+/// Generates form element styles
+/// @param {List} $colors [()] - List of registered color names to include. Pass null to include all registered colors
+/// @termeh {Number} [white] - var("base", "color")
+/// @termeh {Number} [black] - var("base", "foreground")
+/// @termeh {Number} [1.6rem] - var("gap", "macro")
+/// @termeh {Color} [2px] - var("decorator", "size")
+/// @termeh {Color} [2rem] - var("decorator", "spinner")
+/// @termeh {Color} [0.85] - var("overlay", "opacity")
+/// @termeh {Color} [null] - var("overlay", "filter")
+@mixin use-form($colors: ()) {
+    $gap-macro: module.var("gap", "macro", 1.6rem);
+    $background: module.var("base", "color", white);
+    $foreground: module.var("base", "foreground", black);
+
+    $decorator: module.var("decorator", "size", 2px);
+    $spinner: module.var("decorator", "spinner", 2rem);
+
+    $opacity: module.var("overlay", "opacity", 0.85);
+    $filter: module.var("overlay", "filter", null);
+
+    @at-root {
+        form {
+            @include module.marged() {
+                margin-bottom: $gap-macro;
+            }
+
+            &.is-loading {
+                @include module.overlay($background, $opacity, $filter);
+                @include module.loader($spinner, $foreground, $decorator);
+            }
+        }
+    }
+}
