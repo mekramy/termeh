@@ -3,9 +3,10 @@
 /// Generates grid element styles with configurable gaps and units
 /// @param {List} $gaps [()] - List of registered gap names to include. Pass null to include all registered gaps
 /// @param {List} $units [()] - List of registered unit names to include. Pass null to include all registered units
-/// @termeh {Number} [1.6rem] - var("gap", "macro")
+///
+/// @termeh {Number} [1.6em] - var("gap", "macro") -> default spacing between grid rows and columns
 @mixin use-grid($gaps: (), $units: ()) {
-    $gap-macro: module.var("gap", "macro", 1.6rem);
+    $gap-macro: module.var("gap", "macro", 1.6em);
 
     @at-root {
         .grid {

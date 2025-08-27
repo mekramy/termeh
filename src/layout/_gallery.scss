@@ -2,10 +2,11 @@
 
 /// Generates gallery element styles with configurable gaps
 /// @param {List} $gaps [()] - List of registered gap names to include. Pass null to include all registered gaps
-/// @termeh {Number} [8px] - var("gap", "micro")
-/// @termeh {Number} [300px] - var("gallery", "height")
-/// @termeh {Number} [200px] - var("gallery", "height-tablet")
-/// @termeh {Number} [100px] - var("gallery", "height-mobile")
+///
+/// @termeh {Number} [8px] - var("gap", "micro") -> default gap between gallery items
+/// @termeh {Number} [300px] - var("gallery", "height") -> default item height in gallery
+/// @termeh {Number} [200px] - var("gallery", "height-tablet") -> item height for tablet screens
+/// @termeh {Number} [100px] - var("gallery", "height-mobile") -> item height for mobile screens
 @mixin use-gallery($gaps: ()) {
     $gap-micro: module.var("gap", "micro", 8px);
     $height: module.var("gallery", "height", 300px);

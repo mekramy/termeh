@@ -2,17 +2,18 @@
 
 /// Generates field element styles with configurable colors
 /// @param {List} $colors [()] - List of registered color names to include. Pass null to include all registered colors
-/// @termeh {Color} [error] - color("shade")
-/// @termeh {Color} [error] - color("error")
-/// @termeh {Color} [error] - color("primary")
-/// @termeh {Number} [8px] - var("gap", "micro")
-/// @termeh {Number} [1.6rem] - var("gap", "macro")
+///
+/// @termeh {Color} [null] - variant("shade", "readable") -> help block text color
+/// @termeh {Color} [null] - variant("primary", "readable") -> default required indicator color
+/// @termeh {Color} [null] - variant("error", "readable") -> error block text color
+/// @termeh {Number} [8px] - var("gap", "micro") -> spacing between blocks
+/// @termeh {Number} [1.6em] - var("gap", "macro") -> bottom margin for input blocks
 @mixin use-field($colors: ()) {
     $shade: module.variant("shade", "readable");
     $primary: module.variant("primary", "readable");
     $error: module.variant("error", "readable");
     $gap-micro: module.var("gap", "micro", 8px);
-    $gap-macro: module.var("gap", "macro", 1.6rem);
+    $gap-macro: module.var("gap", "macro", 1.6em);
 
     @at-root {
         .field {

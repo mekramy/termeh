@@ -2,10 +2,11 @@
 
 /// Applies image styles and size classes
 /// @param {List} $sizes [()] - List of registered size names to include. Pass null to include all registered sizes
-/// @termeh {Number} [0.2rem] - var("radius", "normal")
-/// @termeh {Number} [50%] - var("radius", "circle")
+///
+/// @termeh {Number} [null] - var("radius", "normal") -> default rounded border radius for images
+/// @termeh {Number} [50%] - var("radius", "circle") -> circular border radius for images
 @mixin use-image($sizes: ()) {
-    $radius-normal: module.var("radius", "normal", 0.2rem);
+    $radius-normal: module.var("radius", "normal");
     $radius-circle: module.var("radius", "circle", 50%);
 
     @at-root {

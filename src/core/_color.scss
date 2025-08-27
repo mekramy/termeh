@@ -82,13 +82,13 @@ $-colors: () !default;
         $c: palette.palette($color, $v);
         @return color.mix($base, $color, 70%);
     } @else if $variant == "mute" {
-        $v: if($tone == "light", "800", "200");
+        $v: if($tone == "light", "900", "100");
         $c: palette.palette($color, $v);
-        @return color.mix($base, $color, 65%);
+        @return color.mix($base, $color, 50%);
     } @else if $variant == "mute-active" {
-        $v: if($tone == "light", "800", "200");
+        $v: if($tone == "light", "900", "100");
         $c: palette.palette($color, $v);
-        @return color.mix($base, $color, 65%);
+        @return color.mix($base, $color, 5%);
     } @else if $variant == "readable" {
         $v: if($tone == "light", "700", "200");
         $c: palette.palette($color, $v);

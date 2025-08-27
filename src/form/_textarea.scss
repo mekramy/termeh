@@ -3,14 +3,17 @@
 
 /// Generates textarea input styles with configurable colors
 /// @param {List} $colors [()] - List of registered color names to include. Pass null to include all registered colors
-/// @termeh {Color} [error] - color("error")
-/// @termeh {Color} [error] - color("primary")
-/// @termeh {Number} [null] - var("radius", "normal")
-/// @termeh {Number} [8px] - var("gap", "micro")
-/// @termeh {Number} [1.6rem] - var("line-height", "normal")
-/// @termeh {Color} [var("base", "separator")] - var("input", "border")
-/// @termeh {Color} [white] - var("input", "background")
-/// @termeh {Color} [color("shade")] - var("input", "placeholder")
+///
+/// @termeh {Color} [error] - color("error") -> accent color for invalid state
+/// @termeh {Color} [error] - color("primary") -> default accent color
+/// @termeh {Color} [null] - var("base", "separator") -> fallback border color
+/// @termeh {Color} [null] - variant("shade", "mute") -> fallback placeholder color
+/// @termeh {Number} [null] - var("radius", "normal") -> default textarea border radius
+/// @termeh {Number} [8px] - var("gap", "micro") -> default textarea padding
+/// @termeh {Number} [1.6em] - var("line-height", "normal") -> textarea line height
+/// @termeh {Color} [FALLBACK] - var("input", "border") -> default textarea border color
+/// @termeh {Color} [FALLBACK] - var("input", "placeholder") -> default textarea placeholder color
+/// @termeh {Color} [white] - var("input", "background") -> default textarea background color
 @mixin use-textarea($colors: ()) {
     $error: module.color("error");
     $primary: module.color("primary");

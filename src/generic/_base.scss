@@ -2,29 +2,29 @@
 
 /// Applies common base styles for HTML elements
 /// @output Styles for root elements and common HTML tags
-/// @termeh {Color} [white] - var("base", "color")
-/// @termeh {Color} [black] - var("base", "foreground")
-/// @termeh {Color} [null] - var("base", "section")
-/// @termeh {Color} [null] - var("base", "separator")
-/// @termeh {Color} [error] - color("primary")
-/// @termeh {Color} [null] - variant("primary", "readable")
-/// @termeh {Color} [null] - variant("primary", "active")
-/// @termeh {Color} [null] - variant("primary", "foreground")
-/// @termeh {Number} [error] - size("small")
-/// @termeh {List} [null] - var("font", "family")
-/// @termeh {Number} [12px] - var("font", "size")
-/// @termeh {String} [normal] - var("font", "weight")
-/// @termeh {List} [null] - var("mono", "family")
-/// @termeh {Number} [null] - var("mono", "size")
-/// @termeh {String} [null] - var("mono", "weight")
-/// @termeh {Color} [null] - var("strong", "froeground")
-/// @termeh {String} [bold] - var("strong", "weight")
-/// @termeh {Number} [8px] - var("gap", "micro")
-/// @termeh {Number} [1.6rem] - var("gap", "macro")
-/// @termeh {String} [ltr] - var("base", "direction")
-/// @termeh {Number} [300px] - var("base", "min-width")
-/// @termeh {Number} [1.6rem] - var("line-height", "normal")
-/// @termeh {Number} [null] - var("radius", "normal")
+///
+/// @termeh {Color} [white] - var("base", "color") -> document background color
+/// @termeh {Color} [black] - var("base", "foreground") -> default text color
+/// @termeh {Color} [null] - var("base", "section") -> background color for <blockquote>, <code>, and <pre>
+/// @termeh {Color} [null] - var("base", "separator") -> color for <hr> and list decorators
+/// @termeh {Color} [error] - color("primary") -> selection background, scrollbar, and input accent color
+/// @termeh {Color} [null] - variant("primary", "readable") -> link color
+/// @termeh {Color} [null] - variant("primary", "foreground") -> selection text color
+/// @termeh {Number} [error] - size("small") -> <small> font size
+/// @termeh {List} [null] - var("font", "family") -> default font family
+/// @termeh {Number} [12px] - var("font", "size") -> default font size
+/// @termeh {String} [normal] - var("font", "weight") -> default font weight
+/// @termeh {List} [null] - var("mono", "family") -> <code> and <pre> font family
+/// @termeh {Number} [null] - var("mono", "size") -> <code> and <pre> font size
+/// @termeh {String} [null] - var("mono", "weight") -> <code> and <pre> font weight
+/// @termeh {Color} [null] - var("strong", "foreground") -> <strong> and <th> text color
+/// @termeh {String} [bold] - var("strong", "weight") -> <strong> and <th> font weight
+/// @termeh {Number} [8px] - var("gap", "micro") -> spacing between list items
+/// @termeh {Number} [1.6em] - var("gap", "macro") -> spacing between blocks
+/// @termeh {String} [ltr] - var("base", "direction") -> document text direction
+/// @termeh {Number} [300px] - var("base", "min-width") -> document minimum width
+/// @termeh {Number} [1.6em] - var("line-height", "normal") -> default line height
+/// @termeh {Number} [null] - var("radius", "normal") -> <blockquote> border radius
 @mixin use-base() {
     $base-color: module.var("base", "color", white);
     $base-foreground: module.var("base", "foreground", black);
@@ -33,7 +33,6 @@
 
     $primary-color: module.color("primary");
     $primary-readable: module.variant("primary", "readable");
-    $primary-background: module.variant("primary", "active");
     $primary-foreground: module.variant("primary", "foreground");
 
     $size-small: module.size("small");
@@ -49,7 +48,7 @@
     $strong-weight: module.var("strong", "weight", bold);
 
     $gap-micro: module.var("gap", "micro", 8px);
-    $gap-macro: module.var("gap", "macro", 1.6rem);
+    $gap-macro: module.var("gap", "macro", 1.6em);
     $direction: module.var("base", "direction", ltr);
     $min-width: module.var("base", "min-width", 300px);
     $line-normal: module.var("line-height", "normal", 1.6em);
@@ -62,7 +61,7 @@
 
         ::selection {
             color: $primary-foreground;
-            background-color: $primary-background;
+            background-color: $primary-color;
         }
 
         html {
@@ -202,6 +201,7 @@
         table {
             th {
                 color: $strong-color;
+                font-weight: $strong-weight;
             }
 
             td,

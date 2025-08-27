@@ -3,25 +3,26 @@
 
 /// Applies table styles with configurable colors and behaviors
 /// @param {List} $colors [()] - List of registered color variants to generate. Pass null to include all registered palettes
-/// @termeh {Color} [error] - color("shade")
-/// @termeh {Color} [error] - color("primary")
-/// @termeh {Color} [white] - var("base", "color")
-/// @termeh {Color} [null] - var("base", "section")
-/// @termeh {Color} [null] - var("base", "separator")
-/// @termeh {String} [bold] - var("strong", "weight")
-/// @termeh {Color} [var("base", "color")] - var("table", "background")
-/// @termeh {Color} [null] - var("table", "foreground")
-/// @termeh {Color} [var("base", "section")] - var("table", "even")
-/// @termeh {Color} [rgba(color("shade"))] - var("table", "hover")
-/// @termeh {Color} [null] - var("table", "grid")
-/// @termeh {Color} [var("base", "separator")] - var("table", "divider")
-/// @termeh {Color} [var("base", "separator")] - var("table", "separator")
-/// @termeh {Color} [color("shade")] - var("table", "decorator")
-/// @termeh {Color} [rgba(color("shade"))] - var("table", "sort-background")
-/// @termeh {String} [null] - var("table", "strong-weight")
+///
+/// @termeh {Color} [error] - color("primary") -> accent color for scrollbars
+/// @termeh {Color} [error] - color("shade") -> fallback color for sort backgrounds and decorators
+/// @termeh {Color} [white] - var("base", "color") -> fallback base table background
+/// @termeh {Color} [null] - var("base", "section") -> fallback background for even rows and row hover
+/// @termeh {Color} [null] - var("base", "separator") -> fallback color for table separators and dividers
+/// @termeh {String} [bold] - var("strong", "weight") -> fallback font weight for headers
+/// @termeh {Color} [FALLBACK] - var("table", "background") -> main table background
+/// @termeh {Color} [null] - var("table", "foreground") -> default table text color
+/// @termeh {Color} [FALLBACK] - var("table", "even") -> even row background
+/// @termeh {Color} [FALLBACK] - var("table", "hover") -> hover row background
+/// @termeh {Color} [null] - var("table", "grid") -> grid line color
+/// @termeh {Color} [FALLBACK] - var("table", "divider") -> section divider color
+/// @termeh {Color} [FALLBACK] - var("table", "separator") -> row separator color
+/// @termeh {Color} [error] - var("table", "decorator") -> sort decorator color
+/// @termeh {Color} [FALLBACK] - var("table", "sort-background") -> sorted column background
+/// @termeh {String} [FALLBACK] - var("table", "strong-weight") -> strong font weight for headers
 @mixin use-table($colors: ()) {
-    $shade: module.color("shade");
     $primary: module.color("primary");
+    $shade: module.color("shade");
 
     $base-color: module.var("base", "color", white);
     $base-section: module.var("base", "section");
@@ -30,8 +31,8 @@
     $base-hover: color.mix($base-section, $shade, 90%);
     $base-strong: module.var("strong", "weight", bold);
 
-    $table-color: module.var("table", "background", $base-color);
-    $table-fg: module.var("table", "foreground");
+    $table-background: module.var("table", "background", $base-color);
+    $table-foreground: module.var("table", "foreground");
     $table-even: module.var("table", "even", $base-section);
     $table-hover: module.var("table", "hover", $base-hover);
     $table-grid: module.var("table", "grid", null);
@@ -65,14 +66,14 @@
                 tr {
                     overflow: hidden;
                     white-space: nowrap;
-                    background: $table-color;
+                    background: $table-background;
                     border-top: 1px solid $table-separator;
                     @include module.transition(all);
 
                     th {
                         width: 1px;
                         vertical-align: middle;
-                        color: $table-fg;
+                        color: $table-foreground;
                         font-weight: $table-strong;
                         padding: module.inline-padding();
                         @include module.transition(all);
@@ -122,7 +123,7 @@
             tbody,
             tfoot {
                 tr {
-                    background: $table-color;
+                    background: $table-background;
                     @include module.transition(all);
 
                     &:not(:last-child) {
@@ -133,7 +134,7 @@
                         width: 1px;
                         font-weight: inherit;
                         vertical-align: middle;
-                        color: $table-fg;
+                        color: $table-foreground;
                         padding: module.inline-padding();
                         @include module.transition(all);
 

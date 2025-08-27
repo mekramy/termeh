@@ -2,16 +2,17 @@
 
 /// Applies consistent heading styles
 /// @output Styles for h1-h6 elements
-/// @termeh {Number} [error] - size("normal")
-/// @termeh {Number} [error] - size("medium")
-/// @termeh {Number} [error] - size("large")
-/// @termeh {Number} [error] - size("big")
-/// @termeh {Number} [error] - size("huge")
-/// @termeh {Number} [error] - size("massive")
-/// @termeh {Number} [1.6rem] - var("gap", "macro")
-/// @termeh {Number} [1.6em] - var("line-height", "normal")
-/// @termeh {Number} [1.4em] - var("line-height", "medium")
-/// @termeh {Number} [1.2em] - var("line-height", "large")
+///
+/// @termeh {Number} [error] - size("massive") -> font size for <h1>
+/// @termeh {Number} [error] - size("huge") -> font size for <h2>
+/// @termeh {Number} [error] - size("big") -> font size for <h3>
+/// @termeh {Number} [error] - size("large") -> font size for <h4>
+/// @termeh {Number} [error] - size("medium") -> font size for <h5>
+/// @termeh {Number} [error] - size("normal") -> font size for <h6>
+/// @termeh {Number} [1.2em] - var("line-height", "large") -> line height for <h1> and <h2>
+/// @termeh {Number} [1.4em] - var("line-height", "medium") -> line height for <h3> and <h4>
+/// @termeh {Number} [1.6em] - var("line-height", "normal") -> line height for <h5> and <h6>
+/// @termeh {Number} [1.6em] - var("gap", "macro") -> bottom margin for headings
 @mixin use-heading() {
     $size-massive: module.size("massive");
     $size-huge: module.size("huge");
@@ -24,7 +25,7 @@
     $line-medium: module.var("line-height", "medium", 1.4em);
     $line-normal: module.var("line-height", "normal", 1.6em);
 
-    $gap-macro: module.var("gap", "macro", 1.6rem);
+    $gap-macro: module.var("gap", "macro", 1.6em);
 
     @at-root {
         h1,

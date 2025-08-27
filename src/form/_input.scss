@@ -4,22 +4,24 @@
 /// Generates input element styles with configurable gaps and colors
 /// @param {List} $gaps [()] - List of registered gap names to include. Pass null to include all registered gaps
 /// @param {List} $colors [()] - List of registered color names to include. Pass null to include all registered colors
-/// @termeh {Color} [error] - color("error")
-/// @termeh {Color} [error] - color("primary")
-/// @termeh {Number} [null] - var("radius", "normal")
-/// @termeh {Number} [2.8rem] - var("input", "height")
-/// @termeh {Color} [var("base", "separator")] - var("input", "border")
-/// @termeh {Color} [white] - var("input", "background")
-/// @termeh {Color} [variant("shade", "mute")] - var("input", "placeholder")
+///
+/// @termeh {Color} [error] - color("error") -> accent color for invalid state
+/// @termeh {Color} [error] - color("primary") -> default accent color
+/// @termeh {Color} [null] - var("base", "separator") -> fallback border color
+/// @termeh {Color} [null] - variant("shade", "mute") -> fallback placeholder color
+/// @termeh {Number} [null] - var("radius", "normal") -> default input border radius
+/// @termeh {Number} [2.8em] - var("input", "height") -> input height
+/// @termeh {Color} [FALLBACK] - var("input", "border") -> default input border color
+/// @termeh {Color} [FALLBACK] - var("input", "placeholder") -> default input placeholder color
+/// @termeh {Color} [white] - var("input", "background") -> default input background color
 @mixin use-input($gaps: (), $colors: ()) {
-    $radius: module.var("radius", "normal");
-
     $error: module.color("error");
     $primary: module.color("primary");
-    $shade: module.variant("shade", "mute");
     $separator: module.var("base", "separator", #eee);
+    $shade: module.variant("shade", "mute");
 
-    $height: module.var("input", "height", 2.8rem);
+    $radius: module.var("radius", "normal");
+    $height: module.var("input", "height", 2.8em);
     $border: module.var("input", "border", $separator);
     $background: module.var("input", "background", white);
     $placeholder: module.var("input", "placeholder", $shade);

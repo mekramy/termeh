@@ -2,20 +2,21 @@
 
 /// Generates form element styles
 /// @param {List} $colors [()] - List of registered color names to include. Pass null to include all registered colors
-/// @termeh {Number} [white] - var("base", "color")
-/// @termeh {Number} [black] - var("base", "foreground")
-/// @termeh {Number} [1.6rem] - var("gap", "macro")
-/// @termeh {Color} [2px] - var("decorator", "size")
-/// @termeh {Color} [2rem] - var("decorator", "spinner")
-/// @termeh {Color} [0.85] - var("overlay", "opacity")
-/// @termeh {Color} [null] - var("overlay", "filter")
+///
+/// @termeh {Color} [white] - var("base", "color") -> form overlay background color
+/// @termeh {Color} [black] - var("base", "foreground") -> overlay spinner color
+/// @termeh {Number} [1.6em] - var("gap", "macro") -> bottom margin
+/// @termeh {Number} [2px] - var("decorator", "size") -> loading spinner thickness
+/// @termeh {Number} [2em] - var("decorator", "spinner") -> loading spinner size
+/// @termeh {Number} [0.85] - var("overlay", "opacity") -> overlay background opacity
+/// @termeh {String} [null] - var("overlay", "filter") -> overlay backdrop filter
 @mixin use-form($colors: ()) {
-    $gap-macro: module.var("gap", "macro", 1.6rem);
     $background: module.var("base", "color", white);
     $foreground: module.var("base", "foreground", black);
 
+    $gap-macro: module.var("gap", "macro", 1.6em);
     $decorator: module.var("decorator", "size", 2px);
-    $spinner: module.var("decorator", "spinner", 2rem);
+    $spinner: module.var("decorator", "spinner", 2em);
 
     $opacity: module.var("overlay", "opacity", 0.85);
     $filter: module.var("overlay", "filter", null);

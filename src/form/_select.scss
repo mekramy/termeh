@@ -3,32 +3,38 @@
 
 /// Generates select input styles with configurable colors
 /// @param {List} $colors [()] - List of registered color names to include. Pass null to include all registered colors
-/// @termeh {Color} [error] - color("error")
-/// @termeh {Color} [error] - color("primary")
-/// @termeh {Number} [null] - var("radius", "normal")
-/// @termeh {Number} [8px] - var("gap", "micro")
-/// @termeh {Number} [1.8rem] - var("input", "height")
-/// @termeh {Color} [var("base", "separator")] - var("input", "border")
-/// @termeh {Color} [white] - var("input", "background")
-/// @termeh {Color} [color("shade")] - var("input", "placeholder")
-/// @termeh {Color} [null] - var("input", "disabled-color")
+///
+/// @termeh {Color} [error] - color("error") -> accent color for invalid state
+/// @termeh {Color} [error] - color("primary") -> default accent color
+/// @termeh {Color} [null] - variant("primary", "foreground") -> default accent color
+/// @termeh {Color} [null] - variant("primary", "readable") -> default accent color
+/// @termeh {Color} [null] - var("base", "separator") -> fallback border color
+/// @termeh {Color} [null] - variant("shade", "mute") -> fallback placeholder color
+/// @termeh {Color} [null] - variant("base", "section") -> item hover background color
+/// @termeh {Number} [null] - var("radius", "normal") -> default input border radius
+/// @termeh {Number} [8px] - var("gap", "micro") -> spacing between select items
+/// @termeh {Number} [2.8em] - var("input", "height") -> input height
+/// @termeh {Color} [FALLBACK] - var("input", "border") -> default input border color
+/// @termeh {Color} [FALLBACK] - var("input", "placeholder") -> default input placeholder color
+/// @termeh {Color} [white] - var("input", "background") -> default input background color
+/// @termeh {Color} [null] - var("input", "disabled-foreground") -> disabled option text color
 @mixin use-select($colors: ()) {
     $error: module.color("error");
     $primary: module.color("primary");
     $primary-color: module.variant("primary", "foreground");
     $primary-readable: module.variant("primary", "readable");
     $shade: module.variant("shade", "mute");
-    $section: module.var("base", "section");
     $separator: module.var("base", "separator", #eee);
+    $section: module.var("base", "section");
 
     $radius: module.var("radius", "normal");
     $gap-micro: module.var("gap", "micro", 8px);
 
-    $height: module.var("input", "height", 2.8rem);
+    $height: module.var("input", "height", 2.8em);
     $border: module.var("input", "border", $separator);
     $background: module.var("input", "background", white);
     $placeholder: module.var("input", "placeholder", $shade);
-    $disabled: module.var("input", "disabled-color");
+    $disabled: module.var("input", "disabled-foreground");
 
     @at-root {
         @include animation.shake();

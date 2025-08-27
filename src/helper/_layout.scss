@@ -1,7 +1,8 @@
 @use "../core/module";
 
 /// Layout utility classes for common layout operations
-/// @termeh {Color} [error] - color("primary")
+///
+/// @termeh {Color} [error] - color("primary") -> accent color for scrollbars
 @mixin use-layout-helper() {
     @at-root {
         .is-clearfix {

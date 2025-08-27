@@ -1,5 +1,5 @@
 @use "core/module";
 
 @include module.define-palette("shade", #667085);
-@include module.define-palette("primary", #2196f3);
 @include module.define-palette("error", #c00021);
+@include module.define-palette("primary", #2196f3);

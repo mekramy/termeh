@@ -2,8 +2,9 @@
 
 /// Generates landscape element styles with configurable gaps and scroll snapping
 /// @param {List} $gaps [()] - List of registered gap names to include. Pass null to include all registered gaps
-/// @termeh {Number} [8px] - var("gap", "micro")
-/// @termeh {Color} [error] - color("primary")
+///
+/// @termeh {Color} [error] - color("primary") -> accent color for scrollbar
+/// @termeh {Number} [8px] - var("gap", "micro") -> default spacing between landscape items
 @mixin use-landscape($gaps: ()) {
     $primary: module.color("primary");
     $gap-micro: module.var("gap", "micro", 8px);

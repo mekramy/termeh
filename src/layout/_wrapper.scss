@@ -2,7 +2,8 @@
 
 /// Generates wrapper element styles with configurable gaps
 /// @param {List} $gaps [()] - List of registered gap names to include. Pass null to include all registered gaps
-/// @termeh {Number} [8px] - var("gap", "micro")
+///
+/// @termeh {Number} [8px] - var("gap", "micro") -> default spacing between wrapper items
 @mixin use-wrapper($gaps: ()) {
     $gap-micro: module.var("gap", "micro", 8px);
 

@@ -1,7 +1,8 @@
 @use "../core/module";
 
 /// Generates attacher element styles with configurable alignments
-/// @termeh {Color} [null] - var("base", "separator")
+///
+/// @termeh {Color} [null] - var("base", "separator") -> background color for separator elements
 @mixin use-attacher() {
     $separator: module.var("base", "separator");
 

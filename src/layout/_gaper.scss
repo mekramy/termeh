@@ -2,8 +2,9 @@
 
 /// Generates gaper element styles with configurable gaps and alignments
 /// @param {List} $gaps [()] - List of registered gap names to include. Pass null to include all registered gaps
-/// @termeh {Color} [null] - var("base", "separator")
-/// @termeh {Number} [8px] - var("gap", "micro")
+///
+/// @termeh {Color} [null] - var("base", "separator") -> default background color for separator elements
+/// @termeh {Number} [8px] - var("gap", "micro") -> default gap between gaper items
 @mixin use-gaper($gaps: ()) {
     $separator: module.var("base", "separator");
     $gap-micro: module.var("gap", "micro", 8px);

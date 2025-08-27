@@ -320,7 +320,8 @@
 
 /// LTR direction specific styles
 /// @content LTR-only styles
-/// @termeh {String} [ltr] - `var("base", "direction")`
+///
+/// @termeh {String} [ltr] - var("base", "direction") → Global text and layout direction
 @mixin is-ltr() {
     @if var.var("base", "direction", "ltr") == "ltr" {
         @content;
@@ -334,7 +335,8 @@
 
 /// RTL direction specific styles
 /// @content RTL-only styles
-/// @termeh {String} [ltr] - `var("base", "direction")`
+///
+/// @termeh {String} [ltr] - var("base", "direction") → Global text and layout direction
 @mixin is-rtl() {
     @if var.var("base", "direction", "ltr") == "rtl" {
         @content;
@@ -382,8 +384,9 @@
 
 /// Returns standard control padding values
 /// @return {List} Padding values
-/// @termeh {Number} [0] - var("control", "v-padding")
-/// @termeh {Number} [1.2em] - var("control", "h-padding")
+///
+/// @termeh {Number} [0] - var("control", "v-padding") → Global vertical padding for controls
+/// @termeh {Number} [1.2em] - var("control", "h-padding") → Global horizontal padding for controls
 @function control-padding() {
     $v-padding: var.var("control", "v-padding", 0em);
     $h-padding: var.var("control", "h-padding", 1.2em);
@@ -392,7 +395,8 @@
 
 /// Returns standard inline element padding values
 /// @return {List} Padding values
-/// @termeh {Number} [8px] - `var("gap", "micro")`
+///
+/// @termeh {Number} [8px] - var("gap", "micro") -> Global gap for inline elements
 @function inline-padding() {
     $gap: var.var("gap", "micro", 8px);
     @return $gap $gap * 2;
@@ -400,23 +404,25 @@
 
 /// Standard transition effect
 /// @param {String} $fields - Properties to transition
-/// @termeh {Number} [250ms] - `var("transition", "duration")`
-/// @termeh {String} [ease] - `var("transition", "ease")`
+///
+/// @termeh {String} [ease] - var("transition", "ease") -> Global transition easing function
+/// @termeh {Number} [250ms] - var("transition", "duration") -> Global transition speed
 @mixin transition($fields) {
     transition-property: $fields;
-    transition-duration: var.var("transition", "duration", 250ms);
     transition-timing-function: var.var("transition", "ease", ease);
+    transition-duration: var.var("transition", "duration", 250ms);
 }
 
 /// Disabled state styling
-/// @termeh {Color} [null] - `var("input", "disabled")`
-/// @termeh {Color} [null] - `var("input", "disabled-border")`
-/// @termeh {Color} [null] - `var("input", "disabled-color")`
+///
+/// @termeh {Color} [null] - var("input", "disabled-foreground") → Global disabled input text color
+/// @termeh {Color} [null] - var("input", "disabled") → Global disabled input background color
+/// @termeh {Color} [null] - var("input", "disabled-border") → Global disabled input border color
 @mixin disabled() {
     opacity: 0.65;
     pointer-events: none;
     user-select: none;
-    color: var.var("input", "disabled-color") !important;
+    color: var.var("input", "disabled-foreground") !important;
     background-color: var.var("input", "disabled") !important;
     border-color: var.var("input", "disabled-border") !important;
 }
@@ -435,9 +441,10 @@
 
 /// Scrollable container with themed scrollbar
 /// @param {Color} $color - Scrollbar thumb hover color
-/// @termeh {Number} [1rem] - `var("scroll", "size")`
-/// @termeh {Color} [var("base", "section")] - `var("scroll", "track")`
-/// @termeh {Color} [var("base", "separator")] - `var("scroll", "thumb")`
+///
+/// @termeh {Number} [1rem] - var("scroll", "size") → Global scrollbar thickness
+/// @termeh {Color} [var("base", "section")] - var("scroll", "track") → Global scrollbar track background
+/// @termeh {Color} [var("base", "separator")] - var("scroll", "thumb") → Global scrollbar thumb color
 @mixin scrollable($color) {
     $color: util.color-of($color, "scrollable", "color");
 

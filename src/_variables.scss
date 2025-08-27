@@ -29,7 +29,7 @@
 @include module.define("line-height", "large", 1.2em); // Large text line height
 
 // Fonts
-@include module.define("font", "family", ("Segoe UI", Tahoma, Geneva, Verdana)); // Font family
+@include module.define("font", "family", ("Segoe UI", Verdana)); // Font family
 @include module.define("font", "size", 14px); // Font size
 @include module.define("font", "weight", normal); // Font weight
 
@@ -55,7 +55,7 @@
 
 // Decorators
 @include module.define("decorator", "size", 2px); // Decorator border width
-@include module.define("decorator", "spinner", 2rem); // Spinner size
+@include module.define("decorator", "spinner", 2em); // Spinner size
 
 // Table
 @include module.define("table", "background", null); // Table background
@@ -69,12 +69,13 @@
 @include module.define("table", "strong-weight", null); // Strong content weight
 
 // Inputs
-@include module.define("input", "height", 2.8rem); // Input height
+@include module.define("input", "height", 2.8em); // Input height
+@include module.define("input", "checkbox", 1.2em); // Checkbox like height
 @include module.define("input", "background", white); // Input background
 @include module.define("input", "border", #d1d6e0); // Input border
 @include module.define("input", "placeholder", null); // Input placeholder color
 @include module.define("input", "disabled", #f0f2f5); // Disabled input background
-@include module.define("input", "disabled-color", #bfc6d4); // Disabled input foreground
+@include module.define("input", "disabled-foreground", #bfc6d4); // Disabled input foreground
 @include module.define("input", "disabled-border", #d1d6e0); // Disabled input border color
 
 // Container
