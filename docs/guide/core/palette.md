@@ -23,7 +23,7 @@ $primary700: termeh.palette(#3498db, "700");
 
 :::
 
-::: termeh Available Variants
+::: dependencies Available Variants
 
 | Key   | Description                    |
 | ----- | ------------------------------ |

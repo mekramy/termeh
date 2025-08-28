@@ -24,14 +24,14 @@ The **Text Style Helper** module provides utility classes for text styling such 
 
 ### Available Style Classes
 
-- `.is-italic` → applies italic style (`any text element`)
-- `.is-underline` → applies underline (`any text element`)
-- `.is-line-through` → applies strikethrough (`any text element`)
-- `.is-undecorated` → removes all text decoration (`any text element`)
-- `.is-capitalized` → capitalizes the first letter of each word (`any text element`)
-- `.is-lowercase` → transforms text to lowercase (`any text element`)
-- `.is-uppercase` → transforms text to uppercase (`any text element`)
-- `.is-ellipsis` → applies ellipsis truncation for overflowing text (`any text element`)
+- `.is-italic` → applies italic style
+- `.is-underline` → applies underline
+- `.is-line-through` → applies strikethrough
+- `.is-undecorated` → removes all text decoration
+- `.is-capitalized` → capitalizes the first letter of each word
+- `.is-lowercase` → transforms text to lowercase
+- `.is-uppercase` → transforms text to uppercase
+- `.is-ellipsis` → applies ellipsis truncation for overflowing text
 
 ## Text Color Helpers
 

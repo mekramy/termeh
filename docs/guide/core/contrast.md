@@ -1,4 +1,4 @@
-# Contrast Helpers
+# Contrast Utilities
 
 Termeh provides a set of color helper functions for luminance, contrast, and color harmonization. These functions help you make accessible and visually harmonious UI designs.
 

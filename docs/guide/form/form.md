@@ -80,22 +80,22 @@ The **Form** module provides consistent spacing, margin behavior, and a built-in
 
 :::
 
-::: termeh
+::: dependencies
 
 Form module uses the following Termeh global `var()`:
 
-| Component               | Type     | Usage                               | Fallback |
-| ----------------------- | -------- | ----------------------------------- | -------- |
-| `gap` → `macro`         | _Number_ | Form bottom margin                  | `1.6rem` |
-| `base` → `background`   | _Color_  | Overlay background color            | `white`  |
-| `base` → `foreground`   | _Color_  | Loader spinner color                | `black`  |
-| `decorator` → `size`    | _Number_ | Border thickness / loader stroke    | `2px`    |
-| `decorator` → `spinner` | _Number_ | Loader spinner size                 | `2rem`   |
-| `overlay` → `opacity`   | _Number_ | Optional overlay background opacity | `0.85`   |
-| `overlay` → `filter`    | _Color_  | Optional overlay filter             | `null`   |
+| Component               | Type     | Usage                         | Default |
+| ----------------------- | -------- | ----------------------------- | ------- |
+| `base` → `color`        | _Color_  | Form overlay background color | `white` |
+| `base` → `foreground`   | _Color_  | Overlay spinner color         | `black` |
+| `gap` → `macro`         | _Number_ | Bottom margin                 | `1.6em` |
+| `decorator` → `size`    | _Number_ | Loading spinner thickness     | `2px`   |
+| `decorator` → `spinner` | _Number_ | Loading spinner size          | `2em`   |
+| `overlay` → `opacity`   | _Number_ | Overlay background opacity    | `0.85`  |
+| `overlay` → `filter`    | _String_ | Overlay backdrop filter       | `null`  |
 
 :::
 
-## Available Classes
+## Modifiers
 
-- `.is-loading` → covers the form with an overlay and shows a centered spinner.
+- `.is-loading` → marks the component as loading and disables interactions

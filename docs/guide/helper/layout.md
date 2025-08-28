@@ -18,13 +18,13 @@ The **Layout Helper** module delivers a set of utility classes designed to simpl
 
 :::
 
-::: termeh
+::: dependencies
 
-Layout helper module uses the following Termeh registered `color()`
+Layout Helper module uses the following Termeh `color()`:
 
-| Color     | Usage                                              |
-| --------- | -------------------------------------------------- |
-| `primary` | Scrollbar color inside `.is-scrollable` containers |
+| Color / Variant | Usage                       | Default |
+| --------------- | --------------------------- | ------- |
+| `primary`       | Accent color for scrollbars | _error_ |
 
 :::
 

@@ -64,38 +64,35 @@ The **Field** module provides a wrapper for form controls, helping manage spacin
 
 :::
 
-::: termeh
+::: dependencies
 
-Field module uses the following Termeh global `var()`
+Field module uses the following Termeh global `var()`:
 
-| Component       | Type     | Usage                               | Fallback |
-| --------------- | -------- | ----------------------------------- | -------- |
-| `gap` → `micro` | _Number_ | Vertical spacing between elements   | `8px`    |
-| `gap` → `macro` | _Number_ | Bottom margin for the field wrapper | `1.6rem` |
+| Component       | Type     | Usage                          | Default |
+| --------------- | -------- | ------------------------------ | ------- |
+| `gap` → `micro` | _Number_ | Spacing between blocks         | `8px`   |
+| `gap` → `macro` | _Number_ | Bottom margin for input blocks | `1.6em` |
 
-Field module uses the following Termeh registered `color()` and `variant()`
+---
 
-| Palette                | Usage                          | Fallback |
-| ---------------------- | ------------------------------ | -------- |
-| `shade` → `readable`   | Help text color                | _error_  |
-| `error` → `readable`   | Error message color            | _error_  |
-| `primary` → `readable` | Required field indicator color | _error_  |
+Field module uses the following Termeh `color()` and `variant()`:
+
+| Color / Variant        | Usage                            | Default |
+| ---------------------- | -------------------------------- | ------- |
+| `shade` → `readable`   | Help block text color            | `null`  |
+| `primary` → `readable` | Default required indicator color | `null`  |
+| `error` → `readable`   | Error block text color           | `null`  |
 
 :::
 
-## Available Classes
+## Modifiers
 
-### Structural Elements
+- `.is-required` → adds a `*` to labels for required fields
+- `.is-disabled` / `:disabled` → applies disabled state to the input
+- `.is-failed` / `:invalid` → shows error message and applies error styling to children
+- `.is-<color>` → applies a registered color as accent color
 
-- `.help` → small helper text
-- `.error` → error message, shown on validation failure
+## Child Elements
 
-### Modifiers
-
-- `.is-required` → appends a `*` to labels for required fields
-- `.is-disabled` → disabled state
-- `.is-failed` / `:invalid` → displays error message
-
-### Color Modifiers
-
-- `.is-<color>` → applies a registered Termeh color variant to selection and required indicator
+- `.help` → helper text for guidance
+- `.error` → error message displayed on validation failure

@@ -8,12 +8,6 @@ Termeh is a _Modern_, _responsive_, and _modular_ CSS framework for scalable UIs
 
 This library includes a wide range of components and predefined styles for various parts of the UI, enabling faster and more consistent development.
 
-::: info External Usage
-
-With its **centralized configuration** and high **extensibility**, this library allows you to define a **consistent theme** across all your external libraries by leveraging the application’s predefined theme settings.
-
-:::
-
 ## Installation
 
 ::: code-group
@@ -48,11 +42,51 @@ To use it in your project, simply import the termeh in your _Sass_ file and use 
 @include termeh.use-generic();
 @include termeh.use-container();
 @include termeh.use-grid(
-  $gaps: ("mini" "normal" "large")
+  $gaps: (
+    "mini" "normal" "large",
+  )
 );
 @include termeh.use-button(
-  $colors: ("primary" "secondary" "blue")
+  $colors: (
+    "primary" "secondary" "blue",
+  )
 );
+```
+
+:::
+
+## External Usage
+
+To use Termeh in a custom component, import Termeh’s core functionality, then include your component in your app.
+
+::: code-group
+
+```scss [component.scss]
+@use "termeh";
+
+@mixin use-my-component(){
+  $fallback-background: termeh.var("base", "section")
+  $background: termeh.var("my-component", "background", $fallback-background);
+
+  @at-root {
+    .my-component{
+      @include termeh.control();
+      background-color: $background;
+    }
+  }
+}
+```
+
+```scss [app.scss]
+@use "termeh";
+@use "my-component";
+
+// Global termeh definitio and usages
+@include termeh.define-palette("primary", #2196f3);
+// ...
+
+// use custom component
+@include my-component.use-my-component();
 ```
 
 :::

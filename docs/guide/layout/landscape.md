@@ -10,7 +10,7 @@ It’s suitable for carousels, horizontally scrolling lists, or vertical scrolle
 <!-- markdownlint-disable MD033 -->
 <Preview height="5rem">
   <div class="demo">
-    <div class="landscape is-medium-gap">
+    <div class="landscape is-mandatory">
       <div class="placeholder is-4x is-light">ITEM 1</div>
       <div class="placeholder is-4x">ITEM 2</div>
       <div class="placeholder is-4x is-light">ITEM 3</div>
@@ -24,7 +24,7 @@ It’s suitable for carousels, horizontally scrolling lists, or vertical scrolle
 == Source
 
 ```html
-<div class="landscape is-medium-gap">
+<div class="landscape is-mandatory">
   <div>ITEM 1</div>
   <div>ITEM 2</div>
   <div>ITEM 3</div>
@@ -51,46 +51,34 @@ It’s suitable for carousels, horizontally scrolling lists, or vertical scrolle
 
 :::
 
-::: termeh
+::: dependencies
 
-Landscape module uses the following Termeh global `var()`
+Landscape module uses the following Termeh global `var()`:
 
-| Component       | Type     | Usage                         | Fallback |
-| --------------- | -------- | ----------------------------- | -------- |
-| `gap` → `micro` | _Number_ | Default spacing between items | `8px`    |
+| Component       | Type     | Usage                                   | Default |
+| --------------- | -------- | --------------------------------------- | ------- |
+| `gap` → `micro` | _Number_ | Default spacing between landscape items | `8px`   |
 
-Landscape module uses the following Termeh registered `color()` and `variant()`
+---
 
-| Palette             | Usage                               | Fallback |
-| ------------------- | ----------------------------------- | -------- |
-| `primary` → `color` | Scrollbar and scroll-thumb coloring | _error_  |
+Landscape module uses the following Termeh `color()`:
+
+| Color / Variant | Usage                      | Default |
+| --------------- | -------------------------- | ------- |
+| `primary`       | Accent color for scrollbar | _error_ |
 
 :::
 
-## Available Classes
-
-- `.filler` → flexible spacer (if needed)
-- `.item` → direct children elements inside landscape container
-
-### Layout Modifiers
+## Modifiers
 
 - `.is-gapless` → removes spacing between children
-- `.is-stacked` → vertical layout with optional vertical snapping
-- `.is-mandatory` → enables mandatory snap points
-- `.is-center-snapped` → scroll snap aligns items to center
-- `.is-end-snapped` → scroll snap aligns items to end
-
-### Alignment Modifiers
-
-- `.is-<align>-align` → vertical alignment
-- `.is-<justify>-justify` → horizontal distribution
-
-### Gap Modifiers
-
-- `.is-<gap>-gap` → applies registered gap sizes
-
-### Responsive Modifiers
-
+- `.is-stacked` → vertical layout with optional snap behavior
+- `.is-mandatory` → enables mandatory scroll snap points
+- `.is-center-snapped` → aligns scroll snap to center
+- `.is-end-snapped` → aligns scroll snap to end
+- `.is-<align>-align` → sets vertical alignment of children
+- `.is-<justify>-justify` → sets horizontal distribution of children
+- `.is-<gap>-gap` → applies a registered gap as spacing
 - `.is-<device>-stacked` → vertical stacking at a specific breakpoint
-- `.is-<device>-<align>-align` → responsive alignment
-- `.is-<device>-<justify>-justify` → responsive justification
+- `.is-<device>-<align>-align` → responsive vertical alignment
+- `.is-<device>-<justify>-justify` → responsive horizontal distribution

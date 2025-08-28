@@ -97,41 +97,33 @@ It supports configurable gaps, responsive column sizing via registered units, al
 
 :::
 
-::: termeh
+::: dependencies
 
 Grid module uses the following Termeh global `var()`:
 
-| Component       | Type     | Usage                           | Fallback |
-| --------------- | -------- | ------------------------------- | -------- |
-| `gap` → `macro` | _Number_ | Default spacing between columns | `1.6rem` |
+| Component       | Type     | Usage                                         | Default |
+| --------------- | -------- | --------------------------------------------- | ------- |
+| `gap` → `macro` | _Number_ | Default spacing between grid rows and columns | `1.6em` |
 
 :::
 
-## Available Classes
-
-### Structural Elements
-
-- `.column` → column item inside the grid
-- `.break` → line break forcing columns to wrap
-
-### Column Modifiers
-
-- `.is-<unit>` → sets column width using registered units
-- `.is-fit` → auto-fit column width
-- `.is-<device>-<unit>` → responsive column width
-- `.is-<device>-fit` → responsive auto-fit column
-
-### Layout Modifiers
+## Modifiers
 
 - `.is-gapless` → removes spacing between columns
-- `.is-<gap>-gap` → applies registered gap sizes
+- `.is-<gap>-gap` → applies a registered gap as spacing
+- `.is-<align>-align` → sets vertical alignment
+- `.is-<justify>-justify` → sets horizontal justification
+- `.is-<device>-<align>-align` → sets responsive vertical alignment
+- `.is-<device>-<justify>-justify` → sets responsive horizontal justification
 
-### Alignment Modifiers
+## Child Elements
 
-- `.is-<align>-align` → vertical alignment
-- `.is-<justify>-justify` → horizontal justification
+- `.column` → defines a column inside the grid
+- `.break` → forces columns to wrap to the next line
 
-### Responsive Modifiers
+## Column Modifiers
 
-- `.is-<device>-<align>-align` → responsive vertical alignment
-- `.is-<device>-<justify>-justify` → responsive justification
+- `.is-<unit>` → sets column width using a registered unit
+- `.is-fit` → fits column width to its content
+- `.is-<device>-<unit>` → sets responsive column width
+- `.is-<device>-fit` → fits column width to its content responsively

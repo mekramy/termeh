@@ -48,22 +48,25 @@ The **Attacher** module provides utility classes for arranging child elements in
 
 :::
 
-::: termeh
+::: dependencies
 
-Attacher module uses the following Termeh global `var()`
+Attacher module uses the following Termeh global `var()`:
 
-| Component            | Type    | Usage                                 |
-| -------------------- | ------- | ------------------------------------- |
-| `base` → `separator` | _Color_ | Divider color for `.divider` elements |
+| Component            | Type    | Usage                                   | Default |
+| -------------------- | ------- | --------------------------------------- | ------- |
+| `base` → `separator` | _Color_ | Background color for separator elements | `null`  |
 
 :::
 
-## Available Classes
+## Modifiers
 
-- `.is-<align>-align` → sets vertical alignment for children.
-- `.is-<justify>-justify` → sets horizontal distribution of children.
+- `.is-<align>-align` → sets vertical alignment of children
+- `.is-<justify>-justify` → sets horizontal distribution of children
 
-## Available Child Classes
+## Child Elements
 
-- `.filler` → stretches to occupy remaining space.
-- `.divider` → vertical separator line between child elements.
+- `.divider` → vertical separator line between child elements
+
+## Child Modifiers
+
+- `.filler` → stretches to occupy remaining space

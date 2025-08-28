@@ -98,7 +98,7 @@ span {
 
 :::
 
-::: termeh Available Text Aligns
+::: dependencies Available Text Aligns
 
 | Key       | Value            |
 | --------- | ---------------- |
@@ -130,7 +130,7 @@ $light: termeh.weight("light"); // 300
 
 :::
 
-::: termeh Available Weights
+::: dependencies Available Weights
 
 | Key        | Value |
 | ---------- | ----- |

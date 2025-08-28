@@ -68,36 +68,35 @@ The **Textarea** module provides styled multi-line text inputs with configurable
 
 :::
 
-::: termeh
+::: dependencies
 
 Textarea module uses the following Termeh global `var()`:
 
-| Component                | Type     | Usage                           | Fallback                   |
-| ------------------------ | -------- | ------------------------------- | -------------------------- |
-| `radius` → `normal`      | _Number_ | Border radius for the textarea  | `null`                     |
-| `gap` → `micro`          | _Number_ | Padding inside the textarea     | `8px`                      |
-| `line-height` → `normal` | _Number_ | Line height of textarea content | `1.6rem`                   |
-| `input` → `border`       | _Color_  | Border color                    | `var("base", "separator")` |
-| `input` → `background`   | _Color_  | Background color                | `white`                    |
-| `input` → `placeholder`  | _Color_  | Placeholder text color          | `color("shade")`           |
+| Component                | Type     | Usage                              | Default    |
+| ------------------------ | -------- | ---------------------------------- | ---------- |
+| `base` → `separator`     | _Color_  | _Fallback_ border color            | `null`     |
+| `radius` → `normal`      | _Number_ | Default textarea border radius     | `null`     |
+| `gap` → `micro`          | _Number_ | Default textarea padding           | `8px`      |
+| `line-height` → `normal` | _Number_ | Textarea line height               | `1.6em`    |
+| `input` → `border`       | _Color_  | Default textarea border color      | _FALLBACK_ |
+| `input` → `placeholder`  | _Color_  | Default textarea placeholder color | _FALLBACK_ |
+| `input` → `background`   | _Color_  | Default textarea background color  | `white`    |
 
-Textarea module uses the following Termeh registered `color()`:
+---
 
-| Palette   | Usage                | Fallback |
-| --------- | -------------------- | -------- |
-| `error`   | Error border color   | _error_  |
-| `primary` | Focused border color | _error_  |
+Textarea module uses the following Termeh `color()` and `variant()`:
+
+| Color / Variant  | Usage                          | Default |
+| ---------------- | ------------------------------ | ------- |
+| `error`          | Accent color for invalid state | _error_ |
+| `primary`        | Default accent color           | _error_ |
+| `shade` → `mute` | _Fallback_ placeholder color   | `null`  |
 
 :::
 
-## Available Classes
+## Modifiers
 
-### Modifiers
-
-- `.is-focused` / `:focus` → focused border state
-- `.is-invalid` → error state with shake animation
-- `.is-disabled` → disabled state
-
-### Color Modifiers
-
-- `.is-<color>` → applies border color and selection styles for focus state
+- `.is-focused` / `:focus` → applies focus styling
+- `.is-invalid` / `:invalid` → applies error styling with shake animation
+- `.is-disabled` / `:disabled` → applies disabled styling
+- `.is-<color>` → applies a registered color as accent color

@@ -136,26 +136,30 @@ The **Gallery** module provides a flexible grid for displaying images or content
 
 :::
 
-::: termeh
+::: dependencies
 
-Gallery module uses the following Termeh global `var()`
+Gallery module uses the following Termeh global `var()`:
 
-| Component                   | Type     | Usage                                 | Fallback |
-| --------------------------- | -------- | ------------------------------------- | -------- |
-| `gap` → `micro`             | _Number_ | Default spacing between gallery items | `8px`    |
-| `gallery` → `height`        | _Number_ | Default item height on desktop        | `300px`  |
-| `gallery` → `height-tablet` | _Number_ | Default item height on tablet         | `200px`  |
-| `gallery` → `height-mobile` | _Number_ | Default item height on mobile         | `100px`  |
+| Component                   | Type     | Usage                             | Default |
+| --------------------------- | -------- | --------------------------------- | ------- |
+| `gap` → `micro`             | _Number_ | Default gap between gallery items | `8px`   |
+| `gallery` → `height`        | _Number_ | Default item height in gallery    | `300px` |
+| `gallery` → `height-tablet` | _Number_ | Item height for tablet screens    | `200px` |
+| `gallery` → `height-mobile` | _Number_ | Item height for mobile screens    | `100px` |
 
 :::
 
-## Available Classes
+## Modifiers
 
-- `.is-gapless` → removes all spacing between items.
-- `.is-<gap>-gap` → applies specific spacing between items based on registered gap names.
-- `.is-stackable` → stacks items vertically on mobile.
+- `.is-gapless` → removes all spacing between items
+- `.is-<gap>-gap` → applies a registered gap as spacing
+- `.is-stackable` → stacks items vertically on mobile
 
-## Available Child Classes
+## Child Elements
 
-- `.item` → individual gallery item.
-- `.is-block` → makes item take full width with automatic height.
+- `.item` → individual gallery item
+  - `.thumbnail` → applied to nested or custom elements representing an image
+
+## Child Modifiers
+
+- `.is-block` → makes item full width with automatic height

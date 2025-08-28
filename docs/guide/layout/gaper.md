@@ -51,42 +51,36 @@ It supports both horizontal and vertical layouts, configurable gaps, dividers, a
 
 :::
 
-::: termeh
+::: dependencies
 
-Gaper module uses the following Termeh global `var()`
+Gaper module uses the following Termeh global `var()`:
 
-| Component            | Type     | Usage                                 | Fallback |
-| -------------------- | -------- | ------------------------------------- | -------- |
-| `base` → `separator` | _Color_  | Divider line color                    | `null`   |
-| `gap` → `micro`      | _Number_ | Default spacing unit between elements | `8px`    |
+| Component            | Type     | Usage                                           | Default |
+| -------------------- | -------- | ----------------------------------------------- | ------- |
+| `base` → `separator` | _Color_  | Default background color for separator elements | `null`  |
+| `gap` → `micro`      | _Number_ | Default gap between gaper items                 | `8px`   |
 
 :::
 
-## Available Classes
+## Modifiers
+
+- `.is-gapless` → removes spacing between children
+- `.is-auto` → applies auto margins instead of gutters/dividers
+- `.is-stacked` → sets vertical layout
+- `.is-stacked-reverse` → sets reversed vertical layout
+- `.is-<align>-align` → sets vertical alignment
+- `.is-<justify>-justify` → sets horizontal distribution
+- `.is-<gap>-gap` → applies a registered gap as spacing
+- `.is-<device>-stacked` → stacks layout at a specific breakpoint
+- `.is-<device>-stacked-reverse` → reversed vertical layout at a breakpoint
+- `.is-<device>-<align>-align` → responsive vertical alignment
+- `.is-<device>-<justify>-justify` → responsive horizontal distribution
+
+## Child Elements
 
 - `.gutter` → empty spacing element
 - `.divider` → thin line separator
+
+## Child Modifiers
+
 - `.filler` → flexible spacer that grows to fill remaining space
-
-### Layout Modifiers
-
-- `.is-gapless` → removes spacing between children
-- `.is-auto` → applies auto margins for children instead of gutters/dividers
-- `.is-stacked` → vertical layout
-- `.is-stacked-reverse` → reversed vertical layout
-
-### Alignment Modifiers
-
-- `.is-<align>-align` → vertical alignment
-- `.is-<justify>-justify` → horizontal distribution
-
-### Gap Modifiers
-
-- `.is-<gap>-gap` → applies registered gap sizes
-
-### Responsive Modifiers
-
-- `.is-<device>-stacked` → stack layout at a specific breakpoint
-- `.is-<device>-stacked-reverse` → reversed vertical layout at a specific breakpoint
-- `.is-<device>-<align>-align` → responsive alignment
-- `.is-<device>-<justify>-justify` → responsive justification

@@ -104,44 +104,41 @@ The **Input** module provides styled input wrappers with configurable gaps, colo
 
 :::
 
-::: termeh
+::: dependencies
 
 Input module uses the following Termeh global `var()`:
 
-| Component               | Type     | Usage                       | Fallback                   |
-| ----------------------- | -------- | --------------------------- | -------------------------- |
-| `radius` → `normal`     | _Number_ | Border radius for the input | `null`                     |
-| `input` → `height`      | _Number_ | Height of input container   | `2.8rem`                   |
-| `input` → `border`      | _Color_  | Border color                | `var("base", "separator")` |
-| `input` → `background`  | _Color_  | Background color            | `white`                    |
-| `input` → `placeholder` | _Color_  | Placeholder text color      | `variant("shade","mute")`  |
+| Component               | Type     | Usage                           | Default    |
+| ----------------------- | -------- | ------------------------------- | ---------- |
+| `base` → `separator`    | _Color_  | Fallback border color           | `null`     |
+| `radius` → `normal`     | _Number_ | Default input border radius     | `null`     |
+| `input` → `height`      | _Number_ | Input height                    | `2.8em`    |
+| `input` → `border`      | _Color_  | Default input border color      | _FALLBACK_ |
+| `input` → `placeholder` | _Color_  | Default input placeholder color | _FALLBACK_ |
+| `input` → `background`  | _Color_  | Default input background color  | `white`    |
 
-Input module uses the following Termeh registered `color()`:
+---
 
-| Palette   | Usage                | Fallback |
-| --------- | -------------------- | -------- |
-| `error`   | Error border color   | _error_  |
-| `primary` | Focused border color | _error_  |
+Input module uses the following Termeh `color()` and `variant()`:
+
+| Color / Variant  | Usage                          | Default |
+| ---------------- | ------------------------------ | ------- |
+| `error`          | Accent color for invalid state | _error_ |
+| `primary`        | Default accent color           | _error_ |
+| `shade` → `mute` | Fallback placeholder color     | `null`  |
 
 :::
 
-## Available Classes
+## Modifiers
 
-### Structural Elements
+- `.is-focused` / `:focus-within` → applies focus styling
+- `.is-invalid` / `:invalid` → applies error styling with shake animation
+- `.is-disabled` / `:disabled` → applies disabled styling
+- `.is-<gap>-gap` → applies a registered gap as spacing
+- `.is-<color>` → applies a registered color as accent color
 
-- `.divider` → vertical separator line inside input
-- `.gutter` → spacing element inside input
+## Child Elements
 
-### Modifiers
-
-- `.is-focused` / `:focus-within` → focused border state
-- `.is-invalid` → error state with shake animation
-- `.is-disabled` → disabled state
-
-### Gap Modifiers
-
-- `.is-<gap>-gap` → adjusts divider margin and gutter width
-
-### Color Modifiers
-
-- `.is-<color>` → applies border color and selection styles for focus state
+- `<input>` → the main input field, fills available space by default
+- `.divider` → vertical line separating input sections
+- `.gutter` → spacing element inside the input container

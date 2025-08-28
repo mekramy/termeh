@@ -59,17 +59,17 @@ It supports wrapping, responsive alignment, and configurable spacing using the T
 
 :::
 
-::: termeh
+::: dependencies
 
-Wrapper module uses the following Termeh global `var()`
+Wrapper module uses the following Termeh global `var()`:
 
-| Component       | Type     | Usage                                 | Fallback |
-| --------------- | -------- | ------------------------------------- | -------- |
-| `gap` → `micro` | _Number_ | Default spacing between wrapped items | `8px`    |
+| Component       | Type     | Usage                                 | Default |
+| --------------- | -------- | ------------------------------------- | ------- |
+| `gap` → `micro` | _Number_ | Default spacing between wrapper items | `8px`   |
 
 :::
 
-## Available Classes
+## Modifiers
 
 - `.is-gapless` → removes spacing between children
-- `.is-<gap>-gap` → applies spacing from registered gap scale
+- `.is-<gap>-gap` → applies a registered gap as spacing

@@ -565,7 +565,7 @@ LTR-only styles. Applies styles when the global direction is _left-to-right_, or
 
 :::
 
-::: termeh
+::: dependencies
 
 Global direction detected from the following Termeh global `var()`:
 
@@ -600,7 +600,7 @@ RTL-only styles. Applies styles when the global direction is _right-to-left_, or
 
 :::
 
-::: termeh
+::: dependencies
 
 Global direction detected from the following Termeh global `var()`:
 
@@ -680,7 +680,7 @@ Returns the standard control padding as a shorthand list.
 
 :::
 
-::: termeh
+::: dependencies
 
 Control padding is calculated from the following Termeh global `var()`:
 
@@ -713,9 +713,9 @@ Returns the standard inline element padding as a shorthand list.
 
 :::
 
-::: termeh
+::: dependencies
 
-Control padding is calculated from the following Termeh global `var()`:
+Inline padding is calculated from the following Termeh global `var()`:
 
 | Component | Variable | Type     | Default |
 | --------- | -------- | -------- | ------- |
@@ -745,7 +745,7 @@ Applies a standard transition using theme duration and easing.
 
 :::
 
-::: termeh
+::: dependencies
 
 UI transitions are calculated from the following Termeh global `var()`:
 
@@ -779,15 +779,15 @@ Applies disabled theming to form controls (colors and borders).
 
 :::
 
-::: termeh
+::: dependencies
 
-The disabled style is derived from the following Termeh global `var()`. Styles will be ignored if the disable variables are not defined or are `null`:
+The disabled style is derived from the following Termeh global `var()`:
 
-| Component | Variable          | Type    | Default |
-| --------- | ----------------- | ------- | ------- |
-| `input`   | `disabled`        | _color_ | `null`  |
-| `input`   | `disabled-color`  | _color_ | `null`  |
-| `input`   | `disabled-border` | _color_ | `null`  |
+| Component | Variable              | Type    | Default |
+| --------- | --------------------- | ------- | ------- |
+| `input`   | `disabled`            | _color_ | `null`  |
+| `input`   | `disabled-foreground` | _color_ | `null`  |
+| `input`   | `disabled-border`     | _color_ | `null`  |
 
 :::
 
@@ -836,7 +836,7 @@ Provides a scrollable style with a themed scrollbar, where only the hover thumb 
 
 :::
 
-::: termeh
+::: dependencies
 
 The scrollbar style is derived from the following Termeh global `var()`:
 

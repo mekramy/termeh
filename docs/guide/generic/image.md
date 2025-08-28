@@ -57,26 +57,20 @@ Applies image styles with utility classes for centering, rounded or circular bor
 
 :::
 
-::: termeh
+::: dependencies
 
-Image module uses the following Termeh global `var()`
+Image module uses the following Termeh global `var()`:
 
-| Component           | Type     | Usage                                   |
-| ------------------- | -------- | --------------------------------------- |
-| `radius` → `normal` | _Number_ | Border-radius for `.is-rounded` images  |
-| `radius` → `circle` | _Number_ | Border-radius for `.is-circular` images |
-
-Image module uses the following Termeh registered `size()`
-
-| Size                | Usage                                |
-| ------------------- | ------------------------------------ |
-| any registered size | Width for `.is-{size}` image classes |
+| Component           | Type     | Usage                                    | Default |
+| ------------------- | -------- | ---------------------------------------- | ------- |
+| `radius` → `normal` | _Number_ | Default rounded border radius for images | `null`  |
+| `radius` → `circle` | _Number_ | Circular border radius for images        | `50%`   |
 
 :::
 
-## Available classes
+## Modifier
 
-- `.is-centered` → centers the image
-- `.is-rounded` → applies normal radius to image
-- `.is-circular` → applies circular radius to image
-- `.is-<size>` → sets the image width to a registered size (e.g., `.is-small`, `.is-medium`, `.is-large`)
+`.is-centered` → centers the image  
+`.is-rounded` → applies normal radius to image  
+`.is-circular` → applies circular radius to image  
+`.is-<size>` → applies a registered size as image width

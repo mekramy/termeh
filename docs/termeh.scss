@@ -8,6 +8,11 @@
 @include termeh.define("font", "family", ("Space Grotesk", sans-serif));
 
 @include termeh.define-palette("primary", #179299);
+@include termeh.define-palette("secondary", #d49805);
+@include termeh.define-palette("blue", #2478d8);
+@include termeh.define-palette("indigo", #575ba0);
+@include termeh.define-palette("lime", #1cbc21);
+@include termeh.define-palette("maroon", #5e032a);
 
 @include termeh.use-generic();
 

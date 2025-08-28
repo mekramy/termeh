@@ -93,7 +93,7 @@ $unknown: termeh.variant("danger", "shadow", #a8220f); // fallback
 
 :::
 
-::: termeh Available Variants
+::: dependencies Available Variants
 
 By default, Termeh resolves these variants through _auto-generation_:
 

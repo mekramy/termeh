@@ -72,19 +72,20 @@ The **Fieldset** module provides consistent styling for `<fieldset>` and `<legen
 
 :::
 
-::: termeh
+::: dependencies
 
 Fieldset module uses the following Termeh global `var()`:
 
-| Component           | Type     | Usage                         | Fallback                   |
-| ------------------- | -------- | ----------------------------- | -------------------------- |
-| `gap` → `macro`     | _Number_ | Padding inside fieldset       | `1.6rem`                   |
-| `radius` → `normal` | _Number_ | Border radius of the fieldset | `null`                     |
-| `input` → `legend`  | _String_ | Font weight of legend         | `normal`                   |
-| `input` → `border`  | _Color_  | Border color of fieldset      | `var("base", "separator")` |
+| Component            | Type     | Usage                                                | Default    |
+| -------------------- | -------- | ---------------------------------------------------- | ---------- |
+| `base` → `separator` | _Color_  | _Fallback_ border color                              | `null`     |
+| `radius` → `normal`  | _Number_ | Default fieldset border radius                       | `null`     |
+| `gap` → `macro`      | _Number_ | Default inner padding and bottom margin for fieldset | `1.6em`    |
+| `input` → `legend`   | _String_ | Legend element font weight                           | `normal`   |
+| `input` → `border`   | _Color_  | Fieldset border color                                | _FALLBACK_ |
 
 :::
 
-## Available Classes
+## Modifiers
 
-- `.is-disabled` → disabled state
+- `.is-disabled` / `:disabled` → disables all controls within the fieldset

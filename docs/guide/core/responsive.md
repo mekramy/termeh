@@ -165,7 +165,7 @@ $tablet-query: termeh.media-query("tablet"); // "screen and (min-width: 769px)"
 
 :::
 
-::: termeh Available Queries
+::: dependencies Available Queries
 
 | Key                | Value                                                    |
 | ------------------ | -------------------------------------------------------- |
@@ -233,7 +233,7 @@ $desktop: termeh.breakpoint("desktop"); // 1024px
 
 :::
 
-::: termeh Available Devices
+::: dependencies Available Devices
 
 | Key          | Value    |
 | ------------ | -------- |

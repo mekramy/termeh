@@ -44,6 +44,6 @@ The **Padder** module provides a simple utility container that applies uniform p
 
 :::
 
-## Available Classes
+## Modifiers
 
-- `.is-<gap>` → sets uniform padding from the registered gap
+- `.is-<gap>` → applies a registered gap as spacing

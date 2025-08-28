@@ -72,38 +72,38 @@ The **Checkbox** module provides customizable checkbox inputs with configurable 
 
 :::
 
-::: termeh
+::: dependencies
 
 Checkbox module uses the following Termeh global `var()`:
 
-| Component                   | Type     | Usage                           | Fallback                   |
-| --------------------------- | -------- | ------------------------------- | -------------------------- |
-| `radius` → `normal`         | _Number_ | Border radius for checkbox      | `normal`                   |
-| `gap` → `micro`             | _Number_ | Spacing between input and label | `8px`                      |
-| `input` → `height`          | _Number_ | Label height                    | `1.8rem`                   |
-| `input` → `checkbox`        | _Number_ | Checkbox input size             | `1.2em`                    |
-| `input` → `border`          | _Color_  | Default border color            | `var("base", "separator")` |
-| `input` → `disabled-color`  | _Color_  | Disabled input color            | `null`                     |
-| `input` → `disabled-border` | _Color_  | Disabled input border color     | `null`                     |
+| Component                       | Type     | Usage                           | Default    |
+| ------------------------------- | -------- | ------------------------------- | ---------- |
+| `base` → `separator`            | _Color_  | _Fallback_ border color         | `null`     |
+| `radius` → `normal`             | _Number_ | Default input border radius     | `null`     |
+| `gap` → `micro`                 | _Number_ | Spacing between input and label | `8px`      |
+| `input` → `height`              | _Number_ | Input height                    | `2.8em`    |
+| `input` → `checkbox`            | _Number_ | Checkbox item height            | `1.2em`    |
+| `input` → `border`              | _Color_  | Default input border color      | _FALLBACK_ |
+| `input` → `disabled-foreground` | _Color_  | Disabled input accent color     | `null`     |
+| `input` → `disabled-border`     | _Color_  | Disabled input border color     | `null`     |
 
-Checkbox module uses the following Termeh registered `color()`:
+---
 
-| Palette   | Usage           | Fallback |
-| --------- | --------------- | -------- |
-| `primary` | Checked / focus | _error_  |
-| `error`   | Error / invalid | _error_  |
+Checkbox module uses the following Termeh `color()`:
+
+| Color / Variant | Usage                          | Default |
+| --------------- | ------------------------------ | ------- |
+| `error`         | Accent color for invalid state | _error_ |
+| `primary`       | Default accent color           | _error_ |
 
 :::
 
-## Available Classes
+## Modifiers
 
-### Structural Elements
+- `.is-invalid` / `:invalid` → applies error styling with shake animation
+- `.is-disabled` / `:disabled` → applies disabled styling
+- `.is-<color>` → applies a registered color as accent color
+
+## Child Elements
 
 - `input[type="checkbox"]` → the checkbox input element
-- `label.checkbox` → wrapper label that handles layout, spacing, and states
-
-### Modifiers
-
-- `.is-<color>` → sets the color for checked, focus, and box-shadow states
-- `.is-invalid` → applies error border color
-- `.is-disabled` → disables input and changes colors

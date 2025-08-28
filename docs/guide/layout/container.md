@@ -40,20 +40,20 @@ The **Container** module provides a flexible wrapper with configurable maximum w
 
 :::
 
-::: termeh
+::: dependencies
 
-Container module uses the following Termeh global `var()`
+Container module uses the following Termeh global `var()`:
 
-| Component                  | Type     | Usage                                        | Fallback |
-| -------------------------- | -------- | -------------------------------------------- | -------- |
-| `gap` → `macro`            | _Number_ | Default bottom margin and container padding  | `1.6rem` |
-| `container` → `desktop`    | _Number_ | Maximum width for `.container` on desktop    | `960px`  |
-| `container` → `widescreen` | _Number_ | Maximum width for `.container` on widescreen | `1200px` |
-| `container` → `fullhd`     | _Number_ | Maximum width for `.container` on fullhd     | `1500px` |
+| Component                  | Type     | Usage                                       | Default  |
+| -------------------------- | -------- | ------------------------------------------- | -------- |
+| `gap` → `macro`            | _Number_ | Default container padding and bottom margin | `1.6em`  |
+| `container` → `desktop`    | _Number_ | Max-width for desktop and smaller screens   | `960px`  |
+| `container` → `widescreen` | _Number_ | Max-width for widescreen devices            | `1200px` |
+| `container` → `fullhd`     | _Number_ | Max-width for full-HD and larger screens    | `1500px` |
 
 :::
 
-## Available Classes
+## Modifiers
 
-- `.is-fullwidth` → disables max-width constraints.
-- `.is-<gap>-padded` → applies specific padding based on registered gap names.
+- `.is-fullwidth` → makes the container span 100% width
+- `.is-<gap>-padded` → applies a registered gap as spacing

@@ -31,7 +31,7 @@ Gets a filtered map of flex aligns, returning both names and values, for iterati
 
 :::
 
-::: termeh Available Aligns
+::: dependencies Available Aligns
 
 | Key             | Value           |
 | --------------- | --------------- |
@@ -73,7 +73,7 @@ Gets a filtered map of flex justifies, returning both names and values, for iter
 
 :::
 
-::: termeh Available Aligns
+::: dependencies Available Aligns
 
 | Key             | Value           |
 | --------------- | --------------- |

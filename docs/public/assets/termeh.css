@@ -91,7 +91,7 @@ th {
 
 ::selection {
   color: rgb(243.4, 249.55, 249.9);
-  background-color: rgb(13.8, 110.142, 126.48);
+  background-color: #179299;
 }
 
 html {
@@ -245,6 +245,9 @@ pre code {
   background-color: transparent;
 }
 
+table th {
+  font-weight: bold;
+}
 table td,
 table th {
   vertical-align: top;
@@ -388,8 +391,8 @@ table thead tr {
   background: white;
   border-top: 1px solid #e0e4eb;
   transition-property: all;
-  transition-duration: 250ms;
   transition-timing-function: ease;
+  transition-duration: 250ms;
 }
 table thead tr th {
   width: 1px;
@@ -397,8 +400,8 @@ table thead tr th {
   font-weight: bold;
   padding: 8px 16px;
   transition-property: all;
-  transition-duration: 250ms;
   transition-timing-function: ease;
+  transition-duration: 250ms;
 }
 table thead tr th.is-center-aligned {
   text-align: center;
@@ -434,8 +437,8 @@ table tbody tr,
 table tfoot tr {
   background: white;
   transition-property: all;
-  transition-duration: 250ms;
   transition-timing-function: ease;
+  transition-duration: 250ms;
 }
 table tbody tr:not(:last-child),
 table tfoot tr:not(:last-child) {
@@ -448,8 +451,8 @@ table tfoot tr td {
   vertical-align: middle;
   padding: 8px 16px;
   transition-property: all;
-  transition-duration: 250ms;
   transition-timing-function: ease;
+  transition-duration: 250ms;
 }
 table tbody tr td.is-center-aligned,
 table tfoot tr td.is-center-aligned {
@@ -526,6 +529,25 @@ table.is-shade tbody tr td.is-sorted,
 table.is-shade tfoot tr td.is-sorted {
   background-color: rgba(102, 112, 133, 0.05);
 }
+table.is-error::selection,
+table.is-error *::selection {
+  color: rgb(251.85, 242.25, 243.9);
+  background-color: #c00021;
+}
+table.is-error thead tr th.is-sorted {
+  color: rgb(198.3, 25.5, 55.2);
+  background-color: rgba(192, 0, 33, 0.05);
+}
+table.is-error thead tr th.is-sortable.is-asc {
+  border-top-color: #c00021;
+}
+table.is-error thead tr th.is-sortable.is-desc {
+  border-bottom-color: #c00021;
+}
+table.is-error tbody tr td.is-sorted,
+table.is-error tfoot tr td.is-sorted {
+  background-color: rgba(192, 0, 33, 0.05);
+}
 table.is-primary::selection,
 table.is-primary *::selection {
   color: rgb(243.4, 249.55, 249.9);
@@ -545,24 +567,100 @@ table.is-primary tbody tr td.is-sorted,
 table.is-primary tfoot tr td.is-sorted {
   background-color: rgba(23, 146, 153, 0.05);
 }
-table.is-error::selection,
-table.is-error *::selection {
-  color: rgb(251.85, 242.25, 243.9);
-  background-color: #c00021;
+table.is-secondary::selection,
+table.is-secondary *::selection {
+  color: rgb(252.85, 249.85, 242.5);
+  background-color: #d49805;
 }
-table.is-error thead tr th.is-sorted {
-  color: rgb(198.3, 25.5, 55.2);
-  background-color: rgba(192, 0, 33, 0.05);
+table.is-secondary thead tr th.is-sorted {
+  color: rgb(216.3, 162.3, 30);
+  background-color: rgba(212, 152, 5, 0.05);
 }
-table.is-error thead tr th.is-sortable.is-asc {
-  border-top-color: #c00021;
+table.is-secondary thead tr th.is-sortable.is-asc {
+  border-top-color: #d49805;
 }
-table.is-error thead tr th.is-sortable.is-desc {
-  border-bottom-color: #c00021;
+table.is-secondary thead tr th.is-sortable.is-desc {
+  border-bottom-color: #d49805;
 }
-table.is-error tbody tr td.is-sorted,
-table.is-error tfoot tr td.is-sorted {
-  background-color: rgba(192, 0, 33, 0.05);
+table.is-secondary tbody tr td.is-sorted,
+table.is-secondary tfoot tr td.is-sorted {
+  background-color: rgba(212, 152, 5, 0.05);
+}
+table.is-blue::selection,
+table.is-blue *::selection {
+  color: rgb(244.05, 248.25, 253.05);
+  background-color: #2478d8;
+}
+table.is-blue thead tr th.is-sorted {
+  color: rgb(57.9, 133.5, 219.9);
+  background-color: rgba(36, 120, 216, 0.05);
+}
+table.is-blue thead tr th.is-sortable.is-asc {
+  border-top-color: #2478d8;
+}
+table.is-blue thead tr th.is-sortable.is-desc {
+  border-bottom-color: #2478d8;
+}
+table.is-blue tbody tr td.is-sorted,
+table.is-blue tfoot tr td.is-sorted {
+  background-color: rgba(36, 120, 216, 0.05);
+}
+table.is-indigo::selection,
+table.is-indigo *::selection {
+  color: rgb(246.6, 246.8, 250.25);
+  background-color: #575ba0;
+}
+table.is-indigo thead tr th.is-sorted {
+  color: rgb(103.8, 107.4, 169.5);
+  background-color: rgba(87, 91, 160, 0.05);
+}
+table.is-indigo thead tr th.is-sortable.is-asc {
+  border-top-color: #575ba0;
+}
+table.is-indigo thead tr th.is-sortable.is-desc {
+  border-bottom-color: #575ba0;
+}
+table.is-indigo tbody tr td.is-sorted,
+table.is-indigo tfoot tr td.is-sorted {
+  background-color: rgba(87, 91, 160, 0.05);
+}
+table.is-lime::selection,
+table.is-lime *::selection {
+  color: rgb(243.65, 251.65, 243.9);
+  background-color: #1cbc21;
+}
+table.is-lime thead tr th.is-sorted {
+  color: rgb(50.7, 194.7, 55.2);
+  background-color: rgba(28, 188, 33, 0.05);
+}
+table.is-lime thead tr th.is-sortable.is-asc {
+  border-top-color: #1cbc21;
+}
+table.is-lime thead tr th.is-sortable.is-desc {
+  border-bottom-color: #1cbc21;
+}
+table.is-lime tbody tr td.is-sorted,
+table.is-lime tfoot tr td.is-sorted {
+  background-color: rgba(28, 188, 33, 0.05);
+}
+table.is-maroon::selection,
+table.is-maroon *::selection {
+  color: rgb(246.95, 242.4, 244.35);
+  background-color: #5e032a;
+}
+table.is-maroon thead tr th.is-sorted {
+  color: rgb(110.1, 28.2, 63.3);
+  background-color: rgba(94, 3, 42, 0.05);
+}
+table.is-maroon thead tr th.is-sortable.is-asc {
+  border-top-color: #5e032a;
+}
+table.is-maroon thead tr th.is-sortable.is-desc {
+  border-bottom-color: #5e032a;
+}
+table.is-maroon tbody tr td.is-sorted,
+table.is-maroon tfoot tr td.is-sorted {
+  background-color: rgba(94, 3, 42, 0.05);
 }
 
 .is-clearfix::after {
@@ -678,6 +776,15 @@ table.is-error tfoot tr td.is-sorted {
   background-color: #667085;
 }
 
+.is-error-color {
+  color: rgb(198.3, 25.5, 55.2);
+}
+.is-error-color::selection,
+.is-error-color *::selection {
+  color: rgb(251.85, 242.25, 243.9);
+  background-color: #c00021;
+}
+
 .is-primary-color {
   color: rgb(46.2, 156.9, 163.2);
 }
@@ -687,13 +794,49 @@ table.is-error tfoot tr td.is-sorted {
   background-color: #179299;
 }
 
-.is-error-color {
-  color: rgb(198.3, 25.5, 55.2);
+.is-secondary-color {
+  color: rgb(216.3, 162.3, 30);
 }
-.is-error-color::selection,
-.is-error-color *::selection {
-  color: rgb(251.85, 242.25, 243.9);
-  background-color: #c00021;
+.is-secondary-color::selection,
+.is-secondary-color *::selection {
+  color: rgb(252.85, 249.85, 242.5);
+  background-color: #d49805;
+}
+
+.is-blue-color {
+  color: rgb(57.9, 133.5, 219.9);
+}
+.is-blue-color::selection,
+.is-blue-color *::selection {
+  color: rgb(244.05, 248.25, 253.05);
+  background-color: #2478d8;
+}
+
+.is-indigo-color {
+  color: rgb(103.8, 107.4, 169.5);
+}
+.is-indigo-color::selection,
+.is-indigo-color *::selection {
+  color: rgb(246.6, 246.8, 250.25);
+  background-color: #575ba0;
+}
+
+.is-lime-color {
+  color: rgb(50.7, 194.7, 55.2);
+}
+.is-lime-color::selection,
+.is-lime-color *::selection {
+  color: rgb(243.65, 251.65, 243.9);
+  background-color: #1cbc21;
+}
+
+.is-maroon-color {
+  color: rgb(110.1, 28.2, 63.3);
+}
+.is-maroon-color::selection,
+.is-maroon-color *::selection {
+  color: rgb(246.95, 242.4, 244.35);
+  background-color: #5e032a;
 }
 
 .is-small-size {
@@ -6795,7 +6938,7 @@ label.checkbox {
   flex-flow: row nowrap;
   margin: 0;
   padding: 0;
-  height: 2.8rem;
+  height: 2.8em;
   line-height: 1em;
   cursor: pointer;
   box-sizing: border-box;
@@ -6817,8 +6960,8 @@ label.checkbox input[type=checkbox] {
   flex: 0 0 auto;
   box-shadow: 0 0 0 0 rgba(23, 146, 153, 0.25);
   transition-property: all;
-  transition-duration: 250ms;
   transition-timing-function: ease;
+  transition-duration: 250ms;
 }
 label.checkbox input[type=checkbox]::after {
   content: "";
@@ -6830,8 +6973,8 @@ label.checkbox input[type=checkbox]::after {
   border-radius: 2px;
   background-color: #179299;
   transition-property: all;
-  transition-duration: 250ms;
   transition-timing-function: ease;
+  transition-duration: 250ms;
 }
 label.checkbox input[type=checkbox]:focus, label.checkbox input[type=checkbox]:focus-within {
   border-color: #179299;
@@ -6854,6 +6997,18 @@ label.checkbox.is-shade input:focus, label.checkbox.is-shade input:focus-within 
 label.checkbox.is-shade input:checked {
   box-shadow: 0 0 0 8px rgba(102, 112, 133, 0);
 }
+label.checkbox.is-error input {
+  box-shadow: 0 0 0 0 rgba(192, 0, 33, 0.25);
+}
+label.checkbox.is-error input::after {
+  background-color: #c00021;
+}
+label.checkbox.is-error input:focus, label.checkbox.is-error input:focus-within {
+  border-color: #c00021;
+}
+label.checkbox.is-error input:checked {
+  box-shadow: 0 0 0 8px rgba(192, 0, 33, 0);
+}
 label.checkbox.is-primary input {
   box-shadow: 0 0 0 0 rgba(23, 146, 153, 0.25);
 }
@@ -6866,17 +7021,65 @@ label.checkbox.is-primary input:focus, label.checkbox.is-primary input:focus-wit
 label.checkbox.is-primary input:checked {
   box-shadow: 0 0 0 8px rgba(23, 146, 153, 0);
 }
-label.checkbox.is-error input {
-  box-shadow: 0 0 0 0 rgba(192, 0, 33, 0.25);
+label.checkbox.is-secondary input {
+  box-shadow: 0 0 0 0 rgba(212, 152, 5, 0.25);
 }
-label.checkbox.is-error input::after {
-  background-color: #c00021;
+label.checkbox.is-secondary input::after {
+  background-color: #d49805;
 }
-label.checkbox.is-error input:focus, label.checkbox.is-error input:focus-within {
-  border-color: #c00021;
+label.checkbox.is-secondary input:focus, label.checkbox.is-secondary input:focus-within {
+  border-color: #d49805;
 }
-label.checkbox.is-error input:checked {
-  box-shadow: 0 0 0 8px rgba(192, 0, 33, 0);
+label.checkbox.is-secondary input:checked {
+  box-shadow: 0 0 0 8px rgba(212, 152, 5, 0);
+}
+label.checkbox.is-blue input {
+  box-shadow: 0 0 0 0 rgba(36, 120, 216, 0.25);
+}
+label.checkbox.is-blue input::after {
+  background-color: #2478d8;
+}
+label.checkbox.is-blue input:focus, label.checkbox.is-blue input:focus-within {
+  border-color: #2478d8;
+}
+label.checkbox.is-blue input:checked {
+  box-shadow: 0 0 0 8px rgba(36, 120, 216, 0);
+}
+label.checkbox.is-indigo input {
+  box-shadow: 0 0 0 0 rgba(87, 91, 160, 0.25);
+}
+label.checkbox.is-indigo input::after {
+  background-color: #575ba0;
+}
+label.checkbox.is-indigo input:focus, label.checkbox.is-indigo input:focus-within {
+  border-color: #575ba0;
+}
+label.checkbox.is-indigo input:checked {
+  box-shadow: 0 0 0 8px rgba(87, 91, 160, 0);
+}
+label.checkbox.is-lime input {
+  box-shadow: 0 0 0 0 rgba(28, 188, 33, 0.25);
+}
+label.checkbox.is-lime input::after {
+  background-color: #1cbc21;
+}
+label.checkbox.is-lime input:focus, label.checkbox.is-lime input:focus-within {
+  border-color: #1cbc21;
+}
+label.checkbox.is-lime input:checked {
+  box-shadow: 0 0 0 8px rgba(28, 188, 33, 0);
+}
+label.checkbox.is-maroon input {
+  box-shadow: 0 0 0 0 rgba(94, 3, 42, 0.25);
+}
+label.checkbox.is-maroon input::after {
+  background-color: #5e032a;
+}
+label.checkbox.is-maroon input:focus, label.checkbox.is-maroon input:focus-within {
+  border-color: #5e032a;
+}
+label.checkbox.is-maroon input:checked {
+  box-shadow: 0 0 0 8px rgba(94, 3, 42, 0);
 }
 label.checkbox input {
   margin-left: 0;
@@ -6987,6 +7190,15 @@ label.checkbox:disabled input::after, label.checkbox.is-disabled input::after {
   color: rgb(247.35, 247.85, 248.9);
   background-color: #667085;
 }
+.field.is-error.is-required > label::after,
+.field.is-error.is-required .field-label::after {
+  color: rgb(198.3, 25.5, 55.2);
+}
+.field.is-error::selection,
+.field.is-error *::selection {
+  color: rgb(251.85, 242.25, 243.9);
+  background-color: #c00021;
+}
 .field.is-primary.is-required > label::after,
 .field.is-primary.is-required .field-label::after {
   color: rgb(46.2, 156.9, 163.2);
@@ -6996,14 +7208,50 @@ label.checkbox:disabled input::after, label.checkbox.is-disabled input::after {
   color: rgb(243.4, 249.55, 249.9);
   background-color: #179299;
 }
-.field.is-error.is-required > label::after,
-.field.is-error.is-required .field-label::after {
-  color: rgb(198.3, 25.5, 55.2);
+.field.is-secondary.is-required > label::after,
+.field.is-secondary.is-required .field-label::after {
+  color: rgb(216.3, 162.3, 30);
 }
-.field.is-error::selection,
-.field.is-error *::selection {
-  color: rgb(251.85, 242.25, 243.9);
-  background-color: #c00021;
+.field.is-secondary::selection,
+.field.is-secondary *::selection {
+  color: rgb(252.85, 249.85, 242.5);
+  background-color: #d49805;
+}
+.field.is-blue.is-required > label::after,
+.field.is-blue.is-required .field-label::after {
+  color: rgb(57.9, 133.5, 219.9);
+}
+.field.is-blue::selection,
+.field.is-blue *::selection {
+  color: rgb(244.05, 248.25, 253.05);
+  background-color: #2478d8;
+}
+.field.is-indigo.is-required > label::after,
+.field.is-indigo.is-required .field-label::after {
+  color: rgb(103.8, 107.4, 169.5);
+}
+.field.is-indigo::selection,
+.field.is-indigo *::selection {
+  color: rgb(246.6, 246.8, 250.25);
+  background-color: #575ba0;
+}
+.field.is-lime.is-required > label::after,
+.field.is-lime.is-required .field-label::after {
+  color: rgb(50.7, 194.7, 55.2);
+}
+.field.is-lime::selection,
+.field.is-lime *::selection {
+  color: rgb(243.65, 251.65, 243.9);
+  background-color: #1cbc21;
+}
+.field.is-maroon.is-required > label::after,
+.field.is-maroon.is-required .field-label::after {
+  color: rgb(110.1, 28.2, 63.3);
+}
+.field.is-maroon::selection,
+.field.is-maroon *::selection {
+  color: rgb(246.95, 242.4, 244.35);
+  background-color: #5e032a;
 }
 .field:invalid .error, .field.is-failed .error {
   display: block;
@@ -7050,8 +7298,8 @@ form.is-loading::after {
   position: absolute;
   box-sizing: border-box;
   content: " ";
-  width: 2rem;
-  height: 2rem;
+  width: 2em;
+  height: 2em;
   border: 2px solid #0d1b2a;
   border-top-color: transparent;
   border-right-color: transparent;
@@ -7071,15 +7319,15 @@ form.is-loading::after {
   display: flex;
   align-items: center;
   flex-flow: row nowrap;
-  height: 2.8rem;
+  height: 2.8em;
   line-height: 1em;
   border-radius: 2px;
   border: 1px solid #d1d6e0;
   background-color: white;
   padding: 8px 16px;
   transition-property: all;
-  transition-duration: 250ms;
   transition-timing-function: ease;
+  transition-duration: 250ms;
 }
 .input > .divider {
   width: 1px;
@@ -7133,16 +7381,16 @@ form.is-loading::after {
   border: 0;
 }
 .input input::-moz-placeholder {
-  color: rgb(201.45, 204.95, 212.3);
+  color: rgb(178.5, 183.5, 194);
 }
 .input input::-webkit-input-placeholder {
-  color: rgb(201.45, 204.95, 212.3);
+  color: rgb(178.5, 183.5, 194);
 }
 .input input:-moz-placeholder {
-  color: rgb(201.45, 204.95, 212.3);
+  color: rgb(178.5, 183.5, 194);
 }
 .input input:-ms-input-placeholder {
-  color: rgb(201.45, 204.95, 212.3);
+  color: rgb(178.5, 183.5, 194);
 }
 .input.is-focused, .input:focus-within {
   border-color: #179299;
@@ -7197,6 +7445,14 @@ form.is-loading::after {
   color: rgb(247.35, 247.85, 248.9);
   background-color: #667085;
 }
+.input.is-error.is-focused, .input.is-error:focus-within {
+  border-color: #c00021;
+}
+.input.is-error::selection,
+.input.is-error *::selection {
+  color: rgb(251.85, 242.25, 243.9);
+  background-color: #c00021;
+}
 .input.is-primary.is-focused, .input.is-primary:focus-within {
   border-color: #179299;
 }
@@ -7205,13 +7461,45 @@ form.is-loading::after {
   color: rgb(243.4, 249.55, 249.9);
   background-color: #179299;
 }
-.input.is-error.is-focused, .input.is-error:focus-within {
-  border-color: #c00021;
+.input.is-secondary.is-focused, .input.is-secondary:focus-within {
+  border-color: #d49805;
 }
-.input.is-error::selection,
-.input.is-error *::selection {
-  color: rgb(251.85, 242.25, 243.9);
-  background-color: #c00021;
+.input.is-secondary::selection,
+.input.is-secondary *::selection {
+  color: rgb(252.85, 249.85, 242.5);
+  background-color: #d49805;
+}
+.input.is-blue.is-focused, .input.is-blue:focus-within {
+  border-color: #2478d8;
+}
+.input.is-blue::selection,
+.input.is-blue *::selection {
+  color: rgb(244.05, 248.25, 253.05);
+  background-color: #2478d8;
+}
+.input.is-indigo.is-focused, .input.is-indigo:focus-within {
+  border-color: #575ba0;
+}
+.input.is-indigo::selection,
+.input.is-indigo *::selection {
+  color: rgb(246.6, 246.8, 250.25);
+  background-color: #575ba0;
+}
+.input.is-lime.is-focused, .input.is-lime:focus-within {
+  border-color: #1cbc21;
+}
+.input.is-lime::selection,
+.input.is-lime *::selection {
+  color: rgb(243.65, 251.65, 243.9);
+  background-color: #1cbc21;
+}
+.input.is-maroon.is-focused, .input.is-maroon:focus-within {
+  border-color: #5e032a;
+}
+.input.is-maroon::selection,
+.input.is-maroon *::selection {
+  color: rgb(246.95, 242.4, 244.35);
+  background-color: #5e032a;
 }
 .field:invalid .input,
 .field.is-failed .input {
@@ -7250,7 +7538,7 @@ label.radio {
   flex-flow: row nowrap;
   margin: 0;
   padding: 0;
-  height: 2.8rem;
+  height: 2.8em;
   line-height: 1em;
   cursor: pointer;
   box-sizing: border-box;
@@ -7272,8 +7560,8 @@ label.radio input[type=radio] {
   flex: 0 0 auto;
   box-shadow: 0 0 0 0 rgba(23, 146, 153, 0.25);
   transition-property: all;
-  transition-duration: 250ms;
   transition-timing-function: ease;
+  transition-duration: 250ms;
 }
 label.radio input[type=radio]::after {
   content: "";
@@ -7285,8 +7573,8 @@ label.radio input[type=radio]::after {
   border-radius: 50%;
   background-color: #179299;
   transition-property: all;
-  transition-duration: 250ms;
   transition-timing-function: ease;
+  transition-duration: 250ms;
 }
 label.radio input[type=radio]:focus, label.radio input[type=radio]:focus-within {
   border-color: #179299;
@@ -7309,6 +7597,18 @@ label.radio.is-shade input:focus, label.radio.is-shade input:focus-within {
 label.radio.is-shade input:checked {
   box-shadow: 0 0 0 8px rgba(102, 112, 133, 0);
 }
+label.radio.is-error input {
+  box-shadow: 0 0 0 0 rgba(192, 0, 33, 0.25);
+}
+label.radio.is-error input::after {
+  background-color: #c00021;
+}
+label.radio.is-error input:focus, label.radio.is-error input:focus-within {
+  border-color: #c00021;
+}
+label.radio.is-error input:checked {
+  box-shadow: 0 0 0 8px rgba(192, 0, 33, 0);
+}
 label.radio.is-primary input {
   box-shadow: 0 0 0 0 rgba(23, 146, 153, 0.25);
 }
@@ -7321,17 +7621,65 @@ label.radio.is-primary input:focus, label.radio.is-primary input:focus-within {
 label.radio.is-primary input:checked {
   box-shadow: 0 0 0 8px rgba(23, 146, 153, 0);
 }
-label.radio.is-error input {
-  box-shadow: 0 0 0 0 rgba(192, 0, 33, 0.25);
+label.radio.is-secondary input {
+  box-shadow: 0 0 0 0 rgba(212, 152, 5, 0.25);
 }
-label.radio.is-error input::after {
-  background-color: #c00021;
+label.radio.is-secondary input::after {
+  background-color: #d49805;
 }
-label.radio.is-error input:focus, label.radio.is-error input:focus-within {
-  border-color: #c00021;
+label.radio.is-secondary input:focus, label.radio.is-secondary input:focus-within {
+  border-color: #d49805;
 }
-label.radio.is-error input:checked {
-  box-shadow: 0 0 0 8px rgba(192, 0, 33, 0);
+label.radio.is-secondary input:checked {
+  box-shadow: 0 0 0 8px rgba(212, 152, 5, 0);
+}
+label.radio.is-blue input {
+  box-shadow: 0 0 0 0 rgba(36, 120, 216, 0.25);
+}
+label.radio.is-blue input::after {
+  background-color: #2478d8;
+}
+label.radio.is-blue input:focus, label.radio.is-blue input:focus-within {
+  border-color: #2478d8;
+}
+label.radio.is-blue input:checked {
+  box-shadow: 0 0 0 8px rgba(36, 120, 216, 0);
+}
+label.radio.is-indigo input {
+  box-shadow: 0 0 0 0 rgba(87, 91, 160, 0.25);
+}
+label.radio.is-indigo input::after {
+  background-color: #575ba0;
+}
+label.radio.is-indigo input:focus, label.radio.is-indigo input:focus-within {
+  border-color: #575ba0;
+}
+label.radio.is-indigo input:checked {
+  box-shadow: 0 0 0 8px rgba(87, 91, 160, 0);
+}
+label.radio.is-lime input {
+  box-shadow: 0 0 0 0 rgba(28, 188, 33, 0.25);
+}
+label.radio.is-lime input::after {
+  background-color: #1cbc21;
+}
+label.radio.is-lime input:focus, label.radio.is-lime input:focus-within {
+  border-color: #1cbc21;
+}
+label.radio.is-lime input:checked {
+  box-shadow: 0 0 0 8px rgba(28, 188, 33, 0);
+}
+label.radio.is-maroon input {
+  box-shadow: 0 0 0 0 rgba(94, 3, 42, 0.25);
+}
+label.radio.is-maroon input::after {
+  background-color: #5e032a;
+}
+label.radio.is-maroon input:focus, label.radio.is-maroon input:focus-within {
+  border-color: #5e032a;
+}
+label.radio.is-maroon input:checked {
+  box-shadow: 0 0 0 8px rgba(94, 3, 42, 0);
 }
 label.radio input {
   margin-left: 0;
@@ -7429,15 +7777,15 @@ select {
   flex-flow: row nowrap;
   width: 100%;
   max-width: 100%;
-  height: 2.8rem;
+  height: 2.8em;
   line-height: 1em;
   border-radius: 2px;
   border: 1px solid #d1d6e0;
   background-color: white;
   padding: 8px 16px;
   transition-property: all;
-  transition-duration: 250ms;
   transition-timing-function: ease;
+  transition-duration: 250ms;
 }
 select:focus, select.is-focused, select:active, select.is-active {
   outline: none;
@@ -7454,16 +7802,16 @@ select::-moz-focus-inner {
   border: 0;
 }
 select::-moz-placeholder {
-  color: rgb(201.45, 204.95, 212.3);
+  color: rgb(178.5, 183.5, 194);
 }
 select::-webkit-input-placeholder {
-  color: rgb(201.45, 204.95, 212.3);
+  color: rgb(178.5, 183.5, 194);
 }
 select:-moz-placeholder {
-  color: rgb(201.45, 204.95, 212.3);
+  color: rgb(178.5, 183.5, 194);
 }
 select:-ms-input-placeholder {
-  color: rgb(201.45, 204.95, 212.3);
+  color: rgb(178.5, 183.5, 194);
 }
 select, select::picker(select) {
   appearance: base-select;
@@ -7472,10 +7820,10 @@ select::picker(select) {
   border: 1px solid #d1d6e0;
 }
 select::picker-icon {
-  color: rgb(201.45, 204.95, 212.3);
+  color: rgb(178.5, 183.5, 194);
   transition-property: transform;
-  transition-duration: 250ms;
   transition-timing-function: ease;
+  transition-duration: 250ms;
 }
 select:open::picker-icon {
   transform: rotate(180deg);
@@ -7534,6 +7882,28 @@ select.is-shade *::selection {
   color: rgb(247.35, 247.85, 248.9);
   background-color: #667085;
 }
+select.is-error option:checked {
+  color: rgb(198.3, 25.5, 55.2);
+}
+select.is-error option::checkmark {
+  color: rgb(198.3, 25.5, 55.2);
+}
+select.is-error:focus, select.is-error:open, select.is-error.is-focused {
+  border-color: #c00021;
+  color: rgb(251.85, 242.25, 243.9);
+  background-color: #c00021;
+}
+select.is-error:focus::picker(select), select.is-error:open::picker(select), select.is-error.is-focused::picker(select) {
+  border-color: #c00021;
+}
+select.is-error:focus::picker-icon, select.is-error:open::picker-icon, select.is-error.is-focused::picker-icon {
+  color: rgb(251.85, 242.25, 243.9);
+}
+select.is-error::selection,
+select.is-error *::selection {
+  color: rgb(251.85, 242.25, 243.9);
+  background-color: #c00021;
+}
 select.is-primary option:checked {
   color: rgb(46.2, 156.9, 163.2);
 }
@@ -7556,27 +7926,115 @@ select.is-primary *::selection {
   color: rgb(243.4, 249.55, 249.9);
   background-color: #179299;
 }
-select.is-error option:checked {
-  color: rgb(198.3, 25.5, 55.2);
+select.is-secondary option:checked {
+  color: rgb(216.3, 162.3, 30);
 }
-select.is-error option::checkmark {
-  color: rgb(198.3, 25.5, 55.2);
+select.is-secondary option::checkmark {
+  color: rgb(216.3, 162.3, 30);
 }
-select.is-error:focus, select.is-error:open, select.is-error.is-focused {
-  border-color: #c00021;
-  color: rgb(251.85, 242.25, 243.9);
-  background-color: #c00021;
+select.is-secondary:focus, select.is-secondary:open, select.is-secondary.is-focused {
+  border-color: #d49805;
+  color: rgb(252.85, 249.85, 242.5);
+  background-color: #d49805;
 }
-select.is-error:focus::picker(select), select.is-error:open::picker(select), select.is-error.is-focused::picker(select) {
-  border-color: #c00021;
+select.is-secondary:focus::picker(select), select.is-secondary:open::picker(select), select.is-secondary.is-focused::picker(select) {
+  border-color: #d49805;
 }
-select.is-error:focus::picker-icon, select.is-error:open::picker-icon, select.is-error.is-focused::picker-icon {
-  color: rgb(251.85, 242.25, 243.9);
+select.is-secondary:focus::picker-icon, select.is-secondary:open::picker-icon, select.is-secondary.is-focused::picker-icon {
+  color: rgb(252.85, 249.85, 242.5);
 }
-select.is-error::selection,
-select.is-error *::selection {
-  color: rgb(251.85, 242.25, 243.9);
-  background-color: #c00021;
+select.is-secondary::selection,
+select.is-secondary *::selection {
+  color: rgb(252.85, 249.85, 242.5);
+  background-color: #d49805;
+}
+select.is-blue option:checked {
+  color: rgb(57.9, 133.5, 219.9);
+}
+select.is-blue option::checkmark {
+  color: rgb(57.9, 133.5, 219.9);
+}
+select.is-blue:focus, select.is-blue:open, select.is-blue.is-focused {
+  border-color: #2478d8;
+  color: rgb(244.05, 248.25, 253.05);
+  background-color: #2478d8;
+}
+select.is-blue:focus::picker(select), select.is-blue:open::picker(select), select.is-blue.is-focused::picker(select) {
+  border-color: #2478d8;
+}
+select.is-blue:focus::picker-icon, select.is-blue:open::picker-icon, select.is-blue.is-focused::picker-icon {
+  color: rgb(244.05, 248.25, 253.05);
+}
+select.is-blue::selection,
+select.is-blue *::selection {
+  color: rgb(244.05, 248.25, 253.05);
+  background-color: #2478d8;
+}
+select.is-indigo option:checked {
+  color: rgb(103.8, 107.4, 169.5);
+}
+select.is-indigo option::checkmark {
+  color: rgb(103.8, 107.4, 169.5);
+}
+select.is-indigo:focus, select.is-indigo:open, select.is-indigo.is-focused {
+  border-color: #575ba0;
+  color: rgb(246.6, 246.8, 250.25);
+  background-color: #575ba0;
+}
+select.is-indigo:focus::picker(select), select.is-indigo:open::picker(select), select.is-indigo.is-focused::picker(select) {
+  border-color: #575ba0;
+}
+select.is-indigo:focus::picker-icon, select.is-indigo:open::picker-icon, select.is-indigo.is-focused::picker-icon {
+  color: rgb(246.6, 246.8, 250.25);
+}
+select.is-indigo::selection,
+select.is-indigo *::selection {
+  color: rgb(246.6, 246.8, 250.25);
+  background-color: #575ba0;
+}
+select.is-lime option:checked {
+  color: rgb(50.7, 194.7, 55.2);
+}
+select.is-lime option::checkmark {
+  color: rgb(50.7, 194.7, 55.2);
+}
+select.is-lime:focus, select.is-lime:open, select.is-lime.is-focused {
+  border-color: #1cbc21;
+  color: rgb(243.65, 251.65, 243.9);
+  background-color: #1cbc21;
+}
+select.is-lime:focus::picker(select), select.is-lime:open::picker(select), select.is-lime.is-focused::picker(select) {
+  border-color: #1cbc21;
+}
+select.is-lime:focus::picker-icon, select.is-lime:open::picker-icon, select.is-lime.is-focused::picker-icon {
+  color: rgb(243.65, 251.65, 243.9);
+}
+select.is-lime::selection,
+select.is-lime *::selection {
+  color: rgb(243.65, 251.65, 243.9);
+  background-color: #1cbc21;
+}
+select.is-maroon option:checked {
+  color: rgb(110.1, 28.2, 63.3);
+}
+select.is-maroon option::checkmark {
+  color: rgb(110.1, 28.2, 63.3);
+}
+select.is-maroon:focus, select.is-maroon:open, select.is-maroon.is-focused {
+  border-color: #5e032a;
+  color: rgb(246.95, 242.4, 244.35);
+  background-color: #5e032a;
+}
+select.is-maroon:focus::picker(select), select.is-maroon:open::picker(select), select.is-maroon.is-focused::picker(select) {
+  border-color: #5e032a;
+}
+select.is-maroon:focus::picker-icon, select.is-maroon:open::picker-icon, select.is-maroon.is-focused::picker-icon {
+  color: rgb(246.95, 242.4, 244.35);
+}
+select.is-maroon::selection,
+select.is-maroon *::selection {
+  color: rgb(246.95, 242.4, 244.35);
+  background-color: #5e032a;
 }
 .field:invalid select:not(:focus, :open, .is-focused),
 .field.is-failed select:not(:focus, :open, .is-focused) {
@@ -7671,16 +8129,16 @@ textarea[rows] {
   height: initial;
 }
 textarea::-moz-placeholder {
-  color: rgb(201.45, 204.95, 212.3);
+  color: rgb(178.5, 183.5, 194);
 }
 textarea::-webkit-input-placeholder {
-  color: rgb(201.45, 204.95, 212.3);
+  color: rgb(178.5, 183.5, 194);
 }
 textarea:-moz-placeholder {
-  color: rgb(201.45, 204.95, 212.3);
+  color: rgb(178.5, 183.5, 194);
 }
 textarea:-ms-input-placeholder {
-  color: rgb(201.45, 204.95, 212.3);
+  color: rgb(178.5, 183.5, 194);
 }
 textarea:focus, textarea.is-focused {
   border-color: #179299;
@@ -7693,6 +8151,14 @@ textarea.is-shade *::selection {
   color: rgb(247.35, 247.85, 248.9);
   background-color: #667085;
 }
+textarea.is-error:focus, textarea.is-error.is-focused {
+  border-color: #c00021;
+}
+textarea.is-error::selection,
+textarea.is-error *::selection {
+  color: rgb(251.85, 242.25, 243.9);
+  background-color: #c00021;
+}
 textarea.is-primary:focus, textarea.is-primary.is-focused {
   border-color: #179299;
 }
@@ -7701,13 +8167,45 @@ textarea.is-primary *::selection {
   color: rgb(243.4, 249.55, 249.9);
   background-color: #179299;
 }
-textarea.is-error:focus, textarea.is-error.is-focused {
-  border-color: #c00021;
+textarea.is-secondary:focus, textarea.is-secondary.is-focused {
+  border-color: #d49805;
 }
-textarea.is-error::selection,
-textarea.is-error *::selection {
-  color: rgb(251.85, 242.25, 243.9);
-  background-color: #c00021;
+textarea.is-secondary::selection,
+textarea.is-secondary *::selection {
+  color: rgb(252.85, 249.85, 242.5);
+  background-color: #d49805;
+}
+textarea.is-blue:focus, textarea.is-blue.is-focused {
+  border-color: #2478d8;
+}
+textarea.is-blue::selection,
+textarea.is-blue *::selection {
+  color: rgb(244.05, 248.25, 253.05);
+  background-color: #2478d8;
+}
+textarea.is-indigo:focus, textarea.is-indigo.is-focused {
+  border-color: #575ba0;
+}
+textarea.is-indigo::selection,
+textarea.is-indigo *::selection {
+  color: rgb(246.6, 246.8, 250.25);
+  background-color: #575ba0;
+}
+textarea.is-lime:focus, textarea.is-lime.is-focused {
+  border-color: #1cbc21;
+}
+textarea.is-lime::selection,
+textarea.is-lime *::selection {
+  color: rgb(243.65, 251.65, 243.9);
+  background-color: #1cbc21;
+}
+textarea.is-maroon:focus, textarea.is-maroon.is-focused {
+  border-color: #5e032a;
+}
+textarea.is-maroon::selection,
+textarea.is-maroon *::selection {
+  color: rgb(246.95, 242.4, 244.35);
+  background-color: #5e032a;
 }
 .field:invalid textarea,
 .field.is-failed textarea {

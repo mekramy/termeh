@@ -22,44 +22,47 @@ Applies common base styles for HTML elements. This includes root font settings, 
 
 :::
 
-::: termeh
+::: dependencies
 
-Base module uses the following Termeh global `var()`
+Base module uses the following Termeh global `var()`:
 
-| Component                | Type     | Usage                                                        |
-| ------------------------ | -------- | ------------------------------------------------------------ |
-| `font` → `family`        | _String_ | Base font-family for text elements (`html`, `body`)          |
-| `font` → `size`          | _Number_ | Base font-size for `html`, default 12px                      |
-| `font` → `weight`        | _String_ | Base font-weight for text, default `normal`                  |
-| `mono` → `family`        | _String_ | Font-family for `<code>` and `<pre>`                         |
-| `mono` → `size`          | _Number_ | Font-size for `<code>` and `<pre>`                           |
-| `mono` → `weight`        | _String_ | Font-weight for `<code>` and `<pre>`                         |
-| `base` → `color`         | _Color_  | Background color for root `<html>` element                   |
-| `base` → `foreground`    | _Color_  | Default text color for `<body>` and common elements          |
-| `base` → `section`       | _Color_  | Background for sections, `blockquote`, `code`, etc.          |
-| `base` → `separator`     | _Color_  | Color for separators like `<hr>` and list markers            |
-| `base` → `direction`     | _String_ | Text direction (`ltr` / `rtl`)                               |
-| `base` → `min-width`     | _Number_ | Minimum width of the layout (`<html>`)                       |
-| `line-height` → `normal` | _Number_ | Line-height for body text                                    |
-| `radius` → `normal`      | _Number_ | Border-radius for blocks like `<blockquote>`                 |
-| `strong` → `forground`   | _Color_  | Foreground for `<strong>`                                    |
-| `strong` → `weight`      | _String_ | Font-weight for `<strong>`                                   |
-| `gap` → `micro`          | _Number_ | Small spacing for margins and list items                     |
-| `gap` → `macro`          | _Number_ | Large spacing for section separation, paragraphs, and blocks |
+| Component                | Type     | Usage                                                      | Default  |
+| ------------------------ | -------- | ---------------------------------------------------------- | -------- |
+| `base` → `color`         | _Color_  | Document background color                                  | `white`  |
+| `base` → `foreground`    | _Color_  | Default text color                                         | `black`  |
+| `base` → `section`       | _Color_  | Background color for `<blockquote>`, `<code>`, and `<pre>` | `null`   |
+| `base` → `separator`     | _Color_  | Color for `<hr>` and list decorators                       | `null`   |
+| `font` → `family`        | _List_   | Default font family                                        | `null`   |
+| `font` → `size`          | _Number_ | Default font size                                          | `12px`   |
+| `font` → `weight`        | _String_ | Default font weight                                        | `normal` |
+| `mono` → `family`        | _List_   | `<code>` and `<pre>` font family                           | `null`   |
+| `mono` → `size`          | _Number_ | `<code>` and `<pre>` font size                             | `null`   |
+| `mono` → `weight`        | _String_ | `<code>` and `<pre>` font weight                           | `null`   |
+| `strong` → `foreground`  | _Color_  | `<strong>` and `<th>` text color                           | `null`   |
+| `strong` → `weight`      | _String_ | `<strong>` and `<th>` font weight                          | `bold`   |
+| `gap` → `micro`          | _Number_ | Spacing between list items                                 | `8px`    |
+| `gap` → `macro`          | _Number_ | Spacing between blocks                                     | `1.6em`  |
+| `base` → `direction`     | _String_ | Document text direction                                    | `ltr`    |
+| `base` → `min-width`     | _Number_ | Document minimum width                                     | `300px`  |
+| `line-height` → `normal` | _Number_ | Default line height                                        | `1.6em`  |
+| `radius` → `normal`      | _Number_ | `<blockquote>` border radius                               | `null`   |
 
-Base module uses the following Termeh registered `color()` and `variant()`
+---
 
-| Palette                  | Usage                                                           |
-| ------------------------ | --------------------------------------------------------------- |
-| `primary` → `color`      | Main interactive color (used for focus, accent, and scrollbars) |
-| `primary` → `readable`   | Readable color for links and interactive text                   |
-| `primary` → `active`     | Background for selected text (`::selection`)                    |
-| `primary` → `foreground` | Foreground for selected text (`::selection`)                    |
+Base module uses the following Termeh `color()` and `variant()`:
 
-Base module uses the following Termeh registered `size()`
+| Color / Variant          | Usage                                                   | Default |
+| ------------------------ | ------------------------------------------------------- | ------- |
+| `primary`                | Selection background, scrollbar, and input accent color | _error_ |
+| `primary` → `readable`   | Link color                                              | `null`  |
+| `primary` → `foreground` | Selection text color                                    | `null`  |
 
-| size  | Usage                            |
-| ----- | -------------------------------- |
-| small | Font-size for `<small>` elements |
+---
+
+Base module uses the following Termeh `size()`:
+
+| Size    | Usage               | Default |
+| ------- | ------------------- | ------- |
+| `small` | `<small>` font size | _error_ |
 
 :::
