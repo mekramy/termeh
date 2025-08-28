@@ -8,7 +8,7 @@
 $-colors: () !default;
 
 /// Defines a palette color
-/// @param {String} $name - Color name (e.g. "primary", "secondary")
+/// @param {String} $name - Color name (e.g. "primary", "green")
 /// @param {Color} $color - Color value (e.g. #6200ee, #03dac6)
 @mixin define-palette($name, $color) {
     $name: util.string-of($name, "define-palette", "name");

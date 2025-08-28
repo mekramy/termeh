@@ -1,0 +1,107 @@
+@use "../core/module";
+$-element-defined: false !default;
+
+/// Generates base element wrapper styles with configurable colors and sizes
+///
+/// @termeh {Number} [error] - size("small") -> font size for small items
+/// @termeh {Number} [8px] - var("gap", "micro") -> spacing between items
+/// @termeh {Number} [2.2em] - var("control", "height") -> element line height
+/// @termeh {Number} [null] - var("control", "weight") -> element font weight
+/// @termeh {Number} [null] - var("control", "strong") -> font weight for strong child elements
+@mixin use-element() {
+    @if not $-element-defined {
+        $-element-defined: true !global;
+
+        $size-small: module.size("small");
+        $gap-micro: module.var("gap", "micro", 8px);
+
+        $height: module.var("control", "height", 2.2em);
+        $weight: module.var("control", "weight");
+        $strong: module.var("control", "strong");
+
+        @at-root {
+            .element {
+                position: relative;
+                display: inline-flex;
+                align-items: center;
+                flex-flow: row nowrap;
+                justify-content: center;
+                text-align: center;
+                white-space: nowrap;
+                text-decoration: none;
+                line-height: $height;
+                font-weight: $weight;
+
+                b,
+                strong,
+                i,
+                em,
+                u,
+                ins,
+                s,
+                del,
+                sub,
+                sup,
+                span,
+                small {
+                    color: inherit;
+                    line-height: $height;
+                    font-weight: $weight;
+                }
+
+                s,
+                del,
+                sub,
+                sup,
+                small {
+                    font-size: $size-small;
+                }
+
+                sup {
+                    vertical-align: super;
+                    align-self: flex-start;
+                }
+
+                sub {
+                    vertical-align: baseline;
+                    align-self: flex-end;
+                }
+
+                b,
+                strong {
+                    font-weight: $strong;
+                }
+
+                > * {
+                    @include module.is-ltr() {
+                        &:not(:last-child) {
+                            margin-right: module.half($gap-micro);
+                        }
+                    }
+
+                    @include module.is-rtl() {
+                        &:not(:last-child) {
+                            margin-left: module.half($gap-micro);
+                        }
+                    }
+                }
+
+                .icon {
+                    color: inherit;
+
+                    @include module.is-ltr() {
+                        &:not(:last-child) {
+                            margin-right: $gap-micro;
+                        }
+                    }
+
+                    @include module.is-rtl() {
+                        &:not(:last-child) {
+                            margin-left: $gap-micro;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,109 @@
+@use "../core/module";
+@use "./element";
+
+/// Generates tag element styles with configurable colors and sizes
+/// @param {List} $colors [()] - List of registered color names to include. Pass null to include all registered colors
+/// @param {List} $sizes [()] - List of registered size names to include. Pass null to include all registered sizes
+///
+/// @termeh {Color} [error] - color("shade") -> default focus/active outline color
+/// @termeh {Color} [null] - variant("shade", "readable") -> default text/icon color
+/// @termeh {Color} [null] - variant("shade", "light") -> default tag background color
+/// @termeh {Number} [null] - var("radius", "normal") -> default tag border radius
+/// @termeh {Number} [null] - var("radius", "rounded") -> rounded tag border radius
+/// @termeh {Color} [null] - var("decorator", "size") -> loading spinner thickness
+/// @termeh {Number} [2.2em] - var("control", "height") -> default tag height
+@mixin use-tag($colors: (), $sizes: ()) {
+    $outline: rgba(module.color("shade"), 0.2);
+    $readable: module.variant("shade", "readable");
+    $background: rgba(module.variant("shade", "light"), 0.35);
+    $background-hover: module.variant("shade", "light");
+
+    $radius-normal: module.var("radius", "normal");
+    $radius-rounded: module.var("radius", "rounded");
+    $decorator: module.var("decorator", "size");
+
+    $height: module.var("control", "height", 2.2em);
+
+    @at-root {
+        @include element.use-element();
+
+        .tag {
+            @include module.control();
+            @extend .element;
+
+            cursor: default;
+            height: $height;
+            border-radius: $radius-normal;
+            text-overflow: ellipsis;
+            color: $readable;
+            background-color: $background;
+            font-size: 0.9em;
+            padding: module.control-padding();
+            @include module.transition(all);
+            @include module.unselectable();
+
+            &.is-action {
+                cursor: pointer;
+
+                &:hover {
+                    background-color: $background-hover;
+                    text-decoration: underline;
+                }
+
+                &:focus,
+                &:active {
+                    box-shadow: module.flat-shadow($decorator, $outline);
+                }
+            }
+
+            &.is-loading {
+                color: transparent;
+                @include module.locked();
+                @include module.loader(1em, $readable, $decorator);
+            }
+
+            &.is-rounded {
+                border-radius: $radius-rounded;
+            }
+
+            @each $name, $size in module.sizes($sizes) {
+                &.is-#{$name} {
+                    font-size: $size;
+                }
+            }
+
+            @each $name, $color in module.colors($colors) {
+                &.is-#{$name} {
+                    $-outline: rgba($color, 0.2);
+                    $-background: rgba(module.variant($name, "light"), 0.35);
+                    $-background-hover: module.variant($name, "light");
+                    $-readable: module.variant($name, "readable");
+
+                    color: $-readable;
+                    background-color: $-background;
+
+                    &.is-action {
+                        &:hover {
+                            background-color: $-background-hover;
+                        }
+
+                        &:focus,
+                        &:active {
+                            box-shadow: module.flat-shadow($decorator, $-outline);
+                        }
+                    }
+
+                    &.is-loading {
+                        color: transparent;
+                        @include module.loader-color($-readable);
+                    }
+                }
+            }
+
+            @include module.is-disabled() {
+                @include module.disabled();
+                border-color: transparent !important;
+            }
+        }
+    }
+}

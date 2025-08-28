@@ -48,7 +48,7 @@ To use it in your project, simply import the termeh in your _Sass_ file and use 
 );
 @include termeh.use-button(
   $colors: (
-    "primary" "secondary" "blue",
+    "primary" "green" "blue",
   )
 );
 ```

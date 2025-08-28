@@ -18,7 +18,7 @@ Register a new base color in the palette.
 
 ```scss
 @include termeh.define-palette("primary", #6200ee);
-@include termeh.define-palette("secondary", #03dac6);
+@include termeh.define-palette("green", #03dac6);
 ```
 
 :::
@@ -87,7 +87,7 @@ If the base color is not provided, the globally defined Termeh base color is use
 
 ```scss
 $primary-active: termeh.variant("primary", "active");
-$secondary-light: termeh.variant("secondary", "light");
+$green-light: termeh.variant("green", "light");
 $unknown: termeh.variant("danger", "shadow", #a8220f); // fallback
 ```
 

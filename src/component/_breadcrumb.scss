@@ -1,0 +1,54 @@
+@use "../core/module";
+
+/// Generates breadcrumb element styles with configurable colors
+/// @param {List} $colors [()] - List of registered color names to include. Pass null to include all registered colors
+///
+/// @termeh {Color} [null] - variant("primary", "readable") -> default active item color
+/// @termeh {Color} [null] - var("base", "separator") -> divider color
+/// @termeh {Number} [8px] - var("gap", "micro") -> horizontal spacing around divider
+/// @termeh {Number} [2.2em] - var("control", "height") -> breadcrumb height
+/// @termeh {Number} [null] - var("control", "weight") -> breadcrumb font weight
+/// @termeh {Number} [null] - var("control", "strong") -> active item font weight
+@mixin use-breadcrumb($colors: ()) {
+    $primary: module.variant("primary", "readable");
+    $separator: module.var("base", "separator");
+    $gap-micro: module.var("gap", "micro", 8px);
+
+    $height: module.var("control", "height", 2.2em);
+    $weight: module.var("control", "weight");
+    $strong: module.var("control", "strong");
+
+    @at-root {
+        .breadcrumb {
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
+            justify-content: flex-start;
+            box-sizing: border-box;
+            font-weight: $weight;
+
+            .active {
+                font-weight: $strong;
+            }
+
+            > * {
+                line-height: $height;
+            }
+
+            .divider {
+                color: $separator;
+                margin: 0 $gap-micro;
+            }
+
+            .active {
+                color: $primary;
+            }
+
+            @each $name, $color in module.colors($includes: $colors) {
+                &.is-#{$name} .active {
+                    color: module.variant($name, "readable");
+                }
+            }
+        }
+    }
+}

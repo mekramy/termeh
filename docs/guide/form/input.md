@@ -99,7 +99,7 @@ The **Input** module provides styled input wrappers with configurable gaps, colo
 **Example:**
 
 ```scss
-@include termeh.use-input(("small", "medium"), ("primary", "secondary"));
+@include termeh.use-input(("small", "medium"), ("primary", "green"));
 ```
 
 :::

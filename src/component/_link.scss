@@ -1,0 +1,79 @@
+@use "../core/module";
+@use "./element";
+
+/// Generates link element styles with configurable colors and sizes
+/// @param {List} $colors [()] - List of registered color names to include. Pass null to include all registered colors
+/// @param {List} $sizes [()] - List of registered size names to include. Pass null to include all registered sizes
+///
+/// @termeh {Color} [black] - var("base", "foreground") -> default link color
+/// @termeh {Number} [2.2em] - var("control", "height") -> link height
+/// @termeh {Color} [null] - var("decorator", "size") -> loading spinner thickness
+@mixin use-link($colors: (), $sizes: ()) {
+    $foreground: module.var("base", "foreground", black);
+    $height: module.var("control", "height", 2.2em);
+    $decorator: module.var("decorator", "size");
+
+    @at-root {
+        @include element.use-element();
+
+        .link {
+            @include module.control();
+            @extend .element;
+
+            cursor: pointer;
+            height: $height;
+            color: $foreground;
+            @include module.transition(all);
+
+            &::after {
+                content: " ";
+                position: absolute;
+                left: 50%;
+                bottom: 0%;
+                width: 0%;
+                height: 1px;
+                transform: translateX(-50%);
+                background: currentColor;
+                @include module.transition(all);
+            }
+
+            &:hover {
+                text-decoration: none;
+
+                &::after {
+                    width: 100%;
+                }
+            }
+
+            &.is-loading {
+                color: transparent;
+                @include module.locked();
+                @include module.loader(1em, $foreground, $decorator);
+            }
+
+            @each $name, $size in module.sizes($sizes) {
+                &.is-#{$name} {
+                    font-size: $size;
+                }
+            }
+
+            @each $name, $color in module.colors($colors) {
+                &.is-#{$name} {
+                    color: module.variant($name, "readable");
+                    @include module.selection($name);
+
+                    &.is-loading {
+                        color: transparent;
+                        @include module.loader-color(module.variant($name, "readable"));
+                    }
+                }
+            }
+
+            @include module.is-disabled() {
+                @include module.disabled();
+                background-color: transparent !important;
+                border-color: transparent !important;
+            }
+        }
+    }
+}

@@ -171,6 +171,40 @@ export default [
         ],
     },
     {
+        text: "Component",
+        collapsed: true,
+        items: [
+            {
+                text: "Element",
+                link: "/guide/component/element",
+            },
+            {
+                text: "Meta",
+                link: "/guide/component/meta",
+            },
+            {
+                text: "Tag",
+                link: "/guide/component/tag",
+            },
+            {
+                text: "Button",
+                link: "/guide/component/button",
+            },
+            {
+                text: "Icon",
+                link: "/guide/component/icon",
+            },
+            {
+                text: "Link",
+                link: "/guide/component/link",
+            },
+            {
+                text: "Breadcrumb",
+                link: "/guide/component/breadcrumb",
+            },
+        ],
+    },
+    {
         text: "Helper",
         collapsed: true,
         items: [

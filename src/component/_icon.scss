@@ -1,0 +1,127 @@
+@use "../core/module";
+
+/// Generates icon container element styles with configurable colors and sizes
+/// @param {List} $colors [()] - List of registered color names to include. Pass null to include all registered colors
+/// @param {List} $sizes [()] - List of registered size names to include. Pass null to include all registered sizes
+///
+/// @termeh {Color} [error] - color("shade") -> default loading spinner color
+/// @termeh {Color} [null] - variant("shade", "mute") -> default action icon color
+/// @termeh {Color} [null] - variant("shade", "readable") -> default hover color for action icons
+/// @termeh {Color} [null] - var("decorator", "size") -> loading spinner thickness
+@mixin use-icon($colors: (), $sizes: ()) {
+    $base: module.color("shade");
+    $mute: module.variant("shade", "mute");
+    $readable: module.variant("shade", "readable");
+    $decorator: module.var("decorator", "size");
+
+    @at-root {
+        .icon {
+            display: inline-flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: center;
+            width: 1em;
+            height: 1em;
+            @include module.transition(all);
+            @include module.unselectable();
+
+            img {
+                display: block;
+                max-height: 100%;
+                max-width: 100%;
+                @include module.transition(all);
+            }
+
+            svg {
+                width: 100%;
+                @include module.transition(all);
+            }
+
+            &:not(.is-outline) {
+                svg {
+                    fill: currentColor;
+
+                    > * {
+                        fill: currentColor;
+                    }
+                }
+            }
+
+            &.is-outline {
+                svg {
+                    stroke: currentColor;
+
+                    > * {
+                        stroke: currentColor;
+                    }
+                }
+            }
+
+            &.is-action {
+                color: $mute;
+                cursor: pointer;
+                text-decoration: none;
+
+                > img {
+                    filter: grayscale(0.5);
+                }
+
+                &:hover {
+                    text-decoration: none;
+                    color: $readable;
+
+                    > img {
+                        filter: grayscale(0);
+                    }
+                }
+            }
+
+            &.is-loading {
+                @include module.locked();
+                @include module.loader(1em, $base, $decorator);
+
+                img,
+                svg {
+                    opacity: 0;
+                }
+            }
+
+            @each $name, $size in module.sizes($sizes) {
+                &.is-#{$name} {
+                    height: $size;
+                    width: $size;
+                }
+            }
+
+            @each $name, $color in module.colors($colors) {
+                &.is-#{$name} {
+                    &:not(.is-action) {
+                        color: module.variant($name, "readable");
+                    }
+
+                    &.is-action {
+                        color: module.variant($name, "mute");
+
+                        &:hover {
+                            color: module.variant($name, "readable");
+                        }
+                    }
+
+                    &.is-loading {
+                        @include module.loader-color(module.variant($name, "readable"));
+                    }
+                }
+            }
+
+            @include module.is-disabled() {
+                @include module.disabled();
+                background-color: transparent !important;
+                border-color: transparent !important;
+
+                > img {
+                    filter: grayscale(1) !important;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,78 @@
+@use "../core/module";
+@use "./element";
+
+/// Generates meta element styles with configurable colors and sizes
+/// @param {List} $colors [()] - List of registered color names to include. Pass null to include all registered colors
+/// @param {List} $sizes [()] - List of registered size names to include. Pass null to include all registered sizes
+///
+/// @termeh {Color} [null] - variant("shade", "mute") -> default meta color
+/// @termeh {Color} [null] - variant("shade", "readable") -> default hover color for action meta
+/// @termeh {Color} [null] - var("decorator", "size") -> loading spinner thickness
+@mixin use-meta($colors: (), $sizes: ()) {
+    $mute: module.variant("shade", "mute");
+    $active: module.variant("shade", "mute-active");
+    $decorator: module.var("decorator", "size");
+
+    @at-root {
+        @include element.use-element();
+
+        .meta {
+            @include module.control();
+            @extend .element;
+
+            cursor: default;
+            color: $mute;
+            font-size: 0.9em;
+            padding: module.inline-padding();
+            @include module.transition(all);
+            @include module.unselectable();
+
+            &.is-action {
+                cursor: pointer;
+
+                &:hover {
+                    color: $active;
+                    text-decoration: underline;
+                }
+            }
+
+            &.is-loading {
+                color: transparent;
+                @include module.locked();
+                @include module.loader(1em, $active, $decorator);
+            }
+
+            @each $name, $size in module.sizes($sizes) {
+                &.is-#{$name} {
+                    font-size: $size;
+                }
+            }
+
+            @each $name, $color in module.colors($colors) {
+                &.is-#{$name} {
+                    $-mute: module.variant($name, "mute");
+                    $-active: module.variant($name, "mute-active");
+
+                    color: $-mute;
+
+                    &.is-action {
+                        &:hover {
+                            color: $-active;
+                        }
+                    }
+
+                    &.is-loading {
+                        color: transparent;
+                        @include module.loader-color($-active);
+                    }
+                }
+            }
+
+            @include module.is-disabled() {
+                @include module.disabled();
+                background-color: transparent !important;
+                border-color: transparent !important;
+            }
+        }
+    }
+}

@@ -61,7 +61,7 @@ $colors: (
   "primary": #ff0000,
 );
 $primary: termeh.alter($colors, "primary", #000); // #ff0000
-$secondary: termeh.alter($colors, "secondary", #000); // #000
+$green: termeh.alter($colors, "green", #000); // #000
 ```
 
 :::

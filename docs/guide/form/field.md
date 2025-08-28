@@ -59,7 +59,7 @@ The **Field** module provides a wrapper for form controls, helping manage spacin
 **Example:**
 
 ```scss
-@include termeh.use-field(("primary", "secondary"));
+@include termeh.use-field(("primary", "green"));
 ```
 
 :::

@@ -8,11 +8,9 @@
 @include termeh.define("font", "family", ("Space Grotesk", sans-serif));
 
 @include termeh.define-palette("primary", #179299);
-@include termeh.define-palette("secondary", #d49805);
-@include termeh.define-palette("blue", #2478d8);
-@include termeh.define-palette("indigo", #575ba0);
-@include termeh.define-palette("lime", #1cbc21);
-@include termeh.define-palette("maroon", #5e032a);
+@include termeh.define-palette("indigo", #5b5fc7);
+@include termeh.define-palette("green", #76c893);
+@include termeh.define-palette("maroon", #8b1e3f);
 
 @include termeh.use-generic();
 
@@ -42,6 +40,14 @@
 @include termeh.use-radio();
 @include termeh.use-select();
 @include termeh.use-textarea();
+
+@include termeh.use-element();
+@include termeh.use-meta();
+@include termeh.use-tag();
+@include termeh.use-button();
+@include termeh.use-icon();
+@include termeh.use-link();
+@include termeh.use-breadcrumb();
 
 .placeholder {
     display: flex;
