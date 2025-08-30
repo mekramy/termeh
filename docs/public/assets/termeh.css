@@ -8044,7 +8044,12 @@ textarea:disabled, textarea.is-disabled {
   border-color: #d1d6e0 !important;
 }
 
-.element, .link, .button, .tag, .meta {
+.element, .link, .header .headers h1,
+.header .headers h2,
+.header .headers h3,
+.header .headers h4,
+.header .headers h5,
+.header .headers h6, .button, .tag, .meta {
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -8056,59 +8061,130 @@ textarea:disabled, textarea.is-disabled {
   line-height: 2.2em;
   font-weight: 600;
 }
-.element b, .link b, .button b, .tag b, .meta b,
+.element b, .link b, .header .headers h1 b,
+.header .headers h2 b,
+.header .headers h3 b,
+.header .headers h4 b,
+.header .headers h5 b,
+.header .headers h6 b, .button b, .tag b, .meta b,
 .element strong,
 .link strong,
+.header .headers h1 strong,
+.header .headers h2 strong,
+.header .headers h3 strong,
+.header .headers h4 strong,
+.header .headers h5 strong,
+.header .headers h6 strong,
 .button strong,
 .tag strong,
 .meta strong,
 .element i,
 .link i,
+.header .headers h1 i,
+.header .headers h2 i,
+.header .headers h3 i,
+.header .headers h4 i,
+.header .headers h5 i,
+.header .headers h6 i,
 .button i,
 .tag i,
 .meta i,
 .element em,
 .link em,
+.header .headers h1 em,
+.header .headers h2 em,
+.header .headers h3 em,
+.header .headers h4 em,
+.header .headers h5 em,
+.header .headers h6 em,
 .button em,
 .tag em,
 .meta em,
 .element u,
 .link u,
+.header .headers h1 u,
+.header .headers h2 u,
+.header .headers h3 u,
+.header .headers h4 u,
+.header .headers h5 u,
+.header .headers h6 u,
 .button u,
 .tag u,
 .meta u,
 .element ins,
 .link ins,
+.header .headers h1 ins,
+.header .headers h2 ins,
+.header .headers h3 ins,
+.header .headers h4 ins,
+.header .headers h5 ins,
+.header .headers h6 ins,
 .button ins,
 .tag ins,
 .meta ins,
 .element s,
 .link s,
+.header .headers h1 s,
+.header .headers h2 s,
+.header .headers h3 s,
+.header .headers h4 s,
+.header .headers h5 s,
+.header .headers h6 s,
 .button s,
 .tag s,
 .meta s,
 .element del,
 .link del,
+.header .headers h1 del,
+.header .headers h2 del,
+.header .headers h3 del,
+.header .headers h4 del,
+.header .headers h5 del,
+.header .headers h6 del,
 .button del,
 .tag del,
 .meta del,
 .element sub,
 .link sub,
+.header .headers h1 sub,
+.header .headers h2 sub,
+.header .headers h3 sub,
+.header .headers h4 sub,
+.header .headers h5 sub,
+.header .headers h6 sub,
 .button sub,
 .tag sub,
 .meta sub,
 .element sup,
 .link sup,
+.header .headers h1 sup,
+.header .headers h2 sup,
+.header .headers h3 sup,
+.header .headers h4 sup,
+.header .headers h5 sup,
+.header .headers h6 sup,
 .button sup,
 .tag sup,
 .meta sup,
 .element span,
 .link span,
+.header .headers h1 span,
+.header .headers h2 span,
+.header .headers h3 span,
+.header .headers h4 span,
+.header .headers h5 span,
+.header .headers h6 span,
 .button span,
 .tag span,
 .meta span,
 .element small,
 .link small,
+.header .headers h1 small,
+.header .headers h2 small,
+.header .headers h3 small,
+.header .headers h4 small,
+.header .headers h5 small,
+.header .headers h6 small,
 .button small,
 .tag small,
 .meta small {
@@ -8116,64 +8192,169 @@ textarea:disabled, textarea.is-disabled {
   line-height: 2.2em;
   font-weight: 600;
 }
-.element s, .link s, .button s, .tag s, .meta s,
+.element s, .link s, .header .headers h1 s,
+.header .headers h2 s,
+.header .headers h3 s,
+.header .headers h4 s,
+.header .headers h5 s,
+.header .headers h6 s, .button s, .tag s, .meta s,
 .element del,
 .link del,
+.header .headers h1 del,
+.header .headers h2 del,
+.header .headers h3 del,
+.header .headers h4 del,
+.header .headers h5 del,
+.header .headers h6 del,
 .button del,
 .tag del,
 .meta del,
 .element sub,
 .link sub,
+.header .headers h1 sub,
+.header .headers h2 sub,
+.header .headers h3 sub,
+.header .headers h4 sub,
+.header .headers h5 sub,
+.header .headers h6 sub,
 .button sub,
 .tag sub,
 .meta sub,
 .element sup,
 .link sup,
+.header .headers h1 sup,
+.header .headers h2 sup,
+.header .headers h3 sup,
+.header .headers h4 sup,
+.header .headers h5 sup,
+.header .headers h6 sup,
 .button sup,
 .tag sup,
 .meta sup,
 .element small,
 .link small,
+.header .headers h1 small,
+.header .headers h2 small,
+.header .headers h3 small,
+.header .headers h4 small,
+.header .headers h5 small,
+.header .headers h6 small,
 .button small,
 .tag small,
 .meta small {
   font-size: 0.8em;
 }
-.element sup, .link sup, .button sup, .tag sup, .meta sup {
+.element sup, .link sup, .header .headers h1 sup,
+.header .headers h2 sup,
+.header .headers h3 sup,
+.header .headers h4 sup,
+.header .headers h5 sup,
+.header .headers h6 sup, .button sup, .tag sup, .meta sup {
   vertical-align: super;
   align-self: flex-start;
 }
-.element sub, .link sub, .button sub, .tag sub, .meta sub {
+.element sub, .link sub, .header .headers h1 sub,
+.header .headers h2 sub,
+.header .headers h3 sub,
+.header .headers h4 sub,
+.header .headers h5 sub,
+.header .headers h6 sub, .button sub, .tag sub, .meta sub {
   vertical-align: baseline;
   align-self: flex-end;
 }
-.element b, .link b, .button b, .tag b, .meta b,
+.element b, .link b, .header .headers h1 b,
+.header .headers h2 b,
+.header .headers h3 b,
+.header .headers h4 b,
+.header .headers h5 b,
+.header .headers h6 b, .button b, .tag b, .meta b,
 .element strong,
 .link strong,
+.header .headers h1 strong,
+.header .headers h2 strong,
+.header .headers h3 strong,
+.header .headers h4 strong,
+.header .headers h5 strong,
+.header .headers h6 strong,
 .button strong,
 .tag strong,
 .meta strong {
   font-weight: 700;
 }
-.element > *:not(:last-child), .link > *:not(:last-child), .button > *:not(:last-child), .tag > *:not(:last-child), .meta > *:not(:last-child) {
+.element > *:not(:last-child), .link > *:not(:last-child), .header .headers h1 > *:not(:last-child),
+.header .headers h2 > *:not(:last-child),
+.header .headers h3 > *:not(:last-child),
+.header .headers h4 > *:not(:last-child),
+.header .headers h5 > *:not(:last-child),
+.header .headers h6 > *:not(:last-child), .button > *:not(:last-child), .tag > *:not(:last-child), .meta > *:not(:last-child) {
   margin-right: 4px;
 }
-.element > *.is-ltr:not(:last-child), .link > *.is-ltr:not(:last-child), .button > *.is-ltr:not(:last-child), .tag > *.is-ltr:not(:last-child), .meta > *.is-ltr:not(:last-child), .element > *:dir(ltr):not(:last-child), .link > *:dir(ltr):not(:last-child), .button > *:dir(ltr):not(:last-child), .tag > *:dir(ltr):not(:last-child), .meta > *:dir(ltr):not(:last-child) {
+.element > *.is-ltr:not(:last-child), .link > *.is-ltr:not(:last-child), .header .headers h1 > *.is-ltr:not(:last-child),
+.header .headers h2 > *.is-ltr:not(:last-child),
+.header .headers h3 > *.is-ltr:not(:last-child),
+.header .headers h4 > *.is-ltr:not(:last-child),
+.header .headers h5 > *.is-ltr:not(:last-child),
+.header .headers h6 > *.is-ltr:not(:last-child), .button > *.is-ltr:not(:last-child), .tag > *.is-ltr:not(:last-child), .meta > *.is-ltr:not(:last-child), .element > *:dir(ltr):not(:last-child), .link > *:dir(ltr):not(:last-child), .header .headers h1 > *:dir(ltr):not(:last-child),
+.header .headers h2 > *:dir(ltr):not(:last-child),
+.header .headers h3 > *:dir(ltr):not(:last-child),
+.header .headers h4 > *:dir(ltr):not(:last-child),
+.header .headers h5 > *:dir(ltr):not(:last-child),
+.header .headers h6 > *:dir(ltr):not(:last-child), .button > *:dir(ltr):not(:last-child), .tag > *:dir(ltr):not(:last-child), .meta > *:dir(ltr):not(:last-child) {
   margin-right: 4px;
 }
-.element > *.is-rtl:not(:last-child), .link > *.is-rtl:not(:last-child), .button > *.is-rtl:not(:last-child), .tag > *.is-rtl:not(:last-child), .meta > *.is-rtl:not(:last-child), .element > *:dir(rtl):not(:last-child), .link > *:dir(rtl):not(:last-child), .button > *:dir(rtl):not(:last-child), .tag > *:dir(rtl):not(:last-child), .meta > *:dir(rtl):not(:last-child) {
+.element > *.is-rtl:not(:last-child), .link > *.is-rtl:not(:last-child), .header .headers h1 > *.is-rtl:not(:last-child),
+.header .headers h2 > *.is-rtl:not(:last-child),
+.header .headers h3 > *.is-rtl:not(:last-child),
+.header .headers h4 > *.is-rtl:not(:last-child),
+.header .headers h5 > *.is-rtl:not(:last-child),
+.header .headers h6 > *.is-rtl:not(:last-child), .button > *.is-rtl:not(:last-child), .tag > *.is-rtl:not(:last-child), .meta > *.is-rtl:not(:last-child), .element > *:dir(rtl):not(:last-child), .link > *:dir(rtl):not(:last-child), .header .headers h1 > *:dir(rtl):not(:last-child),
+.header .headers h2 > *:dir(rtl):not(:last-child),
+.header .headers h3 > *:dir(rtl):not(:last-child),
+.header .headers h4 > *:dir(rtl):not(:last-child),
+.header .headers h5 > *:dir(rtl):not(:last-child),
+.header .headers h6 > *:dir(rtl):not(:last-child), .button > *:dir(rtl):not(:last-child), .tag > *:dir(rtl):not(:last-child), .meta > *:dir(rtl):not(:last-child) {
   margin-left: 4px;
 }
-.element .icon, .link .icon, .button .icon, .tag .icon, .meta .icon {
+.element .icon, .link .icon, .header .headers h1 .icon,
+.header .headers h2 .icon,
+.header .headers h3 .icon,
+.header .headers h4 .icon,
+.header .headers h5 .icon,
+.header .headers h6 .icon, .button .icon, .tag .icon, .meta .icon {
   color: inherit;
 }
-.element .icon:not(:last-child), .link .icon:not(:last-child), .button .icon:not(:last-child), .tag .icon:not(:last-child), .meta .icon:not(:last-child) {
+.element .icon:not(:last-child), .link .icon:not(:last-child), .header .headers h1 .icon:not(:last-child),
+.header .headers h2 .icon:not(:last-child),
+.header .headers h3 .icon:not(:last-child),
+.header .headers h4 .icon:not(:last-child),
+.header .headers h5 .icon:not(:last-child),
+.header .headers h6 .icon:not(:last-child), .button .icon:not(:last-child), .tag .icon:not(:last-child), .meta .icon:not(:last-child) {
   margin-right: 8px;
 }
-.element .icon.is-ltr:not(:last-child), .link .icon.is-ltr:not(:last-child), .button .icon.is-ltr:not(:last-child), .tag .icon.is-ltr:not(:last-child), .meta .icon.is-ltr:not(:last-child), .element .icon:dir(ltr):not(:last-child), .link .icon:dir(ltr):not(:last-child), .button .icon:dir(ltr):not(:last-child), .tag .icon:dir(ltr):not(:last-child), .meta .icon:dir(ltr):not(:last-child) {
+.element .icon.is-ltr:not(:last-child), .link .icon.is-ltr:not(:last-child), .header .headers h1 .icon.is-ltr:not(:last-child),
+.header .headers h2 .icon.is-ltr:not(:last-child),
+.header .headers h3 .icon.is-ltr:not(:last-child),
+.header .headers h4 .icon.is-ltr:not(:last-child),
+.header .headers h5 .icon.is-ltr:not(:last-child),
+.header .headers h6 .icon.is-ltr:not(:last-child), .button .icon.is-ltr:not(:last-child), .tag .icon.is-ltr:not(:last-child), .meta .icon.is-ltr:not(:last-child), .element .icon:dir(ltr):not(:last-child), .link .icon:dir(ltr):not(:last-child), .header .headers h1 .icon:dir(ltr):not(:last-child),
+.header .headers h2 .icon:dir(ltr):not(:last-child),
+.header .headers h3 .icon:dir(ltr):not(:last-child),
+.header .headers h4 .icon:dir(ltr):not(:last-child),
+.header .headers h5 .icon:dir(ltr):not(:last-child),
+.header .headers h6 .icon:dir(ltr):not(:last-child), .button .icon:dir(ltr):not(:last-child), .tag .icon:dir(ltr):not(:last-child), .meta .icon:dir(ltr):not(:last-child) {
   margin-right: 8px;
 }
-.element .icon.is-rtl:not(:last-child), .link .icon.is-rtl:not(:last-child), .button .icon.is-rtl:not(:last-child), .tag .icon.is-rtl:not(:last-child), .meta .icon.is-rtl:not(:last-child), .element .icon:dir(rtl):not(:last-child), .link .icon:dir(rtl):not(:last-child), .button .icon:dir(rtl):not(:last-child), .tag .icon:dir(rtl):not(:last-child), .meta .icon:dir(rtl):not(:last-child) {
+.element .icon.is-rtl:not(:last-child), .link .icon.is-rtl:not(:last-child), .header .headers h1 .icon.is-rtl:not(:last-child),
+.header .headers h2 .icon.is-rtl:not(:last-child),
+.header .headers h3 .icon.is-rtl:not(:last-child),
+.header .headers h4 .icon.is-rtl:not(:last-child),
+.header .headers h5 .icon.is-rtl:not(:last-child),
+.header .headers h6 .icon.is-rtl:not(:last-child), .button .icon.is-rtl:not(:last-child), .tag .icon.is-rtl:not(:last-child), .meta .icon.is-rtl:not(:last-child), .element .icon:dir(rtl):not(:last-child), .link .icon:dir(rtl):not(:last-child), .header .headers h1 .icon:dir(rtl):not(:last-child),
+.header .headers h2 .icon:dir(rtl):not(:last-child),
+.header .headers h3 .icon:dir(rtl):not(:last-child),
+.header .headers h4 .icon:dir(rtl):not(:last-child),
+.header .headers h5 .icon:dir(rtl):not(:last-child),
+.header .headers h6 .icon:dir(rtl):not(:last-child), .button .icon:dir(rtl):not(:last-child), .tag .icon:dir(rtl):not(:last-child), .meta .icon:dir(rtl):not(:last-child) {
   margin-left: 8px;
 }
 
@@ -9053,6 +9234,273 @@ fieldset.is-disabled .button,
   background-color: #f0f2f5 !important;
   border-color: #d1d6e0 !important;
   border-color: transparent !important;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+}
+.header:not(.is-paddingless) {
+  padding: 0em 1.2em;
+}
+.header:not(:last-child, .is-marginless) {
+  margin-bottom: 1.6rem;
+}
+.header .thumbnail {
+  flex: 0 0 auto;
+}
+.header .thumbnail:not(:last-child) {
+  margin-right: 1.6rem;
+}
+.header .thumbnail:not(:last-child).is-ltr, .header .thumbnail:not(:last-child):dir(ltr) {
+  margin-right: 1.6rem;
+}
+.header .thumbnail:not(:last-child).is-rtl, .header .thumbnail:not(:last-child):dir(rtl) {
+  margin-left: 1.6rem;
+}
+.header .headers {
+  min-width: 0;
+  flex: 1 1 0;
+}
+.header .headers h1,
+.header .headers h2,
+.header .headers h3,
+.header .headers h4,
+.header .headers h5,
+.header .headers h6 {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 1em;
+  line-height: 1.6em;
+}
+.header .headers h1:not(:last-child, .is-marginless),
+.header .headers h2:not(:last-child, .is-marginless),
+.header .headers h3:not(:last-child, .is-marginless),
+.header .headers h4:not(:last-child, .is-marginless),
+.header .headers h5:not(:last-child, .is-marginless),
+.header .headers h6:not(:last-child, .is-marginless) {
+  margin-bottom: 0;
+}
+.header .headers h1 .filler,
+.header .headers h2 .filler,
+.header .headers h3 .filler,
+.header .headers h4 .filler,
+.header .headers h5 .filler,
+.header .headers h6 .filler {
+  flex: 1 1 0;
+}
+.header .headers h1,
+.header .headers h2 {
+  font-weight: bold;
+}
+.header .headers h3,
+.header .headers h4,
+.header .headers h5,
+.header .headers h6 {
+  color: rgb(178.5, 183.5, 194);
+  font-size: 0.9em;
+  font-weight: 500;
+}
+.header .headers h5,
+.header .headers h6 {
+  opacity: 0.75;
+}
+.header.is-decorated {
+  margin-left: 1px;
+  border-left: 2px solid #667085;
+}
+.header.is-decorated.is-ltr, .header.is-decorated:dir(ltr) {
+  margin-left: 1px;
+  border-left: 2px solid #667085;
+}
+.header.is-decorated.is-rtl, .header.is-decorated:dir(rtl) {
+  margin-right: 1px;
+  border-right: 2px solid #667085;
+}
+.header.is-centered {
+  text-align: center;
+}
+.header.is-centered h1,
+.header.is-centered h2,
+.header.is-centered h3,
+.header.is-centered h4,
+.header.is-centered h5,
+.header.is-centered h6 {
+  justify-content: center;
+}
+.header.is-mini-gap:not(.is-paddingless) {
+  padding: 0.25em 0.5em;
+}
+.header.is-mini-gap .thumbnail:not(:last-child) {
+  margin-right: 0.5em;
+}
+.header.is-mini-gap .thumbnail:not(:last-child).is-ltr, .header.is-mini-gap .thumbnail:not(:last-child):dir(ltr) {
+  margin-right: 0.5em;
+}
+.header.is-mini-gap .thumbnail:not(:last-child).is-rtl, .header.is-mini-gap .thumbnail:not(:last-child):dir(rtl) {
+  margin-left: 0.5em;
+}
+.header.is-small-gap:not(.is-paddingless) {
+  padding: 0.425em 0.85em;
+}
+.header.is-small-gap .thumbnail:not(:last-child) {
+  margin-right: 0.85em;
+}
+.header.is-small-gap .thumbnail:not(:last-child).is-ltr, .header.is-small-gap .thumbnail:not(:last-child):dir(ltr) {
+  margin-right: 0.85em;
+}
+.header.is-small-gap .thumbnail:not(:last-child).is-rtl, .header.is-small-gap .thumbnail:not(:last-child):dir(rtl) {
+  margin-left: 0.85em;
+}
+.header.is-normal-gap:not(.is-paddingless) {
+  padding: 0.5em 1em;
+}
+.header.is-normal-gap .thumbnail:not(:last-child) {
+  margin-right: 1em;
+}
+.header.is-normal-gap .thumbnail:not(:last-child).is-ltr, .header.is-normal-gap .thumbnail:not(:last-child):dir(ltr) {
+  margin-right: 1em;
+}
+.header.is-normal-gap .thumbnail:not(:last-child).is-rtl, .header.is-normal-gap .thumbnail:not(:last-child):dir(rtl) {
+  margin-left: 1em;
+}
+.header.is-medium-gap:not(.is-paddingless) {
+  padding: 0.75em 1.5em;
+}
+.header.is-medium-gap .thumbnail:not(:last-child) {
+  margin-right: 1.5em;
+}
+.header.is-medium-gap .thumbnail:not(:last-child).is-ltr, .header.is-medium-gap .thumbnail:not(:last-child):dir(ltr) {
+  margin-right: 1.5em;
+}
+.header.is-medium-gap .thumbnail:not(:last-child).is-rtl, .header.is-medium-gap .thumbnail:not(:last-child):dir(rtl) {
+  margin-left: 1.5em;
+}
+.header.is-large-gap:not(.is-paddingless) {
+  padding: 1em 2em;
+}
+.header.is-large-gap .thumbnail:not(:last-child) {
+  margin-right: 2em;
+}
+.header.is-large-gap .thumbnail:not(:last-child).is-ltr, .header.is-large-gap .thumbnail:not(:last-child):dir(ltr) {
+  margin-right: 2em;
+}
+.header.is-large-gap .thumbnail:not(:last-child).is-rtl, .header.is-large-gap .thumbnail:not(:last-child):dir(rtl) {
+  margin-left: 2em;
+}
+.header.is-huge-gap:not(.is-paddingless) {
+  padding: 1.25em 2.5em;
+}
+.header.is-huge-gap .thumbnail:not(:last-child) {
+  margin-right: 2.5em;
+}
+.header.is-huge-gap .thumbnail:not(:last-child).is-ltr, .header.is-huge-gap .thumbnail:not(:last-child):dir(ltr) {
+  margin-right: 2.5em;
+}
+.header.is-huge-gap .thumbnail:not(:last-child).is-rtl, .header.is-huge-gap .thumbnail:not(:last-child):dir(rtl) {
+  margin-left: 2.5em;
+}
+.header.is-massive-gap:not(.is-paddingless) {
+  padding: 1.5em 3em;
+}
+.header.is-massive-gap .thumbnail:not(:last-child) {
+  margin-right: 3em;
+}
+.header.is-massive-gap .thumbnail:not(:last-child).is-ltr, .header.is-massive-gap .thumbnail:not(:last-child):dir(ltr) {
+  margin-right: 3em;
+}
+.header.is-massive-gap .thumbnail:not(:last-child).is-rtl, .header.is-massive-gap .thumbnail:not(:last-child):dir(rtl) {
+  margin-left: 3em;
+}
+.header.is-shade::selection,
+.header.is-shade *::selection {
+  color: rgb(247.35, 247.85, 248.9);
+  background-color: #667085;
+}
+.header.is-shade.is-decorated {
+  border-left-color: #667085;
+  border-right-color: #667085;
+}
+.header.is-shade.is-decorated.is-ltr, .header.is-shade.is-decorated:dir(ltr) {
+  border-left-color: #667085;
+}
+.header.is-shade.is-decorated.is-ltr, .header.is-shade.is-decorated:dir(ltr) {
+  border-right-color: #667085;
+}
+.header.is-error::selection,
+.header.is-error *::selection {
+  color: rgb(251.85, 242.25, 243.9);
+  background-color: #c00021;
+}
+.header.is-error.is-decorated {
+  border-left-color: #c00021;
+  border-right-color: #c00021;
+}
+.header.is-error.is-decorated.is-ltr, .header.is-error.is-decorated:dir(ltr) {
+  border-left-color: #c00021;
+}
+.header.is-error.is-decorated.is-ltr, .header.is-error.is-decorated:dir(ltr) {
+  border-right-color: #c00021;
+}
+.header.is-primary::selection,
+.header.is-primary *::selection {
+  color: rgb(243.4, 249.55, 249.9);
+  background-color: #179299;
+}
+.header.is-primary.is-decorated {
+  border-left-color: #179299;
+  border-right-color: #179299;
+}
+.header.is-primary.is-decorated.is-ltr, .header.is-primary.is-decorated:dir(ltr) {
+  border-left-color: #179299;
+}
+.header.is-primary.is-decorated.is-ltr, .header.is-primary.is-decorated:dir(ltr) {
+  border-right-color: #179299;
+}
+.header.is-indigo::selection,
+.header.is-indigo *::selection {
+  color: rgb(246.8, 247, 252.2);
+  background-color: #5b5fc7;
+}
+.header.is-indigo.is-decorated {
+  border-left-color: #5b5fc7;
+  border-right-color: #5b5fc7;
+}
+.header.is-indigo.is-decorated.is-ltr, .header.is-indigo.is-decorated:dir(ltr) {
+  border-left-color: #5b5fc7;
+}
+.header.is-indigo.is-decorated.is-ltr, .header.is-indigo.is-decorated:dir(ltr) {
+  border-right-color: #5b5fc7;
+}
+.header.is-green::selection,
+.header.is-green *::selection {
+  color: rgb(248.15, 252.25, 249.6);
+  background-color: #76c893;
+}
+.header.is-green.is-decorated {
+  border-left-color: #76c893;
+  border-right-color: #76c893;
+}
+.header.is-green.is-decorated.is-ltr, .header.is-green.is-decorated:dir(ltr) {
+  border-left-color: #76c893;
+}
+.header.is-green.is-decorated.is-ltr, .header.is-green.is-decorated:dir(ltr) {
+  border-right-color: #76c893;
+}
+.header.is-maroon::selection,
+.header.is-maroon *::selection {
+  color: rgb(249.2, 243.75, 245.4);
+  background-color: #8b1e3f;
+}
+.header.is-maroon.is-decorated {
+  border-left-color: #8b1e3f;
+  border-right-color: #8b1e3f;
+}
+.header.is-maroon.is-decorated.is-ltr, .header.is-maroon.is-decorated:dir(ltr) {
+  border-left-color: #8b1e3f;
+}
+.header.is-maroon.is-decorated.is-ltr, .header.is-maroon.is-decorated:dir(ltr) {
+  border-right-color: #8b1e3f;
 }
 
 .card {

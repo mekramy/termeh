@@ -191,6 +191,10 @@ export default [
                 link: "/guide/component/button",
             },
             {
+                text: "Header",
+                link: "/guide/component/header",
+            },
+            {
                 text: "Card",
                 link: "/guide/component/card",
             },
