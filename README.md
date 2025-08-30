@@ -10,6 +10,5 @@ This library includes a wide range of components and predefined styles for vario
 ![Stars](https://img.shields.io/github/stars/mekramy/termeh?style=social)
 ![Contributors](https://img.shields.io/github/contributors/mekramy/termeh)
 ![Issues](https://img.shields.io/github/issues/mekramy/termeh)
-[![Build Status](https://github.com/mekramy/termeh/actions/workflows/ci.yml/badge.svg)](https://github.com/mekramy/termeh/actions)
 
-Read Full [Documentation](https://termeh.ekramy.ir)
+Read the full documentation on the [official website](https://termeh.ekramy.ir).
