@@ -542,7 +542,7 @@ Creates a full-cover overlay via `::before`, with optional backdrop-filter.
 
 ## Is-Ltr
 
-LTR-only styles. Applies styles when the global direction is _left-to-right_, or the element has the `.is-ltr` class, or matches the `:dir(ltr)` selector.
+LTR-only styles. Applies styles when the global direction is _left-to-right_, or the element has the `.is-ltr` class.
 
 ::: definition
 
@@ -577,7 +577,7 @@ Global direction detected from the following Termeh global `var()`:
 
 ## Is-Rtl
 
-RTL-only styles. Applies styles when the global direction is _right-to-left_, or the element has the `.is-rtl` class, or matches the `:dir(rtl)` selector.
+RTL-only styles. Applies styles when the global direction is _right-to-left_, or the element has the `.is-rtl` class.
 
 ::: definition
 

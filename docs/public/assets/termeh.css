@@ -1038,19 +1038,19 @@ table.is-maroon tfoot tr td.is-sorted {
   border-top-right-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
 }
-.attacher.is-ltr > *:not(:first-child), .attacher:dir(ltr) > *:not(:first-child) {
+.attacher.is-ltr > *:not(:first-child) {
   border-top-left-radius: 0 !important;
   border-bottom-left-radius: 0 !important;
 }
-.attacher.is-ltr > *:not(:last-child), .attacher:dir(ltr) > *:not(:last-child) {
+.attacher.is-ltr > *:not(:last-child) {
   border-top-right-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
 }
-.attacher.is-rtl > *:not(:first-child), .attacher:dir(rtl) > *:not(:first-child) {
+.attacher.is-rtl > *:not(:first-child) {
   border-top-right-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
 }
-.attacher.is-rtl > *:not(:last-child), .attacher:dir(rtl) > *:not(:last-child) {
+.attacher.is-rtl > *:not(:last-child) {
   border-top-left-radius: 0 !important;
   border-bottom-left-radius: 0 !important;
 }
@@ -7005,11 +7005,11 @@ label.checkbox input {
   margin-left: 0;
   margin-right: 8px;
 }
-label.checkbox.is-ltr input, label.checkbox:dir(ltr) input {
+label.checkbox.is-ltr input {
   margin-left: 0;
   margin-right: 8px;
 }
-label.checkbox.is-rtl input, label.checkbox:dir(rtl) input {
+label.checkbox.is-rtl input {
   margin-left: 8px;
   margin-right: 0;
 }
@@ -7551,11 +7551,11 @@ label.radio input {
   margin-left: 0;
   margin-right: 8px;
 }
-label.radio.is-ltr input, label.radio:dir(ltr) input {
+label.radio.is-ltr input {
   margin-left: 0;
   margin-right: 8px;
 }
-label.radio.is-rtl input, label.radio:dir(rtl) input {
+label.radio.is-rtl input {
   margin-left: 8px;
   margin-right: 0;
 }
@@ -8294,12 +8294,7 @@ textarea:disabled, textarea.is-disabled {
 .header .headers h3 > *.is-ltr:not(:last-child),
 .header .headers h4 > *.is-ltr:not(:last-child),
 .header .headers h5 > *.is-ltr:not(:last-child),
-.header .headers h6 > *.is-ltr:not(:last-child), .button > *.is-ltr:not(:last-child), .tag > *.is-ltr:not(:last-child), .meta > *.is-ltr:not(:last-child), .element > *:dir(ltr):not(:last-child), .link > *:dir(ltr):not(:last-child), .header .headers h1 > *:dir(ltr):not(:last-child),
-.header .headers h2 > *:dir(ltr):not(:last-child),
-.header .headers h3 > *:dir(ltr):not(:last-child),
-.header .headers h4 > *:dir(ltr):not(:last-child),
-.header .headers h5 > *:dir(ltr):not(:last-child),
-.header .headers h6 > *:dir(ltr):not(:last-child), .button > *:dir(ltr):not(:last-child), .tag > *:dir(ltr):not(:last-child), .meta > *:dir(ltr):not(:last-child) {
+.header .headers h6 > *.is-ltr:not(:last-child), .button > *.is-ltr:not(:last-child), .tag > *.is-ltr:not(:last-child), .meta > *.is-ltr:not(:last-child) {
   margin-right: 4px;
 }
 .element > *.is-rtl:not(:last-child), .link > *.is-rtl:not(:last-child), .header .headers h1 > *.is-rtl:not(:last-child),
@@ -8307,12 +8302,7 @@ textarea:disabled, textarea.is-disabled {
 .header .headers h3 > *.is-rtl:not(:last-child),
 .header .headers h4 > *.is-rtl:not(:last-child),
 .header .headers h5 > *.is-rtl:not(:last-child),
-.header .headers h6 > *.is-rtl:not(:last-child), .button > *.is-rtl:not(:last-child), .tag > *.is-rtl:not(:last-child), .meta > *.is-rtl:not(:last-child), .element > *:dir(rtl):not(:last-child), .link > *:dir(rtl):not(:last-child), .header .headers h1 > *:dir(rtl):not(:last-child),
-.header .headers h2 > *:dir(rtl):not(:last-child),
-.header .headers h3 > *:dir(rtl):not(:last-child),
-.header .headers h4 > *:dir(rtl):not(:last-child),
-.header .headers h5 > *:dir(rtl):not(:last-child),
-.header .headers h6 > *:dir(rtl):not(:last-child), .button > *:dir(rtl):not(:last-child), .tag > *:dir(rtl):not(:last-child), .meta > *:dir(rtl):not(:last-child) {
+.header .headers h6 > *.is-rtl:not(:last-child), .button > *.is-rtl:not(:last-child), .tag > *.is-rtl:not(:last-child), .meta > *.is-rtl:not(:last-child) {
   margin-left: 4px;
 }
 .element .icon, .link .icon, .header .headers h1 .icon,
@@ -8336,12 +8326,7 @@ textarea:disabled, textarea.is-disabled {
 .header .headers h3 .icon.is-ltr:not(:last-child),
 .header .headers h4 .icon.is-ltr:not(:last-child),
 .header .headers h5 .icon.is-ltr:not(:last-child),
-.header .headers h6 .icon.is-ltr:not(:last-child), .button .icon.is-ltr:not(:last-child), .tag .icon.is-ltr:not(:last-child), .meta .icon.is-ltr:not(:last-child), .element .icon:dir(ltr):not(:last-child), .link .icon:dir(ltr):not(:last-child), .header .headers h1 .icon:dir(ltr):not(:last-child),
-.header .headers h2 .icon:dir(ltr):not(:last-child),
-.header .headers h3 .icon:dir(ltr):not(:last-child),
-.header .headers h4 .icon:dir(ltr):not(:last-child),
-.header .headers h5 .icon:dir(ltr):not(:last-child),
-.header .headers h6 .icon:dir(ltr):not(:last-child), .button .icon:dir(ltr):not(:last-child), .tag .icon:dir(ltr):not(:last-child), .meta .icon:dir(ltr):not(:last-child) {
+.header .headers h6 .icon.is-ltr:not(:last-child), .button .icon.is-ltr:not(:last-child), .tag .icon.is-ltr:not(:last-child), .meta .icon.is-ltr:not(:last-child) {
   margin-right: 8px;
 }
 .element .icon.is-rtl:not(:last-child), .link .icon.is-rtl:not(:last-child), .header .headers h1 .icon.is-rtl:not(:last-child),
@@ -8349,12 +8334,7 @@ textarea:disabled, textarea.is-disabled {
 .header .headers h3 .icon.is-rtl:not(:last-child),
 .header .headers h4 .icon.is-rtl:not(:last-child),
 .header .headers h5 .icon.is-rtl:not(:last-child),
-.header .headers h6 .icon.is-rtl:not(:last-child), .button .icon.is-rtl:not(:last-child), .tag .icon.is-rtl:not(:last-child), .meta .icon.is-rtl:not(:last-child), .element .icon:dir(rtl):not(:last-child), .link .icon:dir(rtl):not(:last-child), .header .headers h1 .icon:dir(rtl):not(:last-child),
-.header .headers h2 .icon:dir(rtl):not(:last-child),
-.header .headers h3 .icon:dir(rtl):not(:last-child),
-.header .headers h4 .icon:dir(rtl):not(:last-child),
-.header .headers h5 .icon:dir(rtl):not(:last-child),
-.header .headers h6 .icon:dir(rtl):not(:last-child), .button .icon:dir(rtl):not(:last-child), .tag .icon:dir(rtl):not(:last-child), .meta .icon:dir(rtl):not(:last-child) {
+.header .headers h6 .icon.is-rtl:not(:last-child), .button .icon.is-rtl:not(:last-child), .tag .icon.is-rtl:not(:last-child), .meta .icon.is-rtl:not(:last-child) {
   margin-left: 8px;
 }
 
@@ -8803,10 +8783,10 @@ fieldset.is-disabled .tag,
 .buttons > :not(:last-child) {
   margin-right: 4px;
 }
-.buttons > :not(:last-child).is-ltr, .buttons > :not(:last-child):dir(ltr) {
+.buttons > :not(:last-child).is-ltr {
   margin-right: 4px;
 }
-.buttons > :not(:last-child).is-rtl, .buttons > :not(:last-child):dir(rtl) {
+.buttons > :not(:last-child).is-rtl {
   margin-left: 4px;
 }
 
@@ -9252,10 +9232,10 @@ fieldset.is-disabled .button,
 .header .thumbnail:not(:last-child) {
   margin-right: 1.6rem;
 }
-.header .thumbnail:not(:last-child).is-ltr, .header .thumbnail:not(:last-child):dir(ltr) {
+.header .thumbnail:not(:last-child).is-ltr {
   margin-right: 1.6rem;
 }
-.header .thumbnail:not(:last-child).is-rtl, .header .thumbnail:not(:last-child):dir(rtl) {
+.header .thumbnail:not(:last-child).is-rtl {
   margin-left: 1.6rem;
 }
 .header .headers {
@@ -9309,11 +9289,11 @@ fieldset.is-disabled .button,
   margin-left: 1px;
   border-left: 2px solid #667085;
 }
-.header.is-decorated.is-ltr, .header.is-decorated:dir(ltr) {
+.header.is-decorated.is-ltr {
   margin-left: 1px;
   border-left: 2px solid #667085;
 }
-.header.is-decorated.is-rtl, .header.is-decorated:dir(rtl) {
+.header.is-decorated.is-rtl {
   margin-right: 1px;
   border-right: 2px solid #667085;
 }
@@ -9334,10 +9314,10 @@ fieldset.is-disabled .button,
 .header.is-mini-gap .thumbnail:not(:last-child) {
   margin-right: 0.5em;
 }
-.header.is-mini-gap .thumbnail:not(:last-child).is-ltr, .header.is-mini-gap .thumbnail:not(:last-child):dir(ltr) {
+.header.is-mini-gap .thumbnail:not(:last-child).is-ltr {
   margin-right: 0.5em;
 }
-.header.is-mini-gap .thumbnail:not(:last-child).is-rtl, .header.is-mini-gap .thumbnail:not(:last-child):dir(rtl) {
+.header.is-mini-gap .thumbnail:not(:last-child).is-rtl {
   margin-left: 0.5em;
 }
 .header.is-small-gap:not(.is-paddingless) {
@@ -9346,10 +9326,10 @@ fieldset.is-disabled .button,
 .header.is-small-gap .thumbnail:not(:last-child) {
   margin-right: 0.85em;
 }
-.header.is-small-gap .thumbnail:not(:last-child).is-ltr, .header.is-small-gap .thumbnail:not(:last-child):dir(ltr) {
+.header.is-small-gap .thumbnail:not(:last-child).is-ltr {
   margin-right: 0.85em;
 }
-.header.is-small-gap .thumbnail:not(:last-child).is-rtl, .header.is-small-gap .thumbnail:not(:last-child):dir(rtl) {
+.header.is-small-gap .thumbnail:not(:last-child).is-rtl {
   margin-left: 0.85em;
 }
 .header.is-normal-gap:not(.is-paddingless) {
@@ -9358,10 +9338,10 @@ fieldset.is-disabled .button,
 .header.is-normal-gap .thumbnail:not(:last-child) {
   margin-right: 1em;
 }
-.header.is-normal-gap .thumbnail:not(:last-child).is-ltr, .header.is-normal-gap .thumbnail:not(:last-child):dir(ltr) {
+.header.is-normal-gap .thumbnail:not(:last-child).is-ltr {
   margin-right: 1em;
 }
-.header.is-normal-gap .thumbnail:not(:last-child).is-rtl, .header.is-normal-gap .thumbnail:not(:last-child):dir(rtl) {
+.header.is-normal-gap .thumbnail:not(:last-child).is-rtl {
   margin-left: 1em;
 }
 .header.is-medium-gap:not(.is-paddingless) {
@@ -9370,10 +9350,10 @@ fieldset.is-disabled .button,
 .header.is-medium-gap .thumbnail:not(:last-child) {
   margin-right: 1.5em;
 }
-.header.is-medium-gap .thumbnail:not(:last-child).is-ltr, .header.is-medium-gap .thumbnail:not(:last-child):dir(ltr) {
+.header.is-medium-gap .thumbnail:not(:last-child).is-ltr {
   margin-right: 1.5em;
 }
-.header.is-medium-gap .thumbnail:not(:last-child).is-rtl, .header.is-medium-gap .thumbnail:not(:last-child):dir(rtl) {
+.header.is-medium-gap .thumbnail:not(:last-child).is-rtl {
   margin-left: 1.5em;
 }
 .header.is-large-gap:not(.is-paddingless) {
@@ -9382,10 +9362,10 @@ fieldset.is-disabled .button,
 .header.is-large-gap .thumbnail:not(:last-child) {
   margin-right: 2em;
 }
-.header.is-large-gap .thumbnail:not(:last-child).is-ltr, .header.is-large-gap .thumbnail:not(:last-child):dir(ltr) {
+.header.is-large-gap .thumbnail:not(:last-child).is-ltr {
   margin-right: 2em;
 }
-.header.is-large-gap .thumbnail:not(:last-child).is-rtl, .header.is-large-gap .thumbnail:not(:last-child):dir(rtl) {
+.header.is-large-gap .thumbnail:not(:last-child).is-rtl {
   margin-left: 2em;
 }
 .header.is-huge-gap:not(.is-paddingless) {
@@ -9394,10 +9374,10 @@ fieldset.is-disabled .button,
 .header.is-huge-gap .thumbnail:not(:last-child) {
   margin-right: 2.5em;
 }
-.header.is-huge-gap .thumbnail:not(:last-child).is-ltr, .header.is-huge-gap .thumbnail:not(:last-child):dir(ltr) {
+.header.is-huge-gap .thumbnail:not(:last-child).is-ltr {
   margin-right: 2.5em;
 }
-.header.is-huge-gap .thumbnail:not(:last-child).is-rtl, .header.is-huge-gap .thumbnail:not(:last-child):dir(rtl) {
+.header.is-huge-gap .thumbnail:not(:last-child).is-rtl {
   margin-left: 2.5em;
 }
 .header.is-massive-gap:not(.is-paddingless) {
@@ -9406,10 +9386,10 @@ fieldset.is-disabled .button,
 .header.is-massive-gap .thumbnail:not(:last-child) {
   margin-right: 3em;
 }
-.header.is-massive-gap .thumbnail:not(:last-child).is-ltr, .header.is-massive-gap .thumbnail:not(:last-child):dir(ltr) {
+.header.is-massive-gap .thumbnail:not(:last-child).is-ltr {
   margin-right: 3em;
 }
-.header.is-massive-gap .thumbnail:not(:last-child).is-rtl, .header.is-massive-gap .thumbnail:not(:last-child):dir(rtl) {
+.header.is-massive-gap .thumbnail:not(:last-child).is-rtl {
   margin-left: 3em;
 }
 .header.is-shade::selection,
@@ -9421,10 +9401,10 @@ fieldset.is-disabled .button,
   border-left-color: #667085;
   border-right-color: #667085;
 }
-.header.is-shade.is-decorated.is-ltr, .header.is-shade.is-decorated:dir(ltr) {
+.header.is-shade.is-decorated.is-ltr {
   border-left-color: #667085;
 }
-.header.is-shade.is-decorated.is-ltr, .header.is-shade.is-decorated:dir(ltr) {
+.header.is-shade.is-decorated.is-ltr {
   border-right-color: #667085;
 }
 .header.is-error::selection,
@@ -9436,10 +9416,10 @@ fieldset.is-disabled .button,
   border-left-color: #c00021;
   border-right-color: #c00021;
 }
-.header.is-error.is-decorated.is-ltr, .header.is-error.is-decorated:dir(ltr) {
+.header.is-error.is-decorated.is-ltr {
   border-left-color: #c00021;
 }
-.header.is-error.is-decorated.is-ltr, .header.is-error.is-decorated:dir(ltr) {
+.header.is-error.is-decorated.is-ltr {
   border-right-color: #c00021;
 }
 .header.is-primary::selection,
@@ -9451,10 +9431,10 @@ fieldset.is-disabled .button,
   border-left-color: #179299;
   border-right-color: #179299;
 }
-.header.is-primary.is-decorated.is-ltr, .header.is-primary.is-decorated:dir(ltr) {
+.header.is-primary.is-decorated.is-ltr {
   border-left-color: #179299;
 }
-.header.is-primary.is-decorated.is-ltr, .header.is-primary.is-decorated:dir(ltr) {
+.header.is-primary.is-decorated.is-ltr {
   border-right-color: #179299;
 }
 .header.is-indigo::selection,
@@ -9466,10 +9446,10 @@ fieldset.is-disabled .button,
   border-left-color: #5b5fc7;
   border-right-color: #5b5fc7;
 }
-.header.is-indigo.is-decorated.is-ltr, .header.is-indigo.is-decorated:dir(ltr) {
+.header.is-indigo.is-decorated.is-ltr {
   border-left-color: #5b5fc7;
 }
-.header.is-indigo.is-decorated.is-ltr, .header.is-indigo.is-decorated:dir(ltr) {
+.header.is-indigo.is-decorated.is-ltr {
   border-right-color: #5b5fc7;
 }
 .header.is-green::selection,
@@ -9481,10 +9461,10 @@ fieldset.is-disabled .button,
   border-left-color: #76c893;
   border-right-color: #76c893;
 }
-.header.is-green.is-decorated.is-ltr, .header.is-green.is-decorated:dir(ltr) {
+.header.is-green.is-decorated.is-ltr {
   border-left-color: #76c893;
 }
-.header.is-green.is-decorated.is-ltr, .header.is-green.is-decorated:dir(ltr) {
+.header.is-green.is-decorated.is-ltr {
   border-right-color: #76c893;
 }
 .header.is-maroon::selection,
@@ -9496,10 +9476,10 @@ fieldset.is-disabled .button,
   border-left-color: #8b1e3f;
   border-right-color: #8b1e3f;
 }
-.header.is-maroon.is-decorated.is-ltr, .header.is-maroon.is-decorated:dir(ltr) {
+.header.is-maroon.is-decorated.is-ltr {
   border-left-color: #8b1e3f;
 }
-.header.is-maroon.is-decorated.is-ltr, .header.is-maroon.is-decorated:dir(ltr) {
+.header.is-maroon.is-decorated.is-ltr {
   border-right-color: #8b1e3f;
 }
 

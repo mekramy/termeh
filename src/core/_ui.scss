@@ -327,8 +327,7 @@
         @content;
     }
 
-    &.is-ltr,
-    &:dir(ltr) {
+    &.is-ltr {
         @content;
     }
 }
@@ -342,8 +341,7 @@
         @content;
     }
 
-    &.is-rtl,
-    &:dir(rtl) {
+    &.is-rtl {
         @content;
     }
 }
@@ -448,5 +446,10 @@
 @mixin scrollable($color) {
     $color: util.color-of($color, "scrollable", "color");
 
-    @include scrollbar(var.var("scroll", "size", 1rem), var.var("scroll", "track", var.var("base", "section", null)), var.var("scroll", "thumb", var.var("base", "separator", null)), $color);
+    @include scrollbar(
+        var.var("scroll", "size", 1rem),
+        var.var("scroll", "track", var.var("base", "section", null)),
+        var.var("scroll", "thumb", var.var("base", "separator", null)),
+        $color
+    );
 }
