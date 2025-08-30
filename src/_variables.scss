@@ -94,3 +94,17 @@
 @include module.define("control", "strong", 700); // control strong font weight
 @include module.define("control", "v-padding", 0em); // control vertical padding
 @include module.define("control", "h-padding", 1.2em); // control horizontal padding
+
+// Boxes
+@include module.define("box", "background", null); // box background
+@include module.define("box", "foreground", null); // box foreground
+@include module.define(
+    "box",
+    "shadow",
+    (
+        module.soft-shadow(0, 1px, module.color("shade")),
+        module.soft-shadow(0, -1px, module.color("shade")),
+        module.soft-shadow(0, 3px, module.color("shade"))
+    )
+); // box shadow
+@include module.define("box", "sizes", ("small" 22em, "normal" 26em, "medium" 36em)); // box sizes

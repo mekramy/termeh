@@ -7173,6 +7173,10 @@ fieldset legend {
   padding: 8px 16px;
 }
 
+form {
+  color: #0d1b2a;
+  background: white;
+}
 form:not(:last-child, .is-marginless) {
   margin-bottom: 1.6rem;
 }
@@ -9049,6 +9053,446 @@ fieldset.is-disabled .button,
   background-color: #f0f2f5 !important;
   border-color: #d1d6e0 !important;
   border-color: transparent !important;
+}
+
+.card {
+  display: block;
+  position: relative;
+  max-width: 100%;
+  padding: 1.6rem;
+  box-shadow: 0 1px 3px -1px rgba(102, 112, 133, 0.15), 0 -1px 3px -1px rgba(102, 112, 133, 0.15), 0 3px 9px -3px rgba(102, 112, 133, 0.15);
+  border-radius: 2px;
+  color: #0d1b2a;
+  background-color: white;
+}
+.card:not(:last-child, .is-marginless) {
+  margin-bottom: 1.6rem;
+}
+.card > .separator {
+  display: block;
+  height: 1px;
+  background: #e0e4eb;
+}
+.card > .separator.is-attached {
+  margin: 0 -1.6rem;
+}
+.card > .section {
+  display: block;
+  padding: 0;
+  margin: 0 -1.6rem;
+  background-color: white;
+}
+.card > .section:first-child, .card > .section.is-header {
+  margin-top: -1.6rem;
+}
+.card > .section:last-child, .card > .section.is-footer {
+  margin-bottom: -1.6rem;
+}
+.card > .section:not(.is-attached) {
+  padding: 1.6rem;
+}
+.card > .section.is-secondary {
+  background: #f8f9fa;
+}
+.card > .overlay {
+  display: flex;
+  position: absolute;
+  box-sizing: border-box;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0;
+  z-index: -1;
+  overflow: hidden;
+  overflow-y: auto;
+  padding: 1.6rem;
+  color: #0d1b2a;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: none;
+  transition-property: all;
+  transition-timing-function: ease;
+  transition-duration: 250ms;
+}
+.card > .overlay::-webkit-scrollbar {
+  width: 10px;
+}
+.card > .overlay::-webkit-scrollbar-track {
+  background: #f8f9fa;
+}
+.card > .overlay::-webkit-scrollbar-thumb {
+  background: #e0e4eb;
+  transition: background 200ms linear;
+}
+.card > .overlay::-webkit-scrollbar-thumb:hover {
+  background: #179299;
+}
+.card > .overlay > * {
+  margin: auto;
+  max-width: 100%;
+}
+.card > .overlay, .card::after {
+  border-radius: 2px;
+}
+.card.is-top-decorated {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top: 2px solid #667085;
+}
+.card.is-bottom-decorated {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: 2px solid #667085;
+}
+.card.is-loading {
+  z-index: 0;
+  position: relative;
+  z-index: 0;
+  position: relative;
+}
+.card.is-loading::before {
+  content: " ";
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: none;
+}
+.card.is-loading::after {
+  z-index: 2;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-rendering: optimizelegibility;
+  display: block;
+  position: absolute;
+  box-sizing: border-box;
+  content: " ";
+  width: 2em;
+  height: 2em;
+  border: 2px solid #0d1b2a;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 500ms infinite linear;
+}
+.card.is-overlaid:not(.is-loading) > .overlay {
+  opacity: 1;
+  z-index: auto;
+}
+.card:not(.is-overlaid):not(.is-loading) > .section.top-sticky {
+  position: sticky;
+  top: -1.6rem;
+}
+.card:not(.is-overlaid):not(.is-loading) > .section.bottom-sticky {
+  position: sticky;
+  bottom: -1.6rem;
+}
+.card.is-mini-gap {
+  padding: 0.5em;
+}
+.card.is-mini-gap > .separator.is-attached {
+  margin: 0 -0.5em;
+}
+.card.is-mini-gap > .section {
+  margin: 0 -0.5em;
+}
+.card.is-mini-gap > .section:first-child, .card.is-mini-gap > .section.is-header {
+  margin-top: -0.5em;
+}
+.card.is-mini-gap > .section:last-child, .card.is-mini-gap > .section.is-footer {
+  margin-bottom: -0.5em;
+}
+.card.is-mini-gap > .section:not(.is-attached) {
+  padding: 0.5em;
+}
+.card.is-mini-gap > .overlay {
+  padding: 0.5em;
+}
+.card.is-mini-gap:not(.is-overlaid):not(.is-loading) > .section.top-sticky {
+  top: -0.5em;
+}
+.card.is-mini-gap:not(.is-overlaid):not(.is-loading) > .section.bottom-sticky {
+  bottom: -0.5em;
+}
+.card.is-small-gap {
+  padding: 0.85em;
+}
+.card.is-small-gap > .separator.is-attached {
+  margin: 0 -0.85em;
+}
+.card.is-small-gap > .section {
+  margin: 0 -0.85em;
+}
+.card.is-small-gap > .section:first-child, .card.is-small-gap > .section.is-header {
+  margin-top: -0.85em;
+}
+.card.is-small-gap > .section:last-child, .card.is-small-gap > .section.is-footer {
+  margin-bottom: -0.85em;
+}
+.card.is-small-gap > .section:not(.is-attached) {
+  padding: 0.85em;
+}
+.card.is-small-gap > .overlay {
+  padding: 0.85em;
+}
+.card.is-small-gap:not(.is-overlaid):not(.is-loading) > .section.top-sticky {
+  top: -0.85em;
+}
+.card.is-small-gap:not(.is-overlaid):not(.is-loading) > .section.bottom-sticky {
+  bottom: -0.85em;
+}
+.card.is-normal-gap {
+  padding: 1em;
+}
+.card.is-normal-gap > .separator.is-attached {
+  margin: 0 -1em;
+}
+.card.is-normal-gap > .section {
+  margin: 0 -1em;
+}
+.card.is-normal-gap > .section:first-child, .card.is-normal-gap > .section.is-header {
+  margin-top: -1em;
+}
+.card.is-normal-gap > .section:last-child, .card.is-normal-gap > .section.is-footer {
+  margin-bottom: -1em;
+}
+.card.is-normal-gap > .section:not(.is-attached) {
+  padding: 1em;
+}
+.card.is-normal-gap > .overlay {
+  padding: 1em;
+}
+.card.is-normal-gap:not(.is-overlaid):not(.is-loading) > .section.top-sticky {
+  top: -1em;
+}
+.card.is-normal-gap:not(.is-overlaid):not(.is-loading) > .section.bottom-sticky {
+  bottom: -1em;
+}
+.card.is-medium-gap {
+  padding: 1.5em;
+}
+.card.is-medium-gap > .separator.is-attached {
+  margin: 0 -1.5em;
+}
+.card.is-medium-gap > .section {
+  margin: 0 -1.5em;
+}
+.card.is-medium-gap > .section:first-child, .card.is-medium-gap > .section.is-header {
+  margin-top: -1.5em;
+}
+.card.is-medium-gap > .section:last-child, .card.is-medium-gap > .section.is-footer {
+  margin-bottom: -1.5em;
+}
+.card.is-medium-gap > .section:not(.is-attached) {
+  padding: 1.5em;
+}
+.card.is-medium-gap > .overlay {
+  padding: 1.5em;
+}
+.card.is-medium-gap:not(.is-overlaid):not(.is-loading) > .section.top-sticky {
+  top: -1.5em;
+}
+.card.is-medium-gap:not(.is-overlaid):not(.is-loading) > .section.bottom-sticky {
+  bottom: -1.5em;
+}
+.card.is-large-gap {
+  padding: 2em;
+}
+.card.is-large-gap > .separator.is-attached {
+  margin: 0 -2em;
+}
+.card.is-large-gap > .section {
+  margin: 0 -2em;
+}
+.card.is-large-gap > .section:first-child, .card.is-large-gap > .section.is-header {
+  margin-top: -2em;
+}
+.card.is-large-gap > .section:last-child, .card.is-large-gap > .section.is-footer {
+  margin-bottom: -2em;
+}
+.card.is-large-gap > .section:not(.is-attached) {
+  padding: 2em;
+}
+.card.is-large-gap > .overlay {
+  padding: 2em;
+}
+.card.is-large-gap:not(.is-overlaid):not(.is-loading) > .section.top-sticky {
+  top: -2em;
+}
+.card.is-large-gap:not(.is-overlaid):not(.is-loading) > .section.bottom-sticky {
+  bottom: -2em;
+}
+.card.is-huge-gap {
+  padding: 2.5em;
+}
+.card.is-huge-gap > .separator.is-attached {
+  margin: 0 -2.5em;
+}
+.card.is-huge-gap > .section {
+  margin: 0 -2.5em;
+}
+.card.is-huge-gap > .section:first-child, .card.is-huge-gap > .section.is-header {
+  margin-top: -2.5em;
+}
+.card.is-huge-gap > .section:last-child, .card.is-huge-gap > .section.is-footer {
+  margin-bottom: -2.5em;
+}
+.card.is-huge-gap > .section:not(.is-attached) {
+  padding: 2.5em;
+}
+.card.is-huge-gap > .overlay {
+  padding: 2.5em;
+}
+.card.is-huge-gap:not(.is-overlaid):not(.is-loading) > .section.top-sticky {
+  top: -2.5em;
+}
+.card.is-huge-gap:not(.is-overlaid):not(.is-loading) > .section.bottom-sticky {
+  bottom: -2.5em;
+}
+.card.is-massive-gap {
+  padding: 3em;
+}
+.card.is-massive-gap > .separator.is-attached {
+  margin: 0 -3em;
+}
+.card.is-massive-gap > .section {
+  margin: 0 -3em;
+}
+.card.is-massive-gap > .section:first-child, .card.is-massive-gap > .section.is-header {
+  margin-top: -3em;
+}
+.card.is-massive-gap > .section:last-child, .card.is-massive-gap > .section.is-footer {
+  margin-bottom: -3em;
+}
+.card.is-massive-gap > .section:not(.is-attached) {
+  padding: 3em;
+}
+.card.is-massive-gap > .overlay {
+  padding: 3em;
+}
+.card.is-massive-gap:not(.is-overlaid):not(.is-loading) > .section.top-sticky {
+  top: -3em;
+}
+.card.is-massive-gap:not(.is-overlaid):not(.is-loading) > .section.bottom-sticky {
+  bottom: -3em;
+}
+.card.is-shade::selection,
+.card.is-shade *::selection {
+  color: rgb(247.35, 247.85, 248.9);
+  background-color: #667085;
+}
+.card.is-shade > .overlay::-webkit-scrollbar-thumb:hover {
+  background: #667085;
+}
+.card.is-shade.is-top-decorated {
+  border-top-color: #667085;
+}
+.card.is-shade.is-bottom-decorated {
+  border-bottom-color: #667085;
+}
+.card.is-shade.is-loading::after {
+  border-left-color: rgb(117.3, 126.3, 145.2);
+  border-bottom-color: rgb(117.3, 126.3, 145.2);
+}
+.card.is-error::selection,
+.card.is-error *::selection {
+  color: rgb(251.85, 242.25, 243.9);
+  background-color: #c00021;
+}
+.card.is-error > .overlay::-webkit-scrollbar-thumb:hover {
+  background: #c00021;
+}
+.card.is-error.is-top-decorated {
+  border-top-color: #c00021;
+}
+.card.is-error.is-bottom-decorated {
+  border-bottom-color: #c00021;
+}
+.card.is-error.is-loading::after {
+  border-left-color: rgb(198.3, 25.5, 55.2);
+  border-bottom-color: rgb(198.3, 25.5, 55.2);
+}
+.card.is-primary::selection,
+.card.is-primary *::selection {
+  color: rgb(243.4, 249.55, 249.9);
+  background-color: #179299;
+}
+.card.is-primary > .overlay::-webkit-scrollbar-thumb:hover {
+  background: #179299;
+}
+.card.is-primary.is-top-decorated {
+  border-top-color: #179299;
+}
+.card.is-primary.is-bottom-decorated {
+  border-bottom-color: #179299;
+}
+.card.is-primary.is-loading::after {
+  border-left-color: rgb(46.2, 156.9, 163.2);
+  border-bottom-color: rgb(46.2, 156.9, 163.2);
+}
+.card.is-indigo::selection,
+.card.is-indigo *::selection {
+  color: rgb(246.8, 247, 252.2);
+  background-color: #5b5fc7;
+}
+.card.is-indigo > .overlay::-webkit-scrollbar-thumb:hover {
+  background: #5b5fc7;
+}
+.card.is-indigo.is-top-decorated {
+  border-top-color: #5b5fc7;
+}
+.card.is-indigo.is-bottom-decorated {
+  border-bottom-color: #5b5fc7;
+}
+.card.is-indigo.is-loading::after {
+  border-left-color: rgb(107.4, 111, 204.6);
+  border-bottom-color: rgb(107.4, 111, 204.6);
+}
+.card.is-green::selection,
+.card.is-green *::selection {
+  color: rgb(248.15, 252.25, 249.6);
+  background-color: #76c893;
+}
+.card.is-green > .overlay::-webkit-scrollbar-thumb:hover {
+  background: #76c893;
+}
+.card.is-green.is-top-decorated {
+  border-top-color: #76c893;
+}
+.card.is-green.is-bottom-decorated {
+  border-bottom-color: #76c893;
+}
+.card.is-green.is-loading::after {
+  border-left-color: rgb(131.7, 205.5, 157.8);
+  border-bottom-color: rgb(131.7, 205.5, 157.8);
+}
+.card.is-maroon::selection,
+.card.is-maroon *::selection {
+  color: rgb(249.2, 243.75, 245.4);
+  background-color: #8b1e3f;
+}
+.card.is-maroon > .overlay::-webkit-scrollbar-thumb:hover {
+  background: #8b1e3f;
+}
+.card.is-maroon.is-top-decorated {
+  border-top-color: #8b1e3f;
+}
+.card.is-maroon.is-bottom-decorated {
+  border-bottom-color: #8b1e3f;
+}
+.card.is-maroon.is-loading::after {
+  border-left-color: rgb(150.6, 52.5, 82.2);
+  border-bottom-color: rgb(150.6, 52.5, 82.2);
+}
+.card.is-small {
+  width: 22em;
+}
+.card.is-normal {
+  width: 26em;
+}
+.card.is-medium {
+  width: 36em;
 }
 
 .icon {

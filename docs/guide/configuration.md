@@ -239,6 +239,32 @@ Two keyframe animations are provided by default:
 - **v-padding** → Vertical padding.
 - **h-padding** → Horizontal padding.
 
+## Box
+
+```scss
+@include module.define("box", "background", null); // color
+@include module.define("box", "foreground", null); // color
+@include module.define(
+  "box",
+  "shadow",
+  (
+    module.soft-shadow(0, 1px, module.color("shade")),
+    module.soft-shadow(0, -1px, module.color("shade")),
+    module.soft-shadow(0, 3px, module.color("shade"))
+  )
+); // list
+@include module.define(
+  "box",
+  "sizes",
+  ("small" 22em, "normal" 26em, "medium" 36em)
+); // list
+```
+
+- **background** → box background
+- **foreground** → box foreground
+- **shadow** → box shadow
+- **sizes** → list of box element sizes
+
 ## Color Palettes
 
 Color tokens used across components.

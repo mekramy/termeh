@@ -1,0 +1,242 @@
+@use "sass:list";
+@use "../core/module";
+
+/// Generates card element styles with configurable colors and gaps
+/// @param {List} $colors [()] - List of registered color names to include. Pass null to include all registered colors
+/// @param {List} $gaps [()] - List of registered gap names to include. Pass null to include all registered gaps
+///
+/// @termeh {Color} [error] - color("shade") -> default decorator color
+/// @termeh {Color} [error] - color("primary") -> default scrollbar accent color
+/// @termeh {Color} [white] - var("base", "color") -> fallback background and overlay
+/// @termeh {Color} [black] - var("base", "foreground") -> fallback foreground and overlay spinner color
+/// @termeh {Color} [null] - var("base", "section") -> secondary section background
+/// @termeh {Color} [null] - var("base", "separator") -> separator background
+/// @termeh {Color} [FALLBACK] - var("box", "background") -> card background and overlay fallback background
+/// @termeh {Color} [FALLBACK] - var("box", "foreground") -> card foreground and overlay fallback spinner color
+/// @termeh {List} [null] - var("box", "shadow") -> default box shadow
+/// @termeh {List} [()] - var("box", "sizes") -> default box sizes
+/// @termeh {Number} [1.6em] - var("gap", "macro") -> default card padding and bottom margin
+/// @termeh {Number} [null] - var("radius", "normal") -> default border-radius
+/// @termeh {Number} [2px] - var("decorator", "size") -> loading spinner thickness
+/// @termeh {Number} [2em] - var("decorator", "spinner") -> loading spinner size
+/// @termeh {Color} [FALLBACK] - var("overlay", "background") -> overlay background color
+/// @termeh {Color} [FALLBACK] - var("overlay", "foureground") -> overlay foreground
+/// @termeh {Number} [0.85] - var("overlay", "opacity") -> overlay background opacity
+/// @termeh {String} [null] - var("overlay", "filter") -> overlay backdrop filter
+@mixin use-card($colors: (), $gaps: ()) {
+    $shade: module.color("shade");
+    $primary: module.color("primary");
+    $base-background: module.var("base", "color", white);
+    $base-foreground: module.var("base", "foreground", black);
+    $base-section: module.var("base", "section");
+    $base-separator: module.var("base", "separator");
+
+    $background: module.var("box", "background", $base-background);
+    $foreground: module.var("box", "foreground", $base-foreground);
+    $shadow: module.var("box", "shadow", null);
+    $sizes: module.var("box", "sizes", ());
+
+    $gap-macro: module.var("gap", "macro", 1.6em);
+    $radius: module.var("radius", "normal");
+    $decorator: module.var("decorator", "size", 2px);
+    $spinner: module.var("decorator", "spinner", 2em);
+
+    $overlay-background: module.var("overlay", "background", $background);
+    $overlay-foreground: module.var("overlay", "foureground", $foreground);
+    $overlay-opacity: module.var("overlay", "opacity", 0.85);
+    $overlay-filter: module.var("overlay", "filter", null);
+
+    @at-root {
+        .card {
+            display: block;
+            position: relative;
+            max-width: 100%;
+            padding: $gap-macro;
+            box-shadow: $shadow;
+            border-radius: $radius;
+            color: $foreground;
+            background-color: $background;
+
+            @include module.marged() {
+                margin-bottom: $gap-macro;
+            }
+
+            > .separator {
+                display: block;
+                height: 1px;
+                background: $base-separator;
+
+                &.is-attached {
+                    margin: 0 module.negate($gap-macro);
+                }
+            }
+
+            > .section {
+                display: block;
+                padding: 0;
+                margin: 0 module.negate($gap-macro);
+                background-color: $background;
+
+                &:first-child,
+                &.is-header {
+                    margin-top: module.negate($gap-macro);
+                }
+
+                &:last-child,
+                &.is-footer {
+                    margin-bottom: module.negate($gap-macro);
+                }
+
+                &:not(.is-attached) {
+                    padding: $gap-macro;
+                }
+
+                &.is-secondary {
+                    background: $base-section;
+                }
+            }
+
+            > .overlay {
+                display: flex;
+                position: absolute;
+                box-sizing: border-box;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                right: 0;
+                opacity: 0;
+                z-index: -1;
+                overflow: hidden;
+                overflow-y: auto;
+                padding: $gap-macro;
+                color: $overlay-foreground;
+                background: rgba($overlay-background, $overlay-opacity);
+                backdrop-filter: $overlay-filter;
+                @include module.transition(all);
+                @include module.scrollable($primary);
+
+                & > * {
+                    margin: auto;
+                    max-width: 100%;
+                }
+            }
+
+            > .overlay,
+            &::after {
+                border-radius: $radius;
+            }
+
+            &.is-top-decorated {
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+                border-top: $decorator solid $shade;
+            }
+
+            &.is-bottom-decorated {
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+                border-bottom: $decorator solid $shade;
+            }
+
+            &.is-loading {
+                @include module.overlay($overlay-background, $overlay-opacity, $overlay-filter);
+                @include module.loader($spinner, $overlay-foreground, $decorator);
+            }
+
+            &.is-overlaid:not(.is-loading) {
+                > .overlay {
+                    opacity: 1;
+                    z-index: auto;
+                }
+            }
+
+            &:not(.is-overlaid):not(.is-loading) > .section {
+                &.top-sticky {
+                    position: sticky;
+                    top: module.negate($gap-macro);
+                }
+
+                &.bottom-sticky {
+                    position: sticky;
+                    bottom: module.negate($gap-macro);
+                }
+            }
+
+            @each $name, $gap in module.gaps($includes: $gaps) {
+                &.is-#{$name}-gap {
+                    padding: $gap;
+
+                    > .separator.is-attached {
+                        margin: 0 module.negate($gap);
+                    }
+
+                    > .section {
+                        margin: 0 module.negate($gap);
+
+                        &:first-child,
+                        &.is-header {
+                            margin-top: module.negate($gap);
+                        }
+
+                        &:last-child,
+                        &.is-footer {
+                            margin-bottom: module.negate($gap);
+                        }
+
+                        &:not(.is-attached) {
+                            padding: $gap;
+                        }
+                    }
+
+                    > .overlay {
+                        padding: $gap;
+                    }
+
+                    &:not(.is-overlaid):not(.is-loading) > .section {
+                        &.top-sticky {
+                            top: module.negate($gap);
+                        }
+
+                        &.bottom-sticky {
+                            bottom: module.negate($gap);
+                        }
+                    }
+                }
+            }
+
+            @each $name, $color in module.colors($includes: $colors) {
+                &.is-#{$name} {
+                    @include module.selection($name);
+
+                    > .overlay {
+                        @include module.scroll-color($color);
+                    }
+
+                    &.is-top-decorated {
+                        border-top-color: $color;
+                    }
+
+                    &.is-bottom-decorated {
+                        border-bottom-color: $color;
+                    }
+
+                    &.is-loading {
+                        @include module.loader-color(module.variant($name, "readable"));
+                    }
+                }
+            }
+
+            @each $size in $sizes {
+                @if list.length($size) == 2 {
+                    $name: list.nth($size, 1);
+                    $width: list.nth($size, 2);
+                    @if $name and $width {
+                        &.is-#{$name} {
+                            width: $width;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

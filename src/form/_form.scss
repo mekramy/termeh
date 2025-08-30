@@ -3,33 +3,45 @@
 /// Generates form element styles
 /// @param {List} $colors [()] - List of registered color names to include. Pass null to include all registered colors
 ///
-/// @termeh {Color} [white] - var("base", "color") -> form overlay background color
-/// @termeh {Color} [black] - var("base", "foreground") -> overlay spinner color
+/// @termeh {Color} [white] - var("base", "color") -> fallback form background
+/// @termeh {Color} [black] - var("base", "foreground") -> fallback form foreground
+/// @termeh {Color} [FALLBACK] - var("box", "background") -> form background and overlay fallback background
+/// @termeh {Color} [FALLBACK] - var("box", "foreground") -> form foreground and overlay fallback spinner color
 /// @termeh {Number} [1.6em] - var("gap", "macro") -> bottom margin
 /// @termeh {Number} [2px] - var("decorator", "size") -> loading spinner thickness
 /// @termeh {Number} [2em] - var("decorator", "spinner") -> loading spinner size
+/// @termeh {Number} [FALLBACK] - var("overlay", "background") -> overlay background color
+/// @termeh {Number} [FALLBACK] - var("overlay", "foureground") -> overlay foreground
 /// @termeh {Number} [0.85] - var("overlay", "opacity") -> overlay background opacity
 /// @termeh {String} [null] - var("overlay", "filter") -> overlay backdrop filter
 @mixin use-form($colors: ()) {
-    $background: module.var("base", "color", white);
-    $foreground: module.var("base", "foreground", black);
+    $base-background: module.var("base", "color", white);
+    $base-foreground: module.var("base", "foreground", black);
+
+    $background: module.var("box", "background", $base-background);
+    $foreground: module.var("box", "foreground", $base-foreground);
 
     $gap-macro: module.var("gap", "macro", 1.6em);
     $decorator: module.var("decorator", "size", 2px);
     $spinner: module.var("decorator", "spinner", 2em);
 
-    $opacity: module.var("overlay", "opacity", 0.85);
-    $filter: module.var("overlay", "filter", null);
+    $overlay-background: module.var("overlay", "background", $background);
+    $overlay-foreground: module.var("overlay", "foureground", $foreground);
+    $overlay-opacity: module.var("overlay", "opacity", 0.85);
+    $overlay-filter: module.var("overlay", "filter", null);
 
     @at-root {
         form {
+            color: $foreground;
+            background: $background;
+
             @include module.marged() {
                 margin-bottom: $gap-macro;
             }
 
             &.is-loading {
-                @include module.overlay($background, $opacity, $filter);
-                @include module.loader($spinner, $foreground, $decorator);
+                @include module.overlay($overlay-background, $overlay-opacity, $overlay-filter);
+                @include module.loader($spinner, $overlay-foreground, $decorator);
             }
         }
     }

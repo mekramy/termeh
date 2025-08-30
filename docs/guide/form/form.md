@@ -84,15 +84,19 @@ The **Form** module provides consistent spacing, margin behavior, and a built-in
 
 Form module uses the following Termeh global `var()`:
 
-| Component               | Type     | Usage                         | Default |
-| ----------------------- | -------- | ----------------------------- | ------- |
-| `base` → `color`        | _Color_  | Form overlay background color | `white` |
-| `base` → `foreground`   | _Color_  | Overlay spinner color         | `black` |
-| `gap` → `macro`         | _Number_ | Bottom margin                 | `1.6em` |
-| `decorator` → `size`    | _Number_ | Loading spinner thickness     | `2px`   |
-| `decorator` → `spinner` | _Number_ | Loading spinner size          | `2em`   |
-| `overlay` → `opacity`   | _Number_ | Overlay background opacity    | `0.85`  |
-| `overlay` → `filter`    | _String_ | Overlay backdrop filter       | `null`  |
+| Component                 | Type     | Usage                                                | Default    |
+| ------------------------- | -------- | ---------------------------------------------------- | ---------- |
+| `base` → `color`          | _Color_  | _Fallback_ form background                           | `white`    |
+| `base` → `foreground`     | _Color_  | _Fallback_ form foreground                           | `black`    |
+| `box` → `background`      | _Color_  | form background and overlay background _fallback_    | _FALLBACK_ |
+| `box` → `foreground`      | _Color_  | form foreground and overlay spinner color _fallback_ | _FALLBACK_ |
+| `gap` → `macro`           | _Number_ | Bottom margin                                        | `1.6em`    |
+| `decorator` → `size`      | _Number_ | Loading spinner thickness                            | `2px`      |
+| `decorator` → `spinner`   | _Number_ | Loading spinner size                                 | `2em`      |
+| `overlay` → `background`  | _Color_  | Overlay background color                             | _FALLBACK_ |
+| `overlay` → `foureground` | _Color_  | Overlay foreground                                   | _FALLBACK_ |
+| `overlay` → `opacity`     | _Number_ | Overlay background opacity                           | `0.85`     |
+| `overlay` → `filter`      | _String_ | Overlay backdrop filter                              | `null`     |
 
 :::
 
