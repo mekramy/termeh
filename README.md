@@ -6,7 +6,7 @@ This library includes a wide range of components and predefined styles for vario
 
 ![NPM Version](https://img.shields.io/npm/v/termeh)
 ![NPM Downloads](https://img.shields.io/npm/dw/termeh)
-[![License](https://img.shields.io/github/license/mekramy/termeh)](https://github.com/mekramy/termeh/blob/main/LICENSE)
+[![License](https://img.shields.io/github/license/mekramy/termeh)](https://github.com/mekramy/termeh/blob/master/LICENSE)
 ![Stars](https://img.shields.io/github/stars/mekramy/termeh?style=social)
 ![Contributors](https://img.shields.io/github/contributors/mekramy/termeh)
 ![Issues](https://img.shields.io/github/issues/mekramy/termeh)
