@@ -10,16 +10,16 @@ The **Button** module provides customizable action elements with support for col
 <Preview height="2rem">
   <div class="demo">
     <div class="buttons">
-      <div class="button is-light">Default</div>
-      <div class="button">
+      <button class="button is-light">Default</button>
+      <button class="button">
         <span class="icon">
           <!--@include: ../icon.svg-->
         </span>
         <span>Icon</span>
-      </div>
-      <div class="button is-loading">Loading</div>
-      <div class="button is-simple is-cta">Simple CTA</div>
-      <div class="button is-disabled">Disabled</div>
+      </button>
+      <button class="button is-loading">Loading</button>
+      <button class="button is-simple is-cta">Simple CTA</button>
+      <button class="button is-disabled">Disabled</button>
     </div>
   </div>
   <div class="demo">

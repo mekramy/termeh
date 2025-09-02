@@ -102,6 +102,7 @@
 
             @include module.is-disabled() {
                 @include module.disabled();
+
                 border-color: transparent !important;
             }
         }

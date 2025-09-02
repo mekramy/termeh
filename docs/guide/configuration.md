@@ -229,7 +229,7 @@ Two keyframe animations are provided by default:
 @include termeh.define("control", "height", 2.2em); // number
 @include termeh.define("control", "weight", 500); // font weight
 @include termeh.define("control", "strong", 700); // font weight
-@include termeh.define("control", "v-padding", 0em); // number
+@include termeh.define("control", "v-padding", 0); // number
 @include termeh.define("control", "h-padding", 1.2em); // number
 ```
 

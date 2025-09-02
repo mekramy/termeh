@@ -92,7 +92,7 @@
 @include module.define("control", "height", 2.2em); // control height
 @include module.define("control", "weight", 500); // control font weight
 @include module.define("control", "strong", 700); // control strong font weight
-@include module.define("control", "v-padding", 0em); // control vertical padding
+@include module.define("control", "v-padding", 0); // control vertical padding
 @include module.define("control", "h-padding", 1.2em); // control horizontal padding
 
 // Boxes

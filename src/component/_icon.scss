@@ -39,21 +39,31 @@
 
             &:not(.is-outline) {
                 svg {
-                    fill: currentColor;
+                    fill: currentcolor;
 
                     > * {
-                        fill: currentColor;
+                        fill: currentcolor;
                     }
                 }
             }
 
             &.is-outline {
                 svg {
-                    stroke: currentColor;
+                    stroke: currentcolor;
 
                     > * {
-                        stroke: currentColor;
+                        stroke: currentcolor;
                     }
+                }
+            }
+
+            &.is-loading {
+                @include module.locked();
+                @include module.loader(1em, $base, $decorator);
+
+                img,
+                svg {
+                    opacity: 0;
                 }
             }
 
@@ -73,16 +83,6 @@
                     > img {
                         filter: grayscale(0);
                     }
-                }
-            }
-
-            &.is-loading {
-                @include module.locked();
-                @include module.loader(1em, $base, $decorator);
-
-                img,
-                svg {
-                    opacity: 0;
                 }
             }
 
@@ -115,6 +115,7 @@
 
             @include module.is-disabled() {
                 @include module.disabled();
+
                 background-color: transparent !important;
                 border-color: transparent !important;
 

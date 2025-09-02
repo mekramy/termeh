@@ -70,6 +70,7 @@
 
             @include module.is-disabled() {
                 @include module.disabled();
+
                 background-color: transparent !important;
                 border-color: transparent !important;
             }

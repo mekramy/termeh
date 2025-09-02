@@ -65,6 +65,15 @@
             @include module.transition(all);
             @include module.unselectable();
 
+            &:hover {
+                text-decoration: none;
+            }
+
+            &:focus,
+            &:active {
+                box-shadow: module.flat-shadow($decorator, $outline);
+            }
+
             &:not(.is-simple) {
                 color: $readable;
                 background-color: $background;
@@ -96,15 +105,6 @@
 
             &.is-rounded {
                 border-radius: $radius-rounded;
-            }
-
-            &:hover {
-                text-decoration: none;
-            }
-
-            &:focus,
-            &:active {
-                box-shadow: module.flat-shadow($decorator, $outline);
             }
 
             @each $name, $size in module.sizes($sizes) {
@@ -170,6 +170,7 @@
                     &:focus,
                     &:active {
                         $-outline: rgba($color, 0.2);
+
                         box-shadow: module.flat-shadow($decorator, $-outline);
                     }
                 }
@@ -177,6 +178,7 @@
 
             @include module.is-disabled() {
                 @include module.disabled();
+
                 border-color: transparent !important;
             }
         }

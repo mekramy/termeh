@@ -7708,12 +7708,12 @@ select option:checked {
 select option::checkmark {
   color: rgb(46.2, 156.9, 163.2);
 }
-select option:not(:disabled):hover {
-  background-color: #f8f9fa;
-}
 select option:disabled {
   cursor: default;
   color: #bfc6d4;
+}
+select option:not(:disabled):hover {
+  background-color: #f8f9fa;
 }
 select:focus, select:open, select.is-focused {
   border-color: #179299;
@@ -8562,7 +8562,7 @@ fieldset.is-disabled .meta,
   color: rgb(117.3, 126.3, 145.2);
   background-color: rgba(232.05, 233.55, 236.7, 0.35);
   font-size: 0.9em;
-  padding: 0em 1.2em;
+  padding: 0 1.2em;
   transition-property: all;
   transition-timing-function: ease;
   transition-duration: 250ms;
@@ -8812,7 +8812,7 @@ fieldset.is-disabled .tag,
   height: 2.2em;
   border-radius: 2px;
   text-overflow: ellipsis;
-  padding: 0em 1.2em;
+  padding: 0 1.2em;
   transition-property: all;
   transition-timing-function: ease;
   transition-duration: 250ms;
@@ -8835,6 +8835,12 @@ fieldset.is-disabled .tag,
 }
 .button::-moz-focus-inner {
   border: 0;
+}
+.button:hover {
+  text-decoration: none;
+}
+.button:focus, .button:active {
+  box-shadow: 0 0 0 2px rgba(102, 112, 133, 0.2);
 }
 .button:not(.is-simple) {
   color: rgb(117.3, 126.3, 145.2);
@@ -8901,12 +8907,6 @@ fieldset.is-disabled .tag,
 }
 .button.is-rounded {
   border-radius: 290486px;
-}
-.button:hover {
-  text-decoration: none;
-}
-.button:focus, .button:active {
-  box-shadow: 0 0 0 2px rgba(102, 112, 133, 0.2);
 }
 .button.is-small {
   font-size: 0.8em;
@@ -9221,7 +9221,7 @@ fieldset.is-disabled .button,
   align-items: center;
 }
 .header:not(.is-paddingless) {
-  padding: 0em 1.2em;
+  padding: 0 1.2em;
 }
 .header:not(:last-child, .is-marginless) {
   margin-bottom: 1.6rem;
@@ -9526,10 +9526,7 @@ fieldset.is-disabled .button,
   display: flex;
   position: absolute;
   box-sizing: border-box;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  right: 0;
+  inset: 0;
   opacity: 0;
   z-index: -1;
   overflow: hidden;
@@ -9608,11 +9605,11 @@ fieldset.is-disabled .button,
   opacity: 1;
   z-index: auto;
 }
-.card:not(.is-overlaid):not(.is-loading) > .section.top-sticky {
+.card:not(.is-overlaid, .is-loading) > .section.top-sticky {
   position: sticky;
   top: -1.6rem;
 }
-.card:not(.is-overlaid):not(.is-loading) > .section.bottom-sticky {
+.card:not(.is-overlaid, .is-loading) > .section.bottom-sticky {
   position: sticky;
   bottom: -1.6rem;
 }
@@ -9637,10 +9634,10 @@ fieldset.is-disabled .button,
 .card.is-mini-gap > .overlay {
   padding: 0.5em;
 }
-.card.is-mini-gap:not(.is-overlaid):not(.is-loading) > .section.top-sticky {
+.card.is-mini-gap:not(.is-overlaid, .is-loading) > .section.top-sticky {
   top: -0.5em;
 }
-.card.is-mini-gap:not(.is-overlaid):not(.is-loading) > .section.bottom-sticky {
+.card.is-mini-gap:not(.is-overlaid, .is-loading) > .section.bottom-sticky {
   bottom: -0.5em;
 }
 .card.is-small-gap {
@@ -9664,10 +9661,10 @@ fieldset.is-disabled .button,
 .card.is-small-gap > .overlay {
   padding: 0.85em;
 }
-.card.is-small-gap:not(.is-overlaid):not(.is-loading) > .section.top-sticky {
+.card.is-small-gap:not(.is-overlaid, .is-loading) > .section.top-sticky {
   top: -0.85em;
 }
-.card.is-small-gap:not(.is-overlaid):not(.is-loading) > .section.bottom-sticky {
+.card.is-small-gap:not(.is-overlaid, .is-loading) > .section.bottom-sticky {
   bottom: -0.85em;
 }
 .card.is-normal-gap {
@@ -9691,10 +9688,10 @@ fieldset.is-disabled .button,
 .card.is-normal-gap > .overlay {
   padding: 1em;
 }
-.card.is-normal-gap:not(.is-overlaid):not(.is-loading) > .section.top-sticky {
+.card.is-normal-gap:not(.is-overlaid, .is-loading) > .section.top-sticky {
   top: -1em;
 }
-.card.is-normal-gap:not(.is-overlaid):not(.is-loading) > .section.bottom-sticky {
+.card.is-normal-gap:not(.is-overlaid, .is-loading) > .section.bottom-sticky {
   bottom: -1em;
 }
 .card.is-medium-gap {
@@ -9718,10 +9715,10 @@ fieldset.is-disabled .button,
 .card.is-medium-gap > .overlay {
   padding: 1.5em;
 }
-.card.is-medium-gap:not(.is-overlaid):not(.is-loading) > .section.top-sticky {
+.card.is-medium-gap:not(.is-overlaid, .is-loading) > .section.top-sticky {
   top: -1.5em;
 }
-.card.is-medium-gap:not(.is-overlaid):not(.is-loading) > .section.bottom-sticky {
+.card.is-medium-gap:not(.is-overlaid, .is-loading) > .section.bottom-sticky {
   bottom: -1.5em;
 }
 .card.is-large-gap {
@@ -9745,10 +9742,10 @@ fieldset.is-disabled .button,
 .card.is-large-gap > .overlay {
   padding: 2em;
 }
-.card.is-large-gap:not(.is-overlaid):not(.is-loading) > .section.top-sticky {
+.card.is-large-gap:not(.is-overlaid, .is-loading) > .section.top-sticky {
   top: -2em;
 }
-.card.is-large-gap:not(.is-overlaid):not(.is-loading) > .section.bottom-sticky {
+.card.is-large-gap:not(.is-overlaid, .is-loading) > .section.bottom-sticky {
   bottom: -2em;
 }
 .card.is-huge-gap {
@@ -9772,10 +9769,10 @@ fieldset.is-disabled .button,
 .card.is-huge-gap > .overlay {
   padding: 2.5em;
 }
-.card.is-huge-gap:not(.is-overlaid):not(.is-loading) > .section.top-sticky {
+.card.is-huge-gap:not(.is-overlaid, .is-loading) > .section.top-sticky {
   top: -2.5em;
 }
-.card.is-huge-gap:not(.is-overlaid):not(.is-loading) > .section.bottom-sticky {
+.card.is-huge-gap:not(.is-overlaid, .is-loading) > .section.bottom-sticky {
   bottom: -2.5em;
 }
 .card.is-massive-gap {
@@ -9799,10 +9796,10 @@ fieldset.is-disabled .button,
 .card.is-massive-gap > .overlay {
   padding: 3em;
 }
-.card.is-massive-gap:not(.is-overlaid):not(.is-loading) > .section.top-sticky {
+.card.is-massive-gap:not(.is-overlaid, .is-loading) > .section.top-sticky {
   top: -3em;
 }
-.card.is-massive-gap:not(.is-overlaid):not(.is-loading) > .section.bottom-sticky {
+.card.is-massive-gap:not(.is-overlaid, .is-loading) > .section.bottom-sticky {
   bottom: -3em;
 }
 .card.is-shade::selection,
@@ -9954,31 +9951,16 @@ fieldset.is-disabled .button,
   transition-duration: 250ms;
 }
 .icon:not(.is-outline) svg {
-  fill: currentColor;
+  fill: currentcolor;
 }
 .icon:not(.is-outline) svg > * {
-  fill: currentColor;
+  fill: currentcolor;
 }
 .icon.is-outline svg {
-  stroke: currentColor;
+  stroke: currentcolor;
 }
 .icon.is-outline svg > * {
-  stroke: currentColor;
-}
-.icon.is-action {
-  color: rgb(178.5, 183.5, 194);
-  cursor: pointer;
-  text-decoration: none;
-}
-.icon.is-action > img {
-  filter: grayscale(0.5);
-}
-.icon.is-action:hover {
-  text-decoration: none;
-  color: rgb(117.3, 126.3, 145.2);
-}
-.icon.is-action:hover > img {
-  filter: grayscale(0);
+  stroke: currentcolor;
 }
 .icon.is-loading {
   pointer-events: none;
@@ -10007,6 +9989,21 @@ fieldset.is-disabled .button,
 .icon.is-loading img,
 .icon.is-loading svg {
   opacity: 0;
+}
+.icon.is-action {
+  color: rgb(178.5, 183.5, 194);
+  cursor: pointer;
+  text-decoration: none;
+}
+.icon.is-action > img {
+  filter: grayscale(0.5);
+}
+.icon.is-action:hover {
+  text-decoration: none;
+  color: rgb(117.3, 126.3, 145.2);
+}
+.icon.is-action:hover > img {
+  filter: grayscale(0);
 }
 .icon.is-small {
   height: 0.8em;
@@ -10194,7 +10191,7 @@ fieldset.is-disabled .icon > img,
   width: 0%;
   height: 1px;
   transform: translateX(-50%);
-  background: currentColor;
+  background: currentcolor;
   transition-property: all;
   transition-timing-function: ease;
   transition-duration: 250ms;
@@ -10374,9 +10371,6 @@ fieldset.is-disabled .link,
   box-sizing: border-box;
   font-weight: 600;
 }
-.breadcrumb .active {
-  font-weight: 700;
-}
 .breadcrumb > * {
   line-height: 2.2em;
 }
@@ -10386,6 +10380,7 @@ fieldset.is-disabled .link,
 }
 .breadcrumb .active {
   color: rgb(46.2, 156.9, 163.2);
+  font-weight: 700;
 }
 .breadcrumb.is-shade .active {
   color: rgb(117.3, 126.3, 145.2);

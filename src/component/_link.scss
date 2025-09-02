@@ -33,7 +33,7 @@
                 width: 0%;
                 height: 1px;
                 transform: translateX(-50%);
-                background: currentColor;
+                background: currentcolor;
                 @include module.transition(all);
             }
 
@@ -71,6 +71,7 @@
 
             @include module.is-disabled() {
                 @include module.disabled();
+
                 background-color: transparent !important;
                 border-color: transparent !important;
             }

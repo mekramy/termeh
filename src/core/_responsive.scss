@@ -159,7 +159,7 @@ $-defs: map.keys($-queries);
 /// Applies styles for retina/high-resolution displays (min-resolution: 2dppx)
 /// @content Styles to apply
 @mixin retina() {
-    @media screen and (min-resolution: 2dppx) {
+    @media screen and (resolution >= 2dppx) {
         @content;
     }
 }
@@ -192,6 +192,14 @@ $-defs: map.keys($-queries);
 /// @content Styles to apply
 @mixin pointer-coarse() {
     @media screen and (pointer: coarse) {
+        @content;
+    }
+}
+
+/// Applies styles the device supports high dynamic range (HDR)
+/// @content Styles to apply
+@mixin prefers-hdr() {
+    @media screen and (dynamic-range: high) {
         @content;
     }
 }

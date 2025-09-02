@@ -222,6 +222,30 @@ Applies styles for landscape device orientation.
 
 ## User preferences
 
+### Prefers HDR
+
+Applies styles the device supports high dynamic range (HDR).
+
+::: definition
+
+**Signature:**
+
+```scss
+@mixin prefers-hdr();
+```
+
+**Example:**
+
+```scss
+.heading-hero {
+  @include termeh.prefers-hdr() {
+    background-image: url("/media/image@hdr.png");
+  }
+}
+```
+
+:::
+
 ### Prefers Dark Scheme
 
 Applies styles when the user prefers a dark color scheme.

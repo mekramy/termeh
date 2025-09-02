@@ -27,10 +27,6 @@
             box-sizing: border-box;
             font-weight: $weight;
 
-            .active {
-                font-weight: $strong;
-            }
-
             > * {
                 line-height: $height;
             }
@@ -42,6 +38,7 @@
 
             .active {
                 color: $primary;
+                font-weight: $strong;
             }
 
             @each $name, $color in module.colors($includes: $colors) {
