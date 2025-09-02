@@ -155,3 +155,99 @@ $-defs: map.keys($-queries);
         @content;
     }
 }
+
+/// Applies styles for retina/high-resolution displays (min-resolution: 2dppx)
+/// @content Styles to apply
+@mixin retina() {
+    @media screen and (min-resolution: 2dppx) {
+        @content;
+    }
+}
+
+/// Applies styles for portrait orientation
+/// @content Styles to apply
+@mixin portrait() {
+    @media screen and (orientation: portrait) {
+        @content;
+    }
+}
+
+/// Applies styles for landscape orientation
+/// @content Styles to apply
+@mixin landscape() {
+    @media screen and (orientation: landscape) {
+        @content;
+    }
+}
+
+/// Applies styles for fine pointer devices (e.g., mouse, stylus)
+/// @content Styles to apply
+@mixin pointer-fine() {
+    @media screen and (pointer: fine) {
+        @content;
+    }
+}
+
+/// Applies styles for coarse pointer devices (e.g., touch)
+/// @content Styles to apply
+@mixin pointer-coarse() {
+    @media screen and (pointer: coarse) {
+        @content;
+    }
+}
+
+/// Applies styles when user prefers dark color scheme
+/// @content Styles to apply
+@mixin prefers-dark() {
+    @media screen and (prefers-color-scheme: dark) {
+        @content;
+    }
+}
+
+/// Applies styles when user prefers light color scheme
+/// @content Styles to apply
+@mixin prefers-light() {
+    @media screen and (prefers-color-scheme: light) {
+        @content;
+    }
+}
+
+/// Applies styles when user prefers reduced motion
+/// @content Styles to apply
+@mixin prefers-reduced-motion() {
+    @media screen and (prefers-reduced-motion: reduce) {
+        @content;
+    }
+}
+
+/// Applies styles when user prefers more contrast
+/// @content Styles to apply
+@mixin prefers-more-contrast() {
+    @media screen and (prefers-contrast: more) {
+        @content;
+    }
+}
+
+/// Applies styles when user prefers less contrast
+/// @content Styles to apply
+@mixin prefers-less-contrast() {
+    @media screen and (prefers-contrast: less) {
+        @content;
+    }
+}
+
+/// Applies styles for print media
+/// @content Styles to apply
+@mixin print() {
+    @media print {
+        @content;
+    }
+}
+
+/// Applies styles for non-print media (e.g., screen)
+/// @content Styles to apply
+@mixin not-print() {
+    @media not print {
+        @content;
+    }
+}

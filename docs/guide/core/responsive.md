@@ -48,7 +48,33 @@ Each mixin wraps content in a media query targeting specific device ranges.
 
 :::
 
-## Non-Touch Device Interaction
+## Device capabilities
+
+### Touch Device Interaction
+
+Applies styles for devices without hover (touch devices).
+
+::: definition
+
+**Signature:**
+
+```scss
+@mixin touch();
+```
+
+**Example:**
+
+```scss
+@include termeh.touch() {
+  .button {
+    border: none;
+  }
+}
+```
+
+:::
+
+### Non-Touch Device Interaction
 
 Applies styles for devices that support hover (non-touch devices).
 
@@ -72,24 +98,296 @@ Applies styles for devices that support hover (non-touch devices).
 
 :::
 
-## Touch Device Interaction
+### Fine Pointer Device Interaction
 
-Applies styles for devices without hover (touch devices).
+Applies styles for devices with a fine pointer (mouse, stylus).
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@mixin touch();
+@mixin pointer-fine();
 ```
 
 **Example:**
 
 ```scss
-@include termeh.touch() {
+@include termeh.pointer-fine() {
   .button {
-    border: none;
+    outline: 1px dashed;
+  }
+}
+```
+
+:::
+
+### Coarse Pointer Device Interaction
+
+Applies styles for devices with a coarse pointer (touch).
+
+::: definition
+
+**Signature:**
+
+```scss
+@mixin pointer-coarse();
+```
+
+**Example:**
+
+```scss
+@include termeh.pointer-coarse() {
+  .button {
+    outline: none;
+  }
+}
+```
+
+:::
+
+## Orientation & Resolution
+
+### Retina Display
+
+Applies styles for high-resolution (retina) displays.
+
+::: definition
+
+**Signature:**
+
+```scss
+@mixin retina();
+```
+
+**Example:**
+
+```scss
+@include termeh.retina() {
+  .icon {
+    background-image: url("icon@2x.png");
+  }
+}
+```
+
+:::
+
+### Portrait Orientation
+
+Applies styles for portrait device orientation.
+
+::: definition
+
+**Signature:**
+
+```scss
+@mixin portrait();
+```
+
+**Example:**
+
+```scss
+@include termeh.portrait() {
+  .container {
+    flex-direction: column;
+  }
+}
+```
+
+:::
+
+### Landscape Orientation
+
+Applies styles for landscape device orientation.
+
+::: definition
+
+**Signature:**
+
+```scss
+@mixin landscape();
+```
+
+**Example:**
+
+```scss
+@include termeh.landscape() {
+  .container {
+    flex-direction: row;
+  }
+}
+```
+
+:::
+
+## User preferences
+
+### Prefers Dark Scheme
+
+Applies styles when the user prefers a dark color scheme.
+
+::: definition
+
+**Signature:**
+
+```scss
+@mixin prefers-dark();
+```
+
+**Example:**
+
+```scss
+@include termeh.prefers-dark() {
+  body {
+    background: #222;
+    color: #eee;
+  }
+}
+```
+
+:::
+
+### Prefers Light Scheme
+
+Applies styles when the user prefers a light color scheme.
+
+::: definition
+
+**Signature:**
+
+```scss
+@mixin prefers-light();
+```
+
+**Example:**
+
+```scss
+@include termeh.prefers-light() {
+  body {
+    background: #fff;
+    color: #222;
+  }
+}
+```
+
+:::
+
+### Prefers Reduced Motion
+
+Applies styles when the user prefers reduced motion.
+
+::: definition
+
+**Signature:**
+
+```scss
+@mixin prefers-reduced-motion();
+```
+
+**Example:**
+
+```scss
+@include termeh.prefers-reduced-motion() {
+  .animation {
+    animation: none;
+  }
+}
+```
+
+:::
+
+### Prefers More Contrast
+
+Applies styles when the user prefers more contrast.
+
+::: definition
+
+**Signature:**
+
+```scss
+@mixin prefers-more-contrast();
+```
+
+**Example:**
+
+```scss
+@include termeh.prefers-more-contrast() {
+  body {
+    filter: contrast(1.2);
+  }
+}
+```
+
+:::
+
+### Prefers Less Contrast
+
+Applies styles when the user prefers less contrast.
+
+::: definition
+
+**Signature:**
+
+```scss
+@mixin prefers-less-contrast();
+```
+
+**Example:**
+
+```scss
+@include termeh.prefers-less-contrast() {
+  body {
+    filter: contrast(0.8);
+  }
+}
+```
+
+:::
+
+## Print
+
+### Print Media
+
+Applies styles for print media.
+
+::: definition
+
+**Signature:**
+
+```scss
+@mixin print();
+```
+
+**Example:**
+
+```scss
+@include termeh.print() {
+  .header {
+    display: none;
+  }
+}
+```
+
+:::
+
+### Non-Print Media
+
+Applies styles for non-print media (e.g., screen).
+
+::: definition
+
+**Signature:**
+
+```scss
+@mixin not-print();
+```
+
+**Example:**
+
+```scss
+@include termeh.not-print() {
+  .print-tip {
+    display: none;
   }
 }
 ```
