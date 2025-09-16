@@ -15,72 +15,76 @@
 /// @termeh {Color} [FALLBACK] - var("input", "placeholder") -> default textarea placeholder color
 /// @termeh {Color} [white] - var("input", "background") -> default textarea background color
 @mixin use-textarea($colors: ()) {
-    $error: module.color("error");
-    $primary: module.color("primary");
-    $shade: module.variant("shade", "mute");
-    $separator: module.var("base", "separator", #eee);
+    @if not module.module-presented("form-textarea") {
+        @include module.present-module("form-textarea");
 
-    $radius: module.var("radius", "normal");
-    $gap-micro: module.var("gap", "micro", 8px);
-    $line-height: module.var("line-height", "normal", 1.6em);
+        $error: module.color("error");
+        $primary: module.color("primary");
+        $shade: module.variant("shade", "mute");
+        $separator: module.var("base", "separator", #eee);
 
-    $border: module.var("input", "border", $separator);
-    $background: module.var("input", "background", white);
-    $placeholder: module.var("input", "placeholder", $shade);
+        $radius: module.var("radius", "normal");
+        $gap-micro: module.var("gap", "micro", 8px);
+        $line-height: module.var("line-height", "normal", 1.6em);
 
-    @at-root {
-        @include animation.shake();
+        $border: module.var("input", "border", $separator);
+        $background: module.var("input", "background", white);
+        $placeholder: module.var("input", "placeholder", $shade);
 
-        textarea {
-            @include module.control();
+        @at-root {
+            @include animation.shake();
 
-            width: 100%;
-            max-width: 100%;
-            resize: vertical;
-            overflow-y: auto;
-            padding: $gap-micro * 2;
-            line-height: $line-height;
-            border-radius: $radius;
-            border: 1px solid $border;
-            background-color: $background;
-            @include module.scrollable($primary);
+            textarea {
+                @include module.control();
 
-            &:not([rows]) {
-                max-height: 40em;
-                min-height: 8em;
-            }
+                width: 100%;
+                max-width: 100%;
+                resize: vertical;
+                overflow-y: auto;
+                padding: $gap-micro * 2;
+                line-height: $line-height;
+                border-radius: $radius;
+                border: 1px solid $border;
+                background-color: $background;
+                @include module.scrollable($primary);
 
-            &[rows] {
-                height: initial;
-            }
-
-            @include module.placeholder() {
-                color: $placeholder;
-            }
-
-            &:focus,
-            &.is-focused {
-                border-color: $primary;
-            }
-
-            @each $name, $color in module.colors($includes: $colors) {
-                &.is-#{$name} {
-                    &:focus,
-                    &.is-focused {
-                        border-color: $color;
-                    }
-
-                    @include module.selection($name);
+                &:not([rows]) {
+                    max-height: 40em;
+                    min-height: 8em;
                 }
-            }
 
-            @include module.is-invalid() {
-                border-color: $error;
-                animation: shake 0.5s ease;
-            }
+                &[rows] {
+                    height: initial;
+                }
 
-            @include module.is-disabled() {
-                @include module.disabled();
+                @include module.placeholder() {
+                    color: $placeholder;
+                }
+
+                &:focus,
+                &.is-focused {
+                    border-color: $primary;
+                }
+
+                @each $name, $color in module.colors($includes: $colors) {
+                    &.is-#{$name} {
+                        &:focus,
+                        &.is-focused {
+                            border-color: $color;
+                        }
+
+                        @include module.selection($name);
+                    }
+                }
+
+                @include module.is-invalid() {
+                    border-color: $error;
+                    animation: shake 0.5s ease;
+                }
+
+                @include module.is-disabled() {
+                    @include module.disabled();
+                }
             }
         }
     }

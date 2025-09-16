@@ -91,6 +91,10 @@ It extends the base _Element_ module.
 @include termeh.use-meta(("primary", "green"), ("small", "medium"));
 ```
 
+**Module:**
+
+This module is registered as `meta` in the _presented modules_.
+
 :::
 
 ::: dependencies

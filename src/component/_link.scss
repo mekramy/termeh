@@ -9,71 +9,75 @@
 /// @termeh {Number} [2.2em] - var("control", "height") -> link height
 /// @termeh {Color} [null] - var("decorator", "size") -> loading spinner thickness
 @mixin use-link($colors: (), $sizes: ()) {
-    $foreground: module.var("base", "foreground", black);
-    $height: module.var("control", "height", 2.2em);
-    $decorator: module.var("decorator", "size");
+    @if not module.module-presented("link") {
+        @include module.present-module("link");
 
-    @at-root {
-        @include element.use-element();
+        $foreground: module.var("base", "foreground", black);
+        $height: module.var("control", "height", 2.2em);
+        $decorator: module.var("decorator", "size");
 
-        .link {
-            @include module.control();
-            @extend .element;
+        @at-root {
+            @include element.use-element();
 
-            cursor: pointer;
-            height: $height;
-            color: $foreground;
-            @include module.transition(all);
+            .link {
+                @include module.control();
+                @extend .element;
 
-            &::after {
-                content: " ";
-                position: absolute;
-                left: 50%;
-                bottom: 0%;
-                width: 0%;
-                height: 1px;
-                transform: translateX(-50%);
-                background: currentcolor;
+                cursor: pointer;
+                height: $height;
+                color: $foreground;
                 @include module.transition(all);
-            }
-
-            &:hover {
-                text-decoration: none;
 
                 &::after {
-                    width: 100%;
+                    content: " ";
+                    position: absolute;
+                    left: 50%;
+                    bottom: 0%;
+                    width: 0%;
+                    height: 1px;
+                    transform: translateX(-50%);
+                    background: currentcolor;
+                    @include module.transition(all);
                 }
-            }
 
-            &.is-loading {
-                color: transparent;
-                @include module.locked();
-                @include module.loader(1em, $foreground, $decorator);
-            }
+                &:hover {
+                    text-decoration: none;
 
-            @each $name, $size in module.sizes($sizes) {
-                &.is-#{$name} {
-                    font-size: $size;
-                }
-            }
-
-            @each $name, $color in module.colors($colors) {
-                &.is-#{$name} {
-                    color: module.variant($name, "readable");
-                    @include module.selection($name);
-
-                    &.is-loading {
-                        color: transparent;
-                        @include module.loader-color(module.variant($name, "readable"));
+                    &::after {
+                        width: 100%;
                     }
                 }
-            }
 
-            @include module.is-disabled() {
-                @include module.disabled();
+                &.is-loading {
+                    color: transparent;
+                    @include module.locked();
+                    @include module.loader(1em, $foreground, $decorator);
+                }
 
-                background-color: transparent !important;
-                border-color: transparent !important;
+                @each $name, $size in module.sizes($sizes) {
+                    &.is-#{$name} {
+                        font-size: $size;
+                    }
+                }
+
+                @each $name, $color in module.colors($colors) {
+                    &.is-#{$name} {
+                        color: module.variant($name, "readable");
+                        @include module.selection($name);
+
+                        &.is-loading {
+                            color: transparent;
+                            @include module.loader-color(module.variant($name, "readable"));
+                        }
+                    }
+                }
+
+                @include module.is-disabled() {
+                    @include module.disabled();
+
+                    background-color: transparent !important;
+                    border-color: transparent !important;
+                }
             }
         }
     }

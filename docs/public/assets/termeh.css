@@ -6924,92 +6924,92 @@ label.checkbox input[type=checkbox]:focus, label.checkbox input[type=checkbox]:f
   border-color: #179299;
 }
 label.checkbox input[type=checkbox]:checked {
-  box-shadow: 0 0 0 8px rgba(23, 146, 153, 0);
+  box-shadow: 0 0 0 5px rgba(23, 146, 153, 0);
 }
 label.checkbox input[type=checkbox]:checked::after {
   transform: scale(0.6);
 }
-label.checkbox.is-shade input {
+label.checkbox.is-shade input[type=checkbox] {
   box-shadow: 0 0 0 0 rgba(102, 112, 133, 0.25);
 }
-label.checkbox.is-shade input::after {
+label.checkbox.is-shade input[type=checkbox]::after {
   background-color: #667085;
 }
-label.checkbox.is-shade input:focus, label.checkbox.is-shade input:focus-within {
+label.checkbox.is-shade input[type=checkbox]:focus, label.checkbox.is-shade input[type=checkbox]:focus-within {
   border-color: #667085;
 }
-label.checkbox.is-shade input:checked {
-  box-shadow: 0 0 0 8px rgba(102, 112, 133, 0);
+label.checkbox.is-shade input[type=checkbox]:checked {
+  box-shadow: 0 0 0 5px rgba(102, 112, 133, 0);
 }
-label.checkbox.is-error input {
+label.checkbox.is-error input[type=checkbox] {
   box-shadow: 0 0 0 0 rgba(192, 0, 33, 0.25);
 }
-label.checkbox.is-error input::after {
+label.checkbox.is-error input[type=checkbox]::after {
   background-color: #c00021;
 }
-label.checkbox.is-error input:focus, label.checkbox.is-error input:focus-within {
+label.checkbox.is-error input[type=checkbox]:focus, label.checkbox.is-error input[type=checkbox]:focus-within {
   border-color: #c00021;
 }
-label.checkbox.is-error input:checked {
-  box-shadow: 0 0 0 8px rgba(192, 0, 33, 0);
+label.checkbox.is-error input[type=checkbox]:checked {
+  box-shadow: 0 0 0 5px rgba(192, 0, 33, 0);
 }
-label.checkbox.is-primary input {
+label.checkbox.is-primary input[type=checkbox] {
   box-shadow: 0 0 0 0 rgba(23, 146, 153, 0.25);
 }
-label.checkbox.is-primary input::after {
+label.checkbox.is-primary input[type=checkbox]::after {
   background-color: #179299;
 }
-label.checkbox.is-primary input:focus, label.checkbox.is-primary input:focus-within {
+label.checkbox.is-primary input[type=checkbox]:focus, label.checkbox.is-primary input[type=checkbox]:focus-within {
   border-color: #179299;
 }
-label.checkbox.is-primary input:checked {
-  box-shadow: 0 0 0 8px rgba(23, 146, 153, 0);
+label.checkbox.is-primary input[type=checkbox]:checked {
+  box-shadow: 0 0 0 5px rgba(23, 146, 153, 0);
 }
-label.checkbox.is-indigo input {
+label.checkbox.is-indigo input[type=checkbox] {
   box-shadow: 0 0 0 0 rgba(91, 95, 199, 0.25);
 }
-label.checkbox.is-indigo input::after {
+label.checkbox.is-indigo input[type=checkbox]::after {
   background-color: #5b5fc7;
 }
-label.checkbox.is-indigo input:focus, label.checkbox.is-indigo input:focus-within {
+label.checkbox.is-indigo input[type=checkbox]:focus, label.checkbox.is-indigo input[type=checkbox]:focus-within {
   border-color: #5b5fc7;
 }
-label.checkbox.is-indigo input:checked {
-  box-shadow: 0 0 0 8px rgba(91, 95, 199, 0);
+label.checkbox.is-indigo input[type=checkbox]:checked {
+  box-shadow: 0 0 0 5px rgba(91, 95, 199, 0);
 }
-label.checkbox.is-green input {
+label.checkbox.is-green input[type=checkbox] {
   box-shadow: 0 0 0 0 rgba(118, 200, 147, 0.25);
 }
-label.checkbox.is-green input::after {
+label.checkbox.is-green input[type=checkbox]::after {
   background-color: #76c893;
 }
-label.checkbox.is-green input:focus, label.checkbox.is-green input:focus-within {
+label.checkbox.is-green input[type=checkbox]:focus, label.checkbox.is-green input[type=checkbox]:focus-within {
   border-color: #76c893;
 }
-label.checkbox.is-green input:checked {
-  box-shadow: 0 0 0 8px rgba(118, 200, 147, 0);
+label.checkbox.is-green input[type=checkbox]:checked {
+  box-shadow: 0 0 0 5px rgba(118, 200, 147, 0);
 }
-label.checkbox.is-maroon input {
+label.checkbox.is-maroon input[type=checkbox] {
   box-shadow: 0 0 0 0 rgba(139, 30, 63, 0.25);
 }
-label.checkbox.is-maroon input::after {
+label.checkbox.is-maroon input[type=checkbox]::after {
   background-color: #8b1e3f;
 }
-label.checkbox.is-maroon input:focus, label.checkbox.is-maroon input:focus-within {
+label.checkbox.is-maroon input[type=checkbox]:focus, label.checkbox.is-maroon input[type=checkbox]:focus-within {
   border-color: #8b1e3f;
 }
-label.checkbox.is-maroon input:checked {
-  box-shadow: 0 0 0 8px rgba(139, 30, 63, 0);
+label.checkbox.is-maroon input[type=checkbox]:checked {
+  box-shadow: 0 0 0 5px rgba(139, 30, 63, 0);
 }
-label.checkbox input {
+label.checkbox input[type=checkbox] {
   margin-left: 0;
   margin-right: 8px;
 }
-label.checkbox.is-ltr input {
+label.checkbox.is-ltr input[type=checkbox] {
   margin-left: 0;
   margin-right: 8px;
 }
-label.checkbox.is-rtl input {
+label.checkbox.is-rtl input[type=checkbox] {
   margin-left: 8px;
   margin-right: 0;
 }
@@ -7017,30 +7017,30 @@ label.checkbox.is-rtl input {
 .field.is-failed label.checkbox {
   animation: shake 0.5s ease;
 }
-.field:invalid label.checkbox input,
-.field.is-failed label.checkbox input {
+.field:invalid label.checkbox input[type=checkbox],
+.field.is-failed label.checkbox input[type=checkbox] {
   border-color: #c00021;
 }
-.field:invalid label.checkbox input::after,
-.field.is-failed label.checkbox input::after {
+.field:invalid label.checkbox input[type=checkbox]::after,
+.field.is-failed label.checkbox input[type=checkbox]::after {
   background-color: #c00021;
 }
-.field:invalid label.checkbox input:checked,
-.field.is-failed label.checkbox input:checked {
-  box-shadow: 0 0 0 8px rgba(192, 0, 33, 0);
+.field:invalid label.checkbox input[type=checkbox]:checked,
+.field.is-failed label.checkbox input[type=checkbox]:checked {
+  box-shadow: 0 0 0 5px rgba(192, 0, 33, 0);
 }
 
 label.checkbox:invalid, label.checkbox.is-failed {
   animation: shake 0.5s ease;
 }
-label.checkbox:invalid input, label.checkbox.is-failed input {
+label.checkbox:invalid input[type=checkbox], label.checkbox.is-failed input[type=checkbox] {
   border-color: #c00021;
 }
-label.checkbox:invalid input::after, label.checkbox.is-failed input::after {
+label.checkbox:invalid input[type=checkbox]::after, label.checkbox.is-failed input[type=checkbox]::after {
   background-color: #c00021;
 }
-label.checkbox:invalid input:checked, label.checkbox.is-failed input:checked {
-  box-shadow: 0 0 0 8px rgba(192, 0, 33, 0);
+label.checkbox:invalid input[type=checkbox]:checked, label.checkbox.is-failed input[type=checkbox]:checked {
+  box-shadow: 0 0 0 5px rgba(192, 0, 33, 0);
 }
 fieldset:disabled label.checkbox,
 fieldset.is-disabled label.checkbox,
@@ -7050,16 +7050,16 @@ fieldset.is-disabled label.checkbox,
   pointer-events: none;
   user-select: none;
 }
-fieldset:disabled label.checkbox input,
-fieldset.is-disabled label.checkbox input,
-.field:disabled label.checkbox input,
-.field.is-disabled label.checkbox input {
+fieldset:disabled label.checkbox input[type=checkbox],
+fieldset.is-disabled label.checkbox input[type=checkbox],
+.field:disabled label.checkbox input[type=checkbox],
+.field.is-disabled label.checkbox input[type=checkbox] {
   border-color: #d1d6e0;
 }
-fieldset:disabled label.checkbox input::after,
-fieldset.is-disabled label.checkbox input::after,
-.field:disabled label.checkbox input::after,
-.field.is-disabled label.checkbox input::after {
+fieldset:disabled label.checkbox input[type=checkbox]::after,
+fieldset.is-disabled label.checkbox input[type=checkbox]::after,
+.field:disabled label.checkbox input[type=checkbox]::after,
+.field.is-disabled label.checkbox input[type=checkbox]::after {
   background-color: #bfc6d4;
 }
 
@@ -7068,10 +7068,10 @@ label.checkbox:disabled, label.checkbox.is-disabled {
   pointer-events: none;
   user-select: none;
 }
-label.checkbox:disabled input, label.checkbox.is-disabled input {
+label.checkbox:disabled input[type=checkbox], label.checkbox.is-disabled input[type=checkbox] {
   border-color: #d1d6e0;
 }
-label.checkbox:disabled input::after, label.checkbox.is-disabled input::after {
+label.checkbox:disabled input[type=checkbox]::after, label.checkbox.is-disabled input[type=checkbox]::after {
   background-color: #bfc6d4;
 }
 
@@ -7470,92 +7470,92 @@ label.radio input[type=radio]:focus, label.radio input[type=radio]:focus-within 
   border-color: #179299;
 }
 label.radio input[type=radio]:checked {
-  box-shadow: 0 0 0 8px rgba(23, 146, 153, 0);
+  box-shadow: 0 0 0 5px rgba(23, 146, 153, 0);
 }
 label.radio input[type=radio]:checked::after {
   transform: scale(0.6);
 }
-label.radio.is-shade input {
+label.radio.is-shade input[type=radio] {
   box-shadow: 0 0 0 0 rgba(102, 112, 133, 0.25);
 }
-label.radio.is-shade input::after {
+label.radio.is-shade input[type=radio]::after {
   background-color: #667085;
 }
-label.radio.is-shade input:focus, label.radio.is-shade input:focus-within {
+label.radio.is-shade input[type=radio]:focus, label.radio.is-shade input[type=radio]:focus-within {
   border-color: #667085;
 }
-label.radio.is-shade input:checked {
-  box-shadow: 0 0 0 8px rgba(102, 112, 133, 0);
+label.radio.is-shade input[type=radio]:checked {
+  box-shadow: 0 0 0 5px rgba(102, 112, 133, 0);
 }
-label.radio.is-error input {
+label.radio.is-error input[type=radio] {
   box-shadow: 0 0 0 0 rgba(192, 0, 33, 0.25);
 }
-label.radio.is-error input::after {
+label.radio.is-error input[type=radio]::after {
   background-color: #c00021;
 }
-label.radio.is-error input:focus, label.radio.is-error input:focus-within {
+label.radio.is-error input[type=radio]:focus, label.radio.is-error input[type=radio]:focus-within {
   border-color: #c00021;
 }
-label.radio.is-error input:checked {
-  box-shadow: 0 0 0 8px rgba(192, 0, 33, 0);
+label.radio.is-error input[type=radio]:checked {
+  box-shadow: 0 0 0 5px rgba(192, 0, 33, 0);
 }
-label.radio.is-primary input {
+label.radio.is-primary input[type=radio] {
   box-shadow: 0 0 0 0 rgba(23, 146, 153, 0.25);
 }
-label.radio.is-primary input::after {
+label.radio.is-primary input[type=radio]::after {
   background-color: #179299;
 }
-label.radio.is-primary input:focus, label.radio.is-primary input:focus-within {
+label.radio.is-primary input[type=radio]:focus, label.radio.is-primary input[type=radio]:focus-within {
   border-color: #179299;
 }
-label.radio.is-primary input:checked {
-  box-shadow: 0 0 0 8px rgba(23, 146, 153, 0);
+label.radio.is-primary input[type=radio]:checked {
+  box-shadow: 0 0 0 5px rgba(23, 146, 153, 0);
 }
-label.radio.is-indigo input {
+label.radio.is-indigo input[type=radio] {
   box-shadow: 0 0 0 0 rgba(91, 95, 199, 0.25);
 }
-label.radio.is-indigo input::after {
+label.radio.is-indigo input[type=radio]::after {
   background-color: #5b5fc7;
 }
-label.radio.is-indigo input:focus, label.radio.is-indigo input:focus-within {
+label.radio.is-indigo input[type=radio]:focus, label.radio.is-indigo input[type=radio]:focus-within {
   border-color: #5b5fc7;
 }
-label.radio.is-indigo input:checked {
-  box-shadow: 0 0 0 8px rgba(91, 95, 199, 0);
+label.radio.is-indigo input[type=radio]:checked {
+  box-shadow: 0 0 0 5px rgba(91, 95, 199, 0);
 }
-label.radio.is-green input {
+label.radio.is-green input[type=radio] {
   box-shadow: 0 0 0 0 rgba(118, 200, 147, 0.25);
 }
-label.radio.is-green input::after {
+label.radio.is-green input[type=radio]::after {
   background-color: #76c893;
 }
-label.radio.is-green input:focus, label.radio.is-green input:focus-within {
+label.radio.is-green input[type=radio]:focus, label.radio.is-green input[type=radio]:focus-within {
   border-color: #76c893;
 }
-label.radio.is-green input:checked {
-  box-shadow: 0 0 0 8px rgba(118, 200, 147, 0);
+label.radio.is-green input[type=radio]:checked {
+  box-shadow: 0 0 0 5px rgba(118, 200, 147, 0);
 }
-label.radio.is-maroon input {
+label.radio.is-maroon input[type=radio] {
   box-shadow: 0 0 0 0 rgba(139, 30, 63, 0.25);
 }
-label.radio.is-maroon input::after {
+label.radio.is-maroon input[type=radio]::after {
   background-color: #8b1e3f;
 }
-label.radio.is-maroon input:focus, label.radio.is-maroon input:focus-within {
+label.radio.is-maroon input[type=radio]:focus, label.radio.is-maroon input[type=radio]:focus-within {
   border-color: #8b1e3f;
 }
-label.radio.is-maroon input:checked {
-  box-shadow: 0 0 0 8px rgba(139, 30, 63, 0);
+label.radio.is-maroon input[type=radio]:checked {
+  box-shadow: 0 0 0 5px rgba(139, 30, 63, 0);
 }
-label.radio input {
+label.radio input[type=radio] {
   margin-left: 0;
   margin-right: 8px;
 }
-label.radio.is-ltr input {
+label.radio.is-ltr input[type=radio] {
   margin-left: 0;
   margin-right: 8px;
 }
-label.radio.is-rtl input {
+label.radio.is-rtl input[type=radio] {
   margin-left: 8px;
   margin-right: 0;
 }
@@ -7563,30 +7563,30 @@ label.radio.is-rtl input {
 .field.is-failed label.radio {
   animation: shake 0.5s ease;
 }
-.field:invalid label.radio input,
-.field.is-failed label.radio input {
+.field:invalid label.radio input[type=radio],
+.field.is-failed label.radio input[type=radio] {
   border-color: #c00021;
 }
-.field:invalid label.radio input::after,
-.field.is-failed label.radio input::after {
+.field:invalid label.radio input[type=radio]::after,
+.field.is-failed label.radio input[type=radio]::after {
   background-color: #c00021;
 }
-.field:invalid label.radio input:checked,
-.field.is-failed label.radio input:checked {
-  box-shadow: 0 0 0 8px rgba(192, 0, 33, 0);
+.field:invalid label.radio input[type=radio]:checked,
+.field.is-failed label.radio input[type=radio]:checked {
+  box-shadow: 0 0 0 5px rgba(192, 0, 33, 0);
 }
 
 label.radio:invalid, label.radio.is-failed {
   animation: shake 0.5s ease;
 }
-label.radio:invalid input, label.radio.is-failed input {
+label.radio:invalid input[type=radio], label.radio.is-failed input[type=radio] {
   border-color: #c00021;
 }
-label.radio:invalid input::after, label.radio.is-failed input::after {
+label.radio:invalid input[type=radio]::after, label.radio.is-failed input[type=radio]::after {
   background-color: #c00021;
 }
-label.radio:invalid input:checked, label.radio.is-failed input:checked {
-  box-shadow: 0 0 0 8px rgba(192, 0, 33, 0);
+label.radio:invalid input[type=radio]:checked, label.radio.is-failed input[type=radio]:checked {
+  box-shadow: 0 0 0 5px rgba(192, 0, 33, 0);
 }
 fieldset:disabled label.radio,
 fieldset.is-disabled label.radio,
@@ -7596,16 +7596,16 @@ fieldset.is-disabled label.radio,
   pointer-events: none;
   user-select: none;
 }
-fieldset:disabled label.radio input,
-fieldset.is-disabled label.radio input,
-.field:disabled label.radio input,
-.field.is-disabled label.radio input {
+fieldset:disabled label.radio input[type=radio],
+fieldset.is-disabled label.radio input[type=radio],
+.field:disabled label.radio input[type=radio],
+.field.is-disabled label.radio input[type=radio] {
   border-color: #d1d6e0;
 }
-fieldset:disabled label.radio input::after,
-fieldset.is-disabled label.radio input::after,
-.field:disabled label.radio input::after,
-.field.is-disabled label.radio input::after {
+fieldset:disabled label.radio input[type=radio]::after,
+fieldset.is-disabled label.radio input[type=radio]::after,
+.field:disabled label.radio input[type=radio]::after,
+.field.is-disabled label.radio input[type=radio]::after {
   background-color: #bfc6d4;
 }
 
@@ -7614,10 +7614,10 @@ label.radio:disabled, label.radio.is-disabled {
   pointer-events: none;
   user-select: none;
 }
-label.radio:disabled input, label.radio.is-disabled input {
+label.radio:disabled input[type=radio], label.radio.is-disabled input[type=radio] {
   border-color: #d1d6e0;
 }
-label.radio:disabled input::after, label.radio.is-disabled input::after {
+label.radio:disabled input[type=radio]::after, label.radio.is-disabled input[type=radio]::after {
   background-color: #bfc6d4;
 }
 

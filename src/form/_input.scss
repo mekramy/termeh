@@ -15,98 +15,102 @@
 /// @termeh {Color} [FALLBACK] - var("input", "placeholder") -> default input placeholder color
 /// @termeh {Color} [white] - var("input", "background") -> default input background color
 @mixin use-input($gaps: (), $colors: ()) {
-    $error: module.color("error");
-    $primary: module.color("primary");
-    $separator: module.var("base", "separator", #eee);
-    $shade: module.variant("shade", "mute");
+    @if not module.module-presented("form-input") {
+        @include module.present-module("form-input");
 
-    $radius: module.var("radius", "normal");
-    $height: module.var("input", "height", 2.8em);
-    $border: module.var("input", "border", $separator);
-    $background: module.var("input", "background", white);
-    $placeholder: module.var("input", "placeholder", $shade);
+        $error: module.color("error");
+        $primary: module.color("primary");
+        $separator: module.var("base", "separator", #eee);
+        $shade: module.variant("shade", "mute");
 
-    @at-root {
-        @include animation.shake();
+        $radius: module.var("radius", "normal");
+        $height: module.var("input", "height", 2.8em);
+        $border: module.var("input", "border", $separator);
+        $background: module.var("input", "background", white);
+        $placeholder: module.var("input", "placeholder", $shade);
 
-        .input {
-            display: flex;
-            align-items: center;
-            flex-flow: row nowrap;
-            height: $height;
-            line-height: 1em;
-            border-radius: $radius;
-            border: 1px solid $border;
-            background-color: $background;
-            padding: module.inline-padding();
-            @include module.transition(all);
+        @at-root {
+            @include animation.shake();
 
-            > .divider {
-                width: 1px;
-                height: 1em;
-                display: block;
-                margin: 0 1em;
-                background-color: $separator;
-            }
+            .input {
+                display: flex;
+                align-items: center;
+                flex-flow: row nowrap;
+                height: $height;
+                line-height: 1em;
+                border-radius: $radius;
+                border: 1px solid $border;
+                background-color: $background;
+                padding: module.inline-padding();
+                @include module.transition(all);
 
-            > .gutter {
-                display: block;
-                flex: 0 0 auto;
-                width: 1em;
-                box-sizing: border-box;
-            }
-
-            > * {
-                line-height: 1em !important;
-            }
-
-            input {
-                @include module.control();
-
-                display: block;
-                flex: 1 1 0;
-                border-radius: 0;
-
-                @include module.placeholder {
-                    color: $placeholder;
+                > .divider {
+                    width: 1px;
+                    height: 1em;
+                    display: block;
+                    margin: 0 1em;
+                    background-color: $separator;
                 }
-            }
 
-            &.is-focused,
-            &:focus-within {
-                border-color: $primary;
-            }
+                > .gutter {
+                    display: block;
+                    flex: 0 0 auto;
+                    width: 1em;
+                    box-sizing: border-box;
+                }
 
-            @each $name, $gap in module.gaps($includes: $gaps) {
-                &.is-#{$name}-gap {
-                    > .divider {
-                        margin: 0 module.half($gap);
-                    }
+                > * {
+                    line-height: 1em !important;
+                }
 
-                    > .gutter {
-                        width: $gap;
+                input {
+                    @include module.control();
+
+                    display: block;
+                    flex: 1 1 0;
+                    border-radius: 0;
+
+                    @include module.placeholder {
+                        color: $placeholder;
                     }
                 }
-            }
 
-            @each $name, $color in module.colors($includes: $colors) {
-                &.is-#{$name} {
-                    &.is-focused,
-                    &:focus-within {
-                        border-color: $color;
-                    }
-
-                    @include module.selection($name);
+                &.is-focused,
+                &:focus-within {
+                    border-color: $primary;
                 }
-            }
 
-            @include module.is-invalid() {
-                border-color: $error;
-                animation: shake 0.5s ease;
-            }
+                @each $name, $gap in module.gaps($includes: $gaps) {
+                    &.is-#{$name}-gap {
+                        > .divider {
+                            margin: 0 module.half($gap);
+                        }
 
-            @include module.is-disabled() {
-                @include module.disabled();
+                        > .gutter {
+                            width: $gap;
+                        }
+                    }
+                }
+
+                @each $name, $color in module.colors($includes: $colors) {
+                    &.is-#{$name} {
+                        &.is-focused,
+                        &:focus-within {
+                            border-color: $color;
+                        }
+
+                        @include module.selection($name);
+                    }
+                }
+
+                @include module.is-invalid() {
+                    border-color: $error;
+                    animation: shake 0.5s ease;
+                }
+
+                @include module.is-disabled() {
+                    @include module.disabled();
+                }
             }
         }
     }

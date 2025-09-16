@@ -48,6 +48,10 @@ Applies consistent heading styles for `h1`–`h6` elements. This includes font s
 @include termeh.use-heading();
 ```
 
+**Module:**
+
+This module is registered as `heading` in the _presented modules_.
+
 :::
 
 ::: dependencies

@@ -66,6 +66,10 @@ The **Breadcrumb** module provides navigation breadcrumbs with customizable colo
 @include termeh.use-breadcrumb(("primary", "danger"));
 ```
 
+**Module:**
+
+This module is registered as `breadcrumb` in the _presented modules_.
+
 :::
 
 ::: dependencies

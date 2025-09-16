@@ -134,6 +134,10 @@ The **Gallery** module provides a flexible grid for displaying images or content
 @include termeh.use-gallery();
 ```
 
+**Module:**
+
+This module is registered as `gallery` in the _presented modules_.
+
 :::
 
 ::: dependencies

@@ -5,33 +5,37 @@
 ///
 /// @termeh {Number} [8px] - var("gap", "micro") -> default spacing between wrapper items
 @mixin use-wrapper($gaps: ()) {
-    $gap-micro: module.var("gap", "micro", 8px);
+    @if not module.module-presented("wrapper") {
+        @include module.present-module("wrapper");
 
-    @at-root {
-        .wrapper {
-            display: flex;
-            flex-flow: row wrap;
-            align-items: center;
-            box-sizing: border-box;
+        $gap-micro: module.var("gap", "micro", 8px);
 
-            > * {
-                flex: 1 1 0;
+        @at-root {
+            .wrapper {
+                display: flex;
+                flex-flow: row wrap;
+                align-items: center;
                 box-sizing: border-box;
-            }
-
-            &:not(.is-gapless) {
-                margin: module.negate(module.half($gap-micro));
 
                 > * {
-                    margin: module.half($gap-micro);
+                    flex: 1 1 0;
+                    box-sizing: border-box;
                 }
 
-                @each $name, $gap in module.gaps($includes: $gaps) {
-                    &.is-#{$name}-gap {
-                        margin: module.negate(module.half($gap));
+                &:not(.is-gapless) {
+                    margin: module.negate(module.half($gap-micro));
 
-                        > * {
-                            margin: module.half($gap);
+                    > * {
+                        margin: module.half($gap-micro);
+                    }
+
+                    @each $name, $gap in module.gaps($includes: $gaps) {
+                        &.is-#{$name}-gap {
+                            margin: module.negate(module.half($gap));
+
+                            > * {
+                                margin: module.half($gap);
+                            }
                         }
                     }
                 }

@@ -70,6 +70,10 @@ The **Radio** module provides customizable radio button inputs with configurable
 @include termeh.use-radio(("primary", "error"));
 ```
 
+**Module:**
+
+This module is registered as `form-radio` in the _presented modules_.
+
 :::
 
 ::: dependencies

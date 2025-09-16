@@ -144,6 +144,10 @@ Provides fully-featured table styles with configurable colors, row behaviors, ho
 @include termeh.use-table(("primary", "error"));
 ```
 
+**Module:**
+
+This module is registered as `table` in the _presented modules_.
+
 :::
 
 ::: dependencies

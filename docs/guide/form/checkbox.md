@@ -70,6 +70,10 @@ The **Checkbox** module provides customizable checkbox inputs with configurable 
 @include termeh.use-checkbox(("primary", "error"));
 ```
 
+**Module:**
+
+This module is registered as `form-checkbox` in the _presented modules_.
+
 :::
 
 ::: dependencies

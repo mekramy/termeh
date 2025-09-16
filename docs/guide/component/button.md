@@ -108,6 +108,10 @@ The **Button** module provides customizable action elements with support for col
 @include termeh.use-button(("primary", "green"), ("small", "large"));
 ```
 
+**Module:**
+
+This module is registered as `button` in the _presented modules_.
+
 :::
 
 ::: dependencies

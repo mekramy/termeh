@@ -49,6 +49,10 @@ It’s suitable for carousels, horizontally scrolling lists, or vertical scrolle
 @include termeh.use-landscape(("small", "medium", "large"));
 ```
 
+**Module:**
+
+This module is registered as `landscape` in the _presented modules_.
+
 :::
 
 ::: dependencies

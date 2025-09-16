@@ -70,6 +70,10 @@ The **Fieldset** module provides consistent styling for `<fieldset>` and `<legen
 @include termeh.use-fieldset();
 ```
 
+**Module:**
+
+This module is registered as `form-fieldset` in the _presented modules_.
+
 :::
 
 ::: dependencies

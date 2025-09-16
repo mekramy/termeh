@@ -10,40 +10,44 @@
 /// @termeh {Number} [null] - var("control", "weight") -> breadcrumb font weight
 /// @termeh {Number} [null] - var("control", "strong") -> active item font weight
 @mixin use-breadcrumb($colors: ()) {
-    $primary: module.variant("primary", "readable");
-    $separator: module.var("base", "separator");
-    $gap-micro: module.var("gap", "micro", 8px);
+    @if not module.module-presented("breadcrumb") {
+        @include module.present-module("breadcrumb");
 
-    $height: module.var("control", "height", 2.2em);
-    $weight: module.var("control", "weight");
-    $strong: module.var("control", "strong");
+        $primary: module.variant("primary", "readable");
+        $separator: module.var("base", "separator");
+        $gap-micro: module.var("gap", "micro", 8px);
 
-    @at-root {
-        .breadcrumb {
-            display: flex;
-            flex-flow: row wrap;
-            align-items: center;
-            justify-content: flex-start;
-            box-sizing: border-box;
-            font-weight: $weight;
+        $height: module.var("control", "height", 2.2em);
+        $weight: module.var("control", "weight");
+        $strong: module.var("control", "strong");
 
-            > * {
-                line-height: $height;
-            }
+        @at-root {
+            .breadcrumb {
+                display: flex;
+                flex-flow: row wrap;
+                align-items: center;
+                justify-content: flex-start;
+                box-sizing: border-box;
+                font-weight: $weight;
 
-            .divider {
-                color: $separator;
-                margin: 0 $gap-micro;
-            }
+                > * {
+                    line-height: $height;
+                }
 
-            .active {
-                color: $primary;
-                font-weight: $strong;
-            }
+                .divider {
+                    color: $separator;
+                    margin: 0 $gap-micro;
+                }
 
-            @each $name, $color in module.colors($includes: $colors) {
-                &.is-#{$name} .active {
-                    color: module.variant($name, "readable");
+                .active {
+                    color: $primary;
+                    font-weight: $strong;
+                }
+
+                @each $name, $color in module.colors($includes: $colors) {
+                    &.is-#{$name} .active {
+                        color: module.variant($name, "readable");
+                    }
                 }
             }
         }

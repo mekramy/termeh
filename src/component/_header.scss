@@ -13,143 +13,147 @@
 /// @termeh {Number} [1.6em] - var("line-height", "normal") -> default line height
 /// @termeh {Number} [2px] - var("decorator", "size") -> decorator thickness
 @mixin use-header($colors: (), $gaps: ()) {
-    $shade: module.color("shade");
-    $mute: module.variant("shade", "mute");
+    @if not module.module-presented("header") {
+        @include module.present-module("header");
 
-    $font-weight: module.var("font", "weight", normal);
-    $strong-weight: module.var("strong", "weight", bold);
+        $shade: module.color("shade");
+        $mute: module.variant("shade", "mute");
 
-    $gap-macro: module.var("gap", "macro", 1.6em);
-    $line-normal: module.var("line-height", "normal", 1.6em);
-    $decorator: module.var("decorator", "size", 2px);
-    @at-root {
-        @include element.use-element();
+        $font-weight: module.var("font", "weight", normal);
+        $strong-weight: module.var("strong", "weight", bold);
 
-        .header {
-            display: flex;
-            align-items: center;
+        $gap-macro: module.var("gap", "macro", 1.6em);
+        $line-normal: module.var("line-height", "normal", 1.6em);
+        $decorator: module.var("decorator", "size", 2px);
+        @at-root {
+            @include element.use-element();
 
-            @include module.padded() {
-                padding: module.control-padding();
-            }
+            .header {
+                display: flex;
+                align-items: center;
 
-            @include module.marged() {
-                margin-bottom: $gap-macro;
-            }
+                @include module.padded() {
+                    padding: module.control-padding();
+                }
 
-            .thumbnail {
-                flex: 0 0 auto;
+                @include module.marged() {
+                    margin-bottom: $gap-macro;
+                }
 
-                &:not(:last-child) {
+                .thumbnail {
+                    flex: 0 0 auto;
+
+                    &:not(:last-child) {
+                        @include module.is-ltr() {
+                            margin-right: $gap-macro;
+                        }
+
+                        @include module.is-rtl() {
+                            margin-left: $gap-macro;
+                        }
+                    }
+                }
+
+                .headers {
+                    min-width: 0;
+                    flex: 1 1 0;
+
+                    h1,
+                    h2,
+                    h3,
+                    h4,
+                    h5,
+                    h6 {
+                        @extend .element;
+                        @include module.marginless();
+
+                        display: flex;
+                        justify-content: flex-start;
+                        font-size: 1em;
+                        line-height: $line-normal;
+
+                        .filler {
+                            flex: 1 1 0;
+                        }
+                    }
+
+                    h1,
+                    h2 {
+                        font-weight: $strong-weight;
+                    }
+
+                    h3,
+                    h4,
+                    h5,
+                    h6 {
+                        color: $mute;
+                        font-size: 0.9em;
+                        font-weight: $font-weight;
+                    }
+
+                    h5,
+                    h6 {
+                        opacity: 0.75;
+                    }
+                }
+
+                &.is-decorated {
                     @include module.is-ltr() {
-                        margin-right: $gap-macro;
+                        margin-left: module.half($decorator);
+                        border-left: $decorator solid $shade;
                     }
 
                     @include module.is-rtl() {
-                        margin-left: $gap-macro;
-                    }
-                }
-            }
-
-            .headers {
-                min-width: 0;
-                flex: 1 1 0;
-
-                h1,
-                h2,
-                h3,
-                h4,
-                h5,
-                h6 {
-                    @extend .element;
-                    @include module.marginless();
-
-                    display: flex;
-                    justify-content: flex-start;
-                    font-size: 1em;
-                    line-height: $line-normal;
-
-                    .filler {
-                        flex: 1 1 0;
+                        margin-right: module.half($decorator);
+                        border-right: $decorator solid $shade;
                     }
                 }
 
-                h1,
-                h2 {
-                    font-weight: $strong-weight;
-                }
+                &.is-centered {
+                    text-align: center;
 
-                h3,
-                h4,
-                h5,
-                h6 {
-                    color: $mute;
-                    font-size: 0.9em;
-                    font-weight: $font-weight;
-                }
-
-                h5,
-                h6 {
-                    opacity: 0.75;
-                }
-            }
-
-            &.is-decorated {
-                @include module.is-ltr() {
-                    margin-left: module.half($decorator);
-                    border-left: $decorator solid $shade;
-                }
-
-                @include module.is-rtl() {
-                    margin-right: module.half($decorator);
-                    border-right: $decorator solid $shade;
-                }
-            }
-
-            &.is-centered {
-                text-align: center;
-
-                h1,
-                h2,
-                h3,
-                h4,
-                h5,
-                h6 {
-                    justify-content: center;
-                }
-            }
-
-            @each $name, $gap in module.gaps($gaps) {
-                &.is-#{$name}-gap {
-                    @include module.padded() {
-                        padding: module.half($gap) $gap;
+                    h1,
+                    h2,
+                    h3,
+                    h4,
+                    h5,
+                    h6 {
+                        justify-content: center;
                     }
+                }
 
-                    .thumbnail {
-                        &:not(:last-child) {
+                @each $name, $gap in module.gaps($gaps) {
+                    &.is-#{$name}-gap {
+                        @include module.padded() {
+                            padding: module.half($gap) $gap;
+                        }
+
+                        .thumbnail {
+                            &:not(:last-child) {
+                                @include module.is-ltr() {
+                                    margin-right: $gap;
+                                }
+
+                                @include module.is-rtl() {
+                                    margin-left: $gap;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                @each $name, $color in module.colors($colors) {
+                    &.is-#{$name} {
+                        @include module.selection($name);
+
+                        &.is-decorated {
                             @include module.is-ltr() {
-                                margin-right: $gap;
+                                border-left-color: $color;
                             }
 
-                            @include module.is-rtl() {
-                                margin-left: $gap;
+                            @include module.is-ltr() {
+                                border-right-color: $color;
                             }
-                        }
-                    }
-                }
-            }
-
-            @each $name, $color in module.colors($colors) {
-                &.is-#{$name} {
-                    @include module.selection($name);
-
-                    &.is-decorated {
-                        @include module.is-ltr() {
-                            border-left-color: $color;
-                        }
-
-                        @include module.is-ltr() {
-                            border-right-color: $color;
                         }
                     }
                 }

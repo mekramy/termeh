@@ -46,6 +46,10 @@ The **Link** module provides a styled link-like element with underline animation
 @include termeh.use-link(("primary", "danger"), ("small", "large"));
 ```
 
+**Module:**
+
+This module is registered as `link` in the _presented modules_.
+
 :::
 
 ::: dependencies

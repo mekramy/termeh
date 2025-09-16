@@ -66,6 +66,10 @@ The **Textarea** module provides styled multi-line text inputs with configurable
 @include termeh.use-textarea(("primary", "error"));
 ```
 
+**Module:**
+
+This module is registered as `form-textarea` in the _presented modules_.
+
 :::
 
 ::: dependencies

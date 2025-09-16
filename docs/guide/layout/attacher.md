@@ -46,6 +46,10 @@ The **Attacher** module provides utility classes for arranging child elements in
 @include termeh.use-attacher();
 ```
 
+**Module:**
+
+This module is registered as `attacher` in the _presented modules_.
+
 :::
 
 ::: dependencies

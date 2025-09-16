@@ -55,6 +55,10 @@ Applies image styles with utility classes for centering, rounded or circular bor
 ); // Apply specific sizes only
 ```
 
+**Module:**
+
+This module is registered as `image` in the _presented modules_.
+
 :::
 
 ::: dependencies

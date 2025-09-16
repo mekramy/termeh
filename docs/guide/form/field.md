@@ -62,6 +62,10 @@ The **Field** module provides a wrapper for form controls, helping manage spacin
 @include termeh.use-field(("primary", "green"));
 ```
 
+**Module:**
+
+This module is registered as `form-field` in the _presented modules_.
+
 :::
 
 ::: dependencies

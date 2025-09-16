@@ -8,48 +8,52 @@
 /// @termeh {Number} [1200px] - var("container", "widescreen") -> max-width for widescreen devices
 /// @termeh {Number} [1500px] - var("container", "fullhd") -> max-width for full-HD and larger screens
 @mixin use-container($paddings: ()) {
-    $gap-macro: module.var("gap", "macro", 1.6em);
-    $desktop: module.var("container", "desktop", 960px);
-    $widescreen: module.var("container", "widescreen", 1200px);
-    $fullhd: module.var("container", "fullhd", 1500px);
+    @if not module.module-presented("container") {
+        @include module.present-module("container");
 
-    @at-root {
-        .container {
-            max-width: 100%;
-            display: block;
-            position: relative;
-            box-sizing: border-box;
+        $gap-macro: module.var("gap", "macro", 1.6em);
+        $desktop: module.var("container", "desktop", 960px);
+        $widescreen: module.var("container", "widescreen", 1200px);
+        $fullhd: module.var("container", "fullhd", 1500px);
 
-            @include module.marged() {
-                margin-bottom: $gap-macro;
-            }
+        @at-root {
+            .container {
+                max-width: 100%;
+                display: block;
+                position: relative;
+                box-sizing: border-box;
 
-            &:not(.is-fullwidth) {
-                @include module.desktop() {
-                    margin-left: auto;
-                    margin-right: auto;
-                    max-width: $desktop;
+                @include module.marged() {
+                    margin-bottom: $gap-macro;
                 }
 
-                @include module.widescreen() {
-                    margin-left: auto;
-                    margin-right: auto;
-                    max-width: $widescreen;
+                &:not(.is-fullwidth) {
+                    @include module.desktop() {
+                        margin-left: auto;
+                        margin-right: auto;
+                        max-width: $desktop;
+                    }
+
+                    @include module.widescreen() {
+                        margin-left: auto;
+                        margin-right: auto;
+                        max-width: $widescreen;
+                    }
+
+                    @include module.fullhd() {
+                        margin-left: auto;
+                        margin-right: auto;
+                        max-width: $fullhd;
+                    }
                 }
 
-                @include module.fullhd() {
-                    margin-left: auto;
-                    margin-right: auto;
-                    max-width: $fullhd;
-                }
-            }
+                @include module.padded() {
+                    padding: $gap-macro;
 
-            @include module.padded() {
-                padding: $gap-macro;
-
-                @each $name, $gap in module.gaps($includes: $paddings) {
-                    &.is-#{$name}-padded {
-                        padding: $gap;
+                    @each $name, $gap in module.gaps($includes: $paddings) {
+                        &.is-#{$name}-padded {
+                            padding: $gap;
+                        }
                     }
                 }
             }

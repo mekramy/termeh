@@ -48,6 +48,10 @@ The **Element** module provides a flexible base wrapper for inline elements with
 @include termeh.use-element();
 ```
 
+**Module:**
+
+This module is registered as `element` in the _presented modules_.
+
 :::
 
 ::: dependencies

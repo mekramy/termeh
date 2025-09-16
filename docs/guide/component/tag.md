@@ -119,6 +119,10 @@ It extends the _Element_ module.
 @include termeh.use-tag(("primary", "success"), ("small", "medium"));
 ```
 
+**Module:**
+
+This module is registered as `tag` in the _presented modules_.
+
 :::
 
 ::: dependencies

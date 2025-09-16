@@ -102,6 +102,10 @@ The **Input** module provides styled input wrappers with configurable gaps, colo
 @include termeh.use-input(("small", "medium"), ("primary", "green"));
 ```
 
+**Module:**
+
+This module is registered as `form-input` in the _presented modules_.
+
 :::
 
 ::: dependencies
@@ -110,7 +114,7 @@ Input module uses the following Termeh global `var()`:
 
 | Component               | Type     | Usage                           | Default    |
 | ----------------------- | -------- | ------------------------------- | ---------- |
-| `base` → `separator`    | _Color_  | _Fallback_ border color           | `null`     |
+| `base` → `separator`    | _Color_  | _Fallback_ border color         | `null`     |
 | `radius` → `normal`     | _Number_ | Default input border radius     | `null`     |
 | `input` → `height`      | _Number_ | Input height                    | `2.8em`    |
 | `input` → `border`      | _Color_  | Default input border color      | _FALLBACK_ |
@@ -125,7 +129,7 @@ Input module uses the following Termeh `color()` and `variant()`:
 | ---------------- | ------------------------------ | ------- |
 | `error`          | Accent color for invalid state | _error_ |
 | `primary`        | Default accent color           | _error_ |
-| `shade` → `mute` | _Fallback_ placeholder color     | `null`  |
+| `shade` → `mute` | _Fallback_ placeholder color   | `null`  |
 
 :::
 

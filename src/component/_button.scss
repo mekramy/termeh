@@ -15,171 +15,175 @@
 /// @termeh {Color} [null] - var("decorator", "size") -> loading spinner thickness
 /// @termeh {Number} [2.2em] - var("control", "height") -> default button height
 @mixin use-button($colors: (), $sizes: ()) {
-    $outline: rgba(module.color("shade"), 0.2);
-    $readable: module.variant("shade", "readable");
-    $background: module.variant("shade", "light");
-    $background-hover: module.variant("shade", "light-active");
+    @if not module.module-presented("button") {
+        @include module.present-module("button");
 
-    $gap-micro: module.var("gap", "micro", 8px);
-    $radius-normal: module.var("radius", "normal");
-    $radius-rounded: module.var("radius", "rounded");
-    $decorator: module.var("decorator", "size");
+        $outline: rgba(module.color("shade"), 0.2);
+        $readable: module.variant("shade", "readable");
+        $background: module.variant("shade", "light");
+        $background-hover: module.variant("shade", "light-active");
 
-    $height: module.var("control", "height", 2.2em);
+        $gap-micro: module.var("gap", "micro", 8px);
+        $radius-normal: module.var("radius", "normal");
+        $radius-rounded: module.var("radius", "rounded");
+        $decorator: module.var("decorator", "size");
 
-    @at-root {
-        @include element.use-element();
+        $height: module.var("control", "height", 2.2em);
 
-        .buttons {
-            display: flex;
-            flex-flow: row nowrap;
-            align-items: stretch;
-            justify-content: flex-end;
-            box-sizing: border-box;
+        @at-root {
+            @include element.use-element();
 
-            .button.is-cta {
-                flex: 1 1 0;
-            }
+            .buttons {
+                display: flex;
+                flex-flow: row nowrap;
+                align-items: stretch;
+                justify-content: flex-end;
+                box-sizing: border-box;
 
-            > :not(:last-child) {
-                @include module.is-ltr() {
-                    margin-right: module.half($gap-micro);
+                .button.is-cta {
+                    flex: 1 1 0;
                 }
 
-                @include module.is-rtl() {
-                    margin-left: module.half($gap-micro);
+                > :not(:last-child) {
+                    @include module.is-ltr() {
+                        margin-right: module.half($gap-micro);
+                    }
+
+                    @include module.is-rtl() {
+                        margin-left: module.half($gap-micro);
+                    }
                 }
             }
-        }
 
-        .button {
-            @include module.control();
-            @extend .element;
+            .button {
+                @include module.control();
+                @extend .element;
 
-            cursor: pointer;
-            width: auto;
-            height: $height;
-            border-radius: $radius-normal;
-            text-overflow: ellipsis;
-            padding: module.control-padding();
-            @include module.transition(all);
-            @include module.unselectable();
-
-            &:hover {
-                text-decoration: none;
-            }
-
-            &:focus,
-            &:active {
-                box-shadow: module.flat-shadow($decorator, $outline);
-            }
-
-            &:not(.is-simple) {
-                color: $readable;
-                background-color: $background;
+                cursor: pointer;
+                width: auto;
+                height: $height;
+                border-radius: $radius-normal;
+                text-overflow: ellipsis;
+                padding: module.control-padding();
+                @include module.transition(all);
+                @include module.unselectable();
 
                 &:hover {
-                    background-color: $background-hover;
+                    text-decoration: none;
                 }
 
-                &.is-loading {
-                    color: transparent;
-                    @include module.locked();
-                    @include module.loader(1em, $readable, $decorator);
+                &:focus,
+                &:active {
+                    box-shadow: module.flat-shadow($decorator, $outline);
                 }
-            }
 
-            &.is-simple:not(.is-light) {
-                color: $readable;
-
-                &:hover {
+                &:not(.is-simple) {
+                    color: $readable;
                     background-color: $background;
-                }
 
-                &.is-loading {
-                    color: transparent;
-                    @include module.locked();
-                    @include module.loader(1em, $readable, $decorator);
-                }
-            }
-
-            &.is-rounded {
-                border-radius: $radius-rounded;
-            }
-
-            @each $name, $size in module.sizes($sizes) {
-                &.is-#{$name} {
-                    font-size: $size;
-                }
-            }
-
-            @each $name, $color in module.colors($colors) {
-                &.is-#{$name} {
-                    &:not(.is-simple, .is-light) {
-                        $-foreground: module.variant($name, "foreground");
-                        $-background: $color;
-                        $-background-hover: module.variant($name, "active");
-
-                        color: $-foreground;
-                        background-color: $-background;
-
-                        &:hover {
-                            background-color: $-background-hover;
-                        }
-
-                        &.is-loading {
-                            color: transparent;
-                            @include module.loader-color($-foreground);
-                        }
+                    &:hover {
+                        background-color: $background-hover;
                     }
 
-                    &.is-simple:not(.is-light) {
-                        $-foreground: module.variant($name, "readable");
-                        $-background: module.variant($name, "light");
+                    &.is-loading {
+                        color: transparent;
+                        @include module.locked();
+                        @include module.loader(1em, $readable, $decorator);
+                    }
+                }
 
-                        color: $-foreground;
+                &.is-simple:not(.is-light) {
+                    color: $readable;
 
-                        &:hover {
+                    &:hover {
+                        background-color: $background;
+                    }
+
+                    &.is-loading {
+                        color: transparent;
+                        @include module.locked();
+                        @include module.loader(1em, $readable, $decorator);
+                    }
+                }
+
+                &.is-rounded {
+                    border-radius: $radius-rounded;
+                }
+
+                @each $name, $size in module.sizes($sizes) {
+                    &.is-#{$name} {
+                        font-size: $size;
+                    }
+                }
+
+                @each $name, $color in module.colors($colors) {
+                    &.is-#{$name} {
+                        &:not(.is-simple, .is-light) {
+                            $-foreground: module.variant($name, "foreground");
+                            $-background: $color;
+                            $-background-hover: module.variant($name, "active");
+
+                            color: $-foreground;
                             background-color: $-background;
+
+                            &:hover {
+                                background-color: $-background-hover;
+                            }
+
+                            &.is-loading {
+                                color: transparent;
+                                @include module.loader-color($-foreground);
+                            }
                         }
 
-                        &.is-loading {
-                            color: transparent;
-                            @include module.loader-color($-foreground);
-                        }
-                    }
+                        &.is-simple:not(.is-light) {
+                            $-foreground: module.variant($name, "readable");
+                            $-background: module.variant($name, "light");
 
-                    &.is-light:not(.is-simple) {
-                        $-foreground: module.variant($name, "readable");
-                        $-background: module.variant($name, "light");
-                        $-background-hover: module.variant($name, "light-active");
+                            color: $-foreground;
 
-                        color: $-foreground;
-                        background-color: $-background;
+                            &:hover {
+                                background-color: $-background;
+                            }
 
-                        &:hover {
-                            background-color: $-background-hover;
+                            &.is-loading {
+                                color: transparent;
+                                @include module.loader-color($-foreground);
+                            }
                         }
 
-                        &.is-loading {
-                            color: transparent;
-                            @include module.loader-color($-foreground);
+                        &.is-light:not(.is-simple) {
+                            $-foreground: module.variant($name, "readable");
+                            $-background: module.variant($name, "light");
+                            $-background-hover: module.variant($name, "light-active");
+
+                            color: $-foreground;
+                            background-color: $-background;
+
+                            &:hover {
+                                background-color: $-background-hover;
+                            }
+
+                            &.is-loading {
+                                color: transparent;
+                                @include module.loader-color($-foreground);
+                            }
                         }
-                    }
 
-                    &:focus,
-                    &:active {
-                        $-outline: rgba($color, 0.2);
+                        &:focus,
+                        &:active {
+                            $-outline: rgba($color, 0.2);
 
-                        box-shadow: module.flat-shadow($decorator, $-outline);
+                            box-shadow: module.flat-shadow($decorator, $-outline);
+                        }
                     }
                 }
-            }
 
-            @include module.is-disabled() {
-                @include module.disabled();
+                @include module.is-disabled() {
+                    @include module.disabled();
 
-                border-color: transparent !important;
+                    border-color: transparent !important;
+                }
             }
         }
     }

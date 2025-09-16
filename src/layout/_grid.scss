@@ -6,95 +6,99 @@
 ///
 /// @termeh {Number} [1.6em] - var("gap", "macro") -> default spacing between grid rows and columns
 @mixin use-grid($gaps: (), $units: ()) {
-    $gap-macro: module.var("gap", "macro", 1.6em);
+    @if not module.module-presented("grid") {
+        @include module.present-module("grid");
 
-    @at-root {
-        .grid {
-            display: flex;
-            flex-flow: row wrap;
-            box-sizing: border-box;
+        $gap-macro: module.var("gap", "macro", 1.6em);
 
-            > .break {
-                height: 0;
-                display: block;
-                flex-basis: 100%;
-            }
-
-            > .column {
-                flex: 1 1 0;
-                display: block;
-                min-width: 0;
-                max-width: 100%;
+        @at-root {
+            .grid {
+                display: flex;
+                flex-flow: row wrap;
                 box-sizing: border-box;
 
-                @each $name, $unit in module.units($includes: $units) {
-                    &.is-#{$name} {
-                        width: $unit;
-                        flex: 0 0 auto;
-                    }
+                > .break {
+                    height: 0;
+                    display: block;
+                    flex-basis: 100%;
                 }
-
-                &.is-fit {
-                    width: auto;
-                    flex: 0 0 auto;
-                }
-            }
-
-            &:not(.is-gapless) {
-                margin: module.negate(module.half($gap-macro));
 
                 > .column {
-                    padding: module.half($gap-macro);
-                }
+                    flex: 1 1 0;
+                    display: block;
+                    min-width: 0;
+                    max-width: 100%;
+                    box-sizing: border-box;
 
-                @each $name, $gap in module.gaps($includes: $gaps) {
-                    &.is-#{$name}-gap {
-                        margin: module.negate(module.half($gap));
-
-                        > .column {
-                            padding: module.half($gap);
-                        }
-                    }
-                }
-            }
-
-            @each $name, $align in module.flex-aligns() {
-                &.is-#{$name}-align {
-                    align-items: $align;
-                }
-            }
-
-            @each $name, $justify in module.flex-justifies() {
-                &.is-#{$name}-justify {
-                    justify-content: $justify;
-                }
-            }
-
-            @each $device, $query in module.media-queries() {
-                @media #{$query} {
-                    > .column {
-                        @each $name, $unit in module.units($includes: $units) {
-                            &.is-#{$device}-#{$name} {
-                                width: $unit;
-                                flex: 0 0 auto;
-                            }
-                        }
-
-                        &.is-#{$device}-fit {
-                            width: auto;
+                    @each $name, $unit in module.units($includes: $units) {
+                        &.is-#{$name} {
+                            width: $unit;
                             flex: 0 0 auto;
                         }
                     }
 
-                    @each $name, $align in module.flex-aligns() {
-                        &.is-#{$device}-#{$name}-align {
-                            align-items: $align;
-                        }
+                    &.is-fit {
+                        width: auto;
+                        flex: 0 0 auto;
+                    }
+                }
+
+                &:not(.is-gapless) {
+                    margin: module.negate(module.half($gap-macro));
+
+                    > .column {
+                        padding: module.half($gap-macro);
                     }
 
-                    @each $name, $justify in module.flex-justifies() {
-                        &.is-#{$device}-#{$name}-justify {
-                            justify-content: $justify;
+                    @each $name, $gap in module.gaps($includes: $gaps) {
+                        &.is-#{$name}-gap {
+                            margin: module.negate(module.half($gap));
+
+                            > .column {
+                                padding: module.half($gap);
+                            }
+                        }
+                    }
+                }
+
+                @each $name, $align in module.flex-aligns() {
+                    &.is-#{$name}-align {
+                        align-items: $align;
+                    }
+                }
+
+                @each $name, $justify in module.flex-justifies() {
+                    &.is-#{$name}-justify {
+                        justify-content: $justify;
+                    }
+                }
+
+                @each $device, $query in module.media-queries() {
+                    @media #{$query} {
+                        > .column {
+                            @each $name, $unit in module.units($includes: $units) {
+                                &.is-#{$device}-#{$name} {
+                                    width: $unit;
+                                    flex: 0 0 auto;
+                                }
+                            }
+
+                            &.is-#{$device}-fit {
+                                width: auto;
+                                flex: 0 0 auto;
+                            }
+                        }
+
+                        @each $name, $align in module.flex-aligns() {
+                            &.is-#{$device}-#{$name}-align {
+                                align-items: $align;
+                            }
+                        }
+
+                        @each $name, $justify in module.flex-justifies() {
+                            &.is-#{$device}-#{$name}-justify {
+                                justify-content: $justify;
+                            }
                         }
                     }
                 }

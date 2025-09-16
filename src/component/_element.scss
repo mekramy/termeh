@@ -1,5 +1,4 @@
 @use "../core/module";
-$-element-defined: false !default;
 
 /// Generates base element wrapper styles with configurable colors and sizes
 ///
@@ -9,8 +8,8 @@ $-element-defined: false !default;
 /// @termeh {Number} [null] - var("control", "weight") -> element font weight
 /// @termeh {Number} [null] - var("control", "strong") -> font weight for strong child elements
 @mixin use-element() {
-    @if not $-element-defined {
-        $-element-defined: true !global;
+    @if not module.module-presented("element") {
+        @include module.present-module("element");
 
         $size-small: module.size("small");
         $gap-micro: module.var("gap", "micro", 8px);

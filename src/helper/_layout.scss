@@ -4,52 +4,56 @@
 ///
 /// @termeh {Color} [error] - color("primary") -> accent color for scrollbars
 @mixin use-layout-helper() {
-    @at-root {
-        .is-clearfix {
-            @include module.clearfix();
-        }
+    @if not module.module-presented("layout-helper") {
+        @include module.present-module("layout-helper");
 
-        .is-ltr {
-            direction: ltr !important;
-        }
+        @at-root {
+            .is-clearfix {
+                @include module.clearfix();
+            }
 
-        .is-rtl {
-            direction: rtl !important;
-        }
+            .is-ltr {
+                direction: ltr !important;
+            }
 
-        .is-clipped {
-            overflow: hidden !important;
-        }
+            .is-rtl {
+                direction: rtl !important;
+            }
 
-        .is-radiusless {
-            border-radius: 0 !important;
-        }
+            .is-clipped {
+                overflow: hidden !important;
+            }
 
-        .is-shadowless {
-            box-shadow: none !important;
-        }
+            .is-radiusless {
+                border-radius: 0 !important;
+            }
 
-        .is-clickable {
-            cursor: pointer !important;
-            pointer-events: all !important;
-        }
+            .is-shadowless {
+                box-shadow: none !important;
+            }
 
-        .is-unselectable {
-            @include module.unselectable();
-        }
+            .is-clickable {
+                cursor: pointer !important;
+                pointer-events: all !important;
+            }
 
-        .is-selectable {
-            @include module.selectable();
-        }
+            .is-unselectable {
+                @include module.unselectable();
+            }
 
-        .is-locked {
-            @include module.locked();
-        }
+            .is-selectable {
+                @include module.selectable();
+            }
 
-        .is-scrollable {
-            overflow: hidden;
-            overflow-y: auto;
-            @include module.scrollable(module.color("primary"));
+            .is-locked {
+                @include module.locked();
+            }
+
+            .is-scrollable {
+                overflow: hidden;
+                overflow-y: auto;
+                @include module.scrollable(module.color("primary"));
+            }
         }
     }
 }

@@ -20,4 +20,8 @@ Applies a minimal CSS reset based on **minireset.css v0.0.6**, resetting default
 @include termeh.mini-reset();
 ```
 
+**Module:**
+
+This module is registered as `reset` in the _presented modules_.
+
 :::

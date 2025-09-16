@@ -49,6 +49,10 @@ It supports both horizontal and vertical layouts, configurable gaps, dividers, a
 @include termeh.use-gaper(("small", "medium", "large"));
 ```
 
+**Module:**
+
+This module is registered as `gaper` in the _presented modules_.
+
 :::
 
 ::: dependencies

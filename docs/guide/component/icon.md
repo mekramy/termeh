@@ -78,6 +78,10 @@ The **Icon** module provides a flexible container for SVG or image-based icons, 
 @include termeh.use-icon(("primary", "green"), ("small", "large"));
 ```
 
+**Module:**
+
+This module is registered as `icon` in the _presented modules_.
+
 :::
 
 ::: dependencies

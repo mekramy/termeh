@@ -20,6 +20,10 @@ Applies common base styles for HTML elements. This includes root font settings, 
 @include termeh.use-base();
 ```
 
+**Module:**
+
+This module is registered as `base` in the _presented modules_.
+
 :::
 
 ::: dependencies

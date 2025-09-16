@@ -4,68 +4,72 @@
 ///
 /// @termeh {Color} [null] - var("base", "separator") -> background color for separator elements
 @mixin use-attacher() {
-    $separator: module.var("base", "separator");
+    @if not module.module-presented("attacher") {
+        @include module.present-module("attacher");
 
-    @at-root {
-        .attacher {
-            display: flex;
-            flex-flow: row nowrap;
-            align-items: stretch;
-            box-sizing: border-box;
+        $separator: module.var("base", "separator");
 
-            > * {
-                flex: 0 0 auto;
-                margin: 0 !important;
-            }
+        @at-root {
+            .attacher {
+                display: flex;
+                flex-flow: row nowrap;
+                align-items: stretch;
+                box-sizing: border-box;
 
-            @include module.is-ltr() {
                 > * {
-                    &:not(:first-child) {
-                        border-top-left-radius: 0 !important;
-                        border-bottom-left-radius: 0 !important;
-                    }
+                    flex: 0 0 auto;
+                    margin: 0 !important;
+                }
 
-                    &:not(:last-child) {
-                        border-top-right-radius: 0 !important;
-                        border-bottom-right-radius: 0 !important;
+                @include module.is-ltr() {
+                    > * {
+                        &:not(:first-child) {
+                            border-top-left-radius: 0 !important;
+                            border-bottom-left-radius: 0 !important;
+                        }
+
+                        &:not(:last-child) {
+                            border-top-right-radius: 0 !important;
+                            border-bottom-right-radius: 0 !important;
+                        }
                     }
                 }
-            }
 
-            @include module.is-rtl() {
-                > * {
-                    &:not(:first-child) {
-                        border-top-right-radius: 0 !important;
-                        border-bottom-right-radius: 0 !important;
-                    }
+                @include module.is-rtl() {
+                    > * {
+                        &:not(:first-child) {
+                            border-top-right-radius: 0 !important;
+                            border-bottom-right-radius: 0 !important;
+                        }
 
-                    &:not(:last-child) {
-                        border-top-left-radius: 0 !important;
-                        border-bottom-left-radius: 0 !important;
+                        &:not(:last-child) {
+                            border-top-left-radius: 0 !important;
+                            border-bottom-left-radius: 0 !important;
+                        }
                     }
                 }
-            }
 
-            > .filler {
-                flex: 1 1 0;
-            }
-
-            > .divider {
-                width: 1px;
-                display: block;
-                align-self: stretch;
-                background-color: $separator;
-            }
-
-            @each $name, $align in module.flex-aligns() {
-                &.is-#{$name}-align {
-                    align-items: $align;
+                > .filler {
+                    flex: 1 1 0;
                 }
-            }
 
-            @each $name, $justify in module.flex-justifies() {
-                &.is-#{$name}-justify {
-                    justify-content: $justify;
+                > .divider {
+                    width: 1px;
+                    display: block;
+                    align-self: stretch;
+                    background-color: $separator;
+                }
+
+                @each $name, $align in module.flex-aligns() {
+                    &.is-#{$name}-align {
+                        align-items: $align;
+                    }
+                }
+
+                @each $name, $justify in module.flex-justifies() {
+                    &.is-#{$name}-justify {
+                        justify-content: $justify;
+                    }
                 }
             }
         }

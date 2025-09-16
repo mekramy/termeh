@@ -3,39 +3,43 @@
 /// Generates text style utility classes
 /// @output Classes for text styling like italic, underline, etc.
 @mixin use-text-helper() {
-    @at-root {
-        .is-italic {
-            font-style: italic !important;
-        }
+    @if not module.module-presented("text-helper") {
+        @include module.present-module("text-helper");
 
-        .is-underline {
-            text-decoration: underline !important;
-        }
+        @at-root {
+            .is-italic {
+                font-style: italic !important;
+            }
 
-        .is-line-through {
-            text-decoration: line-through !important;
-        }
+            .is-underline {
+                text-decoration: underline !important;
+            }
 
-        .is-undecorated {
-            text-decoration: none !important;
-        }
+            .is-line-through {
+                text-decoration: line-through !important;
+            }
 
-        .is-capitalized {
-            text-transform: capitalize !important;
-        }
+            .is-undecorated {
+                text-decoration: none !important;
+            }
 
-        .is-lowercase {
-            text-transform: lowercase !important;
-        }
+            .is-capitalized {
+                text-transform: capitalize !important;
+            }
 
-        .is-uppercase {
-            text-transform: uppercase !important;
-        }
+            .is-lowercase {
+                text-transform: lowercase !important;
+            }
 
-        .is-ellipsis {
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
+            .is-uppercase {
+                text-transform: uppercase !important;
+            }
+
+            .is-ellipsis {
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
         }
     }
 }
@@ -43,11 +47,15 @@
 /// Generates text color utility classes
 /// @param {List} $colors [()] - List of registered color names to include. Pass null to include all registered palettes
 @mixin use-text-colors($colors: ()) {
-    @at-root {
-        @each $name, $color in module.colors($includes: $colors) {
-            .is-#{$name}-color {
-                color: module.variant($name, "readable");
-                @include module.selection($name);
+    @if not module.module-presented("text-colors") {
+        @include module.present-module("text-colors");
+
+        @at-root {
+            @each $name, $color in module.colors($includes: $colors) {
+                .is-#{$name}-color {
+                    color: module.variant($name, "readable");
+                    @include module.selection($name);
+                }
             }
         }
     }
@@ -56,10 +64,14 @@
 /// Generates text size utility classes
 /// @param {List} $sizes [()] - List of registered size names to include. Pass null to include all registered sizes
 @mixin use-text-sizes($sizes: ()) {
-    @at-root {
-        @each $label, $size in module.sizes($includes: $sizes) {
-            .is-#{$label}-size {
-                font-size: $size !important;
+    @if not module.module-presented("text-sizes") {
+        @include module.present-module("text-sizes");
+
+        @at-root {
+            @each $label, $size in module.sizes($includes: $sizes) {
+                .is-#{$label}-size {
+                    font-size: $size !important;
+                }
             }
         }
     }
@@ -68,10 +80,14 @@
 /// Generates text weight utility classes
 /// @param {List} $weights [()] - List of registered weight names to include. Pass null to include all font-weights
 @mixin use-text-weights($weights: ()) {
-    @at-root {
-        @each $label, $weight in module.weights($includes: $weights) {
-            .is-#{$label}-weight {
-                font-weight: $weight !important;
+    @if not module.module-presented("text-weights") {
+        @include module.present-module("text-weights");
+
+        @at-root {
+            @each $label, $weight in module.weights($includes: $weights) {
+                .is-#{$label}-weight {
+                    font-weight: $weight !important;
+                }
             }
         }
     }
@@ -80,10 +96,14 @@
 /// Generates text alignment utility classes
 /// @param {List} $aligns [()] - List of registered alignment names to include. Pass null to include all registered text-aligns
 @mixin use-text-aligns($aligns: ()) {
-    @at-root {
-        @each $label, $align in module.text-aligns($includes: $aligns) {
-            .is-#{$label}-align {
-                text-align: $align !important;
+    @if not module.module-presented("text-aligns") {
+        @include module.present-module("text-aligns");
+
+        @at-root {
+            @each $label, $align in module.text-aligns($includes: $aligns) {
+                .is-#{$label}-align {
+                    text-align: $align !important;
+                }
             }
         }
     }

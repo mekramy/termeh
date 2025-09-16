@@ -8,27 +8,31 @@
 /// @termeh {String} [normal] - var("input", "legend") -> legend element font weight
 /// @termeh {Color} [FALLBACK] - var("input", "border") -> fieldset border color
 @mixin use-fieldset() {
-    $separator: module.var("base", "separator");
-    $radius: module.var("radius", "normal");
-    $gap-macro: module.var("gap", "macro", 1.6em);
+    @if not module.module-presented("form-fieldset") {
+        @include module.present-module("form-fieldset");
 
-    $legend: module.var("input", "legend", normal);
-    $border: module.var("input", "border", $separator);
+        $separator: module.var("base", "separator");
+        $radius: module.var("radius", "normal");
+        $gap-macro: module.var("gap", "macro", 1.6em);
 
-    @at-root {
-        fieldset {
-            padding: $gap-macro;
-            border-radius: $radius;
-            border: 1px solid $border;
+        $legend: module.var("input", "legend", normal);
+        $border: module.var("input", "border", $separator);
 
-            @include module.marged() {
-                margin-bottom: $gap-macro;
-            }
+        @at-root {
+            fieldset {
+                padding: $gap-macro;
+                border-radius: $radius;
+                border: 1px solid $border;
 
-            legend {
-                line-height: 1em;
-                font-weight: $legend;
-                padding: module.inline-padding();
+                @include module.marged() {
+                    margin-bottom: $gap-macro;
+                }
+
+                legend {
+                    line-height: 1em;
+                    font-weight: $legend;
+                    padding: module.inline-padding();
+                }
             }
         }
     }

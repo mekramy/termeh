@@ -42,6 +42,10 @@ The **Padder** module provides a simple utility container that applies uniform p
 @include termeh.use-padder();
 ```
 
+**Module:**
+
+This module is registered as `padder` in the _presented modules_.
+
 :::
 
 ## Modifiers

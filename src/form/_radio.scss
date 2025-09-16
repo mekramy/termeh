@@ -15,138 +15,142 @@
 /// @termeh {Color} [null] - var("input", "disabled-foreground") -> disabled input accent color
 /// @termeh {Color} [null] - var("input", "disabled-border") -> disabled input border color
 @mixin use-radio($colors: ()) {
-    $error: module.color("error");
-    $primary: module.color("primary");
-    $separator: module.var("base", "separator", #eee);
+    @if not module.module-presented("form-radio") {
+        @include module.present-module("form-radio");
 
-    $radius: module.var("radius", "circle", 50%);
-    $gap-micro: module.var("gap", "micro", 8px);
+        $error: module.color("error");
+        $primary: module.color("primary");
+        $separator: module.var("base", "separator", #eee);
 
-    $height: module.var("input", "height", 2.8em);
-    $size: module.var("input", "checkbox", 1.2em);
+        $radius: module.var("radius", "circle", 50%);
+        $gap-micro: module.var("gap", "micro", 8px);
 
-    $border: module.var("input", "border", $separator);
-    $disabled: module.var("input", "disabled-foreground");
-    $disabled-border: module.var("input", "disabled-border");
+        $height: module.var("input", "height", 2.8em);
+        $size: module.var("input", "checkbox", 1.2em);
 
-    @at-root {
-        @include animation.shake();
+        $border: module.var("input", "border", $separator);
+        $disabled: module.var("input", "disabled-foreground");
+        $disabled-border: module.var("input", "disabled-border");
 
-        label.radio {
-            display: flex;
-            align-items: center;
-            flex-flow: row nowrap;
-            margin: 0;
-            padding: 0;
-            height: $height;
-            line-height: 1em;
-            cursor: pointer;
-            box-sizing: border-box;
+        @at-root {
+            @include animation.shake();
 
-            input[type="radio"] {
-                -webkit-appearance: none;
-                -moz-appearance: none;
-                appearance: none;
-                display: grid;
-                place-content: center;
-                overflow: hidden;
+            label.radio {
+                display: flex;
+                align-items: center;
+                flex-flow: row nowrap;
                 margin: 0;
-                font: inherit;
-                width: $size;
-                height: $size;
-                border-radius: $radius;
-                border: 1px solid $border;
+                padding: 0;
+                height: $height;
+                line-height: 1em;
                 cursor: pointer;
-                flex: 0 0 auto;
-                box-shadow: module.flat-shadow(0, rgba($primary, 0.25));
-                @include module.transition(all);
+                box-sizing: border-box;
 
-                &::after {
-                    content: "";
+                input[type="radio"] {
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    display: grid;
+                    place-content: center;
+                    overflow: hidden;
+                    margin: 0;
+                    font: inherit;
                     width: $size;
                     height: $size;
-                    display: block;
-                    box-sizing: border-box;
-                    transform: scale(0);
                     border-radius: $radius;
-                    background-color: $primary;
+                    border: 1px solid $border;
+                    cursor: pointer;
+                    flex: 0 0 auto;
+                    box-shadow: module.flat-shadow(0, rgba($primary, 0.25));
                     @include module.transition(all);
-                }
-
-                &:focus,
-                &:focus-within {
-                    border-color: $primary;
-                }
-
-                &:checked {
-                    box-shadow: module.flat-shadow(8px, rgba($primary, 0));
 
                     &::after {
-                        transform: scale(0.6);
-                    }
-                }
-            }
-
-            @each $name, $color in module.colors($includes: $colors) {
-                &.is-#{$name} input {
-                    box-shadow: module.flat-shadow(0, rgba($color, 0.25));
-
-                    &::after {
-                        background-color: $color;
+                        content: "";
+                        width: $size;
+                        height: $size;
+                        display: block;
+                        box-sizing: border-box;
+                        transform: scale(0);
+                        border-radius: $radius;
+                        background-color: $primary;
+                        @include module.transition(all);
                     }
 
                     &:focus,
                     &:focus-within {
-                        border-color: $color;
+                        border-color: $primary;
                     }
 
                     &:checked {
-                        box-shadow: module.flat-shadow(8px, rgba($color, 0));
+                        box-shadow: module.flat-shadow(5px, rgba($primary, 0));
+
+                        &::after {
+                            transform: scale(0.6);
+                        }
                     }
                 }
-            }
 
-            @include module.is-ltr() {
-                input {
-                    margin-left: 0;
-                    margin-right: $gap-micro;
-                }
-            }
+                @each $name, $color in module.colors($includes: $colors) {
+                    &.is-#{$name} input[type="radio"] {
+                        box-shadow: module.flat-shadow(0, rgba($color, 0.25));
 
-            @include module.is-rtl() {
-                input {
-                    margin-left: $gap-micro;
-                    margin-right: 0;
-                }
-            }
+                        &::after {
+                            background-color: $color;
+                        }
 
-            @include module.is-invalid() {
-                animation: shake 0.5s ease;
+                        &:focus,
+                        &:focus-within {
+                            border-color: $color;
+                        }
 
-                input {
-                    border-color: $error;
-
-                    &::after {
-                        background-color: $error;
-                    }
-
-                    &:checked {
-                        box-shadow: module.flat-shadow(8px, rgba($error, 0));
+                        &:checked {
+                            box-shadow: module.flat-shadow(5px, rgba($color, 0));
+                        }
                     }
                 }
-            }
 
-            @include module.is-disabled() {
-                color: $disabled;
-
-                input {
-                    border-color: $disabled-border;
-
-                    &::after {
-                        background-color: $disabled;
+                @include module.is-ltr() {
+                    input[type="radio"] {
+                        margin-left: 0;
+                        margin-right: $gap-micro;
                     }
                 }
-                @include module.locked();
+
+                @include module.is-rtl() {
+                    input[type="radio"] {
+                        margin-left: $gap-micro;
+                        margin-right: 0;
+                    }
+                }
+
+                @include module.is-invalid() {
+                    animation: shake 0.5s ease;
+
+                    input[type="radio"] {
+                        border-color: $error;
+
+                        &::after {
+                            background-color: $error;
+                        }
+
+                        &:checked {
+                            box-shadow: module.flat-shadow(5px, rgba($error, 0));
+                        }
+                    }
+                }
+
+                @include module.is-disabled() {
+                    color: $disabled;
+
+                    input[type="radio"] {
+                        border-color: $disabled-border;
+
+                        &::after {
+                            background-color: $disabled;
+                        }
+                    }
+                    @include module.locked();
+                }
             }
         }
     }

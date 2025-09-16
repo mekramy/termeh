@@ -15,33 +15,37 @@
 /// @termeh {Number} [0.85] - var("overlay", "opacity") -> overlay background opacity
 /// @termeh {String} [null] - var("overlay", "filter") -> overlay backdrop filter
 @mixin use-form($colors: ()) {
-    $base-background: module.var("base", "color", white);
-    $base-foreground: module.var("base", "foreground", black);
+    @if not module.module-presented("form") {
+        @include module.present-module("form");
 
-    $background: module.var("box", "background", $base-background);
-    $foreground: module.var("box", "foreground", $base-foreground);
+        $base-background: module.var("base", "color", white);
+        $base-foreground: module.var("base", "foreground", black);
 
-    $gap-macro: module.var("gap", "macro", 1.6em);
-    $decorator: module.var("decorator", "size", 2px);
-    $spinner: module.var("decorator", "spinner", 2em);
+        $background: module.var("box", "background", $base-background);
+        $foreground: module.var("box", "foreground", $base-foreground);
 
-    $overlay-background: module.var("overlay", "background", $background);
-    $overlay-foreground: module.var("overlay", "foureground", $foreground);
-    $overlay-opacity: module.var("overlay", "opacity", 0.85);
-    $overlay-filter: module.var("overlay", "filter", null);
+        $gap-macro: module.var("gap", "macro", 1.6em);
+        $decorator: module.var("decorator", "size", 2px);
+        $spinner: module.var("decorator", "spinner", 2em);
 
-    @at-root {
-        form {
-            color: $foreground;
-            background: $background;
+        $overlay-background: module.var("overlay", "background", $background);
+        $overlay-foreground: module.var("overlay", "foureground", $foreground);
+        $overlay-opacity: module.var("overlay", "opacity", 0.85);
+        $overlay-filter: module.var("overlay", "filter", null);
 
-            @include module.marged() {
-                margin-bottom: $gap-macro;
-            }
+        @at-root {
+            form {
+                color: $foreground;
+                background: $background;
 
-            &.is-loading {
-                @include module.overlay($overlay-background, $overlay-opacity, $overlay-filter);
-                @include module.loader($spinner, $overlay-foreground, $decorator);
+                @include module.marged() {
+                    margin-bottom: $gap-macro;
+                }
+
+                &.is-loading {
+                    @include module.overlay($overlay-background, $overlay-opacity, $overlay-filter);
+                    @include module.loader($spinner, $overlay-foreground, $decorator);
+                }
             }
         }
     }

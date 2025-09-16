@@ -16,6 +16,10 @@ The **Visibility Helper** module provides utility classes for conditionally hidi
 @include termeh.use-visibility-helper();
 ```
 
+**Module:**
+
+This module is registered as `visibility-helper` in the _presented modules_.
+
 :::
 
 ## Available Classes

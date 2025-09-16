@@ -108,6 +108,10 @@ The **Select** module provides styled dropdown inputs with configurable colors, 
 @include termeh.use-select(("primary", "error"));
 ```
 
+**Module:**
+
+This module is registered as `form-select` in the _presented modules_.
+
 :::
 
 ::: dependencies

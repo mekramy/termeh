@@ -71,6 +71,10 @@ It supports **colors**, **gaps**, **sizes**, and **state modifiers** such as loa
 @include termeh.use-card(("primary", "danger"), ("macro", "small"));
 ```
 
+**Module:**
+
+This module is registered as `card` in the _presented modules_.
+
 :::
 
 ::: dependencies

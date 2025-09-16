@@ -16,6 +16,10 @@ The **Attachment Helper** module provides utility classes to remove specific bor
 @include termeh.use-attachment-helper();
 ```
 
+**Module:**
+
+This module is registered as `attachment-helper` in the _presented modules_.
+
 :::
 
 ## Available Classes

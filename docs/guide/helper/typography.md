@@ -20,6 +20,10 @@ The **Text Style Helper** module provides utility classes for text styling such 
 @include termeh.use-text-helper();
 ```
 
+**Module:**
+
+This module is registered as `text-helper` in the _presented modules_.
+
 :::
 
 ### Available Style Classes
@@ -51,6 +55,10 @@ The **Text Color Helper** module generates utility classes to apply readable col
 @include termeh.use-text-colors();
 ```
 
+**Module:**
+
+This module is registered as `text-colors` in the _presented modules_.
+
 :::
 
 ### Available Color Classes
@@ -74,6 +82,10 @@ The **Text Size Helper** module generates utility classes to apply font sizes ba
 ```scss
 @include termeh.use-text-sizes();
 ```
+
+**Module:**
+
+This module is registered as `text-sizes` in the _presented modules_.
 
 :::
 
@@ -99,6 +111,10 @@ The **Text Weight Helper** module provides utility classes to apply font weights
 @include termeh.use-text-weights();
 ```
 
+**Module:**
+
+This module is registered as `text-weights` in the _presented modules_.
+
 :::
 
 ### Available Weight Classes
@@ -122,6 +138,10 @@ The **Text Align Helper** module provides utility classes for applying text alig
 ```scss
 @include termeh.use-text-aligns();
 ```
+
+**Module:**
+
+This module is registered as `text-aligns` in the _presented modules_.
 
 :::
 

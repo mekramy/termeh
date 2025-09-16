@@ -38,6 +38,10 @@ The **Container** module provides a flexible wrapper with configurable maximum w
 @include termeh.use-container(("small", "medium", "large"));
 ```
 
+**Module:**
+
+This module is registered as `container` in the _presented modules_.
+
 :::
 
 ::: dependencies

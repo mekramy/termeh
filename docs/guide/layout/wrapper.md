@@ -57,6 +57,10 @@ It supports wrapping, responsive alignment, and configurable spacing using the T
 @include termeh.use-wrapper(("small", "medium"));
 ```
 
+**Module:**
+
+This module is registered as `wrapper` in the _presented modules_.
+
 :::
 
 ::: dependencies

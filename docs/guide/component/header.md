@@ -100,6 +100,10 @@ The **Header** module provides flexible heading layouts with optional thumbnails
 @include termeh.use-header(("primary", "indigo"), ("normal", "large"));
 ```
 
+**Module:**
+
+This module is registered as `header` in the _presented modules_.
+
 :::
 
 ::: dependencies

@@ -21,241 +21,245 @@
 /// @termeh {Color} [FALLBACK] - var("table", "sort-background") -> sorted column background
 /// @termeh {String} [FALLBACK] - var("table", "strong-weight") -> strong font weight for headers
 @mixin use-table($colors: ()) {
-    $primary: module.color("primary");
-    $shade: module.color("shade");
+    @if not module.module-presented("table") {
+        @include module.present-module("table");
 
-    $base-color: module.var("base", "color", white);
-    $base-section: module.var("base", "section");
-    $base-separator: module.var("base", "separator");
-    $base-sort: rgba($shade, 0.05);
-    $base-hover: color.mix($base-section, $shade, 90%);
-    $base-strong: module.var("strong", "weight", bold);
+        $primary: module.color("primary");
+        $shade: module.color("shade");
 
-    $table-background: module.var("table", "background", $base-color);
-    $table-foreground: module.var("table", "foreground");
-    $table-even: module.var("table", "even", $base-section);
-    $table-hover: module.var("table", "hover", $base-hover);
-    $table-grid: module.var("table", "grid", null);
-    $table-divider: module.var("table", "divider", $base-separator);
-    $table-separator: module.var("table", "separator", $base-separator);
-    $table-decorator: module.var("table", "decorator", $shade);
+        $base-color: module.var("base", "color", white);
+        $base-section: module.var("base", "section");
+        $base-separator: module.var("base", "separator");
+        $base-sort: rgba($shade, 0.05);
+        $base-hover: color.mix($base-section, $shade, 90%);
+        $base-strong: module.var("strong", "weight", bold);
 
-    $sort-background: module.var("table", "sort-background", $base-sort);
+        $table-background: module.var("table", "background", $base-color);
+        $table-foreground: module.var("table", "foreground");
+        $table-even: module.var("table", "even", $base-section);
+        $table-hover: module.var("table", "hover", $base-hover);
+        $table-grid: module.var("table", "grid", null);
+        $table-divider: module.var("table", "divider", $base-separator);
+        $table-separator: module.var("table", "separator", $base-separator);
+        $table-decorator: module.var("table", "decorator", $shade);
 
-    $table-strong: module.var("table", "strong-weight", $base-strong);
+        $sort-background: module.var("table", "sort-background", $base-sort);
 
-    @at-root {
-        .table-container {
-            display: block;
-            overflow: auto visible;
-            @include module.overflow-touch();
-            @include module.scrollable($primary);
-        }
+        $table-strong: module.var("table", "strong-weight", $base-strong);
 
-        table {
-            margin: 0;
-            padding: 0;
-            font: inherit;
-            table-layout: auto;
+        @at-root {
+            .table-container {
+                display: block;
+                overflow: auto visible;
+                @include module.overflow-touch();
+                @include module.scrollable($primary);
+            }
 
-            thead {
-                padding: 0;
+            table {
                 margin: 0;
-                border-bottom: 1px solid $table-divider;
+                padding: 0;
+                font: inherit;
+                table-layout: auto;
 
-                tr {
-                    overflow: hidden;
-                    white-space: nowrap;
-                    background: $table-background;
-                    border-top: 1px solid $table-separator;
-                    @include module.transition(all);
+                thead {
+                    padding: 0;
+                    margin: 0;
+                    border-bottom: 1px solid $table-divider;
 
-                    th {
-                        width: 1px;
-                        vertical-align: middle;
-                        color: $table-foreground;
-                        font-weight: $table-strong;
-                        padding: module.inline-padding();
+                    tr {
+                        overflow: hidden;
+                        white-space: nowrap;
+                        background: $table-background;
+                        border-top: 1px solid $table-separator;
                         @include module.transition(all);
 
-                        &.is-center-aligned {
-                            text-align: center;
-                        }
+                        th {
+                            width: 1px;
+                            vertical-align: middle;
+                            color: $table-foreground;
+                            font-weight: $table-strong;
+                            padding: module.inline-padding();
+                            @include module.transition(all);
 
-                        &.is-right-aligned {
-                            text-align: right;
-                        }
-
-                        &.is-left-aligned {
-                            text-align: left;
-                        }
-
-                        &.is-ellipsis {
-                            max-width: 1px;
-                            text-overflow: ellipsis;
-                        }
-
-                        &.is-filler {
-                            width: auto;
-                            max-width: 1px;
-                            text-overflow: ellipsis;
-                        }
-
-                        &.is-sorted {
-                            background-color: $sort-background;
-                        }
-
-                        &.is-sortable {
-                            cursor: pointer;
-
-                            &.is-asc {
-                                border-top: 1px solid $table-decorator;
+                            &.is-center-aligned {
+                                text-align: center;
                             }
 
-                            &.is-desc {
-                                border-bottom: 1px solid $table-decorator;
+                            &.is-right-aligned {
+                                text-align: right;
+                            }
+
+                            &.is-left-aligned {
+                                text-align: left;
+                            }
+
+                            &.is-ellipsis {
+                                max-width: 1px;
+                                text-overflow: ellipsis;
+                            }
+
+                            &.is-filler {
+                                width: auto;
+                                max-width: 1px;
+                                text-overflow: ellipsis;
+                            }
+
+                            &.is-sorted {
+                                background-color: $sort-background;
+                            }
+
+                            &.is-sortable {
+                                cursor: pointer;
+
+                                &.is-asc {
+                                    border-top: 1px solid $table-decorator;
+                                }
+
+                                &.is-desc {
+                                    border-bottom: 1px solid $table-decorator;
+                                }
                             }
                         }
                     }
                 }
-            }
 
-            tbody,
-            tfoot {
-                tr {
-                    background: $table-background;
-                    @include module.transition(all);
-
-                    &:not(:last-child) {
-                        border-bottom: 1px solid $table-separator;
-                    }
-
-                    td {
-                        width: 1px;
-                        font-weight: inherit;
-                        vertical-align: middle;
-                        color: $table-foreground;
-                        padding: module.inline-padding();
+                tbody,
+                tfoot {
+                    tr {
+                        background: $table-background;
                         @include module.transition(all);
 
-                        &.is-center-aligned {
-                            text-align: center;
+                        &:not(:last-child) {
+                            border-bottom: 1px solid $table-separator;
                         }
 
-                        &.is-right-aligned {
-                            text-align: right;
-                        }
+                        td {
+                            width: 1px;
+                            font-weight: inherit;
+                            vertical-align: middle;
+                            color: $table-foreground;
+                            padding: module.inline-padding();
+                            @include module.transition(all);
 
-                        &.is-left-aligned {
-                            text-align: left;
-                        }
+                            &.is-center-aligned {
+                                text-align: center;
+                            }
 
-                        &.is-ellipsis {
-                            max-width: 1px;
-                            text-overflow: ellipsis;
-                        }
+                            &.is-right-aligned {
+                                text-align: right;
+                            }
 
-                        &.is-filler {
-                            width: auto;
-                            max-width: 1px;
-                            text-overflow: ellipsis;
-                        }
+                            &.is-left-aligned {
+                                text-align: left;
+                            }
 
-                        &.is-sorted {
-                            background-color: $sort-background;
-                        }
+                            &.is-ellipsis {
+                                max-width: 1px;
+                                text-overflow: ellipsis;
+                            }
 
-                        &:not(.is-multiline) {
-                            overflow: hidden;
-                            white-space: nowrap;
+                            &.is-filler {
+                                width: auto;
+                                max-width: 1px;
+                                text-overflow: ellipsis;
+                            }
+
+                            &.is-sorted {
+                                background-color: $sort-background;
+                            }
+
+                            &:not(.is-multiline) {
+                                overflow: hidden;
+                                white-space: nowrap;
+                            }
                         }
                     }
                 }
-            }
 
-            tbody {
-                tr {
-                    &.is-even {
-                        background: $table-even;
-                    }
+                tbody {
+                    tr {
+                        &.is-even {
+                            background: $table-even;
+                        }
 
-                    &:not(.is-expanded) .extra {
-                        display: none;
-                    }
-
-                    &:not(.is-expanded):has(+ tr.extra) {
-                        + tr.extra {
+                        &:not(.is-expanded) .extra {
                             display: none;
                         }
-                    }
 
-                    &:not(:last-child) {
-                        border-bottom: 1px solid $table-separator;
-                    }
+                        &:not(.is-expanded):has(+ tr.extra) {
+                            + tr.extra {
+                                display: none;
+                            }
+                        }
 
-                    &:last-child {
-                        border-bottom: 1px solid $table-divider;
-                    }
-                }
-            }
+                        &:not(:last-child) {
+                            border-bottom: 1px solid $table-separator;
+                        }
 
-            @if $table-grid {
-                @include module.is-ltr() {
-                    tbody tr td:not(:first-child) {
-                        border-left: 1px solid $table-grid;
+                        &:last-child {
+                            border-bottom: 1px solid $table-divider;
+                        }
                     }
                 }
 
-                @include module.is-rtl() {
-                    tbody tr td:not(:first-child) {
-                        border-right: 1px solid $table-grid;
+                @if $table-grid {
+                    @include module.is-ltr() {
+                        tbody tr td:not(:first-child) {
+                            border-left: 1px solid $table-grid;
+                        }
+                    }
+
+                    @include module.is-rtl() {
+                        tbody tr td:not(:first-child) {
+                            border-right: 1px solid $table-grid;
+                        }
                     }
                 }
-            }
 
-            &.is-fullwidth {
-                width: 100%;
-            }
+                &.is-fullwidth {
+                    width: 100%;
+                }
 
-            &.is-stripped > tbody > tr:nth-child(even) {
-                background: $table-even;
-            }
+                &.is-stripped > tbody > tr:nth-child(even) {
+                    background: $table-even;
+                }
 
-            &.is-hoverable > tbody > tr:hover {
-                background: $table-hover;
-            }
+                &.is-hoverable > tbody > tr:hover {
+                    background: $table-hover;
+                }
 
-            @each $name, $color in module.colors($includes: $colors) {
-                &.is-#{$name} {
-                    @include module.selection($name);
+                @each $name, $color in module.colors($includes: $colors) {
+                    &.is-#{$name} {
+                        @include module.selection($name);
 
-                    thead {
-                        tr {
-                            th {
-                                &.is-sorted {
-                                    color: module.variant($name, "readable");
-                                    background-color: rgba($color, 0.05);
-                                }
-
-                                &.is-sortable {
-                                    &.is-asc {
-                                        border-top-color: $color;
+                        thead {
+                            tr {
+                                th {
+                                    &.is-sorted {
+                                        color: module.variant($name, "readable");
+                                        background-color: rgba($color, 0.05);
                                     }
 
-                                    &.is-desc {
-                                        border-bottom-color: $color;
+                                    &.is-sortable {
+                                        &.is-asc {
+                                            border-top-color: $color;
+                                        }
+
+                                        &.is-desc {
+                                            border-bottom-color: $color;
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
 
-                    tbody,
-                    tfoot {
-                        tr {
-                            td {
-                                &.is-sorted {
-                                    background-color: rgba($color, 0.05);
+                        tbody,
+                        tfoot {
+                            tr {
+                                td {
+                                    &.is-sorted {
+                                        background-color: rgba($color, 0.05);
+                                    }
                                 }
                             }
                         }

@@ -16,6 +16,10 @@ The **Layout Helper** module delivers a set of utility classes designed to simpl
 @include termeh.use-layout-helper();
 ```
 
+**Module:**
+
+This module is registered as `layout-helper` in the _presented modules_.
+
 :::
 
 ::: dependencies

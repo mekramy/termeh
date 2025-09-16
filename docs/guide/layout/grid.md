@@ -95,6 +95,10 @@ It supports configurable gaps, responsive column sizing via registered units, al
 @include termeh.use-grid(("small", "medium", "large"), ("1-2", "1-3", "1-4"));
 ```
 
+**Module:**
+
+This module is registered as `grid` in the _presented modules_.
+
 :::
 
 ::: dependencies

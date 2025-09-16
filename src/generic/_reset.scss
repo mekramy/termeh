@@ -1,91 +1,97 @@
+@use "../core/module";
+
 /// Applies a minimal CSS reset based on minireset.css v0.0.6
 /// Resets default browser styles while preserving useful defaults
 /// @see https://github.com/jgthms/minireset.css
 @mixin mini-reset() {
-    @at-root {
-        /* Reset margin and padding for structural elements */
-        html,
-        body,
-        p,
-        ol,
-        ul,
-        li,
-        dl,
-        dt,
-        dd,
-        blockquote,
-        figure,
-        fieldset,
-        legend,
-        textarea,
-        pre,
-        iframe,
-        hr,
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            margin: 0;
-            padding: 0;
-        }
+    @if not module.module-presented("reset") {
+        @include module.present-module("reset");
 
-        /* Normalize heading styles */
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            font-size: 100%;
-            font-weight: normal;
-        }
+        @at-root {
+            /* Reset margin and padding for structural elements */
+            html,
+            body,
+            p,
+            ol,
+            ul,
+            li,
+            dl,
+            dt,
+            dd,
+            blockquote,
+            figure,
+            fieldset,
+            legend,
+            textarea,
+            pre,
+            iframe,
+            hr,
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                margin: 0;
+                padding: 0;
+            }
 
-        /* Remove list styling */
-        ul {
-            list-style: none;
-        }
+            /* Normalize heading styles */
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                font-size: 100%;
+                font-weight: normal;
+            }
 
-        /* Normalize form element spacing */
-        button,
-        input,
-        select {
-            margin: 0;
-        }
+            /* Remove list styling */
+            ul {
+                list-style: none;
+            }
 
-        /* Universal box-sizing with inheritance */
-        html {
-            box-sizing: border-box;
-        }
+            /* Normalize form element spacing */
+            button,
+            input,
+            select {
+                margin: 0;
+            }
 
-        *,
-        *::before,
-        *::after {
-            box-sizing: inherit;
-        }
+            /* Universal box-sizing with inheritance */
+            html {
+                box-sizing: border-box;
+            }
 
-        /* Responsive media elements */
-        img,
-        video {
-            height: auto;
-            max-width: 100%;
-        }
+            *,
+            *::before,
+            *::after {
+                box-sizing: inherit;
+            }
 
-        /* Remove iframe borders */
-        iframe {
-            border: 0;
-        }
+            /* Responsive media elements */
+            img,
+            video {
+                height: auto;
+                max-width: 100%;
+            }
 
-        /* Table normalization */
-        table {
-            border-collapse: collapse;
-            border-spacing: 0;
-        }
+            /* Remove iframe borders */
+            iframe {
+                border: 0;
+            }
 
-        td,
-        th {
-            padding: 0;
+            /* Table normalization */
+            table {
+                border-collapse: collapse;
+                border-spacing: 0;
+            }
+
+            td,
+            th {
+                padding: 0;
+            }
         }
     }
 }

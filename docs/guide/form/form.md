@@ -78,6 +78,10 @@ The **Form** module provides consistent spacing, margin behavior, and a built-in
 @include termeh.use-form();
 ```
 
+**Module:**
+
+This module is registered as `form` in the _presented modules_.
+
 :::
 
 ::: dependencies

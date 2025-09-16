@@ -6,26 +6,30 @@
 /// @termeh {Number} [null] - var("radius", "normal") -> default rounded border radius for images
 /// @termeh {Number} [50%] - var("radius", "circle") -> circular border radius for images
 @mixin use-image($sizes: ()) {
-    $radius-normal: module.var("radius", "normal");
-    $radius-circle: module.var("radius", "circle", 50%);
+    @if not module.module-presented("image") {
+        @include module.present-module("image");
 
-    @at-root {
-        img {
-            &.is-centered {
-                margin: auto;
-            }
+        $radius-normal: module.var("radius", "normal");
+        $radius-circle: module.var("radius", "circle", 50%);
 
-            &.is-rounded {
-                border-radius: $radius-normal;
-            }
+        @at-root {
+            img {
+                &.is-centered {
+                    margin: auto;
+                }
 
-            &.is-circular {
-                border-radius: $radius-circle;
-            }
+                &.is-rounded {
+                    border-radius: $radius-normal;
+                }
 
-            @each $name, $size in module.sizes($includes: $sizes) {
-                &.is-#{$name} {
-                    width: $size;
+                &.is-circular {
+                    border-radius: $radius-circle;
+                }
+
+                @each $name, $size in module.sizes($includes: $sizes) {
+                    &.is-#{$name} {
+                        width: $size;
+                    }
                 }
             }
         }

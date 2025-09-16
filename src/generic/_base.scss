@@ -26,215 +26,219 @@
 /// @termeh {Number} [1.6em] - var("line-height", "normal") -> default line height
 /// @termeh {Number} [null] - var("radius", "normal") -> <blockquote> border radius
 @mixin use-base() {
-    $base-color: module.var("base", "color", white);
-    $base-foreground: module.var("base", "foreground", black);
-    $base-section: module.var("base", "section");
-    $base-separator: module.var("base", "separator");
+    @if not module.module-presented("base") {
+        @include module.present-module("base");
 
-    $primary-color: module.color("primary");
-    $primary-readable: module.variant("primary", "readable");
-    $primary-foreground: module.variant("primary", "foreground");
+        $base-color: module.var("base", "color", white);
+        $base-foreground: module.var("base", "foreground", black);
+        $base-section: module.var("base", "section");
+        $base-separator: module.var("base", "separator");
 
-    $size-small: module.size("small");
-    $font-family: module.var("font", "family");
-    $font-size: module.var("font", "size", 12px);
-    $font-weight: module.var("font", "weight", normal);
+        $primary-color: module.color("primary");
+        $primary-readable: module.variant("primary", "readable");
+        $primary-foreground: module.variant("primary", "foreground");
 
-    $mono-family: module.var("font", "family");
-    $mono-size: module.var("font", "size");
-    $mono-weight: module.var("font", "weight");
+        $size-small: module.size("small");
+        $font-family: module.var("font", "family");
+        $font-size: module.var("font", "size", 12px);
+        $font-weight: module.var("font", "weight", normal);
 
-    $strong-color: module.var("strong", "foreground");
-    $strong-weight: module.var("strong", "weight", bold);
+        $mono-family: module.var("font", "family");
+        $mono-size: module.var("font", "size");
+        $mono-weight: module.var("font", "weight");
 
-    $gap-micro: module.var("gap", "micro", 8px);
-    $gap-macro: module.var("gap", "macro", 1.6em);
-    $direction: module.var("base", "direction", ltr);
-    $min-width: module.var("base", "min-width", 300px);
-    $line-normal: module.var("line-height", "normal", 1.6em);
-    $radius-normal: module.var("radius", "normal");
+        $strong-color: module.var("strong", "foreground");
+        $strong-weight: module.var("strong", "weight", bold);
 
-    @at-root {
-        :root {
-            font-size: $font-size;
-        }
+        $gap-micro: module.var("gap", "micro", 8px);
+        $gap-macro: module.var("gap", "macro", 1.6em);
+        $direction: module.var("base", "direction", ltr);
+        $min-width: module.var("base", "min-width", 300px);
+        $line-normal: module.var("line-height", "normal", 1.6em);
+        $radius-normal: module.var("radius", "normal");
 
-        ::selection {
-            color: $primary-foreground;
-            background-color: $primary-color;
-        }
+        @at-root {
+            :root {
+                font-size: $font-size;
+            }
 
-        html {
-            overflow: hidden auto;
-            scroll-behavior: smooth;
-            font-family: $font-family;
-            font-size: $font-size;
-            font-weight: $font-weight;
-            text-size-adjust: 100%;
-            text-rendering: optimizelegibility;
-            -moz-osx-font-smoothing: grayscale;
-            -webkit-font-smoothing: antialiased;
-            direction: $direction;
-            min-width: $min-width;
-            background-color: $base-color;
+            ::selection {
+                color: $primary-foreground;
+                background-color: $primary-color;
+            }
 
-            @include module.scrollable($primary-color);
-        }
+            html {
+                overflow: hidden auto;
+                scroll-behavior: smooth;
+                font-family: $font-family;
+                font-size: $font-size;
+                font-weight: $font-weight;
+                text-size-adjust: 100%;
+                text-rendering: optimizelegibility;
+                -moz-osx-font-smoothing: grayscale;
+                -webkit-font-smoothing: antialiased;
+                direction: $direction;
+                min-width: $min-width;
+                background-color: $base-color;
 
-        article,
-        aside,
-        figure,
-        footer,
-        header,
-        hgroup,
-        section {
-            display: block;
-        }
+                @include module.scrollable($primary-color);
+            }
 
-        blockquote {
-            display: block;
-            padding: $gap-macro;
-            margin: $gap-macro;
-            border-radius: $radius-normal;
-            background-color: $base-section;
-        }
+            article,
+            aside,
+            figure,
+            footer,
+            header,
+            hgroup,
+            section {
+                display: block;
+            }
 
-        body,
-        button,
-        input,
-        optgroup,
-        select,
-        textarea,
-        select option {
-            font-size: 1rem;
-            font-family: $font-family;
-        }
+            blockquote {
+                display: block;
+                padding: $gap-macro;
+                margin: $gap-macro;
+                border-radius: $radius-normal;
+                background-color: $base-section;
+            }
 
-        body {
-            color: $base-foreground;
-            line-height: $line-normal;
-        }
+            body,
+            button,
+            input,
+            optgroup,
+            select,
+            textarea,
+            select option {
+                font-size: 1rem;
+                font-family: $font-family;
+            }
 
-        select {
-            appearance: menulist;
-            -moz-appearance: menulist;
-            -webkit-appearance: menulist;
-        }
+            body {
+                color: $base-foreground;
+                line-height: $line-normal;
+            }
 
-        code,
-        pre {
-            direction: ltr;
-            padding: $gap-macro;
-            font-size: $mono-size;
-            font-family: $mono-family;
-            font-weight: $mono-weight;
-            background-color: $base-section;
-            -moz-osx-font-smoothing: auto;
-            -webkit-font-smoothing: auto;
-        }
+            select {
+                appearance: menulist;
+                -moz-appearance: menulist;
+                -webkit-appearance: menulist;
+            }
 
-        strong {
-            color: $strong-color;
-            font-weight: $strong-weight;
-        }
-
-        a {
-            cursor: pointer;
-            text-decoration: none;
-            color: $primary-readable;
+            code,
+            pre {
+                direction: ltr;
+                padding: $gap-macro;
+                font-size: $mono-size;
+                font-family: $mono-family;
+                font-weight: $mono-weight;
+                background-color: $base-section;
+                -moz-osx-font-smoothing: auto;
+                -webkit-font-smoothing: auto;
+            }
 
             strong {
-                color: $primary-readable;
-            }
-
-            &:hover {
-                text-decoration: underline;
-            }
-        }
-
-        hr {
-            display: block;
-            border: none;
-            height: 1px;
-            background-color: $base-separator;
-
-            @include module.marged(false) {
-                margin: $gap-macro 0;
-            }
-        }
-
-        input[type="checkbox"],
-        input[type="radio"] {
-            vertical-align: baseline;
-            accent-color: $primary-color;
-        }
-
-        small {
-            font-size: $size-small;
-        }
-
-        span {
-            font-style: inherit;
-            font-weight: inherit;
-        }
-
-        fieldset {
-            border: none;
-        }
-
-        pre {
-            white-space: pre;
-            word-wrap: normal;
-            overflow-x: auto;
-
-            @include module.scrollable($primary-color);
-            @include module.overflow-touch();
-
-            code {
-                padding: 0;
-                font-size: 1em;
-                color: currentcolor;
-                background-color: transparent;
-            }
-        }
-
-        table {
-            th {
                 color: $strong-color;
                 font-weight: $strong-weight;
             }
 
-            td,
-            th {
-                vertical-align: top;
+            a {
+                cursor: pointer;
+                text-decoration: none;
+                color: $primary-readable;
 
-                &:not([align]) {
-                    text-align: inherit;
+                strong {
+                    color: $primary-readable;
+                }
+
+                &:hover {
+                    text-decoration: underline;
                 }
             }
-        }
 
-        p,
-        ol,
-        ul {
-            @include module.marged() {
-                margin-bottom: $gap-macro;
-            }
-        }
+            hr {
+                display: block;
+                border: none;
+                height: 1px;
+                background-color: $base-separator;
 
-        ul li {
-            position: relative;
-            padding-right: 2em;
-
-            @include module.marged() {
-                margin-bottom: $gap-micro;
+                @include module.marged(false) {
+                    margin: $gap-macro 0;
+                }
             }
 
-            &::before {
-                content: "—";
-                position: absolute;
-                right: 0;
-                color: $base-separator;
+            input[type="checkbox"],
+            input[type="radio"] {
+                vertical-align: baseline;
+                accent-color: $primary-color;
+            }
+
+            small {
+                font-size: $size-small;
+            }
+
+            span {
+                font-style: inherit;
+                font-weight: inherit;
+            }
+
+            fieldset {
+                border: none;
+            }
+
+            pre {
+                white-space: pre;
+                word-wrap: normal;
+                overflow-x: auto;
+
+                @include module.scrollable($primary-color);
+                @include module.overflow-touch();
+
+                code {
+                    padding: 0;
+                    font-size: 1em;
+                    color: currentcolor;
+                    background-color: transparent;
+                }
+            }
+
+            table {
+                th {
+                    color: $strong-color;
+                    font-weight: $strong-weight;
+                }
+
+                td,
+                th {
+                    vertical-align: top;
+
+                    &:not([align]) {
+                        text-align: inherit;
+                    }
+                }
+            }
+
+            p,
+            ol,
+            ul {
+                @include module.marged() {
+                    margin-bottom: $gap-macro;
+                }
+            }
+
+            ul li {
+                position: relative;
+                padding-right: 2em;
+
+                @include module.marged() {
+                    margin-bottom: $gap-micro;
+                }
+
+                &::before {
+                    content: "—";
+                    position: absolute;
+                    right: 0;
+                    color: $base-separator;
+                }
             }
         }
     }
