@@ -9,5 +9,6 @@ module.exports = {
         "scss/dollar-variable-empty-line-before": null,
         "scss/at-mixin-argumentless-call-parentheses": null,
         "scss/double-slash-comment-empty-line-before": null,
-    },
+        "scss/at-extend-no-missing-placeholder": null
+    }
 };

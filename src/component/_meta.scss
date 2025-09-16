@@ -10,6 +10,7 @@
 /// @termeh {Color} [null] - var("decorator", "size") -> loading spinner thickness
 @mixin use-meta($colors: (), $sizes: ()) {
     @if not module.module-presented("meta") {
+        @include element.use-element();
         @include module.present-module("meta");
 
         $mute: module.variant("shade", "mute");
@@ -17,8 +18,6 @@
         $decorator: module.var("decorator", "size");
 
         @at-root {
-            @include element.use-element();
-
             .meta {
                 @include module.control();
                 @extend .element;

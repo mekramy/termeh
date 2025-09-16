@@ -14,6 +14,7 @@
 /// @termeh {Number} [2px] - var("decorator", "size") -> decorator thickness
 @mixin use-header($colors: (), $gaps: ()) {
     @if not module.module-presented("header") {
+        @include element.use-element();
         @include module.present-module("header");
 
         $shade: module.color("shade");
@@ -26,8 +27,6 @@
         $line-normal: module.var("line-height", "normal", 1.6em);
         $decorator: module.var("decorator", "size", 2px);
         @at-root {
-            @include element.use-element();
-
             .header {
                 display: flex;
                 align-items: center;

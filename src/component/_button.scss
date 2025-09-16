@@ -16,6 +16,7 @@
 /// @termeh {Number} [2.2em] - var("control", "height") -> default button height
 @mixin use-button($colors: (), $sizes: ()) {
     @if not module.module-presented("button") {
+        @include element.use-element();
         @include module.present-module("button");
 
         $outline: rgba(module.color("shade"), 0.2);
@@ -31,8 +32,6 @@
         $height: module.var("control", "height", 2.2em);
 
         @at-root {
-            @include element.use-element();
-
             .buttons {
                 display: flex;
                 flex-flow: row nowrap;

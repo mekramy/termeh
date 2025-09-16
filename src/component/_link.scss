@@ -10,6 +10,7 @@
 /// @termeh {Color} [null] - var("decorator", "size") -> loading spinner thickness
 @mixin use-link($colors: (), $sizes: ()) {
     @if not module.module-presented("link") {
+        @include element.use-element();
         @include module.present-module("link");
 
         $foreground: module.var("base", "foreground", black);
@@ -17,8 +18,6 @@
         $decorator: module.var("decorator", "size");
 
         @at-root {
-            @include element.use-element();
-
             .link {
                 @include module.control();
                 @extend .element;
