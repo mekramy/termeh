@@ -1,0 +1,24 @@
+@use "sass:list";
+@use "util";
+
+$-modules: () !default;
+
+/// Adds a module to the presented modules list
+/// @param {*} $module - Module to add
+@mixin present-module($module) {
+    $module: util.string-of($module, "add-module", "module");
+    $-modules: list.append($-modules, $module) !global;
+}
+
+/// Validates that required module are present
+/// @param {*} $module - Module to check
+/// @param {List} $requirement - required module
+/// @throws Error if required module is missing
+@mixin require($module, $requirement) {
+    $module: util.string-of($module, "require", "module");
+    $requirement: util.string-of($requirement, "require", "requirement");
+
+    @if not list.index($-modules, $requirement) {
+        @error "Module #{$module} requires [#{$requirement}] modules";
+    }
+}

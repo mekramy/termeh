@@ -19,6 +19,10 @@ export default [
                 link: "/guide/core/intro",
             },
             {
+                text: "Modules",
+                link: "/guide/core/modules",
+            },
+            {
                 text: "Variable",
                 link: "/guide/core/variable",
             },
