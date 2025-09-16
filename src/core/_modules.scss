@@ -6,14 +6,14 @@ $-modules: () !default;
 /// Adds a module to the presented modules list
 /// @param {*} $module - Module to add
 @mixin present-module($module) {
-    $module: util.string-of($module, "add-module", "module");
+    $module: util.string-of($module, "present-module", "module");
     $-modules: list.append($-modules, $module) !global;
 }
 
-/// Validates that required module are present
-/// @param {*} $module - Module to check
-/// @param {List} $requirement - required module
-/// @throws Error if required module is missing
+/// Validates that required modules are present
+/// @param {*} $module - Module that requires another module
+/// @param {*} $requirement - Required module that must be present
+/// @throws Error if the required module is not present
 @mixin require($module, $requirement) {
     $module: util.string-of($module, "require", "module");
     $requirement: util.string-of($requirement, "require", "requirement");
@@ -21,4 +21,12 @@ $-modules: () !default;
     @if not list.index($-modules, $requirement) {
         @error "Module #{$module} requires [#{$requirement}] modules";
     }
+}
+
+/// Checks whether a module has been presented (added) or not
+/// @param {*} $module - Module to check
+/// @return {Boolean} `true` if module is presented, `false` otherwise
+@function module-presented($module) {
+    $module: util.string-of($module, "module-presented", "module");
+    @return if(list.index($-modules, $module), true, false);
 }
