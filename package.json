@@ -1,16 +1,29 @@
 {
-    "name": "termeh",
-    "version": "0.0.8",
     "license": "ISC",
-    "private": false,
+    "version": "1.0.0",
+    "name": "termeh",
     "homepage": "https://termeh.ekramy.ir",
-    "description": "Modern, responsive, and modular CSS framework for scalable UIs.",
-    "style": "termeh.scss",
-    "sass": "termeh.scss",
+    "description": "Modern, responsive, and modular CSS framework.",
+    "style": "./termeh.scss",
+    "sass": "./termeh.scss",
+    "exports": {
+        ".": {
+            "sass": "./termeh.scss"
+        }
+    },
     "files": [
         "src",
         "termeh.scss"
     ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/mekramy/termeh.git"
+    },
+    "author": {
+        "name": "Mojtaba Ekramy",
+        "email": "m.ajamekramy@gmail.com",
+        "url": "https://github.com/mekramy"
+    },
     "keywords": [
         "responsive",
         "ui-design",
@@ -29,27 +42,18 @@
         "docs:style": "npx sass docs/termeh.scss docs/public/assets/termeh.css",
         "docs:preview": "vitepress preview docs"
     },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/mekramy/termeh.git"
-    },
-    "author": {
-        "name": "Mojtaba Ekramy",
-        "email": "m.ajamekramy@gmail.com",
-        "url": "https://github.com/mekramy"
-    },
-    "peerDependencies": {
-        "sass": ">=1.62.0"
-    },
     "devDependencies": {
         "@catppuccin/vitepress": "^0.1.2",
         "markdown-it-container": "^4.0.0",
-        "stylelint": "^16.18.0",
-        "stylelint-config-standard-scss": "^14.0.0",
-        "stylelint-scss": "^6.11.1",
+        "stylelint": "^16.24.0",
+        "stylelint-config-standard-scss": "^16.0.0",
+        "stylelint-scss": "^6.12.1",
         "vitepress": "^1.6.4",
         "vitepress-plugin-group-icons": "^1.6.3",
-        "vitepress-plugin-tabs": "^0.7.1",
-        "vue": "^3.5.19"
+        "vitepress-plugin-tabs": "^0.7.3",
+        "vue": "^3.5.21"
+    },
+    "peerDependencies": {
+        "sass": ">=1.62.0"
     }
 }
