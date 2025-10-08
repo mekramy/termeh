@@ -1,4 +1,5 @@
 @use "sass:math";
+@use "sass:list";
 @use "sass:selector";
 @use "sass:color" as col;
 @use "color";
@@ -406,8 +407,9 @@
 /// @termeh {String} [ease] - var("transition", "ease") -> Global transition easing function
 /// @termeh {Number} [250ms] - var("transition", "duration") -> Global transition speed
 @mixin transition($fields) {
-    transition-property: $fields;
-    transition-timing-function: var.var("transition", "ease", ease);
+    will-change: list.append($fields, (), "comma");
+    transition-property: list.append($fields, (), "comma");
+    transition-timing-function: var.var("transition", "ease", linear);
     transition-duration: var.var("transition", "duration", 250ms);
 }
 
