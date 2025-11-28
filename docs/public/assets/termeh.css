@@ -390,6 +390,7 @@ table thead tr {
   white-space: nowrap;
   background: white;
   border-top: 1px solid #e0e4eb;
+  will-change: all;
   transition-property: all;
   transition-timing-function: ease;
   transition-duration: 250ms;
@@ -399,6 +400,7 @@ table thead tr th {
   vertical-align: middle;
   font-weight: bold;
   padding: 8px 16px;
+  will-change: all;
   transition-property: all;
   transition-timing-function: ease;
   transition-duration: 250ms;
@@ -436,6 +438,7 @@ table thead tr th.is-sortable.is-desc {
 table tbody tr,
 table tfoot tr {
   background: white;
+  will-change: all;
   transition-property: all;
   transition-timing-function: ease;
   transition-duration: 250ms;
@@ -450,6 +453,7 @@ table tfoot tr td {
   font-weight: inherit;
   vertical-align: middle;
   padding: 8px 16px;
+  will-change: all;
   transition-property: all;
   transition-timing-function: ease;
   transition-duration: 250ms;
@@ -529,6 +533,11 @@ table.is-shade tbody tr td.is-sorted,
 table.is-shade tfoot tr td.is-sorted {
   background-color: rgba(102, 112, 133, 0.05);
 }
+table thead tr th:not(.is-sorted).is-shade,
+table tbody tr td:not(.is-sorted).is-shade,
+table tfoot tr td:not(.is-sorted).is-shade {
+  background-color: rgba(102, 112, 133, 0.03);
+}
 table.is-error::selection,
 table.is-error *::selection {
   color: rgb(251.85, 242.25, 243.9);
@@ -547,6 +556,11 @@ table.is-error thead tr th.is-sortable.is-desc {
 table.is-error tbody tr td.is-sorted,
 table.is-error tfoot tr td.is-sorted {
   background-color: rgba(192, 0, 33, 0.05);
+}
+table thead tr th:not(.is-sorted).is-error,
+table tbody tr td:not(.is-sorted).is-error,
+table tfoot tr td:not(.is-sorted).is-error {
+  background-color: rgba(192, 0, 33, 0.03);
 }
 table.is-primary::selection,
 table.is-primary *::selection {
@@ -567,6 +581,11 @@ table.is-primary tbody tr td.is-sorted,
 table.is-primary tfoot tr td.is-sorted {
   background-color: rgba(23, 146, 153, 0.05);
 }
+table thead tr th:not(.is-sorted).is-primary,
+table tbody tr td:not(.is-sorted).is-primary,
+table tfoot tr td:not(.is-sorted).is-primary {
+  background-color: rgba(23, 146, 153, 0.03);
+}
 table.is-indigo::selection,
 table.is-indigo *::selection {
   color: rgb(246.8, 247, 252.2);
@@ -585,6 +604,11 @@ table.is-indigo thead tr th.is-sortable.is-desc {
 table.is-indigo tbody tr td.is-sorted,
 table.is-indigo tfoot tr td.is-sorted {
   background-color: rgba(91, 95, 199, 0.05);
+}
+table thead tr th:not(.is-sorted).is-indigo,
+table tbody tr td:not(.is-sorted).is-indigo,
+table tfoot tr td:not(.is-sorted).is-indigo {
+  background-color: rgba(91, 95, 199, 0.03);
 }
 table.is-green::selection,
 table.is-green *::selection {
@@ -605,6 +629,11 @@ table.is-green tbody tr td.is-sorted,
 table.is-green tfoot tr td.is-sorted {
   background-color: rgba(118, 200, 147, 0.05);
 }
+table thead tr th:not(.is-sorted).is-green,
+table tbody tr td:not(.is-sorted).is-green,
+table tfoot tr td:not(.is-sorted).is-green {
+  background-color: rgba(118, 200, 147, 0.03);
+}
 table.is-maroon::selection,
 table.is-maroon *::selection {
   color: rgb(249.2, 243.75, 245.4);
@@ -623,6 +652,11 @@ table.is-maroon thead tr th.is-sortable.is-desc {
 table.is-maroon tbody tr td.is-sorted,
 table.is-maroon tfoot tr td.is-sorted {
   background-color: rgba(139, 30, 63, 0.05);
+}
+table thead tr th:not(.is-sorted).is-maroon,
+table tbody tr td:not(.is-sorted).is-maroon,
+table tfoot tr td:not(.is-sorted).is-maroon {
+  background-color: rgba(139, 30, 63, 0.03);
 }
 
 .is-clearfix::after {
@@ -6903,6 +6937,7 @@ label.checkbox input[type=checkbox] {
   cursor: pointer;
   flex: 0 0 auto;
   box-shadow: 0 0 0 0 rgba(23, 146, 153, 0.25);
+  will-change: all;
   transition-property: all;
   transition-timing-function: ease;
   transition-duration: 250ms;
@@ -6916,6 +6951,7 @@ label.checkbox input[type=checkbox]::after {
   transform: scale(0);
   border-radius: 2px;
   background-color: #179299;
+  will-change: all;
   transition-property: all;
   transition-timing-function: ease;
   transition-duration: 250ms;
@@ -7231,6 +7267,7 @@ form.is-loading::after {
   border: 1px solid #d1d6e0;
   background-color: white;
   padding: 8px 16px;
+  will-change: all;
   transition-property: all;
   transition-timing-function: ease;
   transition-duration: 250ms;
@@ -7449,6 +7486,7 @@ label.radio input[type=radio] {
   cursor: pointer;
   flex: 0 0 auto;
   box-shadow: 0 0 0 0 rgba(23, 146, 153, 0.25);
+  will-change: all;
   transition-property: all;
   transition-timing-function: ease;
   transition-duration: 250ms;
@@ -7462,6 +7500,7 @@ label.radio input[type=radio]::after {
   transform: scale(0);
   border-radius: 50%;
   background-color: #179299;
+  will-change: all;
   transition-property: all;
   transition-timing-function: ease;
   transition-duration: 250ms;
@@ -7649,6 +7688,7 @@ select {
   border: 1px solid #d1d6e0;
   background-color: white;
   padding: 8px 16px;
+  will-change: all;
   transition-property: all;
   transition-timing-function: ease;
   transition-duration: 250ms;
@@ -7687,6 +7727,7 @@ select::picker(select) {
 }
 select::picker-icon {
   color: rgb(178.5, 183.5, 194);
+  will-change: transform;
   transition-property: transform;
   transition-timing-function: ease;
   transition-duration: 250ms;
@@ -8359,6 +8400,7 @@ textarea:disabled, textarea.is-disabled {
   color: rgb(178.5, 183.5, 194);
   font-size: 0.9em;
   padding: 8px 16px;
+  will-change: all;
   transition-property: all;
   transition-timing-function: ease;
   transition-duration: 250ms;
@@ -8563,6 +8605,7 @@ fieldset.is-disabled .meta,
   background-color: rgba(232.05, 233.55, 236.7, 0.35);
   font-size: 0.9em;
   padding: 0 1.2em;
+  will-change: all;
   transition-property: all;
   transition-timing-function: ease;
   transition-duration: 250ms;
@@ -8813,6 +8856,7 @@ fieldset.is-disabled .tag,
   border-radius: 2px;
   text-overflow: ellipsis;
   padding: 0 1.2em;
+  will-change: all;
   transition-property: all;
   transition-timing-function: ease;
   transition-duration: 250ms;
@@ -9535,6 +9579,7 @@ fieldset.is-disabled .button,
   color: #0d1b2a;
   background: rgba(255, 255, 255, 0.75);
   backdrop-filter: none;
+  will-change: all;
   transition-property: all;
   transition-timing-function: ease;
   transition-duration: 250ms;
@@ -9927,6 +9972,7 @@ fieldset.is-disabled .button,
   justify-content: center;
   width: 1em;
   height: 1em;
+  will-change: all;
   transition-property: all;
   transition-timing-function: ease;
   transition-duration: 250ms;
@@ -9940,12 +9986,14 @@ fieldset.is-disabled .button,
   display: block;
   max-height: 100%;
   max-width: 100%;
+  will-change: all;
   transition-property: all;
   transition-timing-function: ease;
   transition-duration: 250ms;
 }
 .icon svg {
   width: 100%;
+  will-change: all;
   transition-property: all;
   transition-timing-function: ease;
   transition-duration: 250ms;
@@ -10165,6 +10213,7 @@ fieldset.is-disabled .icon > img,
   cursor: pointer;
   height: 2.2em;
   color: #0d1b2a;
+  will-change: all;
   transition-property: all;
   transition-timing-function: ease;
   transition-duration: 250ms;
@@ -10192,6 +10241,7 @@ fieldset.is-disabled .icon > img,
   height: 1px;
   transform: translateX(-50%);
   background: currentcolor;
+  will-change: all;
   transition-property: all;
   transition-timing-function: ease;
   transition-duration: 250ms;

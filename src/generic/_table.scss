@@ -264,6 +264,14 @@
                             }
                         }
                     }
+
+                    thead tr th:not(.is-sorted),
+                    tbody tr td:not(.is-sorted),
+                    tfoot tr td:not(.is-sorted) {
+                        &.is-#{$name} {
+                            background-color: rgba($color, 0.03);
+                        }
+                    }
                 }
             }
         }

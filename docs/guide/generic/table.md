@@ -50,24 +50,24 @@ Provides fully-featured table styles with configurable colors, row behaviors, ho
         <tr>
           <th class="is-left-aligned is-filler is-sorted is-asc is-sortable">Name</th>
           <th class="is-center-aligned is-sortable">Age</th>
-          <th class="is-sortable">Email</th>
+          <th class="is-sortable is-indigo">Email</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td class="is-left-aligned is-filler is-sorted is-ellipsis">John Doe</td>
           <td class="is-center-aligned">20</td>
-          <td>john@example.com</td>
+          <td class="is-indigo">john@example.com</td>
         </tr>
         <tr>
           <td class="is-left-aligned is-filler is-sorted is-ellipsis">Jane Smith</td>
           <td class="is-center-aligned">25</td>
-          <td>jane.smith@example.com</td>
+          <td class="is-indigo">jane.smith@example.com</td>
         </tr>
         <tr>
           <td class="is-left-aligned is-filler is-sorted is-ellipsis">Jack Ma</td>
           <td class="is-center-aligned">39</td>
-          <td>jack.ma@example.com</td>
+          <td class="is-indigo">jack.ma@example.com</td>
         </tr>
         <tr>
           <td class="is-left-aligned is-filler is-sorted is-ellipsis">
@@ -75,7 +75,7 @@ Provides fully-featured table styles with configurable colors, row behaviors, ho
             ex sapien vitae pellentesque sem placerat in id cursus mi.
           </td>
           <td class="is-center-aligned">44</td>
-          <td>jack.ma@example.com</td>
+          <td class="is-indigo">jack.ma@example.com</td>
         </tr>
       </tbody>
     </table>
@@ -91,24 +91,24 @@ Provides fully-featured table styles with configurable colors, row behaviors, ho
     <tr>
       <th class="is-left-aligned is-filler is-sortable">Name</th>
       <th class="is-center-aligned is-sortable is-sorted is-asc">Age</th>
-      <th class="is-sortable">Email</th>
+      <th class="is-sortable is-indigo">Email</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td class="is-left-aligned is-filler is-ellipsis">John Doe</td>
       <td class="is-center-aligned is-sorted">20</td>
-      <td>john@example.com</td>
+      <td class="is-indigo">john@example.com</td>
     </tr>
     <tr>
       <td class="is-left-aligned is-filler is-ellipsis">Jane Smith</td>
       <td class="is-center-aligned is-sorted">25</td>
-      <td>jane.smith@example.com</td>
+      <td class="is-indigo">jane.smith@example.com</td>
     </tr>
     <tr>
       <td class="is-left-aligned is-filler is-ellipsis">Jack Ma</td>
       <td class="is-center-aligned is-sorted">39</td>
-      <td>jack.ma@example.com</td>
+      <td class="is-indigo">jack.ma@example.com</td>
     </tr>
     <tr>
       <td class="is-left-aligned is-filler is-ellipsis">
@@ -116,7 +116,7 @@ Provides fully-featured table styles with configurable colors, row behaviors, ho
         ex sapien vitae pellentesque sem placerat in id cursus mi.
       </td>
       <td class="is-center-aligned is-sorted">44</td>
-      <td>jack.ma@example.com</td>
+      <td class="is-indigo">jack.ma@example.com</td>
     </tr>
   </tbody>
 </table>
@@ -233,3 +233,4 @@ You can wrap your table inside `.table-container` to enable scrolling on overflo
   - `.is-filler` → expands column to fill remaining space
   - `.is-multiline` → allows multi-line text inside column
   - `.is-sorted` → marks a column as sorted
+  - `.is-<color>` → apply light highlight to column
