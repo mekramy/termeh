@@ -4,6 +4,18 @@
 @use "sass:list";
 @use "sass:string";
 
+/// Ternary operator for Sass
+/// @param {Bool} $condition - Condition to evaluate
+/// @param {*} $truly - Value to return if condition is true
+/// @param {*} $falsy - Value to return if condition is false
+/// @return {*} $truly if $condition is true, otherwise $falsy
+@function ternary($condition, $truly, $falsy) {
+    @if $condition {
+        @return $truly;
+    }
+    @return $falsy;
+}
+
 /// Returns the negated value of a number
 /// @param {Number} $value - Input number to negate
 /// @return {Number} Negated value
@@ -26,7 +38,7 @@
 /// @param {*} $alt - Fallback value if key not found
 /// @return {*} Value from map or fallback value
 @function alter($map, $key, $alt) {
-    @return if(map.has-key($map, $key), map.get($map, $key), $alt);
+    @return ternary(map.has-key($map, $key), map.get($map, $key), $alt);
 }
 
 /// Determines if key should be included based on filters

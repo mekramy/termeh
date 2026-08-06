@@ -12,6 +12,7 @@ In addition, Termeh's core provides helpers for layout and structure, including 
 
 Each section below dives deeper into these core features, showing how to leverage Termeh's built-in functions and mixins to create modern, modular, and maintainable UIs.
 
+- **[Modules](/guide/core/modules)** — Manage, Register and extend modules.
 - **[Global Variables](/guide/core/variable)** — Centralized, reusable variables for scoped styling
 - **[Gaps](/guide/core/gap)** — Consistent spacing system for layouts and components
 - **[Units](/guide/core/unit)** — Flexible grid units for sizing and layouts

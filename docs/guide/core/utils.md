@@ -2,6 +2,26 @@
 
 Termeh provides helper functions for mathematical operations, map/list handling, type validation, and error handling.
 
+## ternary
+
+Ternary operator for Sass.
+
+::: definition
+
+**Signature:**
+
+```scss
+@function ternary($condition: BOOLEAN, $truly: ANY, $falsy: ANY): ANY;
+```
+
+**Example:**
+
+```scss
+$color: termeh.ternary($dark-theme, black, white);
+```
+
+:::
+
 ## Negate
 
 Returns the negated value of a number.

@@ -28,5 +28,5 @@ $-modules: () !default;
 /// @return {Boolean} `true` if module is presented, `false` otherwise
 @function module-presented($module) {
     $module: util.string-of($module, "module-presented", "module");
-    @return if(list.index($-modules, $module), true, false);
+    @return util.ternary(list.index($-modules, $module), true, false);
 }

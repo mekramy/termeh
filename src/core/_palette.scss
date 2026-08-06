@@ -74,11 +74,11 @@ $-color-mixes: (
     $hue: list.nth($record, 4);
 
     // Adjust saturation and lightness based on the color's properties.
-    $sat: if(color.channel($color, "saturation", $space: hsl) > 40%, 100%, 50%);
-    $sat: if(color.channel($color, "saturation", $space: hsl) == 0%, 0%, $sat);
+    $sat: util.ternary(color.channel($color, "saturation", $space: hsl) > 40%, 100%, 50%);
+    $sat: util.ternary(color.channel($color, "saturation", $space: hsl) == 0%, 0%, $sat);
 
     // Calculate the darkest version based on lightness.
-    $lgh: if(color.channel($color, "lightness", $space: hsl) >= 50%, 40%, 17%);
+    $lgh: util.ternary(color.channel($color, "lightness", $space: hsl) >= 50%, 40%, 17%);
     @return hsl($hue, $sat, $lgh);
 }
 
@@ -90,7 +90,7 @@ $-color-mixes: (
     $hue: list.nth($record, 5);
 
     // Generate the brightest version with 95% lightness.
-    @return hsl($hue, color.saturation($color), 95%);
+    @return hsl($hue, color.channel($color, "saturation", $space: hsl), 95%);
 }
 
 /// Validates color variant
@@ -122,10 +122,6 @@ $-color-mixes: (
     }
 
     $amount: list.nth($data, 1);
-    $base: if(
-        list.nth($data, 2) == brightest,
-        -brightest($color),
-        -darkest($color)
-    );
+    $base: util.ternary(list.nth($data, 2) == brightest, -brightest($color), -darkest($color));
     @return color.mix($base, $color, $amount);
 }

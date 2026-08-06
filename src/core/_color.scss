@@ -66,39 +66,39 @@ $-colors: () !default;
         @return $defined;
     }
 
-    $base: if($base, $base, var.var("base", "color", white));
+    $base: util.ternary($base, $base, var.var("base", "color", white));
     $tone: contrast.tone($base);
     $color: map.get($-colors, $name, "color");
 
     @if $variant == "active" {
-        $v: if($tone == "light", "700", "300");
+        $v: util.ternary($tone == "light", "700", "300");
         @return palette.palette($color, $v);
     } @else if $variant == "light" {
-        $v: if($tone == "light", "800", "200");
+        $v: util.ternary($tone == "light", "800", "200");
         $c: palette.palette($color, $v);
         @return color.mix($base, $color, 85%);
     } @else if $variant == "light-active" {
-        $v: if($tone == "light", "800", "200");
+        $v: util.ternary($tone == "light", "800", "200");
         $c: palette.palette($color, $v);
         @return color.mix($base, $color, 70%);
     } @else if $variant == "mute" {
-        $v: if($tone == "light", "900", "100");
+        $v: util.ternary($tone == "light", "900", "100");
         $c: palette.palette($color, $v);
         @return color.mix($base, $color, 50%);
     } @else if $variant == "mute-active" {
-        $v: if($tone == "light", "900", "100");
+        $v: util.ternary($tone == "light", "900", "100");
         $c: palette.palette($color, $v);
         @return color.mix($base, $color, 5%);
     } @else if $variant == "readable" {
-        $v: if($tone == "light", "700", "200");
+        $v: util.ternary($tone == "light", "700", "200");
         $c: palette.palette($color, $v);
         @return color.mix($base, $color, 10%);
     } @else if $variant == "foreground" {
-        $v: if($tone == "light", "900", "100");
+        $v: util.ternary($tone == "light", "900", "100");
         $c: palette.palette($color, $v);
         @return color.mix($base, $color, 95%);
     } @else if $variant == "decorator" {
-        $v: if($tone == "light", "800", "200");
+        $v: util.ternary($tone == "light", "800", "200");
         $c: palette.palette($color, $v);
         @return color.mix($base, $color, 40%);
     }
