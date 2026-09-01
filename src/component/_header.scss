@@ -30,6 +30,7 @@
             .header {
                 display: flex;
                 align-items: center;
+                gap: $gap-macro;
 
                 @include module.padded() {
                     padding: module.control-padding();
@@ -41,16 +42,6 @@
 
                 .thumbnail {
                     flex: 0 0 auto;
-
-                    &:not(:last-child) {
-                        @include module.is-ltr() {
-                            margin-right: $gap-macro;
-                        }
-
-                        @include module.is-rtl() {
-                            margin-left: $gap-macro;
-                        }
-                    }
                 }
 
                 .headers {
@@ -123,20 +114,10 @@
 
                 @each $name, $gap in module.gaps($gaps) {
                     &.is-#{$name}-gap {
+                        gap: $gap;
+
                         @include module.padded() {
                             padding: module.half($gap) $gap;
-                        }
-
-                        .thumbnail {
-                            &:not(:last-child) {
-                                @include module.is-ltr() {
-                                    margin-right: $gap;
-                                }
-
-                                @include module.is-rtl() {
-                                    margin-left: $gap;
-                                }
-                            }
                         }
                     }
                 }

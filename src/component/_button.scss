@@ -38,19 +38,15 @@
                 align-items: stretch;
                 justify-content: flex-end;
                 box-sizing: border-box;
+                gap: module.half($gap-micro);
 
                 .button.is-cta {
                     flex: 1 1 0;
                 }
 
-                > :not(:last-child) {
-                    @include module.is-ltr() {
-                        margin-right: module.half($gap-micro);
-                    }
-
-                    @include module.is-rtl() {
-                        margin-left: module.half($gap-micro);
-                    }
+                @include module.mobile() {
+                    overflow: hidden;
+                    overflow-x: auto;
                 }
             }
 

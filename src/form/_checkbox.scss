@@ -39,6 +39,7 @@
                 display: flex;
                 align-items: center;
                 flex-flow: row nowrap;
+                gap: $gap-micro;
                 margin: 0;
                 padding: 0;
                 height: $height;
@@ -106,20 +107,6 @@
                         &:checked {
                             box-shadow: module.flat-shadow(5px, rgba($color, 0));
                         }
-                    }
-                }
-
-                @include module.is-ltr() {
-                    input[type="checkbox"] {
-                        margin-left: 0;
-                        margin-right: $gap-micro;
-                    }
-                }
-
-                @include module.is-rtl() {
-                    input[type="checkbox"] {
-                        margin-left: $gap-micro;
-                        margin-right: 0;
                     }
                 }
 

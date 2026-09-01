@@ -30,6 +30,7 @@
                 text-decoration: none;
                 line-height: $height;
                 font-weight: $weight;
+                gap: module.half($gap-micro);
 
                 b,
                 strong,
@@ -71,32 +72,16 @@
                     font-weight: $strong;
                 }
 
-                > * {
-                    @include module.is-ltr() {
-                        &:not(:last-child) {
-                            margin-right: module.half($gap-micro);
-                        }
-                    }
-
-                    @include module.is-rtl() {
-                        &:not(:last-child) {
-                            margin-left: module.half($gap-micro);
-                        }
-                    }
-                }
-
                 .icon {
                     color: inherit;
 
-                    @include module.is-ltr() {
-                        &:not(:last-child) {
-                            margin-right: $gap-micro;
+                    &:not(:last-child) {
+                        @include module.is-ltr() {
+                            margin-right: module.half($gap-micro);
                         }
-                    }
 
-                    @include module.is-rtl() {
-                        &:not(:last-child) {
-                            margin-left: $gap-micro;
+                        @include module.is-rtl() {
+                            margin-left: module.half($gap-micro);
                         }
                     }
                 }
