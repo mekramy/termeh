@@ -2701,28 +2701,52 @@ table tfoot tr td:not(.is-sorted).is-maroon {
   flex: 0 0 auto;
 }
 .grid:not(.is-gapless) {
-  gap: 1.6rem;
+  margin: -0.8rem;
+}
+.grid:not(.is-gapless) > .column {
+  padding: 0.8rem;
 }
 .grid:not(.is-gapless).is-mini-gap {
-  gap: 0.5em;
+  margin: -0.25em;
+}
+.grid:not(.is-gapless).is-mini-gap > .column {
+  padding: 0.25em;
 }
 .grid:not(.is-gapless).is-small-gap {
-  gap: 0.85em;
+  margin: -0.425em;
+}
+.grid:not(.is-gapless).is-small-gap > .column {
+  padding: 0.425em;
 }
 .grid:not(.is-gapless).is-normal-gap {
-  gap: 1em;
+  margin: -0.5em;
+}
+.grid:not(.is-gapless).is-normal-gap > .column {
+  padding: 0.5em;
 }
 .grid:not(.is-gapless).is-medium-gap {
-  gap: 1.5em;
+  margin: -0.75em;
+}
+.grid:not(.is-gapless).is-medium-gap > .column {
+  padding: 0.75em;
 }
 .grid:not(.is-gapless).is-large-gap {
-  gap: 2em;
+  margin: -1em;
+}
+.grid:not(.is-gapless).is-large-gap > .column {
+  padding: 1em;
 }
 .grid:not(.is-gapless).is-huge-gap {
-  gap: 2.5em;
+  margin: -1.25em;
+}
+.grid:not(.is-gapless).is-huge-gap > .column {
+  padding: 1.25em;
 }
 .grid:not(.is-gapless).is-massive-gap {
-  gap: 3em;
+  margin: -1.5em;
+}
+.grid:not(.is-gapless).is-massive-gap > .column {
+  padding: 1.5em;
 }
 .grid.is-stretch-align {
   align-items: stretch;

@@ -44,11 +44,19 @@
                 }
 
                 &:not(.is-gapless) {
-                    gap: $gap-macro;
+                    margin: module.negate(module.half($gap-macro));
+
+                    > .column {
+                        padding: module.half($gap-macro);
+                    }
 
                     @each $name, $gap in module.gaps($includes: $gaps) {
                         &.is-#{$name}-gap {
-                            gap: $gap;
+                            margin: module.negate(module.half($gap));
+
+                            > .column {
+                                padding: module.half($gap);
+                            }
                         }
                     }
                 }
