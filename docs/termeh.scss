@@ -50,6 +50,7 @@
 @include termeh.use-icon();
 @include termeh.use-link();
 @include termeh.use-breadcrumb();
+@include termeh.use-action();
 
 .placeholder {
     display: flex;

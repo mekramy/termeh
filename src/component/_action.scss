@@ -1,0 +1,147 @@
+@use "../core/module";
+@use "./element";
+
+/// Generates action groups and their interactive action controls.
+///
+/// Action groups arrange `.action` elements horizontally and allow overflow scrolling on
+/// mobile. Actions support secondary, loading, rounded, disabled, and color variants.
+///
+/// @param {List} $colors [()] - Color names for which to generate `.is-{color}` group variants. Pass `null` to use all registered colors.
+///
+/// @termeh {Color} [null] - color("primary") -> default action background color
+/// @termeh {Color} [null] - variant("primary", "foreground") -> default action text and loader color
+/// @termeh {Color} [null] - variant("shade", "readable") -> secondary action text and loader color
+/// @termeh {Color} [null] - color("shade") -> default focus and active outline color
+/// @termeh {Number} [8px] - var("gap", "micro") -> spacing between actions
+/// @termeh {Number} [null] - var("radius", "normal") -> default action border radius
+/// @termeh {Number} [null] - var("radius", "rounded") -> rounded action border radius
+/// @termeh {Number} [null] - var("decorator", "size") -> focus outline and loader size
+/// @termeh {Number} [2.2em] - var("control", "height") -> action control height
+@mixin use-action($colors: ()) {
+    @if not module.module-presented("action") {
+        @include element.use-element();
+        @include module.present-module("action");
+
+        $background: module.color("primary");
+        $foreground: module.variant("primary", "foreground");
+        $readable: module.variant("shade", "readable");
+        $outline: rgba(module.color("shade"), 0.2);
+
+        $gap-micro: module.var("gap", "micro", 8px);
+        $radius-normal: module.var("radius", "normal");
+        $radius-rounded: module.var("radius", "rounded");
+        $decorator: module.var("decorator", "size");
+
+        $height: module.var("control", "height", 2.2em);
+
+        @at-root {
+            .actions {
+                display: flex;
+                flex-flow: row nowrap;
+                align-items: stretch;
+                justify-content: flex-end;
+                box-sizing: border-box;
+                padding: $decorator * 1.5;
+                gap: module.half($gap-micro);
+
+                @include module.mobile() {
+                    overflow: hidden;
+                    overflow-x: auto;
+                }
+
+                .action {
+                    @include module.control();
+                    @extend .element;
+
+                    cursor: pointer;
+                    width: auto;
+                    height: $height;
+                    border-radius: $radius-normal;
+                    text-overflow: ellipsis;
+                    padding: module.control-padding();
+                    @include module.transition(all);
+                    @include module.unselectable();
+
+                    &:not(.is-secondary) {
+                        color: $foreground;
+                        background-color: rgba($background, 0.8);
+
+                        &.is-loading {
+                            color: transparent;
+                            @include module.locked();
+                            @include module.loader(1em, $foreground, $decorator);
+                        }
+
+                        &:hover {
+                            background-color: $background;
+                        }
+                    }
+
+                    &.is-secondary {
+                        color: $readable;
+                        background-color: transparent;
+
+                        &.is-loading {
+                            color: transparent;
+                            @include module.locked();
+                            @include module.loader(1em, $readable, $decorator);
+                        }
+
+                        &:hover {
+                            background-color: rgba($readable, 0.1);
+                        }
+                    }
+
+                    &.is-rounded {
+                        border-radius: $radius-rounded;
+                    }
+
+                    &:hover {
+                        box-shadow: none;
+                        text-decoration: none;
+                        transform: scale(1.05);
+                    }
+
+                    &:focus,
+                    &:active {
+                        box-shadow: module.flat-shadow($decorator, $outline);
+                    }
+
+                    @include module.is-disabled() {
+                        @include module.disabled();
+
+                        border-color: transparent !important;
+                    }
+                }
+
+                @each $name, $color in module.colors($colors) {
+                    &.is-#{$name},
+                    .is-#{$name} & {
+                        $background: $color;
+                        $foreground: module.variant($name, "foreground");
+                        $outline: rgba($color, 0.2);
+
+                        .action:not(.is-secondary) {
+                            color: $foreground;
+                            background-color: rgba($background, 0.8);
+
+                            &.is-loading {
+                                color: transparent;
+                                @include module.loader-color($color);
+                            }
+
+                            &:hover {
+                                background-color: $background;
+                            }
+
+                            &:focus,
+                            &:active {
+                                box-shadow: module.flat-shadow($decorator, $outline);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

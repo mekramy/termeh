@@ -38,6 +38,7 @@
                 align-items: stretch;
                 justify-content: flex-end;
                 box-sizing: border-box;
+                padding: $decorator * 1.5;
                 gap: module.half($gap-micro);
 
                 .button.is-cta {
