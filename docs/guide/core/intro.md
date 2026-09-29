@@ -14,6 +14,7 @@ Each section below dives deeper into these core features, showing how to leverag
 
 - **[Modules](/guide/core/modules)** — Manage, Register and extend modules.
 - **[Global Variables](/guide/core/variable)** — Centralized, reusable variables for scoped styling
+- **[Schemes](/guide/core/scheme)** — Register, retrieve, and export scoped CSS variables
 - **[Gaps](/guide/core/gap)** — Consistent spacing system for layouts and components
 - **[Units](/guide/core/unit)** — Flexible grid units for sizing and layouts
 - **[Text](/guide/core/text)** — Text sizes and styles for UI components

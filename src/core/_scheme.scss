@@ -1,0 +1,73 @@
+@use "sass:map";
+@use "sass:list";
+@use "util";
+
+$-tokens: () !default;
+$-schemes: () !default;
+
+@function -resolve-scheme($scheme) {
+    @if $scheme == null {
+        @return "__base__";
+    }
+
+    @return $scheme;
+}
+
+/// Defines a new color scheme.
+/// @param $name The name of the color scheme.
+/// @return null.
+@function define-scheme($name) {
+    $name: util.string-of($name, "define-scheme", "name");
+
+    @if list.index($-schemes, $name) == null {
+        $-schemes: list.append($-schemes, $name) !global;
+    }
+
+    @return null;
+}
+
+/// Returns the list of defined color schemes.
+/// @return The list of defined color schemes.
+@function schemes() {
+    @return $-schemes;
+}
+
+/// Defines a new css variable and associates it with a color scheme.
+/// @param $name The name of the css variable.
+/// @param $value The value of the css variable.
+/// @param $scheme The color scheme to associate the variable with (optional).
+@function define-variable($name, $value, $scheme: null) {
+    $name: util.string-of($name, "define-variable", "name");
+
+    $name: util.tokenize($name);
+    $scheme: -resolve-scheme($scheme);
+
+    $schemes: util.alter($-tokens, $name, ());
+    $schemes: map.set($schemes, $scheme, $value);
+    $-tokens: map.set($-tokens, $name, $schemes) !global;
+
+    @return null;
+}
+
+/// Retrieves the value of a defined css variable.
+/// @param $name The name of the css variable.
+/// @param $fallback The fallback value if the variable is not defined.
+/// @return The value of the css variable or the fallback value.
+@function variable($name, $fallback) {
+    $name: util.string-of($name, "variable", "name");
+
+    $name: util.tokenize($name);
+    @return var($name, $fallback);
+}
+
+/// Outputs the CSS variables associated with a specific color scheme.
+/// @param $scheme The color scheme for which to output the variables.
+@mixin variables($scheme: null) {
+    $scheme: -resolve-scheme($scheme);
+    @each $name, $schemes in $-tokens {
+        $v: map.get($schemes, $scheme);
+        @if $v != null {
+            #{$name}: $v;
+        }
+    }
+}

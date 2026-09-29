@@ -23,6 +23,10 @@ export default [
                 link: "/guide/core/modules",
             },
             {
+                text: "Theming",
+                link: "/guide/core/scheme",
+            },
+            {
                 text: "Variable",
                 link: "/guide/core/variable",
             },
