@@ -86,6 +86,46 @@ $green: termeh.alter($colors, "green", #000); // #000
 
 :::
 
+## Tokenize
+
+Tokenizes a given name into a CSS custom property format.
+
+::: definition
+
+**Signature:**
+
+```scss
+@function tokenize($name: STRING): STRING;
+```
+
+**Example:**
+
+```scss
+$token: termeh.tokenize("primaryColor"); // --termeh-primary-color
+```
+
+:::
+
+## Fallback Vars
+
+Generates a CSS fallback chain for a list of variables.
+
+::: definition
+
+**Signature:**
+
+```scss
+@function fallback-vars($vars: LIST): STRING;
+```
+
+**Example:**
+
+```scss
+color: fallback-vars(("--primary", "--secondary", "--tertiary", red));
+```
+
+:::
+
 ## Should Include
 
 Determines if a key should be included based on includes/excludes lists.

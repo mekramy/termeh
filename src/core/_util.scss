@@ -4,6 +4,47 @@
 @use "sass:list";
 @use "sass:string";
 
+@function -is-uppercase-letter($char) {
+    @return $char != string.to-lower-case($char);
+}
+
+@function -can-add-separator($result) {
+    @return string.length($result) > 0 and string.slice($result, -1) != "-";
+}
+
+@function -kebab-case($value) {
+    $result: "";
+    $length: string.length($value);
+
+    @for $i from 1 through $length {
+        $char: string.slice($value, $i, $i);
+
+        @if $char == "_" or $char == "-" or $char == " " {
+            @if -can-add-separator($result) {
+                $result: $result + "-";
+            }
+        } @else if -is-uppercase-letter($char) {
+            @if -can-add-separator($result) {
+                $result: $result + "-";
+            }
+
+            $result: $result + string.to-lower-case($char);
+        } @else {
+            $result: $result + $char;
+        }
+    }
+
+    @if string.slice($result, 1, 1) == "-" {
+        $result: string.slice($result, 2);
+    }
+
+    @if string.slice($result, -1) == "-" {
+        $result: string.slice($result, 1, string.length($result) - 1);
+    }
+
+    @return $result;
+}
+
 /// Ternary operator for Sass
 /// @param {Bool} $condition - Condition to evaluate
 /// @param {*} $truly - Value to return if condition is true
@@ -39,6 +80,27 @@
 /// @return {*} Value from map or fallback value
 @function alter($map, $key, $alt) {
     @return ternary(map.has-key($map, $key), map.get($map, $key), $alt);
+}
+
+/// Tokenizes a given name into a CSS custom property format.
+/// @param $name The name to tokenize.
+/// @return The tokenized name as a CSS custom property.
+@function tokenize($name) {
+    $name: string-of($name, "tokenize", "name");
+    @return string.unquote("--termeh-" + -kebab-case($name));
+}
+
+/// Generates a CSS fallback chain for a list of variables
+/// @param {List} $vars - List of CSS variables
+/// @return {String} CSS fallback chain
+@function fallback-vars($vars) {
+    $key: list-of($vars, "fallback-vars", "vars");
+
+    $result: list.nth($vars, list.length($vars));
+    @for $i from list.length($vars) - 1 through 1 {
+        $result: var(list.nth($vars, $i), $result);
+    }
+    @return $result;
 }
 
 /// Determines if key should be included based on filters
