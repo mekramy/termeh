@@ -2,6 +2,66 @@
 
 Termeh provides helper functions for mathematical operations, map/list handling, type validation, and error handling.
 
+## Negate
+
+Returns the negated value of a number.
+
+::: definition
+
+**Signature:**
+
+```scss
+@function negate($value: NUMBER): CALC();
+```
+
+**Example:**
+
+```scss
+$negated: termeh.negate(10px); // calc(-1 * 10px)
+```
+
+:::
+
+## Half
+
+Returns half of a number.
+
+::: definition
+
+**Signature:**
+
+```scss
+@function half($value: NUMBER): CALC();
+```
+
+**Example:**
+
+```scss
+$negated: termeh.half(20px); // calc(20px / 2)
+```
+
+:::
+
+## Double
+
+Returns double of a number.
+
+::: definition
+
+**Signature:**
+
+```scss
+@function double($value: NUMBER): CALC();
+```
+
+**Example:**
+
+```scss
+$negated: termeh.double(20px); // calc(20px * 2)
+```
+
+:::
+
 ## ternary
 
 Ternary operator for Sass.
@@ -18,46 +78,6 @@ Ternary operator for Sass.
 
 ```scss
 $color: termeh.ternary($dark-theme, black, white);
-```
-
-:::
-
-## Negate
-
-Returns the negated value of a number.
-
-::: definition
-
-**Signature:**
-
-```scss
-@function negate($value: NUMBER): NUMBER;
-```
-
-**Example:**
-
-```scss
-$negated: termeh.negate(10px); // -10px
-```
-
-:::
-
-## Half
-
-Returns half of a number.
-
-::: definition
-
-**Signature:**
-
-```scss
-@function half($value: NUMBER): NUMBER;
-```
-
-**Example:**
-
-```scss
-$negated: termeh.half(20px); // 10px
 ```
 
 :::
@@ -90,6 +110,8 @@ $green: termeh.alter($colors, "green", #000); // #000
 
 Tokenizes a given name into a CSS custom property format.
 
+> **Throws** an error if the input name is invalid string value.
+
 ::: definition
 
 **Signature:**
@@ -115,13 +137,18 @@ Generates a CSS fallback chain for a list of variables.
 **Signature:**
 
 ```scss
-@function fallback-vars($vars: LIST): STRING;
+@function fallback-vars($vars: LIST): VAR();
 ```
 
 **Example:**
 
 ```scss
-color: fallback-vars(("--primary", "--secondary", "--tertiary", red));
+color: fallback-vars((
+  "--primary", 
+  "--secondary", 
+  "--tertiary",
+  red
+)); /// var("--primary", var("--secondary", var("--tertiary", red)))
 ```
 
 :::
@@ -129,6 +156,8 @@ color: fallback-vars(("--primary", "--secondary", "--tertiary", red));
 ## Should Include
 
 Determines if a key should be included based on includes/excludes lists.
+
+> **Throws** an error if the inputs types are invalid.
 
 ::: definition
 
