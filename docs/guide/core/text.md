@@ -6,6 +6,10 @@ Termeh provides utilities to define and retrieve text sizes and styles for UI co
 
 Register a new text size.
 
+::: error
+**throws** If the input name is not a string or if the input size is not a number.
+:::
+
 ::: definition
 
 **Signature:**
@@ -27,6 +31,10 @@ Register a new text size.
 ## Text Size
 
 Retrieves a defined text size value by its name or generates an _error_ if the size is not defined.
+
+::: error
+**throws** If the input name is not a string or if the size is not found.
+:::
 
 ::: definition
 
@@ -112,6 +120,10 @@ span {
 ## Font Weight
 
 Gets the numeric font-weight value by its name or generates an _error_ if the weight is invalid.
+
+::: error
+**throws** If the input name is not a string or if the font weight is not found.
+:::
 
 ::: definition
 

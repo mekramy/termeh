@@ -420,7 +420,11 @@ Applies styles for non-print media (e.g., screen).
 
 ## From
 
-Applies styles starting from a specific breakpoint (min-width) or generates an _error_ if the device is invalid.
+Applies styles at and above a breakpoint.
+
+::: error
+**throws** If the input is not a string or if the breakpoint is not found.
+:::
 
 ::: definition
 
@@ -444,7 +448,11 @@ Applies styles starting from a specific breakpoint (min-width) or generates an _
 
 ## Until
 
-Applies styles up to a specific breakpoint (max-width) or generates an _error_ if the device is invalid.
+Applies styles below a breakpoint.
+
+::: error
+**throws** If the input is not a string or if the breakpoint is not found.
+:::
 
 ::: definition
 
@@ -468,7 +476,11 @@ Applies styles up to a specific breakpoint (max-width) or generates an _error_ i
 
 ## Media Query
 
-Gets a media query string by its name or generates an _error_ if the media query is invalid.
+Returns the media query string for the specified name.
+
+::: error
+**throws** If the input is not a string or if the query is not found.
+:::
 
 ::: definition
 
@@ -536,14 +548,18 @@ Gets a filtered map of media queries, returning both names and values, for itera
 
 ## Breakpoint
 
-Gets the numeric value of a specific breakpoint or generates an _error_ if the breakpoint is invalid.
+Gets the numeric value of a specific breakpoint.
+
+::: error
+**throws** If the input is not a string or if the breakpoint is not found.
+:::
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function breakpoint($devince: STRING): NUMBER;
+@function breakpoint($device: STRING): NUMBER;
 ```
 
 **Example:**

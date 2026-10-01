@@ -15,12 +15,14 @@ $-defs: map.keys($-weights);
 /// Gets font weight value by name
 /// @param {String} $name - Weight name
 /// @return {Number} Weight value
-/// @throws Error if font weight not found
+///
+/// @throws If the input name is not a string or if the font weight is not found
 @function weight($name) {
     $name: util.string-of($name, "weight", "name");
     @if not map.has-key($-weights, $name) {
         @error "Font weight '#{$name}' not found. Available weights: #{$-defs}";
     }
+
     @return map.get($-weights, $name);
 }
 

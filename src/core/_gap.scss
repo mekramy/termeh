@@ -6,6 +6,8 @@ $-gaps: () !default;
 /// Defines a new gap
 /// @param {String} $name - Gap name (e.g. "small", "medium")
 /// @param {Number} $gap - Gap value (e.g. 8px, 1rem)
+///
+/// @throws If the input name is not a string or the input gap is not a number
 @mixin define-gap($name, $gap) {
     $name: util.string-of($name, "define-gap", "name");
     $gap: util.number-of($gap, "define-gap", "gap");
@@ -16,12 +18,14 @@ $-gaps: () !default;
 /// Gets gap value by name
 /// @param {String} $name - Gap name
 /// @return {Number} Gap value
-/// @throws Error if gap not found
+///
+/// @throws If the input name is not a string or if the gap is not found
 @function gap($name) {
     $name: util.string-of($name, "gap", "name");
     @if not map.has-key($-gaps, $name) {
         @error "Gap '#{$name}' not defined!";
     }
+
     @return map.get($-gaps, $name);
 }
 

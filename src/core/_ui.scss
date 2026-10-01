@@ -1,17 +1,14 @@
-@use "sass:math";
 @use "sass:list";
-@use "sass:selector";
-@use "sass:color" as col;
 @use "color";
 @use "var";
 @use "util";
 @use "../animation";
 
-/// Applies margin styles to non-last children unless marginless
-/// @param {Boolean} $exceptLast [true] - Whether to exclude last child
+/// Applies margin styles to children, optionally excluding the last child
+/// and elements with `.is-marginless`.
+/// @param {Bool} $except-last [true] - Whether to exclude the last child
 /// @content Margin styles to apply
 @mixin marged($except-last: true) {
-    $except-last: util.bool-of($except-last, "marged", "except-last");
     @if $except-last {
         &:not(:last-child, .is-marginless) {
             @content;
@@ -23,14 +20,14 @@
     }
 }
 
-/// Removes bottom margin from non-last, non-marginless elements
+/// Removes bottom margin from non-last children unless they are `.is-marginless`.
 @mixin marginless() {
     &:not(:last-child, .is-marginless) {
         margin-bottom: 0;
     }
 }
 
-/// Applies padding styles unless element has .is-paddingless
+/// Applies padding styles unless the element has `.is-paddingless`.
 /// @content Padding styles to apply
 @mixin padded() {
     &:not(.is-paddingless) {
@@ -38,62 +35,11 @@
     }
 }
 
-/// Removes padding from elements with .is-paddingless
+/// Removes padding from elements with `.is-paddingless`.
 @mixin paddingless() {
     &:not(.is-paddingless) {
         padding: 0;
     }
-}
-
-/// Generates standard box shadow with transparency
-/// @param {Number} $x - Horizontal offset
-/// @param {Number} $y - Vertical offset
-/// @param {Color} $color - Shadow base color
-/// @return {List} Box shadow value
-@function shadow($x, $y, $color) {
-    $x: util.number-of($x, "shadow", "x");
-    $y: util.number-of($y, "shadow", "y");
-    $color: util.color-of($color, "shadow", "color");
-
-    $max: math.max(math.abs($x), math.abs($y));
-    $color: col.change($color, $alpha: 0.3);
-
-    @return $x $y ($max * 2) 0 $color;
-}
-
-/// Generates soft diffused shadow effect
-/// @param {Number} $x - Horizontal offset
-/// @param {Number} $y - Vertical offset
-/// @param {Color} $color - Shadow base color
-/// @return {List} Box shadow value
-@function soft-shadow($x, $y, $color) {
-    $x: util.number-of($x, "soft-shadow", "x");
-    $y: util.number-of($y, "soft-shadow", "y");
-    $color: util.color-of($color, "soft-shadow", "color");
-
-    $max: math.max(math.abs($x), math.abs($y));
-    $color: col.change($color, $alpha: 0.15);
-
-    @return $x $y ($max * 3) util.negate($max) $color;
-}
-
-/// Generates flat box shadow with transparency
-/// @param {Number} $size - Blur radius
-/// @param {Color} $color - Shadow base color
-/// @return {List} Box shadow value
-@function flat-shadow($size, $color) {
-    $size: util.number-of($size, "flat-shadow", "size");
-    $color: util.color-of($color, "flat-shadow", "color");
-
-    @return 0 0 0 $size $color;
-}
-
-/// Calculates the border radius for a child element based on parent radius and padding
-/// @param {Number} $parent-radius - The border radius of the parent element
-/// @param {Number} $padding - The padding between parent and child elements
-/// @return {Number} Calculated child border radius
-@function child-radius($parent-radius, $padding) {
-    @return calc($parent-radius - $padding);
 }
 
 /// Clearfix implementation using ::after pseudo-element
@@ -132,17 +78,6 @@
     -moz-user-select: text;
     -ms-user-select: text;
     user-select: text;
-}
-
-/// Styles placeholder text across browsers
-/// @content Placeholder styles
-@mixin placeholder() {
-    $placeholders: ":-moz" ":-webkit-input" "-moz" "-ms-input";
-    @each $placeholder in $placeholders {
-        &:#{$placeholder}-placeholder {
-            @content;
-        }
-    }
 }
 
 /// Resets form element styles to baseline
@@ -199,11 +134,6 @@
 /// @param {Color} $thumb - Thumb color
 /// @param {Color} $thumb-hover - Thumb hover color
 @mixin scrollbar($width, $track: null, $thumb: null, $thumb-hover: null) {
-    $width: util.number-of($width, "scrollbar", "width");
-    $track: util.color-of($track, "scrollbar", "track");
-    $thumb: util.color-of($thumb, "scrollbar", "thumb");
-    $thumb-hover: util.color-of($thumb-hover, "scrollbar", "thumb-hover");
-
     &::-webkit-scrollbar {
         width: $width;
     }
@@ -225,8 +155,6 @@
 /// Updates scrollbar thumb hover color
 /// @param {Color} $color - New hover color
 @mixin scroll-color($color) {
-    $color: util.color-of($color, "scroll-color", "color");
-
     &::-webkit-scrollbar-thumb:hover {
         background: $color;
     }
@@ -237,10 +165,6 @@
 /// @param {Color} $color - Spinner color
 /// @param {Number} $width - Spinner stroke width
 @mixin spinner($size, $color, $width) {
-    $size: util.number-of($size, "spinner", "size");
-    $color: util.color-of($color, "spinner", "color");
-    $width: util.number-of($width, "spinner", "width");
-
     text-rendering: optimizelegibility;
     display: block;
     position: absolute;
@@ -260,8 +184,6 @@
 /// Updates spinner color
 /// @param {Color} $color - New spinner color
 @mixin spinner-color($color) {
-    $color: util.color-of($color, "spinner-color", "color");
-
     border-left-color: $color;
     border-bottom-color: $color;
 }
@@ -271,10 +193,6 @@
 /// @param {Color} $color - Spinner color
 /// @param {Number} $width - Spinner stroke width
 @mixin loader($size, $color, $width) {
-    $size: util.number-of($size, "loader", "size");
-    $color: util.color-of($color, "loader", "color");
-    $width: util.number-of($width, "loader", "width");
-
     z-index: 0;
     position: relative;
 
@@ -290,22 +208,15 @@
 /// Updates loader spinner color
 /// @param {Color} $color - New spinner color
 @mixin loader-color($color) {
-    $color: util.color-of($color, "loader-color", "color");
-
     &::after {
-        border-left-color: $color;
-        border-bottom-color: $color;
+        @include spinner-color($color);
     }
 }
 
 /// Overlay layer with optional backdrop filter
-/// @param {Color} $color - Overlay opacity
-/// @param {Number} $opacity - Overlay background opacity
+/// @param {Color} $background - Overlay background color
 /// @param {String} $filter - Backdrop filter value
-@mixin overlay($color, $opacity, $filter) {
-    $color: util.color-of($color, "overlay", "color");
-    $opacity: util.number-of($opacity, "overlay", "opacity");
-
+@mixin overlay($background, $filter) {
     z-index: 0;
     position: relative;
 
@@ -314,7 +225,7 @@
         position: absolute;
         z-index: 1;
         inset: 0;
-        background: rgba($color, $opacity);
+        background: $background;
         backdrop-filter: $filter;
     }
 }
@@ -387,9 +298,7 @@
 /// @termeh {Number} [0] - var("control", "v-padding") → Global vertical padding for controls
 /// @termeh {Number} [1.2em] - var("control", "h-padding") → Global horizontal padding for controls
 @function control-padding() {
-    $v-padding: var.var("control", "v-padding", 0em);
-    $h-padding: var.var("control", "h-padding", 1.2em);
-    @return $v-padding $h-padding;
+    @return var.var("control", "v-padding", 0em) var.var("control", "h-padding", 1.2em);
 }
 
 /// Returns standard inline element padding values
@@ -398,7 +307,7 @@
 /// @termeh {Number} [8px] - var("gap", "micro") -> Global gap for inline elements
 @function inline-padding() {
     $gap: var.var("gap", "micro", 8px);
-    @return $gap $gap * 2;
+    @return $gap double($gap);
 }
 
 /// Standard transition effect
@@ -429,6 +338,8 @@
 
 /// Text selection styling
 /// @param {String} $name - Color palette name
+///
+/// @throws If the specified color palette name does not exist
 @mixin selection($name) {
     $name: util.string-of($name, "selection", "name");
 
@@ -446,8 +357,6 @@
 /// @termeh {Color} [var("base", "section")] - var("scroll", "track") → Global scrollbar track background
 /// @termeh {Color} [var("base", "separator")] - var("scroll", "thumb") → Global scrollbar thumb color
 @mixin scrollable($color) {
-    $color: util.color-of($color, "scrollable", "color");
-
     @include scrollbar(
         var.var("scroll", "size", 1rem),
         var.var("scroll", "track", var.var("base", "section", null)),

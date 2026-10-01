@@ -1,15 +1,58 @@
 @use "sass:map";
 @use "sass:color";
+@use "scheme" as scm;
 @use "contrast";
 @use "palette";
 @use "util";
 @use "var";
 
 $-colors: () !default;
+$-overrides: () !default;
+
+@function -variant($color, $base, $variant) {
+    @if $color == null or $base == null {
+        @return null;
+    }
+
+    $tone: contrast.tone($base);
+    @if $variant == "active" {
+        $v: util.ternary($tone == "light", "700", "300");
+        @return palette.palette($color, $v);
+    } @else if $variant == "light" {
+        $v: util.ternary($tone == "light", "800", "200");
+        @return color.mix($base, palette.palette($color, $v), 85%);
+    } @else if $variant == "light-active" {
+        $v: util.ternary($tone == "light", "800", "200");
+        @return color.mix($base, palette.palette($color, $v), 70%);
+    } @else if $variant == "action" {
+        @return rgba($color, 0.15);
+    } @else if $variant == "action-active" {
+        @return rgba($color, 0.35);
+    } @else if $variant == "mute" {
+        $v: util.ternary($tone == "light", "900", "100");
+        @return color.mix($base, palette.palette($color, $v), 50%);
+    } @else if $variant == "mute-active" {
+        $v: util.ternary($tone == "light", "900", "100");
+        @return color.mix($base, palette.palette($color, $v), 5%);
+    } @else if $variant == "readable" {
+        $v: util.ternary($tone == "light", "700", "200");
+        @return color.mix($base, palette.palette($color, $v), 10%);
+    } @else if $variant == "foreground" {
+        $v: util.ternary($tone == "light", "900", "100");
+        @return color.mix($base, palette.palette($color, $v), 95%);
+    } @else if $variant == "decorator" {
+        $v: util.ternary($tone == "light", "800", "200");
+        @return color.mix($base, palette.palette($color, $v), 40%);
+    }
+
+    @return null;
+}
 
 /// Defines a palette color
 /// @param {String} $name - Color name (e.g. "primary", "green")
 /// @param {Color} $color - Color value (e.g. #6200ee, #03dac6)
+///
+/// @throws If the input name is not a string or the input color is not a valid color
 @mixin define-palette($name, $color) {
     $name: util.string-of($name, "define-palette", "name");
     $color: util.color-of($color, "define-palette", "color");
@@ -18,16 +61,40 @@ $-colors: () !default;
     $-colors: map.set($-colors, $name, $vars) !global;
 }
 
+/// Overrides a palette color for a specific scheme.
+/// @param {String} $scheme - The color scheme to override
+/// @param {String} $name - The name of the color to override
+/// @param {Color} $color - The new color value
+///
+/// @throws If the scheme or name is not a string, the color is invalid, or the color is not defined in the main scheme
+@mixin override-palette($scheme, $name, $color) {
+    $scheme: util.string-of($scheme, "override-palette", "scheme");
+    $name: util.string-of($name, "override-palette", "name");
+    $color: util.color-of($color, "override-palette", "color");
+    @if not map.has-key($-colors, $name) {
+        @error "Color '#{$name}' not defined!";
+    }
+
+    $variants: util.alter($-overrides, $name, ());
+    $schemes: util.alter($variants, $scheme, ());
+
+    $schemes: map.set($schemes, "color", $color);
+    $variants: map.set($variants, $scheme, $schemes);
+
+    $-overrides: map.set($-overrides, $name, $variants) !global;
+    $_: scm.define-scheme($scheme);
+}
+
 /// Defines a color variant
 /// @param {String} $name - Base color name
 /// @param {String} $variant - Variant name (e.g. "light", "dark")
 /// @param {Color} $color - Variant color
-/// @throws Error if base color not found
+///
+/// @throws If the name or variant is not a string, the color is invalid, or color is not defined in the main scheme
 @mixin define-variant($name, $variant, $color) {
     $name: util.string-of($name, "define-variant", "name");
     $variant: util.string-of($variant, "define-variant", "variant");
     $color: util.color-of($color, "define-variant", "color");
-
     @if not map.has-key($-colors, $name) {
         @error "Color '#{$name}' not defined!";
     }
@@ -37,73 +104,172 @@ $-colors: () !default;
     $-colors: map.set($-colors, $name, $vars) !global;
 }
 
-/// Gets base color value
-/// @param {String} $name - Color name
-/// @return {Color} Color value
-/// @throws Error if color not found
-@function color($name) {
-    $name: util.string-of($name, "color", "name");
+/// Overrides a specific variant of a palette color for a specific scheme.
+/// @param {String} $scheme - The color scheme to override
+/// @param {String} $name - The name of the color to override
+/// @param {String} $variant - The variant of the color to override
+/// @param {Color} $color - The new color value
+///
+/// @throws If the scheme, name, or variant is not a string, the color is invalid, or the color is not defined in the main scheme
+@mixin override-variant($scheme, $name, $variant, $color) {
+    $scheme: util.string-of($scheme, "override-variant", "scheme");
+    $name: util.string-of($name, "override-variant", "name");
+    $variant: util.string-of($variant, "override-variant", "variant");
+    $color: util.color-of($color, "override-variant", "color");
     @if not map.has-key($-colors, $name) {
         @error "Color '#{$name}' not defined!";
     }
+
+    $variants: util.alter($-overrides, $name, ());
+    $schemes: util.alter($variants, $scheme, ());
+
+    $schemes: map.set($schemes, $variant, $color);
+    $variants: map.set($variants, $scheme, $schemes);
+
+    $-overrides: map.set($-overrides, $name, $variants) !global;
+    $_: scm.define-scheme($scheme);
+}
+
+/// Retrieves the value of a base color by its name.
+/// @param {String} $name - The name of the color to retrieve
+/// @return {Color} The value of the color
+///
+/// @throws If the name is not a string or color is not defined
+@function color-value($name) {
+    $name: util.string-of($name, "color-value", "name");
+    @if not map.has-key($-colors, $name) {
+        @error "Color '#{$name}' not defined!";
+    }
+
     @return map.get($-colors, $name, "color");
 }
 
-/// Gets color variant with auto-generation
-/// @param {String} $name - Base color name
-/// @param {String} $variant - Variant name (active, light, light-active, mute, mute-active, readable, foreground, decorator or color)
-/// @param {Color} $fallback [null] - Fallback color
-/// @param {Color} $base [null] - Base color for theming (light or dark)
-/// @return {Color} Variant color
-@function variant($name, $variant, $fallback: null, $base: null) {
-    $name: util.string-of($name, "variant", "name");
-    $variant: util.string-of($variant, "variant", "variant");
-    $fallback: util.color-safe($fallback, "variant", "fallback", null);
-    $base: util.color-safe($base, "variant", "base", null);
+/// Retrieves the value of a color for a specific scheme.
+/// @param {String} $scheme - The color scheme to retrieve
+/// @param {String} $name - The name of the color to retrieve
+/// @return {Color} The value of the color
+///
+/// @throws If the scheme or name is not a string or color is not defined in the main scheme
+@function scheme-color($scheme, $name) {
+    $scheme: util.string-of($scheme, "scheme-color", "scheme");
+    $name: util.string-of($name, "scheme-color", "name");
+    @if not map.has-key($-colors, $name) {
+        @error "Color '#{$name}' not defined!";
+    }
+
+    $color: map.get($-overrides, $name, $scheme, "color");
+    @if $color == null {
+        $color: map.get($-colors, $name, "color");
+    }
+
+    @return $color;
+}
+
+/// Retrieves the value of a color variant for a specific color name.
+/// @param {String} $name - The name of the color
+/// @param {String} $variant - The variant of the color
+/// @param {Color} $fallback - The fallback color if the variant is not defined
+/// @return {Color} The value of the color variant
+///
+/// @throws If the name or variant is not a string
+@function variant-value($name, $variant, $fallback: null) {
+    $name: util.string-of($name, "variant-value", "name");
+    $variant: util.string-of($variant, "variant-value", "variant");
 
     $defined: map.get($-colors, $name, $variant);
     @if $defined {
         @return $defined;
     }
 
-    $base: util.ternary($base, $base, var.var("base", "color", white));
-    $tone: contrast.tone($base);
+    $base: var.value("base", "color", white);
     $color: map.get($-colors, $name, "color");
+    @return -variant($color, $base, $variant) or $fallback;
+}
 
-    @if $variant == "active" {
-        $v: util.ternary($tone == "light", "700", "300");
-        @return palette.palette($color, $v);
-    } @else if $variant == "light" {
-        $v: util.ternary($tone == "light", "800", "200");
-        $c: palette.palette($color, $v);
-        @return color.mix($base, $color, 85%);
-    } @else if $variant == "light-active" {
-        $v: util.ternary($tone == "light", "800", "200");
-        $c: palette.palette($color, $v);
-        @return color.mix($base, $color, 70%);
-    } @else if $variant == "mute" {
-        $v: util.ternary($tone == "light", "900", "100");
-        $c: palette.palette($color, $v);
-        @return color.mix($base, $color, 50%);
-    } @else if $variant == "mute-active" {
-        $v: util.ternary($tone == "light", "900", "100");
-        $c: palette.palette($color, $v);
-        @return color.mix($base, $color, 5%);
-    } @else if $variant == "readable" {
-        $v: util.ternary($tone == "light", "700", "200");
-        $c: palette.palette($color, $v);
-        @return color.mix($base, $color, 10%);
-    } @else if $variant == "foreground" {
-        $v: util.ternary($tone == "light", "900", "100");
-        $c: palette.palette($color, $v);
-        @return color.mix($base, $color, 95%);
-    } @else if $variant == "decorator" {
-        $v: util.ternary($tone == "light", "800", "200");
-        $c: palette.palette($color, $v);
-        @return color.mix($base, $color, 40%);
+/// Retrieves the value of a color variant for a specific color scheme and color name.
+/// @param {String} $scheme - The color scheme to retrieve
+/// @param {String} $name - The name of the color
+/// @param {String} $variant - The variant of the color
+/// @param {Color} $fallback - The fallback color if the variant is not defined
+/// @return {Color} The value of the color variant
+///
+/// @throws If the scheme, name, or variant is not a string
+@function scheme-variant($scheme, $name, $variant, $fallback: null) {
+    $scheme: util.string-of($scheme, "scheme-variant", "scheme");
+    $name: util.string-of($name, "scheme-variant", "name");
+    $variant: util.string-of($variant, "scheme-variant", "variant");
+
+    $defined: map.get($-overrides, $name, $scheme, $variant);
+    @if $defined {
+        @return $defined;
     }
 
-    @return $fallback;
+    $base: var.value($scheme, "color", null);
+    $color: map.get($-overrides, $name, $scheme, "color");
+    @if $color == null {
+        $color: map.get($-colors, $name, "color");
+    }
+    @return -variant($color, $base, $variant) or $fallback;
+}
+
+/// Returns the CSS variable reference for a base color by its name.
+/// @param {String} $name - The name of the color
+/// @return {String} The CSS variable reference for the color
+///
+/// @throws If the name is not a string or the color is not defined
+@function color($name) {
+    $name: util.string-of($name, "color", "name");
+    @if not map.has-key($-colors, $name) {
+        @error "Color '#{$name}' not defined!";
+    }
+
+    $token: "color-#{$name}";
+    $value: map.get($-colors, $name, "color");
+    $_: scm.define-variable($token, $value);
+
+    @each $scheme in scm.schemes() {
+        $val: map.get($-overrides, $name, $scheme, "color");
+        $_: scm.define-variable($token, $val, $scheme);
+    }
+
+    @return scm.variable($token, $value);
+}
+
+/// Returns the CSS variable reference for a color variant by its name and variant.
+/// @param {String} $name - The name of the color
+/// @param {String} $variant - The variant of the color
+/// @param {Color} $fallback - The fallback color if the variant is not defined
+/// @return {String} The CSS variable reference for the color variant
+///
+/// @throws If the name or variant is not a string
+@function variant($name, $variant, $fallback: null) {
+    $name: util.string-of($name, "variant", "name");
+    $variant: util.string-of($variant, "variant", "variant");
+
+    $token: "color-#{$name}-#{$variant}";
+    $value: map.get($-colors, $name, $variant);
+    @if $value == null {
+        $base: var.value("base", "color", white);
+        $color: map.get($-colors, $name, "color");
+        $value: -variant($color, $base, $variant) or $fallback;
+    }
+    $_: scm.define-variable($token, $value);
+
+    @each $scheme in scm.schemes() {
+        $val: map.get($-overrides, $name, $scheme, $variant);
+        @if $val == null {
+            $base: var.value($scheme, "color", null);
+            $color: map.get($-overrides, $name, $scheme, "color");
+            @if $color == null {
+                $color: map.get($-colors, $name, "color");
+            }
+            $val: -variant($color, $base, $variant) or $fallback;
+        }
+
+        $_: scm.define-variable($token, $val, $scheme);
+    }
+
+    @return scm.variable($token, $value);
 }
 
 /// Gets filtered palette colors
@@ -118,7 +284,19 @@ $-colors: () !default;
     $result: ();
     @each $name, $variants in $-colors {
         @if util.should-include($name, $includes, $excludes) {
-            $result: map.set($result, $name, map.get($variants, "color"));
+            // Register vars
+            $token: "color-#{$name}";
+            $value: map.get($variants, "color");
+            $_: scm.define-variable($token, $value);
+
+            @each $scheme in scm.schemes() {
+                $val: map.get($-overrides, $name, $scheme, "color");
+                @if $val != null {
+                    $_: scm.define-variable($token, $val, $scheme);
+                }
+            }
+
+            $result: map.set($result, $name, scm.variable($token, $value));
         }
     }
     @return $result;

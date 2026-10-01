@@ -65,10 +65,10 @@
     &.dependencies {
         margin: 1rem 0;
         padding: 0.5rem 16px;
-        border-radius: 0;
-        background: none;
-        border: 1px solid var(--vp-c-divider);
-        border-top: 3px solid var(--vp-home-hero-name-color);
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border: 1px solid var(--vp-custom-block-details-code-bg);
+        border-left: 3px solid var(--vp-c-text-1);
 
         summary {
             gap: 1rem;
@@ -91,7 +91,7 @@
 
                 svg {
                     width: 100%;
-                    fill: var(--vp-c-brand-1, currentcolor);
+                    fill: var(--vp-c-text-1, currentcolor);
                 }
             }
 
@@ -103,7 +103,7 @@
 
         .arrow {
             transform: rotate(0deg);
-            border: solid var(--vp-home-hero-name-color);
+            border: solid var(--vp-c-text-2);
             border-width: 0 2px 2px 0;
             padding: 2px;
             transform-origin: center;

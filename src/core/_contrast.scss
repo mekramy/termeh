@@ -17,8 +17,11 @@
 /// Calculates color luminance (WCAG standard)
 /// @param {Color} $color - Color to analyze
 /// @return {Number} Luminance value
+///
+/// @throws If the input is not a valid color
 @function luminance($color) {
     $color: util.color-of($color, "luminance", "color");
+
     $red: -normalize(color.channel($color, "red", $space: rgb));
     $green: -normalize(color.channel($color, "green", $space: rgb));
     $blue: -normalize(color.channel($color, "blue", $space: rgb));
@@ -29,9 +32,12 @@
 /// @param {Color} $color1 - First color
 /// @param {Color} $color2 - Second color
 /// @return {Color} Darker color
+///
+/// @throws If either input is not a valid color
 @function darkest($color1, $color2) {
     $color1: util.color-of($color1, "darkest", "color1");
     $color2: util.color-of($color2, "darkest", "color2");
+
     @return util.ternary(luminance($color1) < luminance($color2), $color1, $color2);
 }
 
@@ -39,9 +45,12 @@
 /// @param {Color} $color1 - First color
 /// @param {Color} $color2 - Second color
 /// @return {Color} Lighter color
+///
+/// @throws If either input is not a valid color
 @function lightest($color1, $color2) {
     $color1: util.color-of($color1, "lightest", "color1");
     $color2: util.color-of($color2, "lightest", "color2");
+
     @return util.ternary(luminance($color1) > luminance($color2), $color1, $color2);
 }
 
@@ -49,9 +58,12 @@
 /// @param {Color} $back - Background color
 /// @param {Color} $color - Foreground color
 /// @return {Number} Contrast ratio
+///
+/// @throws If either input is not a valid color
 @function contrast-ratio($back, $color) {
     $back: util.color-of($back, "contrast-ratio", "back");
     $color: util.color-of($color, "contrast-ratio", "color");
+
     $back-lum: luminance($back) + 0.05;
     $color-lum: luminance($color) + 0.05;
     @return math.div(math.max($back-lum, $color-lum), math.min($back-lum, $color-lum));
@@ -60,8 +72,11 @@
 /// Determines if color is light or dark
 /// @param {Color} $color - Color to analyze
 /// @return {String} "light" or "dark"
+///
+/// @throws If the input is not a valid color
 @function tone($color) {
     $color: util.color-of($color, "tone", "color");
+
     $light-cnt: contrast-ratio($color, white);
     $dark-cnt: contrast-ratio($color, rgba(black, 0.87));
     @return util.ternary($light-cnt < 3.1 and $dark-cnt > $light-cnt, "light", "dark");
@@ -72,10 +87,13 @@
 /// @param {Color} $color1 - First option
 /// @param {Color} $color2 - Second option
 /// @return {Color} Higher contrast color
+///
+/// @throws If any input is not a valid color
 @function contrast($base, $color1, $color2) {
     $base: util.color-of($base, "contrast", "base");
     $color1: util.color-of($color1, "contrast", "color1");
     $color2: util.color-of($color2, "contrast", "color2");
+
     $color1-cnt: contrast-ratio(darkest($base, $color1), lightest($base, $color1));
     $color2-cnt: contrast-ratio(darkest($base, $color2), lightest($base, $color2));
     @return util.ternary($color1-cnt > $color2-cnt, $color1, $color2);
@@ -86,10 +104,13 @@
 /// @param {Color} $color1 - First option
 /// @param {Color} $color2 - Second option
 /// @return {Color} More harmonious color
+///
+/// @throws If any input is not a valid color
 @function harmony($base, $color1, $color2) {
     $base: util.color-of($base, "harmony", "base");
     $color1: util.color-of($color1, "harmony", "color1");
     $color2: util.color-of($color2, "harmony", "color2");
+
     $color1-cnt: contrast-ratio(darkest($base, $color1), lightest($base, $color1));
     $color2-cnt: contrast-ratio(darkest($base, $color2), lightest($base, $color2));
     @return util.ternary($color1-cnt < $color2-cnt, $color1, $color2);

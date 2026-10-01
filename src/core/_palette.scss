@@ -96,7 +96,8 @@ $-color-mixes: (
 /// Validates color variant
 /// @param {String} $var - Variant to validate
 /// @return {String} Validated variant
-/// @throws Error if invalid
+///
+/// @throws If the input variant is not valid
 @function -validate($var) {
     $var: util.string-of($var, "palette", "variant");
     $valid-variants: "50" "100" "200" "300" "400" "500" "600" "700" "800" "900";
@@ -112,11 +113,13 @@ $-color-mixes: (
 /// @param {Color} $color - Base color
 /// @param {String} $variant - Desired variant
 /// @return {Color} Resulting color variant
+///
+/// @throws If the input color is not a valid color or if the variant is not valid
 @function palette($color, $variant) {
     $color: util.color-of($color, "palette", "color");
+
     $variant: -validate($variant);
     $data: map.get($-color-mixes, $variant);
-
     @if not $data {
         @return $color;
     }

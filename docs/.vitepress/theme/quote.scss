@@ -1,0 +1,52 @@
+.quote {
+    width: 100%;
+    display: block;
+    padding: 0.6rem;
+    box-sizing: border-box;
+    font-family: var(--vp-font-family-mono);
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+
+    > p {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: baseline;
+        gap: 1rem;
+        font-weight: 600;
+        font-size: 0.8rem;
+        line-height: 1.6;
+
+        strong {
+            flex: none;
+            font-weight: 600;
+            font-size: 0.6rem;
+            line-height: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-radius: 2px;
+            padding: 4px 8px;
+            color: var(--vp-c-bg);
+        }
+    }
+
+    &.is-error {
+        color: var(--vp-c-text-1);
+        border: 1px solid var(--vp-badge-danger-bg);
+        border-left: 3px solid var(--vp-badge-danger-text);
+
+        > p strong {
+            background: var(--vp-badge-danger-text);
+        }
+    }
+
+    &.is-tip {
+        color: var(--vp-badge-info-text);
+        background-color: var(--vp-badge-info-bg);
+        border-left: 3px solid var(--vp-badge-info-text);
+
+        > p strong {
+            background: var(--vp-badge-info-text);
+        }
+    }
+}

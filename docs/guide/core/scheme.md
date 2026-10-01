@@ -56,6 +56,10 @@ $available-schemes: termeh.schemes(); // schemes registered by component overrid
 
 Registers a CSS variable with a value and optionally associates it with a color scheme. Variables without a scheme are exported by `variables()` without an argument. Variables associated with a scheme are exported by `variables($scheme)` for that scheme.
 
+::: error
+**throws** If the input name is not a string.
+:::
+
 ::: definition
 
 **Signature:**
@@ -76,6 +80,10 @@ $_: termeh.define-variable("navbar-height", #8ec5ed, "dark");
 ## Variable
 
 Returns a CSS `var()` reference for a variable. This optional helper is useful when a component needs to resolve a scheme variable with a fallback value.
+
+::: error
+**throws** If the input name is not a string.
+:::
 
 ::: definition
 

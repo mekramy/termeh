@@ -6,6 +6,10 @@ Termeh provides utilities to define and retrieve grid size units. These units ca
 
 Register a new grid unit.
 
+::: error
+**throws** If the input name is not a string or if the input unit is not a number.
+:::
+
 ::: definition
 
 **Signature:**
@@ -27,6 +31,10 @@ Register a new grid unit.
 ## Unit
 
 Gets a unit value by its name or generates an _error_ if the unit is not defined.
+
+::: error
+**throws** If the input name is not a string or if the unit is not found.
+:::
 
 ::: definition
 

@@ -13,12 +13,14 @@ $-defs: map.keys($-breakpoints);
 /// Gets breakpoint value by name
 /// @param {String} $name - Breakpoint name
 /// @return {Number} Breakpoint value
-/// @throws Error if breakpoint not found
+///
+/// @throws If the input is not a string or if the breakpoint is not found
 @function breakpoint($name) {
     $name: util.string-of($name, "breakpoint", "name");
     @if not map.has-key($-breakpoints, $name) {
         @error "Breakpoint '#{$name}' not found. Available: #{$-defs}";
     }
+
     @return map.get($-breakpoints, $name);
 }
 
@@ -28,13 +30,15 @@ $-defs: map.keys($-breakpoints);
     @return $-breakpoints;
 }
 
-/// Applies styles from breakpoint
+/// Applies styles at and above a breakpoint.
 /// @param {String} $device - Breakpoint name
 /// @content Styles to apply
+///
+/// @throws If the input is not a string or if the breakpoint is not found
 @mixin from($device) {
     $device: util.string-of($device, "from", "device");
-    @if not map.has-key($-breakpoints, $name) {
-        @error "Breakpoint '#{$name}' not found. Available: #{$-defs}";
+    @if not map.has-key($-breakpoints, $device) {
+        @error "Breakpoint '#{$device}' not found. Available: #{$-defs}";
     }
 
     @media screen and (min-width: breakpoint($device)) {
@@ -42,13 +46,15 @@ $-defs: map.keys($-breakpoints);
     }
 }
 
-/// Applies styles until breakpoint
+/// Applies styles below a breakpoint.
 /// @param {String} $device - Breakpoint name
 /// @content Styles to apply
+///
+/// @throws If the input is not a string or if the breakpoint is not found
 @mixin until($device) {
     $device: util.string-of($device, "until", "device");
-    @if not map.has-key($-breakpoints, $name) {
-        @error "Breakpoint '#{$name}' not found. Available: #{$-defs}";
+    @if not map.has-key($-breakpoints, $device) {
+        @error "Breakpoint '#{$device}' not found. Available: #{$-defs}";
     }
 
     @media screen and (max-width: math.sub(breakpoint($device), 1px)) {

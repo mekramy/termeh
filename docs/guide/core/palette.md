@@ -6,6 +6,10 @@ Termeh provides a comprehensive set of functions to generate and manipulate colo
 
 Generates a color variant based on a base color and a variant string. Variants typically range from _50_ (brightest) to _900_ (darkest).
 
+::: error
+**throws** If the input color is not a valid color or if the variant is not valid.
+:::
+
 ::: definition
 
 **Signature:**

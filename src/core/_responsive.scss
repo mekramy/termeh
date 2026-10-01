@@ -19,9 +19,11 @@ $-defs: map.keys($-queries);
 /// Gets media query by name
 /// @param {String} $name - Query name
 /// @return {String} Media query
-/// @throws Error if query not found
+///
+/// @throws If the input is not a string or if the query is not found
 @function media-query($name) {
     $name: util.string-of($name, "media-query", "name");
+
     @if not map.has-key($-queries, $name) {
         @error "Media query '#{$name}' not found. Available: #{$-defs}";
     }
@@ -52,7 +54,7 @@ $-defs: map.keys($-queries);
     @return $result;
 }
 
-/// Applies styles for non-touch devices
+/// Applies styles to devices that support hover.
 /// @content Styles to apply
 @mixin non-touch() {
     @media (hover: hover) {
@@ -60,7 +62,7 @@ $-defs: map.keys($-queries);
     }
 }
 
-/// Applies styles for touch devices
+/// Applies styles to devices that do not support hover.
 /// @content Styles to apply
 @mixin touch() {
     @media (hover: none) {

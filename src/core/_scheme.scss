@@ -13,9 +13,10 @@ $-schemes: () !default;
     @return $scheme;
 }
 
-/// Defines a new color scheme.
-/// @param $name The name of the color scheme.
-/// @return null.
+/// Defines a color scheme.
+/// @param {String} $name - Color scheme name
+///
+/// @throws Input name is not a string
 @function define-scheme($name) {
     $name: util.string-of($name, "define-scheme", "name");
 
@@ -26,18 +27,24 @@ $-schemes: () !default;
     @return null;
 }
 
-/// Returns the list of defined color schemes.
-/// @return The list of defined color schemes.
+/// Returns all defined color schemes.
+/// @return {List} Defined color schemes
 @function schemes() {
     @return $-schemes;
 }
 
-/// Defines a new css variable and associates it with a color scheme.
-/// @param $name The name of the css variable.
-/// @param $value The value of the css variable.
-/// @param $scheme The color scheme to associate the variable with (optional).
+/// Defines a CSS variable and associates it with a color scheme.
+/// @param {String} $name - CSS variable name
+/// @param {*} $value - CSS variable value
+/// @param {String} $scheme [null] - Color scheme name
+///
+/// @throws Input name is not a string
 @function define-variable($name, $value, $scheme: null) {
     $name: util.string-of($name, "define-variable", "name");
+
+    @if $value == null {
+        @return null;
+    }
 
     $name: util.tokenize($name);
     $scheme: -resolve-scheme($scheme);
@@ -49,10 +56,12 @@ $-schemes: () !default;
     @return null;
 }
 
-/// Retrieves the value of a defined css variable.
-/// @param $name The name of the css variable.
-/// @param $fallback The fallback value if the variable is not defined.
-/// @return The value of the css variable or the fallback value.
+/// Returns a CSS variable reference with an optional fallback.
+/// @param {String} $name - CSS variable name
+/// @param {*} $fallback - Fallback value if the variable is not defined
+/// @return {String} CSS variable reference
+///
+/// @throws Input name is not a string
 @function variable($name, $fallback) {
     $name: util.string-of($name, "variable", "name");
 
@@ -60,8 +69,8 @@ $-schemes: () !default;
     @return var($name, $fallback);
 }
 
-/// Outputs the CSS variables associated with a specific color scheme.
-/// @param $scheme The color scheme for which to output the variables.
+/// Outputs CSS variables associated with a color scheme.
+/// @param {String} $scheme [null] - Color scheme name
 @mixin variables($scheme: null) {
     $scheme: -resolve-scheme($scheme);
     @each $name, $schemes in $-tokens {

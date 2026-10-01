@@ -6,6 +6,8 @@ $-units: () !default;
 /// Defines a new grid unit
 /// @param {String} $name - Unit name (e.g. "full", "1-of-3")
 /// @param {Number} $unit - Unit value (e.g. 100%, 33.333%)
+///
+/// @throws If the input name is not a string or if the input unit is not a number
 @mixin define-unit($name, $unit) {
     $name: util.string-of($name, "define-unit", "name");
     $unit: util.number-of($unit, "define-unit", "unit");
@@ -16,7 +18,8 @@ $-units: () !default;
 /// Gets unit value by name
 /// @param {String} $name - Unit name
 /// @return {Number} Unit value
-/// @throws Error if unit not found
+///
+/// @throws If the input name is not a string or if the unit is not found
 @function unit($name) {
     $name: util.string-of($name, "unit", "name");
     @if not map.has-key($-units, $name) {

@@ -31,6 +31,10 @@ export default [
                 link: "/guide/core/variable",
             },
             {
+                text: "Color",
+                link: "/guide/core/color",
+            },
+            {
                 text: "Gap",
                 link: "/guide/core/gap",
             },
@@ -51,8 +55,12 @@ export default [
                 link: "/guide/core/responsive",
             },
             {
-                text: "Color",
-                link: "/guide/core/color",
+                text: "UI",
+                link: "/guide/core/ui",
+            },
+            {
+                text: "Utils",
+                link: "/guide/core/utils",
             },
             {
                 text: "Palette",
@@ -61,14 +69,6 @@ export default [
             {
                 text: "Contrast",
                 link: "/guide/core/contrast",
-            },
-            {
-                text: "UI",
-                link: "/guide/core/ui",
-            },
-            {
-                text: "Utils",
-                link: "/guide/core/utils",
             },
         ],
     },

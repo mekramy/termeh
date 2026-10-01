@@ -1,10 +1,14 @@
 # Module Presented And Duplicated Check
 
-Termeh provides utilities to manage custom modules. It allows you to check if a required module is loaded and throws an error if not. You can also register modules as loaded and check if a module has been presented.
+Termeh provides utilities to manage custom modules. It allows you to check if a required module is loaded and throws an If not. You can also register modules as loaded and check if a module has been presented.
 
 ## Present Module
 
-Adds a module to the global presented modules list.
+Registers a module as available.
+
+::: error
+**throws** If the input is not a string.
+:::
 
 ::: definition
 
@@ -36,7 +40,11 @@ Adds a module to the global presented modules list.
 
 ## Required Module Check
 
-Validates that required modules are present. Throws an error if any required module is missing.
+Validates that required modules are present. Throws an If any required module is missing.
+
+::: error
+**throws** If either input is not a valid string or if the required module is not present.
+:::
 
 ::: definition
 
@@ -68,7 +76,11 @@ Validates that required modules are present. Throws an error if any required mod
 
 ## Module Presented Check
 
-Checks whether a module has been presented (added) or not.
+Checks whether a module has been registered.
+
+::: error
+**throws** If the input is not a valid string.
+:::
 
 ::: definition
 

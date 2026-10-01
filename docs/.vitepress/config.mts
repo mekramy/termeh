@@ -1,14 +1,17 @@
 import { defineConfig } from "vitepress";
+
+import container from "markdown-it-container";
 import {
     groupIconMdPlugin,
     groupIconVitePlugin,
 } from "vitepress-plugin-group-icons";
 import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
-import container from "markdown-it-container";
 
-import Sidebar from "./sidebar";
 import Definition from "./definition";
 import Dependencies from "./dependencies";
+import ErrorBlock from "./error";
+import Sidebar from "./sidebar";
+import TipBlock from "./tip";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -44,6 +47,8 @@ export default defineConfig({
         config(md) {
             md.use(groupIconMdPlugin);
             md.use(tabsMarkdownPlugin);
+            md.use(container, "error", ErrorBlock);
+            md.use(container, "tip", TipBlock);
             md.use(container, "definition", Definition);
             md.use(container, "dependencies", Dependencies);
         },

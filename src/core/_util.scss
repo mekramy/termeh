@@ -2,6 +2,7 @@
 @use "sass:meta";
 @use "sass:map";
 @use "sass:list";
+@use "sass:color";
 @use "sass:string";
 
 @function -is-uppercase-letter($char) {
@@ -66,6 +67,14 @@
     @return calc(#{$value} * 2);
 }
 
+/// Calculates the border radius for a child element based on parent radius and padding
+/// @param {Number} $parent-radius - The border radius of the parent element
+/// @param {Number} $padding - The padding between parent and child elements
+/// @return {Number} Calculated child border radius
+@function child-radius($parent-radius, $padding) {
+    @return calc($parent-radius - $padding);
+}
+
 /// Ternary operator for Sass
 /// @param {Bool} $condition - Condition to evaluate
 /// @param {*} $truly - Value to return if condition is true
@@ -88,19 +97,24 @@
     @return ternary(map.has-key($map, $key), map.get($map, $key), $alt);
 }
 
-/// Tokenizes a given name into a CSS custom property format.
-/// @param $name The name to tokenize.
-/// @return The tokenized name as a CSS custom property.
+/// Converts a name to a Termeh CSS custom property token.
+/// @param {String} $name - Name to tokenize
+/// @return {String} Tokenized CSS custom property name
+///
+/// @throws If the input name is not a string
 @function tokenize($name) {
     $name: string-of($name, "tokenize", "name");
+
     @return string.unquote("--termeh-" + -kebab-case($name));
 }
 
-/// Generates a CSS fallback chain for a list of variables
+/// Generates a nested CSS `var()` fallback chain.
 /// @param {List} $vars - List of CSS variables
 /// @return {String} CSS fallback chain
+///
+/// @throws If the input is not a valid list
 @function fallback-vars($vars) {
-    $key: list-of($vars, "fallback-vars", "vars");
+    $vars: list-of($vars, "fallback-vars", "vars");
 
     $result: list.nth($vars, list.length($vars));
     @for $i from list.length($vars) - 1 through 1 {
@@ -109,11 +123,62 @@
     @return $result;
 }
 
-/// Determines if key should be included based on filters
+/// Generates a standard translucent box shadow.
+/// @param {Number} $x - Horizontal offset
+/// @param {Number} $y - Vertical offset
+/// @param {Color} $color - Shadow base color
+/// @return {List} Box shadow value
+///
+/// @throws If the input x or y is not a number or if the input color is not a color
+@function shadow($x, $y, $color) {
+    $x: number-of($x, "shadow", "x");
+    $y: number-of($y, "shadow", "y");
+    $color: color-of($color, "shadow", "color");
+
+    $max: math.max(math.abs($x), math.abs($y));
+    $color: color.change($color, $alpha: 0.3);
+
+    @return $x $y ($max * 2) 0 $color;
+}
+
+/// Generates a soft, diffused box shadow.
+/// @param {Number} $x - Horizontal offset
+/// @param {Number} $y - Vertical offset
+/// @param {Color} $color - Shadow base color
+/// @return {List} Box shadow value
+///
+/// @throws If the input x or y is not a number or if the input color is not a color
+@function soft-shadow($x, $y, $color) {
+    $x: number-of($x, "soft-shadow", "x");
+    $y: number-of($y, "soft-shadow", "y");
+    $color: color-of($color, "soft-shadow", "color");
+
+    $max: math.max(math.abs($x), math.abs($y));
+    $color: color.change($color, $alpha: 0.15);
+
+    @return $x $y ($max * 3) negate($max) $color;
+}
+
+/// Generates flat box shadow with transparency
+/// @param {Number} $size - Blur radius
+/// @param {Color} $color - Shadow base color
+/// @return {List} Box shadow value
+///
+/// @throws If the input size is not a number or if the input color is not a color
+@function flat-shadow($size, $color) {
+    $size: number-of($size, "flat-shadow", "size");
+    $color: color-of($color, "flat-shadow", "color");
+
+    @return 0 0 0 $size $color;
+}
+
+/// Determines whether a key passes the include and exclude filters.
 /// @param {String} $key - Key to check
 /// @param {List} $includes - List of keys to include
 /// @param {List} $excludes - List of keys to exclude
 /// @return {Bool} Whether key should be included
+///
+/// @throws If the input key is not a string or if the includes/excludes lists are not valid lists
 @function should-include($key, $includes, $excludes) {
     $key: string-of($key, "should-include", "key");
     $includes: list-of($includes, "should-include", "includes");
@@ -142,7 +207,8 @@
 /// @param {String} $func - Caller function
 /// @param {String} $param - Parameter name
 /// @return {Number} Validated number
-/// @throws Error if type mismatch
+///
+/// @throws If type mismatch
 @function number-of($value, $func, $param) {
     @if meta.type-of($value) != number {
         @error throw-error($value, $func, $param, "number");
@@ -156,7 +222,8 @@
 /// @param {String} $param - Parameter name
 /// @param {Number} $fallback [0] - Value to return if input is null
 /// @return {Number} Validated number
-/// @throws Error if type mismatch
+///
+/// @throws If type mismatch
 @function number-safe($value, $func, $param, $fallback: 0) {
     @if not $value {
         @return $fallback;
@@ -172,7 +239,8 @@
 /// @param {String} $func - Caller function
 /// @param {String} $param - Parameter name
 /// @return {String} Validated string
-/// @throws Error if type mismatch
+///
+/// @throws If type mismatch
 @function string-of($value, $func, $param) {
     @if meta.type-of($value) != string {
         @error throw-error($value, $func, $param, "string");
@@ -186,7 +254,8 @@
 /// @param {String} $param - Parameter name
 /// @param {String} $fallback [""] - Value to return if input is null
 /// @return {String} Validated string
-/// @throws Error if type mismatch
+///
+/// @throws If type mismatch
 @function string-safe($value, $func, $param, $fallback: "") {
     @if not $value {
         @return $fallback;
@@ -202,7 +271,8 @@
 /// @param {String} $func - Caller function
 /// @param {String} $param - Parameter name
 /// @return {Color} Validated color
-/// @throws Error if type mismatch
+///
+/// @throws If type mismatch
 @function color-of($value, $func, $param) {
     @if meta.type-of($value) != color {
         @error throw-error($value, $func, $param, "color");
@@ -216,7 +286,8 @@
 /// @param {String} $param - Parameter name
 /// @param {Color} $fallback [null] - Value to return if input is null
 /// @return {Color} Validated color
-/// @throws Error if type mismatch
+///
+/// @throws If type mismatch
 @function color-safe($value, $func, $param, $fallback: null) {
     @if not $value {
         @return $fallback;
@@ -232,7 +303,8 @@
 /// @param {String} $func - Caller function
 /// @param {String} $param - Parameter name
 /// @return {List} Validated list
-/// @throws Error if type mismatch
+///
+/// @throws If type mismatch
 @function list-of($value, $func, $param) {
     @if meta.type-of($value) != list {
         @error throw-error($value, $func, $param, "list");
@@ -246,7 +318,8 @@
 /// @param {String} $param - Parameter name
 /// @param {List} $fallback [()] - Value to return if input is null
 /// @return {List} Validated list (returns empty list if null)
-/// @throws Error if type mismatch
+///
+/// @throws If type mismatch
 @function list-safe($value, $func, $param, $fallback: ()) {
     @if not $value {
         @return $fallback;
@@ -262,7 +335,8 @@
 /// @param {String} $func - Caller function
 /// @param {String} $param - Parameter name
 /// @return {Map} Validated map
-/// @throws Error if type mismatch
+///
+/// @throws If type mismatch
 @function map-of($value, $func, $param) {
     @if meta.type-of($value) != map {
         @error throw-error($value, $func, $param, "map");
@@ -276,7 +350,8 @@
 /// @param {String} $param - Parameter name
 /// @param {Map} $fallback [()] - Value to return if input is null
 /// @return {Map} Validated map
-/// @throws Error if type mismatch
+///
+/// @throws If type mismatch
 @function map-safe($value, $func, $param, $fallback: ()) {
     @if not $value {
         @return $fallback;
@@ -292,7 +367,8 @@
 /// @param {String} $func - Caller function
 /// @param {String} $param - Parameter name
 /// @return {Bool} Validated boolean
-/// @throws Error if type mismatch
+///
+/// @throws If type mismatch
 @function bool-of($value, $func, $param) {
     @if meta.type-of($value) != bool {
         @error throw-error($value, $func, $param, "bool");
@@ -304,9 +380,10 @@
 /// @param {*} $value - Value to check
 /// @param {String} $func - Caller function
 /// @param {String} $param - Parameter name
-/// @param {Number} $fallback [false] - Value to return if input is null
+/// @param {Bool} $fallback [false] - Value to return if input is null
 /// @return {Bool} Validated boolean
-/// @throws Error if type mismatch
+///
+/// @throws If type mismatch
 @function bool-safe($value, $func, $param, $fallback: false) {
     @if not $value {
         @return $fallback;
@@ -322,7 +399,8 @@
 /// @param {String} $func - Caller function
 /// @param {String} $param - Parameter name
 /// @return {Function} Validated function
-/// @throws Error if type mismatch
+///
+/// @throws If type mismatch
 @function function-of($value, $func, $param) {
     @if meta.type-of($value) != function {
         @error throw-error($value, $func, $param, "function");
@@ -334,9 +412,10 @@
 /// @param {*} $value - Value to check
 /// @param {String} $func - Caller function
 /// @param {String} $param - Parameter name
-/// @param {Number} $fallback [null] - Value to return if input is null
+/// @param {Function} $fallback [null] - Value to return if input is null
 /// @return {Function} Validated function
-/// @throws Error if type mismatch
+///
+/// @throws If type mismatch
 @function function-safe($value, $func, $param, $fallback: null) {
     @if not $value {
         @return $fallback;

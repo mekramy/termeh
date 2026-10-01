@@ -6,6 +6,10 @@ Termeh provides utilities to define and retrieve spacing gaps in a consistent an
 
 Register a new gap value.
 
+::: error
+**throws** If the input name is not a string or the input gap is not a number.
+:::
+
 ::: definition
 
 **Signature:**
@@ -27,6 +31,10 @@ Register a new gap value.
 ## Gap
 
 Retrieves a defined gap value by its name or generates an _error_ if the gap is not defined.
+
+::: error
+**throws** If the input name is not a string or if the gap is not found.
+:::
 
 ::: definition
 

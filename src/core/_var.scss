@@ -1,12 +1,20 @@
 @use "sass:map";
 @use "util";
+@use "scheme" as scm;
 
 $-vars: () !default;
+$-overrides: () !default;
 
-/// Defines a scoped variable
+@function -scheme-var($scheme, $com, $prop) {
+    @return map.get($-overrides, $com, $scheme, $prop);
+}
+
+/// Defines a component-scoped variable.
 /// @param {String} $com - Component name
 /// @param {String} $prop - Property name
 /// @param {*} $value - Value to assign
+///
+/// @throws If the component name or property name is not a string
 @mixin define($com, $prop, $value) {
     $com: util.string-of($com, "define", "component");
     $prop: util.string-of($prop, "define", "property");
@@ -16,14 +24,79 @@ $-vars: () !default;
     $-vars: map.set($-vars, $com, $values) !global;
 }
 
-/// Gets component variable value
+/// Overrides a component variable for a specific color scheme.
+/// @param {String} $scheme - Scheme name
+/// @param {String} $com - Component name
+/// @param {String} $prop - Property name
+/// @param {*} $value - Value to assign
+///
+/// @throws If the scheme name, component name, or property name is not a string
+@mixin override($scheme, $com, $prop, $value) {
+    $scheme: util.string-of($scheme, "override", "scheme");
+    $com: util.string-of($com, "override", "component");
+    $prop: util.string-of($prop, "override", "property");
+
+    $components: util.alter($-overrides, $com, ());
+    $schemes: util.alter($components, $scheme, ());
+
+    $schemes: map.set($schemes, $prop, $value);
+    $components: map.set($components, $scheme, $schemes);
+
+    $-overrides: map.set($-overrides, $com, $components) !global;
+    $_: scm.define-scheme($scheme);
+}
+
+/// Returns the value of a component-scoped variable.
 /// @param {String} $com - Component name
 /// @param {String} $prop - Property name
 /// @param {*} $fallback [null] - Fallback value
 /// @return {*} Property value or fallback
+///
+/// @throws If the component name or property name is not a string
+@function value($com, $prop, $fallback: null) {
+    $com: util.string-of($com, "value", "component");
+    $prop: util.string-of($prop, "value", "property");
+
+    @return map.get($-vars, $com, $prop) or $fallback;
+}
+
+/// Returns the value of a component variable for a specific color scheme.
+/// @param {String} $scheme - Scheme name
+/// @param {String} $com - Component name
+/// @param {String} $prop - Property name
+/// @param {*} $fallback [null] - Fallback value
+/// @return {*} Property value or fallback
+///
+/// @throws If the scheme name, component name, or property name is not a string
+@function scheme-value($scheme, $com, $prop, $fallback: null) {
+    $scheme: util.string-of($scheme, "scheme-value", "scheme");
+    $com: util.string-of($com, "scheme-value", "component");
+    $prop: util.string-of($prop, "scheme-value", "property");
+
+    @return map.get($-overrides, $com, $scheme, $prop) or $fallback;
+}
+
+/// Returns the CSS variable reference for a component property.
+/// @param {String} $com - Component name
+/// @param {String} $prop - Property name
+/// @param {*} $fallback [null] - Fallback value
+/// @return {String} CSS variable reference
+///
+/// @throws If the component name or property name is not a string
 @function var($com, $prop, $fallback: null) {
     $com: util.string-of($com, "var", "component");
     $prop: util.string-of($prop, "var", "property");
 
-    @return map.get($-vars, $com, $prop) or $fallback;
+    $token: "#{$com}-#{$prop}";
+    $value: map.get($-vars, $com, $prop) or $fallback;
+    $_: scm.define-variable($token, $value);
+
+    @each $scheme in scm.schemes() {
+        $val: -scheme-var($scheme, $com, $prop);
+        @if $val != null {
+            $_: scm.define-variable($token, $val, $scheme);
+        }
+    }
+
+    @return scm.variable($token, $value);
 }

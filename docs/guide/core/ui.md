@@ -94,94 +94,6 @@ Removes padding from elements with `.is-paddingless`.
 
 :::
 
-## Shadow
-
-Generates a standard box-shadow with transparency based on offsets and base color.
-
-::: definition
-
-**Signature:**
-
-```scss
-@function shadow($x: NUMBER, $y: NUMBER, $color: COLOR): LIST;
-```
-
-**Example:**
-
-```scss
-.panel {
-  box-shadow: termeh.shadow(2px, 4px, #000);
-}
-```
-
-:::
-
-## Soft-Shadow
-
-Generates a softer, more diffused shadow.
-
-::: definition
-
-**Signature:**
-
-```scss
-@function soft-shadow($x: NUMBER, $y: NUMBER, $color: COLOR): LIST;
-```
-
-**Example:**
-
-```scss
-.panel {
-  box-shadow: termeh.soft-shadow(2px, 6px, #000);
-}
-```
-
-:::
-
-## Flat-Shadow
-
-Generates a flat, even drop shadow.
-
-::: definition
-
-**Signature:**
-
-```scss
-@function flat-shadow($size: NUMBER, $color: COLOR): LIST;
-```
-
-**Example:**
-
-```scss
-.box {
-  box-shadow: termeh.flat-shadow(10px, rgba(0, 0, 0, 0.2));
-}
-```
-
-:::
-
-## Child-Radius
-
-Computes child border-radius given parent radius and inner padding.
-
-::: definition
-
-**Signature:**
-
-```scss
-@function child-radius($parent-radius: NUMBER, $padding: NUMBER): NUMBER;
-```
-
-**Example:**
-
-```scss
-.card .media {
-  border-radius: termeh.child-radius(16px, 8px);
-}
-```
-
-:::
-
 ## Clearfix
 
 Classic clearfix using `::after`.
@@ -251,7 +163,7 @@ button {
 
 :::
 
-## Unselectable
+## UnSelectable
 
 Disables text selection across browsers.
 
@@ -290,30 +202,6 @@ Re-enables text selection.
 ```scss
 .non-disabled {
   @include termeh.selectable;
-}
-```
-
-:::
-
-## Placeholder
-
-Cross-browser placeholder styling.
-
-::: definition
-
-**Signature:**
-
-```scss
-@mixin placeholder();
-```
-
-**Example:**
-
-```scss
-input[type="text"] {
-  @include termeh.placeholder {
-    color: rgba(0, 0, 0, 0.45);
-  }
 }
 ```
 
@@ -527,14 +415,14 @@ Creates a full-cover overlay via `::before`, with optional backdrop-filter.
 **Signature:**
 
 ```scss
-@mixin overlay($color: COLOR, $opacity: NUMBER, $filter: CSS-FILTER);
+@mixin overlay($background: COLOR, $filter: CSS-FILTER);
 ```
 
 **Example:**
 
 ```scss
 .dialog[aria-modal="true"] {
-  @include termeh.overlay(black, 0.5, blur(6px));
+  @include termeh.overlay(rgba(0, 0, 0, 0.5), blur(6px));
 }
 ```
 
@@ -795,6 +683,10 @@ The disabled style is derived from the following Termeh global `var()`:
 
 Styles selection color pair based on a palette name (foreground & background).
 
+::: error
+**throws**  If the specified color palette name does not exist.
+:::
+
 ::: definition
 
 **Signature:**
@@ -840,10 +732,10 @@ Provides a scrollable style with a themed scrollbar, where only the hover thumb 
 
 The scrollbar style is derived from the following Termeh global `var()`:
 
-| Component | Variable | Type    | Default |
-| --------- | -------- | ------- | ------- |
-| `scroll`  | `size`   | _color_ | `1rem`  |
-| `scroll`  | `track`  | _color_ | `null`  |
-| `scroll`  | `thumb`  | _color_ | `null`  |
+| Component | Variable | Type     | Default |
+| --------- | -------- | -------- | ------- |
+| `scroll`  | `size`   | _NUMBER_ | `1rem`  |
+| `scroll`  | `track`  | _color_  | `null`  |
+| `scroll`  | `thumb`  | _color_  | `null`  |
 
 :::

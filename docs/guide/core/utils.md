@@ -62,6 +62,26 @@ $negated: termeh.double(20px); // calc(20px * 2)
 
 :::
 
+## Child Radius
+
+Calculates the border radius for a child element based on the parent element's radius and the padding between them.
+
+::: definition
+
+**Signature:**
+
+```scss
+@function child-radius($parent-radius: NUMBER, $padding: NUMBER): CALC();
+```
+
+**Example:**
+
+```scss
+$child-radius: termeh.child-radius(10px, 2px); // calc(10px - 2px)
+```
+
+:::
+
 ## ternary
 
 Ternary operator for Sass.
@@ -110,7 +130,9 @@ $green: termeh.alter($colors, "green", #000); // #000
 
 Tokenizes a given name into a CSS custom property format.
 
-> **Throws** an error if the input name is invalid string value.
+::: error
+**throws** If the input name is not a string.
+:::
 
 ::: definition
 
@@ -130,7 +152,11 @@ $token: termeh.tokenize("primaryColor"); // --termeh-primary-color
 
 ## Fallback Vars
 
-Generates a CSS fallback chain for a list of variables.
+Generates a nested CSS `var()` fallback chain.
+
+::: error
+**throws** If the input is not a valid list.
+:::
 
 ::: definition
 
@@ -153,11 +179,85 @@ color: fallback-vars((
 
 :::
 
+## Shadow
+
+Generates a standard translucent box shadow.
+
+::: error
+**throws** If the input x or y is not a number or if the input color is not a color.
+:::
+
+::: definition
+
+**Signature:**
+
+```scss
+@function shadow($x: NUMBER, $y: NUMBER, $color: COLOR): LIST();
+```
+
+**Example:**
+
+```scss
+$box-shadow: termeh.shadow(0px, 2px, black); // 2px 2px 4px 0 rgba(0, 0, 0, 0.3)
+```
+
+:::
+
+## Soft Shadow
+
+Generates a soft, diffused box shadow.
+
+::: error
+**throws** If the input x or y is not a number or if the input color is not a color.
+:::
+
+::: definition
+
+**Signature:**
+
+```scss
+@function soft-shadow($x: NUMBER, $y: NUMBER, $color: COLOR): LIST();
+```
+
+**Example:**
+
+```scss
+$box-shadow: termeh.soft-shadow(0px, 2px, black); // 0px 2px 6px -2px rgba(0, 0, 0, 0.15)
+```
+
+:::
+
+## Flat Shadow
+
+Generates a flat box shadow with transparency.
+
+::: error
+**throws** If the input size is not a number or if the input color is not a color.
+:::
+
+::: definition
+
+**Signature:**
+
+```scss
+@function flat-shadow($size: NUMBER, $color: COLOR): LIST();
+```
+
+**Example:**
+
+```scss
+$box-shadow: termeh.flat-shadow(4px, black); // 0 0 0 4px rgba(0, 0, 0, 1)
+```
+
+:::
+
 ## Should Include
 
-Determines if a key should be included based on includes/excludes lists.
+Determines whether a key passes the include and exclude filters.
 
-> **Throws** an error if the inputs types are invalid.
+::: error
+**throws** If the input key is not a string or if the includes/excludes lists are not valid lists.
+:::
 
 ::: definition
 
@@ -188,6 +288,10 @@ $excluded: termeh.should-include(
 ## Type Validators
 
 Functions to validate _number_, _string_, _color_, _list_, _map_, _bool_, and _function_. They generate an _error_ if validation fails, referencing the `function` and `parameter` names. Each also has a `-safe` variant that returns a _fallback_ value when the input is `null`.
+
+::: error
+**throws** If type mismatch.
+:::
 
 ::: definition
 

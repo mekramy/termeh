@@ -6,6 +6,10 @@ Termeh provides a set of color helper functions for luminance, contrast, and col
 
 Calculates the luminance of a color (_WCAG_ standard).
 
+::: error
+**throws** If the input is not a valid color.
+:::
+
 ::: definition
 
 **Signature:**
@@ -25,6 +29,10 @@ $luminance: termeh.luminance(#3498db);
 ## Darkest
 
 Returns the darker color based on luminance.
+
+:::error
+**throws** If either input is not a valid color.
+:::
 
 ::: definition
 
@@ -46,6 +54,10 @@ $dark: termeh.darkest(#ff0000, #00ff00);
 
 Returns the lighter color based on luminance.
 
+:::error
+**throws** If either input is not a valid color.
+:::
+
 ::: definition
 
 **Signature:**
@@ -65,6 +77,10 @@ $light: termeh.lightest(#ff0000, #00ff00);
 ## Contrast Ratio
 
 Calculates the WCAG contrast ratio between background and foreground colors.
+
+:::error
+**throws** If either input is not a valid color.
+:::
 
 ::: definition
 
@@ -86,6 +102,10 @@ $ratio: termeh.contrast-ratio(#ffffff, #333333);
 
 Determines whether a color is _light_ or _dark_.
 
+:::error
+**throws** If the input is not a valid color.
+:::
+
 ::: definition
 
 **Signature:**
@@ -106,6 +126,10 @@ $tone: termeh.tone(#f1c40f);
 
 Selects the color with higher contrast relative to a base color.
 
+:::error
+**throws** If any input is not a valid color.
+:::
+
 ::: definition
 
 **Signature:**
@@ -125,6 +149,10 @@ $best-contrast: termeh.contrast(#ffffff, #3498db, #e74c3c);
 ## Harmony
 
 Selects the more harmonious color relative to a base color.
+
+:::error
+**throws** If any input is not a valid color.
+:::
 
 ::: definition
 

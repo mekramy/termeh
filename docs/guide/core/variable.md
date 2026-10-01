@@ -2,9 +2,17 @@
 
 Termeh provides a centralized system for defining and retrieving component-specific variables. This allows for scoped, reusable, and easily maintainable styling across your project.
 
+::: tip
+**theming** Termeh's variables are scheme-based, meaning they can have different values depending on the active color scheme.
+:::
+
 ## Define
 
-Defines a scoped variable for a component.
+Defines a component-scoped variable.
+
+::: error
+**throws** If the component name or property name is not a string.
+:::
 
 ::: definition
 
@@ -23,9 +31,88 @@ Defines a scoped variable for a component.
 
 :::
 
+## Override
+
+Overrides a component variable for a specific color scheme.
+
+::: error
+**throws** If the scheme name, component name, or property name is not a string.
+:::
+
+::: definition
+
+**Signature:**
+
+```scss
+@mixin override($Scheme: STRING, $Com: STRING, $Prop: STRING, $Value: ANY);
+```
+
+**Example:**
+
+```scss
+@include termeh.override("dark", "base", "color", #222);
+@include termeh.override("dark", "base", "foreground", white);
+```
+
+:::
+
+## Value
+
+Returns the value of a component-scoped variable. Returns a _fallback_ value if the variable is _not set_ or _null_.
+
+::: error
+**throws** If the component name or property name is not a string.
+:::
+
+::: definition
+
+**Signature:**
+
+```scss
+@function value($Component: STRING, $Property: STRING, $Fallback: ANY = null);
+```
+
+**Example:**
+
+```scss
+$radius: termeh.value("radius", "normal", null);
+$padding: termeh.value("card", "padding", 8px);
+```
+
+:::
+
+## Scheme Value
+
+Returns the value of a component variable for a specific color scheme. Returns a _fallback_ value if the variable is _not set_ or _null_.
+
+::: error
+**throws** If the scheme name, component name, or property name is not a string.
+:::
+
+::: definition
+
+**Signature:**
+
+```scss
+@function scheme-value($Scheme: STRING, $Com: STRING, $Prop: STRING, $Fallback: ANY = null);
+```
+
+**Example:**
+
+```scss
+$radius: termeh.scheme-value("dark", "radius", "normal", 0);
+$background: termeh.scheme-value("dark", "base", "color", #222);
+```
+
+:::
+
 ## Var
 
-Retrieves the value of a previously defined component variable. Returns a _fallback_ value if the variable is _not set_ or _null_.
+Returns the CSS variable reference for a component property.
+
+::: error
+**throws** If the component name or property name is not a string.
+:::
 
 ::: definition
 
