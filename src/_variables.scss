@@ -1,16 +1,11 @@
 @use "core/module";
 
-// Layout
+/** Layout */
+// Base
 @include module.define("base", "direction", ltr); // App direction
 @include module.define("base", "min-width", 300px); // Minimum document width
 
-// Scheme
-@include module.define("base", "color", white); // Theme color (detect light/dark mode)
-@include module.define("base", "foreground", #0d1b2a); // Default foreground
-@include module.define("base", "section", #f8f9fa); // Section background
-@include module.define("base", "separator", #e0e4eb); // Separator background
-
-// Layout Gaps
+// Spacing
 @include module.define("gap", "micro", 8px); // Small gap within components/text
 @include module.define("gap", "macro", 1.6rem); // Large gap for layout structure
 
@@ -19,15 +14,28 @@
 @include module.define("radius", "circle", 50%); // Circular border-radius
 @include module.define("radius", "rounded", 290486px); // Fully rounded border-radius
 
-// Transitions
-@include module.define("transition", "ease", ease); // Default transition timing
-@include module.define("transition", "duration", 250ms); // Default transition duration
+// Decorators
+@include module.define("decorator", "size", 2px); // Decorator border width
+@include module.define("decorator", "spinner", 2em); // Spinner size
 
-// Line heights
-@include module.define("line-height", "normal", 1.6em); // Default line height
-@include module.define("line-height", "medium", 1.4em); // Medium text line height
-@include module.define("line-height", "large", 1.2em); // Large text line height
+// Container
+@include module.define("container", "desktop", 960px); // Desktop container width
+@include module.define("container", "widescreen", 1200px); // Widescreen container width
+@include module.define("container", "fullhd", 1500px); // Full HD container width
 
+// Gallery
+@include module.define("gallery", "height", 300px); // Default gallery row height
+@include module.define("gallery", "height-tablet", 200px); // Tablet gallery row height
+@include module.define("gallery", "height-mobile", 100px); // Mobile gallery row height
+
+// Control elements (button, link, badge, ...)
+@include module.define("control", "height", 2.2em); // control height
+@include module.define("control", "weight", 500); // control font weight
+@include module.define("control", "strong", 700); // control strong font weight
+@include module.define("control", "v-padding", 0); // control vertical padding
+@include module.define("control", "h-padding", 1.2em); // control horizontal padding
+
+/** UI */
 // Fonts
 @include module.define("font", "family", ("Segoe UI", Verdana)); // Font family
 @include module.define("font", "size", 14px); // Font size
@@ -38,9 +46,18 @@
 @include module.define("mono", "size", 1rem); // Code font size
 @include module.define("mono", "weight", normal); // Code Font weight
 
-// Decorated text
+// Line heights
+@include module.define("line-height", "normal", 1.6em); // Default line height
+@include module.define("line-height", "medium", 1.4em); // Medium text line height
+@include module.define("line-height", "large", 1.2em); // Large text line height
+
+// Strong text
 @include module.define("strong", "foreground", null); // Strong text foreground
 @include module.define("strong", "weight", bold); // Strong text weight
+
+// Transitions
+@include module.define("transition", "ease", ease); // Default transition timing
+@include module.define("transition", "duration", 250ms); // Default transition duration
 
 // Scrollbar
 @include module.define("scroll", "size", 10px); // Scrollbar width
@@ -48,14 +65,17 @@
 @include module.define("scroll", "thumb", null); // Scrollbar thumb background
 
 // Overlay
-@include module.define("overlay", "background", white); // Overlay background
+@include module.define("overlay", "background", rgba(255, 255, 255, 0.75)); // Overlay background
 @include module.define("overlay", "foureground", null); // Overlay foreground
-@include module.define("overlay", "opacity", 0.75); // Overlay background opacity
 @include module.define("overlay", "filter", none); // Overlay backdrop filter
 
-// Decorators
-@include module.define("decorator", "size", 2px); // Decorator border width
-@include module.define("decorator", "spinner", 2em); // Spinner size
+/** Theme */
+
+// Scheme
+@include module.define("base", "color", white); // Theme color (detect light/dark mode)
+@include module.define("base", "foreground", #0d1b2a); // Default foreground
+@include module.define("base", "section", #f8f9fa); // Section background
+@include module.define("base", "separator", #e0e4eb); // Separator background
 
 // Table
 @include module.define("table", "background", null); // Table background
@@ -77,23 +97,6 @@
 @include module.define("input", "disabled", #f0f2f5); // Disabled input background
 @include module.define("input", "disabled-foreground", #bfc6d4); // Disabled input foreground
 @include module.define("input", "disabled-border", #d1d6e0); // Disabled input border color
-
-// Container
-@include module.define("container", "desktop", 960px); // Desktop container width
-@include module.define("container", "widescreen", 1200px); // Widescreen container width
-@include module.define("container", "fullhd", 1500px); // Full HD container width
-
-// Gallery
-@include module.define("gallery", "height", 300px); // Default gallery row height
-@include module.define("gallery", "height-tablet", 200px); // Tablet gallery row height
-@include module.define("gallery", "height-mobile", 100px); // Mobile gallery row height
-
-// Control elements (button, link, badge, ...)
-@include module.define("control", "height", 2.2em); // control height
-@include module.define("control", "weight", 500); // control font weight
-@include module.define("control", "strong", 700); // control strong font weight
-@include module.define("control", "v-padding", 0); // control vertical padding
-@include module.define("control", "h-padding", 1.2em); // control horizontal padding
 
 // Boxes
 @include module.define("box", "background", null); // box background

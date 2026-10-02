@@ -15,255 +15,267 @@ Two keyframe animations are provided by default:
 - **spin** → Used for loaders.
 - **shake** → Used for invalid inputs.
 
-## Layout
+## Variables
+
+### Layout
+
+#### Base
 
 ```scss
-@include termeh.define("base", "direction", ltr); // ltr | rtl
-@include termeh.define("base", "min-width", 300px); // number
+@include termeh.define("base", "direction", ltr);
+@include termeh.define("base", "min-width", 300px);
 ```
 
-- **direction** → Document direction (`ltr` or `rtl`).
-- **min-width** → Minimum width of the document.
+- **direction:** _[`ltr | rtl`]_ → Document direction.
+- **min-width:** _[`number`]_ → Minimum width of the document.
 
-## Scheme
+#### Spacing
 
 ```scss
-@include termeh.define("base", "color", white); // color
-@include termeh.define("base", "foreground", #081e30); // color
-@include termeh.define("base", "section", #f8f9fa); // color
-@include termeh.define("base", "separator", #e0e4eb); // color
+@include termeh.define("gap", "micro", 8px);
+@include termeh.define("gap", "macro", 1.6rem);
 ```
 
-- **color** → Base theme color (light/dark mode aware).
-- **foreground** → Default text color.
-- **section** → Section background color.
-- **separator** → Divider/line color.
+- **micro:** _[`number`]_ → Small spacing inside components.
+- **macro:** _[`number`]_ → Larger spacing between elements for layout/grid.
 
-## Layout Gaps
+#### Border Radius
 
 ```scss
-@include termeh.define("gap", "micro", 8px); // number
-@include termeh.define("gap", "macro", 1.6rem); // number
+@include termeh.define("radius", "normal", 2px);
+@include termeh.define("radius", "circle", 50%);
+@include termeh.define("radius", "rounded", 290486px);
 ```
 
-- **micro** → Small spacing inside components.
-- **macro** → Larger spacing for layout/grid.
+- **normal:** _[`number`]_ → Default border-radius.
+- **circle:** _[`number`]_ → Perfect circle radius.
+- **rounded:** _[`number`]_ → Fully rounded corners (pills, tags, etc.).
 
-## Border Radius
+#### Decorators
 
 ```scss
-@include termeh.define("radius", "normal", 2px); // number
-@include termeh.define("radius", "circle", 50%); // number
-@include termeh.define("radius", "rounded", 290486px); // number
+@include termeh.define("decorator", "size", 2px);
+@include termeh.define("decorator", "spinner", 2em);
 ```
 
-- **normal** → Default border-radius.
-- **circle** → Perfect circle radius.
-- **rounded** → Fully rounded corners (pills, tags, etc.).
+- **size:** _[`number`]_ → Thickness for decorative elements (e.g., borders, spinner).
+- **spinner:** _[`number`]_ → Default spinner size.
 
-## Transitions
+#### Containers
 
 ```scss
-@include termeh.define("transition", "ease", ease); // easing function
-@include termeh.define("transition", "duration", 250ms); // time duration
+@include termeh.define("container", "desktop", 960px);
+@include termeh.define("container", "widescreen", 1200px);
+@include termeh.define("container", "fullhd", 1500px);
 ```
 
-- **ease** → Default transition timing function.
-- **duration** → Default transition speed.
+- **desktop:** _[`number`]_ → Max width for desktop.
+- **widescreen:** _[`number`]_ → Max width for widescreen.
+- **fullhd:** _[`number`]_ → Max width for full HD and larger.
 
-## Line Heights
+#### Gallery
 
 ```scss
-@include termeh.define("line-height", "normal", 1.6em); // number
-@include termeh.define("line-height", "medium", 1.4em); // number
-@include termeh.define("line-height", "large", 1.2em); // number
+@include termeh.define("gallery", "height", 300px);
+@include termeh.define("gallery", "height-tablet", 200px);
+@include termeh.define("gallery", "height-mobile", 100px);
 ```
 
-- **normal** → Default text line height.
-- **medium** → Tighter line height.
-- **large** → More compact line height.
+- **height:** _[`number`]_ → Default gallery item height.
+- **height-tablet:** _[`number`]_ → Tablet height.
+- **height-mobile:** _[`number`]_ → Mobile height.
 
-## Fonts
+#### Control
+
+```scss
+@include termeh.define("control", "height", 2.2em);
+@include termeh.define("control", "weight", 500);
+@include termeh.define("control", "strong", 700);
+@include termeh.define("control", "v-padding", 0);
+@include termeh.define("control", "h-padding", 1.2em);
+```
+
+- **height:** _[`number`]_ → Default control height (`button`, `link`, `badge`, …).
+- **weight:** _[`font weight`]_ → Base font weight.
+- **strong:** _[`font weight`]_ → Bold font weight for controls.
+- **v-padding:** _[`number`]_ → Vertical padding.
+- **h-padding:** _[`number`]_ → Horizontal padding.
+
+### UI
+
+#### Fonts
+
+Default ui fonts.
 
 ```scss
 @include termeh.define("font", "family", ("Segoe UI", Verdana));
-@include termeh.define("font", "size", 14px); // number
-@include termeh.define("font", "weight", normal); // font weight
+@include termeh.define("font", "size", 14px);
+@include termeh.define("font", "weight", normal);
 ```
 
-- **family** → Default font stack.
-- **size** → Base font size.
-- **weight** → Base font weight.
+- **family:** _[`font family`]_ → Default font stack.
+- **size:** _[`number`]_ → Base font size.
+- **weight:** _[`font weight`]_ → Base font weight.
 
-## Monospace Fonts
+#### Monospace Fonts
+
+Monospace element (code, pre, ...) fonts.
 
 ```scss
 @include termeh.define("mono", "family", monospace);
-@include termeh.define("mono", "size", 1rem); // number
-@include termeh.define("mono", "weight", normal); // font weight
+@include termeh.define("mono", "size", 1rem);
+@include termeh.define("mono", "weight", normal);
 ```
 
-- **family** → Monospace font family.
-- **size** → Monospace font size.
-- **weight** → Monospace font weight.
+- **family:** _[`font family`]_ → Monospace font family.
+- **size:** _[`number`]_ → Monospace font size.
+- **weight:** _[`font weight`]_ → Monospace font weight.
 
-## Strong Text
+#### Line Heights
 
 ```scss
-@include termeh.define("strong", "foreground", null); // color
-@include termeh.define("strong", "weight", bold); // font weight
+@include termeh.define("line-height", "normal", 1.6em);
+@include termeh.define("line-height", "medium", 1.4em);
+@include termeh.define("line-height", "large", 1.2em);
 ```
 
-- **foreground** → Strong text color (inherits if `null`).
-- **weight** → Strong text weight.
+- **normal:** _[`number`]_ → Default text line height.
+- **medium:** _[`number`]_ → Tighter line height.
+- **large:** _[`number`)_→ More compact line height.
 
-## Scrollbar
+#### Strong Text
 
 ```scss
-@include termeh.define("scroll", "size", 10px); // number
-@include termeh.define("scroll", "track", null); // color
-@include termeh.define("scroll", "thumb", null); // color
+@include termeh.define("strong", "foreground", null);
+@include termeh.define("strong", "weight", bold);
 ```
 
-- **size** → Scrollbar thickness.
-- **track** → Scrollbar track background.
-- **thumb** → Scrollbar thumb color.
+- **foreground:** _[`color`]_ → Strong text color (inherits if `null`).
+- **weight:** _[`font weight`]_ → Strong text weight.
 
-## Overlay
+#### Transitions
 
 ```scss
-@include termeh.define("overlay", "background", white); // color
-@include termeh.define("overlay", "foreground", null); // color
-@include termeh.define("overlay", "opacity", 0.75); // number
-@include termeh.define("overlay", "filter", none); // filter
+@include termeh.define("transition", "ease", ease);
+@include termeh.define("transition", "duration", 250ms);
 ```
 
-- **background** → Overlay background.
-- **foreground** → Overlay foreground color.
-- **opacity** → Overlay transparency level.
-- **filter** → Optional CSS filter (e.g., `blur(2px)`).
+- **ease:** _[`easing function`]_ → Default transition timing function.
+- **duration:** _[`time duration`]_ → Default transition speed.
 
-## Decorators
+#### Scrollbar
 
 ```scss
-@include termeh.define("decorator", "size", 2px); // number
-@include termeh.define("decorator", "spinner", 2em); // number
+@include termeh.define("scroll", "size", 10px);
+@include termeh.define("scroll", "track", null);
+@include termeh.define("scroll", "thumb", null);
 ```
 
-- **size** → Thickness for decorative elements (e.g., borders, spinner).
-- **spinner** → Default spinner size.
+- **size:** _[`number`]_ → Scrollbar thickness.
+- **track:** _[`color`]_ → Scrollbar track background.
+- **thumb:** _[`color`]_ → Scrollbar thumb color.
 
-## Tables
+#### Overlay
 
 ```scss
-@include termeh.define("table", "background", null); // color
-@include termeh.define("table", "foreground", null); // color
-@include termeh.define("table", "even", null); // color
-@include termeh.define("table", "hover", null); // color
-@include termeh.define("table", "grid", null); // color
-@include termeh.define("table", "separator", null); // color
-@include termeh.define("table", "divider", null); // color
-@include termeh.define("table", "sort-background", null); // color
-@include termeh.define("table", "strong-weight", null); // color
+@include termeh.define("overlay", "background", rgba(255, 255, 255, 0.75));
+@include termeh.define("overlay", "foreground", null);
+@include termeh.define("overlay", "filter", none);
 ```
 
-- **background** → Table background.
-- **foreground** → Table text color.
-- **even** → Background for even rows.
-- **hover** → Row hover background.
-- **grid** → Column dividers.
-- **separator** → Row dividers.
-- **divider** → Section dividers (header, footer, body).
-- **sort-background** → Highlighted sorted column background.
-- **strong-weight** → Emphasis text weight.
+- **background:** _[`color`]_ → Overlay background.
+- **foreground:** _[`color`]_ → Overlay foreground color.
+- **filter:** _[`filter`]_ → Optional CSS filter (e.g., `blur(2px)`).
 
-## Inputs
+### Theme
+
+#### Scheme
 
 ```scss
-@include termeh.define("input", "height", 2.8em); // number
-@include termeh.define("input", "checkbox", 1.2em); // number
-@include termeh.define("input", "background", white); // color
-@include termeh.define("input", "border", #d1d6e0); // color
-@include termeh.define("input", "placeholder", null); // color
-@include termeh.define("input", "disabled", #f0f2f5); // color
-@include termeh.define("input", "disabled-foreground", #bfc6d4); // color
-@include termeh.define("input", "disabled-border", #d1d6e0); // color
+@include termeh.define("base", "color", white);
+@include termeh.define("base", "foreground", #081e30);
+@include termeh.define("base", "section", #f8f9fa);
+@include termeh.define("base", "separator", #e0e4eb);
 ```
 
-- **height** → Default input height.
-- **checkbox** → Checkbox and radio size.
-- **background** → Input background.
-- **border** → Input border color.
-- **placeholder** → Placeholder color.
-- **disabled** → Disabled background.
-- **disabled-foreground** → Disabled text color.
-- **disabled-border** → Disabled border color.
+- **color:** _[`color`)_→ Base theme color (detect light/dark mode).
+- **foreground:** _[`color`)_→ Default text color.
+- **section:** _[`color`)_→ Section background color.
+- **separator:** _[`color`)_→ Divider/line color.
 
-## Containers
+#### Tables
 
 ```scss
-@include termeh.define("container", "desktop", 960px); // number
-@include termeh.define("container", "widescreen", 1200px); // number
-@include termeh.define("container", "fullhd", 1500px); // number
+@include termeh.define("table", "background", null);
+@include termeh.define("table", "foreground", null);
+@include termeh.define("table", "even", null);
+@include termeh.define("table", "hover", null);
+@include termeh.define("table", "grid", null);
+@include termeh.define("table", "separator", null);
+@include termeh.define("table", "divider", null);
+@include termeh.define("table", "sort-background", null);
+@include termeh.define("table", "strong-weight", null);
 ```
 
-- **desktop** → Max width for desktop.
-- **widescreen** → Max width for widescreen.
-- **fullhd** → Max width for full HD and larger.
+- **background:** _[`color`]_ → Table background.
+- **foreground:** _[`color`]_ → Table text color.
+- **even:** _[`color`]_ → Background for even rows.
+- **hover:** _[`color`]_ → Row hover background.
+- **grid:** _[`color`]_ → Column dividers.
+- **separator:** _[`color`]_ → Row dividers.
+- **divider:** _[`color`]_ → Section dividers (header, footer, body).
+- **sort-background:** _[`color`]_ → Highlighted sorted column background.
+- **strong-weight:** _[`font weight`]_ → Emphasis text weight.
 
-## Gallery
+#### Inputs
 
 ```scss
-@include termeh.define("gallery", "height", 300px); // number
-@include termeh.define("gallery", "height-tablet", 200px); // number
-@include termeh.define("gallery", "height-mobile", 100px); // number
+@include termeh.define("input", "height", 2.8em);
+@include termeh.define("input", "checkbox", 1.2em);
+@include termeh.define("input", "background", white);
+@include termeh.define("input", "border", #d1d6e0);
+@include termeh.define("input", "placeholder", null);
+@include termeh.define("input", "disabled", #f0f2f5);
+@include termeh.define("input", "disabled-foreground", #bfc6d4);
+@include termeh.define("input", "disabled-border", #d1d6e0);
 ```
 
-- **height** → Default gallery item height.
-- **height-tablet** → Tablet height.
-- **height-mobile** → Mobile height.
+- **height:** _[`number`]_ → Default input height.
+- **checkbox:** _[`number`]_ → Checkbox and radio size.
+- **background:** _[`color`]_ → Input background.
+- **border:** _[`color`]_ → Input border color.
+- **placeholder:** _[`color`]_ → Placeholder color.
+- **disabled:** _[`color`]_ → Disabled background.
+- **disabled-foreground:** _[`color`]_ → Disabled text color.
+- **disabled-border:** _[`color`]_ → Disabled border color.
 
-## Control
+#### Box
 
-```scss
-@include termeh.define("control", "height", 2.2em); // number
-@include termeh.define("control", "weight", 500); // font weight
-@include termeh.define("control", "strong", 700); // font weight
-@include termeh.define("control", "v-padding", 0); // number
-@include termeh.define("control", "h-padding", 1.2em); // number
-```
-
-- **height** → Default control height (`button`, `link`, `badge`, …).
-- **weight** → Base font weight.
-- **strong** → Bold font weight for controls.
-- **v-padding** → Vertical padding.
-- **h-padding** → Horizontal padding.
-
-## Box
+Default styles for card, modal and other box-like components.
 
 ```scss
-@include module.define("box", "background", null); // color
-@include module.define("box", "foreground", null); // color
+@include module.define("box", "background", null);
+@include module.define("box", "foreground", null);
 @include module.define(
   "box",
   "shadow",
   (
-    module.soft-shadow(0, 1px, module.color("shade")),
-    module.soft-shadow(0, -1px, module.color("shade")),
-    module.soft-shadow(0, 3px, module.color("shade"))
+    module.soft-shadow(0, 1px, module.color-value("shade")),
+    module.soft-shadow(0, -1px, module.color-value("shade")),
+    module.soft-shadow(0, 3px, module.color-value("shade"))
   )
-); // list
+);
 @include module.define(
   "box",
   "sizes",
   ("small" 22em, "normal" 26em, "medium" 36em)
-); // list
+);
 ```
 
-- **background** → box background
-- **foreground** → box foreground
-- **shadow** → box shadow
-- **sizes** → list of box element sizes
+- **background:** _[`color`]_ → Box background.
+- **foreground:** _[`color`]_ → Box foreground.
+- **shadow:** _[`shadow`]_ → Box shadow.
+- **sizes:** _[`list`]_ → List of box element sizes.
 
 ## Color Palettes
 
@@ -275,9 +287,9 @@ Color tokens used across components.
 @include termeh.define-palette("primary", #2196f3);
 ```
 
-- **shade** → Neutral color.
-- **error** → Error/danger color.
-- **primary** → Primary accent color.
+- **shade:** _[`color`]_ → Neutral color.
+- **error:** _[`color`]_ → Error/danger color.
+- **primary:** _[`color`]_ → Primary accent color.
 
 ## Gaps
 
