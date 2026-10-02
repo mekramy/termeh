@@ -32,11 +32,11 @@
 
     &.is-error {
         color: var(--vp-c-text-1);
-        border: 1px solid var(--vp-badge-danger-bg);
-        border-left: 3px solid var(--vp-badge-danger-text);
+        border: 1px solid var(--vp-badge-warning-bg);
+        border-left: 3px solid var(--vp-badge-warning-text);
 
         > p strong {
-            background: var(--vp-badge-danger-text);
+            background: var(--vp-badge-warning-text);
         }
     }
 
