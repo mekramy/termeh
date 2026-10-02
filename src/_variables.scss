@@ -35,7 +35,7 @@
 @include module.define("control", "v-padding", 0); // control vertical padding
 @include module.define("control", "h-padding", 1.2em); // control horizontal padding
 
-/** UI */
+/** Texts */
 // Fonts
 @include module.define("font", "family", ("Segoe UI", Verdana)); // Font family
 @include module.define("font", "size", 14px); // Font size
@@ -46,15 +46,25 @@
 @include module.define("mono", "size", 1rem); // Code font size
 @include module.define("mono", "weight", normal); // Code Font weight
 
-// Line heights
-@include module.define("line-height", "normal", 1.6em); // Default line height
-@include module.define("line-height", "medium", 1.4em); // Medium text line height
-@include module.define("line-height", "large", 1.2em); // Large text line height
+// Small text
+@include module.define("small", "size", 0.875rem); // Small text size
+@include module.define("small", "weight", normal); // Small text weight
+@include module.define("small", "foreground", null); // Small text foreground
 
 // Strong text
 @include module.define("strong", "foreground", null); // Strong text foreground
 @include module.define("strong", "weight", bold); // Strong text weight
 
+// Decorated text
+@include module.define("decorated", "foreground", null); // Decorated text foreground
+@include module.define("decorated", "weight", bold); // Decorated text weight
+
+// Line heights
+@include module.define("line-height", "normal", 1.6em); // Default line height
+@include module.define("line-height", "medium", 1.4em); // Medium text line height
+@include module.define("line-height", "large", 1.2em); // Large text line height
+
+/** UI */
 // Transitions
 @include module.define("transition", "ease", ease); // Default transition timing
 @include module.define("transition", "duration", 250ms); // Default transition duration

@@ -101,7 +101,7 @@ Two keyframe animations are provided by default:
 - **v-padding:** _[`number`]_ → Vertical padding.
 - **h-padding:** _[`number`]_ → Horizontal padding.
 
-### UI
+### Text
 
 #### Fonts
 
@@ -131,6 +131,44 @@ Monospace element (code, pre, ...) fonts.
 - **size:** _[`number`]_ → Monospace font size.
 - **weight:** _[`font weight`]_ → Monospace font weight.
 
+#### Small Text
+
+`<small>`, `<sub>`, `<sup>` and other small text elements.
+
+```scss
+@include termeh.define("small", "size", 0.8rem);
+@include termeh.define("small", "weight", normal);
+@include termeh.define("small", "foreground", null);
+```
+
+- **size:** _[`number`]_ → Small text size.
+- **weight:** _[`font weight`]_ → Small text weight.
+- **foreground:** _[`color`]_ → Small text color (inherits if `null`).
+
+#### Strong Text
+
+`<strong>` and other strong text elements.
+
+```scss
+@include termeh.define("strong", "foreground", null);
+@include termeh.define("strong", "weight", bold);
+```
+
+- **foreground:** _[`color`]_ → Strong text color (inherits if `null`).
+- **weight:** _[`font weight`]_ → Strong text weight.
+
+#### Decorated Text
+
+`<u>` and other decorated text elements.
+
+```scss
+@include termeh.define("decorated", "foreground", null);
+@include termeh.define("decorated", "weight", bold);
+```
+
+- **foreground:** _[`color`]_ → Decorated text color (inherits if `null`).
+- **weight:** _[`font weight`]_ → Decorated text weight.
+
 #### Line Heights
 
 ```scss
@@ -141,17 +179,9 @@ Monospace element (code, pre, ...) fonts.
 
 - **normal:** _[`number`]_ → Default text line height.
 - **medium:** _[`number`]_ → Tighter line height.
-- **large:** _[`number`)_→ More compact line height.
+- **large:** _[`number`]_ → More compact line height.
 
-#### Strong Text
-
-```scss
-@include termeh.define("strong", "foreground", null);
-@include termeh.define("strong", "weight", bold);
-```
-
-- **foreground:** _[`color`]_ → Strong text color (inherits if `null`).
-- **weight:** _[`font weight`]_ → Strong text weight.
+### UI
 
 #### Transitions
 
@@ -198,10 +228,10 @@ Monospace element (code, pre, ...) fonts.
 @include termeh.define("base", "separator", #e0e4eb);
 ```
 
-- **color:** _[`color`)_→ Base theme color (detect light/dark mode).
-- **foreground:** _[`color`)_→ Default text color.
-- **section:** _[`color`)_→ Section background color.
-- **separator:** _[`color`)_→ Divider/line color.
+- **color:** _[`color`]_ → Base theme color (detect light/dark mode).
+- **foreground:** _[`color`]_ → Default text color.
+- **section:** _[`color`]_ → Section background color.
+- **separator:** _[`color`]_ → Divider/line color.
 
 #### Tables
 
