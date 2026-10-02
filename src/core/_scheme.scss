@@ -66,6 +66,9 @@ $-schemes: () !default;
     $name: util.string-of($name, "variable", "name");
 
     $name: util.tokenize($name);
+    @if $fallback == null {
+        @return var($name);
+    }
     @return var($name, $fallback);
 }
 

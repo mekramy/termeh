@@ -118,7 +118,9 @@
 
     $result: list.nth($vars, list.length($vars));
     @for $i from list.length($vars) - 1 through 1 {
-        $result: var(list.nth($vars, $i), $result);
+        @if list.nth($vars, $i) != null {
+            $result: var(list.nth($vars, $i), $result);
+        }
     }
     @return $result;
 }
