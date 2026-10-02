@@ -1,10 +1,10 @@
 @use "sass:map";
 @use "sass:color";
-@use "scheme" as scm;
 @use "contrast";
 @use "palette";
 @use "util";
 @use "var";
+@use "scheme" as scm;
 
 $-colors: () !default;
 $-overrides: () !default;
@@ -291,9 +291,7 @@ $-overrides: () !default;
 
             @each $scheme in scm.schemes() {
                 $val: map.get($-overrides, $name, $scheme, "color");
-                @if $val != null {
-                    $_: scm.define-variable($token, $val, $scheme);
-                }
+                $_: scm.define-variable($token, $val, $scheme);
             }
 
             $result: map.set($result, $name, scm.variable($token, $value));

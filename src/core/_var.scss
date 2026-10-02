@@ -87,7 +87,7 @@ $-overrides: () !default;
     $com: util.string-of($com, "var", "component");
     $prop: util.string-of($prop, "var", "property");
 
-    $token: "#{$com}-#{$prop}";
+    $token: "var-#{$com}-#{$prop}";
     $value: map.get($-vars, $com, $prop) or $fallback;
     $_: scm.define-variable($token, $value);
 

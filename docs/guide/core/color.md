@@ -278,14 +278,14 @@ By default, Termeh resolves these variants through _auto-generation_:
 
 ## Colors
 
-Gets a filtered map of colors, returning both names and values, for iteration.
+Gets a filtered map of colors, returning both names and CSS variable reference, for iteration.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function colors($includes: LIST = null, $excludes: LIST = null): MAP<STRING, COLOR>;
+@function colors($includes: LIST = null, $excludes: LIST = null): MAP<STRING, VAR()>;
 ```
 
 **Example:**

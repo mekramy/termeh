@@ -1,7 +1,9 @@
 @use "sass:map";
 @use "util";
+@use "scheme" as scm;
 
 $-gaps: () !default;
+$-overrides: () !default;
 
 /// Defines a new gap
 /// @param {String} $name - Gap name (e.g. "small", "medium")
@@ -15,7 +17,64 @@ $-gaps: () !default;
     $-gaps: map.set($-gaps, $name, $gap) !global;
 }
 
-/// Gets gap value by name
+/// Overrides an existing gap for a specific scheme
+/// @param {String} $scheme - Scheme name (e.g. "dark", "light")
+/// @param {String} $name - Gap name (e.g. "small", "medium")
+/// @param {Number} $gap - Gap value (e.g. 8px, 1rem)
+///
+/// @throws If the input scheme or name is not a string, if the input gap is not a number, or if the gap is not defined in main scheme
+@mixin override-gap($scheme, $name, $gap) {
+    $scheme: util.string-of($scheme, "override-gap", "scheme");
+    $name: util.string-of($name, "override-gap", "name");
+    $gap: util.number-of($gap, "override-gap", "gap");
+    @if not map.has-key($-gaps, $name) {
+        @error "Gap '#{$name}' not defined!";
+    }
+
+    $gaps: util.alter($-overrides, $name, ());
+    $gaps: map.set($gaps, $scheme, $gap);
+
+    $-overrides: map.set($-overrides, $name, $gaps) !global;
+    $_: scm.define-scheme($scheme);
+}
+
+/// Gets the value of a gap by name
+/// @param {String} $name - Gap name
+/// @return {Number} Gap value
+///
+/// @throws If the input name is not a string or if the gap is not found
+@function gap-value($name) {
+    $name: util.string-of($name, "gap-value", "name");
+    @if not map.has-key($-gaps, $name) {
+        @error "Gap '#{$name}' not defined!";
+    }
+
+    @return map.get($-gaps, $name);
+}
+
+/// Gets the value of a gap for a specific scheme
+/// This function will return main scheme gap as fallback
+/// @param {String} $scheme - Scheme name (e.g. "dark", "light")
+/// @param {String} $name - Gap name (e.g. "small", "medium")
+/// @return {Number} Gap value
+///
+/// @throws If the input scheme or name is not a string, or if the gap is not defined in the main scheme
+@function scheme-gap($scheme, $name) {
+    $scheme: util.string-of($scheme, "scheme-gap", "scheme");
+    $name: util.string-of($name, "scheme-gap", "name");
+    @if not map.has-key($-gaps, $name) {
+        @error "Gap '#{$name}' not defined!";
+    }
+
+    $gap: map.get($-overrides, $name, $scheme);
+    @if $gap == null {
+        $gap: map.get($-gaps, $name);
+    }
+
+    @return $gap;
+}
+
+/// Returns the CSS variable reference for a gap by its name
 /// @param {String} $name - Gap name
 /// @return {Number} Gap value
 ///
@@ -26,7 +85,16 @@ $-gaps: () !default;
         @error "Gap '#{$name}' not defined!";
     }
 
-    @return map.get($-gaps, $name);
+    $token: "gap-#{$name}";
+    $value: map.get($-gaps, $name);
+    $_: scm.define-variable($token, $value);
+
+    @each $scheme in scm.schemes() {
+        $val: map.get($-overrides, $name, $scheme);
+        $_: scm.define-variable($token, $val, $scheme);
+    }
+
+    @return scm.variable($token, $value);
 }
 
 /// Gets filtered map of gaps
@@ -41,7 +109,15 @@ $-gaps: () !default;
     $result: ();
     @each $name, $gap in $-gaps {
         @if util.should-include($name, $includes, $excludes) {
-            $result: map.set($result, $name, $gap);
+            $token: "gap-#{$name}";
+            $_: scm.define-variable($token, $gap);
+
+            @each $scheme in scm.schemes() {
+                $val: map.get($-overrides, $name, $scheme);
+                $_: scm.define-variable($token, $val, $scheme);
+            }
+
+            $result: map.set($result, $name, scm.variable($token, $gap));
         }
     }
     @return $result;

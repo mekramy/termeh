@@ -2,6 +2,10 @@
 
 Termeh provides utilities to define and retrieve text sizes and styles for UI components.
 
+::: tip
+**theming** Termeh's text sizes are scheme-based, meaning they can have different values depending on the active color scheme.
+:::
+
 ## Define Text Size
 
 Register a new text size.
@@ -28,9 +32,33 @@ Register a new text size.
 
 :::
 
-## Text Size
+## Override Size
 
-Retrieves a defined text size value by its name or generates an _error_ if the size is not defined.
+Overrides an existing size for a specific scheme.
+
+::: error
+**throws** If the input scheme or name is not a string, if the input size is not a number, or if the size is not defined in main scheme.
+:::
+
+::: definition
+
+**Signature:**
+
+```scss
+@mixin override-size($scheme: STRING, $name: STRING, $size: NUMBER);
+```
+
+**Example:**
+
+```scss
+@include termeh.override-size("dark", "small", 14px);
+```
+
+:::
+
+## Size Value
+
+Gets the value of a size by name.
 
 ::: error
 **throws** If the input name is not a string or if the size is not found.
@@ -41,28 +69,77 @@ Retrieves a defined text size value by its name or generates an _error_ if the s
 **Signature:**
 
 ```scss
-@function size($name: STRING): NUMBER;
+@function size-value($name: STRING): NUMBER;
 ```
 
 **Example:**
 
 ```scss
-$small-text: termeh.size("small"); // 12px
-$large-text: termeh.size("large"); // 24px
+$small-size: termeh.size-value("small"); // 12px
+$large-size: termeh.size-value("large"); // 24px
 ```
 
 :::
 
-## Text Sizes
+## Scheme Size
 
-Gets a filtered map of text sizes, returning both names and values, for iteration.
+Gets the value of a size for a specific scheme. This function will return main scheme size as fallback.
+
+::: error
+**throws** If the input scheme or name is not a string, or if the size is not defined in the main scheme.
+:::
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function sizes($includes: LIST = null, $excludes: LIST = null): MAP<STRING, NUMBER>;
+@function scheme-size($scheme: STRING, $name: STRING): NUMBER;
+```
+
+**Example:**
+
+```scss
+$small-dark: termeh.scheme-size("dark", "small"); // 14px
+```
+
+:::
+
+## Text Size
+
+Returns the CSS variable reference for a size by its name.
+
+::: error
+**throws** If the input name is not a string or if the size is not found.
+:::
+
+::: definition
+
+**Signature:**
+
+```scss
+@function size($name: STRING): VAR();
+```
+
+**Example:**
+
+```scss
+$small-text: termeh.size("small"); // var(--termeh-size-small, 12px)
+$large-text: termeh.size("large"); // var(--termeh-size-large, 24px)
+```
+
+:::
+
+## Text Sizes
+
+Gets a filtered map of text sizes, returning both names and CSS variable reference, for iteration.
+
+::: definition
+
+**Signature:**
+
+```scss
+@function sizes($includes: LIST = null, $excludes: LIST = null): MAP<STRING, VAR()>;
 ```
 
 **Example:**

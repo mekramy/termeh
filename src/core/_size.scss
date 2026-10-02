@@ -1,13 +1,15 @@
 @use "sass:map";
 @use "util";
+@use "scheme" as scm;
 
 $-sizes: () !default;
+$-overrides: () !default;
 
 /// Defines a new size
 /// @param {String} $name - Size name (e.g. "small", "medium")
 /// @param {Number} $size - Size value (e.g. 12px, 1rem)
 ///
-/// @throws Ifnput name is not a string or if the input size is not a number
+/// @throws If the input name is not a string or if the input size is not a number
 @mixin define-size($name, $size) {
     $name: util.string-of($name, "define-size", "name");
     $size: util.number-of($size, "define-size", "size");
@@ -15,7 +17,64 @@ $-sizes: () !default;
     $-sizes: map.set($-sizes, $name, $size) !global;
 }
 
-/// Gets size value by name
+/// Overrides an existing size for a specific scheme
+/// @param {String} $scheme - Scheme name (e.g. "dark", "light")
+/// @param {String} $name - Size name (e.g. "small", "medium")
+/// @param {Number} $size - Size value (e.g. 12px, 1rem)
+///
+/// @throws If the input scheme or name is not a string, if the input size is not a number, or if the size is not defined in main scheme
+@mixin override-size($scheme, $name, $size) {
+    $scheme: util.string-of($scheme, "override-size", "scheme");
+    $name: util.string-of($name, "override-size", "name");
+    $size: util.number-of($size, "override-size", "size");
+    @if not map.has-key($-sizes, $name) {
+        @error "Size '#{$name}' not defined!";
+    }
+
+    $sizes: util.alter($-overrides, $name, ());
+    $sizes: map.set($sizes, $scheme, $size);
+
+    $-overrides: map.set($-overrides, $name, $sizes) !global;
+    $_: scm.define-scheme($scheme);
+}
+
+/// Gets the value of a size by name
+/// @param {String} $name - Size name
+/// @return {Number} Size value
+///
+/// @throws If the input name is not a string or if the size is not found
+@function size-value($name) {
+    $name: util.string-of($name, "size-value", "name");
+    @if not map.has-key($-sizes, $name) {
+        @error "Size '#{$name}' not defined!";
+    }
+
+    @return map.get($-sizes, $name);
+}
+
+/// Gets the value of a size for a specific scheme
+/// This function will return main scheme size as fallback
+/// @param {String} $scheme - Scheme name (e.g. "dark", "light")
+/// @param {String} $name - Size name (e.g. "small", "medium")
+/// @return {Number} Size value
+///
+/// @throws If the input scheme or name is not a string, or if the size is not defined in the main scheme
+@function scheme-size($scheme, $name) {
+    $scheme: util.string-of($scheme, "scheme-size", "scheme");
+    $name: util.string-of($name, "scheme-size", "name");
+    @if not map.has-key($-sizes, $name) {
+        @error "Size '#{$name}' not defined!";
+    }
+
+    $size: map.get($-overrides, $name, $scheme);
+    @if $size == null {
+        $size: map.get($-sizes, $name);
+    }
+
+    @return $size;
+}
+
+/// Returns the CSS variable reference for a size by its name
 /// @param {String} $name - Size name
 /// @return {Number} Size value
 ///
@@ -26,7 +85,16 @@ $-sizes: () !default;
         @error "Size '#{$name}' not defined!";
     }
 
-    @return map.get($-sizes, $name);
+    $token: "size-#{$name}";
+    $value: map.get($-sizes, $name);
+    $_: scm.define-variable($token, $value);
+
+    @each $scheme in scm.schemes() {
+        $val: map.get($-overrides, $name, $scheme);
+        $_: scm.define-variable($token, $val, $scheme);
+    }
+
+    @return scm.variable($token, $value);
 }
 
 /// Gets filtered map of sizes
@@ -41,7 +109,15 @@ $-sizes: () !default;
     $result: ();
     @each $name, $size in $-sizes {
         @if util.should-include($name, $includes, $excludes) {
-            $result: map.set($result, $name, $size);
+            $token: "size-#{$name}";
+            $_: scm.define-variable($token, $size);
+
+            @each $scheme in scm.schemes() {
+                $val: map.get($-overrides, $name, $scheme);
+                $_: scm.define-variable($token, $val, $scheme);
+            }
+
+            $result: map.set($result, $name, scm.variable($token, $size));
         }
     }
     @return $result;

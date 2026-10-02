@@ -2,6 +2,10 @@
 
 Termeh provides utilities to define and retrieve spacing gaps in a consistent and reusable way. You can create named gaps, access individual values, or filter sets of gaps for use in layouts and components.
 
+::: tip
+**theming** Termeh's gaps are scheme-based, meaning they can have different values depending on the active color scheme.
+:::
+
 ## Define Gap
 
 Register a new gap value.
@@ -28,9 +32,33 @@ Register a new gap value.
 
 :::
 
-## Gap
+## Override Gap
 
-Retrieves a defined gap value by its name or generates an _error_ if the gap is not defined.
+Overrides an existing gap for a specific scheme.
+
+::: error
+**throws** If the input scheme or name is not a string, if the input gap is not a number, or if the gap is not defined in main scheme.
+:::
+
+::: definition
+
+**Signature:**
+
+```scss
+@mixin override-gap($scheme: STRING, $name: STRING, $gap: NUMBER);
+```
+
+**Example:**
+
+```scss
+@include termeh.override-gap("dark", "small", 10px);
+```
+
+:::
+
+## Gap Value
+
+Gets the value of a gap by its name.
 
 ::: error
 **throws** If the input name is not a string or if the gap is not found.
@@ -41,28 +69,77 @@ Retrieves a defined gap value by its name or generates an _error_ if the gap is 
 **Signature:**
 
 ```scss
-@function gap($name: STRING): NUMBER;
+@function gap-value($name: STRING): NUMBER;
 ```
 
 **Example:**
 
 ```scss
-$small-gap: termeh.gap("small"); // 8px
-$medium-gap: termeh.gap("medium"); // 16px
+$small-gap: termeh.gap-value("small"); // 8px
+$medium-gap: termeh.gap-value("medium"); // 16px
 ```
 
 :::
 
-## Gaps
+## Scheme Gap
 
-Gets a filtered map of gaps, returning both names and values, for iteration.
+Retrieves the value of a gap for a specific scheme. This function will return main scheme gap as fallback.
+
+::: error
+**throws** If the input scheme or name is not a string, or if the gap is not defined in the main scheme.
+:::
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function gaps($includes: LIST = null, $excludes: LIST = null): MAP<STRING, NUMBER>;
+@function scheme-gap($scheme: STRING, $name: STRING): NUMBER;
+```
+
+**Example:**
+
+```scss
+$small-gap-dark: termeh.scheme-gap("dark", "small"); // 10px
+```
+
+:::
+
+## Gap
+
+Returns the CSS variable reference for a gap by its name.
+
+::: error
+**throws** If the input name is not a string or if the gap is not found.
+:::
+
+::: definition
+
+**Signature:**
+
+```scss
+@function gap($name: STRING): VAR();
+```
+
+**Example:**
+
+```scss
+$small-gap: termeh.gap("small"); // var(--termeh-gap-small, 8px)
+$medium-gap: termeh.gap("medium"); // var(--termeh-gap-medium, 16px)
+```
+
+:::
+
+## Gaps
+
+Gets a filtered map of gaps, returning both names and CSS variable reference, for iteration.
+
+::: definition
+
+**Signature:**
+
+```scss
+@function gaps($includes: LIST = null, $excludes: LIST = null): MAP<STRING, VAR()>;
 ```
 
 **Example:**

@@ -39,12 +39,12 @@ export default [
                 link: "/guide/core/gap",
             },
             {
-                text: "Unit",
-                link: "/guide/core/unit",
-            },
-            {
                 text: "Text",
                 link: "/guide/core/text",
+            },
+            {
+                text: "Unit",
+                link: "/guide/core/unit",
             },
             {
                 text: "Flexbox",
