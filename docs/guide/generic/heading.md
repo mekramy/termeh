@@ -58,24 +58,24 @@ This module is registered as `heading` in the _presented modules_.
 
 Heading module uses the following Termeh global `var()`:
 
-| Component                | Type     | Usage                             | Default |
-| ------------------------ | -------- | --------------------------------- | ------- |
-| `line-height` → `large`  | _Number_ | Line height for `<h1>` and `<h2>` | `1.2em` |
-| `line-height` → `medium` | _Number_ | Line height for `<h3>` and `<h4>` | `1.4em` |
-| `line-height` → `normal` | _Number_ | Line height for `<h5>` and `<h6>` | `1.6em` |
-| `gap` → `macro`          | _Number_ | Bottom margin for headings        | `1.6em` |
+| Component       | Variable   | Type     | Usage                             | Default |
+|-----------------|------------|----------|-----------------------------------|---------|
+| **gap**         | **macro**  | _Number_ | Bottom margin for headings        | `1.6em` |
+| **line-height** | **large**  | _Number_ | Line height for `<h1>` and `<h2>` | `1.2em` |
+| **line-height** | **medium** | _Number_ | Line height for `<h3>` and `<h4>` | `1.4em` |
+| **line-height** | **normal** | _Number_ | Line height for `<h5>` and `<h6>` | `1.6em` |
 
 ---
 
 Heading module uses the following Termeh `size()`:
 
-| Size      | Usage                | Default |
-| --------- | -------------------- | ------- |
-| `massive` | Font size for `<h1>` | _error_ |
-| `huge`    | Font size for `<h2>` | _error_ |
-| `big`     | Font size for `<h3>` | _error_ |
-| `large`   | Font size for `<h4>` | _error_ |
-| `medium`  | Font size for `<h5>` | _error_ |
-| `normal`  | Font size for `<h6>` | _error_ |
+| Size        | Usage                | Default |
+|-------------|----------------------|---------|
+| **massive** | Font size for `<h1>` | _error_ |
+| **huge**    | Font size for `<h2>` | _error_ |
+| **big**     | Font size for `<h3>` | _error_ |
+| **large**   | Font size for `<h4>` | _error_ |
+| **medium**  | Font size for `<h5>` | _error_ |
+| **normal**  | Font size for `<h6>` | _error_ |
 
 :::

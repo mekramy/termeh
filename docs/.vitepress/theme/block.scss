@@ -70,6 +70,18 @@
         border: 1px solid var(--vp-custom-block-details-code-bg);
         border-left: 3px solid var(--vp-c-text-1);
 
+        table {
+            strong {
+                font-weight: 700;
+                font-size: 0.7rem;
+                white-space: nowrap;
+                letter-spacing: 1px;
+                background-color: transparent;
+                color: var(--vp-c-text-2);
+                font-family: var(--vp-font-family-mono);
+            }
+        }
+
         summary {
             gap: 1rem;
             display: flex;

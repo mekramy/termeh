@@ -65,10 +65,10 @@ This module is registered as `image` in the _presented modules_.
 
 Image module uses the following Termeh global `var()`:
 
-| Component           | Type     | Usage                                    | Default |
-| ------------------- | -------- | ---------------------------------------- | ------- |
-| `radius` → `normal` | _Number_ | Default rounded border radius for images | `null`  |
-| `radius` → `circle` | _Number_ | Circular border radius for images        | `50%`   |
+| Component  | Variable   | Type     | Usage                                    | Default |
+|------------|------------|----------|------------------------------------------|---------|
+| **radius** | **normal** | _Number_ | Default rounded border radius for images | `null`  |
+| **radius** | **circle** | _Number_ | Circular border radius for images        | `50%`   |
 
 :::
 

@@ -307,7 +307,7 @@
 /// @termeh {Number} [8px] - var("gap", "micro") -> Global gap for inline elements
 @function inline-padding() {
     $gap: var.var("gap", "micro", 8px);
-    @return $gap double($gap);
+    @return $gap util.double($gap);
 }
 
 /// Standard transition effect

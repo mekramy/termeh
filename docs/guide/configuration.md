@@ -240,23 +240,25 @@ Monospace element (code, pre, ...) fonts.
 ```scss
 @include termeh.define("table", "background", null);
 @include termeh.define("table", "foreground", null);
+@include termeh.define("table", "decorator", null);
 @include termeh.define("table", "hover-background", null);
 @include termeh.define("table", "striped-background", null);
+@include termeh.define("table", "sorted-background", null);
 @include termeh.define("table", "column-separator", null);
 @include termeh.define("table", "row-separator", null);
 @include termeh.define("table", "section-separator", null);
-@include termeh.define("table", "sorted-background", null);
 @include termeh.define("table", "strong-weight", null);
 ```
 
 - **background:** _[`color`]_ → Table background.
 - **foreground:** _[`color`]_ → Table text color.
+- **decorator:** _[`color`]_ → Table decorator (sort indicator) color.
 - **hover-background:** _[`color`]_ → Row hover background.
 - **striped-background:** _[`color`]_ → Background for even rows.
+- **sorted-background:** _[`color`]_ → Highlighted sorted column background.
 - **column-separator:** _[`color`]_ → Column dividers.
 - **row-separator:** _[`color`]_ → Row dividers.
 - **section-separator:** _[`color`]_ → Section dividers (header, footer, body).
-- **sorted-background:** _[`color`]_ → Highlighted sorted column background.
 - **strong-weight:** _[`font weight`]_ → Emphasis text weight.
 
 #### Inputs

@@ -3,33 +3,73 @@
 /// Applies common base styles for HTML elements
 /// @output Styles for root elements and common HTML tags
 ///
-/// @termeh {Color} [white] - var("base", "color") -> document background color
-/// @termeh {Color} [black] - var("base", "foreground") -> default text color
-/// @termeh {Color} [null] - var("base", "section") -> background color for <blockquote>, <code>, and <pre>
-/// @termeh {Color} [null] - var("base", "separator") -> color for <hr> and list decorators
-/// @termeh {Color} [error] - color("primary") -> selection background, scrollbar, and input accent color
-/// @termeh {Color} [null] - variant("primary", "readable") -> link color
-/// @termeh {Color} [null] - variant("primary", "foreground") -> selection text color
-/// @termeh {Number} [error] - size("small") -> <small> font size
-/// @termeh {List} [null] - var("font", "family") -> default font family
-/// @termeh {Number} [12px] - var("font", "size") -> default font size
-/// @termeh {String} [normal] - var("font", "weight") -> default font weight
-/// @termeh {List} [null] - var("mono", "family") -> <code> and <pre> font family
-/// @termeh {Number} [null] - var("mono", "size") -> <code> and <pre> font size
-/// @termeh {String} [null] - var("mono", "weight") -> <code> and <pre> font weight
-/// @termeh {Color} [null] - var("strong", "foreground") -> <strong> and <th> text color
-/// @termeh {String} [bold] - var("strong", "weight") -> <strong> and <th> font weight
-/// @termeh {Number} [8px] - var("gap", "micro") -> spacing between list items
-/// @termeh {Number} [1.6em] - var("gap", "macro") -> spacing between blocks
-/// @termeh {String} [ltr] - var("base", "direction") -> document text direction
-/// @termeh {Number} [300px] - var("base", "min-width") -> document minimum width
-/// @termeh {Number} [1.6em] - var("line-height", "normal") -> default line height
-/// @termeh {Number} [null] - var("radius", "normal") -> <blockquote> border radius
+/// @param {Direction} [ltr] var("base", "direction") - document text direction
+/// @param {Number} [300px] var("base", "min-width") - document minimum width
+///
+/// @param {Number} [null] var("radius", "normal") - <blockquote> border radius
+/// @param {Number} [1.6em] var("line-height", "normal") - default line height
+///
+/// @param {Number} [8px] var("gap", "micro") - spacing between list items
+/// @param {Number} [1.6em] var("gap", "macro") - spacing between blocks
+///
+/// @param {Font Family} [null] var("font", "family") - default font family
+/// @param {Number} [12px] var("font", "size") - default font size
+/// @param {Font Weight} [normal] var("font", "weight") - default font weight
+///
+/// @param {Font Family} [null] var("mono", "family") - <code> and <pre> font family
+/// @param {Number} [null] var("mono", "size") - <code> and <pre> font size
+/// @param {Font Weight} [null] var("mono", "weight") - <code> and <pre> font weight
+///
+/// @param {Number} [0.875rem] var("small", "size") - <small>, <sub> and <sup> font size
+/// @param {Font Weight} [normal] var("small", "weight") - <small>, <sub> and <sup> font weight
+/// @param {Color} [null] var("small", "foreground") - <small>, <sub> and <sup> text color
+///
+/// @param {Color} [null] var("strong", "foreground") - <strong>, <b> and <th> text color
+/// @param {Font Weight} [bold] var("strong", "weight") - <strong>, <b> and <th> font weight
+///
+/// @param {Color} [null] var("decorated", "foreground") - <u>, <ins>, <s> and <del> text color
+/// @param {Font Weight} [normal] var("decorated", "weight") - <u>, <ins>, <s> and <del> font weight
+///
+/// @param {Color} [white] var("base", "background") - document background color
+/// @param {Color} [black] var("base", "foreground") - default text color
+/// @param {Color} [null] var("base", "section") - background color for <blockquote>, <code>, and <pre>
+/// @param {Color} [null] var("base", "separator") - color for <hr> and list decorators
+///
+/// @param {Color} [error] color("primary") - selection background, scrollbar, and input accent color
+/// @param {Color} [null] variant("primary", "readable") - link color
+/// @param {Color} [null] variant("primary", "foreground") - selection text color
 @mixin use-base() {
     @if not module.module-presented("base") {
         @include module.present-module("base");
 
-        $base-color: module.var("base", "color", white);
+        $direction: module.var("base", "direction", ltr);
+        $min-width: module.var("base", "min-width", 300px);
+
+        $radius: module.var("radius", "normal");
+        $line-height: module.var("line-height", "normal", 1.6em);
+
+        $gap-micro: module.var("gap", "micro", 8px);
+        $gap-macro: module.var("gap", "macro", 1.6em);
+
+        $font-family: module.var("font", "family");
+        $font-size: module.var("font", "size", 12px);
+        $font-weight: module.var("font", "weight", normal);
+
+        $mono-family: module.var("mono", "family");
+        $mono-size: module.var("mono", "size");
+        $mono-weight: module.var("mono", "weight");
+
+        $small-size: module.var("small", "size", 0.875rem);
+        $small-weight: module.var("small", "weight", normal);
+        $small-foreground: module.var("small", "foreground", null);
+
+        $strong-color: module.var("strong", "foreground");
+        $strong-weight: module.var("strong", "weight", bold);
+
+        $decorated-color: module.var("decorated", "foreground", null);
+        $decorated-weight: module.var("decorated", "weight", normal);
+
+        $base-background: module.var("base", "background", white);
         $base-foreground: module.var("base", "foreground", black);
         $base-section: module.var("base", "section");
         $base-separator: module.var("base", "separator");
@@ -37,25 +77,6 @@
         $primary-color: module.color("primary");
         $primary-readable: module.variant("primary", "readable");
         $primary-foreground: module.variant("primary", "foreground");
-
-        $size-small: module.size("small");
-        $font-family: module.var("font", "family");
-        $font-size: module.var("font", "size", 12px);
-        $font-weight: module.var("font", "weight", normal);
-
-        $mono-family: module.var("font", "family");
-        $mono-size: module.var("font", "size");
-        $mono-weight: module.var("font", "weight");
-
-        $strong-color: module.var("strong", "foreground");
-        $strong-weight: module.var("strong", "weight", bold);
-
-        $gap-micro: module.var("gap", "micro", 8px);
-        $gap-macro: module.var("gap", "macro", 1.6em);
-        $direction: module.var("base", "direction", ltr);
-        $min-width: module.var("base", "min-width", 300px);
-        $line-normal: module.var("line-height", "normal", 1.6em);
-        $radius-normal: module.var("radius", "normal");
 
         @at-root {
             :root {
@@ -70,16 +91,18 @@
             html {
                 overflow: hidden auto;
                 scroll-behavior: smooth;
-                font-family: $font-family;
+                direction: $direction;
+                min-width: $min-width;
                 font-size: $font-size;
+                font-family: $font-family;
                 font-weight: $font-weight;
+                line-height: $line-height;
                 text-size-adjust: 100%;
                 text-rendering: optimizelegibility;
                 -moz-osx-font-smoothing: grayscale;
                 -webkit-font-smoothing: antialiased;
-                direction: $direction;
-                min-width: $min-width;
-                background-color: $base-color;
+                color: $base-foreground;
+                background-color: $base-background;
 
                 @include module.scrollable($primary-color);
             }
@@ -94,14 +117,6 @@
                 display: block;
             }
 
-            blockquote {
-                display: block;
-                padding: $gap-macro;
-                margin: $gap-macro;
-                border-radius: $radius-normal;
-                background-color: $base-section;
-            }
-
             body,
             button,
             input,
@@ -113,32 +128,35 @@
                 font-family: $font-family;
             }
 
-            body {
-                color: $base-foreground;
-                line-height: $line-normal;
+            button,
+            input,
+            optgroup,
+            select,
+            textarea {
+                font: inherit;
+                color: inherit;
             }
 
-            select {
-                appearance: menulist;
-                -moz-appearance: menulist;
-                -webkit-appearance: menulist;
+            small,
+            sub,
+            sup {
+                font-size: $small-size;
+                font-weight: $small-weight;
+                color: $small-foreground;
             }
 
-            code,
-            pre {
-                direction: ltr;
-                padding: $gap-macro;
-                font-size: $mono-size;
-                font-family: $mono-family;
-                font-weight: $mono-weight;
-                background-color: $base-section;
-                -moz-osx-font-smoothing: auto;
-                -webkit-font-smoothing: auto;
-            }
-
-            strong {
+            strong,
+            b {
                 color: $strong-color;
                 font-weight: $strong-weight;
+            }
+
+            u,
+            ins,
+            s,
+            del {
+                color: $decorated-color;
+                font-weight: $decorated-weight;
             }
 
             a {
@@ -150,7 +168,12 @@
                     color: $primary-readable;
                 }
 
+                &:visited {
+                    opacity: 0.8;
+                }
+
                 &:hover {
+                    opacity: 1;
                     text-decoration: underline;
                 }
             }
@@ -166,14 +189,16 @@
                 }
             }
 
+            select {
+                appearance: menulist;
+                -moz-appearance: menulist;
+                -webkit-appearance: menulist;
+            }
+
             input[type="checkbox"],
             input[type="radio"] {
                 vertical-align: baseline;
                 accent-color: $primary-color;
-            }
-
-            small {
-                font-size: $size-small;
             }
 
             span {
@@ -183,6 +208,26 @@
 
             fieldset {
                 border: none;
+            }
+
+            blockquote {
+                display: block;
+                padding: $gap-macro;
+                margin: $gap-macro 0;
+                border-radius: $radius;
+                background-color: $base-section;
+            }
+
+            code,
+            pre {
+                direction: ltr;
+                padding: $gap-macro;
+                font-size: $mono-size;
+                font-family: $mono-family;
+                font-weight: $mono-weight;
+                background-color: $base-section;
+                -moz-osx-font-smoothing: auto;
+                -webkit-font-smoothing: auto;
             }
 
             pre {

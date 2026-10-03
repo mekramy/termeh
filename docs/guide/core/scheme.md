@@ -2,7 +2,9 @@
 
 Termeh provides a centralized system for exporting CSS variables associated with color schemes. When a Termeh module is used, its required variables and variants are registered automatically. Only registered values are emitted, so unused module variables and variants are not added as CSS variables.
 
-By default, Termeh automatically registers the variables and colors used by its modules. Their getter functions return CSS `var()` references, so components use the generated custom properties and can respond to color scheme changes automatically. When a value needs special processing or custom registration, use the helper functions in this module to define and resolve it explicitly.
+::: tip
+**theming** By default, Termeh automatically registers the variables and colors used by its modules. Their getter functions return CSS variable references, so components use the generated custom properties and can respond to color scheme changes automatically. When a value needs special processing or custom registration, use the helper functions in this module to define and resolve it explicitly.
+:::
 
 ## Recommended Usage
 

@@ -3,19 +3,27 @@
 /// Applies consistent heading styles
 /// @output Styles for h1-h6 elements
 ///
-/// @termeh {Number} [error] - size("massive") -> font size for <h1>
-/// @termeh {Number} [error] - size("huge") -> font size for <h2>
-/// @termeh {Number} [error] - size("big") -> font size for <h3>
-/// @termeh {Number} [error] - size("large") -> font size for <h4>
-/// @termeh {Number} [error] - size("medium") -> font size for <h5>
-/// @termeh {Number} [error] - size("normal") -> font size for <h6>
-/// @termeh {Number} [1.2em] - var("line-height", "large") -> line height for <h1> and <h2>
-/// @termeh {Number} [1.4em] - var("line-height", "medium") -> line height for <h3> and <h4>
-/// @termeh {Number} [1.6em] - var("line-height", "normal") -> line height for <h5> and <h6>
-/// @termeh {Number} [1.6em] - var("gap", "macro") -> bottom margin for headings
+/// @param {Number} [1.6em] var("gap", "macro") - bottom margin for headings
+///
+/// @param {Number} [1.2em] var("line-height", "large") - line height for <h1> and <h2>
+/// @param {Number} [1.4em] var("line-height", "medium") - line height for <h3> and <h4>
+/// @param {Number} [1.6em] var("line-height", "normal") - line height for <h5> and <h6>
+///
+/// @param {Number} [error] size("massive") - font size for <h1>
+/// @param {Number} [error] size("huge") - font size for <h2>
+/// @param {Number} [error] size("big") - font size for <h3>
+/// @param {Number} [error] size("large") - font size for <h4>
+/// @param {Number} [error] size("medium") - font size for <h5>
+/// @param {Number} [error] size("normal") - font size for <h6>
 @mixin use-heading() {
     @if not module.module-presented("heading") {
         @include module.present-module("heading");
+
+        $gap-macro: module.var("gap", "macro", 1.6em);
+
+        $line-large: module.var("line-height", "large", 1.2em);
+        $line-medium: module.var("line-height", "medium", 1.4em);
+        $line-normal: module.var("line-height", "normal", 1.6em);
 
         $size-massive: module.size("massive");
         $size-huge: module.size("huge");
@@ -23,12 +31,6 @@
         $size-large: module.size("large");
         $size-medium: module.size("medium");
         $size-normal: module.size("normal");
-
-        $line-large: module.var("line-height", "large", 1.2em);
-        $line-medium: module.var("line-height", "medium", 1.4em);
-        $line-normal: module.var("line-height", "normal", 1.6em);
-
-        $gap-macro: module.var("gap", "macro", 1.6em);
 
         @at-root {
             h1,
@@ -38,6 +40,7 @@
             h5,
             h6 {
                 font-weight: bold;
+
                 @include module.marged() {
                     margin-bottom: $gap-macro;
                 }

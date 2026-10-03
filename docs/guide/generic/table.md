@@ -78,6 +78,13 @@ Provides fully-featured table styles with configurable colors, row behaviors, ho
           <td class="is-indigo">jack.ma@example.com</td>
         </tr>
       </tbody>
+      <tfoot>
+        <tr>
+          <td class="is-filler"></td>
+          <td>AVG: 32</td>
+          <td></td>
+        </tr>
+      </tfoot>
     </table>
   </div>
 </Preview>
@@ -119,6 +126,13 @@ Provides fully-featured table styles with configurable colors, row behaviors, ho
       <td class="is-indigo">jack.ma@example.com</td>
     </tr>
   </tbody>
+  <tfoot>
+    <tr>
+      <td class="is-filler"></td>
+      <td>AVG: 32</td>
+      <td></td>
+    </tr>
+  </tfoot>
 </table>
 ```
 
@@ -154,31 +168,30 @@ This module is registered as `table` in the _presented modules_.
 
 Table module uses the following Termeh global `var()`:
 
-| Component                   | Type     | Usage                                              | Default    |
-| --------------------------- | -------- | -------------------------------------------------- | ---------- |
-| `base` → `color`            | _Color_  | _Fallback_ base table background                   | `white`    |
-| `base` → `section`          | _Color_  | _Fallback_ background for even rows and row hover  | `null`     |
-| `base` → `separator`        | _Color_  | _Fallback_ color for table separators and dividers | `null`     |
-| `strong` → `weight`         | _String_ | _Fallback_ font weight for headers                 | `bold`     |
-| `table` → `background`      | _Color_  | Main table background                              | _FALLBACK_ |
-| `table` → `foreground`      | _Color_  | Default table text color                           | `null`     |
-| `table` → `even`            | _Color_  | Even row background                                | _FALLBACK_ |
-| `table` → `hover`           | _Color_  | Hover row background                               | _FALLBACK_ |
-| `table` → `grid`            | _Color_  | Grid line color                                    | `null`     |
-| `table` → `divider`         | _Color_  | Section divider color                              | _FALLBACK_ |
-| `table` → `separator`       | _Color_  | Row separator color                                | _FALLBACK_ |
-| `table` → `decorator`       | _Color_  | Sort decorator color                               | _error_    |
-| `table` → `sort-background` | _Color_  | Sorted column background                           | _FALLBACK_ |
-| `table` → `strong-weight`   | _String_ | Strong font weight for headers                     | _FALLBACK_ |
+| Component  | Variable               | Type          | Usage                                              | Default    |
+|------------|------------------------|---------------|----------------------------------------------------|------------|
+| **base**   | **section**            | _Color_       | _Fallback_ background for striped rows             | `null`     |
+| **base**   | **separator**          | _Color_       | _Fallback_ color for row and section separators    | `null`     |
+| **strong** | **weight**             | _Font Weight_ | _Fallback_ font weight for headers                 | `bold`     |
+| **table**  | **background**         | _Color_       | Main table background                              | `null`     |
+| **table**  | **foreground**         | _Color_       | Default table text color                           | `null`     |
+| **table**  | **decorator**          | _Color_       | Sort decorator color                               | _FALLBACK_ |
+| **table**  | **hover-background**   | _Color_       | Hover row background                               | _FALLBACK_ |
+| **table**  | **striped-background** | _Color_       | Even row background                                | _FALLBACK_ |
+| **table**  | **sorted-background**  | _Color_       | Sorted column background                           | _FALLBACK_ |
+| **table**  | **column-separator**   | _Color_       | Column separator color for `<tbody>` cells         | `null`     |
+| **table**  | **row-separator**      | _Color_       | Row separator color                                | _FALLBACK_ |
+| **table**  | **section-separator**  | _Color_       | Section separator color                            | _FALLBACK_ |
+| **table**  | **strong-weight**      | _Font Weight_ | Strong font weight for headers                     | _FALLBACK_ |
 
 ---
 
-Table module uses the following Termeh `color()` and `variant()`:
+Table module uses the following Termeh `color()` :
 
-| Color / Variant | Usage                                                | Default |
-| --------------- | ---------------------------------------------------- | ------- |
-| `primary`       | Accent color for scrollbars                          | _error_ |
-| `shade`         | _Fallback_ color for sort backgrounds and decorators | _error_ |
+| Color       | Usage                                                | Default |
+|-------------|------------------------------------------------------|---------|
+| **primary** | Accent color for scrollbars                          | _error_ |
+| **shade**   | _Fallback_ color for sort backgrounds and decorators | _error_ |
 
 :::
 

@@ -91,12 +91,13 @@
 // Table
 @include module.define("table", "background", null); // Table background
 @include module.define("table", "foreground", null); // Table foreground
+@include module.define("table", "decorator", null); // Table decorator color
 @include module.define("table", "hover-background", null); // Hover row background
 @include module.define("table", "striped-background", null); // Even row background
+@include module.define("table", "sorted-background", null); // Sorted column background
 @include module.define("table", "column-separator", null); // Column divider background
 @include module.define("table", "row-separator", null); // Row divider background
 @include module.define("table", "section-separator", null); // Section divider background
-@include module.define("table", "sorted-background", null); // Sorted column background
 @include module.define("table", "strong-weight", null); // Strong content weight
 
 // Inputs

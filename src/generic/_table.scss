@@ -4,48 +4,54 @@
 /// Applies table styles with configurable colors and behaviors
 /// @param {List} $colors [()] - List of registered color variants to generate. Pass null to include all registered palettes
 ///
-/// @termeh {Color} [error] - color("primary") -> accent color for scrollbars
-/// @termeh {Color} [error] - color("shade") -> fallback color for sort backgrounds and decorators
-/// @termeh {Color} [white] - var("base", "color") -> fallback base table background
-/// @termeh {Color} [null] - var("base", "section") -> fallback background for even rows and row hover
-/// @termeh {Color} [null] - var("base", "separator") -> fallback color for table separators and dividers
-/// @termeh {String} [bold] - var("strong", "weight") -> fallback font weight for headers
-/// @termeh {Color} [FALLBACK] - var("table", "background") -> main table background
-/// @termeh {Color} [null] - var("table", "foreground") -> default table text color
-/// @termeh {Color} [FALLBACK] - var("table", "even") -> even row background
-/// @termeh {Color} [FALLBACK] - var("table", "hover") -> hover row background
-/// @termeh {Color} [null] - var("table", "grid") -> grid line color
-/// @termeh {Color} [FALLBACK] - var("table", "divider") -> section divider color
-/// @termeh {Color} [FALLBACK] - var("table", "separator") -> row separator color
-/// @termeh {Color} [error] - var("table", "decorator") -> sort decorator color
-/// @termeh {Color} [FALLBACK] - var("table", "sort-background") -> sorted column background
-/// @termeh {String} [FALLBACK] - var("table", "strong-weight") -> strong font weight for headers
+/// @param {Color} [error] - color("shade") -> fallback color for sort backgrounds and decorators
+/// @param {Color} [error] - color("primary") -> accent color for scrollbars
+///
+/// @param {Color} [null] - var("base", "section") -> fallback background for striped rows background
+/// @param {Color} [null] - var("base", "separator") -> fallback color for table separators
+/// @param {Font Weight} [bold] - var("strong", "weight") -> fallback font weight for headers
+///
+/// @param {Color} [null] - var("table", "background") -> main table background
+/// @param {Color} [null] - var("table", "foreground") -> default table text color
+/// @param {Color} [FALLBACK] - var("table", "decorator") -> sort decorator color
+///
+/// @param {Color} [FALLBACK] - var("table", "hover-background") -> hover row background
+/// @param {Color} [FALLBACK] - var("table", "striped-background") -> even row background
+/// @param {Color} [FALLBACK] - var("table", "sorted-background") -> sorted column background
+///
+/// @param {Color} [null] - var("table", "column-separator") -> column separator color
+/// @param {Color} [FALLBACK] - var("table", "row-separator") -> row separator color
+/// @param {Color} [FALLBACK] - var("table", "section-separator") -> section separator color
+///
+/// @param {Font Weight} [FALLBACK] - var("table", "strong-weight") -> strong font weight for headers
 @mixin use-table($colors: ()) {
     @if not module.module-presented("table") {
         @include module.present-module("table");
 
-        $primary: module.color("primary");
         $shade: module.color("shade");
+        $primary: module.color("primary");
 
-        $base-color: module.var("base", "color", white);
-        $base-section: module.var("base", "section");
-        $base-separator: module.var("base", "separator");
-        $base-sort: rgba($shade, 0.05);
-        $base-hover: color.mix($base-section, $shade, 90%);
-        $base-strong: module.var("strong", "weight", bold);
+        $fallback-decorator: $shade;
+        $fallback-hover: module.alpha($shade, 0.1);
+        $fallback-striped: module.var("base", "section");
+        $fallback-sorted: module.alpha($shade, 0.05);
+        $fallback-row-separator: module.var("base", "separator");
+        $fallback-section-separator: module.var("base", "separator");
+        $fallback-strong: module.var("strong", "weight", bold);
 
-        $table-background: module.var("table", "background", $base-color);
-        $table-foreground: module.var("table", "foreground");
-        $table-even: module.var("table", "even", $base-section);
-        $table-hover: module.var("table", "hover", $base-hover);
-        $table-grid: module.var("table", "grid", null);
-        $table-divider: module.var("table", "divider", $base-separator);
-        $table-separator: module.var("table", "separator", $base-separator);
-        $table-decorator: module.var("table", "decorator", $shade);
+        $background: module.var("table", "background");
+        $foreground: module.var("table", "foreground");
+        $decorator: module.var("table", "decorator", $fallback-decorator);
 
-        $sort-background: module.var("table", "sort-background", $base-sort);
+        $hover-background: module.var("table", "hover-background", $fallback-hover);
+        $striped-background: module.var("table", "striped-background", $fallback-striped);
+        $sorted-background: module.var("table", "sorted-background", $fallback-sorted);
 
-        $table-strong: module.var("table", "strong-weight", $base-strong);
+        $column-separator: module.var("table", "column-separator");
+        $row-separator: module.var("table", "row-separator", $fallback-row-separator);
+        $section-separator: module.var("table", "section-separator", $fallback-section-separator);
+
+        $strong-weight: module.var("table", "strong-weight", $fallback-strong);
 
         @at-root {
             .table-container {
@@ -64,20 +70,20 @@
                 thead {
                     padding: 0;
                     margin: 0;
-                    border-bottom: 1px solid $table-divider;
+                    border-bottom: 1px solid $section-separator;
 
                     tr {
                         overflow: hidden;
                         white-space: nowrap;
-                        background: $table-background;
-                        border-top: 1px solid $table-separator;
+                        background: $background;
+                        border-top: 1px solid $row-separator;
                         @include module.transition(all);
 
                         th {
                             width: 1px;
                             vertical-align: middle;
-                            color: $table-foreground;
-                            font-weight: $table-strong;
+                            color: $foreground;
+                            font-weight: $strong-weight;
                             padding: module.inline-padding();
                             @include module.transition(all);
 
@@ -105,18 +111,18 @@
                             }
 
                             &.is-sorted {
-                                background-color: $sort-background;
+                                background-color: $sorted-background;
                             }
 
                             &.is-sortable {
                                 cursor: pointer;
 
                                 &.is-asc {
-                                    border-top: 1px solid $table-decorator;
+                                    border-top: 1px solid $decorator;
                                 }
 
                                 &.is-desc {
-                                    border-bottom: 1px solid $table-decorator;
+                                    border-bottom: 1px solid $decorator;
                                 }
                             }
                         }
@@ -126,18 +132,18 @@
                 tbody,
                 tfoot {
                     tr {
-                        background: $table-background;
+                        background: $background;
                         @include module.transition(all);
 
                         &:not(:last-child) {
-                            border-bottom: 1px solid $table-separator;
+                            border-bottom: 1px solid $row-separator;
                         }
 
                         td {
                             width: 1px;
                             font-weight: inherit;
                             vertical-align: middle;
-                            color: $table-foreground;
+                            color: $foreground;
                             padding: module.inline-padding();
                             @include module.transition(all);
 
@@ -165,7 +171,7 @@
                             }
 
                             &.is-sorted {
-                                background-color: $sort-background;
+                                background-color: $sorted-background;
                             }
 
                             &:not(.is-multiline) {
@@ -179,7 +185,7 @@
                 tbody {
                     tr {
                         &.is-even {
-                            background: $table-even;
+                            background: $striped-background;
                         }
 
                         &:not(.is-expanded) .extra {
@@ -193,25 +199,25 @@
                         }
 
                         &:not(:last-child) {
-                            border-bottom: 1px solid $table-separator;
-                        }
-
-                        &:last-child {
-                            border-bottom: 1px solid $table-divider;
+                            border-bottom: 1px solid $row-separator;
                         }
                     }
                 }
 
-                @if $table-grid {
+                tfoot {
+                    border-top: 1px solid $section-separator;
+                }
+
+                @if $column-separator != null {
                     @include module.is-ltr() {
                         tbody tr td:not(:first-child) {
-                            border-left: 1px solid $table-grid;
+                            border-left: 1px solid $column-separator;
                         }
                     }
 
                     @include module.is-rtl() {
                         tbody tr td:not(:first-child) {
-                            border-right: 1px solid $table-grid;
+                            border-right: 1px solid $column-separator;
                         }
                     }
                 }
@@ -221,11 +227,11 @@
                 }
 
                 &.is-stripped > tbody > tr:nth-child(even) {
-                    background: $table-even;
+                    background: $striped-background;
                 }
 
                 &.is-hoverable > tbody > tr:hover {
-                    background: $table-hover;
+                    background: $hover-background;
                 }
 
                 @each $name, $color in module.colors($includes: $colors) {
@@ -237,7 +243,7 @@
                                 th {
                                     &.is-sorted {
                                         color: module.variant($name, "readable");
-                                        background-color: rgba($color, 0.05);
+                                        background-color: module.alpha($color, 0.05);
                                     }
 
                                     &.is-sortable {
@@ -258,7 +264,7 @@
                             tr {
                                 td {
                                     &.is-sorted {
-                                        background-color: rgba($color, 0.05);
+                                        background-color: module.alpha($color, 0.05);
                                     }
                                 }
                             }
@@ -269,7 +275,7 @@
                     tbody tr td:not(.is-sorted),
                     tfoot tr td:not(.is-sorted) {
                         &.is-#{$name} {
-                            background-color: rgba($color, 0.03);
+                            background-color: module.alpha($color, 0.03);
                         }
                     }
                 }
