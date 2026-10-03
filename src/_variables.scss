@@ -56,8 +56,8 @@
 @include module.define("strong", "weight", bold); // Strong text weight
 
 // Decorated text
+@include module.define("decorated", "weight", normal); // Decorated text weight
 @include module.define("decorated", "foreground", null); // Decorated text foreground
-@include module.define("decorated", "weight", bold); // Decorated text weight
 
 // Line heights
 @include module.define("line-height", "normal", 1.6em); // Default line height
@@ -82,7 +82,7 @@
 /** Theme */
 
 // Scheme
-@include module.define("base", "color", white); // Theme color (detect light/dark mode)
+@include module.define("base", "backround", white); // Theme color (detect light/dark mode)
 @include module.define("base", "foreground", #0d1b2a); // Default foreground
 @include module.define("base", "section", #f8f9fa); // Section background
 @include module.define("base", "separator", #e0e4eb); // Separator background
@@ -90,17 +90,17 @@
 // Table
 @include module.define("table", "background", null); // Table background
 @include module.define("table", "foreground", null); // Table foreground
-@include module.define("table", "even", null); // Even row background
-@include module.define("table", "hover", null); // Hover row background
-@include module.define("table", "grid", null); // Column divider background
-@include module.define("table", "separator", null); // Row divider background
-@include module.define("table", "divider", null); // Section divider background
-@include module.define("table", "sort-background", null); // Sorted column background
+@include module.define("table", "hover-background", null); // Hover row background
+@include module.define("table", "striped-background", null); // Even row background
+@include module.define("table", "column-separator", null); // Column divider background
+@include module.define("table", "row-separator", null); // Row divider background
+@include module.define("table", "section-separator", null); // Section divider background
+@include module.define("table", "sorted-background", null); // Sorted column background
 @include module.define("table", "strong-weight", null); // Strong content weight
 
 // Inputs
 @include module.define("input", "height", 2.8em); // Input height
-@include module.define("input", "checkbox", 1.2em); // Checkbox like height
+@include module.define("input", "checkbox", 1.2em); // Checkbox line height
 @include module.define("input", "background", white); // Input background
 @include module.define("input", "border", #d1d6e0); // Input border
 @include module.define("input", "placeholder", null); // Input placeholder color

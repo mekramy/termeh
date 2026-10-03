@@ -5,8 +5,7 @@
     --vp-font-family-base: "Ubuntu", "Segoe UI", Roboto, sans-serif;
 
     /* Code Snippet font */
-    --vp-font-family-mono: "Google Sans Code", monospace, Menlo, Monaco,
-        Consolas;
+    --vp-font-family-mono: "Google Sans Code", monospace, Menlo, Monaco, Consolas;
 }
 
 html {
@@ -34,10 +33,33 @@ html {
             font-size: 0.75em;
             letter-spacing: 1px;
             text-transform: uppercase;
-            color: var(
-                --ctp-mocha-red,
-                var(--ctp-latte-flamingo, var(--vp-c-brand-1))
-            );
+            color: var(--ctp-mocha-red, var(--ctp-latte-flamingo, var(--vp-c-brand-1)));
+        }
+    }
+
+    ul {
+        list-style-type: square;
+
+        li {
+            &::marker {
+                color: var(--vp-c-divider);
+            }
+
+            strong {
+                font-weight: bold;
+                font-size: 0.65em;
+                letter-spacing: 1px;
+                font-family: var(--vp-font-family-mono);
+                text-transform: uppercase;
+                color: var(--vp-c-text-2);
+            }
+
+            code {
+                font-weight: 600;
+                font-size: 0.8rem;
+                background-color: transparent;
+                font-family: var(--vp-font-family-mono);
+            }
         }
     }
 }

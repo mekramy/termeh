@@ -162,12 +162,12 @@ Monospace element (code, pre, ...) fonts.
 `<u>` and other decorated text elements.
 
 ```scss
+@include termeh.define("decorated", "weight", normal);
 @include termeh.define("decorated", "foreground", null);
-@include termeh.define("decorated", "weight", bold);
 ```
 
-- **foreground:** _[`color`]_ → Decorated text color (inherits if `null`).
 - **weight:** _[`font weight`]_ → Decorated text weight.
+- **foreground:** _[`color`]_ → Decorated text color (inherits if `null`).
 
 #### Line Heights
 
@@ -222,13 +222,13 @@ Monospace element (code, pre, ...) fonts.
 #### Scheme
 
 ```scss
-@include termeh.define("base", "color", white);
+@include termeh.define("base", "background", white);
 @include termeh.define("base", "foreground", #081e30);
 @include termeh.define("base", "section", #f8f9fa);
 @include termeh.define("base", "separator", #e0e4eb);
 ```
 
-- **color:** _[`color`]_ → Base theme color (detect light/dark mode).
+- **background:** _[`color`]_ → Base theme color (detect light/dark mode).
 - **foreground:** _[`color`]_ → Default text color.
 - **section:** _[`color`]_ → Section background color.
 - **separator:** _[`color`]_ → Divider/line color.
@@ -238,23 +238,23 @@ Monospace element (code, pre, ...) fonts.
 ```scss
 @include termeh.define("table", "background", null);
 @include termeh.define("table", "foreground", null);
-@include termeh.define("table", "even", null);
-@include termeh.define("table", "hover", null);
-@include termeh.define("table", "grid", null);
-@include termeh.define("table", "separator", null);
-@include termeh.define("table", "divider", null);
-@include termeh.define("table", "sort-background", null);
+@include termeh.define("table", "hover-background", null);
+@include termeh.define("table", "striped-background", null);
+@include termeh.define("table", "column-separator", null);
+@include termeh.define("table", "row-separator", null);
+@include termeh.define("table", "section-separator", null);
+@include termeh.define("table", "sorted-background", null);
 @include termeh.define("table", "strong-weight", null);
 ```
 
 - **background:** _[`color`]_ → Table background.
 - **foreground:** _[`color`]_ → Table text color.
-- **even:** _[`color`]_ → Background for even rows.
-- **hover:** _[`color`]_ → Row hover background.
-- **grid:** _[`color`]_ → Column dividers.
-- **separator:** _[`color`]_ → Row dividers.
-- **divider:** _[`color`]_ → Section dividers (header, footer, body).
-- **sort-background:** _[`color`]_ → Highlighted sorted column background.
+- **hover-background:** _[`color`]_ → Row hover background.
+- **striped-background:** _[`color`]_ → Background for even rows.
+- **column-separator:** _[`color`]_ → Column dividers.
+- **row-separator:** _[`color`]_ → Row dividers.
+- **section-separator:** _[`color`]_ → Section dividers (header, footer, body).
+- **sorted-background:** _[`color`]_ → Highlighted sorted column background.
 - **strong-weight:** _[`font weight`]_ → Emphasis text weight.
 
 #### Inputs

@@ -181,7 +181,7 @@ $-overrides: () !default;
         @return $defined;
     }
 
-    $base: var.value("base", "color", white);
+    $base: var.value("base", "background", white);
     $color: map.get($-colors, $name, "color");
     @return -variant($color, $base, $variant) or $fallback;
 }
@@ -204,7 +204,7 @@ $-overrides: () !default;
         @return $defined;
     }
 
-    $base: var.value($scheme, "color", null);
+    $base: var.scheme-value($scheme, "base", "background", null);
     $color: map.get($-overrides, $name, $scheme, "color");
     @if $color == null {
         $color: map.get($-colors, $name, "color");
@@ -249,7 +249,7 @@ $-overrides: () !default;
     $token: "color-#{$name}-#{$variant}";
     $value: map.get($-colors, $name, $variant);
     @if $value == null {
-        $base: var.value("base", "color", white);
+        $base: var.value("base", "background", white);
         $color: map.get($-colors, $name, "color");
         $value: -variant($color, $base, $variant) or $fallback;
     }
@@ -258,7 +258,7 @@ $-overrides: () !default;
     @each $scheme in scm.schemes() {
         $val: map.get($-overrides, $name, $scheme, $variant);
         @if $val == null {
-            $base: var.value($scheme, "color", null);
+            $base: var.scheme-value($scheme, "base", "background", null);
             $color: map.get($-overrides, $name, $scheme, "color");
             @if $color == null {
                 $color: map.get($-colors, $name, "color");

@@ -50,7 +50,7 @@ Overrides a component variable for a specific color scheme.
 **Example:**
 
 ```scss
-@include termeh.override("dark", "base", "color", #222);
+@include termeh.override("dark", "base", "background", #222);
 @include termeh.override("dark", "base", "foreground", white);
 ```
 
@@ -101,7 +101,7 @@ Returns the value of a component variable for a specific color scheme. Returns a
 
 ```scss
 $radius: termeh.scheme-value("dark", "radius", "normal", 0);
-$background: termeh.scheme-value("dark", "base", "color", #222);
+$background: termeh.scheme-value("dark", "base", "background", #222);
 ```
 
 :::
