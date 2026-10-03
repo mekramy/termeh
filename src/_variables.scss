@@ -75,14 +75,15 @@
 @include module.define("scroll", "thumb", null); // Scrollbar thumb background
 
 // Overlay
-@include module.define("overlay", "background", rgba(255, 255, 255, 0.75)); // Overlay background
-@include module.define("overlay", "foureground", null); // Overlay foreground
+@include module.define("overlay", "background", white); // Overlay background
+@include module.define("overlay", "foreground", null); // Overlay foreground
+@include module.define("overlay", "opacity", 0.75); // Overlay background opacity
 @include module.define("overlay", "filter", none); // Overlay backdrop filter
 
 /** Theme */
 
 // Scheme
-@include module.define("base", "backround", white); // Theme color (detect light/dark mode)
+@include module.define("base", "background", white); // Theme color (detect light/dark mode)
 @include module.define("base", "foreground", #0d1b2a); // Default foreground
 @include module.define("base", "section", #f8f9fa); // Section background
 @include module.define("base", "separator", #e0e4eb); // Separator background

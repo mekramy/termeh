@@ -208,13 +208,15 @@ Monospace element (code, pre, ...) fonts.
 #### Overlay
 
 ```scss
-@include termeh.define("overlay", "background", rgba(255, 255, 255, 0.75));
+@include termeh.define("overlay", "background", white);
 @include termeh.define("overlay", "foreground", null);
+@include termeh.define("overlay", "opacity", 0.75);
 @include termeh.define("overlay", "filter", none);
 ```
 
 - **background:** _[`color`]_ → Overlay background.
 - **foreground:** _[`color`]_ → Overlay foreground color.
+- **opacity:** _[`number`]_ → Overlay background opacity.
 - **filter:** _[`filter`]_ → Optional CSS filter (e.g., `blur(2px)`).
 
 ### Theme

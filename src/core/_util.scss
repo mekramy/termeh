@@ -125,6 +125,18 @@
     @return $result;
 }
 
+/// Generates a color with the specified alpha transparency.
+/// @param {Color | VAR} $value - Base color
+/// @param {Number} $opacity - Alpha transparency value (0 to 1)
+/// @return {Color} Color with applied alpha transparency
+///
+/// @throws If opacity not a valid number
+@function alpha($value, $opacity) {
+    $opacity: number-of($opacity, "alpha", "opacity");
+
+    @return rgb(from #{$value} r g b / #{$opacity});
+}
+
 /// Generates a standard translucent box shadow.
 /// @param {Number} $x - Horizontal offset
 /// @param {Number} $y - Vertical offset

@@ -179,6 +179,31 @@ color: fallback-vars((
 
 :::
 
+## Alpha
+
+Generates a color from `VAR` or color with the specified alpha transparency.
+
+::: error
+**throws** If opacity not a valid number.
+:::
+
+::: definition
+
+**Signature:**
+
+```scss
+@function alpha($value: ANY, $opacity: NUMBER): COLOR;
+```
+
+**Example:**
+
+```scss
+$transparent-black: termeh.alpha(black, 0.5); // rgb(from black r g b / 0.5)
+$transparent-primary: termeh.alpha(var(--termeh-primary-color), 0.3); // rgb(from var(--termeh-primary-color) r g b / 0.3)
+```
+
+:::
+
 ## Shadow
 
 Generates a standard translucent box shadow.
