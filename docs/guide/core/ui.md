@@ -4,45 +4,23 @@ A collection of utility mixins and functions for layout, spacing, controls, and 
 
 ## Marged
 
-Applies margin styles to non-last children unless the element has `.is-marginless`.
+Applies margin styles to children, excluding the last child and elements with `.is-marginless`
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@mixin marged($except-last: BOOLEAN = true);
+@mixin marged($exclude...);
 ```
 
 **Example:**
 
 ```scss
 .list-item {
-  @include termeh.marged {
+  @include termeh.marged(".is-fit") {
     margin-bottom: 1rem;
   }
-}
-```
-
-:::
-
-## Marginless
-
-Removes bottom margin from non-last, non-marginless elements.
-
-::: definition
-
-**Signature:**
-
-```scss
-@mixin marginless();
-```
-
-**Example:**
-
-```scss
-.list-item {
-  @include termeh.marginless;
 }
 ```
 
@@ -57,7 +35,7 @@ Applies padding styles unless the element has `.is-paddingless`.
 **Signature:**
 
 ```scss
-@mixin padded();
+@mixin padded($exclude...);
 ```
 
 **Example:**
@@ -72,23 +50,25 @@ Applies padding styles unless the element has `.is-paddingless`.
 
 :::
 
-## Paddingless
+## Gapped
 
-Removes padding from elements with `.is-paddingless`.
+Applies gap styles unless the element has `.is-gapless`.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@mixin paddingless();
+@mixin gapped($exclude...);
 ```
 
 **Example:**
 
 ```scss
-.card {
-  @include termeh.paddingless;
+.grid {
+  @include termeh.gapped {
+    gap: 1rem;
+  };
 }
 ```
 

@@ -4,41 +4,33 @@
 @use "util";
 @use "../animation";
 
-/// Applies margin styles to children, optionally excluding the last child
-/// and elements with `.is-marginless`.
-/// @param {Bool} $except-last [true] - Whether to exclude the last child
+/// Applies margin styles to children, excluding the last child and elements with `.is-marginless`.
 /// @content Margin styles to apply
-@mixin marged($except-last: true) {
-    @if $except-last {
-        &:not(:last-child, .is-marginless) {
-            @content;
-        }
-    } @else {
-        &:not(.is-marginless) {
-            @content;
-        }
-    }
-}
-
-/// Removes bottom margin from non-last children unless they are `.is-marginless`.
-@mixin marginless() {
-    &:not(:last-child, .is-marginless) {
-        margin-bottom: 0;
+/// @param {List} $exclude - List of additional selectors to exclude
+@mixin marged($exclude...) {
+    $skip: list.join(".is-marginless", $exclude, comma);
+    &:not(:last-child, #{$skip}) {
+        @content;
     }
 }
 
 /// Applies padding styles unless the element has `.is-paddingless`.
 /// @content Padding styles to apply
-@mixin padded() {
-    &:not(.is-paddingless) {
+/// @param {List} $exclude - List of additional selectors to exclude
+@mixin padded($exclude...) {
+    $skip: list.join(".is-paddingless", $exclude, comma);
+    &:not(#{$skip}) {
         @content;
     }
 }
 
-/// Removes padding from elements with `.is-paddingless`.
-@mixin paddingless() {
-    &:not(.is-paddingless) {
-        padding: 0;
+/// Applies gap styles unless the element has `.is-gapless`.
+/// @content Gap styles to apply
+/// @param {List} $exclude - List of additional selectors to exclude
+@mixin gapped($exclude...) {
+    $skip: list.join(".is-gapless", $exclude, comma);
+    &:not(#{$skip}) {
+        @content;
     }
 }
 
