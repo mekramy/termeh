@@ -4,9 +4,13 @@ outline: deep
 
 # What Is Termeh
 
-Termeh is a _Modern_, _responsive_, and _modular_ CSS framework for scalable UIs. It has no external dependencies and is written entirely in _Sass_. Termeh provides advanced tools for managing _contrast_, _colors_, _palettes_, and _responsive design_, making it a powerful choice for building flexible and accessible interfaces.
+Termeh is a _Modern_, _responsive_, _modular_, and _scheme based_ CSS framework for scalable UIs. It has no external dependencies and is written entirely in _Sass_. Termeh provides advanced tools for managing _contrast_, _colors_, _palettes_, and _responsive design_, making it a powerful choice for building flexible and accessible interfaces.
 
 This library includes a wide range of components and predefined styles for various parts of the UI, enabling faster and more consistent development.
+
+::: tip
+Termeh writes in modern CSS and requires _CSS logical properties and values_. This ensures better support for internationalization and more flexible layout handling.
+:::
 
 ## Installation
 
