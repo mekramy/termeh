@@ -2,8 +2,8 @@
 
 The color system provides a consistent way to define, manage, and retrieve colors and their variants across the design system. It supports base palettes, custom variants, and automatically generated variants based on theme contrast.
 
-::: tip
-**theming** Termeh's colors are scheme-based, meaning they can have different values depending on the active color scheme.
+::: scheme
+Colors are scheme-based, meaning they can have different values depending on the active color scheme.
 :::
 
 ## Define Palette
@@ -260,19 +260,19 @@ $primary-active: termeh.variant("primary", "active", #555); // var(--termeh-colo
 
 By default, Termeh resolves these variants through _auto-generation_:
 
-| Key             | Description                         |
-| --------------- | ----------------------------------- |
-| `active`        | Active state                        |
-| `light`         | Light version of color              |
-| `light-active`  | Light version active state          |
-| `mute`          | Muted text                          |
-| `mute-active`   | Muted text active state             |
-| `action`        | Action background                   |
-| `action-active` | Action background active state      |
-| `readable`      | Readable text color                 |
-| `foreground`    | Foreground color                    |
-| `decorator`     | Decorator color (separator, etc...) |
-| `color`         | Registered color itself             |
+| Key               | Description                         |
+|-------------------|-------------------------------------|
+| **active**        | Active state                        |
+| **light**         | Light version of color              |
+| **light-active**  | Light version active state          |
+| **mute**          | Muted text                          |
+| **mute-active**   | Muted text active state             |
+| **action**        | Action background                   |
+| **action-active** | Action background active state      |
+| **readable**      | Readable text color                 |
+| **foreground**    | Foreground color                    |
+| **decorator**     | Decorator color (separator, etc...) |
+| **color**         | Registered color itself             |
 
 :::
 

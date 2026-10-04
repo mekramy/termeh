@@ -4,26 +4,26 @@
 /// Applies table styles with configurable colors and behaviors
 /// @param {List} $colors [()] - List of registered color variants to generate. Pass null to include all registered palettes
 ///
-/// @param {Color} [error] - color("shade") -> fallback color for sort backgrounds and decorators
-/// @param {Color} [error] - color("primary") -> accent color for scrollbars
+/// @param {Color} [error] color("shade") - fallback color for sort backgrounds and decorators
+/// @param {Color} [error] color("primary") - accent color for scrollbars
 ///
-/// @param {Color} [null] - var("base", "section") -> fallback background for striped rows background
-/// @param {Color} [null] - var("base", "separator") -> fallback color for table separators
-/// @param {Font Weight} [bold] - var("strong", "weight") -> fallback font weight for headers
+/// @param {Color} [null] var("base", "section") - fallback background for striped rows background
+/// @param {Color} [null] var("base", "separator") - fallback color for table separators
+/// @param {Font Weight} [bold] var("strong", "weight") - fallback font weight for headers
 ///
-/// @param {Color} [null] - var("table", "background") -> main table background
-/// @param {Color} [null] - var("table", "foreground") -> default table text color
-/// @param {Color} [FALLBACK] - var("table", "decorator") -> sort decorator color
+/// @param {Color} [null] var("table", "background") - main table background
+/// @param {Color} [null] var("table", "foreground") - default table text color
+/// @param {Color} [FALLBACK] var("table", "decorator") - sort decorator color
 ///
-/// @param {Color} [FALLBACK] - var("table", "hover-background") -> hover row background
-/// @param {Color} [FALLBACK] - var("table", "striped-background") -> even row background
-/// @param {Color} [FALLBACK] - var("table", "sorted-background") -> sorted column background
+/// @param {Color} [FALLBACK] var("table", "hover-background") - hover row background
+/// @param {Color} [FALLBACK] var("table", "striped-background") - even row background
+/// @param {Color} [FALLBACK] var("table", "sorted-background") - sorted column background
 ///
-/// @param {Color} [null] - var("table", "column-separator") -> column separator color
-/// @param {Color} [FALLBACK] - var("table", "row-separator") -> row separator color
-/// @param {Color} [FALLBACK] - var("table", "section-separator") -> section separator color
+/// @param {Color} [null] var("table", "column-separator") - column separator color
+/// @param {Color} [FALLBACK] var("table", "row-separator") - row separator color
+/// @param {Color} [FALLBACK] var("table", "section-separator") - section separator color
 ///
-/// @param {Font Weight} [FALLBACK] - var("table", "strong-weight") -> strong font weight for headers
+/// @param {Font Weight} [FALLBACK] var("table", "strong-weight") - strong font weight for headers
 @mixin use-table($colors: ()) {
     @if not module.module-presented("table") {
         @include module.present-module("table");

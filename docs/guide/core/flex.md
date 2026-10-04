@@ -33,14 +33,14 @@ Gets a filtered map of flex aligns, returning both names and values, for iterati
 
 ::: dependencies Available Aligns
 
-| Key             | Value           |
-| --------------- | --------------- |
-| `flex-start`    | _flex-start_    |
-| `flex-end`      | _flex-end_      |
-| `center`        | _center_        |
-| `space-between` | _space-between_ |
-| `space-around`  | _space-around_  |
-| `space-evenly`  | _space-evenly_  |
+| Key               | Value           |
+|-------------------|-----------------|
+| **flex-start**    | _flex-start_    |
+| **flex-end**      | _flex-end_      |
+| **center**        | _center_        |
+| **space-between** | _space-between_ |
+| **space-around**  | _space-around_  |
+| **space-evenly**  | _space-evenly_  |
 
 :::
 
@@ -65,7 +65,7 @@ Gets a filtered map of flex justifies, returning both names and values, for iter
 
   @each $name, $justify in termeh.flex-justifies(null, ("stretch")) {
     &.is-#{$name}-justified {
-      justify-content: $align;
+      justify-content: $justify;
     }
   }
 }
@@ -73,15 +73,15 @@ Gets a filtered map of flex justifies, returning both names and values, for iter
 
 :::
 
-::: dependencies Available Aligns
+::: dependencies Available Justifies
 
-| Key             | Value           |
-| --------------- | --------------- |
-| `flex-start`    | _flex-start_    |
-| `flex-end`      | _flex-end_      |
-| `center`        | _center_        |
-| `space-between` | _space-between_ |
-| `space-around`  | _space-around_  |
-| `space-evenly`  | _space-evenly_  |
+| Key               | Value           |
+|-------------------|-----------------|
+| **flex-start**    | _flex-start_    |
+| **flex-end**      | _flex-end_      |
+| **center**        | _center_        |
+| **space-between** | _space-between_ |
+| **space-around**  | _space-around_  |
+| **space-evenly**  | _space-evenly_  |
 
 :::

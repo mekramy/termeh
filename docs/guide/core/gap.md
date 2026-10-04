@@ -2,8 +2,8 @@
 
 Termeh provides utilities to define and retrieve spacing gaps in a consistent and reusable way. You can create named gaps, access individual values, or filter sets of gaps for use in layouts and components.
 
-::: tip
-**theming** Termeh's gaps are scheme-based, meaning they can have different values depending on the active color scheme.
+::: scheme
+Gaps are scheme-based, meaning they can have different values depending on the active color scheme.
 :::
 
 ## Define Gap

@@ -2,8 +2,8 @@
 
 Termeh provides a centralized system for defining and retrieving component-specific variables. This allows for scoped, reusable, and easily maintainable styling across your project.
 
-::: tip
-**theming** Termeh's variables are scheme-based, meaning they can have different values depending on the active color scheme.
+::: scheme
+Variables are scheme-based, meaning they can have different values depending on the active color scheme.
 :::
 
 ## Define

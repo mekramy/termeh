@@ -39,14 +39,4 @@
             background: var(--vp-badge-warning-text);
         }
     }
-
-    &.is-tip {
-        color: var(--vp-badge-info-text);
-        background-color: var(--vp-badge-info-bg);
-        border-left: 3px solid var(--vp-badge-info-text);
-
-        > p strong {
-            background: var(--vp-badge-info-text);
-        }
-    }
 }

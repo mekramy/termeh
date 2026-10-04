@@ -501,19 +501,19 @@ $tablet-query: termeh.media-query("tablet"); // "screen and (min-width: 769px)"
 
 ::: dependencies Available Queries
 
-| Key                | Value                                                    |
-| ------------------ | -------------------------------------------------------- |
-| `until-fullhd`     | `screen and (max-width: 1407px)`                         |
-| `until-widescreen` | `screen and (max-width: 1215px)`                         |
-| `until-desktop`    | `screen and (max-width: 1023px)`                         |
-| `tablet`           | `screen and (min-width: 769px)`                          |
-| `desktop`          | `screen and (min-width: 1024px)`                         |
-| `widescreen`       | `screen and (min-width: 1216px)`                         |
-| `fullhd`           | `screen and (min-width: 1408px)`                         |
-| `mobile`           | `screen and (max-width: 768px)`                          |
-| `tablet-only`      | `screen and (min-width: 769px) and (max-width: 1023px)`  |
-| `desktop-only`     | `screen and (min-width: 1024px) and (max-width: 1215px)` |
-| `widescreen-only"` | `screen and (min-width: 1216px) and (max-width: 1407px)` |
+| Key                  | Value                                                    |
+|----------------------|----------------------------------------------------------|
+| **until-fullhd**     | `screen and (max-width: 1407px)`                         |
+| **until-widescreen** | `screen and (max-width: 1215px)`                         |
+| **until-desktop**    | `screen and (max-width: 1023px)`                         |
+| **tablet**           | `screen and (min-width: 769px)`                          |
+| **desktop**          | `screen and (min-width: 1024px)`                         |
+| **widescreen**       | `screen and (min-width: 1216px)`                         |
+| **fullhd**           | `screen and (min-width: 1408px)`                         |
+| **mobile**           | `screen and (max-width: 768px)`                          |
+| **tablet-only**      | `screen and (min-width: 769px) and (max-width: 1023px)`  |
+| **desktop-only**     | `screen and (min-width: 1024px) and (max-width: 1215px)` |
+| **widescreen-only**  | `screen and (min-width: 1216px) and (max-width: 1407px)` |
 
 :::
 
@@ -573,12 +573,12 @@ $desktop: termeh.breakpoint("desktop"); // 1024px
 
 ::: dependencies Available Devices
 
-| Key          | Value    |
-| ------------ | -------- |
-| `tablet`     | _769px_  |
-| `desktop`    | _1024px_ |
-| `widescreen` | _1216px_ |
-| `fullhd`     | _1408px_ |
+| Key            | Value    |
+|----------------|----------|
+| **tablet**     | _769px_  |
+| **desktop**    | _1024px_ |
+| **widescreen** | _1216px_ |
+| **fullhd**     | _1408px_ |
 
 :::
 

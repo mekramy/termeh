@@ -10,8 +10,8 @@ import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
 import Definition from "./definition";
 import Dependencies from "./dependencies";
 import ErrorBlock from "./error";
+import Scheme from "./scheme";
 import Sidebar from "./sidebar";
-import TipBlock from "./tip";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -48,7 +48,7 @@ export default defineConfig({
             md.use(groupIconMdPlugin);
             md.use(tabsMarkdownPlugin);
             md.use(container, "error", ErrorBlock);
-            md.use(container, "tip", TipBlock);
+            md.use(container, "scheme", Scheme);
             md.use(container, "definition", Definition);
             md.use(container, "dependencies", Dependencies);
         },

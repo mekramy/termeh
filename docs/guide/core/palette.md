@@ -29,17 +29,17 @@ $primary700: termeh.palette(#3498db, "700");
 
 ::: dependencies Available Variants
 
-| Key   | Description                    |
-| ----- | ------------------------------ |
-| `50`  | Brightest variant              |
-| `100` | Very light variant             |
-| `200` | Light variant                  |
-| `300` | Moderately light variant       |
-| `400` | Slightly light / base-adjacent |
-| `500` | Base / Original color          |
-| `600` | Slightly dark / base-adjacent  |
-| `700` | Moderately dark variant        |
-| `800` | Dark variant                   |
-| `900` | Darkest variant                |
+| Key     | Description                    |
+|---------|--------------------------------|
+| **50**  | Brightest variant              |
+| **100** | Very light variant             |
+| **200** | Light variant                  |
+| **300** | Moderately light variant       |
+| **400** | Slightly light / base-adjacent |
+| **500** | Base / Original color          |
+| **600** | Slightly dark / base-adjacent  |
+| **700** | Moderately dark variant        |
+| **800** | Dark variant                   |
+| **900** | Darkest variant                |
 
 :::

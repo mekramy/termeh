@@ -457,9 +457,9 @@ LTR-only styles. Applies styles when the global direction is _left-to-right_, or
 
 Global direction detected from the following Termeh global `var()`:
 
-| Component | Variable    | Type         | Default |
-| --------- | ----------- | ------------ | ------- |
-| `base`    | `direction` | _ltr \| rtl_ | `ltr`   |
+| Component | Variable      | Type         | Default |
+|-----------|---------------|--------------|---------|
+| **base**  | **direction** | _ltr \| rtl_ | `ltr`   |
 
 :::
 
@@ -492,9 +492,9 @@ RTL-only styles. Applies styles when the global direction is _right-to-left_, or
 
 Global direction detected from the following Termeh global `var()`:
 
-| Component | Variable    | Type         | Default |
-| --------- | ----------- | ------------ | ------- |
-| `base`    | `direction` | _ltr \| rtl_ | `ltr`   |
+| Component | Variable      | Type         | Default |
+|-----------|---------------|--------------|---------|
+| **base**  | **direction** | _ltr \| rtl_ | `ltr`   |
 
 :::
 
@@ -572,10 +572,10 @@ Returns the standard control padding as a shorthand list.
 
 Control padding is calculated from the following Termeh global `var()`:
 
-| Component | Variable    | Type     | Default |
-| --------- | ----------- | -------- | ------- |
-| `control` | `v-padding` | _NUMBER_ | `0`     |
-| `control` | `h-padding` | _NUMBER_ | `1.2em` |
+| Component   | Variable      | Type     | Default |
+|-------------|---------------|----------|---------|
+| **control** | **v-padding** | _NUMBER_ | `0`     |
+| **control** | **h-padding** | _NUMBER_ | `1.2em` |
 
 :::
 
@@ -605,9 +605,9 @@ Returns the standard inline element padding as a shorthand list.
 
 Inline padding is calculated from the following Termeh global `var()`:
 
-| Component | Variable | Type     | Default |
-| --------- | -------- | -------- | ------- |
-| `gap`     | `micro`  | _NUMBER_ | `8px`   |
+| Component | Variable  | Type     | Default |
+|-----------|-----------|----------|---------|
+| **gap**   | **micro** | _NUMBER_ | `8px`   |
 
 :::
 
@@ -637,10 +637,10 @@ Applies a standard transition using theme duration and easing.
 
 UI transitions are calculated from the following Termeh global `var()`:
 
-| Component    | Variable   | Type       | Default |
-| ------------ | ---------- | ---------- | ------- |
-| `transition` | `ease`     | _easing_   | `ease`  |
-| `transition` | `duration` | _duration_ | `250ms` |
+| Component      | Variable     | Type       | Default |
+|----------------|--------------|------------|---------|
+| **transition** | **ease**     | _easing_   | `ease`  |
+| **transition** | **duration** | _duration_ | `250ms` |
 
 :::
 
@@ -671,11 +671,11 @@ Applies disabled theming to form controls (colors and borders).
 
 The disabled style is derived from the following Termeh global `var()`:
 
-| Component | Variable              | Type    | Default |
-| --------- | --------------------- | ------- | ------- |
-| `input`   | `disabled`            | _color_ | `null`  |
-| `input`   | `disabled-foreground` | _color_ | `null`  |
-| `input`   | `disabled-border`     | _color_ | `null`  |
+| Component | Variable                | Type    | Default |
+|-----------|-------------------------|---------|---------|
+| **input** | **disabled**            | _color_ | `null`  |
+| **input** | **disabled-foreground** | _color_ | `null`  |
+| **input** | **disabled-border**     | _color_ | `null`  |
 
 :::
 
@@ -732,10 +732,10 @@ Provides a scrollable style with a themed scrollbar, where only the hover thumb 
 
 The scrollbar style is derived from the following Termeh global `var()`:
 
-| Component | Variable | Type     | Default |
-| --------- | -------- | -------- | ------- |
-| `scroll`  | `size`   | _NUMBER_ | `1rem`  |
-| `scroll`  | `track`  | _color_  | `null`  |
-| `scroll`  | `thumb`  | _color_  | `null`  |
+| Component  | Variable  | Type     | Default |
+|------------|-----------|----------|---------|
+| **scroll** | **size**  | _NUMBER_ | `1rem`  |
+| **scroll** | **track** | _color_  | `null`  |
+| **scroll** | **thumb** | _color_  | `null`  |
 
 :::

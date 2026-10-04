@@ -2,8 +2,8 @@
 
 Termeh provides utilities to define and retrieve text sizes and styles for UI components.
 
-::: tip
-**theming** Termeh's text sizes are scheme-based, meaning they can have different values depending on the active color scheme.
+::: scheme
+Text sizes are scheme-based, meaning they can have different values depending on the active color scheme.
 :::
 
 ## Define Text Size
@@ -185,12 +185,12 @@ span {
 
 ::: dependencies Available Text Aligns
 
-| Key       | Value            |
-| --------- | ---------------- |
-| `left`    | _left aligned_   |
-| `right`   | _right aligned_  |
-| `center`  | _center aligned_ |
-| `justify` | _justified_      |
+| Key         | Value            |
+|-------------|------------------|
+| **left**    | _left aligned_   |
+| **right**   | _right aligned_  |
+| **center**  | _center aligned_ |
+| **justify** | _justified_      |
 
 :::
 
@@ -221,15 +221,15 @@ $light: termeh.weight("light"); // 300
 
 ::: dependencies Available Weights
 
-| Key        | Value |
-| ---------- | ----- |
-| `lighter`  | _100_ |
-| `light`    | _300_ |
-| `normal`   | _400_ |
-| `medium`   | _500_ |
-| `semibold` | _600_ |
-| `bold`     | _700_ |
-| `bolder`   | _900_ |
+| Key          | Value |
+|--------------|-------|
+| **lighter**  | _100_ |
+| **light**    | _300_ |
+| **normal**   | _400_ |
+| **medium**   | _500_ |
+| **semibold** | _600_ |
+| **bold**     | _700_ |
+| **bolder**   | _900_ |
 
 :::
 
