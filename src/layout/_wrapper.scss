@@ -3,7 +3,7 @@
 /// Generates wrapper element styles with configurable gaps
 /// @param {List} $gaps [()] - List of registered gap names to include. Pass null to include all registered gaps
 ///
-/// @termeh {Number} [8px] - var("gap", "micro") -> default spacing between wrapper items
+/// @param {Number} [8px] var("gap", "micro") - default spacing between wrapper items
 @mixin use-wrapper($gaps: ()) {
     @if not module.module-presented("wrapper") {
         @include module.present-module("wrapper");
@@ -22,7 +22,7 @@
                     box-sizing: border-box;
                 }
 
-                &:not(.is-gapless) {
+                @include module.gapped() {
                     gap: $gap-micro;
 
                     @each $name, $gap in module.gaps($includes: $gaps) {

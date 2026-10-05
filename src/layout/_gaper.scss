@@ -3,8 +3,8 @@
 /// Generates gaper element styles with configurable gaps and alignments
 /// @param {List} $gaps [()] - List of registered gap names to include. Pass null to include all registered gaps
 ///
-/// @termeh {Color} [null] - var("base", "separator") -> default background color for separator elements
-/// @termeh {Number} [8px] - var("gap", "micro") -> default gap between gaper items
+/// @param {Color} [null] var("base", "separator") - default background color for divider
+/// @param {Number} [8px] var("gap", "micro") - default gap between gaper items
 @mixin use-gaper($gaps: ()) {
     @if not module.module-presented("gaper") {
         @include module.present-module("gaper");
@@ -68,7 +68,7 @@
                     }
                 }
 
-                &:not(.is-gapless) {
+                @include module.gapped() {
                     > .divider,
                     > .gutter {
                         display: block;
@@ -148,7 +148,7 @@
                             }
                         }
 
-                        &:not(.is-gapless, .is-auto) {
+                        @include module.gapped(".is-auto") {
                             &.is-#{$device}-stacked,
                             &.is-#{$device}-stacked-reverse {
                                 > .divider,

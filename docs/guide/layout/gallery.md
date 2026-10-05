@@ -144,12 +144,12 @@ This module is registered as `gallery` in the _presented modules_.
 
 Gallery module uses the following Termeh global `var()`:
 
-| Component                   | Type     | Usage                             | Default |
-| --------------------------- | -------- | --------------------------------- | ------- |
-| `gap` → `micro`             | _Number_ | Default gap between gallery items | `8px`   |
-| `gallery` → `height`        | _Number_ | Default item height in gallery    | `300px` |
-| `gallery` → `height-tablet` | _Number_ | Item height for tablet screens    | `200px` |
-| `gallery` → `height-mobile` | _Number_ | Item height for mobile screens    | `100px` |
+| Component   | Variable          | Type     | Usage                             | Default |
+|-------------|-------------------|----------|-----------------------------------|---------|
+| **gap**     | **micro**         | _Number_ | Default gap between gallery items | `8px`   |
+| **gallery** | **height**        | _Number_ | Default item height in gallery    | `300px` |
+| **gallery** | **height-tablet** | _Number_ | Item height for tablet screens    | `200px` |
+| **gallery** | **height-mobile** | _Number_ | Item height for mobile screens    | `100px` |
 
 :::
 

@@ -48,12 +48,12 @@ This module is registered as `container` in the _presented modules_.
 
 Container module uses the following Termeh global `var()`:
 
-| Component                  | Type     | Usage                                       | Default  |
-| -------------------------- | -------- | ------------------------------------------- | -------- |
-| `gap` → `macro`            | _Number_ | Default container padding and bottom margin | `1.6em`  |
-| `container` → `desktop`    | _Number_ | Max-width for desktop and smaller screens   | `960px`  |
-| `container` → `widescreen` | _Number_ | Max-width for widescreen devices            | `1200px` |
-| `container` → `fullhd`     | _Number_ | Max-width for full-HD and larger screens    | `1500px` |
+| Component     | Variable       | Type     | Usage                                       | Default  |
+|---------------|----------------|----------|---------------------------------------------|----------|
+| **gap**       | **macro**      | _Number_ | Default container padding and bottom margin | `1.6em`  |
+| **container** | **desktop**    | _Number_ | Maximum width at the desktop breakpoint     | `960px`  |
+| **container** | **widescreen** | _Number_ | Maximum width at the widescreen breakpoint  | `1200px` |
+| **container** | **fullhd**     | _Number_ | Max-width for full-HD and larger screens    | `1500px` |
 
 :::
 

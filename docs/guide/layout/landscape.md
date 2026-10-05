@@ -59,17 +59,17 @@ This module is registered as `landscape` in the _presented modules_.
 
 Landscape module uses the following Termeh global `var()`:
 
-| Component       | Type     | Usage                                   | Default |
-| --------------- | -------- | --------------------------------------- | ------- |
-| `gap` → `micro` | _Number_ | Default spacing between landscape items | `8px`   |
+| Component | Variable  | Type     | Usage                                   | Default |
+|-----------|-----------|----------|-----------------------------------------|---------|
+| **gap**   | **micro** | _Number_ | Default spacing between landscape items | `8px`   |
 
 ---
 
 Landscape module uses the following Termeh `color()`:
 
-| Color / Variant | Usage                      | Default |
-| --------------- | -------------------------- | ------- |
-| `primary`       | Accent color for scrollbar | _error_ |
+| Color       | Usage                      | Default |
+|-------------|----------------------------|---------|
+| **primary** | Accent color for scrollbar | _ERROR_ |
 
 :::
 

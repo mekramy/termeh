@@ -105,9 +105,9 @@ This module is registered as `grid` in the _presented modules_.
 
 Grid module uses the following Termeh global `var()`:
 
-| Component       | Type     | Usage                                         | Default |
-| --------------- | -------- | --------------------------------------------- | ------- |
-| `gap` → `macro` | _Number_ | Default spacing between grid rows and columns | `1.6em` |
+| Component | Variable  | Type     | Usage                                         | Default |
+|-----------|-----------|----------|-----------------------------------------------|---------|
+| **gap**   | **macro** | _Number_ | Default spacing between grid rows and columns | `1.6em` |
 
 :::
 

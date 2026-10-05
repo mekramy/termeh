@@ -2,7 +2,7 @@
 
 /// Generates attacher element styles with configurable alignments
 ///
-/// @termeh {Color} [null] - var("base", "separator") -> background color for separator elements
+/// @param {Color} [null] var("base", "separator") - Background color for `.divider` elements
 @mixin use-attacher() {
     @if not module.module-presented("attacher") {
         @include module.present-module("attacher");
@@ -19,33 +19,15 @@
                 > * {
                     flex: 0 0 auto;
                     margin: 0 !important;
-                }
 
-                @include module.is-ltr() {
-                    > * {
-                        &:not(:first-child) {
-                            border-top-left-radius: 0 !important;
-                            border-bottom-left-radius: 0 !important;
-                        }
-
-                        &:not(:last-child) {
-                            border-top-right-radius: 0 !important;
-                            border-bottom-right-radius: 0 !important;
-                        }
+                    &:not(:first-child) {
+                        border-start-start-radius: 0 !important;
+                        border-end-start-radius: 0 !important;
                     }
-                }
 
-                @include module.is-rtl() {
-                    > * {
-                        &:not(:first-child) {
-                            border-top-right-radius: 0 !important;
-                            border-bottom-right-radius: 0 !important;
-                        }
-
-                        &:not(:last-child) {
-                            border-top-left-radius: 0 !important;
-                            border-bottom-left-radius: 0 !important;
-                        }
+                    &:not(:last-child) {
+                        border-start-end-radius: 0 !important;
+                        border-end-end-radius: 0 !important;
                     }
                 }
 

@@ -56,9 +56,9 @@ This module is registered as `attacher` in the _presented modules_.
 
 Attacher module uses the following Termeh global `var()`:
 
-| Component            | Type    | Usage                                   | Default |
-| -------------------- | ------- | --------------------------------------- | ------- |
-| `base` → `separator` | _Color_ | Background color for separator elements | `null`  |
+| Component | Variable      | Type    | Usage                                    | Default |
+|-----------|---------------|---------|------------------------------------------|---------|
+| **base**  | **separator** | _Color_ | Background color for `.divider` elements | `null`  |
 
 :::
 

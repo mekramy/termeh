@@ -59,10 +59,10 @@ This module is registered as `gaper` in the _presented modules_.
 
 Gaper module uses the following Termeh global `var()`:
 
-| Component            | Type     | Usage                                           | Default |
-| -------------------- | -------- | ----------------------------------------------- | ------- |
-| `base` → `separator` | _Color_  | Default background color for separator elements | `null`  |
-| `gap` → `micro`      | _Number_ | Default gap between gaper items                 | `8px`   |
+| Component | Variable      | Type     | Usage                           | Default |
+|-----------|---------------|----------|---------------------------------|---------|
+| **base**  | **separator** | _Color_  | Background color for `.divider` | `null`  |
+| **gap**   | **micro**     | _Number_ | Default gap between gaper items | `8px`   |
 
 :::
 

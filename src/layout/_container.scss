@@ -3,10 +3,10 @@
 /// Generates container element styles with configurable paddings
 /// @param {List} $paddings [()] - List of registered gap names to include for padding
 ///
-/// @termeh {Number} [1.6em] - var("gap", "macro") -> default container padding and bottom margin
-/// @termeh {Number} [960px] - var("container", "desktop") -> max-width for desktop and smaller screens
-/// @termeh {Number} [1200px] - var("container", "widescreen") -> max-width for widescreen devices
-/// @termeh {Number} [1500px] - var("container", "fullhd") -> max-width for full-HD and larger screens
+/// @param {Number} [1.6em] var("gap", "macro") - default container padding and bottom margin
+/// @param {Number} [960px] var("container", "desktop") - max-width for desktop and smaller screens
+/// @param {Number} [1200px] var("container", "widescreen") - max-width for widescreen devices
+/// @param {Number} [1500px] var("container", "fullhd") - max-width for full-HD and larger screens
 @mixin use-container($paddings: ()) {
     @if not module.module-presented("container") {
         @include module.present-module("container");
@@ -18,9 +18,9 @@
 
         @at-root {
             .container {
-                max-width: 100%;
                 display: block;
                 position: relative;
+                max-width: 100%;
                 box-sizing: border-box;
 
                 @include module.marged() {
@@ -35,14 +35,10 @@
                     }
 
                     @include module.widescreen() {
-                        margin-left: auto;
-                        margin-right: auto;
                         max-width: $widescreen;
                     }
 
                     @include module.fullhd() {
-                        margin-left: auto;
-                        margin-right: auto;
                         max-width: $fullhd;
                     }
                 }

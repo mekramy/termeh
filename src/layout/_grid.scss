@@ -4,7 +4,7 @@
 /// @param {List} $gaps [()] - List of registered gap names to include. Pass null to include all registered gaps
 /// @param {List} $units [()] - List of registered unit names to include. Pass null to include all registered units
 ///
-/// @termeh {Number} [1.6em] - var("gap", "macro") -> default spacing between grid rows and columns
+/// @param {Number} [1.6em] var("gap", "macro") - default spacing between grid rows and columns
 @mixin use-grid($gaps: (), $units: ()) {
     @if not module.module-presented("grid") {
         @include module.present-module("grid");
@@ -43,7 +43,7 @@
                     }
                 }
 
-                &:not(.is-gapless) {
+                @include module.gapped() {
                     margin: module.negate(module.half($gap-macro));
 
                     > .column {

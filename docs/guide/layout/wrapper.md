@@ -67,9 +67,9 @@ This module is registered as `wrapper` in the _presented modules_.
 
 Wrapper module uses the following Termeh global `var()`:
 
-| Component       | Type     | Usage                                 | Default |
-| --------------- | -------- | ------------------------------------- | ------- |
-| `gap` → `micro` | _Number_ | Default spacing between wrapper items | `8px`   |
+| Component | Variable  | Type     | Usage                                 | Default |
+|-----------|-----------|----------|---------------------------------------|---------|
+| **gap**   | **micro** | _Number_ | Default spacing between wrapper items | `8px`   |
 
 :::
 
