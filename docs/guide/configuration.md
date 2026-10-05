@@ -188,10 +188,12 @@ Monospace element (code, pre, ...) fonts.
 ```scss
 @include termeh.define("transition", "ease", ease);
 @include termeh.define("transition", "duration", 250ms);
+@include termeh.define("transition", "delay", 100ms);
 ```
 
 - **ease:** _[`easing function`]_ → Default transition timing function.
 - **duration:** _[`time duration`]_ → Default transition speed.
+- **delay:** _[`time duration`]_ → Default transition delay.
 
 #### Scrollbar
 
@@ -265,7 +267,7 @@ Monospace element (code, pre, ...) fonts.
 
 ```scss
 @include termeh.define("input", "height", 2.8em);
-@include termeh.define("input", "checkbox", 1.2em);
+@include termeh.define("input", "checkbox", 1.3em);
 @include termeh.define("input", "background", white);
 @include termeh.define("input", "border", #d1d6e0);
 @include termeh.define("input", "placeholder", null);

@@ -68,6 +68,7 @@
 // Transitions
 @include module.define("transition", "ease", ease); // Default transition timing
 @include module.define("transition", "duration", 250ms); // Default transition duration
+@include module.define("transition", "delay", 100ms); // Delay for delayed-animations
 
 // Scrollbar
 @include module.define("scroll", "size", 10px); // Scrollbar width
@@ -102,7 +103,7 @@
 
 // Inputs
 @include module.define("input", "height", 2.8em); // Input height
-@include module.define("input", "checkbox", 1.2em); // Checkbox line height
+@include module.define("input", "checkbox", 1.3em); // Checkbox line height
 @include module.define("input", "background", white); // Input background
 @include module.define("input", "border", #d1d6e0); // Input border
 @include module.define("input", "placeholder", null); // Input placeholder color

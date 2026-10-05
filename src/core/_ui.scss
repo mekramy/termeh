@@ -50,8 +50,9 @@
 
 /// Disables pointer events and text selection
 @mixin locked() {
-    pointer-events: none;
+    cursor: default;
     user-select: none;
+    pointer-events: none;
 }
 
 /// Disables text selection across browsers
@@ -207,8 +208,9 @@
 
 /// Overlay layer with optional backdrop filter
 /// @param {Color} $background - Overlay background color
+/// @param {Number} $opacity - Overlay background opacity
 /// @param {String} $filter - Backdrop filter value
-@mixin overlay($background, $filter) {
+@mixin overlay($background, $opacity, $filter) {
     z-index: 0;
     position: relative;
 
@@ -217,7 +219,7 @@
         position: absolute;
         z-index: 1;
         inset: 0;
-        background: $background;
+        background: util.alpha($background, $opacity);
         backdrop-filter: $filter;
     }
 }
@@ -225,7 +227,7 @@
 /// LTR direction specific styles
 /// @content LTR-only styles
 ///
-/// @termeh {String} [ltr] - var("base", "direction") → Global text and layout direction
+/// @param {String} [ltr] var("base", "direction") - Global text and layout direction
 @mixin is-ltr() {
     @if var.var("base", "direction", "ltr") == "ltr" {
         @content;
@@ -239,7 +241,7 @@
 /// RTL direction specific styles
 /// @content RTL-only styles
 ///
-/// @termeh {String} [ltr] - var("base", "direction") → Global text and layout direction
+/// @param {String} [ltr] var("base", "direction") - Global text and layout direction
 @mixin is-rtl() {
     @if var.var("base", "direction", "ltr") == "rtl" {
         @content;
@@ -287,8 +289,8 @@
 /// Returns standard control padding values
 /// @return {List} Padding values
 ///
-/// @termeh {Number} [0] - var("control", "v-padding") → Global vertical padding for controls
-/// @termeh {Number} [1.2em] - var("control", "h-padding") → Global horizontal padding for controls
+/// @param {Number} [0] var("control", "v-padding") - Global vertical padding for controls
+/// @param {Number} [1.2em] var("control", "h-padding") - Global horizontal padding for controls
 @function control-padding() {
     @return var.var("control", "v-padding", 0em) var.var("control", "h-padding", 1.2em);
 }
@@ -296,7 +298,7 @@
 /// Returns standard inline element padding values
 /// @return {List} Padding values
 ///
-/// @termeh {Number} [8px] - var("gap", "micro") -> Global gap for inline elements
+/// @param {Number} [8px] var("gap", "micro") - Global gap for inline elements
 @function inline-padding() {
     $gap: var.var("gap", "micro", 8px);
     @return $gap util.double($gap);
@@ -305,20 +307,38 @@
 /// Standard transition effect
 /// @param {String} $fields - Properties to transition
 ///
-/// @termeh {String} [ease] - var("transition", "ease") -> Global transition easing function
-/// @termeh {Number} [250ms] - var("transition", "duration") -> Global transition speed
+/// @param {String} [ease] var("transition", "ease") - Global transition easing function
+/// @param {Number} [250ms] var("transition", "duration") - Global transition speed
 @mixin transition($fields) {
-    will-change: list.append($fields, (), "comma");
+    @if $fields != all {
+        will-change: list.append($fields, (), "comma");
+    }
     transition-property: list.append($fields, (), "comma");
     transition-timing-function: var.var("transition", "ease", linear);
     transition-duration: var.var("transition", "duration", 250ms);
 }
 
+/// Delayed transition effect
+/// @param {String} $fields - Properties to transition with a delay
+///
+/// @param {String} [ease] var("transition", "ease") - Global transition easing function
+/// @param {Number} [250ms] var("transition", "duration") - Global transition speed
+/// @param {Number} [100ms] var("transition", "delay") - Global transition delay
+@mixin delayed-transition($fields) {
+    @if $fields != all {
+        will-change: list.append($fields, (), "comma");
+    }
+    transition-property: list.append($fields, (), "comma");
+    transition-timing-function: var.var("transition", "ease", linear);
+    transition-duration: var.var("transition", "duration", 250ms);
+    transition-delay: var.var("transition", "delay", 100ms);
+}
+
 /// Disabled state styling
 ///
-/// @termeh {Color} [null] - var("input", "disabled-foreground") → Global disabled input text color
-/// @termeh {Color} [null] - var("input", "disabled") → Global disabled input background color
-/// @termeh {Color} [null] - var("input", "disabled-border") → Global disabled input border color
+/// @param {Color} [null] var("input", "disabled-foreground") - Global disabled input text color
+/// @param {Color} [null] var("input", "disabled") - Global disabled input background color
+/// @param {Color} [null] var("input", "disabled-border") - Global disabled input border color
 @mixin disabled() {
     opacity: 0.65;
     pointer-events: none;
@@ -345,9 +365,9 @@
 /// Scrollable container with themed scrollbar
 /// @param {Color} $color - Scrollbar thumb hover color
 ///
-/// @termeh {Number} [1rem] - var("scroll", "size") → Global scrollbar thickness
-/// @termeh {Color} [var("base", "section")] - var("scroll", "track") → Global scrollbar track background
-/// @termeh {Color} [var("base", "separator")] - var("scroll", "thumb") → Global scrollbar thumb color
+/// @param {Number} [1rem] var("scroll", "size") - Global scrollbar thickness
+/// @param {Color} [var("base", "section")] var("scroll", "track") - Global scrollbar track background
+/// @param {Color} [var("base", "separator")] var("scroll", "thumb") - Global scrollbar thumb color
 @mixin scrollable($color) {
     @include scrollbar(
         var.var("scroll", "size", 1rem),

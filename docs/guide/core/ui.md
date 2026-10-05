@@ -395,14 +395,14 @@ Creates a full-cover overlay via `::before`, with optional backdrop-filter.
 **Signature:**
 
 ```scss
-@mixin overlay($background: COLOR, $filter: CSS-FILTER);
+@mixin overlay($background: COLOR, $opacity: NUMBER, $filter: CSS-FILTER);
 ```
 
 **Example:**
 
 ```scss
 .dialog[aria-modal="true"] {
-  @include termeh.overlay(rgba(0, 0, 0, 0.5), blur(6px));
+  @include termeh.overlay(#222, 0.5, blur(6px));
 }
 ```
 
@@ -607,7 +607,7 @@ Applies a standard transition using theme duration and easing.
 
 ```scss
 .button {
-  @include termeh.transition(background-color, color);
+  @include termeh.transition((background-color color));
 }
 ```
 
@@ -621,6 +621,40 @@ UI transitions are calculated from the following Termeh global `var()`:
 |----------------|--------------|------------|---------|
 | **transition** | **ease**     | _easing_   | `ease`  |
 | **transition** | **duration** | _duration_ | `250ms` |
+
+:::
+
+## Delayed Transition
+
+Applies a standard transition with a delay using theme duration, easing, and delay.
+
+::: definition
+
+**Signature:**
+
+```scss
+@mixin delayed-transition($fields: LIST);
+```
+
+**Example:**
+
+```scss
+.button {
+  @include termeh.delayed-transition((background-color color));
+}
+```
+
+:::
+
+::: dependencies
+
+UI delayed transitions are calculated from the following Termeh global `var()`:
+
+| Component      | Variable     | Type       | Default |
+|----------------|--------------|------------|---------|
+| **transition** | **ease**     | _easing_   | `ease`  |
+| **transition** | **duration** | _duration_ | `250ms` |
+| **transition** | **delay**    | _duration_ | `100ms` |
 
 :::
 
