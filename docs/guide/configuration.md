@@ -267,23 +267,27 @@ Monospace element (code, pre, ...) fonts.
 
 ```scss
 @include termeh.define("input", "height", 2.8em);
-@include termeh.define("input", "checkbox", 1.3em);
-@include termeh.define("input", "background", white);
 @include termeh.define("input", "border", #d1d6e0);
+@include termeh.define("input", "background", white);
 @include termeh.define("input", "placeholder", null);
 @include termeh.define("input", "disabled", #f0f2f5);
 @include termeh.define("input", "disabled-foreground", #bfc6d4);
 @include termeh.define("input", "disabled-border", #d1d6e0);
+@include termeh.define("input", "checkbox", 1.3em);
+@include termeh.define("input", "legend-size", null);
+@include termeh.define("input", "legend-weight", null);
 ```
 
 - **height:** _[`number`]_ → Default input height.
-- **checkbox:** _[`number`]_ → Checkbox and radio size.
-- **background:** _[`color`]_ → Input background.
 - **border:** _[`color`]_ → Input border color.
+- **background:** _[`color`]_ → Input background.
 - **placeholder:** _[`color`]_ → Placeholder color.
 - **disabled:** _[`color`]_ → Disabled background.
 - **disabled-foreground:** _[`color`]_ → Disabled text color.
 - **disabled-border:** _[`color`]_ → Disabled border color.
+- **checkbox:** _[`number`]_ → Checkbox and radio size.
+- **legend-size:** _[`number`]_ → Fieldset legend text size.
+- **legend-weight:** _[`font weight`]_ → Fieldset legend text weight.
 
 #### Box
 

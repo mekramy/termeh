@@ -45,7 +45,7 @@
         $direction: module.var("base", "direction", ltr);
         $min-width: module.var("base", "min-width", 300px);
 
-        $radius: module.var("radius", "normal");
+        $radius-normal: module.var("radius", "normal");
         $line-height: module.var("line-height", "normal", 1.6em);
 
         $gap-micro: module.var("gap", "micro", 8px);
@@ -214,7 +214,7 @@
                 display: block;
                 padding: $gap-macro;
                 margin: $gap-macro 0;
-                border-radius: $radius;
+                border-radius: $radius-normal;
                 background-color: $base-section;
             }
 

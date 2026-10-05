@@ -34,7 +34,7 @@
         $fallback-decorator: $shade;
         $fallback-hover: module.alpha($shade, 0.1);
         $fallback-striped: module.var("base", "section");
-        $fallback-sorted: module.alpha($shade, 0.05);
+        $fallback-sorted: module.alpha($shade, 0.025);
         $fallback-row-separator: module.var("base", "separator");
         $fallback-section-separator: module.var("base", "separator");
         $fallback-strong: module.var("strong", "weight", bold);
@@ -235,7 +235,7 @@
                                 th {
                                     &.is-sorted {
                                         color: module.variant($name, "readable");
-                                        background-color: module.alpha($color, 0.05);
+                                        background-color: module.alpha($color, 0.025);
                                     }
 
                                     &.is-sortable {
@@ -256,7 +256,7 @@
                             tr {
                                 td {
                                     &.is-sorted {
-                                        background-color: module.alpha($color, 0.05);
+                                        background-color: module.alpha($color, 0.025);
                                     }
                                 }
                             }
@@ -267,7 +267,7 @@
                     tbody tr td:not(.is-sorted),
                     tfoot tr td:not(.is-sorted) {
                         &.is-#{$name} {
-                            background-color: module.alpha($color, 0.03);
+                            background-color: module.alpha($color, 0.025);
                         }
                     }
                 }

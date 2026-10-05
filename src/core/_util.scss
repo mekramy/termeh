@@ -132,8 +132,6 @@
 ///
 /// @throws If opacity not a valid number
 @function alpha($value, $opacity) {
-    $opacity: number-of($opacity, "alpha", "opacity");
-
     @return rgb(from #{$value} r g b / #{$opacity});
 }
 
