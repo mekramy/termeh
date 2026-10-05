@@ -1,35 +1,37 @@
 @use "../animation";
 @use "../core/module";
 
-/// Generates textarea input styles with configurable colors
-/// @param {List} $colors [()] - List of registered color names to include. Pass null to include all registered colors
+/// Generates textarea input styles with configurable colors.
+/// @param {List} $colors [()] - Registered color names for which to generate modifier styles. Pass null to include all registered colors.
 ///
-/// @termeh {Color} [error] - color("error") -> accent color for invalid state
-/// @termeh {Color} [error] - color("primary") -> default accent color
-/// @termeh {Color} [null] - var("base", "separator") -> fallback border color
-/// @termeh {Color} [null] - variant("shade", "mute") -> fallback placeholder color
-/// @termeh {Number} [null] - var("radius", "normal") -> default textarea border radius
-/// @termeh {Number} [8px] - var("gap", "micro") -> default textarea padding
-/// @termeh {Number} [1.6em] - var("line-height", "normal") -> textarea line height
-/// @termeh {Color} [FALLBACK] - var("input", "border") -> default textarea border color
-/// @termeh {Color} [FALLBACK] - var("input", "placeholder") -> default textarea placeholder color
-/// @termeh {Color} [white] - var("input", "background") -> default textarea background color
+/// @param {Color} [error] color("error") - Border color in the invalid state.
+/// @param {Color} [error] color("primary") - Default border color in the focused state and scrollbar accent color.
+/// @param {Color} [null] variant("shade", "mute") - Fallback placeholder color when no input placeholder color is configured.
+/// @param {Color} [null] var("base", "separator") - Fallback border color when no input border color is configured.
+///
+/// @param {Number} [null] var("radius", "normal") - Border radius of the textarea.
+/// @param {Number} [8px] var("gap", "micro") - Base padding unit; the resulting padding is twice this value on each side.
+/// @param {Number} [1.6em] var("line-height", "normal") - Text line height inside the textarea.
+///
+/// @param {Color} [FALLBACK] var("input", "border") - Textarea border color; falls back to the base separator color.
+/// @param {Color} [FALLBACK] var("input", "placeholder") - Placeholder text color; falls back to the muted shade variant.
+/// @param {Color} [white] var("input", "background") - Textarea background color.
 @mixin use-textarea($colors: ()) {
     @if not module.module-presented("form-textarea") {
         @include module.present-module("form-textarea");
 
         $error: module.color("error");
         $primary: module.color("primary");
-        $shade: module.variant("shade", "mute");
-        $separator: module.var("base", "separator", #eee);
+        $shade-mute: module.variant("shade", "mute");
+        $separator: module.var("base", "separator");
 
-        $radius: module.var("radius", "normal");
+        $radius-normal: module.var("radius", "normal");
         $gap-micro: module.var("gap", "micro", 8px);
         $line-height: module.var("line-height", "normal", 1.6em);
 
         $border: module.var("input", "border", $separator);
         $background: module.var("input", "background", white);
-        $placeholder: module.var("input", "placeholder", $shade);
+        $placeholder: module.var("input", "placeholder", $shade-mute);
 
         @at-root {
             @include animation.shake();
@@ -41,9 +43,9 @@
                 max-width: 100%;
                 resize: vertical;
                 overflow-y: auto;
-                padding: $gap-micro * 2;
+                padding: module.double($gap-micro);
                 line-height: $line-height;
-                border-radius: $radius;
+                border-radius: $radius-normal;
                 border: 1px solid $border;
                 background-color: $background;
                 @include module.scrollable($primary);
@@ -57,7 +59,7 @@
                     height: initial;
                 }
 
-                @include module.placeholder() {
+                &:placeholder {
                     color: $placeholder;
                 }
 

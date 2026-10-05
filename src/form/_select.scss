@@ -1,43 +1,47 @@
 @use "../animation";
 @use "../core/module";
 
-/// Generates select input styles with configurable colors
-/// @param {List} $colors [()] - List of registered color names to include. Pass null to include all registered colors
+/// Generates select input styles with configurable colors.
+/// @param {List} $colors [()] - Registered color names for which to generate modifier styles. Pass null to include all registered colors.
 ///
-/// @termeh {Color} [error] - color("error") -> accent color for invalid state
-/// @termeh {Color} [error] - color("primary") -> default accent color
-/// @termeh {Color} [null] - variant("primary", "foreground") -> default accent color
-/// @termeh {Color} [null] - variant("primary", "readable") -> default accent color
-/// @termeh {Color} [null] - var("base", "separator") -> fallback border color
-/// @termeh {Color} [null] - variant("shade", "mute") -> fallback placeholder color
-/// @termeh {Color} [null] - variant("base", "section") -> item hover background color
-/// @termeh {Number} [null] - var("radius", "normal") -> default input border radius
-/// @termeh {Number} [8px] - var("gap", "micro") -> spacing between select items
-/// @termeh {Number} [2.8em] - var("input", "height") -> input height
-/// @termeh {Color} [FALLBACK] - var("input", "border") -> default input border color
-/// @termeh {Color} [FALLBACK] - var("input", "placeholder") -> default input placeholder color
-/// @termeh {Color} [white] - var("input", "background") -> default input background color
-/// @termeh {Color} [null] - var("input", "disabled-foreground") -> disabled option text color
+/// @param {Color} [error] color("error") - Border color when the select is invalid and not focused or open.
+/// @param {Color} [primary] color("primary") - Default accent color for the focused or open select.
+/// @param {Color} [null] variant("primary", "foreground") - Text and picker-icon color while the select is focused or open.
+/// @param {Color} [null] variant("primary", "readable") - Text and checkmark color of the selected option.
+/// @param {Color} [null] variant("shade", "mute") - Fallback color for the placeholder and picker icon.
+/// @param {Color} [#eee] var("base", "separator") - Fallback border color when no input border color is configured.
+/// @param {Color} [null] var("base", "section") - Background color on enabled options while hovered.
+///
+/// @param {Number} [null] var("radius", "normal") - Border radius of the select control.
+/// @param {Number} [8px] var("gap", "micro") - Gap between contents inside an option.
+/// @param {Font Weight} [bold] var("strong", "weight") - Font weight of the selected option.
+///
+/// @param {Number} [2.8em] var("input", "height") - Height of the select control.
+/// @param {Color} [FALLBACK] var("input", "border") - Select border color; falls back to the base separator color.
+/// @param {Color} [white] var("input", "background") - Select background color.
+/// @param {Color} [FALLBACK] var("input", "placeholder") - Placeholder and picker-icon color; falls back to the muted shade variant.
+/// @param {Color} [null] var("input", "disabled-foreground") - Text color of disabled options.
 @mixin use-select($colors: ()) {
     @if not module.module-presented("form-select") {
         @include module.present-module("form-select");
 
         $error: module.color("error");
         $primary: module.color("primary");
-        $primary-color: module.variant("primary", "foreground");
+        $primary-foreground: module.variant("primary", "foreground");
         $primary-readable: module.variant("primary", "readable");
-        $shade: module.variant("shade", "mute");
+        $shade-mute: module.variant("shade", "mute");
         $separator: module.var("base", "separator", #eee);
         $section: module.var("base", "section");
 
-        $radius: module.var("radius", "normal");
+        $radius-normal: module.var("radius", "normal");
         $gap-micro: module.var("gap", "micro", 8px);
+        $strong-weight: module.var("strong", "weight", bold);
 
         $height: module.var("input", "height", 2.8em);
         $border: module.var("input", "border", $separator);
         $background: module.var("input", "background", white);
-        $placeholder: module.var("input", "placeholder", $shade);
-        $disabled: module.var("input", "disabled-foreground");
+        $placeholder: module.var("input", "placeholder", $shade-mute);
+        $disabled-foreground: module.var("input", "disabled-foreground");
 
         @at-root {
             @include animation.shake();
@@ -52,15 +56,11 @@
                 max-width: 100%;
                 height: $height;
                 line-height: 1em;
-                border-radius: $radius;
+                border-radius: $radius-normal;
                 border: 1px solid $border;
                 background-color: $background;
                 padding: module.inline-padding();
                 @include module.transition(all);
-
-                @include module.placeholder() {
-                    color: $placeholder;
-                }
 
                 &,
                 &::picker(select) {
@@ -74,6 +74,10 @@
                 &::picker-icon {
                     color: $placeholder;
                     @include module.transition(transform);
+                }
+
+                &:placeholder {
+                    color: $placeholder;
                 }
 
                 &:open {
@@ -91,7 +95,7 @@
 
                     &:checked {
                         color: $primary-readable;
-                        font-weight: bold;
+                        font-weight: $strong-weight;
                     }
 
                     &::checkmark {
@@ -100,7 +104,7 @@
 
                     &:disabled {
                         cursor: default;
-                        color: $disabled;
+                        color: $disabled-foreground;
                     }
 
                     &:not(:disabled):hover {
@@ -111,16 +115,16 @@
                 &:focus,
                 &:open,
                 &.is-focused {
-                    border-color: $primary;
-                    color: $primary-color;
+                    color: $primary-foreground;
                     background-color: $primary;
+                    border-color: $primary;
 
                     &::picker(select) {
                         border-color: $primary;
                     }
 
                     &::picker-icon {
-                        color: $primary-color;
+                        color: $primary-foreground;
                     }
                 }
 
@@ -143,9 +147,9 @@
                         &.is-focused {
                             $-foreground: module.variant($name, "foreground");
 
-                            border-color: $color;
                             color: $-foreground;
                             background-color: $color;
+                            border-color: $color;
 
                             &::picker(select) {
                                 border-color: $color;

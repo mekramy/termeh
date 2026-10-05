@@ -80,13 +80,14 @@ This module is registered as `form-fieldset` in the _presented modules_.
 
 Fieldset module uses the following Termeh global `var()`:
 
-| Component            | Type     | Usage                                                | Default    |
-| -------------------- | -------- | ---------------------------------------------------- | ---------- |
-| `base` → `separator` | _Color_  | _Fallback_ border color                              | `null`     |
-| `radius` → `normal`  | _Number_ | Default fieldset border radius                       | `null`     |
-| `gap` → `macro`      | _Number_ | Default inner padding and bottom margin for fieldset | `1.6em`    |
-| `input` → `legend`   | _String_ | Legend element font weight                           | `normal`   |
-| `input` → `border`   | _Color_  | Fieldset border color                                | _FALLBACK_ |
+| Component  | Variable          | Type          | Usage                                      | Default    |
+|------------|-------------------|---------------|--------------------------------------------|------------|
+| **base**   | **separator**     | _Color_       | Fallback fieldset border color             | `null`     |
+| **radius** | **normal**        | _Number_      | Fieldset border radius                     | `null`     |
+| **gap**    | **macro**         | _Number_      | Fieldset padding and bottom margin         | `1.6em`    |
+| **input**  | **border**        | _Color_       | Border color; falls back to base separator | _FALLBACK_ |
+| **input**  | **legend-size**   | _Number_      | Legend font size                           | `null`     |
+| **input**  | **legend-weight** | _Font Weight_ | Legend font weight                         | `normal`   |
 
 :::
 

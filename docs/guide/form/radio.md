@@ -80,25 +80,25 @@ This module is registered as `form-radio` in the _presented modules_.
 
 Radio module uses the following Termeh global `var()`:
 
-| Component                       | Type     | Usage                           | Default    |
-| ------------------------------- | -------- | ------------------------------- | ---------- |
-| `base` → `separator`            | _Color_  | _Fallback_ border color         | `null`     |
-| `radius` → `normal`             | _Number_ | Default input border radius     | `null`     |
-| `gap` → `micro`                 | _Number_ | Spacing between input and label | `8px`      |
-| `input` → `height`              | _Number_ | Input height                    | `2.8em`    |
-| `input` → `checkbox`            | _Number_ | Radio item height               | `1.2em`    |
-| `input` → `border`              | _Color_  | Default input border color      | _FALLBACK_ |
-| `input` → `disabled-foreground` | _Color_  | Disabled input accent color     | `null`     |
-| `input` → `disabled-border`     | _Color_  | Disabled input border color     | `null`     |
+| Component  | Variable                | Type     | Usage                                              | Default    |
+|------------|-------------------------|----------|----------------------------------------------------|------------|
+| **base**   | **separator**           | _Color_  | Fallback radio border color                        | `null`     |
+| **radius** | **circle**              | _Number_ | Radio control and selected dot border radius       | `50%`      |
+| **gap**    | **micro**               | _Number_ | Space between radio control and label              | `8px`      |
+| **input**  | **height**              | _Number_ | Radio label row height                             | `2.8em`    |
+| **input**  | **checkbox**            | _Number_ | Radio control width and height                     | `1.2em`    |
+| **input**  | **border**              | _Color_  | Radio border color; falls back to `base.separator` | _FALLBACK_ |
+| **input**  | **disabled-foreground** | _Color_  | Label and selected dot color when disabled         | `null`     |
+| **input**  | **disabled-border**     | _Color_  | Radio border color when disabled                   | `null`     |
 
 ---
 
 Radio module uses the following Termeh `color()`:
 
-| Color / Variant | Usage                          | Default |
-| --------------- | ------------------------------ | ------- |
-| `error`         | Accent color for invalid state | _error_ |
-| `primary`       | Default accent color           | _error_ |
+| Color       | Usage                               | Default |
+|-------------|-------------------------------------|---------|
+| **error**   | Invalid border/selected-dot color   | _error_ |
+| **primary** | Focus border and selected-dot color | _error_ |
 
 :::
 

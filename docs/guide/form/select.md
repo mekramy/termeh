@@ -118,29 +118,30 @@ This module is registered as `form-select` in the _presented modules_.
 
 Select module uses the following Termeh global `var()`:
 
-| Component                       | Type     | Usage                           | Default    |
-| ------------------------------- | -------- | ------------------------------- | ---------- |
-| `base` → `separator`            | _Color_  | _Fallback_ border color         | `null`     |
-| `radius` → `normal`             | _Number_ | Default input border radius     | `null`     |
-| `gap` → `micro`                 | _Number_ | Spacing between select items    | `8px`      |
-| `input` → `height`              | _Number_ | Input height                    | `2.8em`    |
-| `input` → `border`              | _Color_  | Default input border color      | _FALLBACK_ |
-| `input` → `placeholder`         | _Color_  | Default input placeholder color | _FALLBACK_ |
-| `input` → `background`          | _Color_  | Default input background color  | `white`    |
-| `input` → `disabled-foreground` | _Color_  | Disabled option text color      | `null`     |
+| Component  | Variable                | Type          | Usage                                                   | Default    |
+|------------|-------------------------|---------------|---------------------------------------------------------|------------|
+| **base**   | **separator**           | _Color_       | Fallback select border color                            | `#eee`     |
+| **base**   | **section**             | _Color_       | Hover background for enabled options                    | `null`     |
+| **radius** | **normal**              | _Number_      | Select border radius                                    | `null`     |
+| **gap**    | **micro**               | _Number_      | Gap between contents in an option                       | `8px`      |
+| **strong** | **weight**              | _Font Weight_ | Font weight of the selected option                      | `bold`     |
+| **input**  | **height**              | _Number_      | Select control height                                   | `2.8em`    |
+| **input**  | **border**              | _Color_       | Select border color; falls back to `base.separator`     | _FALLBACK_ |
+| **input**  | **background**          | _Color_       | Select background                                       | `white`    |
+| **input**  | **placeholder**         | _Color_       | Placeholder and picker icon; falls back to `shade.mute` | _FALLBACK_ |
+| **input**  | **disabled-foreground** | _Color_       | Text color for disabled options                         | `null`     |
 
 ---
 
 Select module uses the following Termeh `color()` and `variant()`:
 
-| Color / Variant          | Usage                          | Default |
-| ------------------------ | ------------------------------ | ------- |
-| `error`                  | Accent color for invalid state | _error_ |
-| `primary`                | Default accent color           | _error_ |
-| `primary` → `foreground` | Default accent color           | `null`  |
-| `primary` → `readable`   | Default accent color           | `null`  |
-| `shade` → `mute`         | _Fallback_ placeholder color   | `null`  |
-| `base` → `section`       | Item hover background color    | `null`  |
+| Color       | Variant        | Usage                                             | Default   |
+|-------------|----------------|---------------------------------------------------|-----------|
+| **error**   |                | Border color when invalid and not focused or open | _error_   |
+| **primary** |                | Focus/open accent color                           | _primary_ |
+| **primary** | **foreground** | Text and picker-icon color when focused or open   | `null`    |
+| **primary** | **readable**   | Selected-option text and checkmark color          | `null`    |
+| **shade**   | **mute**       | Fallback placeholder and picker-icon color        | `null`    |
 
 :::
 

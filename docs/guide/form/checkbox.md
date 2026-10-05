@@ -80,25 +80,28 @@ This module is registered as `form-checkbox` in the _presented modules_.
 
 Checkbox module uses the following Termeh global `var()`:
 
-| Component                       | Type     | Usage                           | Default    |
-| ------------------------------- | -------- | ------------------------------- | ---------- |
-| `base` → `separator`            | _Color_  | _Fallback_ border color         | `null`     |
-| `radius` → `normal`             | _Number_ | Default input border radius     | `null`     |
-| `gap` → `micro`                 | _Number_ | Spacing between input and label | `8px`      |
-| `input` → `height`              | _Number_ | Input height                    | `2.8em`    |
-| `input` → `checkbox`            | _Number_ | Checkbox item height            | `1.2em`    |
-| `input` → `border`              | _Color_  | Default input border color      | _FALLBACK_ |
-| `input` → `disabled-foreground` | _Color_  | Disabled input accent color     | `null`     |
-| `input` → `disabled-border`     | _Color_  | Disabled input border color     | `null`     |
+| Component     | Variable                | Type     | Usage                                                 | Default    |
+|---------------|-------------------------|----------|-------------------------------------------------------|------------|
+| **base**      | **separator**           | _Color_  | Fallback checkbox border color                        | `null`     |
+| **radius**    | **normal**              | _Number_ | Checkbox control border radius                        | `null`     |
+| **gap**       | **micro**               | _Number_ | Space between the checkbox and its label              | `8px`      |
+| **decorator** | **size**                | _Number_ | Checkmark stroke thickness                            | `2px`      |
+| **input**     | **height**              | _Number_ | Checkbox label row height                             | `2.8em`    |
+| **input**     | **checkbox**            | _Number_ | Checkbox control width and height                     | `1.2em`    |
+| **input**     | **border**              | _Color_  | Checkbox border color; falls back to `base.separator` | _FALLBACK_ |
+| **input**     | **disabled-foreground** | _Color_  | Label and checkmark color in the disabled state       | `null`     |
+| **input**     | **disabled-border**     | _Color_  | Checkbox border color in the disabled state           | `null`     |
 
 ---
 
-Checkbox module uses the following Termeh `color()`:
+Checkbox module uses the following Termeh `color()` and `variant()`:
 
-| Color / Variant | Usage                          | Default |
-| --------------- | ------------------------------ | ------- |
-| `error`         | Accent color for invalid state | _error_ |
-| `primary`       | Default accent color           | _error_ |
+| Color       | Variant        | Usage                           | Default |
+|-------------|----------------|---------------------------------|---------|
+| **error**   |                | Invalid border and checked fill | _error_ |
+| **primary** |                | Focus border and checked fill   | _error_ |
+| **error**   | **foreground** | Invalid-state checkmark color   | `null`  |
+| **primary** | **foreground** | Checked-state checkmark color   | `null`  |
 
 :::
 

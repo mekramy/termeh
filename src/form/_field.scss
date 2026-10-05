@@ -1,22 +1,26 @@
 @use "../core/module";
 
-/// Generates field element styles with configurable colors
-/// @param {List} $colors [()] - List of registered color names to include. Pass null to include all registered colors
+/// Generates field element styles with configurable colors.
+/// @param {List} $colors [()] - Registered color names for which to generate modifier styles. Pass null to include all registered colors.
 ///
-/// @termeh {Color} [null] - variant("shade", "readable") -> help block text color
-/// @termeh {Color} [null] - variant("primary", "readable") -> default required indicator color
-/// @termeh {Color} [null] - variant("error", "readable") -> error block text color
-/// @termeh {Number} [8px] - var("gap", "micro") -> spacing between blocks
-/// @termeh {Number} [1.6em] - var("gap", "macro") -> bottom margin for input blocks
+/// @param {Color} [null] variant("shade", "readable") - Text color for help text.
+/// @param {Color} [null] variant("primary", "readable") - Default color for the required-field indicator.
+/// @param {Color} [null] variant("error", "readable") - Text color for validation errors.
+///
+/// @param {Number} [8px] var("gap", "micro") - Bottom spacing between field contents, excluding help and error elements.
+/// @param {Number} [1.6em] var("gap", "macro") - Bottom margin after each field.
+/// @param {Font Weight} [bold] var("strong", "weight") - Font weight of the required-field indicator.
 @mixin use-field($colors: ()) {
     @if not module.module-presented("form-field") {
         @include module.present-module("form-field");
 
-        $shade: module.variant("shade", "readable");
-        $primary: module.variant("primary", "readable");
-        $error: module.variant("error", "readable");
+        $shade-readable: module.variant("shade", "readable");
+        $primary-readable: module.variant("primary", "readable");
+        $error-readable: module.variant("error", "readable");
+
         $gap-micro: module.var("gap", "micro", 8px);
         $gap-macro: module.var("gap", "macro", 1.6em);
+        $strong-weight: module.var("strong", "weight", bold);
 
         @at-root {
             .field {
@@ -26,8 +30,10 @@
                     margin-bottom: $gap-macro;
                 }
 
-                > :not(:last-child, .is-marginless, .help, .error) {
-                    margin-bottom: $gap-micro;
+                > * {
+                    @include module.marged(".help", ".error") {
+                        margin-bottom: $gap-micro;
+                    }
                 }
 
                 > label,
@@ -36,20 +42,20 @@
                 }
 
                 .help {
-                    color: $shade;
+                    color: $shade-readable;
                 }
 
                 .error {
                     display: none;
-                    color: $error;
+                    color: $error-readable;
                 }
 
                 &.is-required {
                     > label::after,
                     .field-label::after {
                         content: " *";
-                        color: $primary;
-                        font-weight: bold;
+                        color: $primary-readable;
+                        font-weight: $strong-weight;
                     }
                 }
 

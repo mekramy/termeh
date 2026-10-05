@@ -1,33 +1,36 @@
 @use "../animation";
 @use "../core/module";
 
-/// Generates input element styles with configurable gaps and colors
-/// @param {List} $gaps [()] - List of registered gap names to include. Pass null to include all registered gaps
-/// @param {List} $colors [()] - List of registered color names to include. Pass null to include all registered colors
+/// Generates input element styles with configurable gaps and colors.
+/// @param {List} $gaps [()] - Registered gap names for which to generate size modifier styles. Pass null to include all registered gaps.
+/// @param {List} $colors [()] - Registered color names for which to generate color modifier styles. Pass null to include all registered colors.
 ///
-/// @termeh {Color} [error] - color("error") -> accent color for invalid state
-/// @termeh {Color} [error] - color("primary") -> default accent color
-/// @termeh {Color} [null] - var("base", "separator") -> fallback border color
-/// @termeh {Color} [null] - variant("shade", "mute") -> fallback placeholder color
-/// @termeh {Number} [null] - var("radius", "normal") -> default input border radius
-/// @termeh {Number} [2.8em] - var("input", "height") -> input height
-/// @termeh {Color} [FALLBACK] - var("input", "border") -> default input border color
-/// @termeh {Color} [FALLBACK] - var("input", "placeholder") -> default input placeholder color
-/// @termeh {Color} [white] - var("input", "background") -> default input background color
+/// @param {Color} [error] color("error") - Border color in the invalid state.
+/// @param {Color} [primary] color("primary") - Default border color in the focused state.
+/// @param {Color} [null] variant("shade", "mute") - Fallback placeholder color when no input placeholder color is configured.
+/// @param {Color} [null] var("base", "separator") - Fallback border color when no input border color is configured.
+///
+/// @param {Number} [null] var("radius", "normal") - Border radius of the input wrapper.
+/// @param {Number} [2.8em] var("input", "height") - Height of the input wrapper.
+///
+/// @param {Color} [FALLBACK] var("input", "border") - Input wrapper border color; falls back to the base separator color.
+/// @param {Color} [white] var("input", "background") - Input wrapper background color.
+/// @param {Color} [FALLBACK] var("input", "placeholder") - Placeholder text color; falls back to the muted shade variant.
 @mixin use-input($gaps: (), $colors: ()) {
     @if not module.module-presented("form-input") {
         @include module.present-module("form-input");
 
         $error: module.color("error");
         $primary: module.color("primary");
-        $separator: module.var("base", "separator", #eee);
-        $shade: module.variant("shade", "mute");
+        $shade-muted: module.variant("shade", "mute");
+        $separator: module.var("base", "separator");
 
-        $radius: module.var("radius", "normal");
+        $radius-normal: module.var("radius", "normal");
         $height: module.var("input", "height", 2.8em);
+
         $border: module.var("input", "border", $separator);
         $background: module.var("input", "background", white);
-        $placeholder: module.var("input", "placeholder", $shade);
+        $placeholder: module.var("input", "placeholder", $shade-muted);
 
         @at-root {
             @include animation.shake();
@@ -38,7 +41,7 @@
                 flex-flow: row nowrap;
                 height: $height;
                 line-height: 1em;
-                border-radius: $radius;
+                border-radius: $radius-normal;
                 border: 1px solid $border;
                 background-color: $background;
                 padding: module.inline-padding();
@@ -70,7 +73,7 @@
                     flex: 1 1 0;
                     border-radius: 0;
 
-                    @include module.placeholder {
+                    &::placeholder {
                         color: $placeholder;
                     }
                 }

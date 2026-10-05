@@ -1,28 +1,31 @@
 @use "../animation";
 @use "../core/module";
 
-/// Generates radio input styles with configurable colors
-/// @param {List} $colors [()] - List of registered color names to include. Pass null to include all registered colors
+/// Generates radio input styles with configurable colors.
+/// @param {List} $colors [()] - Registered color names for which to generate modifier styles. Pass null to include all registered colors.
 ///
-/// @termeh {Color} [error] - color("error") -> accent color for invalid state
-/// @termeh {Color} [error] - color("primary") -> default accent color
-/// @termeh {Color} [null] - var("base", "separator") -> fallback border color
-/// @termeh {Number} [null] - var("radius", "normal") -> default input border radius
-/// @termeh {Number} [8px] - var("gap", "micro") -> spacing between input and label
-/// @termeh {Number} [2.8em] - var("input", "height") -> input height
-/// @termeh {Number} [1.2em] - var("input", "checkbox") -> radio item height
-/// @termeh {Color} [FALLBACK] - var("input", "border") -> default input border color
-/// @termeh {Color} [null] - var("input", "disabled-foreground") -> disabled input accent color
-/// @termeh {Color} [null] - var("input", "disabled-border") -> disabled input border color
+/// @param {Color} [error] color("error") - Radio border and selected-dot color in the invalid state.
+/// @param {Color} [primary] color("primary") - Default radio focus and selected-dot color.
+/// @param {Color} [null] var("base", "separator") - Fallback border color when no input border color is configured.
+///
+/// @param {Number} [50%] var("radius", "circle") - Border radius of the radio control and selected dot.
+/// @param {Number} [8px] var("gap", "micro") - Space between the radio control and its label.
+///
+/// @param {Number} [2.8em] var("input", "height") - Height of the radio label row.
+/// @param {Number} [1.2em] var("input", "checkbox") - Width and height of the radio control.
+///
+/// @param {Color} [FALLBACK] var("input", "border") - Radio border color; falls back to the base separator color.
+/// @param {Color} [null] var("input", "disabled-foreground") - Label and selected-dot color in the disabled state.
+/// @param {Color} [null] var("input", "disabled-border") - Radio border color in the disabled state.
 @mixin use-radio($colors: ()) {
     @if not module.module-presented("form-radio") {
         @include module.present-module("form-radio");
 
         $error: module.color("error");
         $primary: module.color("primary");
-        $separator: module.var("base", "separator", #eee);
+        $separator: module.var("base", "separator");
 
-        $radius: module.var("radius", "circle", 50%);
+        $radius-circle: module.var("radius", "circle", 50%);
         $gap-micro: module.var("gap", "micro", 8px);
 
         $height: module.var("input", "height", 2.8em);
@@ -48,21 +51,15 @@
                 box-sizing: border-box;
 
                 input[type="radio"] {
-                    -webkit-appearance: none;
-                    -moz-appearance: none;
-                    appearance: none;
+                    @include module.control();
                     display: grid;
                     place-content: center;
-                    overflow: hidden;
-                    margin: 0;
-                    font: inherit;
                     width: $size;
                     height: $size;
-                    border-radius: $radius;
+                    border-radius: $radius-circle;
                     border: 1px solid $border;
                     cursor: pointer;
                     flex: 0 0 auto;
-                    box-shadow: module.flat-shadow(0, rgba($primary, 0.25));
                     @include module.transition(all);
 
                     &::after {
@@ -72,9 +69,9 @@
                         display: block;
                         box-sizing: border-box;
                         transform: scale(0);
-                        border-radius: $radius;
+                        border-radius: $radius-circle;
                         background-color: $primary;
-                        @include module.transition(all);
+                        @include module.transition(transform);
                     }
 
                     &:focus,
@@ -83,8 +80,6 @@
                     }
 
                     &:checked {
-                        box-shadow: module.flat-shadow(5px, rgba($primary, 0));
-
                         &::after {
                             transform: scale(0.6);
                         }
@@ -93,8 +88,6 @@
 
                 @each $name, $color in module.colors($includes: $colors) {
                     &.is-#{$name} input[type="radio"] {
-                        box-shadow: module.flat-shadow(0, rgba($color, 0.25));
-
                         &::after {
                             background-color: $color;
                         }
@@ -102,10 +95,6 @@
                         &:focus,
                         &:focus-within {
                             border-color: $color;
-                        }
-
-                        &:checked {
-                            box-shadow: module.flat-shadow(5px, rgba($color, 0));
                         }
                     }
                 }
@@ -119,15 +108,12 @@
                         &::after {
                             background-color: $error;
                         }
-
-                        &:checked {
-                            box-shadow: module.flat-shadow(5px, rgba($error, 0));
-                        }
                     }
                 }
 
                 @include module.is-disabled() {
                     color: $disabled;
+                    @include module.locked();
 
                     input[type="radio"] {
                         border-color: $disabled-border;
@@ -136,7 +122,6 @@
                             background-color: $disabled;
                         }
                     }
-                    @include module.locked();
                 }
             }
         }

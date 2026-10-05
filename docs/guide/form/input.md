@@ -112,24 +112,24 @@ This module is registered as `form-input` in the _presented modules_.
 
 Input module uses the following Termeh global `var()`:
 
-| Component               | Type     | Usage                           | Default    |
-| ----------------------- | -------- | ------------------------------- | ---------- |
-| `base` → `separator`    | _Color_  | _Fallback_ border color         | `null`     |
-| `radius` → `normal`     | _Number_ | Default input border radius     | `null`     |
-| `input` → `height`      | _Number_ | Input height                    | `2.8em`    |
-| `input` → `border`      | _Color_  | Default input border color      | _FALLBACK_ |
-| `input` → `placeholder` | _Color_  | Default input placeholder color | _FALLBACK_ |
-| `input` → `background`  | _Color_  | Default input background color  | `white`    |
+| Component  | Variable        | Type     | Usage                                         | Default    |
+|------------|-----------------|----------|-----------------------------------------------|------------|
+| **base**   | **separator**   | _Color_  | Fallback input border color                   | `null`     |
+| **radius** | **normal**      | _Number_ | Input wrapper border radius                   | `null`     |
+| **input**  | **height**      | _Number_ | Input wrapper height                          | `2.8em`    |
+| **input**  | **border**      | _Color_  | Input border color; uses base separator       | _FALLBACK_ |
+| **input**  | **placeholder** | _Color_  | Placeholder color; falls back to `shade.mute` | _FALLBACK_ |
+| **input**  | **background**  | _Color_  | Input wrapper background                      | `white`    |
 
 ---
 
 Input module uses the following Termeh `color()` and `variant()`:
 
-| Color / Variant  | Usage                          | Default |
-| ---------------- | ------------------------------ | ------- |
-| `error`          | Accent color for invalid state | _error_ |
-| `primary`        | Default accent color           | _error_ |
-| `shade` → `mute` | _Fallback_ placeholder color   | `null`  |
+| Color       | Variant  | Usage                             | Default   |
+|-------------|----------|-----------------------------------|-----------|
+| **error**   |          | Border color in the invalid state | _error_   |
+| **primary** |          | Border color in the focused state | _primary_ |
+| **shade**   | **mute** | Fallback placeholder text color   | `null`    |
 
 :::
 

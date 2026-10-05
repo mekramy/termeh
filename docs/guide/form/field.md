@@ -72,20 +72,21 @@ This module is registered as `form-field` in the _presented modules_.
 
 Field module uses the following Termeh global `var()`:
 
-| Component       | Type     | Usage                          | Default |
-| --------------- | -------- | ------------------------------ | ------- |
-| `gap` → `micro` | _Number_ | Spacing between blocks         | `8px`   |
-| `gap` → `macro` | _Number_ | Bottom margin for input blocks | `1.6em` |
+| Component  | Variable   | Type          | Usage                                    | Default |
+|------------|------------|---------------|------------------------------------------|---------|
+| **gap**    | **micro**  | _Number_      | Field spacing, excluding help and errors | `8px`   |
+| **gap**    | **macro**  | _Number_      | Bottom margin after each non-last field  | `1.6em` |
+| **strong** | **weight** | _Font Weight_ | Required indicator font weight           | `bold`  |
 
 ---
 
 Field module uses the following Termeh `color()` and `variant()`:
 
-| Color / Variant        | Usage                            | Default |
-| ---------------------- | -------------------------------- | ------- |
-| `shade` → `readable`   | Help block text color            | `null`  |
-| `primary` → `readable` | Default required indicator color | `null`  |
-| `error` → `readable`   | Error block text color           | `null`  |
+| Color       | Variant      | Usage                 | Default |
+|-------------|--------------|-----------------------|---------|
+| **shade**   | **readable** | Help text             | `null`  |
+| **primary** | **readable** | Required indicator    | `null`  |
+| **error**   | **readable** | Validation error text | `null`  |
 
 :::
 

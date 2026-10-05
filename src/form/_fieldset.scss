@@ -2,26 +2,31 @@
 
 /// Generates fieldset element styles
 ///
-/// @termeh {Color} [null] - var("base", "separator") -> fallback border color
-/// @termeh {Number} [null] - var("radius", "normal") -> default fieldset border radius
-/// @termeh {Number} [1.6em] - var("gap", "macro") -> default inner padding and bottom margin for fieldset
-/// @termeh {String} [normal] - var("input", "legend") -> legend element font weight
-/// @termeh {Color} [FALLBACK] - var("input", "border") -> fieldset border color
+/// @param {Color} [null] var("base", "separator") - Fallback color for the fieldset border when no input border color is configured.
+///
+/// @param {Number} [null] var("radius", "normal") - Border radius of the fieldset.
+/// @param {Number} [1.6em] var("gap", "macro") - Inner fieldset padding and bottom margin.
+///
+/// @param {Color} [FALLBACK] var("input", "border") - Fieldset border color; falls back to the base separator color.
+/// @param {Number} [null] var("input", "legend-size") - Font size of the legend; no fallback is supplied.
+/// @param {Font Weight} [normal] var("input", "legend-weight") - Font weight of the legend.
 @mixin use-fieldset() {
     @if not module.module-presented("form-fieldset") {
         @include module.present-module("form-fieldset");
 
         $separator: module.var("base", "separator");
-        $radius: module.var("radius", "normal");
+
+        $radius-normal: module.var("radius", "normal");
         $gap-macro: module.var("gap", "macro", 1.6em);
 
-        $legend: module.var("input", "legend", normal);
         $border: module.var("input", "border", $separator);
+        $legend-size: module.var("input", "legend-size");
+        $legend-weight: module.var("input", "legend-weight", normal);
 
         @at-root {
             fieldset {
                 padding: $gap-macro;
-                border-radius: $radius;
+                border-radius: $radius-normal;
                 border: 1px solid $border;
 
                 @include module.marged() {
@@ -30,7 +35,8 @@
 
                 legend {
                     line-height: 1em;
-                    font-weight: $legend;
+                    font-size: $legend-size;
+                    font-weight: $legend-weight;
                     padding: module.inline-padding();
                 }
             }

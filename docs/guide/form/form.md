@@ -88,19 +88,19 @@ This module is registered as `form` in the _presented modules_.
 
 Form module uses the following Termeh global `var()`:
 
-| Component                 | Type     | Usage                                                | Default    |
-| ------------------------- | -------- | ---------------------------------------------------- | ---------- |
-| `base` → `color`          | _Color_  | _Fallback_ form background                           | `white`    |
-| `base` → `foreground`     | _Color_  | _Fallback_ form foreground                           | `black`    |
-| `box` → `background`      | _Color_  | form background and overlay background _fallback_    | _FALLBACK_ |
-| `box` → `foreground`      | _Color_  | form foreground and overlay spinner color _fallback_ | _FALLBACK_ |
-| `gap` → `macro`           | _Number_ | Bottom margin                                        | `1.6em`    |
-| `decorator` → `size`      | _Number_ | Loading spinner thickness                            | `2px`      |
-| `decorator` → `spinner`   | _Number_ | Loading spinner size                                 | `2em`      |
-| `overlay` → `background`  | _Color_  | Overlay background color                             | _FALLBACK_ |
-| `overlay` → `foureground` | _Color_  | Overlay foreground                                   | _FALLBACK_ |
-| `overlay` → `opacity`     | _Number_ | Overlay background opacity                           | `0.85`     |
-| `overlay` → `filter`      | _String_ | Overlay backdrop filter                              | `null`     |
+| Component     | Variable        | Type     | Usage                            | Default    |
+|---------------|-----------------|----------|----------------------------------|------------|
+| **base**      | **background**  | _Color_  | Fallback form/overlay background | `white`    |
+| **base**      | **foreground**  | _Color_  | Fallback text/spinner color      | `black`    |
+| **box**       | **background**  | _Color_  | Form background                  | _FALLBACK_ |
+| **box**       | **foreground**  | _Color_  | Form text/spinner color          | _FALLBACK_ |
+| **gap**       | **macro**       | _Number_ | Form bottom margin               | `1.6em`    |
+| **decorator** | **size**        | _Number_ | Spinner stroke width             | `2px`      |
+| **decorator** | **spinner**     | _Number_ | Spinner diameter                 | `2em`      |
+| **overlay**   | **background**  | _Color_  | Overlay background               | _FALLBACK_ |
+| **overlay**   | **foureground** | _Color_  | Spinner color                    | _FALLBACK_ |
+| **overlay**   | **opacity**     | _Number_ | Overlay opacity                  | `0.85`     |
+| **overlay**   | **filter**      | _String_ | Backdrop-filter value            | `null`     |
 
 :::
 
