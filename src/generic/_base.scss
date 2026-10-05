@@ -184,7 +184,7 @@
                 height: 1px;
                 background-color: $base-separator;
 
-                @include module.marged(false) {
+                @include module.marged() {
                     margin: $gap-macro 0;
                 }
             }

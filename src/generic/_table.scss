@@ -209,16 +209,8 @@
                 }
 
                 @if $column-separator != null {
-                    @include module.is-ltr() {
-                        tbody tr td:not(:first-child) {
-                            border-left: 1px solid $column-separator;
-                        }
-                    }
-
-                    @include module.is-rtl() {
-                        tbody tr td:not(:first-child) {
-                            border-right: 1px solid $column-separator;
-                        }
+                    tbody tr td:not(:first-child) {
+                        border-inline-start: 1px solid $column-separator;
                     }
                 }
 
