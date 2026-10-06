@@ -77,9 +77,6 @@ $-schemes: () !default;
 @mixin variables($scheme: null) {
     $scheme: -resolve-scheme($scheme);
     @each $name, $schemes in $-tokens {
-        $v: map.get($schemes, $scheme);
-        @if $v != null {
-            #{$name}: $v;
-        }
+        #{$name}: map.get($schemes, $scheme);
     }
 }

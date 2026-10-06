@@ -92,9 +92,9 @@ $-overrides: () !default;
     $_: scm.define-variable($token, $value);
 
     @each $scheme in scm.schemes() {
-        $val: -scheme-var($scheme, $com, $prop);
-        @if $val != null {
-            $_: scm.define-variable($token, $val, $scheme);
+        $-value: -scheme-var($scheme, $com, $prop);
+        @if $-value != null {
+            $_: scm.define-variable($token, $-value, $scheme);
         }
     }
 

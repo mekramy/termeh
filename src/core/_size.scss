@@ -90,8 +90,8 @@ $-overrides: () !default;
     $_: scm.define-variable($token, $value);
 
     @each $scheme in scm.schemes() {
-        $val: map.get($-overrides, $name, $scheme);
-        $_: scm.define-variable($token, $val, $scheme);
+        $-value: map.get($-overrides, $name, $scheme);
+        $_: scm.define-variable($token, $-value, $scheme);
     }
 
     @return scm.variable($token, $value);
@@ -113,8 +113,8 @@ $-overrides: () !default;
             $_: scm.define-variable($token, $size);
 
             @each $scheme in scm.schemes() {
-                $val: map.get($-overrides, $name, $scheme);
-                $_: scm.define-variable($token, $val, $scheme);
+                $-value: map.get($-overrides, $name, $scheme);
+                $_: scm.define-variable($token, $-value, $scheme);
             }
 
             $result: map.set($result, $name, scm.variable($token, $size));

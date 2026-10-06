@@ -88,18 +88,20 @@ Two keyframe animations are provided by default:
 #### Control
 
 ```scss
-@include termeh.define("control", "height", 2.2em);
 @include termeh.define("control", "weight", 500);
-@include termeh.define("control", "strong", 700);
+@include termeh.define("control", "height", 2.2em);
 @include termeh.define("control", "v-padding", 0);
 @include termeh.define("control", "h-padding", 1.2em);
+@include termeh.define("control", "meta-size", 0.9em);
+@include termeh.define("control", "meta-weight", 600);
 ```
 
-- **height:** _[`number`]_ → Default control height (`button`, `link`, `badge`, …).
 - **weight:** _[`font weight`]_ → Base font weight.
-- **strong:** _[`font weight`]_ → Bold font weight for controls.
+- **height:** _[`number`]_ → Default control height (`button`, `link`, `badge`, …).
 - **v-padding:** _[`number`]_ → Vertical padding.
 - **h-padding:** _[`number`]_ → Horizontal padding.
+- **meta-size:** _[`number`]_ → Font size for meta-like elements (`meta`, `tag`, `action`).
+- **meta-weight:** _[`font weight`]_ → Font weight for meta-like elements (`meta`, `tag`, `action`).
 
 ### Text
 

@@ -24,10 +24,6 @@ $-overrides: () !default;
     } @else if $variant == "light-active" {
         $v: util.ternary($tone == "light", "800", "200");
         @return color.mix($base, palette.palette($color, $v), 70%);
-    } @else if $variant == "action" {
-        @return rgba($color, 0.15);
-    } @else if $variant == "action-active" {
-        @return rgba($color, 0.35);
     } @else if $variant == "mute" {
         $v: util.ternary($tone == "light", "900", "100");
         @return color.mix($base, palette.palette($color, $v), 50%);
@@ -228,8 +224,8 @@ $-overrides: () !default;
     $_: scm.define-variable($token, $value);
 
     @each $scheme in scm.schemes() {
-        $val: map.get($-overrides, $name, $scheme, "color");
-        $_: scm.define-variable($token, $val, $scheme);
+        $-value: map.get($-overrides, $name, $scheme, "color");
+        $_: scm.define-variable($token, $-value, $scheme);
     }
 
     @return scm.variable($token, $value);
@@ -256,17 +252,17 @@ $-overrides: () !default;
     $_: scm.define-variable($token, $value);
 
     @each $scheme in scm.schemes() {
-        $val: map.get($-overrides, $name, $scheme, $variant);
-        @if $val == null {
+        $-value: map.get($-overrides, $name, $scheme, $variant);
+        @if $-value == null {
             $base: var.scheme-value($scheme, "base", "background", null);
             $color: map.get($-overrides, $name, $scheme, "color");
             @if $color == null {
                 $color: map.get($-colors, $name, "color");
             }
-            $val: -variant($color, $base, $variant) or $fallback;
+            $-value: -variant($color, $base, $variant) or $fallback;
         }
 
-        $_: scm.define-variable($token, $val, $scheme);
+        $_: scm.define-variable($token, $-value, $scheme);
     }
 
     @return scm.variable($token, $value);
@@ -290,8 +286,8 @@ $-overrides: () !default;
             $_: scm.define-variable($token, $value);
 
             @each $scheme in scm.schemes() {
-                $val: map.get($-overrides, $name, $scheme, "color");
-                $_: scm.define-variable($token, $val, $scheme);
+                $-value: map.get($-overrides, $name, $scheme, "color");
+                $_: scm.define-variable($token, $-value, $scheme);
             }
 
             $result: map.set($result, $name, scm.variable($token, $value));

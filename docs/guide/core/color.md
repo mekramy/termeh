@@ -267,8 +267,6 @@ By default, Termeh resolves these variants through _auto-generation_:
 | **light-active**  | Light version active state          |
 | **mute**          | Muted text                          |
 | **mute-active**   | Muted text active state             |
-| **action**        | Action background                   |
-| **action-active** | Action background active state      |
 | **readable**      | Readable text color                 |
 | **foreground**    | Foreground color                    |
 | **decorator**     | Decorator color (separator, etc...) |

@@ -341,8 +341,8 @@
 /// @param {Color} [null] var("input", "disabled-border") - Global disabled input border color
 @mixin disabled() {
     opacity: 0.65;
-    pointer-events: none;
     user-select: none;
+    pointer-events: none;
     color: var.var("input", "disabled-foreground") !important;
     background-color: var.var("input", "disabled") !important;
     border-color: var.var("input", "disabled-border") !important;
