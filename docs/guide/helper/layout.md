@@ -26,9 +26,9 @@ This module is registered as `layout-helper` in the _presented modules_.
 
 Layout Helper module uses the following Termeh `color()`:
 
-| Color / Variant | Usage                       | Default |
-| --------------- | --------------------------- | ------- |
-| `primary`       | Accent color for scrollbars | _error_ |
+| Color       | Usage                       | Default |
+|-------------|-----------------------------|---------|
+| **primary** | Accent color for scrollbars | _error_ |
 
 :::
 
