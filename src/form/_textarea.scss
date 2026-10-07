@@ -14,8 +14,11 @@
 /// @param {Number} [1.6em] var("line-height", "normal") - Text line height inside the textarea.
 ///
 /// @param {Color} [FALLBACK] var("input", "border") - Textarea border color; falls back to the base separator color.
-/// @param {Color} [FALLBACK] var("input", "placeholder") - Placeholder text color; falls back to the muted shade variant.
 /// @param {Color} [white] var("input", "background") - Textarea background color.
+///
+/// @param {Color} [FALLBACK] var("input", "placeholder") - Placeholder text color; falls back to the muted shade variant.
+/// @param {Number} [0.85em] var("control", "placeholder-size") - Placeholder font size.
+/// @param {Number} [600] var("control", "placeholder-weight") - Placeholder font weight.
 @mixin use-textarea($colors: ()) {
     @if not module.module-presented("form-textarea") {
         @include module.present-module("form-textarea");
@@ -31,7 +34,10 @@
 
         $border: module.var("input", "border", $separator);
         $background: module.var("input", "background", white);
+
         $placeholder: module.var("input", "placeholder", $shade-mute);
+        $placeholder-size: module.var("control", "placeholder-size", 0.85em);
+        $placeholder-weight: module.var("control", "placeholder-weight", 600);
 
         @at-root {
             @include animation.shake();
@@ -59,8 +65,10 @@
                     height: initial;
                 }
 
-                &:placeholder {
+                &::placeholder {
                     color: $placeholder;
+                    font-size: $placeholder-size;
+                    font-weight: $placeholder-weight;
                 }
 
                 &:focus,

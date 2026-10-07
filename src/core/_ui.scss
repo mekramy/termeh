@@ -271,18 +271,31 @@
 /// Applies styles for disabled state
 /// @content Styles to apply when element is disabled or within disabled context
 @mixin is-disabled() {
-    @at-root {
-        fieldset:disabled #{&},
-        fieldset.is-disabled #{&},
-        .field:disabled #{&},
-        .field.is-disabled #{&} {
-            @content;
-        }
-    }
-
     &:disabled,
     &.is-disabled {
         @content;
+    }
+
+    @at-root {
+        :disabled #{&},
+        .is-disabled #{&} {
+            @content;
+        }
+    }
+}
+
+/// Applies styles for focused state
+/// @content Styles to apply when element is focused
+@mixin is-focused($exclude...) {
+    $skip: list.join(".is-disabled", $exclude, comma);
+    &:focus:not(:disabled, #{$skip}) {
+        @content;
+    }
+
+    @at-root {
+        :not(:disabled, .is-disabled) #{&}:focus {
+            @content;
+        }
     }
 }
 

@@ -128,8 +128,10 @@ Select module uses the following Termeh global `var()`:
 | **input**  | **height**              | _Number_      | Select control height                                   | `2.8em`    |
 | **input**  | **border**              | _Color_       | Select border color; falls back to `base.separator`     | _FALLBACK_ |
 | **input**  | **background**          | _Color_       | Select background                                       | `white`    |
-| **input**  | **placeholder**         | _Color_       | Placeholder and picker icon; falls back to `shade.mute` | _FALLBACK_ |
 | **input**  | **disabled-foreground** | _Color_       | Text color for disabled options                         | `null`     |
+| **input**  | **placeholder**         | _Color_       | Placeholder and picker icon; falls back to `shade.mute` | _FALLBACK_ |
+| **input**  | **placeholder-size**    | _Number_      | Placeholder font size                                   | `0.85em`   |
+| **input**  | **placeholder-weight**  | _Number_      | Placeholder font weight                                 | `600`      |
 
 ---
 

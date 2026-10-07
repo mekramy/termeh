@@ -112,14 +112,16 @@ This module is registered as `form-input` in the _presented modules_.
 
 Input module uses the following Termeh global `var()`:
 
-| Component  | Variable        | Type     | Usage                                         | Default    |
-|------------|-----------------|----------|-----------------------------------------------|------------|
-| **base**   | **separator**   | _Color_  | Fallback input border color                   | `null`     |
-| **radius** | **normal**      | _Number_ | Input wrapper border radius                   | `null`     |
-| **input**  | **height**      | _Number_ | Input wrapper height                          | `2.8em`    |
-| **input**  | **border**      | _Color_  | Input border color; uses base separator       | _FALLBACK_ |
-| **input**  | **placeholder** | _Color_  | Placeholder color; falls back to `shade.mute` | _FALLBACK_ |
-| **input**  | **background**  | _Color_  | Input wrapper background                      | `white`    |
+| Component  | Variable               | Type     | Usage                                         | Default    |
+|------------|------------------------|----------|-----------------------------------------------|------------|
+| **base**   | **separator**          | _Color_  | Fallback input border color                   | `null`     |
+| **radius** | **normal**             | _Number_ | Input wrapper border radius                   | `null`     |
+| **input**  | **height**             | _Number_ | Input wrapper height                          | `2.8em`    |
+| **input**  | **border**             | _Color_  | Input border color; uses base separator       | _FALLBACK_ |
+| **input**  | **background**         | _Color_  | Input wrapper background                      | `white`    |
+| **input**  | **placeholder**        | _Color_  | Placeholder color; falls back to `shade.mute` | _FALLBACK_ |
+| **input**  | **placeholder-size**   | _Number_ | Placeholder font size                         | `0.85em`   |
+| **input**  | **placeholder-weight** | _Number_ | Placeholder font weight                       | `600`      |
 
 ---
 

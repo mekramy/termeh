@@ -19,8 +19,11 @@
 /// @param {Number} [2.8em] var("input", "height") - Height of the select control.
 /// @param {Color} [FALLBACK] var("input", "border") - Select border color; falls back to the base separator color.
 /// @param {Color} [white] var("input", "background") - Select background color.
-/// @param {Color} [FALLBACK] var("input", "placeholder") - Placeholder and picker-icon color; falls back to the muted shade variant.
 /// @param {Color} [null] var("input", "disabled-foreground") - Text color of disabled options.
+///
+/// @param {Color} [FALLBACK] var("input", "placeholder") - Placeholder and picker-icon color; falls back to the muted shade variant.
+/// @param {Number} [0.85em] var("control", "placeholder-size") - Placeholder font size.
+/// @param {Number} [600] var("control", "placeholder-weight") - Placeholder font weight.
 @mixin use-select($colors: ()) {
     @if not module.module-presented("form-select") {
         @include module.present-module("form-select");
@@ -40,8 +43,11 @@
         $height: module.var("input", "height", 2.8em);
         $border: module.var("input", "border", $separator);
         $background: module.var("input", "background", white);
-        $placeholder: module.var("input", "placeholder", $shade-mute);
         $disabled-foreground: module.var("input", "disabled-foreground");
+
+        $placeholder: module.var("input", "placeholder", $shade-mute);
+        $placeholder-size: module.var("control", "placeholder-size", 0.85em);
+        $placeholder-weight: module.var("control", "placeholder-weight", 600);
 
         @at-root {
             @include animation.shake();
@@ -76,8 +82,10 @@
                     @include module.transition(transform);
                 }
 
-                &:placeholder {
+                &::placeholder {
                     color: $placeholder;
+                    font-size: $placeholder-size;
+                    font-weight: $placeholder-weight;
                 }
 
                 &:open {

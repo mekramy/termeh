@@ -504,7 +504,7 @@ Styles for invalid state (works for elements and within `.field` containers).
 
 ## Is-Disabled
 
-Styles for disabled state (element itself or within disabled fieldset/field).
+Styles for `:disabled` state or `is-disabled` class, for both the element itself or within a disabled parent.
 
 ::: definition
 
@@ -520,6 +520,30 @@ Styles for disabled state (element itself or within disabled fieldset/field).
 .button {
   @include termeh.is-disabled {
     opacity: 0.6;
+  }
+}
+```
+
+:::
+
+## Is-Focused
+
+Styles for focused state (element itself or within not disabled parent).
+
+::: definition
+
+**Signature:**
+
+```scss
+@mixin is-focused($exclude...);
+```
+
+**Example:**
+
+```scss
+.input {
+  @include termeh.is-focused(".is-loading") {
+    border-color: #3498db;
   }
 }
 ```
