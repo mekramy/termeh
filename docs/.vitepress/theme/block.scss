@@ -66,11 +66,33 @@
         margin: 1rem 0;
         padding: 0.5rem 16px;
         border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-        border: 1px solid var(--vp-custom-block-details-code-bg);
-        border-left: 3px solid var(--vp-c-text-1);
+        border-top-right-radius: 0;
+        border: 1px solid var(--vp-c-border);
+
+        h1 {
+            display: block;
+            line-height: 2;
+            font-weight: bolder;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 0.5rem 16px;
+            margin: calc(-0.5rem - 1px) calc(-16px - 1px);
+            margin-left: calc(-16px - 2px);
+            margin-bottom: 1.6em;
+
+            color: var(--vp-c-brand-3);
+            background-color: var(--vp-c-bg-soft);
+            border: 1px solid var(--vp-c-border);
+            border-left: 3px solid var(--vp-c-brand-3);
+            border-bottom: none;
+        }
 
         table {
+            display: table;
+            width: 100%;
+            table-layout: auto;
+
             strong {
                 font-weight: 700;
                 font-size: 0.7rem;
@@ -80,51 +102,17 @@
                 color: var(--vp-c-text-2);
                 font-family: var(--vp-font-family-mono);
             }
-        }
 
-        summary {
-            gap: 1rem;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            margin: 0;
-            padding: 4px 0;
-            cursor: pointer;
-            font-weight: 500;
-            list-style: none;
-
-            .icon {
-                width: 1.6em;
-                height: 1.6em;
-                display: inline-flex;
-                flex-flow: row nowrap;
-                align-items: center;
-                justify-content: center;
-
-                svg {
-                    width: 100%;
-                    fill: var(--vp-c-text-1, currentcolor);
-                }
+            u {
+                font-weight: 600;
+                font-size: 0.65rem;
+                letter-spacing: 0;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                text-decoration: none;
+                color: var(--ctp-latte-rosewater);
+                font-family: var(--vp-font-family-mono);
             }
-
-            .title {
-                flex: 1;
-                font-weight: 500;
-            }
-        }
-
-        .arrow {
-            transform: rotate(0deg);
-            border: solid var(--vp-c-text-2);
-            border-width: 0 2px 2px 0;
-            padding: 2px;
-            transform-origin: center;
-            transition: transform 0.2s ease;
-            rotate: 45deg;
-        }
-
-        &[open] .arrow {
-            transform: rotate(180deg);
         }
     }
 
