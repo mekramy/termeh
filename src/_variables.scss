@@ -1,6 +1,6 @@
 @use "core/module";
 
-/** Layout */
+/** Layout And UI */
 // Base
 @include module.define("base", "direction", ltr); // App direction
 @include module.define("base", "min-width", 300px); // Minimum document width
@@ -17,6 +17,11 @@
 // Decorators
 @include module.define("decorator", "size", 2px); // Decorator border width
 @include module.define("decorator", "spinner", 2em); // Spinner size
+
+// Transitions
+@include module.define("transition", "ease", ease); // Default transition timing
+@include module.define("transition", "duration", 250ms); // Default transition duration
+@include module.define("transition", "delay", 100ms); // Delay for delayed-animations
 
 // Container
 @include module.define("container", "desktop", 960px); // Desktop container width
@@ -65,11 +70,13 @@
 @include module.define("line-height", "medium", 1.4em); // Medium text line height
 @include module.define("line-height", "large", 1.2em); // Large text line height
 
-/** UI */
-// Transitions
-@include module.define("transition", "ease", ease); // Default transition timing
-@include module.define("transition", "duration", 250ms); // Default transition duration
-@include module.define("transition", "delay", 100ms); // Delay for delayed-animations
+/** Theme */
+
+// Scheme
+@include module.define("base", "background", white); // Theme color (detect light/dark mode)
+@include module.define("base", "foreground", #0d1b2a); // Default foreground
+@include module.define("base", "section", #f8f9fa); // Section background
+@include module.define("base", "separator", #e0e4eb); // Separator background
 
 // Scrollbar
 @include module.define("scroll", "size", 10px); // Scrollbar width
@@ -81,14 +88,6 @@
 @include module.define("overlay", "foreground", null); // Overlay foreground
 @include module.define("overlay", "opacity", 0.75); // Overlay background opacity
 @include module.define("overlay", "filter", none); // Overlay backdrop filter
-
-/** Theme */
-
-// Scheme
-@include module.define("base", "background", white); // Theme color (detect light/dark mode)
-@include module.define("base", "foreground", #0d1b2a); // Default foreground
-@include module.define("base", "section", #f8f9fa); // Section background
-@include module.define("base", "separator", #e0e4eb); // Separator background
 
 // Table
 @include module.define("table", "background", null); // Table background
@@ -119,6 +118,12 @@
 // Boxes
 @include module.define("box", "background", null); // box background
 @include module.define("box", "foreground", null); // box foreground
+@include module.define("box", "section", null); // box section background
+@include module.define("box", "separator", null); // box separator background
+@include module.define("box", "overlay-background", null); // box overlay background
+@include module.define("box", "overlay-foreground", null); // box overlay foreground
+@include module.define("box", "overlay-opacity", null); // box overlay opacity
+@include module.define("box", "overlay-filter", null); // box overlay filter
 @include module.define(
     "box",
     "shadow",

@@ -17,7 +17,7 @@ Two keyframe animations are provided by default:
 
 ## Variables
 
-### Layout
+### Layout AND UI
 
 #### Base
 
@@ -61,6 +61,18 @@ Two keyframe animations are provided by default:
 - **size:** _[`number`]_ → Thickness for decorative elements (e.g., borders, spinner).
 - **spinner:** _[`number`]_ → Default spinner size.
 
+#### Transitions
+
+```scss
+@include termeh.define("transition", "ease", ease);
+@include termeh.define("transition", "duration", 250ms);
+@include termeh.define("transition", "delay", 100ms);
+```
+
+- **ease:** _[`easing function`]_ → Default transition timing function.
+- **duration:** _[`time duration`]_ → Default transition speed.
+- **delay:** _[`time duration`]_ → Default transition delay.
+
 #### Containers
 
 ```scss
@@ -100,8 +112,8 @@ Two keyframe animations are provided by default:
 - **height:** _[`number`]_ → Default control height (`button`, `link`, `badge`, …).
 - **v-padding:** _[`number`]_ → Vertical padding.
 - **h-padding:** _[`number`]_ → Horizontal padding.
-- **meta-size:** _[`number`]_ → Font size for meta-like elements (`meta`, `tag`, `action`).
-- **meta-weight:** _[`font weight`]_ → Font weight for meta-like elements (`meta`, `tag`, `action`).
+- **meta-size:** _[`number`]_ → Font size for meta-like elements (`meta`, `tag`, `action`, `link`, `breadcrumb`).
+- **meta-weight:** _[`font weight`]_ → Font weight for meta-like elements (`meta`, `tag`, `action`, `link`, `breadcrumb`).
 
 ### Text
 
@@ -183,19 +195,21 @@ Monospace element (code, pre, ...) fonts.
 - **medium:** _[`number`]_ → Tighter line height.
 - **large:** _[`number`]_ → More compact line height.
 
-### UI
+### Theme
 
-#### Transitions
+#### Scheme
 
 ```scss
-@include termeh.define("transition", "ease", ease);
-@include termeh.define("transition", "duration", 250ms);
-@include termeh.define("transition", "delay", 100ms);
+@include termeh.define("base", "background", white);
+@include termeh.define("base", "foreground", #081e30);
+@include termeh.define("base", "section", #f8f9fa);
+@include termeh.define("base", "separator", #e0e4eb);
 ```
 
-- **ease:** _[`easing function`]_ → Default transition timing function.
-- **duration:** _[`time duration`]_ → Default transition speed.
-- **delay:** _[`time duration`]_ → Default transition delay.
+- **background:** _[`color`]_ → Base theme color (detect light/dark mode).
+- **foreground:** _[`color`]_ → Default text color.
+- **section:** _[`color`]_ → Section background color.
+- **separator:** _[`color`]_ → Divider/line color.
 
 #### Scrollbar
 
@@ -222,22 +236,6 @@ Monospace element (code, pre, ...) fonts.
 - **foreground:** _[`color`]_ → Overlay foreground color.
 - **opacity:** _[`number`]_ → Overlay background opacity.
 - **filter:** _[`filter`]_ → Optional CSS filter (e.g., `blur(2px)`).
-
-### Theme
-
-#### Scheme
-
-```scss
-@include termeh.define("base", "background", white);
-@include termeh.define("base", "foreground", #081e30);
-@include termeh.define("base", "section", #f8f9fa);
-@include termeh.define("base", "separator", #e0e4eb);
-```
-
-- **background:** _[`color`]_ → Base theme color (detect light/dark mode).
-- **foreground:** _[`color`]_ → Default text color.
-- **section:** _[`color`]_ → Section background color.
-- **separator:** _[`color`]_ → Divider/line color.
 
 #### Tables
 
@@ -302,6 +300,12 @@ Default styles for card, modal and other box-like components.
 ```scss
 @include module.define("box", "background", null);
 @include module.define("box", "foreground", null);
+@include module.define("box", "section", null);
+@include module.define("box", "separator", null);
+@include module.define("box", "overlay-background", null);
+@include module.define("box", "overlay-foreground", null);
+@include module.define("box", "overlay-opacity", null);
+@include module.define("box", "overlay-filter", null);
 @include module.define(
   "box",
   "shadow",
@@ -320,6 +324,12 @@ Default styles for card, modal and other box-like components.
 
 - **background:** _[`color`]_ → Box background.
 - **foreground:** _[`color`]_ → Box foreground.
+- **section:** _[`color`]_ → Box section background.
+- **separator:** _[`color`]_ → Box separator color.
+- **overlay-background:** _[`color`]_ → Box overlay background color.
+- **overlay-foreground:** _[`color`]_ → Box overlay foreground color.
+- **overlay-opacity:** _[`number`]_ → Box overlay background opacity.
+- **overlay-filter:** _[`filter`]_ → Box overlay backdrop filter.
 - **shadow:** _[`shadow`]_ → Box shadow.
 - **sizes:** _[`list`]_ → List of box element sizes.
 
