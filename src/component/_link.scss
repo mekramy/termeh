@@ -1,21 +1,28 @@
 @use "../core/module";
 @use "./element";
 
-/// Generates link element styles with configurable colors and sizes
-/// @param {List} $colors [()] - List of registered color names to include. Pass null to include all registered colors
-/// @param {List} $sizes [()] - List of registered size names to include. Pass null to include all registered sizes
+/// Generates link element styles with configurable colors and sizes.
 ///
-/// @termeh {Color} [black] - var("base", "foreground") -> default link color
-/// @termeh {Number} [2.2em] - var("control", "height") -> link height
-/// @termeh {Color} [null] - var("decorator", "size") -> loading spinner thickness
+/// @param {List} $colors - Colors for link variants; `null` includes all registered colors
+/// @param {List} $sizes - Sizes for link variants; `null` includes all registered sizes
+///
+/// @param {Color} var("base", "foreground") - Link text color
+/// @param {Number} var("decorator", "size") - Loading spinner thickness
+///
+/// @param {Number} var("control", "height") - Link height
+/// @param {Number} var("control", "meta-size") - Link text size
+/// @param {Font Weight} var("control", "meta-weight") - Link text weight
 @mixin use-link($colors: (), $sizes: ()) {
     @if not module.module-presented("link") {
         @include element.use-element();
         @include module.present-module("link");
 
-        $foreground: module.var("base", "foreground", black);
-        $height: module.var("control", "height", 2.2em);
+        $foreground: module.var("base", "foreground");
         $decorator: module.var("decorator", "size");
+
+        $height: module.var("control", "height");
+        $font-size: module.var("control", "meta-size");
+        $font-weight: module.var("control", "meta-weight");
 
         @at-root {
             .link {
@@ -24,8 +31,11 @@
 
                 cursor: pointer;
                 height: $height;
+                font-size: $font-size;
+                font-weight: $font-weight;
+                text-overflow: ellipsis;
                 color: $foreground;
-                @include module.transition(all);
+                @include module.transition(color);
 
                 &::after {
                     content: " ";
@@ -36,7 +46,7 @@
                     height: 1px;
                     transform: translateX(-50%);
                     background: currentcolor;
-                    @include module.transition(all);
+                    @include module.transition((width));
                 }
 
                 &:hover {

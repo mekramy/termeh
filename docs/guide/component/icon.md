@@ -84,26 +84,6 @@ This module is registered as `icon` in the _presented modules_.
 
 :::
 
-::: dependencies
-
-Icon module uses the following Termeh global `var()`:
-
-| Component            | Type    | Usage                     | Default |
-| -------------------- | ------- | ------------------------- | ------- |
-| `decorator` → `size` | _Color_ | Loading spinner thickness | `null`  |
-
----
-
-Icon module uses the following Termeh `color()` and `variant()`:
-
-| Color / Variant      | Usage                                | Default |
-| -------------------- | ------------------------------------ | ------- |
-| `shade`              | Default loading spinner color        | _error_ |
-| `shade` → `mute`     | Default action icon color            | `null`  |
-| `shade` → `readable` | Default hover color for action icons | `null`  |
-
-:::
-
 ## Modifiers
 
 - `.is-outline` → applies color to stroke instead of fill
@@ -112,3 +92,27 @@ Icon module uses the following Termeh `color()` and `variant()`:
 - `.is-disabled` → applies disabled state
 - `.is-<size>` → applies a registered size as icon size
 - `.is-<color>` → applies a registered color as accent color
+
+## Configuration
+
+This component uses the following dependencies for styling:
+
+::: dependencies
+
+Icon module uses the following Termeh global _var_:
+
+| Component     | Variable | Type     | Usage                     |
+|---------------|----------|----------|---------------------------|
+| **decorator** | **size** | _Number_ | Loading spinner thickness |
+
+---
+
+Icon module uses the following Termeh _color_ and _variant_:
+
+| Color         | Variant / Caution     | Usage                 |
+|---------------|-----------------------|-----------------------|
+| ****shade**** | ==@throw on missing== | Loading spinner color |
+| ****shade**** | ****mute****          | Action icon color     |
+| ****shade**** | ****readable****      | Action hover color    |
+
+:::

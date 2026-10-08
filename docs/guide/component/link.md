@@ -52,21 +52,27 @@ This module is registered as `link` in the _presented modules_.
 
 :::
 
-::: dependencies
-
-Link module uses the following Termeh global `var()`:
-
-| Component             | Type     | Usage                     | Default |
-| --------------------- | -------- | ------------------------- | ------- |
-| `base` → `foreground` | _Color_  | Default link color        | `black` |
-| `control` → `height`  | _Number_ | Link height               | `2.2em` |
-| `decorator` → `size`  | _Color_  | Loading spinner thickness | `null`  |
-
-:::
-
 ## Modifiers
 
 - `.is-loading` → applies loading state
 - `.is-disabled` → applies disabled state
 - `.is-<size>` → applies a registered size as font size
 - `.is-<color>` → applies a registered color as accent color
+
+## Configuration
+
+This component uses the following dependencies for styling:
+
+::: dependencies
+
+Link module uses the following Termeh global _var_:
+
+| Component     | Variable        | Type          | Usage                     |
+|---------------|-----------------|---------------|---------------------------|
+| **base**      | **foreground**  | _Color_       | Link text color           |
+| **decorator** | **size**        | _Number_      | Loading spinner thickness |
+| **control**   | **height**      | _Number_      | Link height               |
+| **control**   | **meta-size**   | _Number_      | Link text size            |
+| **control**   | **meta-weight** | _Font Weight_ | Link text weight          |
+
+:::

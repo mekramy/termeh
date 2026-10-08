@@ -1,11 +1,14 @@
 import { defineConfig } from "vitepress";
 
 import container from "markdown-it-container";
+import markdownItIns from "markdown-it-ins";
+import markdownItMark from "markdown-it-mark";
 import {
     groupIconMdPlugin,
     groupIconVitePlugin,
 } from "vitepress-plugin-group-icons";
 import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
+import { fallbacks } from "./fallbacks";
 
 import Definition from "./definition";
 import Dependencies from "./dependencies";
@@ -47,6 +50,9 @@ export default defineConfig({
         config(md) {
             md.use(groupIconMdPlugin);
             md.use(tabsMarkdownPlugin);
+            md.use(markdownItIns);
+            md.use(markdownItMark);
+            md.use(fallbacks);
             md.use(container, "error", ErrorBlock);
             md.use(container, "scheme", Scheme);
             md.use(container, "definition", Definition);

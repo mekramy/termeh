@@ -125,29 +125,6 @@ This module is registered as `tag` in the _presented modules_.
 
 :::
 
-::: dependencies
-
-Tag module uses the following Termeh global `var()`:
-
-| Component            | Type     | Usage                     | Default |
-| -------------------- | -------- | ------------------------- | ------- |
-| `radius` → `normal`  | _Number_ | Default tag border radius | `null`  |
-| `radius` → `rounded` | _Number_ | Rounded tag border radius | `null`  |
-| `decorator` → `size` | _Color_  | Loading spinner thickness | `null`  |
-| `control` → `height` | _Number_ | Default tag height        | `2.2em` |
-
----
-
-Tag module uses the following Termeh `color()` and `variant()`:
-
-| Color / Variant      | Usage                              | Default |
-| -------------------- | ---------------------------------- | ------- |
-| `shade`              | Default focus/active outline color | _error_ |
-| `shade` → `readable` | Default text/icon color            | `null`  |
-| `shade` → `light`    | Default tag background color       | `null`  |
-
-:::
-
 ## Modifiers
 
 - `.is-action` → makes icon clickable
@@ -156,3 +133,32 @@ Tag module uses the following Termeh `color()` and `variant()`:
 - `.is-disabled` → applies disabled state
 - `.is-<size>` → applies a registered size as font size
 - `.is-<color>` → applies a registered color as accent color
+
+## Configuration
+
+This component uses the following dependencies for styling:
+
+::: dependencies
+
+Tag module uses the following Termeh global _var_:
+
+| Component     | Variable        | Type          | Usage                                       |
+|---------------|-----------------|---------------|---------------------------------------------|
+| **radius**    | **normal**      | _Number_      | Standard corner radius                      |
+| **radius**    | **rounded**     | _Number_      | Rounded corner radius                       |
+| **decorator** | **size**        | _Number_      | Focus-outline and loading spinner thickness |
+| **control**   | **height**      | _Number_      | Tag height                                  |
+| **control**   | **meta-size**   | _Number_      | Default text size                           |
+| **control**   | **meta-weight** | _Font Weight_ | Default text weight                         |
+
+---
+
+Tag module uses the following Termeh _color_ and _variant_:
+
+| Color     | Variant / Caution     | Usage                          |
+|-----------|-----------------------|--------------------------------|
+| **shade** | ==@throw on missing== | Focus-outline color            |
+| **shade** | **light**             | Default background color       |
+| **shade** | **readable**          | Default text and spinner color |
+
+:::

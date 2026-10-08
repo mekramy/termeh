@@ -77,39 +77,11 @@ This module is registered as `card` in the _presented modules_.
 
 :::
 
-::: dependencies
+## Child Elements
 
-Card module uses the following Termeh global `var()`:
-
-| Component                 | Type     | Usage                                                | Default    |
-| ------------------------- | -------- | ---------------------------------------------------- | ---------- |
-| `base` → `color`          | _Color_  | _Fallback_ background and overlay                    | `white`    |
-| `base` → `foreground`     | _Color_  | _Fallback_ foreground and overlay spinner color      | `black`    |
-| `base` → `section`        | _Color_  | Secondary section background                         | `null`     |
-| `base` → `separator`      | _Color_  | Separator background                                 | `null`     |
-| `box` → `background`      | _Color_  | Card background and overlay _fallback_ background    | _FALLBACK_ |
-| `box` → `foreground`      | _Color_  | Card foreground and overlay _fallback_ spinner color | _FALLBACK_ |
-| `box` → `shadow`          | _List_   | Default box shadow                                   | `null`     |
-| `box` → `sizes`           | _List_   | Default box sizes                                    | `()`       |
-| `gap` → `macro`           | _Number_ | Default card padding and bottom margin               | `1.6em`    |
-| `radius` → `normal`       | _Number_ | Default border-radius                                | `null`     |
-| `decorator` → `size`      | _Number_ | Loading spinner thickness                            | `2px`      |
-| `decorator` → `spinner`   | _Number_ | Loading spinner size                                 | `2em`      |
-| `overlay` → `background`  | _Color_  | Overlay background color                             | _FALLBACK_ |
-| `overlay` → `foureground` | _Color_  | Overlay foreground                                   | _FALLBACK_ |
-| `overlay` → `opacity`     | _Number_ | Overlay background opacity                           | `0.85`     |
-| `overlay` → `filter`      | _String_ | Overlay backdrop filter                              | `null`     |
-
----
-
-Card module uses the following Termeh `color()` and `variant()`:
-
-| Color / Variant | Usage                          | Default |
-| --------------- | ------------------------------ | ------- |
-| `shade`         | Default decorator color        | _error_ |
-| `primary`       | Default scrollbar accent color | _error_ |
-
-:::
+- `.separator` → horizontal divider line
+- `.section` → content block inside a card
+- `.overlay` → overlay container, shown when the card has `.is-overlaid`. must be placed as the last child of the card
 
 ## Modifiers Classes
 
@@ -120,12 +92,6 @@ Card module uses the following Termeh `color()` and `variant()`:
 - `.is-<gap>-gap` → applies a predefined spacing value
 - `.is-<color>` → applies a predefined accent color
 - `.is-<size>` → applies a predefined `box` size (default card width)
-
-## Child Elements
-
-- `.separator` → horizontal divider line
-- `.section` → content block inside a card
-- `.overlay` → overlay container, shown when the card has `.is-overlaid`; must be placed as the last child of the card
 
 ## Section Modifiers
 
@@ -138,3 +104,47 @@ Card module uses the following Termeh `color()` and `variant()`:
 ## Separator Modifiers
 
 - `.is-attached` → full-width divider with no margin
+
+## Configuration
+
+This component uses the following dependencies for styling:
+
+::: dependencies
+
+Card module uses the following Termeh global _var_:
+
+| Component | Variable | Type | Usage |
+| - | - | - | - |
+| **gap** | **macro** | _Number_ | Spacing between card sections |
+| **radius** | **normal** | _Number_ | Card corner radius |
+| **decorator** | **size** | _Number_ | Decorator and loader thickness |
+| **decorator** | **spinner** | _Number_ | Loading spinner size |
+| **card** | **background** | _Color_ | Card background color |
+| ++ `var("box", "background")` `var("base", "background")` |
+| **card** | **foreground** | _Color_ | Card text color |
+| ++ `var("box", "foreground")` `var("base", "foreground")` |
+| **card** | **section** | _Color_ | Secondary section background |
+| ++ `var("box", "section")` `var("base", "section")` |
+| **card** | **separator** | _Color_ | Section separator color |
+| ++ `var("box", "separator")` `var("base", "separator")` |
+| **card** | **shadow** | _Box Shadow_ | Card shadow values |
+| ++ `var("box", "shadow")` |
+| **card** | **sizes** | _List_ | Card size variants |
+| ++ `var("box", "sizes")` |
+| **card** | **overlay-background** | _Color_ | Overlay background color |
+| ++ `var("box", "overlay-background")` `var("overlay", "background")` |
+| **card** | **overlay-foreground** | _Color_ | Overlay text color |
+| ++ `var("box", "overlay-foreground")` `var("overlay", "foreground")` |
+| **card** | **overlay-opacity** | _Number_ | Overlay opacity |
+| ++ `var("box", "overlay-opacity")` `var("overlay", "opacity")` |
+| **card** | **overlay-filter** | _Filter_ | Overlay backdrop filter |
+| ++ `var("box", "overlay-filter")` `var("overlay", "filter")` |
+
+Card module uses the following Termeh _color_:
+
+| Color       | Variant / Caution     | Usage                   |
+|-------------|-----------------------|-------------------------|
+| **shade**   | ==@throw on missing== | Decorator border color  |
+| **primary** | ==@throw on missing== | Overlay scrollbar color |
+
+:::

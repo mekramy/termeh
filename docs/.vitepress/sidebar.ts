@@ -183,6 +183,22 @@ export default [
         collapsed: true,
         items: [
             {
+                text: "Button",
+                link: "/guide/component/button",
+            },
+            {
+                text: "Card",
+                link: "/guide/component/card",
+            },
+            {
+                text: "Header",
+                link: "/guide/component/header",
+            },
+            {
+                text: "Icon",
+                link: "/guide/component/icon",
+            },
+            {
                 text: "Element",
                 link: "/guide/component/element",
             },
@@ -195,28 +211,12 @@ export default [
                 link: "/guide/component/tag",
             },
             {
-                text: "Button",
-                link: "/guide/component/button",
+                text: "Link",
+                link: "/guide/component/link",
             },
             {
                 text: "Action",
                 link: "/guide/component/action",
-            },
-            {
-                text: "Header",
-                link: "/guide/component/header",
-            },
-            {
-                text: "Card",
-                link: "/guide/component/card",
-            },
-            {
-                text: "Icon",
-                link: "/guide/component/icon",
-            },
-            {
-                text: "Link",
-                link: "/guide/component/link",
             },
             {
                 text: "Breadcrumb",

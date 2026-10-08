@@ -1,25 +1,29 @@
 @use "../core/module";
 
-/// Generates breadcrumb element styles with configurable colors
-/// @param {List} $colors [()] - List of registered color names to include. Pass null to include all registered colors
+/// Generates breadcrumb styles with configurable colors.
 ///
-/// @termeh {Color} [null] - variant("primary", "readable") -> default active item color
-/// @termeh {Color} [null] - var("base", "separator") -> divider color
-/// @termeh {Number} [8px] - var("gap", "micro") -> horizontal spacing around divider
-/// @termeh {Number} [2.2em] - var("control", "height") -> breadcrumb height
-/// @termeh {Number} [null] - var("control", "weight") -> breadcrumb font weight
-/// @termeh {Number} [null] - var("control", "strong") -> active item font weight
+/// @param {List} $colors - Colors for breadcrumb variants; `null` includes all registered colors
+///
+/// @param {Color} variant("primary", "readable") - Active item color
+/// @param {Color} var("base", "separator") - Divider color
+/// @param {Number} var("gap", "micro") - Space around dividers
+///
+/// @param {Number} var("control", "height") - Item line height
+/// @param {Number} var("control", "meta-size") - Breadcrumb text size
+/// @param {Font Weight} var("control", "meta-weight") - Breadcrumb text weight
+/// @param {Font Weight} var("strong", "weight") - Active item text weight
 @mixin use-breadcrumb($colors: ()) {
     @if not module.module-presented("breadcrumb") {
         @include module.present-module("breadcrumb");
 
-        $primary: module.variant("primary", "readable");
+        $primary-readable: module.variant("primary", "readable");
         $separator: module.var("base", "separator");
-        $gap-micro: module.var("gap", "micro", 8px);
+        $gap-micro: module.var("gap", "micro");
 
-        $height: module.var("control", "height", 2.2em);
-        $weight: module.var("control", "weight");
-        $strong: module.var("control", "strong");
+        $height: module.var("control", "height");
+        $font-size: module.var("control", "meta-size");
+        $font-weight: module.var("control", "meta-weight");
+        $strong-weight: module.var("strong", "weight");
 
         @at-root {
             .breadcrumb {
@@ -28,7 +32,8 @@
                 align-items: center;
                 justify-content: flex-start;
                 box-sizing: border-box;
-                font-weight: $weight;
+                font-size: $font-size;
+                font-weight: $font-weight;
 
                 > * {
                     line-height: $height;
@@ -40,8 +45,8 @@
                 }
 
                 .active {
-                    color: $primary;
-                    font-weight: $strong;
+                    color: $primary-readable;
+                    font-weight: $strong-weight;
                 }
 
                 @each $name, $color in module.colors($includes: $colors) {

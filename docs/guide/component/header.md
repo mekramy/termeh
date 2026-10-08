@@ -106,29 +106,6 @@ This module is registered as `header` in the _presented modules_.
 
 :::
 
-::: dependencies
-
-Header module uses the following Termeh global `var()`:
-
-| Component                | Type     | Usage                                    | Default  |
-| ------------------------ | -------- | ---------------------------------------- | -------- |
-| `font` → `weight`        | _String_ | Sub-header font weight                   | `normal` |
-| `strong` → `weight`      | _String_ | Top-header font weight                   | `bold`   |
-| `gap` → `macro`          | _Number_ | Spacing between blocks and bottom margin | `1.6em`  |
-| `line-height` → `normal` | _Number_ | Default line height                      | `1.6em`  |
-| `decorator` → `size`     | _Number_ | Decorator line thickness                 | `2px`    |
-
----
-
-Header module uses the following Termeh `color()` and `variant()`:
-
-| Color / Variant  | Usage                   | Default |
-| ---------------- | ----------------------- | ------- |
-| `shade`          | Default decorator color | _error_ |
-| `shade` → `mute` | Sub-header text color   | `null`  |
-
-:::
-
 ## Child Elements
 
 - `.thumbnail` → heading icon or avatar
@@ -140,3 +117,32 @@ Header module uses the following Termeh `color()` and `variant()`:
 - `.is-centered` → centers all text within the header
 - `.is-<gap>-gap` → applies a predefined spacing value
 - `.is-<color>` → applies a predefined accent color
+
+## Configuration
+
+This component uses the following dependencies for styling:
+
+::: dependencies
+
+Header module uses the following Termeh global _var_:
+
+| Component       | Variable        | Type          | Usage                        |
+|-----------------|-----------------|---------------|------------------------------|
+| **control**     | **weight**      | _Font Weight_ | Secondary header text weight |
+| **strong**      | **weight**      | _Font Weight_ | Primary header text weight   |
+| **control**     | **meta-size**   | _Number_      | Secondary header text size   |
+| **control**     | **meta-weight** | _Font Weight_ | Secondary header text weight |
+| **decorator**   | **size**        | _Number_      | Decorator thickness          |
+| **gap**         | **macro**       | _Number_      | Header gap and bottom margin |
+| **line-height** | **normal**      | _Number_      | Header line height           |
+
+---
+
+Header module uses the following Termeh _color_ and _variant_:
+
+| Color     | Variant / Caution     | Usage                  |
+|-----------|-----------------------|------------------------|
+| **shade** | ==@throw on missing== | Decorator color        |
+| **shade** | **mute**              | Secondary header color |
+
+:::

@@ -1,53 +1,84 @@
 @use "sass:list";
 @use "../core/module";
 
-/// Generates card element styles with configurable colors and gaps
-/// @param {List} $colors [()] - List of registered color names to include. Pass null to include all registered colors
-/// @param {List} $gaps [()] - List of registered gap names to include. Pass null to include all registered gaps
+/// Generates card element styles with configurable colors and gaps.
 ///
-/// @termeh {Color} [error] - color("shade") -> default decorator color
-/// @termeh {Color} [error] - color("primary") -> default scrollbar accent color
-/// @termeh {Color} [white] - var("base", "color") -> fallback background and overlay
-/// @termeh {Color} [black] - var("base", "foreground") -> fallback foreground and overlay spinner color
-/// @termeh {Color} [null] - var("base", "section") -> secondary section background
-/// @termeh {Color} [null] - var("base", "separator") -> separator background
-/// @termeh {Color} [FALLBACK] - var("box", "background") -> card background and overlay fallback background
-/// @termeh {Color} [FALLBACK] - var("box", "foreground") -> card foreground and overlay fallback spinner color
-/// @termeh {List} [null] - var("box", "shadow") -> default box shadow
-/// @termeh {List} [()] - var("box", "sizes") -> default box sizes
-/// @termeh {Number} [1.6em] - var("gap", "macro") -> default card padding and bottom margin
-/// @termeh {Number} [null] - var("radius", "normal") -> default border-radius
-/// @termeh {Number} [2px] - var("decorator", "size") -> loading spinner and decorator thickness
-/// @termeh {Number} [2em] - var("decorator", "spinner") -> loading spinner size
-/// @termeh {Color} [FALLBACK] - var("overlay", "background") -> overlay background color
-/// @termeh {Color} [FALLBACK] - var("overlay", "foureground") -> overlay foreground
-/// @termeh {Number} [0.85] - var("overlay", "opacity") -> overlay background opacity
-/// @termeh {String} [null] - var("overlay", "filter") -> overlay backdrop filter
+/// @param {List} $colors - Colors for card variants; `null` includes all registered colors
+/// @param {List} $gaps - Gaps for card variants; `null` includes all registered gaps
+///
+/// @param {Color} color("shade") - Decorator border color @throw
+/// @param {Color} color("primary") - Overlay scrollbar color @throw
+///
+/// @param {Number} var("gap", "macro") - Spacing between card sections
+/// @param {Number} var("radius", "normal") - Card corner radius
+/// @param {Number} var("decorator", "size") - Decorator and loader thickness
+/// @param {Number} var("decorator", "spinner") - Loading spinner size
+///
+/// @param {Color} var("card", "background") - Card background color @fallback [box:background, base:background]
+/// @param {Color} var("card", "foreground") - Card text color @fallback [box:foreground, base:foreground]
+/// @param {Color} var("card", "section") - Secondary section background @fallback [box:section, base:section]
+/// @param {Color} var("card", "separator") - Section separator color @fallback [box:separator, base:separator]
+/// @param {Box Shadow} var("card", "shadow") - Card shadow values @fallback [box:shadow]
+/// @param {List} var("card", "sizes") - Card size variants @fallback [box:sizes]
+///
+/// @param {Color} var("card", "overlay-background") - Overlay background color @fallback [box:overlay-background, overlay:background]
+/// @param {Color} var("card", "overlay-foreground") - Overlay text color @fallback [box:overlay-foreground, overlay:foreground]
+/// @param {Number} var("card", "overlay-opacity") - Overlay opacity @fallback [box:overlay-opacity, overlay:opacity]
+/// @param {Filter} var("card", "overlay-filter") - Overlay backdrop filter @fallback [box:overlay-filter, overlay:filter]
 @mixin use-card($colors: (), $gaps: ()) {
     @if not module.module-presented("card") {
         @include module.present-module("card");
 
+        /** Fallbacks */
+        $fallback-background: module.var("base", "background", white);
+        $fallback-foreground: module.var("base", "foreground", black);
+        $fallback-section: module.var("base", "section");
+        $fallback-separator: module.var("base", "separator");
+
+        $fallback-overlay-background: module.var("overlay", "background", $fallback-background);
+        $fallback-overlay-foreground: module.var("overlay", "foreground", $fallback-foreground);
+        $fallback-overlay-opacity: module.var("overlay", "opacity");
+        $fallback-overlay-filter: module.var("overlay", "filter");
+
+        $box-background: module.var("box", "background", $fallback-background);
+        $box-foreground: module.var("box", "foreground", $fallback-foreground);
+        $box-section: module.var("box", "section", $fallback-section);
+        $box-separator: module.var("box", "separator", $fallback-separator);
+        $box-overlay-background: module.var(
+            "box",
+            "overlay-background",
+            $fallback-overlay-background
+        );
+        $box-overlay-foreground: module.var(
+            "box",
+            "overlay-foreground",
+            $fallback-overlay-foreground
+        );
+        $box-overlay-opacity: module.var("box", "overlay-opacity", $fallback-overlay-opacity);
+        $box-overlay-filter: module.var("box", "overlay-filter", $fallback-overlay-filter);
+        $box-shadow: module.var("box", "shadow");
+        $box-sizes: module.var("box", "sizes");
+        /** ----- */
+
         $shade: module.color("shade");
         $primary: module.color("primary");
-        $base-background: module.var("base", "color", white);
-        $base-foreground: module.var("base", "foreground", black);
-        $base-section: module.var("base", "section");
-        $base-separator: module.var("base", "separator");
 
-        $background: module.var("box", "background", $base-background);
-        $foreground: module.var("box", "foreground", $base-foreground);
-        $shadow: module.var("box", "shadow", null);
-        $sizes: module.var("box", "sizes", ());
+        $gap-macro: module.var("gap", "macro");
+        $radius-normal: module.var("radius", "normal");
+        $decorator: module.var("decorator", "size");
+        $spinner: module.var("decorator", "spinner");
 
-        $gap-macro: module.var("gap", "macro", 1.6em);
-        $radius: module.var("radius", "normal");
-        $decorator: module.var("decorator", "size", 2px);
-        $spinner: module.var("decorator", "spinner", 2em);
+        $background: module.var("card", "background", $box-background);
+        $foreground: module.var("card", "foreground", $box-foreground);
+        $section: module.var("card", "section", $box-section);
+        $separator: module.var("card", "separator", $box-separator);
+        $shadow: module.var("card", "shadow", $box-shadow);
+        $sizes: module.var("card", "sizes", $box-sizes);
 
-        $overlay-background: module.var("overlay", "background", $background);
-        $overlay-foreground: module.var("overlay", "foureground", $foreground);
-        $overlay-opacity: module.var("overlay", "opacity", 0.85);
-        $overlay-filter: module.var("overlay", "filter", null);
+        $overlay-background: module.var("card", "overlay-background", $box-overlay-background);
+        $overlay-foreground: module.var("card", "overlay-foreground", $box-overlay-foreground);
+        $overlay-opacity: module.var("card", "overlay-opacity", $box-overlay-opacity);
+        $overlay-filter: module.var("card", "overlay-filter", $box-overlay-filter);
 
         @at-root {
             .card {
@@ -55,10 +86,10 @@
                 position: relative;
                 max-width: 100%;
                 padding: $gap-macro;
-                box-shadow: $shadow;
-                border-radius: $radius;
                 color: $foreground;
                 background-color: $background;
+                border-radius: $radius-normal;
+                box-shadow: $shadow;
 
                 @include module.marged() {
                     margin-bottom: $gap-macro;
@@ -67,7 +98,7 @@
                 > .separator {
                     display: block;
                     height: 1px;
-                    background: $base-separator;
+                    background: $separator;
 
                     &.is-attached {
                         margin: 0 module.negate($gap-macro);
@@ -95,7 +126,7 @@
                     }
 
                     &.is-secondary {
-                        background: $base-section;
+                        background: $section;
                     }
                 }
 
@@ -110,9 +141,9 @@
                     overflow-y: auto;
                     padding: $gap-macro;
                     color: $overlay-foreground;
-                    background: rgba($overlay-background, $overlay-opacity);
+                    background: module.alpha($overlay-background, $overlay-opacity);
                     backdrop-filter: $overlay-filter;
-                    @include module.transition(all);
+                    @include module.transition(opacity);
                     @include module.scrollable($primary);
 
                     & > * {
@@ -123,7 +154,7 @@
 
                 > .overlay,
                 &::after {
-                    border-radius: $radius;
+                    border-radius: $radius-normal;
                 }
 
                 &.is-top-decorated {

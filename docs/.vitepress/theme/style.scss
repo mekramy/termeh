@@ -30,7 +30,7 @@ html {
         em {
             font-style: normal;
             font-weight: bold;
-            font-size: 0.75em;
+            font-size: 0.8em;
             letter-spacing: 1px;
             text-transform: uppercase;
             color: var(--ctp-mocha-red, var(--ctp-latte-flamingo, var(--vp-c-brand-1)));
@@ -47,7 +47,7 @@ html {
 
             strong {
                 font-weight: bold;
-                font-size: 0.65em;
+                font-size: 0.7rem;
                 letter-spacing: 1px;
                 font-family: var(--vp-font-family-mono);
                 text-transform: uppercase;
@@ -55,11 +55,26 @@ html {
             }
 
             code {
+                padding: 0;
                 font-weight: 600;
                 font-size: 0.8rem;
                 background-color: transparent;
                 font-family: var(--vp-font-family-mono);
             }
+
+            ins {
+                font-size: 0.7rem;
+            }
         }
+    }
+
+    ins {
+        font-weight: 600;
+        font-size: 0.65rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--ctp-latte-lavender);
+        font-family: var(--vp-font-family-mono);
     }
 }

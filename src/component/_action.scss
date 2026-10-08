@@ -6,33 +6,46 @@
 /// Action groups arrange `.action` elements horizontally and allow overflow scrolling on
 /// mobile. Actions support secondary, loading, rounded, disabled, and color variants.
 ///
-/// @param {List} $colors [()] - Color names for which to generate `.is-{color}` group variants. Pass `null` to use all registered colors.
+/// @param {List} $colors - Colors for `.is-{color}` variants; `null` includes all registered colors
 ///
-/// @termeh {Color} [null] - color("primary") -> default action background color
-/// @termeh {Color} [null] - variant("primary", "foreground") -> default action text and loader color
-/// @termeh {Color} [null] - variant("shade", "readable") -> secondary action text and loader color
-/// @termeh {Color} [null] - color("shade") -> default focus and active outline color
-/// @termeh {Number} [8px] - var("gap", "micro") -> spacing between actions
-/// @termeh {Number} [null] - var("radius", "normal") -> default action border radius
-/// @termeh {Number} [null] - var("radius", "rounded") -> rounded action border radius
-/// @termeh {Number} [null] - var("decorator", "size") -> focus outline and loader size
-/// @termeh {Number} [2.2em] - var("control", "height") -> action control height
+/// @param {Color} color("shade") - Secondary hover and focus-outline color @throw
+/// @param {Color} variant("shade", "readable") - Secondary text and loading spinner color
+///
+/// @param {Color} color("primary") - Primary action background and focus-outline color @throw
+/// @param {Color} variant("primary", "foreground") - Primary text and loading spinner color
+///
+/// @param {Number} var("gap", "micro") - Spacing between actions
+/// @param {Number} var("radius", "normal") - Standard border radius
+/// @param {Number} var("radius", "rounded") - Rounded border radius
+///
+/// @param {Number} var("decorator", "size") - Padding, focus-outline, and loading spinner thickness
+/// @param {Number} var("control", "height") - Action height
+/// @param {Number} var("control", "meta-size") - Action text size
+/// @param {Font Weight} var("control", "meta-weight") - Action text weight
 @mixin use-action($colors: ()) {
     @if not module.module-presented("action") {
         @include element.use-element();
         @include module.present-module("action");
 
-        $background: module.color("primary");
-        $foreground: module.variant("primary", "foreground");
-        $readable: module.variant("shade", "readable");
-        $outline: rgba(module.color("shade"), 0.2);
+        $shade: module.color("shade");
+        $shade-readable: module.variant("shade", "readable");
+        $secondary-hover: module.alpha($shade, 0.1);
+        $secondary-outline: module.alpha($shade, 0.2);
 
-        $gap-micro: module.var("gap", "micro", 8px);
+        $primary: module.color("primary");
+        $primary-foreground: module.variant("primary", "foreground");
+        $background: module.alpha($primary, 0.65);
+        $hover: module.alpha($primary, 0.85);
+        $outline: module.alpha($primary, 0.2);
+
+        $gap-micro: module.var("gap", "micro");
         $radius-normal: module.var("radius", "normal");
         $radius-rounded: module.var("radius", "rounded");
-        $decorator: module.var("decorator", "size");
 
-        $height: module.var("control", "height", 2.2em);
+        $decorator: module.var("decorator", "size");
+        $height: module.var("control", "height");
+        $font-size: module.var("control", "meta-size");
+        $font-weight: module.var("control", "meta-weight");
 
         @at-root {
             .actions {
@@ -41,7 +54,7 @@
                 align-items: stretch;
                 justify-content: flex-end;
                 box-sizing: border-box;
-                padding: $decorator * 1.5;
+                padding: $decorator;
                 gap: module.half($gap-micro);
 
                 @include module.mobile() {
@@ -56,39 +69,53 @@
                     cursor: pointer;
                     width: auto;
                     height: $height;
-                    border-radius: $radius-normal;
+                    font-size: $font-size;
+                    font-weight: $font-weight;
                     text-overflow: ellipsis;
+                    border-radius: $radius-normal;
                     padding: module.control-padding();
                     @include module.transition(all);
                     @include module.unselectable();
 
                     &:not(.is-secondary) {
-                        color: $foreground;
-                        background-color: rgba($background, 0.8);
+                        color: $primary-foreground;
+                        background-color: $background;
+
+                        @include module.is-focused(".is-loading") {
+                            outline: $decorator solid $outline;
+                        }
+
+                        &:hover {
+                            outline-color: none;
+                            text-decoration: none;
+                            background-color: $hover;
+                        }
 
                         &.is-loading {
                             color: transparent;
                             @include module.locked();
-                            @include module.loader(1em, $foreground, $decorator);
-                        }
-
-                        &:hover {
-                            background-color: $background;
+                            @include module.loader(1em, $primary-foreground, $decorator);
                         }
                     }
 
                     &.is-secondary {
-                        color: $readable;
+                        color: $shade-readable;
                         background-color: transparent;
+
+                        @include module.is-focused(".is-loading") {
+                            outline: $decorator solid $secondary-outline;
+                        }
+
+                        &:hover {
+                            outline-color: none;
+                            text-decoration: none;
+                            background-color: $secondary-hover;
+                        }
 
                         &.is-loading {
                             color: transparent;
                             @include module.locked();
-                            @include module.loader(1em, $readable, $decorator);
-                        }
-
-                        &:hover {
-                            background-color: rgba($readable, 0.1);
+                            @include module.loader(1em, $shade-readable, $decorator);
                         }
                     }
 
@@ -96,47 +123,35 @@
                         border-radius: $radius-rounded;
                     }
 
-                    &:hover {
-                        box-shadow: none;
-                        text-decoration: none;
-                        transform: scale(1.05);
-                    }
-
-                    &:focus,
-                    &:active {
-                        box-shadow: module.flat-shadow($decorator, $outline);
-                    }
-
                     @include module.is-disabled() {
                         @include module.disabled();
-
                         border-color: transparent !important;
                     }
                 }
 
                 @each $name, $color in module.colors($colors) {
+                    $-foreground: module.variant($name, "foreground");
+                    $-background: module.alpha($color, 0.65);
+                    $-hover: module.alpha($color, 0.85);
+                    $-outline: module.alpha($color, 0.2);
+
                     &.is-#{$name},
                     .is-#{$name} & {
-                        $background: $color;
-                        $foreground: module.variant($name, "foreground");
-                        $outline: rgba($color, 0.2);
-
                         .action:not(.is-secondary) {
-                            color: $foreground;
-                            background-color: rgba($background, 0.8);
+                            color: $-foreground;
+                            background-color: $-background;
+
+                            @include module.is-focused(".is-loading") {
+                                outline-color: $-outline;
+                            }
+
+                            &:hover {
+                                background-color: $-hover;
+                            }
 
                             &.is-loading {
                                 color: transparent;
                                 @include module.loader-color($color);
-                            }
-
-                            &:hover {
-                                background-color: $background;
-                            }
-
-                            &:focus,
-                            &:active {
-                                box-shadow: module.flat-shadow($decorator, $outline);
                             }
                         }
                     }

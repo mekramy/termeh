@@ -1,22 +1,27 @@
 @use "../core/module";
 
-/// Generates base element wrapper styles with configurable colors and sizes
+/// Generates base element wrapper styles with configurable colors and sizes.
 ///
-/// @termeh {Number} [error] - size("small") -> font size for small items
-/// @termeh {Number} [8px] - var("gap", "micro") -> spacing between items
-/// @termeh {Number} [2.2em] - var("control", "height") -> element line height
-/// @termeh {Number} [null] - var("control", "weight") -> element font weight
-/// @termeh {Number} [null] - var("control", "strong") -> font weight for strong child elements
+/// @param {Number} var("gap", "micro") - Spacing between items and after non-final icons
+///
+/// @param {Number} var("small", "size") - Text size for s, del, sub, sup, and small
+/// @param {Font Weight} var("small", "weight") - Text weight for s, del, sub, sup, and small
+/// @param {Font Weight} var("strong", "weight") - Text weight for b and strong
+///
+/// @param {Font Weight} var("control", "weight") - Base text weight; small and strong use their own
+/// @param {Number} var("control", "height") - Line height for the element and its text
 @mixin use-element() {
     @if not module.module-presented("element") {
         @include module.present-module("element");
 
-        $size-small: module.size("small");
-        $gap-micro: module.var("gap", "micro", 8px);
+        $gap-micro: module.var("gap", "micro");
 
-        $height: module.var("control", "height", 2.2em);
+        $small-size: module.var("small", "size");
+        $small-weight: module.var("small", "weight");
+        $strong-weight: module.var("strong", "weight");
+
         $weight: module.var("control", "weight");
-        $strong: module.var("control", "strong");
+        $height: module.var("control", "height");
 
         @at-root {
             .element {
@@ -25,11 +30,11 @@
                 align-items: center;
                 flex-flow: row nowrap;
                 justify-content: center;
+                font-weight: $weight;
+                line-height: $height;
                 text-align: center;
                 white-space: nowrap;
                 text-decoration: none;
-                line-height: $height;
-                font-weight: $weight;
                 gap: module.half($gap-micro);
 
                 b,
@@ -54,7 +59,8 @@
                 sub,
                 sup,
                 small {
-                    font-size: $size-small;
+                    font-size: $small-size;
+                    font-weight: $small-weight;
                 }
 
                 sup {
@@ -69,20 +75,14 @@
 
                 b,
                 strong {
-                    font-weight: $strong;
+                    font-weight: $strong-weight;
                 }
 
                 .icon {
                     color: inherit;
 
                     &:not(:last-child) {
-                        @include module.is-ltr() {
-                            margin-right: module.half($gap-micro);
-                        }
-
-                        @include module.is-rtl() {
-                            margin-left: module.half($gap-micro);
-                        }
+                        margin-inline-end: module.half($gap-micro);
                     }
                 }
             }

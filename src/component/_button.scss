@@ -1,35 +1,39 @@
 @use "../core/module";
 @use "./element";
 
-/// Generates button element styles with configurable colors and sizes
-/// @param {List} $colors [()] - List of registered color names to include. Pass null to include all registered colors
-/// @param {List} $sizes [()] - List of registered size names to include. Pass null to include all registered sizes
+/// Generates button element styles with configurable colors and sizes.
 ///
-/// @termeh {Color} [error] - color("shade") -> default focus/active outline color
-/// @termeh {Color} [null] - variant("shade", "readable") -> default text/icon color
-/// @termeh {Color} [null] - variant("shade", "light") -> default button background
-/// @termeh {Color} [null] - variant("shade", "light-active") -> default hover background
-/// @termeh {Number} [8px] - var("gap", "micro") -> spacing between button container items
-/// @termeh {Number} [null] - var("radius", "normal") -> default border radius
-/// @termeh {Number} [null] - var("radius", "rounded") -> rounded button border radius
-/// @termeh {Color} [null] - var("decorator", "size") -> loading spinner thickness
-/// @termeh {Number} [2.2em] - var("control", "height") -> default button height
+/// @param {List} $colors - Colors for button variants; `null` includes all registered colors
+/// @param {List} $sizes - Sizes for button variants; `null` includes all registered sizes
+///
+/// @param {Color} color("shade") - Focus-outline color @throw
+/// @param {Color} variant("shade", "light") - Default button background
+/// @param {Color} variant("shade", "readable") - Default button text color
+/// @param {Color} variant("shade", "light-active") - Hover background
+///
+/// @param {Number} var("gap", "micro") - Gap between grouped buttons
+/// @param {Number} var("radius", "normal") - Standard button radius
+/// @param {Number} var("radius", "rounded") - Rounded button radius
+/// @param {Number} var("decorator", "size") - Focus-outline and loading spinner thickness
+///
+/// @param {Number} var("control", "height") - Button height
 @mixin use-button($colors: (), $sizes: ()) {
     @if not module.module-presented("button") {
         @include element.use-element();
         @include module.present-module("button");
 
-        $outline: rgba(module.color("shade"), 0.2);
-        $readable: module.variant("shade", "readable");
-        $background: module.variant("shade", "light");
-        $background-hover: module.variant("shade", "light-active");
+        $shade: module.color("shade");
+        $shade-light: module.variant("shade", "light");
+        $shade-readable: module.variant("shade", "readable");
+        $shade-light-active: module.variant("shade", "light-active");
+        $outline: module.alpha($shade, 0.2);
 
-        $gap-micro: module.var("gap", "micro", 8px);
+        $gap-micro: module.var("gap", "micro");
         $radius-normal: module.var("radius", "normal");
         $radius-rounded: module.var("radius", "rounded");
         $decorator: module.var("decorator", "size");
 
-        $height: module.var("control", "height", 2.2em);
+        $height: module.var("control", "height");
 
         @at-root {
             .buttons {
@@ -38,7 +42,7 @@
                 align-items: stretch;
                 justify-content: flex-end;
                 box-sizing: border-box;
-                padding: $decorator * 1.5;
+                padding: $decorator;
                 gap: module.half($gap-micro);
 
                 .button.is-cta {
@@ -58,8 +62,8 @@
                 cursor: pointer;
                 width: auto;
                 height: $height;
-                border-radius: $radius-normal;
                 text-overflow: ellipsis;
+                border-radius: $radius-normal;
                 padding: module.control-padding();
                 @include module.transition(all);
                 @include module.unselectable();
@@ -68,37 +72,36 @@
                     text-decoration: none;
                 }
 
-                &:focus,
-                &:active {
-                    box-shadow: module.flat-shadow($decorator, $outline);
+                @include module.is-focused(".is-loading") {
+                    outline: $decorator solid $outline;
                 }
 
                 &:not(.is-simple) {
-                    color: $readable;
-                    background-color: $background;
+                    color: $shade-readable;
+                    background-color: $shade-light;
 
                     &:hover {
-                        background-color: $background-hover;
+                        background-color: $shade-light-active;
                     }
 
                     &.is-loading {
                         color: transparent;
                         @include module.locked();
-                        @include module.loader(1em, $readable, $decorator);
+                        @include module.loader(1em, $shade-readable, $decorator);
                     }
                 }
 
                 &.is-simple:not(.is-light) {
-                    color: $readable;
+                    color: $shade-readable;
 
                     &:hover {
-                        background-color: $background;
+                        background-color: $shade-light;
                     }
 
                     &.is-loading {
                         color: transparent;
                         @include module.locked();
-                        @include module.loader(1em, $readable, $decorator);
+                        @include module.loader(1em, $shade-readable, $decorator);
                     }
                 }
 
@@ -116,11 +119,10 @@
                     &.is-#{$name} {
                         &:not(.is-simple, .is-light) {
                             $-foreground: module.variant($name, "foreground");
-                            $-background: $color;
                             $-background-hover: module.variant($name, "active");
 
                             color: $-foreground;
-                            background-color: $-background;
+                            background-color: $color;
 
                             &:hover {
                                 background-color: $-background-hover;
@@ -166,11 +168,8 @@
                             }
                         }
 
-                        &:focus,
-                        &:active {
-                            $-outline: rgba($color, 0.2);
-
-                            box-shadow: module.flat-shadow($decorator, $-outline);
+                        @include module.is-focused(".is-loading") {
+                            outline-color: module.alpha($color, 0.2);
                         }
                     }
                 }

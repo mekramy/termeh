@@ -10,6 +10,7 @@
 
         strong {
             position: relative;
+            white-space: nowrap;
             display: inline-block;
             padding: 0.3rem 1rem;
             margin-left: -1.4rem;
@@ -93,24 +94,68 @@
             width: 100%;
             table-layout: auto;
 
+            td.is-fallback {
+                font-family: var(--vp-font-family-mono);
+                background: var(--vp-c-bg);
+                border-left: none;
+                border-right: none;
+                padding-left: 2rem;
+
+                ins {
+                    font-weight: 700;
+                    color: var(--ctp-latte-surface2);
+                }
+
+                code {
+                    display: block;
+                    padding: 0;
+                    padding-left: 2em;
+                    font-weight: 500;
+                    font-size: 0.75rem;
+                    line-height: 2;
+                    letter-spacing: 0.75px;
+                    white-space: nowrap;
+                    color: var(--vp-c-black);
+                    background: transparent;
+
+                    &:before {
+                        content: "→";
+                        margin-right: 1em;
+                        color: var(--ctp-latte-surface2);
+                    }
+                }
+            }
+
             strong {
-                font-weight: 700;
-                font-size: 0.7rem;
+                font-weight: 600;
+                font-size: 0.85rem;
                 white-space: nowrap;
-                letter-spacing: 1px;
                 background-color: transparent;
-                color: var(--vp-c-text-2);
                 font-family: var(--vp-font-family-mono);
             }
 
-            u {
+            em {
                 font-weight: 600;
                 font-size: 0.65rem;
-                letter-spacing: 0;
                 letter-spacing: 1px;
                 text-transform: uppercase;
                 text-decoration: none;
-                color: var(--ctp-latte-rosewater);
+                white-space: nowrap;
+                color: var(--ctp-latte-sky);
+                font-family: var(--vp-font-family-mono);
+            }
+
+            mark {
+                padding: 2px 6px;
+                border-radius: 2px;
+                font-weight: 600;
+                font-size: 0.65rem;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                text-decoration: none;
+                white-space: nowrap;
+                color: var(--vp-custom-block-caution-text);
+                background-color: var(--vp-custom-block-caution-bg);
                 font-family: var(--vp-font-family-mono);
             }
         }

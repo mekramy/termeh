@@ -1,6 +1,6 @@
 # Button Module
 
-The **Button** module provides customizable action elements with support for color variants, sizes, shapes, loading, and disabled states. It extends the _Element_ module. It can be grouped using the `. buttons` container for consistent spacing.
+The **Button** module provides customizable action elements with support for color variants, sizes, shapes, loading, and disabled states. It extends the _Element_ module. It can be grouped using the `.buttons` container for consistent spacing.
 
 ::: tabs
 
@@ -114,31 +114,6 @@ This module is registered as `button` in the _presented modules_.
 
 :::
 
-::: dependencies
-
-Button module uses the following Termeh global `var()`:
-
-| Component            | Type     | Usage                                  | Default |
-| -------------------- | -------- | -------------------------------------- | ------- |
-| `gap` → `micro`      | _Number_ | Spacing between button container items | `8px`   |
-| `radius` → `normal`  | _Number_ | Default border radius                  | `null`  |
-| `radius` → `rounded` | _Number_ | Rounded button border radius           | `null`  |
-| `decorator` → `size` | _Color_  | Loading spinner thickness              | `null`  |
-| `control` → `height` | _Number_ | Default button height                  | `2.2em` |
-
----
-
-Button module uses the following Termeh `color()` and `variant()`:
-
-| Color / Variant          | Usage                              | Default |
-| ------------------------ | ---------------------------------- | ------- |
-| `shade`                  | Default focus/active outline color | _error_ |
-| `shade` → `readable`     | Default text/icon color            | `null`  |
-| `shade` → `light`        | Default button background          | `null`  |
-| `shade` → `light-active` | Default hover background           | `null`  |
-
-:::
-
 ## Button Container
 
 Container for buttons: `.buttons`
@@ -151,5 +126,34 @@ Container for buttons: `.buttons`
 - `.is-rounded` → applies rounded border-radius
 - `.is-loading` → applies loading state
 - `.is-disabled` → applies disabled state
-- `.is-<size>` → applies a registered size as button size
-- `.is-<color>` → applies a registered color as accent color
+- ++.is-{size}++ → applies a registered size as button size
+- ++.is-{color}++ → applies a registered color as accent color
+
+## Configuration
+
+This component uses the following dependencies for styling:
+
+::: dependencies
+
+Button module uses the following Termeh global _var_:
+
+| Component     | Variable    | Type     | Usage                                       |
+|---------------|-------------|----------|---------------------------------------------|
+| **gap**       | **micro**   | _Number_ | Gap between grouped buttons                 |
+| **radius**    | **normal**  | _Number_ | Standard button radius                      |
+| **radius**    | **rounded** | _Number_ | Rounded button radius                       |
+| **decorator** | **size**    | _Number_ | Focus-outline and loading spinner thickness |
+| **control**   | **height**  | _Number_ | Button height                               |
+
+---
+
+Button module uses the following Termeh _color_ and _varian_:
+
+| Color     | Variant / Caution     | Usage                              |
+|-----------|-----------------------|------------------------------------|
+| **shade** | ==@throw on missing== | Default focus/active outline color |
+| **shade** | **readable**          | Default text/icon color            |
+| **shade** | **light**             | Default button background          |
+| **shade** | **light-active**      | Default hover background           |
+
+:::

@@ -72,33 +72,38 @@ This module is registered as `breadcrumb` in the _presented modules_.
 
 :::
 
-::: dependencies
-
-Breadcrumb module uses the following Termeh global `var()`:
-
-| Component            | Type     | Usage                             | Default |
-| -------------------- | -------- | --------------------------------- | ------- |
-| `base` → `separator` | _Color_  | Divider color                     | `null`  |
-| `gap` → `micro`      | _Number_ | Horizontal spacing around divider | `8px`   |
-| `control` → `height` | _Number_ | Breadcrumb height                 | `2.2em` |
-| `control` → `weight` | _Number_ | Breadcrumb font weight            | `null`  |
-| `control` → `strong` | _Number_ | Active item font weight           | `null`  |
-
----
-
-Breadcrumb module uses the following Termeh `color()` and `variant()`:
-
-| Color / Variant        | Usage                     | Default |
-| ---------------------- | ------------------------- | ------- |
-| `primary` → `readable` | Default active item color | `null`  |
-
-:::
-
-## Modifiers
-
-- `.is-<color>` → applies a registered color as accent color
-
-### Child Elements
+## Child Elements
 
 - `.divider` → separator element
 - `.active` → active item
+
+## Modifiers
+
+- ++is-{color}++ → applies a registered color as accent color
+
+## Configuration
+
+This component uses the following dependencies for styling:
+
+::: dependencies
+
+Breadcrumb module uses the following Termeh global _var_:
+
+| Component   | Variable        | Type          | Usage                   |
+|-------------|-----------------|---------------|-------------------------|
+| **base**    | **separator**   | _Color_       | Divider color           |
+| **gap**     | **micro**       | _Number_      | Space around dividers   |
+| **control** | **height**      | _Number_      | Item line height        |
+| **control** | **meta-size**   | _Number_      | Breadcrumb text size    |
+| **control** | **meta-weight** | _Font Weight_ | Breadcrumb text weight  |
+| **strong**  | **weight**      | _Font Weight_ | Active item text weight |
+
+---
+
+Breadcrumb module uses the following Termeh _variant_:
+
+| Color       | Variant      | Usage             |
+|-------------|--------------|-------------------|
+| **primary** | **readable** | Active item color |
+
+:::

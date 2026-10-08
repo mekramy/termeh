@@ -1,20 +1,21 @@
 @use "../core/module";
 
-/// Generates icon container element styles with configurable colors and sizes
-/// @param {List} $colors [()] - List of registered color names to include. Pass null to include all registered colors
-/// @param {List} $sizes [()] - List of registered size names to include. Pass null to include all registered sizes
+/// Generates icon container element styles with configurable colors and sizes.
 ///
-/// @termeh {Color} [error] - color("shade") -> default loading spinner color
-/// @termeh {Color} [null] - variant("shade", "mute") -> default action icon color
-/// @termeh {Color} [null] - variant("shade", "readable") -> default hover color for action icons
-/// @termeh {Color} [null] - var("decorator", "size") -> loading spinner thickness
+/// @param {List} $colors - Colors for icon variants; `null` includes all registered colors
+/// @param {List} $sizes - Sizes for icon variants; `null` includes all registered sizes
+///
+/// @param {Color} $shade color("shade") - Loading spinner color
+/// @param {Color} $shade-mute variant("shade", "mute") - Action icon color
+/// @param {Color} $shade-readable variant("shade", "readable") - Action hover color
+/// @param {Number} $decorator var("decorator", "size") - Loading spinner thickness
 @mixin use-icon($colors: (), $sizes: ()) {
     @if not module.module-presented("icon") {
         @include module.present-module("icon");
 
-        $base: module.color("shade");
-        $mute: module.variant("shade", "mute");
-        $readable: module.variant("shade", "readable");
+        $shade: module.color("shade");
+        $shade-mute: module.variant("shade", "mute");
+        $shade-readable: module.variant("shade", "readable");
         $decorator: module.var("decorator", "size");
 
         @at-root {
@@ -62,7 +63,7 @@
 
                 &.is-loading {
                     @include module.locked();
-                    @include module.loader(1em, $base, $decorator);
+                    @include module.loader(1em, $shade, $decorator);
 
                     img,
                     svg {
@@ -71,7 +72,7 @@
                 }
 
                 &.is-action {
-                    color: $mute;
+                    color: $shade-mute;
                     cursor: pointer;
                     text-decoration: none;
 
@@ -81,7 +82,7 @@
 
                     &:hover {
                         text-decoration: none;
-                        color: $readable;
+                        color: $shade-readable;
 
                         > img {
                             filter: grayscale(0);
@@ -97,21 +98,24 @@
                 }
 
                 @each $name, $color in module.colors($colors) {
+                    $-mute: module.variant($name, "mute");
+                    $-readable: module.variant($name, "readable");
+
                     &.is-#{$name} {
                         &:not(.is-action) {
-                            color: module.variant($name, "readable");
+                            color: $-readable;
                         }
 
                         &.is-action {
-                            color: module.variant($name, "mute");
+                            color: $-mute;
 
                             &:hover {
-                                color: module.variant($name, "readable");
+                                color: $-readable;
                             }
                         }
 
                         &.is-loading {
-                            @include module.loader-color(module.variant($name, "readable"));
+                            @include module.loader-color($-readable);
                         }
                     }
                 }

@@ -1,6 +1,6 @@
 # Meta Module
 
-The **Meta** module provides inline meta information elements with configurable colors, sizes, action/hover states, loading indicators, and disabled handling.
+The **Meta** module provides inline meta information elements with configurable colors, sizes, action/hover states, loading spinners, and disabled handling.
 It extends the base _Element_ module.
 
 ::: tabs
@@ -11,12 +11,12 @@ It extends the base _Element_ module.
 <Preview height="3rem">
   <div class="demo">
     <div class="meta">Default</div>
-    <div class="meta is-action">
+    <button class="meta is-action">
       <span class="icon">
         <!--@include: ../icon.svg-->
       </span>
       <span>Clickable</span>
-    </div>
+    </button>
     <div class="meta is-loading">Loading</div>
     <div class="meta is-disabled">Disabled</div>
   </div>
@@ -60,10 +60,10 @@ It extends the base _Element_ module.
 
 ```html
 <div class="meta">Default</div>
-<div class="meta is-action">
+<button class="meta is-action">
   <span class="icon">...</span>
   <span>Clickable</span>
-</div>
+</button>
 <div class="meta is-loading">Loading</div>
 <div class="meta is-disabled">Disabled</div>
 <div class="meta is-primary">Primary</div>
@@ -97,25 +97,6 @@ This module is registered as `meta` in the _presented modules_.
 
 :::
 
-::: dependencies
-
-Meta module uses the following Termeh global `var()`:
-
-| Component            | Type    | Usage                     | Default |
-| -------------------- | ------- | ------------------------- | ------- |
-| `decorator` → `size` | _Color_ | Loading spinner thickness | `null`  |
-
----
-
-Meta module uses the following Termeh `color()` and `variant()`:
-
-| Color / Variant      | Usage                               | Default |
-| -------------------- | ----------------------------------- | ------- |
-| `shade` → `mute`     | Default meta color                  | `null`  |
-| `shade` → `readable` | Default hover color for action meta | `null`  |
-
-:::
-
 ## Modifiers
 
 - `.is-action` → makes icon clickable
@@ -123,3 +104,29 @@ Meta module uses the following Termeh `color()` and `variant()`:
 - `.is-disabled` → applies disabled state
 - `.is-<size>` → applies a registered size as font size
 - `.is-<color>` → applies a registered color as accent color
+
+## Configuration
+
+This component uses the following dependencies for styling:
+
+::: dependencies
+
+Meta module uses the following Termeh global _var_:
+
+| Component     | Variable        | Type          | Usage                     |
+|---------------|-----------------|---------------|---------------------------|
+| **decorator** | **size**        | _Number_      | Loading spinner thickness |
+| **control**   | **height**      | _Number_      | Meta element height       |
+| **control**   | **meta-size**   | _Number_      | Default text size         |
+| **control**   | **meta-weight** | _Font Weight_ | Default text weight       |
+
+---
+
+Meta module uses the following Termeh _variant_:
+
+| Color     | Variant         | Usage                          |
+|-----------|-----------------|--------------------------------|
+| **shade** | **mute**        | Default text color             |
+| **shade** | **mute-active** | Action hover and spinner color |
+
+:::

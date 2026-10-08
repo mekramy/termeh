@@ -85,31 +85,6 @@ This module is registered as `action` in the _presented modules_.
 
 :::
 
-::: dependencies
-
-Action module uses the following Termeh global `var()`:
-
-| Component            | Type     | Usage                                 | Default |
-| -------------------- | -------- | ------------------------------------- | ------- |
-| `gap` → `micro`      | _Number_ | Spacing between action items          | `8px`   |
-| `radius` → `normal`  | _Number_ | Default action border radius          | `null`  |
-| `radius` → `rounded` | _Number_ | Rounded action border radius          | `null`  |
-| `decorator` → `size` | _Number_ | Loading spinner and focus ring size   | `null`  |
-| `control` → `height` | _Number_ | Default action height                 | `2.2em` |
-
----
-
-Action module uses the following Termeh `color()` and `variant()`:
-
-| Color / Variant        | Usage                                     | Default |
-| --------------------   | ----------------------------------------- | ------- |
-| `primary`              | Default action background                 | `null`  |
-| `primary`→`foreground` | Default action text and spinner color     | `null`  |
-| `shade`                | Default focus/active outline color        | `null`  |
-| `shade`→`readable`     | Secondary action text and spinner color   | `null`  |
-
-:::
-
 ## Action Container
 
 Container for action items: `.actions`
@@ -123,7 +98,7 @@ Container for action items: `.actions`
 - `.is-loading` → locks the action and replaces text with a loader
 - `.is-rounded` → applies rounded border radius
 - `.is-disabled` → applies disabled style and disables interaction
-- `.is-<color>` → applies a registered color variant to an `.actions` container
+- ++is-{color}++ → applies a registered color variant to an `.actions` container
 
 ## Color Scope
 
@@ -131,3 +106,34 @@ Apply a color to the `.actions` container or any parent element. Individual `.ac
 
 - `.actions.is-primary`
 - `.is-primary .actions`
+
+## Configuration
+
+This component uses the following dependencies for styling:
+
+::: dependencies
+
+Action module uses the following Termeh global _var_:
+
+| Component     | Variable        | Type          | Usage                                                 |
+|---------------|-----------------|---------------|-------------------------------------------------------|
+| **gap**       | **micro**       | _Number_      | Spacing between actions                               |
+| **radius**    | **normal**      | _Number_      | Standard border radius                                |
+| **radius**    | **rounded**     | _Number_      | Rounded border radius                                 |
+| **decorator** | **size**        | _Number_      | Padding, focus-outline, and loading spinner thickness |
+| **control**   | **height**      | _Number_      | Action height                                         |
+| **control**   | **meta-size**   | _Number_      | Action text size                                      |
+| **control**   | **meta-weight** | _Font Weight_ | Action text weight                                    |
+
+---
+
+Action module uses the following Termeh _color_ and _variant_:
+
+| Color       | Variant / Caution     | Usage                                             |
+|-------------|-----------------------|---------------------------------------------------|
+| **shade**   | ==@throw on missing== | Secondary hover and focus-outline color           |
+| **primary** | ==@throw on missing== | Primary action background and focus-outline color |
+| **primary** | **foreground**        | Primary text and loading spinner color            |
+| **shade**   | **readable**          | Secondary text and loading spinner color          |
+
+:::

@@ -1,13 +1,18 @@
 @use "../core/module";
 @use "./element";
 
-/// Generates meta element styles with configurable colors and sizes
-/// @param {List} $colors [()] - List of registered color names to include. Pass null to include all registered colors
-/// @param {List} $sizes [()] - List of registered size names to include. Pass null to include all registered sizes
+/// Generates meta element styles with configurable colors and sizes.
 ///
-/// @termeh {Color} [null] - variant("shade", "mute") -> default meta color
-/// @termeh {Color} [null] - variant("shade", "readable") -> default hover color for action meta
-/// @termeh {Color} [null] - var("decorator", "size") -> loading spinner thickness
+/// @param {List} $colors - Colors for meta variants; `null` includes all registered colors
+/// @param {List} $sizes - Sizes for meta variants; `null` includes all registered sizes
+///
+/// @param {Color} variant("shade", "mute") - Default text color
+/// @param {Color} variant("shade", "mute-active") - Action hover and spinner color
+/// @param {Number} var("decorator", "size") - Loading spinner thickness
+///
+/// @param {Number} var("control", "height") - Meta element height
+/// @param {Number} var("control", "meta-size") - Default text size
+/// @param {Font Weight} var("control", "meta-weight") - Default text weight
 @mixin use-meta($colors: (), $sizes: ()) {
     @if not module.module-presented("meta") {
         @include element.use-element();
@@ -17,24 +22,37 @@
         $active: module.variant("shade", "mute-active");
         $decorator: module.var("decorator", "size");
 
+        $height: module.var("control", "height");
+        $font-size: module.var("control", "meta-size");
+        $font-weight: module.var("control", "meta-weight");
+
         @at-root {
             .meta {
                 @include module.control();
                 @extend .element;
 
                 cursor: default;
+                height: $height;
+                font-size: $font-size;
+                font-weight: $font-weight;
+                text-overflow: ellipsis;
                 color: $mute;
-                font-size: 0.9em;
                 padding: module.inline-padding();
                 @include module.transition(all);
                 @include module.unselectable();
 
                 &.is-action {
                     cursor: pointer;
+                    text-decoration: underline;
+                    text-underline-offset: 3px;
 
                     &:hover {
                         color: $active;
-                        text-decoration: underline;
+                    }
+
+                    @include module.is-focused(".is-loading") {
+                        color: $active;
+                        text-decoration-style: double;
                     }
                 }
 
@@ -51,14 +69,18 @@
                 }
 
                 @each $name, $color in module.colors($colors) {
-                    &.is-#{$name} {
-                        $-mute: module.variant($name, "mute");
-                        $-active: module.variant($name, "mute-active");
+                    $-mute: module.variant($name, "mute");
+                    $-active: module.variant($name, "mute-active");
 
+                    &.is-#{$name} {
                         color: $-mute;
 
                         &.is-action {
                             &:hover {
+                                color: $-active;
+                            }
+
+                            @include module.is-focused(".is-loading") {
                                 color: $-active;
                             }
                         }

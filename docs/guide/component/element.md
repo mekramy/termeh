@@ -54,27 +54,6 @@ This module is registered as `element` in the _presented modules_.
 
 :::
 
-::: dependencies
-
-Element module uses the following Termeh global `var()`:
-
-| Component            | Type     | Usage                                 | Default |
-| -------------------- | -------- | ------------------------------------- | ------- |
-| `gap` → `micro`      | _Number_ | Spacing between items                 | `8px`   |
-| `control` → `height` | _Number_ | Element line height                   | `2.2em` |
-| `control` → `weight` | _Number_ | Element font weight                   | `null`  |
-| `control` → `strong` | _Number_ | Font weight for strong child elements | `null`  |
-
----
-
-Element module uses the following Termeh `size()`:
-
-| Size    | Usage                     | Default |
-| ------- | ------------------------- | ------- |
-| `small` | Font size for small items | _error_ |
-
-:::
-
 ## Child Elements
 
 - `b`, `strong` → applies strong inline style
@@ -85,3 +64,24 @@ Element module uses the following Termeh `size()`:
 - `sub` → applies subscript style with smaller bottom-aligned text
 - `small` → applies smaller text style
 - `.icon` → applies inline icon style, inherits text color
+
+## Configuration
+
+This component uses the following dependencies for styling:
+
+::: dependencies
+
+Element module uses the following Termeh global _var_:
+
+| Component   | Variable   | Type          | Usage                                            |
+|-------------|------------|---------------|--------------------------------------------------|
+| **gap**     | **micro**  | _Number_      | Spacing between items and after non-final icons  |
+| **small**   | **size**   | _Number_      | Text size for s, del, sub, sup, and small        |
+| **small**   | **weight** | _Font Weight_ | Text weight for s, del, sub, sup, and small      |
+| **strong**  | **weight** | _Font Weight_ | Text weight for b and strong                     |
+| **control** | **weight** | _Font Weight_ | Base text weight; small and strong use their own |
+| **control** | **height** | _Number_      | Line height for the element and its text         |
+
+---
+
+:::

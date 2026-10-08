@@ -1,32 +1,42 @@
 @use "../core/module";
 @use "./element";
 
-/// Generates tag element styles with configurable colors and sizes
-/// @param {List} $colors [()] - List of registered color names to include. Pass null to include all registered colors
-/// @param {List} $sizes [()] - List of registered size names to include. Pass null to include all registered sizes
+/// Generates tag element styles with configurable colors and sizes.
 ///
-/// @termeh {Color} [error] - color("shade") -> default focus/active outline color
-/// @termeh {Color} [null] - variant("shade", "readable") -> default text/icon color
-/// @termeh {Color} [null] - variant("shade", "light") -> default tag background color
-/// @termeh {Number} [null] - var("radius", "normal") -> default tag border radius
-/// @termeh {Number} [null] - var("radius", "rounded") -> rounded tag border radius
-/// @termeh {Color} [null] - var("decorator", "size") -> loading spinner thickness
-/// @termeh {Number} [2.2em] - var("control", "height") -> default tag height
+/// @param {List} $colors - Colors for tag variants; `null` includes all registered colors
+/// @param {List} $sizes - Sizes for tag variants; `null` includes all registered sizes
+///
+/// @param {Color} color("shade") - Focus-outline color
+/// @param {Color} variant("shade", "light") - Default background color
+/// @param {Color} variant("shade", "readable") - Default text and spinner color
+///
+/// @param {Number} var("radius", "normal") - Standard corner radius
+/// @param {Number} var("radius", "rounded") - Rounded corner radius
+/// @param {Number} var("decorator", "size") - Focus-outline and loading spinner thickness
+///
+/// @param {Number} var("control", "height") - Tag height
+/// @param {Number} var("control", "meta-size") - Default text size
+/// @param {Font Weight} var("control", "meta-weight") - Default text weight
 @mixin use-tag($colors: (), $sizes: ()) {
     @if not module.module-presented("tag") {
         @include element.use-element();
         @include module.present-module("tag");
 
-        $outline: rgba(module.color("shade"), 0.2);
-        $readable: module.variant("shade", "readable");
-        $background: rgba(module.variant("shade", "light"), 0.35);
-        $background-hover: module.variant("shade", "light");
+        $shade: module.color("shade");
+        $shade-light: module.variant("shade", "light");
+        $shade-readable: module.variant("shade", "readable");
+
+        $background: module.alpha($shade-light, 0.35);
+        $hover: module.alpha($shade-light, 0.9);
+        $outline: module.alpha($shade, 0.2);
 
         $radius-normal: module.var("radius", "normal");
         $radius-rounded: module.var("radius", "rounded");
         $decorator: module.var("decorator", "size");
 
-        $height: module.var("control", "height", 2.2em);
+        $height: module.var("control", "height");
+        $font-size: module.var("control", "meta-size");
+        $font-weight: module.var("control", "meta-weight");
 
         @at-root {
             .tag {
@@ -35,33 +45,34 @@
 
                 cursor: default;
                 height: $height;
-                border-radius: $radius-normal;
+                font-size: $font-size;
+                font-weight: $font-weight;
                 text-overflow: ellipsis;
-                color: $readable;
+                color: $shade-readable;
                 background-color: $background;
-                font-size: 0.9em;
+                border-radius: $radius-normal;
                 padding: module.control-padding();
                 @include module.transition(all);
                 @include module.unselectable();
 
                 &.is-action {
                     cursor: pointer;
+                    text-decoration: underline;
+                    text-underline-offset: 3px;
 
                     &:hover {
-                        background-color: $background-hover;
-                        text-decoration: underline;
+                        background-color: $hover;
                     }
 
-                    &:focus,
-                    &:active {
-                        box-shadow: module.flat-shadow($decorator, $outline);
+                    @include module.is-focused(".is-loading") {
+                        outline: $decorator solid $outline;
                     }
                 }
 
                 &.is-loading {
                     color: transparent;
                     @include module.locked();
-                    @include module.loader(1em, $readable, $decorator);
+                    @include module.loader(1em, $shade-readable, $decorator);
                 }
 
                 &.is-rounded {
@@ -75,29 +86,28 @@
                 }
 
                 @each $name, $color in module.colors($colors) {
-                    &.is-#{$name} {
-                        $-outline: rgba($color, 0.2);
-                        $-background: rgba(module.variant($name, "light"), 0.35);
-                        $-background-hover: module.variant($name, "light");
-                        $-readable: module.variant($name, "readable");
+                    $-foreground: module.variant($name, "readable");
+                    $-background: module.alpha(module.variant($name, "light"), 0.35);
+                    $-hover: module.alpha(module.variant($name, "light"), 0.9);
+                    $-outline: module.alpha($color, 0.2);
 
-                        color: $-readable;
+                    &.is-#{$name} {
+                        color: $-foreground;
                         background-color: $-background;
 
                         &.is-action {
                             &:hover {
-                                background-color: $-background-hover;
+                                background-color: $-hover;
                             }
 
-                            &:focus,
-                            &:active {
-                                box-shadow: module.flat-shadow($decorator, $-outline);
+                            @include module.is-focused(".is-loading") {
+                                outline-color: $-outline;
                             }
                         }
 
                         &.is-loading {
                             color: transparent;
-                            @include module.loader-color($-readable);
+                            @include module.loader-color($-foreground);
                         }
                     }
                 }
