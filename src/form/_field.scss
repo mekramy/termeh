@@ -1,15 +1,15 @@
 @use "../core/module";
 
 /// Generates field element styles with configurable colors.
-/// @param {List} $colors [()] - Registered color names for which to generate modifier styles. Pass null to include all registered colors.
 ///
-/// @param {Color} [null] variant("shade", "readable") - Text color for help text.
-/// @param {Color} [null] variant("primary", "readable") - Default color for the required-field indicator.
-/// @param {Color} [null] variant("error", "readable") - Text color for validation errors.
+/// @param {List} $colors [()] - Color names for field modifier styles; `null` includes all registered colors
 ///
-/// @param {Number} [8px] var("gap", "micro") - Bottom spacing between field contents, excluding help and error elements.
-/// @param {Number} [1.6em] var("gap", "macro") - Bottom margin after each field.
-/// @param {Font Weight} [bold] var("strong", "weight") - Font weight of the required-field indicator.
+/// @require {Variable<Color>} variant("shade", "readable") - Help text color
+/// @require {Variable<Color>} variant("primary", "readable") - Required-field indicator color
+/// @require {Variable<Color>} variant("error", "readable") - Validation error text color
+/// @require {Variable<Length>} var("gap", "micro") - Spacing between field contents
+/// @require {Variable<Length>} var("gap", "macro") - Bottom margin after each field
+/// @require {Variable<FontWeight>} var("strong", "weight") - Required-field indicator weight
 @mixin use-field($colors: ()) {
     @if not module.module-presented("form-field") {
         @include module.present-module("form-field");
@@ -18,9 +18,9 @@
         $primary-readable: module.variant("primary", "readable");
         $error-readable: module.variant("error", "readable");
 
-        $gap-micro: module.var("gap", "micro", 8px);
-        $gap-macro: module.var("gap", "macro", 1.6em);
-        $strong-weight: module.var("strong", "weight", bold);
+        $gap-micro: module.var("gap", "micro");
+        $gap-macro: module.var("gap", "macro");
+        $strong-weight: module.var("strong", "weight");
 
         @at-root {
             .field {

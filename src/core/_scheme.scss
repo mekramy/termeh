@@ -6,7 +6,7 @@ $-tokens: () !default;
 $-schemes: () !default;
 
 @function -resolve-scheme($scheme) {
-    @if $scheme == null {
+    @if not $scheme {
         @return "__base__";
     }
 
@@ -14,13 +14,14 @@ $-schemes: () !default;
 }
 
 /// Defines a color scheme.
-/// @param {String} $name - Color scheme name
 ///
-/// @throws Input name is not a string
+/// @param {String} $name - Color scheme name
+/// @throw If the input name is not a string
+/// @access private
 @function define-scheme($name) {
     $name: util.string-of($name, "define-scheme", "name");
 
-    @if list.index($-schemes, $name) == null {
+    @if not list.index($-schemes, $name) {
         $-schemes: list.append($-schemes, $name) !global;
     }
 
@@ -28,21 +29,22 @@ $-schemes: () !default;
 }
 
 /// Returns all defined color schemes.
+///
 /// @return {List} Defined color schemes
 @function schemes() {
     @return $-schemes;
 }
 
 /// Defines a CSS variable and associates it with a color scheme.
+///
 /// @param {String} $name - CSS variable name
 /// @param {*} $value - CSS variable value
 /// @param {String} $scheme [null] - Color scheme name
-///
-/// @throws Input name is not a string
+/// @throw If the input name is not a string
 @function define-variable($name, $value, $scheme: null) {
     $name: util.string-of($name, "define-variable", "name");
 
-    @if $value == null {
+    @if not $value {
         @return null;
     }
 
@@ -57,22 +59,23 @@ $-schemes: () !default;
 }
 
 /// Returns a CSS variable reference with an optional fallback.
+///
 /// @param {String} $name - CSS variable name
 /// @param {*} $fallback - Fallback value if the variable is not defined
-/// @return {String} CSS variable reference
-///
-/// @throws Input name is not a string
+/// @return {Variable<Mixed>} CSS variable reference
+/// @throw If the input name is not a string
 @function variable($name, $fallback) {
     $name: util.string-of($name, "variable", "name");
 
     $name: util.tokenize($name);
-    @if $fallback == null {
+    @if not $fallback {
         @return var($name);
     }
     @return var($name, $fallback);
 }
 
 /// Outputs CSS variables associated with a color scheme.
+///
 /// @param {String} $scheme [null] - Color scheme name
 @mixin variables($scheme: null) {
     $scheme: -resolve-scheme($scheme);

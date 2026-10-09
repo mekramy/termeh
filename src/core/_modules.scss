@@ -4,20 +4,20 @@
 $-modules: () !default;
 
 /// Registers a module as available.
-/// @param {*} $module - Module to add
 ///
-/// @throws If the input is not a string
+/// @param {String} $module - Module to add
+/// @throw If the input is not a string
 @mixin present-module($module) {
     $module: util.string-of($module, "present-module", "module");
 
     $-modules: list.append($-modules, $module) !global;
 }
 
-/// Validates that required modules are present
-/// @param {*} $module - Input module that requires another module
-/// @param {*} $requirement - Input required module that must be present
+/// Validates that required modules are present.
 ///
-/// @throws If either input is not a valid string or if the required module is not present
+/// @param {String} $module - Input module that requires another module
+/// @param {String} $requirement - Input required module that must be present
+/// @throw If either input is not a valid string or if the required module is not present
 @mixin require($module, $requirement) {
     $module: util.string-of($module, "require", "module");
     $requirement: util.string-of($requirement, "require", "requirement");
@@ -28,10 +28,10 @@ $-modules: () !default;
 }
 
 /// Checks whether a module has been registered.
-/// @param {*} $module - Module to check
-/// @return {Boolean} `true` if module is presented, `false` otherwise
 ///
-/// @throws If the input is not a valid string
+/// @param {String} $module - Module to check
+/// @return {Boolean} `true` if the module is registered, `false` otherwise
+/// @throw If the input is not a string
 @function module-presented($module) {
     $module: util.string-of($module, "module-presented", "module");
 

@@ -16,11 +16,11 @@ $-queries: (
 ) !default;
 $-defs: map.keys($-queries);
 
-/// Gets media query by name
+/// Gets media query by name.
+///
 /// @param {String} $name - Query name
 /// @return {String} Media query
-///
-/// @throws If the input is not a string or if the query is not found
+/// @throw If the input is not a string or if the query is not found
 @function media-query($name) {
     $name: util.string-of($name, "media-query", "name");
 
@@ -30,10 +30,11 @@ $-defs: map.keys($-queries);
     @return map.get($-queries, $name);
 }
 
-/// Gets filtered media queries
+/// Gets filtered media queries.
+///
 /// @param {List} $includes [null] - Names to include
 /// @param {List} $excludes [null] - Names to exclude
-/// @return {Map} Filtered queries
+/// @return {Map<String, String>} Filtered queries
 @function media-queries($includes: null, $excludes: null) {
     $includes: util.list-safe($includes, "media-queries", "includes", $-defs);
     $excludes: util.list-safe($excludes, "media-queries", "excludes", ());
@@ -55,6 +56,7 @@ $-defs: map.keys($-queries);
 }
 
 /// Applies styles to devices that support hover.
+///
 /// @content Styles to apply
 @mixin non-touch() {
     @media (hover: hover) {
@@ -63,6 +65,7 @@ $-defs: map.keys($-queries);
 }
 
 /// Applies styles to devices that do not support hover.
+///
 /// @content Styles to apply
 @mixin touch() {
     @media (hover: none) {
@@ -70,7 +73,8 @@ $-defs: map.keys($-queries);
     }
 }
 
-/// Applies styles for mobile devices (max-width: 768px)
+/// Applies styles for mobile devices (max-width: 768px).
+///
 /// @content Styles to apply
 @mixin mobile() {
     @media #{media-query("mobile")} {
@@ -78,7 +82,8 @@ $-defs: map.keys($-queries);
     }
 }
 
-/// Applies styles for tablet devices (min-width: 769px)
+/// Applies styles for tablet devices (min-width: 769px).
+///
 /// @content Styles to apply
 @mixin tablet() {
     @media #{media-query("tablet")} {
@@ -86,7 +91,8 @@ $-defs: map.keys($-queries);
     }
 }
 
-/// Applies styles for tablet-only devices (769px-1023px)
+/// Applies styles for tablet-only devices (769px-1023px).
+///
 /// @content Styles to apply
 @mixin tablet-only() {
     @media #{media-query("tablet-only")} {
@@ -94,7 +100,8 @@ $-defs: map.keys($-queries);
     }
 }
 
-/// Applies styles for devices smaller than desktop (max-width: 1023px)
+/// Applies styles for devices smaller than desktop (max-width: 1023px).
+///
 /// @content Styles to apply
 @mixin until-desktop() {
     @media #{media-query("until-desktop")} {
@@ -102,7 +109,8 @@ $-defs: map.keys($-queries);
     }
 }
 
-/// Applies styles for desktop devices (min-width: 1024px)
+/// Applies styles for desktop devices (min-width: 1024px).
+///
 /// @content Styles to apply
 @mixin desktop() {
     @media #{media-query("desktop")} {
@@ -110,7 +118,8 @@ $-defs: map.keys($-queries);
     }
 }
 
-/// Applies styles for desktop-only devices (1024px-1215px)
+/// Applies styles for desktop-only devices (1024px-1215px).
+///
 /// @content Styles to apply
 @mixin desktop-only() {
     @media #{media-query("desktop-only")} {
@@ -118,7 +127,8 @@ $-defs: map.keys($-queries);
     }
 }
 
-/// Applies styles for devices smaller than widescreen (max-width: 1215px)
+/// Applies styles for devices smaller than widescreen (max-width: 1215px).
+///
 /// @content Styles to apply
 @mixin until-widescreen() {
     @media #{media-query("until-widescreen")} {
@@ -126,7 +136,8 @@ $-defs: map.keys($-queries);
     }
 }
 
-/// Applies styles for widescreen devices (min-width: 1216px)
+/// Applies styles for widescreen devices (min-width: 1216px).
+///
 /// @content Styles to apply
 @mixin widescreen() {
     @media #{media-query("widescreen")} {
@@ -134,7 +145,8 @@ $-defs: map.keys($-queries);
     }
 }
 
-/// Applies styles for widescreen-only devices (1216px-1407px)
+/// Applies styles for widescreen-only devices (1216px-1407px).
+///
 /// @content Styles to apply
 @mixin widescreen-only() {
     @media #{media-query("widescreen-only")} {
@@ -142,7 +154,8 @@ $-defs: map.keys($-queries);
     }
 }
 
-/// Applies styles for devices smaller than fullhd (max-width: 1407px)
+/// Applies styles for devices smaller than fullhd (max-width: 1407px).
+///
 /// @content Styles to apply
 @mixin until-fullhd() {
     @media #{media-query("until-fullhd")} {
@@ -150,7 +163,8 @@ $-defs: map.keys($-queries);
     }
 }
 
-/// Applies styles for fullhd devices (min-width: 1408px)
+/// Applies styles for fullhd devices (min-width: 1408px).
+///
 /// @content Styles to apply
 @mixin fullhd() {
     @media #{media-query("fullhd")} {
@@ -158,7 +172,8 @@ $-defs: map.keys($-queries);
     }
 }
 
-/// Applies styles for retina/high-resolution displays (min-resolution: 2dppx)
+/// Applies styles for retina/high-resolution displays (min-resolution: 2dppx).
+///
 /// @content Styles to apply
 @mixin retina() {
     @media screen and (resolution >= 2dppx) {
@@ -166,7 +181,8 @@ $-defs: map.keys($-queries);
     }
 }
 
-/// Applies styles for portrait orientation
+/// Applies styles for portrait orientation.
+///
 /// @content Styles to apply
 @mixin portrait() {
     @media screen and (orientation: portrait) {
@@ -174,7 +190,8 @@ $-defs: map.keys($-queries);
     }
 }
 
-/// Applies styles for landscape orientation
+/// Applies styles for landscape orientation.
+///
 /// @content Styles to apply
 @mixin landscape() {
     @media screen and (orientation: landscape) {
@@ -182,7 +199,8 @@ $-defs: map.keys($-queries);
     }
 }
 
-/// Applies styles for fine pointer devices (e.g., mouse, stylus)
+/// Applies styles for fine pointer devices (e.g., mouse, stylus).
+///
 /// @content Styles to apply
 @mixin pointer-fine() {
     @media screen and (pointer: fine) {
@@ -190,7 +208,8 @@ $-defs: map.keys($-queries);
     }
 }
 
-/// Applies styles for coarse pointer devices (e.g., touch)
+/// Applies styles for coarse pointer devices (e.g., touch).
+///
 /// @content Styles to apply
 @mixin pointer-coarse() {
     @media screen and (pointer: coarse) {
@@ -198,7 +217,8 @@ $-defs: map.keys($-queries);
     }
 }
 
-/// Applies styles the device supports high dynamic range (HDR)
+/// Applies styles when the device supports high dynamic range (HDR).
+///
 /// @content Styles to apply
 @mixin prefers-hdr() {
     @media screen and (dynamic-range: high) {
@@ -206,7 +226,8 @@ $-defs: map.keys($-queries);
     }
 }
 
-/// Applies styles when user prefers dark color scheme
+/// Applies styles when user prefers dark color scheme.
+///
 /// @content Styles to apply
 @mixin prefers-dark() {
     @media screen and (prefers-color-scheme: dark) {
@@ -214,7 +235,8 @@ $-defs: map.keys($-queries);
     }
 }
 
-/// Applies styles when user prefers light color scheme
+/// Applies styles when user prefers light color scheme.
+///
 /// @content Styles to apply
 @mixin prefers-light() {
     @media screen and (prefers-color-scheme: light) {
@@ -222,7 +244,8 @@ $-defs: map.keys($-queries);
     }
 }
 
-/// Applies styles when user prefers reduced motion
+/// Applies styles when user prefers reduced motion.
+///
 /// @content Styles to apply
 @mixin prefers-reduced-motion() {
     @media screen and (prefers-reduced-motion: reduce) {
@@ -230,7 +253,8 @@ $-defs: map.keys($-queries);
     }
 }
 
-/// Applies styles when user prefers more contrast
+/// Applies styles when user prefers more contrast.
+///
 /// @content Styles to apply
 @mixin prefers-more-contrast() {
     @media screen and (prefers-contrast: more) {
@@ -238,7 +262,8 @@ $-defs: map.keys($-queries);
     }
 }
 
-/// Applies styles when user prefers less contrast
+/// Applies styles when user prefers less contrast.
+///
 /// @content Styles to apply
 @mixin prefers-less-contrast() {
     @media screen and (prefers-contrast: less) {
@@ -246,7 +271,8 @@ $-defs: map.keys($-queries);
     }
 }
 
-/// Applies styles for print media
+/// Applies styles for print media.
+///
 /// @content Styles to apply
 @mixin print() {
     @media print {
@@ -254,7 +280,8 @@ $-defs: map.keys($-queries);
     }
 }
 
-/// Applies styles for non-print media (e.g., screen)
+/// Applies styles for non-print media (e.g., screen).
+///
 /// @content Styles to apply
 @mixin not-print() {
     @media not print {

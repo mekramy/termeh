@@ -4,7 +4,7 @@
 @use "util";
 
 /// Color ranges based on HSL values
-/// Format: (name, from hue, to hue, dark hue, light hue)
+/// Format: (name, from hue, to hue, dark hue, bright hue)
 $-color-spaces: (
     red 355deg 360deg 0deg 355deg,
     red 0deg 11deg 0deg 11deg,
@@ -40,18 +40,22 @@ $-color-mixes: (
     "900": 90% darkest,
 );
 
-/// Checks if value is within range
+/// Checks if value is within range.
+///
 /// @param {Number} $v - Value to check
 /// @param {Number} $min - Minimum bound
 /// @param {Number} $max - Maximum bound
 /// @return {Boolean} True if within range
+/// @access private
 @function -between($v, $min, $max) {
     @return $v >= $min and $v <= $max;
 }
 
-/// Finds color range for given hue
+/// Finds color range for given hue.
+///
 /// @param {Color} $color - Input color
-/// @return {List|null} Color range definition
+/// @return {List | null} Color range definition
+/// @access private
 @function -find($color) {
     $hue: color.channel($color, "hue", $space: hsl);
 
@@ -66,9 +70,11 @@ $-color-mixes: (
     @return null;
 }
 
-/// Generates darkest variant of color
+/// Generates darkest variant of color.
+///
 /// @param {Color} $color - Base color
 /// @return {Color} Darkest variant
+/// @access private
 @function -darkest($color) {
     $record: -find($color);
     $hue: list.nth($record, 4);
@@ -82,9 +88,11 @@ $-color-mixes: (
     @return hsl($hue, $sat, $lgh);
 }
 
-/// Generates brightest variant of color
+/// Generates brightest variant of color.
+///
 /// @param {Color} $color - Base color
 /// @return {Color} Brightest variant
+/// @access private
 @function -brightest($color) {
     $record: -find($color);
     $hue: list.nth($record, 5);
@@ -93,11 +101,12 @@ $-color-mixes: (
     @return hsl($hue, color.channel($color, "saturation", $space: hsl), 95%);
 }
 
-/// Validates color variant
+/// Validates color variant.
+///
 /// @param {String} $var - Variant to validate
 /// @return {String} Validated variant
-///
-/// @throws If the input variant is not valid
+/// @throw If the input variant is not valid
+/// @access private
 @function -validate($var) {
     $var: util.string-of($var, "palette", "variant");
     $valid-variants: "50" "100" "200" "300" "400" "500" "600" "700" "800" "900";
@@ -109,12 +118,12 @@ $-color-mixes: (
     @return $var;
 }
 
-/// Generates color variant
+/// Generates color variant.
+///
 /// @param {Color} $color - Base color
 /// @param {String} $variant - Desired variant
 /// @return {Color} Resulting color variant
-///
-/// @throws If the input color is not a valid color or if the variant is not valid
+/// @throw If the input color is not a valid color or if the variant is not valid
 @function palette($color, $variant) {
     $color: util.color-of($color, "palette", "color");
 

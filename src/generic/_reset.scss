@@ -1,7 +1,9 @@
 @use "../core/module";
 
-/// Applies a minimal CSS reset based on minireset.css v0.0.6
-/// Resets default browser styles while preserving useful defaults
+/// Applies a minimal reset based on minireset.css v0.0.6.
+///
+/// Resets browser defaults while preserving useful styles.
+///
 /// @see https://github.com/jgthms/minireset.css
 @mixin mini-reset() {
     @if not module.module-presented("reset") {

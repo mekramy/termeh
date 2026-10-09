@@ -1,8 +1,8 @@
 @use "../core/module";
 
-/// Generates attacher element styles with configurable alignments
+/// Generates attacher styles with alignment and justification variants.
 ///
-/// @param {Color} [null] var("base", "separator") - Background color for `.divider` elements
+/// @require {Variable<Color>} var("base", "separator") - Divider background color
 @mixin use-attacher() {
     @if not module.module-presented("attacher") {
         @include module.present-module("attacher");

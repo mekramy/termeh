@@ -1,40 +1,39 @@
 @use "../core/module";
 
 /// Generates form element styles.
-/// @param {List} $colors [()] - Registered color names for which to generate modifier styles. Pass null to include all registered colors.
 ///
-/// @param {Color} [white] var("base", "background") - Fallback form background when no box background is configured.
-/// @param {Color} [black] var("base", "foreground") - Fallback form text color when no box foreground is configured.
+/// @param {List} $colors [()] - Color names reserved for future form variants; currently unused
 ///
-/// @param {Color} [FALLBACK] var("box", "background") - Form background and fallback background for the loading overlay; falls back to the base background.
-/// @param {Color} [FALLBACK] var("box", "foreground") - Form text color and fallback spinner color for the loading overlay; falls back to the base foreground.
-///
-/// @param {Number} [1.6em] var("gap", "macro") - Bottom margin after the form.
-/// @param {Number} [2px] var("decorator", "size") - Loading spinner stroke width.
-/// @param {Number} [2em] var("decorator", "spinner") - Loading spinner diameter.
-///
-/// @param {Color} [FALLBACK] var("overlay", "background") - Loading overlay background color; falls back to the box background.
-/// @param {Color} [FALLBACK] var("overlay", "foureground") - Loading spinner color; falls back to the box foreground. The variable key is misspelled this way in the implementation.
-/// @param {Number} [0.85] var("overlay", "opacity") - Opacity applied to the loading overlay background.
-/// @param {String} [null] var("overlay", "filter") - CSS backdrop-filter value for the loading overlay.
+/// @require {Variable<Color>} var("box", "background") [var("base", "background")] - Form and fallback overlay background
+/// @require {Variable<Color>} var("box", "foreground") [var("base", "foreground")] - Form text and fallback spinner color
+/// @require {Variable<Length>} var("gap", "macro") - Bottom margin after the form
+/// @require {Variable<Length>} var("decorator", "size") - Loading spinner stroke width
+/// @require {Variable<Length>} var("decorator", "spinner") - Loading spinner diameter
+/// @require {Variable<Color>} var("overlay", "background") [var("box", "background", var("base", "background"))] - Loading overlay background
+/// @require {Variable<Color>} var("overlay", "foureground") [var("box", "foreground", var("base", "foreground"))] - Loading spinner color
+/// @require {Variable<Number>} var("overlay", "opacity") - Loading overlay opacity
+/// @require {Variable<Filter>} var("overlay", "filter") - Loading overlay backdrop filter
 @mixin use-form($colors: ()) {
     @if not module.module-presented("form") {
         @include module.present-module("form");
 
-        $base-background: module.var("base", "background", white);
-        $base-foreground: module.var("base", "foreground", black);
+        /** Fallbacks */
+        $-base-background: module.var("base", "background");
+        $-base-foreground: module.var("base", "foreground");
 
-        $background: module.var("box", "background", $base-background);
-        $foreground: module.var("box", "foreground", $base-foreground);
+        /** --------- */
 
-        $gap-macro: module.var("gap", "macro", 1.6em);
-        $decorator: module.var("decorator", "size", 2px);
-        $spinner: module.var("decorator", "spinner", 2em);
+        $background: module.var("box", "background", $-base-background);
+        $foreground: module.var("box", "foreground", $-base-foreground);
+
+        $gap-macro: module.var("gap", "macro");
+        $decorator: module.var("decorator", "size");
+        $spinner: module.var("decorator", "spinner");
 
         $overlay-background: module.var("overlay", "background", $background);
         $overlay-foreground: module.var("overlay", "foureground", $foreground);
-        $overlay-opacity: module.var("overlay", "opacity", 0.85);
-        $overlay-filter: module.var("overlay", "filter", null);
+        $overlay-opacity: module.var("overlay", "opacity");
+        $overlay-filter: module.var("overlay", "filter");
 
         @at-root {
             form {

@@ -5,11 +5,11 @@
 $-sizes: () !default;
 $-overrides: () !default;
 
-/// Defines a new size
-/// @param {String} $name - Size name (e.g. "small", "medium")
-/// @param {Number} $size - Size value (e.g. 12px, 1rem)
+/// Defines a new size.
 ///
-/// @throws If the input name is not a string or if the input size is not a number
+/// @param {String} $name - Size name
+/// @param {Length} $size - Size value
+/// @throw If the input name is not a string or if the input size is not a number
 @mixin define-size($name, $size) {
     $name: util.string-of($name, "define-size", "name");
     $size: util.number-of($size, "define-size", "size");
@@ -17,12 +17,12 @@ $-overrides: () !default;
     $-sizes: map.set($-sizes, $name, $size) !global;
 }
 
-/// Overrides an existing size for a specific scheme
-/// @param {String} $scheme - Scheme name (e.g. "dark", "light")
-/// @param {String} $name - Size name (e.g. "small", "medium")
-/// @param {Number} $size - Size value (e.g. 12px, 1rem)
+/// Overrides an existing size for a specific scheme.
 ///
-/// @throws If the input scheme or name is not a string, if the input size is not a number, or if the size is not defined in main scheme
+/// @param {String} $scheme - Scheme name
+/// @param {String} $name - Size name
+/// @param {Length} $size - Size value
+/// @throw If the input scheme or name is not a string, if the input size is not a number, or if the size is not defined in main scheme
 @mixin override-size($scheme, $name, $size) {
     $scheme: util.string-of($scheme, "override-size", "scheme");
     $name: util.string-of($name, "override-size", "name");
@@ -35,14 +35,14 @@ $-overrides: () !default;
     $sizes: map.set($sizes, $scheme, $size);
 
     $-overrides: map.set($-overrides, $name, $sizes) !global;
-    $_: scm.define-scheme($scheme);
+    $-ignore: scm.define-scheme($scheme);
 }
 
-/// Gets the value of a size by name
-/// @param {String} $name - Size name
-/// @return {Number} Size value
+/// Gets the value of a size by name.
 ///
-/// @throws If the input name is not a string or if the size is not found
+/// @param {String} $name - Size name
+/// @return {Length} Size value
+/// @throw If the input name is not a string or if the size is not found
 @function size-value($name) {
     $name: util.string-of($name, "size-value", "name");
     @if not map.has-key($-sizes, $name) {
@@ -52,13 +52,13 @@ $-overrides: () !default;
     @return map.get($-sizes, $name);
 }
 
-/// Gets the value of a size for a specific scheme
-/// This function will return main scheme size as fallback
-/// @param {String} $scheme - Scheme name (e.g. "dark", "light")
-/// @param {String} $name - Size name (e.g. "small", "medium")
-/// @return {Number} Size value
+/// Gets the value of a size for a specific scheme.
+/// This function will return main scheme size as fallback.
 ///
-/// @throws If the input scheme or name is not a string, or if the size is not defined in the main scheme
+/// @param {String} $scheme - Scheme name
+/// @param {String} $name - Size name
+/// @return {Length} Size value
+/// @throw If the input scheme or name is not a string, or if the size is not defined in the main scheme
 @function scheme-size($scheme, $name) {
     $scheme: util.string-of($scheme, "scheme-size", "scheme");
     $name: util.string-of($name, "scheme-size", "name");
@@ -67,18 +67,18 @@ $-overrides: () !default;
     }
 
     $size: map.get($-overrides, $name, $scheme);
-    @if $size == null {
+    @if not $size {
         $size: map.get($-sizes, $name);
     }
 
     @return $size;
 }
 
-/// Returns the CSS variable reference for a size by its name
-/// @param {String} $name - Size name
-/// @return {Number} Size value
+/// Returns the CSS variable reference for a size by its name.
 ///
-/// @throws If the input name is not a string or if the size is not found
+/// @param {String} $name - Size name
+/// @return {Variable<Length>} Size value
+/// @throw If the input name is not a string or if the size is not found
 @function size($name) {
     $name: util.string-of($name, "size", "name");
     @if not map.has-key($-sizes, $name) {
@@ -87,20 +87,21 @@ $-overrides: () !default;
 
     $token: "size-#{$name}";
     $value: map.get($-sizes, $name);
-    $_: scm.define-variable($token, $value);
+    $-ignore: scm.define-variable($token, $value);
 
     @each $scheme in scm.schemes() {
         $-value: map.get($-overrides, $name, $scheme);
-        $_: scm.define-variable($token, $-value, $scheme);
+        $-ignore: scm.define-variable($token, $-value, $scheme);
     }
 
     @return scm.variable($token, $value);
 }
 
-/// Gets filtered map of sizes
+/// Gets filtered map of sizes.
+///
 /// @param {List} $includes [null] - Sizes to include
 /// @param {List} $excludes [null] - Sizes to exclude
-/// @return {Map} Filtered sizes
+/// @return {Map<String, Variable<Length>>} Filtered sizes
 @function sizes($includes: null, $excludes: null) {
     $-defs: map.keys($-sizes);
     $includes: util.list-safe($includes, "sizes", "includes", $-defs);
@@ -110,11 +111,11 @@ $-overrides: () !default;
     @each $name, $size in $-sizes {
         @if util.should-include($name, $includes, $excludes) {
             $token: "size-#{$name}";
-            $_: scm.define-variable($token, $size);
+            $-ignore: scm.define-variable($token, $size);
 
             @each $scheme in scm.schemes() {
                 $-value: map.get($-overrides, $name, $scheme);
-                $_: scm.define-variable($token, $-value, $scheme);
+                $-ignore: scm.define-variable($token, $-value, $scheme);
             }
 
             $result: map.set($result, $name, scm.variable($token, $size));

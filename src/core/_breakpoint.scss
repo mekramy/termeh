@@ -8,37 +8,38 @@ $-breakpoints: (
     "widescreen": 1216px,
     "fullhd": 1408px,
 ) !default;
-$-defs: map.keys($-breakpoints);
+$-available: map.keys($-breakpoints);
 
-/// Gets breakpoint value by name
+/// Gets breakpoint value by name.
+///
 /// @param {String} $name - Breakpoint name
 /// @return {Number} Breakpoint value
-///
-/// @throws If the input is not a string or if the breakpoint is not found
+/// @throw If the input is not a string or if the breakpoint is not found
 @function breakpoint($name) {
     $name: util.string-of($name, "breakpoint", "name");
     @if not map.has-key($-breakpoints, $name) {
-        @error "Breakpoint '#{$name}' not found. Available: #{$-defs}";
+        @error "Breakpoint '#{$name}' not found. Available: #{$-available}";
     }
 
     @return map.get($-breakpoints, $name);
 }
 
-/// Gets all breakpoints
-/// @return {Map} All breakpoints
+/// Gets all breakpoints.
+///
+/// @return {Map<String, Number>} All breakpoints
 @function breakpoints() {
     @return $-breakpoints;
 }
 
 /// Applies styles at and above a breakpoint.
-/// @param {String} $device - Breakpoint name
-/// @content Styles to apply
 ///
-/// @throws If the input is not a string or if the breakpoint is not found
+/// @content Styles to apply
+/// @param {String} $device - Breakpoint name
+/// @throw If the input is not a string or if the breakpoint is not found
 @mixin from($device) {
     $device: util.string-of($device, "from", "device");
     @if not map.has-key($-breakpoints, $device) {
-        @error "Breakpoint '#{$device}' not found. Available: #{$-defs}";
+        @error "Breakpoint '#{$device}' not found. Available: #{$-available}";
     }
 
     @media screen and (min-width: breakpoint($device)) {
@@ -47,14 +48,14 @@ $-defs: map.keys($-breakpoints);
 }
 
 /// Applies styles below a breakpoint.
-/// @param {String} $device - Breakpoint name
-/// @content Styles to apply
 ///
-/// @throws If the input is not a string or if the breakpoint is not found
+/// @content Styles to apply
+/// @param {String} $device - Breakpoint name
+/// @throw If the input is not a string or if the breakpoint is not found
 @mixin until($device) {
     $device: util.string-of($device, "until", "device");
     @if not map.has-key($-breakpoints, $device) {
-        @error "Breakpoint '#{$device}' not found. Available: #{$-defs}";
+        @error "Breakpoint '#{$device}' not found. Available: #{$-available}";
     }
 
     @media screen and (max-width: math.sub(breakpoint($device), 1px)) {

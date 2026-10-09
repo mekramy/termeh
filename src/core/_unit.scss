@@ -3,11 +3,11 @@
 
 $-units: () !default;
 
-/// Defines a new grid unit
-/// @param {String} $name - Unit name (e.g. "full", "1-of-3")
-/// @param {Number} $unit - Unit value (e.g. 100%, 33.333%)
+/// Defines a new grid unit.
 ///
-/// @throws If the input name is not a string or if the input unit is not a number
+/// @param {String} $name - Unit name
+/// @param {Length} $unit - Unit value
+/// @throw If the input name is not a string or if the input unit is not a number
 @mixin define-unit($name, $unit) {
     $name: util.string-of($name, "define-unit", "name");
     $unit: util.number-of($unit, "define-unit", "unit");
@@ -15,11 +15,11 @@ $-units: () !default;
     $-units: map.set($-units, $name, $unit) !global;
 }
 
-/// Gets unit value by name
-/// @param {String} $name - Unit name
-/// @return {Number} Unit value
+/// Gets unit value by name.
 ///
-/// @throws If the input name is not a string or if the unit is not found
+/// @param {String} $name - Unit name
+/// @return {Length} Unit value
+/// @throw If the input name is not a string or if the unit is not found
 @function unit($name) {
     $name: util.string-of($name, "unit", "name");
     @if not map.has-key($-units, $name) {
@@ -28,10 +28,11 @@ $-units: () !default;
     @return map.get($-units, $name);
 }
 
-/// Gets filtered map of units
+/// Gets filtered map of units.
+///
 /// @param {List} $includes [null] - Units to include
 /// @param {List} $excludes [null] - Units to exclude
-/// @return {Map} Filtered units
+/// @return {Map<String, Length>} Filtered units
 @function units($includes: null, $excludes: null) {
     $-defs: map.keys($-units);
     $includes: util.list-safe($includes, "units", "includes", $-defs);

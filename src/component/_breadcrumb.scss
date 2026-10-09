@@ -1,17 +1,16 @@
 @use "../core/module";
 
-/// Generates breadcrumb styles with configurable colors.
+/// Generates breadcrumb styles with configurable color variants.
 ///
-/// @param {List} $colors - Colors for breadcrumb variants; `null` includes all registered colors
+/// @param {List} $colors [()] - Color names for breadcrumb variants; `null` includes all registered colors
 ///
-/// @param {Color} variant("primary", "readable") - Active item color
-/// @param {Color} var("base", "separator") - Divider color
-/// @param {Number} var("gap", "micro") - Space around dividers
-///
-/// @param {Number} var("control", "height") - Item line height
-/// @param {Number} var("control", "meta-size") - Breadcrumb text size
-/// @param {Font Weight} var("control", "meta-weight") - Breadcrumb text weight
-/// @param {Font Weight} var("strong", "weight") - Active item text weight
+/// @require {Variable<Color>} variant("primary", "readable") - Active item color
+/// @require {Variable<Color>} var("base", "separator") - Divider color
+/// @require {Variable<Length>} var("gap", "micro") - Space around dividers
+/// @require {Variable<Length>} var("control", "height") - Item line height
+/// @require {Variable<Length>} var("control", "meta-size") - Breadcrumb text size
+/// @require {Variable<FontWeight>} var("control", "meta-weight") - Breadcrumb text weight
+/// @require {Variable<FontWeight>} var("strong", "weight") - Active item text weight
 @mixin use-breadcrumb($colors: ()) {
     @if not module.module-presented("breadcrumb") {
         @include module.present-module("breadcrumb");

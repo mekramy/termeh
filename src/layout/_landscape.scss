@@ -1,16 +1,19 @@
 @use "../core/module";
 
-/// Generates landscape element styles with configurable gaps and scroll snapping
-/// @param {List} $gaps [()] - List of registered gap names to include. Pass null to include all registered gaps
+/// Generates horizontal and vertical landscape layouts with scroll snapping.
 ///
-/// @param {Color} [error] color("primary") - accent color for scrollbar
-/// @param {Number} [8px] var("gap", "micro") - default spacing between landscape items
+/// @param {List} $gaps [()] - Registered gap names to include; `null` includes all registered gaps
+///
+/// @throw If the primary color is not registered
+///
+/// @require {Variable<Color>} color("primary") - Scrollbar accent color @throw on missing
+/// @require {Variable<Length>} var("gap", "micro") - Default spacing between items
 @mixin use-landscape($gaps: ()) {
     @if not module.module-presented("landscape") {
         @include module.present-module("landscape");
 
         $primary: module.color("primary");
-        $gap-micro: module.var("gap", "micro", 8px);
+        $gap-micro: module.var("gap", "micro");
 
         @at-root {
             .landscape {

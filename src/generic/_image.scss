@@ -1,16 +1,17 @@
 @use "../core/module";
 
-/// Applies image styles and size classes
-/// @param {List} $sizes [()] - List of registered size names to include. Pass null to include all registered sizes
+/// Applies image styles and size variants.
 ///
-/// @param {Number} [null] var("radius", "normal") - default rounded border radius for images
-/// @param {Number} [50%] var("radius", "circle") - circular border radius for images
+/// @param {List} $sizes [()] - Registered size names to include; `null` includes all registered sizes
+///
+/// @require {Variable<Length>} var("radius", "normal") - Rounded image border radius
+/// @require {Variable<Length>} var("radius", "circle") - Circular image border radius
 @mixin use-image($sizes: ()) {
     @if not module.module-presented("image") {
         @include module.present-module("image");
 
         $radius-normal: module.var("radius", "normal");
-        $radius-circle: module.var("radius", "circle", 50%);
+        $radius-circle: module.var("radius", "circle");
 
         @at-root {
             img {

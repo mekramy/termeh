@@ -1,6 +1,6 @@
 @use "../core/module";
 
-/// Visibility utility classes for responsive hiding/showing
+/// Generates responsive visibility utility classes.
 @mixin use-visibility-helper() {
     @if not module.module-presented("visibility-helper") {
         @include module.present-module("visibility-helper");

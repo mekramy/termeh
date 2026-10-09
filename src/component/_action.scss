@@ -1,27 +1,21 @@
 @use "../core/module";
 @use "./element";
 
-/// Generates action groups and their interactive action controls.
+/// Generates action groups and their interactive controls.
 ///
-/// Action groups arrange `.action` elements horizontally and allow overflow scrolling on
-/// mobile. Actions support secondary, loading, rounded, disabled, and color variants.
+/// @param {List} $colors [()] - Color names for `.is-{color}` variants; `null` includes all registered colors
 ///
-/// @param {List} $colors - Colors for `.is-{color}` variants; `null` includes all registered colors
-///
-/// @param {Color} color("shade") - Secondary hover and focus-outline color @throw
-/// @param {Color} variant("shade", "readable") - Secondary text and loading spinner color
-///
-/// @param {Color} color("primary") - Primary action background and focus-outline color @throw
-/// @param {Color} variant("primary", "foreground") - Primary text and loading spinner color
-///
-/// @param {Number} var("gap", "micro") - Spacing between actions
-/// @param {Number} var("radius", "normal") - Standard border radius
-/// @param {Number} var("radius", "rounded") - Rounded border radius
-///
-/// @param {Number} var("decorator", "size") - Padding, focus-outline, and loading spinner thickness
-/// @param {Number} var("control", "height") - Action height
-/// @param {Number} var("control", "meta-size") - Action text size
-/// @param {Font Weight} var("control", "meta-weight") - Action text weight
+/// @require {Variable<Color>} color("shade") - Secondary hover and focus-outline color @throw on missing
+/// @require {Variable<Color>} variant("shade", "readable") - Secondary text and loading spinner color
+/// @require {Variable<Color>} color("primary") - Primary action background and focus-outline color @throw on missing
+/// @require {Variable<Color>} variant("primary", "foreground") - Primary text and loading spinner color
+/// @require {Variable<Length>} var("gap", "micro") - Spacing between actions
+/// @require {Variable<Length>} var("radius", "normal") - Standard border radius
+/// @require {Variable<Length>} var("radius", "rounded") - Rounded border radius
+/// @require {Variable<Length>} var("decorator", "size") - Padding, focus-outline, and spinner thickness
+/// @require {Variable<Length>} var("control", "height") - Action height
+/// @require {Variable<Length>} var("control", "meta-size") - Action text size
+/// @require {Variable<FontWeight>} var("control", "meta-weight") - Action text weight
 @mixin use-action($colors: ()) {
     @if not module.module-presented("action") {
         @include element.use-element();
@@ -125,6 +119,7 @@
 
                     @include module.is-disabled() {
                         @include module.disabled();
+
                         border-color: transparent !important;
                     }
                 }

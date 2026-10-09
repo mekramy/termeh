@@ -1,64 +1,54 @@
 @use "sass:list";
 @use "../core/module";
 
-/// Generates card element styles with configurable colors and gaps.
+/// Generates card styles with configurable color and gap variants.
 ///
-/// @param {List} $colors - Colors for card variants; `null` includes all registered colors
-/// @param {List} $gaps - Gaps for card variants; `null` includes all registered gaps
+/// @param {List} $colors [()] - Color names for card variants; `null` includes all registered colors
+/// @param {List} $gaps [()] - Gap names for card variants; `null` includes all registered gaps
 ///
-/// @param {Color} color("shade") - Decorator border color @throw
-/// @param {Color} color("primary") - Overlay scrollbar color @throw
-///
-/// @param {Number} var("gap", "macro") - Spacing between card sections
-/// @param {Number} var("radius", "normal") - Card corner radius
-/// @param {Number} var("decorator", "size") - Decorator and loader thickness
-/// @param {Number} var("decorator", "spinner") - Loading spinner size
-///
-/// @param {Color} var("card", "background") - Card background color @fallback [box:background, base:background]
-/// @param {Color} var("card", "foreground") - Card text color @fallback [box:foreground, base:foreground]
-/// @param {Color} var("card", "section") - Secondary section background @fallback [box:section, base:section]
-/// @param {Color} var("card", "separator") - Section separator color @fallback [box:separator, base:separator]
-/// @param {Box Shadow} var("card", "shadow") - Card shadow values @fallback [box:shadow]
-/// @param {List} var("card", "sizes") - Card size variants @fallback [box:sizes]
-///
-/// @param {Color} var("card", "overlay-background") - Overlay background color @fallback [box:overlay-background, overlay:background]
-/// @param {Color} var("card", "overlay-foreground") - Overlay text color @fallback [box:overlay-foreground, overlay:foreground]
-/// @param {Number} var("card", "overlay-opacity") - Overlay opacity @fallback [box:overlay-opacity, overlay:opacity]
-/// @param {Filter} var("card", "overlay-filter") - Overlay backdrop filter @fallback [box:overlay-filter, overlay:filter]
+/// @require {Variable<Color>} color("shade") - Decorator border color @throw on missing
+/// @require {Variable<Color>} color("primary") - Overlay scrollbar color @throw on missing
+/// @require {Variable<Length>} var("gap", "macro") - Spacing between card sections
+/// @require {Variable<Length>} var("radius", "normal") - Card corner radius
+/// @require {Variable<Length>} var("decorator", "size") - Decorator and loader thickness
+/// @require {Variable<Length>} var("decorator", "spinner") - Loading spinner size
+/// @require {Variable<Color>} var("card", "background") [var("box", "background", var("base", "background"))] - Card background color
+/// @require {Variable<Color>} var("card", "foreground") [var("box", "foreground", var("base", "foreground"))] - Card text color
+/// @require {Variable<Color>} var("card", "section") [var("box", "section", var("base", "section"))] - Secondary section background
+/// @require {Variable<Color>} var("card", "separator") [var("box", "separator", var("base", "separator"))] - Section separator color
+/// @require {Variable<Box Shadow>} var("card", "shadow") [var("box", "shadow")] - Card shadow
+/// @require {Variable<List>} var("card", "sizes") [var("box", "sizes")] - Card size variants
+/// @require {Variable<Color>} var("card", "overlay-background") [var("box", "overlay-background", var("overlay", "background", var("base", "background")))] - Overlay background color
+/// @require {Variable<Color>} var("card", "overlay-foreground") [var("box", "overlay-foreground", var("overlay", "foreground", var("base", "foreground")))] - Overlay text color
+/// @require {Variable<Number>} var("card", "overlay-opacity") [var("box", "overlay-opacity", var("overlay", "opacity"))] - Overlay opacity
+/// @require {Variable<Filter>} var("card", "overlay-filter") [var("box", "overlay-filter", var("overlay", "filter"))] - Overlay backdrop filter
 @mixin use-card($colors: (), $gaps: ()) {
     @if not module.module-presented("card") {
         @include module.present-module("card");
 
         /** Fallbacks */
-        $fallback-background: module.var("base", "background", white);
-        $fallback-foreground: module.var("base", "foreground", black);
-        $fallback-section: module.var("base", "section");
-        $fallback-separator: module.var("base", "separator");
+        $-base-background: module.var("base", "background");
+        $-base-foreground: module.var("base", "foreground");
+        $-base-section: module.var("base", "section");
+        $-base-separator: module.var("base", "separator");
 
-        $fallback-overlay-background: module.var("overlay", "background", $fallback-background);
-        $fallback-overlay-foreground: module.var("overlay", "foreground", $fallback-foreground);
-        $fallback-overlay-opacity: module.var("overlay", "opacity");
-        $fallback-overlay-filter: module.var("overlay", "filter");
+        $-overlay-background: module.var("overlay", "background", $-base-background);
+        $-overlay-foreground: module.var("overlay", "foreground", $-base-foreground);
+        $-overlay-opacity: module.var("overlay", "opacity");
+        $-overlay-filter: module.var("overlay", "filter");
 
-        $box-background: module.var("box", "background", $fallback-background);
-        $box-foreground: module.var("box", "foreground", $fallback-foreground);
-        $box-section: module.var("box", "section", $fallback-section);
-        $box-separator: module.var("box", "separator", $fallback-separator);
-        $box-overlay-background: module.var(
-            "box",
-            "overlay-background",
-            $fallback-overlay-background
-        );
-        $box-overlay-foreground: module.var(
-            "box",
-            "overlay-foreground",
-            $fallback-overlay-foreground
-        );
-        $box-overlay-opacity: module.var("box", "overlay-opacity", $fallback-overlay-opacity);
-        $box-overlay-filter: module.var("box", "overlay-filter", $fallback-overlay-filter);
-        $box-shadow: module.var("box", "shadow");
-        $box-sizes: module.var("box", "sizes");
-        /** ----- */
+        $-box-background: module.var("box", "background", $-base-background);
+        $-box-foreground: module.var("box", "foreground", $-base-foreground);
+        $-box-section: module.var("box", "section", $-base-section);
+        $-box-separator: module.var("box", "separator", $-base-separator);
+        $-box-overlay-background: module.var("box", "overlay-background", $-overlay-background);
+        $-box-overlay-foreground: module.var("box", "overlay-foreground", $-overlay-foreground);
+        $-box-overlay-opacity: module.var("box", "overlay-opacity", $-overlay-opacity);
+        $-box-overlay-filter: module.var("box", "overlay-filter", $-overlay-filter);
+        $-box-shadow: module.var("box", "shadow");
+        $-box-sizes: module.var("box", "sizes");
+
+        /** --------- */
 
         $shade: module.color("shade");
         $primary: module.color("primary");
@@ -68,17 +58,17 @@
         $decorator: module.var("decorator", "size");
         $spinner: module.var("decorator", "spinner");
 
-        $background: module.var("card", "background", $box-background);
-        $foreground: module.var("card", "foreground", $box-foreground);
-        $section: module.var("card", "section", $box-section);
-        $separator: module.var("card", "separator", $box-separator);
-        $shadow: module.var("card", "shadow", $box-shadow);
-        $sizes: module.var("card", "sizes", $box-sizes);
+        $background: module.var("card", "background", $-box-background);
+        $foreground: module.var("card", "foreground", $-box-foreground);
+        $section: module.var("card", "section", $-box-section);
+        $separator: module.var("card", "separator", $-box-separator);
+        $shadow: module.var("card", "shadow", $-box-shadow);
+        $sizes: module.var("card", "sizes", $-box-sizes);
 
-        $overlay-background: module.var("card", "overlay-background", $box-overlay-background);
-        $overlay-foreground: module.var("card", "overlay-foreground", $box-overlay-foreground);
-        $overlay-opacity: module.var("card", "overlay-opacity", $box-overlay-opacity);
-        $overlay-filter: module.var("card", "overlay-filter", $box-overlay-filter);
+        $overlay-background: module.var("card", "overlay-background", $-box-overlay-background);
+        $overlay-foreground: module.var("card", "overlay-foreground", $-box-overlay-foreground);
+        $overlay-opacity: module.var("card", "overlay-opacity", $-box-overlay-opacity);
+        $overlay-filter: module.var("card", "overlay-filter", $-box-overlay-filter);
 
         @at-root {
             .card {

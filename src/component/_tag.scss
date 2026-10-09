@@ -1,22 +1,20 @@
 @use "../core/module";
 @use "./element";
 
-/// Generates tag element styles with configurable colors and sizes.
+/// Generates tag styles with configurable color and size variants.
 ///
-/// @param {List} $colors - Colors for tag variants; `null` includes all registered colors
-/// @param {List} $sizes - Sizes for tag variants; `null` includes all registered sizes
+/// @param {List} $colors [()] - Color names for tag variants; `null` includes all registered colors
+/// @param {List} $sizes [()] - Size names for tag variants; `null` includes all registered sizes
 ///
-/// @param {Color} color("shade") - Focus-outline color
-/// @param {Color} variant("shade", "light") - Default background color
-/// @param {Color} variant("shade", "readable") - Default text and spinner color
-///
-/// @param {Number} var("radius", "normal") - Standard corner radius
-/// @param {Number} var("radius", "rounded") - Rounded corner radius
-/// @param {Number} var("decorator", "size") - Focus-outline and loading spinner thickness
-///
-/// @param {Number} var("control", "height") - Tag height
-/// @param {Number} var("control", "meta-size") - Default text size
-/// @param {Font Weight} var("control", "meta-weight") - Default text weight
+/// @require {Variable<Color>} color("shade") - Focus-outline color @throw on missing
+/// @require {Variable<Color>} variant("shade", "light") - Default background color
+/// @require {Variable<Color>} variant("shade", "readable") - Default text and spinner color
+/// @require {Variable<Length>} var("radius", "normal") - Standard corner radius
+/// @require {Variable<Length>} var("radius", "rounded") - Rounded corner radius
+/// @require {Variable<Length>} var("decorator", "size") - Focus-outline and loading spinner thickness
+/// @require {Variable<Length>} var("control", "height") - Tag height
+/// @require {Variable<Length>} var("control", "meta-size") - Default text size
+/// @require {Variable<FontWeight>} var("control", "meta-weight") - Default text weight
 @mixin use-tag($colors: (), $sizes: ()) {
     @if not module.module-presented("tag") {
         @include element.use-element();

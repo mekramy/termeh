@@ -10,28 +10,29 @@ $-weights: (
     "bold": 700,
     "bolder": 900,
 ) !default;
-$-defs: map.keys($-weights);
+$-available: map.keys($-weights);
 
-/// Gets font weight value by name
-/// @param {String} $name - Weight name
-/// @return {Number} Weight value
+/// Gets font weight value by name.
 ///
-/// @throws If the input name is not a string or if the font weight is not found
+/// @param {String} $name - Weight name
+/// @return {FontWeight} Weight value
+/// @throw If the input name is not a string or if the font weight is not found
 @function weight($name) {
     $name: util.string-of($name, "weight", "name");
     @if not map.has-key($-weights, $name) {
-        @error "Font weight '#{$name}' not found. Available weights: #{$-defs}";
+        @error "Font weight '#{$name}' not found. Available weights: #{$-available}";
     }
 
     @return map.get($-weights, $name);
 }
 
-/// Gets filtered map of font weights
+/// Gets filtered map of font weights.
+///
 /// @param {List} $includes [null] - Weights to include
 /// @param {List} $excludes [null] - Weights to exclude
-/// @return {Map} Filtered weights
+/// @return {Map<String, FontWeight>} Filtered weights
 @function weights($includes: null, $excludes: null) {
-    $includes: util.list-safe($includes, "weights", "includes", $-defs);
+    $includes: util.list-safe($includes, "weights", "includes", $-available);
     $excludes: util.list-safe($excludes, "weights", "excludes", ());
 
     $result: ();

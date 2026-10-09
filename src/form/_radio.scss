@@ -2,36 +2,37 @@
 @use "../core/module";
 
 /// Generates radio input styles with configurable colors.
-/// @param {List} $colors [()] - Registered color names for which to generate modifier styles. Pass null to include all registered colors.
 ///
-/// @param {Color} [error] color("error") - Radio border and selected-dot color in the invalid state.
-/// @param {Color} [primary] color("primary") - Default radio focus and selected-dot color.
-/// @param {Color} [null] var("base", "separator") - Fallback border color when no input border color is configured.
+/// @param {List} $colors [()] - Color names for radio modifier styles; `null` includes all registered colors
 ///
-/// @param {Number} [50%] var("radius", "circle") - Border radius of the radio control and selected dot.
-/// @param {Number} [8px] var("gap", "micro") - Space between the radio control and its label.
-///
-/// @param {Number} [2.8em] var("input", "height") - Height of the radio label row.
-/// @param {Number} [1.2em] var("input", "checkbox") - Width and height of the radio control.
-///
-/// @param {Color} [FALLBACK] var("input", "border") - Radio border color; falls back to the base separator color.
-/// @param {Color} [null] var("input", "disabled-foreground") - Label and selected-dot color in the disabled state.
-/// @param {Color} [null] var("input", "disabled-border") - Radio border color in the disabled state.
+/// @require {Variable<Color>} color("error") - Invalid-state radio color @throw on missing
+/// @require {Variable<Color>} color("primary") - Default focus and selected-dot color @throw on missing
+/// @require {Variable<Length>} var("gap", "micro") - Space between the radio and its label
+/// @require {Variable<Length>} var("radius", "circle") - Radio and selected-dot border radius
+/// @require {Variable<Length>} var("input", "height")  - Radio label row height
+/// @require {Variable<Length>} var("input", "checkbox") - Radio control width and height
+/// @require {Variable<Color>} var("input", "border") [var("base", "separator")] - Radio border color
+/// @require {Variable<Color>} var("input", "disabled-foreground") - Disabled label and selected-dot color
+/// @require {Variable<Color>} var("input", "disabled-border") - Disabled radio border color
 @mixin use-radio($colors: ()) {
     @if not module.module-presented("form-radio") {
         @include module.present-module("form-radio");
 
+        /** Fallbacks */
+        $-separator: module.var("base", "separator");
+
+        /** --------- */
+
         $error: module.color("error");
         $primary: module.color("primary");
-        $separator: module.var("base", "separator");
 
-        $radius-circle: module.var("radius", "circle", 50%);
-        $gap-micro: module.var("gap", "micro", 8px);
+        $gap-micro: module.var("gap", "micro");
+        $radius-circle: module.var("radius", "circle");
 
-        $height: module.var("input", "height", 2.8em);
-        $size: module.var("input", "checkbox", 1.2em);
+        $height: module.var("input", "height");
+        $size: module.var("input", "checkbox");
 
-        $border: module.var("input", "border", $separator);
+        $border: module.var("input", "border", $-separator);
         $disabled: module.var("input", "disabled-foreground");
         $disabled-border: module.var("input", "disabled-border");
 
@@ -52,6 +53,7 @@
 
                 input[type="radio"] {
                     @include module.control();
+
                     display: grid;
                     place-content: center;
                     width: $size;

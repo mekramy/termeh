@@ -2,42 +2,42 @@
 @use "../core/module";
 
 /// Generates textarea input styles with configurable colors.
-/// @param {List} $colors [()] - Registered color names for which to generate modifier styles. Pass null to include all registered colors.
 ///
-/// @param {Color} [error] color("error") - Border color in the invalid state.
-/// @param {Color} [error] color("primary") - Default border color in the focused state and scrollbar accent color.
-/// @param {Color} [null] variant("shade", "mute") - Fallback placeholder color when no input placeholder color is configured.
-/// @param {Color} [null] var("base", "separator") - Fallback border color when no input border color is configured.
+/// @param {List} $colors [()] - Color names for textarea modifier styles; `null` includes all registered colors
 ///
-/// @param {Number} [null] var("radius", "normal") - Border radius of the textarea.
-/// @param {Number} [8px] var("gap", "micro") - Base padding unit; the resulting padding is twice this value on each side.
-/// @param {Number} [1.6em] var("line-height", "normal") - Text line height inside the textarea.
-///
-/// @param {Color} [FALLBACK] var("input", "border") - Textarea border color; falls back to the base separator color.
-/// @param {Color} [white] var("input", "background") - Textarea background color.
-///
-/// @param {Color} [FALLBACK] var("input", "placeholder") - Placeholder text color; falls back to the muted shade variant.
-/// @param {Number} [0.85em] var("control", "placeholder-size") - Placeholder font size.
-/// @param {Number} [600] var("control", "placeholder-weight") - Placeholder font weight.
+/// @require {Variable<Color>} color("error") - Invalid-state border color @throw on missing
+/// @require {Variable<Color>} color("primary") - Focus border and scrollbar accent color @throw on missing
+/// @require {Variable<Length>} var("gap", "micro") - Padding unit; used at twice its value on each side
+/// @require {Variable<Length>} var("radius", "normal") - Textarea border radius
+/// @require {Variable<Length>} var("line-height", "normal") - Text line height
+/// @require {Variable<Color>} var("input", "border") [var("base", "separator")] - Textarea border color
+/// @require {Variable<Color>} var("input", "background") - Textarea background color
+/// @require {Variable<Color>} var("input", "placeholder") [variant("shade", "mute")] - Placeholder text color
+/// @require {Variable<Length>} var("control", "placeholder-size") - Placeholder font size
+/// @require {Variable<FontWeight>} var("control", "placeholder-weight") - Placeholder font weight
 @mixin use-textarea($colors: ()) {
     @if not module.module-presented("form-textarea") {
         @include module.present-module("form-textarea");
 
+        /** Fallbacks */
+        $-separator: module.var("base", "separator");
+        $-shade-mute: module.variant("shade", "mute");
+
+        /** --------- */
+
         $error: module.color("error");
         $primary: module.color("primary");
-        $shade-mute: module.variant("shade", "mute");
-        $separator: module.var("base", "separator");
 
+        $gap-micro: module.var("gap", "micro");
         $radius-normal: module.var("radius", "normal");
-        $gap-micro: module.var("gap", "micro", 8px);
-        $line-height: module.var("line-height", "normal", 1.6em);
+        $line-height: module.var("line-height", "normal");
 
-        $border: module.var("input", "border", $separator);
-        $background: module.var("input", "background", white);
+        $border: module.var("input", "border", $-separator);
+        $background: module.var("input", "background");
 
-        $placeholder: module.var("input", "placeholder", $shade-mute);
-        $placeholder-size: module.var("control", "placeholder-size", 0.85em);
-        $placeholder-weight: module.var("control", "placeholder-weight", 600);
+        $placeholder: module.var("input", "placeholder", $-shade-mute);
+        $placeholder-size: module.var("control", "placeholder-size");
+        $placeholder-weight: module.var("control", "placeholder-weight");
 
         @at-root {
             @include animation.shake();

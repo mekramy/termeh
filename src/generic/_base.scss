@@ -1,76 +1,66 @@
 @use "../core/module";
 
-/// Applies common base styles for HTML elements
-/// @output Styles for root elements and common HTML tags
+/// Applies base styles to the document and common HTML elements.
 ///
-/// @param {Direction} [ltr] var("base", "direction") - document text direction
-/// @param {Number} [300px] var("base", "min-width") - document minimum width
-///
-/// @param {Number} [null] var("radius", "normal") - <blockquote> border radius
-/// @param {Number} [1.6em] var("line-height", "normal") - default line height
-///
-/// @param {Number} [8px] var("gap", "micro") - spacing between list items
-/// @param {Number} [1.6em] var("gap", "macro") - spacing between blocks
-///
-/// @param {Font Family} [null] var("font", "family") - default font family
-/// @param {Number} [12px] var("font", "size") - default font size
-/// @param {Font Weight} [normal] var("font", "weight") - default font weight
-///
-/// @param {Font Family} [null] var("mono", "family") - <code> and <pre> font family
-/// @param {Number} [null] var("mono", "size") - <code> and <pre> font size
-/// @param {Font Weight} [null] var("mono", "weight") - <code> and <pre> font weight
-///
-/// @param {Number} [0.875rem] var("small", "size") - <small>, <sub> and <sup> font size
-/// @param {Font Weight} [normal] var("small", "weight") - <small>, <sub> and <sup> font weight
-/// @param {Color} [null] var("small", "foreground") - <small>, <sub> and <sup> text color
-///
-/// @param {Color} [null] var("strong", "foreground") - <strong>, <b> and <th> text color
-/// @param {Font Weight} [bold] var("strong", "weight") - <strong>, <b> and <th> font weight
-///
-/// @param {Color} [null] var("decorated", "foreground") - <u>, <ins>, <s> and <del> text color
-/// @param {Font Weight} [normal] var("decorated", "weight") - <u>, <ins>, <s> and <del> font weight
-///
-/// @param {Color} [white] var("base", "background") - document background color
-/// @param {Color} [black] var("base", "foreground") - default text color
-/// @param {Color} [null] var("base", "section") - background color for <blockquote>, <code>, and <pre>
-/// @param {Color} [null] var("base", "separator") - color for <hr> and list decorators
-///
-/// @param {Color} [error] color("primary") - selection background, scrollbar, and input accent color
-/// @param {Color} [null] variant("primary", "readable") - link color
-/// @param {Color} [null] variant("primary", "foreground") - selection text color
+/// @require {Variable<Direction>} var("base", "direction") - Document text direction
+/// @require {Variable<Length>} var("base", "min-width") - Document minimum width
+/// @require {Variable<Length>} var("radius", "normal") - Blockquote border radius
+/// @require {Variable<Length>} var("line-height", "normal") - Default line height
+/// @require {Variable<Length>} var("gap", "micro") - Spacing between list items
+/// @require {Variable<Length>} var("gap", "macro") - Spacing between blocks
+/// @require {Variable<FontFamily>} var("font", "family") - Default font family
+/// @require {Variable<Length>} var("font", "size") - Default font size
+/// @require {Variable<FontWeight>} var("font", "weight") - Default font weight
+/// @require {Variable<FontFamily>} var("mono", "family") - Code and preformatted text font family
+/// @require {Variable<Length>} var("mono", "size") - Code and preformatted text font size
+/// @require {Variable<FontWeight>} var("mono", "weight") - Code and preformatted text font weight
+/// @require {Variable<Length>} var("small", "size") - Small, subscript, and superscript font size
+/// @require {Variable<FontWeight>} var("small", "weight") - Small, subscript, and superscript font weight
+/// @require {Variable<Color>} var("small", "foreground") - Small, subscript, and superscript text color
+/// @require {Variable<Color>} var("strong", "foreground") - Strong, bold, and table-header text color
+/// @require {Variable<FontWeight>} var("strong", "weight") - Strong, bold, and table-header font weight
+/// @require {Variable<Color>} var("decorated", "foreground") - Underlined, inserted, struck-through, and deleted text color
+/// @require {Variable<FontWeight>} var("decorated", "weight") - Underlined, inserted, struck-through, and deleted text weight
+/// @require {Variable<Color>} var("base", "background") - Document background color
+/// @require {Variable<Color>} var("base", "foreground") - Default text color
+/// @require {Variable<Color>} var("base", "section") - Blockquote, code, and preformatted text background
+/// @require {Variable<Color>} var("base", "separator") - Horizontal rule and list decorator color
+/// @require {Variable<Color>} color("primary") - Selection background, scrollbar, and input accent color @throw on missing
+/// @require {Variable<Color>} variant("primary", "readable") - Link color
+/// @require {Variable<Color>} variant("primary", "foreground") - Selection text color
 @mixin use-base() {
     @if not module.module-presented("base") {
         @include module.present-module("base");
 
-        $direction: module.var("base", "direction", ltr);
-        $min-width: module.var("base", "min-width", 300px);
+        $direction: module.var("base", "direction");
+        $min-width: module.var("base", "min-width");
 
         $radius-normal: module.var("radius", "normal");
-        $line-height: module.var("line-height", "normal", 1.6em);
+        $line-height: module.var("line-height", "normal");
 
-        $gap-micro: module.var("gap", "micro", 8px);
-        $gap-macro: module.var("gap", "macro", 1.6em);
+        $gap-micro: module.var("gap", "micro");
+        $gap-macro: module.var("gap", "macro");
 
         $font-family: module.var("font", "family");
-        $font-size: module.var("font", "size", 12px);
-        $font-weight: module.var("font", "weight", normal);
+        $font-size: module.var("font", "size");
+        $font-weight: module.var("font", "weight");
 
         $mono-family: module.var("mono", "family");
         $mono-size: module.var("mono", "size");
         $mono-weight: module.var("mono", "weight");
 
-        $small-size: module.var("small", "size", 0.875rem);
-        $small-weight: module.var("small", "weight", normal);
-        $small-foreground: module.var("small", "foreground", null);
+        $small-size: module.var("small", "size");
+        $small-weight: module.var("small", "weight");
+        $small-foreground: module.var("small", "foreground");
 
         $strong-color: module.var("strong", "foreground");
-        $strong-weight: module.var("strong", "weight", bold);
+        $strong-weight: module.var("strong", "weight");
 
-        $decorated-color: module.var("decorated", "foreground", null);
-        $decorated-weight: module.var("decorated", "weight", normal);
+        $decorated-color: module.var("decorated", "foreground");
+        $decorated-weight: module.var("decorated", "weight");
 
-        $base-background: module.var("base", "background", white);
-        $base-foreground: module.var("base", "foreground", black);
+        $base-background: module.var("base", "background");
+        $base-foreground: module.var("base", "foreground");
         $base-section: module.var("base", "section");
         $base-separator: module.var("base", "separator");
 
@@ -190,7 +180,7 @@
             }
 
             select {
-                appearance: menulist;
+                appearance: auto;
                 -moz-appearance: menulist;
                 -webkit-appearance: menulist;
             }
@@ -232,7 +222,7 @@
 
             pre {
                 white-space: pre;
-                word-wrap: normal;
+                overflow-wrap: normal;
                 overflow-x: auto;
 
                 @include module.scrollable($primary-color);

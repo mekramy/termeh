@@ -1,22 +1,20 @@
 @use "../core/module";
 @use "./element";
 
-/// Generates button element styles with configurable colors and sizes.
+/// Generates button styles with configurable color and size variants.
 ///
-/// @param {List} $colors - Colors for button variants; `null` includes all registered colors
-/// @param {List} $sizes - Sizes for button variants; `null` includes all registered sizes
+/// @param {List} $colors [()] - Color names for button variants; `null` includes all registered colors
+/// @param {List} $sizes [()] - Size names for button variants; `null` includes all registered sizes
 ///
-/// @param {Color} color("shade") - Focus-outline color @throw
-/// @param {Color} variant("shade", "light") - Default button background
-/// @param {Color} variant("shade", "readable") - Default button text color
-/// @param {Color} variant("shade", "light-active") - Hover background
-///
-/// @param {Number} var("gap", "micro") - Gap between grouped buttons
-/// @param {Number} var("radius", "normal") - Standard button radius
-/// @param {Number} var("radius", "rounded") - Rounded button radius
-/// @param {Number} var("decorator", "size") - Focus-outline and loading spinner thickness
-///
-/// @param {Number} var("control", "height") - Button height
+/// @require {Variable<Color>} color("shade") - Default button Focus-outline color @throw on missing
+/// @require {Variable<Color>} variant("shade", "light") - Default button background
+/// @require {Variable<Color>} variant("shade", "readable") - Default button text color
+/// @require {Variable<Color>} variant("shade", "light-active") - Default button Hover background
+/// @require {Variable<Length>} var("gap", "micro") - Gap between grouped buttons
+/// @require {Variable<Length>} var("radius", "normal") - Standard button radius
+/// @require {Variable<Length>} var("radius", "rounded") - Rounded button radius
+/// @require {Variable<Length>} var("decorator", "size") - Focus-outline and loading spinner thickness
+/// @require {Variable<Length>} var("control", "height") - Button height
 @mixin use-button($colors: (), $sizes: ()) {
     @if not module.module-presented("button") {
         @include element.use-element();

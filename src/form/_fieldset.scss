@@ -1,27 +1,27 @@
 @use "../core/module";
 
-/// Generates fieldset element styles
+/// Generates fieldset styles.
 ///
-/// @param {Color} [null] var("base", "separator") - Fallback color for the fieldset border when no input border color is configured.
-///
-/// @param {Number} [null] var("radius", "normal") - Border radius of the fieldset.
-/// @param {Number} [1.6em] var("gap", "macro") - Inner fieldset padding and bottom margin.
-///
-/// @param {Color} [FALLBACK] var("input", "border") - Fieldset border color; falls back to the base separator color.
-/// @param {Number} [null] var("input", "legend-size") - Font size of the legend; no fallback is supplied.
-/// @param {Font Weight} [normal] var("input", "legend-weight") - Font weight of the legend.
+/// @require {Variable<Length>} var("gap", "macro") - Inner padding and bottom margin
+/// @require {Variable<Length>} var("radius", "normal") - Fieldset border radius
+/// @require {Variable<Color>} var("input", "border") [var("base", "separator")] - Fieldset border color
+/// @require {Variable<Length>} var("input", "legend-size") - Legend font size
+/// @require {Variable<FontWeight>} var("input", "legend-weight") - Legend font weight
 @mixin use-fieldset() {
     @if not module.module-presented("form-fieldset") {
         @include module.present-module("form-fieldset");
 
-        $separator: module.var("base", "separator");
+        /** Fallbacks */
+        $-separator: module.var("base", "separator");
 
+        /** --------- */
+
+        $gap-macro: module.var("gap", "macro");
         $radius-normal: module.var("radius", "normal");
-        $gap-macro: module.var("gap", "macro", 1.6em);
 
-        $border: module.var("input", "border", $separator);
+        $border: module.var("input", "border", $-separator);
         $legend-size: module.var("input", "legend-size");
-        $legend-weight: module.var("input", "legend-weight", normal);
+        $legend-weight: module.var("input", "legend-weight");
 
         @at-root {
             fieldset {

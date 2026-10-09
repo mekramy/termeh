@@ -1,18 +1,17 @@
 @use "../core/module";
 @use "./element";
 
-/// Generates meta element styles with configurable colors and sizes.
+/// Generates meta element styles with configurable color and size variants.
 ///
-/// @param {List} $colors - Colors for meta variants; `null` includes all registered colors
-/// @param {List} $sizes - Sizes for meta variants; `null` includes all registered sizes
+/// @param {List} $colors [()] - Color names for meta variants; `null` includes all registered colors
+/// @param {List} $sizes [()] - Size names for meta variants; `null` includes all registered sizes
 ///
-/// @param {Color} variant("shade", "mute") - Default text color
-/// @param {Color} variant("shade", "mute-active") - Action hover and spinner color
-/// @param {Number} var("decorator", "size") - Loading spinner thickness
-///
-/// @param {Number} var("control", "height") - Meta element height
-/// @param {Number} var("control", "meta-size") - Default text size
-/// @param {Font Weight} var("control", "meta-weight") - Default text weight
+/// @require {Variable<Color>} variant("shade", "mute") - Default text color
+/// @require {Variable<Color>} variant("shade", "mute-active") - Action hover and spinner color
+/// @require {Variable<Length>} var("decorator", "size") - Loading spinner thickness
+/// @require {Variable<Length>} var("control", "height") - Meta element height
+/// @require {Variable<Length>} var("control", "meta-size") - Default text size
+/// @require {Variable<FontWeight>} var("control", "meta-weight") - Default text weight
 @mixin use-meta($colors: (), $sizes: ()) {
     @if not module.module-presented("meta") {
         @include element.use-element();

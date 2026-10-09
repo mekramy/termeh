@@ -1,57 +1,53 @@
 @use "sass:color";
 @use "../core/module";
 
-/// Applies table styles with configurable colors and behaviors
-/// @param {List} $colors [()] - List of registered color variants to generate. Pass null to include all registered palettes
+/// Applies table styles with configurable color variants.
 ///
-/// @param {Color} [error] color("shade") - fallback color for sort backgrounds and decorators
-/// @param {Color} [error] color("primary") - accent color for scrollbars
+/// @param {List} $colors [()] - Registered color names to include; `null` includes all registered colors
 ///
-/// @param {Color} [null] var("base", "section") - fallback background for striped rows background
-/// @param {Color} [null] var("base", "separator") - fallback color for table separators
-/// @param {Font Weight} [bold] var("strong", "weight") - fallback font weight for headers
-///
-/// @param {Color} [null] var("table", "background") - main table background
-/// @param {Color} [null] var("table", "foreground") - default table text color
-/// @param {Color} [FALLBACK] var("table", "decorator") - sort decorator color
-///
-/// @param {Color} [FALLBACK] var("table", "hover-background") - hover row background
-/// @param {Color} [FALLBACK] var("table", "striped-background") - even row background
-/// @param {Color} [FALLBACK] var("table", "sorted-background") - sorted column background
-///
-/// @param {Color} [null] var("table", "column-separator") - column separator color
-/// @param {Color} [FALLBACK] var("table", "row-separator") - row separator color
-/// @param {Color} [FALLBACK] var("table", "section-separator") - section separator color
-///
-/// @param {Font Weight} [FALLBACK] var("table", "strong-weight") - strong font weight for headers
+/// @require {Variable<Color>} color("shade") - Sort backgrounds and decorators color @throw on missing
+/// @require {Variable<Color>} color("primary") - Scrollbar accent color @throw on missing
+/// @require {Variable<Color>} var("table", "background") - Table background color
+/// @require {Variable<Color>} var("table", "foreground") - Table text color
+/// @require {Variable<Color>} var("table", "decorator") [color("shade")] - Sort decorator color
+/// @require {Variable<Color>} var("table", "hover-background") [module.alpha(color("shade"), 0.1)] - Hovered row background
+/// @require {Variable<Color>} var("table", "striped-background") [var("base", "section")] - Even row background
+/// @require {Variable<Color>} var("table", "sorted-background") [module.alpha(color("shade"), 0.025)] - Sorted column background
+/// @require {Variable<Color>} var("table", "column-separator") - Column separator color
+/// @require {Variable<Color>} var("table", "row-separator") [var("base", "separator")] - Row separator color
+/// @require {Variable<Color>} var("table", "section-separator") [var("base", "separator")] - Section separator color
+/// @require {Variable<FontWeight>} var("table", "strong-weight") [var("strong", "weight")] - Header emphasis weight
 @mixin use-table($colors: ()) {
     @if not module.module-presented("table") {
         @include module.present-module("table");
 
-        $shade: module.color("shade");
-        $primary: module.color("primary");
+        /** Fallbacks */
+        $-shade: module.color("shade");
+        $-decorator: $-shade;
+        $-hover-background: module.alpha($-shade, 0.1);
+        $-striped-background: module.var("base", "section");
+        $-sorted-background: module.alpha($-shade, 0.025);
+        $-row-separator: module.var("base", "separator");
+        $-section-separator: module.var("base", "separator");
+        $-strong-weight: module.var("strong", "weight");
 
-        $fallback-decorator: $shade;
-        $fallback-hover: module.alpha($shade, 0.1);
-        $fallback-striped: module.var("base", "section");
-        $fallback-sorted: module.alpha($shade, 0.025);
-        $fallback-row-separator: module.var("base", "separator");
-        $fallback-section-separator: module.var("base", "separator");
-        $fallback-strong: module.var("strong", "weight", bold);
+        /** --------- */
+
+        $primary: module.color("primary");
 
         $background: module.var("table", "background");
         $foreground: module.var("table", "foreground");
-        $decorator: module.var("table", "decorator", $fallback-decorator);
+        $decorator: module.var("table", "decorator", $-decorator);
 
-        $hover-background: module.var("table", "hover-background", $fallback-hover);
-        $striped-background: module.var("table", "striped-background", $fallback-striped);
-        $sorted-background: module.var("table", "sorted-background", $fallback-sorted);
+        $hover-background: module.var("table", "hover-background", $-hover-background);
+        $striped-background: module.var("table", "striped-background", $-striped-background);
+        $sorted-background: module.var("table", "sorted-background", $-sorted-background);
 
         $column-separator: module.var("table", "column-separator");
-        $row-separator: module.var("table", "row-separator", $fallback-row-separator);
-        $section-separator: module.var("table", "section-separator", $fallback-section-separator);
+        $row-separator: module.var("table", "row-separator", $-row-separator);
+        $section-separator: module.var("table", "section-separator", $-section-separator);
 
-        $strong-weight: module.var("table", "strong-weight", $fallback-strong);
+        $strong-weight: module.var("table", "strong-weight", $-strong-weight);
 
         @at-root {
             .table-container {
@@ -208,7 +204,7 @@
                     border-top: 1px solid $section-separator;
                 }
 
-                @if $column-separator != null {
+                @if $column-separator {
                     tbody tr td:not(:first-child) {
                         border-inline-start: 1px solid $column-separator;
                     }

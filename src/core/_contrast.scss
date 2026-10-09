@@ -2,9 +2,11 @@
 @use "sass:math";
 @use "util";
 
-/// Normalizes RGB value for luminance calculation
+/// Normalizes RGB value for luminance calculation.
+///
 /// @param {Number} $v - RGB value (0-255)
 /// @return {Number} Normalized value (0-1)
+/// @access private
 @function -normalize($v) {
     $v: math.div($v, 255);
     @return util.ternary(
@@ -14,11 +16,11 @@
     );
 }
 
-/// Calculates color luminance (WCAG standard)
+/// Calculates color luminance (WCAG standard).
+///
 /// @param {Color} $color - Color to analyze
 /// @return {Number} Luminance value
-///
-/// @throws If the input is not a valid color
+/// @throw If the input is not a valid color
 @function luminance($color) {
     $color: util.color-of($color, "luminance", "color");
 
@@ -28,12 +30,12 @@
     @return 0.2126 * $red + 0.7152 * $green + 0.0722 * $blue;
 }
 
-/// Returns darker color based on luminance
+/// Returns darker color based on luminance.
+///
 /// @param {Color} $color1 - First color
 /// @param {Color} $color2 - Second color
 /// @return {Color} Darker color
-///
-/// @throws If either input is not a valid color
+/// @throw If either input is not a valid color
 @function darkest($color1, $color2) {
     $color1: util.color-of($color1, "darkest", "color1");
     $color2: util.color-of($color2, "darkest", "color2");
@@ -41,12 +43,12 @@
     @return util.ternary(luminance($color1) < luminance($color2), $color1, $color2);
 }
 
-/// Returns lighter color based on luminance
+/// Returns lighter color based on luminance.
+///
 /// @param {Color} $color1 - First color
 /// @param {Color} $color2 - Second color
 /// @return {Color} Lighter color
-///
-/// @throws If either input is not a valid color
+/// @throw If either input is not a valid color
 @function lightest($color1, $color2) {
     $color1: util.color-of($color1, "lightest", "color1");
     $color2: util.color-of($color2, "lightest", "color2");
@@ -54,12 +56,12 @@
     @return util.ternary(luminance($color1) > luminance($color2), $color1, $color2);
 }
 
-/// Calculates WCAG contrast ratio
+/// Calculates WCAG contrast ratio.
+///
 /// @param {Color} $back - Background color
 /// @param {Color} $color - Foreground color
 /// @return {Number} Contrast ratio
-///
-/// @throws If either input is not a valid color
+/// @throw If either input is not a valid color
 @function contrast-ratio($back, $color) {
     $back: util.color-of($back, "contrast-ratio", "back");
     $color: util.color-of($color, "contrast-ratio", "color");
@@ -69,26 +71,26 @@
     @return math.div(math.max($back-lum, $color-lum), math.min($back-lum, $color-lum));
 }
 
-/// Determines if color is light or dark
+/// Determines if a color is light or dark.
+///
 /// @param {Color} $color - Color to analyze
 /// @return {String} "light" or "dark"
-///
-/// @throws If the input is not a valid color
+/// @throw If the input is not a valid color
 @function tone($color) {
     $color: util.color-of($color, "tone", "color");
 
     $light-cnt: contrast-ratio($color, white);
-    $dark-cnt: contrast-ratio($color, rgba(black, 0.87));
+    $dark-cnt: contrast-ratio($color, rgb(black, 0.87));
     @return util.ternary($light-cnt < 3.1 and $dark-cnt > $light-cnt, "light", "dark");
 }
 
-/// Selects higher contrast color
+/// Selects higher contrast color.
+///
 /// @param {Color} $base - Base color
 /// @param {Color} $color1 - First option
 /// @param {Color} $color2 - Second option
 /// @return {Color} Higher contrast color
-///
-/// @throws If any input is not a valid color
+/// @throw If any input is not a valid color
 @function contrast($base, $color1, $color2) {
     $base: util.color-of($base, "contrast", "base");
     $color1: util.color-of($color1, "contrast", "color1");
@@ -99,13 +101,13 @@
     @return util.ternary($color1-cnt > $color2-cnt, $color1, $color2);
 }
 
-/// Selects more harmonious color
+/// Selects the color with lower contrast against the base color.
+///
 /// @param {Color} $base - Base color
 /// @param {Color} $color1 - First option
 /// @param {Color} $color2 - Second option
 /// @return {Color} More harmonious color
-///
-/// @throws If any input is not a valid color
+/// @throw If any input is not a valid color
 @function harmony($base, $color1, $color2) {
     $base: util.color-of($base, "harmony", "base");
     $color1: util.color-of($color1, "harmony", "color1");

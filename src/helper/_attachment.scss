@@ -1,7 +1,6 @@
 @use "../core/module";
 
-/// Applies border radius overrides for attached elements
-/// Removes specific border radius to create seamless connections between elements
+/// Removes adjoining border radii from attached elements.
 @mixin use-attachment-helper() {
     @if not module.module-presented("attachment-helper") {
         @include module.present-module("attachment-helper");

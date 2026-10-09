@@ -1,10 +1,11 @@
 @use "sass:map";
 @use "util";
 
-/// Returns text alignment values based on includes/excludes
+/// Returns text alignment values based on includes/excludes.
+///
 /// @param {List} $includes [null] - List of alignments to include
 /// @param {List} $excludes [null] - List of alignments to exclude
-/// @return {Map} Map of alignment names and values
+/// @return {Map<String, TextAlign>} Map of alignment names and values
 @function text-aligns($includes: null, $excludes: null) {
     $-aligns: (
         "left": left,

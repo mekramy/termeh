@@ -5,8 +5,9 @@
 @use "../animation";
 
 /// Applies margin styles to children, excluding the last child and elements with `.is-marginless`.
+///
 /// @content Margin styles to apply
-/// @param {List} $exclude - List of additional selectors to exclude
+/// @param {Arglist} $exclude - List of additional selectors to exclude
 @mixin marged($exclude...) {
     $skip: list.join(".is-marginless", $exclude, comma);
     &:not(:last-child, #{$skip}) {
@@ -15,8 +16,9 @@
 }
 
 /// Applies padding styles unless the element has `.is-paddingless`.
+///
 /// @content Padding styles to apply
-/// @param {List} $exclude - List of additional selectors to exclude
+/// @param {Arglist} $exclude - List of additional selectors to exclude
 @mixin padded($exclude...) {
     $skip: list.join(".is-paddingless", $exclude, comma);
     &:not(#{$skip}) {
@@ -25,8 +27,9 @@
 }
 
 /// Applies gap styles unless the element has `.is-gapless`.
+///
 /// @content Gap styles to apply
-/// @param {List} $exclude - List of additional selectors to exclude
+/// @param {Arglist} $exclude - List of additional selectors to exclude
 @mixin gapped($exclude...) {
     $skip: list.join(".is-gapless", $exclude, comma);
     &:not(#{$skip}) {
@@ -34,7 +37,7 @@
     }
 }
 
-/// Clearfix implementation using ::after pseudo-element
+/// Clearfix implementation using ::after pseudo-element.
 @mixin clearfix() {
     &::after {
         clear: both;
@@ -43,19 +46,19 @@
     }
 }
 
-/// Enables smooth scrolling on iOS devices
+/// Enables smooth scrolling on iOS devices.
 @mixin overflow-touch() {
     -webkit-overflow-scrolling: touch;
 }
 
-/// Disables pointer events and text selection
+/// Disables pointer events and text selection.
 @mixin locked() {
     cursor: default;
     user-select: none;
     pointer-events: none;
 }
 
-/// Disables text selection across browsers
+/// Disables text selection across browsers.
 @mixin unselectable() {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -64,7 +67,7 @@
     user-select: none;
 }
 
-/// Enables text selection across browsers
+/// Enables text selection across browsers.
 @mixin selectable() {
     -webkit-touch-callout: default;
     -webkit-user-select: text;
@@ -73,7 +76,7 @@
     user-select: text;
 }
 
-/// Resets form element styles to baseline
+/// Resets form element styles to baseline.
 @mixin reset() {
     -moz-appearance: none;
     -webkit-appearance: none;
@@ -93,7 +96,7 @@
     overflow: hidden;
 }
 
-/// Base control styles for form elements
+/// Base control styles for form elements and actions.
 @mixin control() {
     @include reset();
 
@@ -121,11 +124,12 @@
     }
 }
 
-/// Custom scrollbar styling
-/// @param {Number} $width - Scrollbar width
-/// @param {Color} $track - Track color
-/// @param {Color} $thumb - Thumb color
-/// @param {Color} $thumb-hover - Thumb hover color
+/// Custom scrollbar styling.
+///
+/// @param {Variable<Length> | Length} $width - Scrollbar width
+/// @param {Variable<Color> | Color} $track [null] - Track color
+/// @param {Variable<Color> | Color} $thumb [null] - Thumb color
+/// @param {Variable<Color> | Color} $thumb-hover [null] - Thumb hover color
 @mixin scrollbar($width, $track: null, $thumb: null, $thumb-hover: null) {
     &::-webkit-scrollbar {
         width: $width;
@@ -145,19 +149,21 @@
     }
 }
 
-/// Updates scrollbar thumb hover color
-/// @param {Color} $color - New hover color
+/// Updates scrollbar thumb hover color.
+///
+/// @param {Variable<Color> | Color} $color - New hover color
 @mixin scroll-color($color) {
     &::-webkit-scrollbar-thumb:hover {
         background: $color;
     }
 }
 
-/// Spinner base styles
-/// @param {Number} $size - Spinner diameter
-/// @param {Color} $color - Spinner color
-/// @param {Number} $width - Spinner stroke width
-@mixin spinner($size, $color, $width) {
+/// Spinner base styles.
+///
+/// @param {Variable<Length> | Length} $size - Spinner diameter
+/// @param {Variable<Color> | Color} $color - Spinner color
+/// @param {Variable<Length> | Length} $thickness - Spinner stroke thickness
+@mixin spinner($size, $color, $thickness) {
     text-rendering: optimizelegibility;
     display: block;
     position: absolute;
@@ -165,7 +171,7 @@
     content: " ";
     width: $size;
     height: $size;
-    border: $width solid $color;
+    border: $thickness solid $color;
     border-top-color: transparent;
     border-right-color: transparent;
     border-radius: 50%;
@@ -174,18 +180,20 @@
     @include animation.spin();
 }
 
-/// Updates spinner color
-/// @param {Color} $color - New spinner color
+/// Updates spinner color.
+///
+/// @param {Variable<Color> | Color} $color - New spinner color
 @mixin spinner-color($color) {
     border-left-color: $color;
     border-bottom-color: $color;
 }
 
-/// Centered loading spinner
-/// @param {Number} $size - Spinner diameter
-/// @param {Color} $color - Spinner color
-/// @param {Number} $width - Spinner stroke width
-@mixin loader($size, $color, $width) {
+/// Centered loading spinner.
+///
+/// @param {Variable<Length> | Length} $size - Spinner diameter
+/// @param {Variable<Color> | Color} $color - Spinner color
+/// @param {Variable<Length> | Length} $thickness - Spinner stroke thickness
+@mixin loader($size, $color, $thickness) {
     z-index: 0;
     position: relative;
 
@@ -194,22 +202,24 @@
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        @include spinner($size, $color, $width);
+        @include spinner($size, $color, $thickness);
     }
 }
 
-/// Updates loader spinner color
-/// @param {Color} $color - New spinner color
+/// Updates loader spinner color.
+///
+/// @param {Variable<Color> | Color} $color - New spinner color
 @mixin loader-color($color) {
     &::after {
         @include spinner-color($color);
     }
 }
 
-/// Overlay layer with optional backdrop filter
-/// @param {Color} $background - Overlay background color
-/// @param {Number} $opacity - Overlay background opacity
-/// @param {String} $filter - Backdrop filter value
+/// Overlay layer with optional backdrop filter.
+///
+/// @param {Variable<Color> | Color} $background - Overlay background color
+/// @param {Variable<Number> | Number} $opacity - Overlay background opacity
+/// @param {Variable<Filter> | Filter} $filter - Backdrop filter value
 @mixin overlay($background, $opacity, $filter) {
     z-index: 0;
     position: relative;
@@ -224,12 +234,12 @@
     }
 }
 
-/// LTR direction specific styles
-/// @content LTR-only styles
+/// LTR direction specific styles.
 ///
-/// @param {String} [ltr] var("base", "direction") - Global text and layout direction
+/// @content LTR-only styles
+/// @require {Direction} var("base", "direction") - Global text and layout direction
 @mixin is-ltr() {
-    @if var.var("base", "direction", "ltr") == "ltr" {
+    @if var.var("base", "direction") == "ltr" {
         @content;
     }
 
@@ -238,12 +248,12 @@
     }
 }
 
-/// RTL direction specific styles
-/// @content RTL-only styles
+/// RTL direction specific styles.
 ///
-/// @param {String} [ltr] var("base", "direction") - Global text and layout direction
+/// @content RTL-only styles
+/// @require {Direction} var("base", "direction") - Global text and layout direction
 @mixin is-rtl() {
-    @if var.var("base", "direction", "ltr") == "rtl" {
+    @if var.var("base", "direction") == "rtl" {
         @content;
     }
 
@@ -252,23 +262,25 @@
     }
 }
 
-/// Applies styles for invalid state
+/// Applies styles for invalid state.
+///
 /// @content Styles to apply when element is invalid or has is-failed class
 @mixin is-invalid() {
-    @at-root {
-        .field:invalid #{&},
-        .field.is-failed #{&} {
-            @content;
-        }
-    }
-
     &:invalid,
     &.is-failed {
         @content;
     }
+
+    @at-root {
+        :invalid #{&},
+        .is-failed #{&} {
+            @content;
+        }
+    }
 }
 
-/// Applies styles for disabled state
+/// Applies styles for disabled state.
+///
 /// @content Styles to apply when element is disabled or within disabled context
 @mixin is-disabled() {
     &:disabled,
@@ -284,8 +296,10 @@
     }
 }
 
-/// Applies styles for focused state
+/// Applies styles for focused state.
+///
 /// @content Styles to apply when element is focused
+/// @param {Arglist} $exclude - Additional selectors to exclude
 @mixin is-focused($exclude...) {
     $skip: list.join(".is-disabled", $exclude, comma);
     &:focus:not(:disabled, #{$skip}) {
@@ -299,59 +313,61 @@
     }
 }
 
-/// Returns standard control padding values
-/// @return {List} Padding values
+/// Returns standard control padding values.
 ///
-/// @param {Number} [0] var("control", "v-padding") - Global vertical padding for controls
-/// @param {Number} [1.2em] var("control", "h-padding") - Global horizontal padding for controls
+/// @return {Padding} Padding values
+/// @require {Variable<Length>} var("control", "v-padding") - Global vertical padding for controls
+/// @require {Variable<Length>} var("control", "h-padding") - Global horizontal padding for controls
 @function control-padding() {
-    @return var.var("control", "v-padding", 0em) var.var("control", "h-padding", 1.2em);
+    @return var.var("control", "v-padding") var.var("control", "h-padding");
 }
 
-/// Returns standard inline element padding values
-/// @return {List} Padding values
+/// Returns standard inline element padding values.
 ///
-/// @param {Number} [8px] var("gap", "micro") - Global gap for inline elements
+/// @return {Padding} Padding values
+/// @require {Variable<Length>} var("gap", "micro") - Global gap for inline elements
 @function inline-padding() {
-    $gap: var.var("gap", "micro", 8px);
+    $gap: var.var("gap", "micro");
     @return $gap util.double($gap);
 }
 
 /// Standard transition effect
-/// @param {String} $fields - Properties to transition
 ///
-/// @param {String} [ease] var("transition", "ease") - Global transition easing function
-/// @param {Number} [250ms] var("transition", "duration") - Global transition speed
+/// @param {List} $fields - Properties to transition
+/// @require {Variable<EasingFunction>} var("transition", "ease") - Global transition easing function
+/// @require {Variable<Duration>} var("transition", "duration") - Global transition speed
 @mixin transition($fields) {
     @if $fields != all {
         will-change: list.append($fields, (), "comma");
     }
+
     transition-property: list.append($fields, (), "comma");
-    transition-timing-function: var.var("transition", "ease", linear);
-    transition-duration: var.var("transition", "duration", 250ms);
+    transition-timing-function: var.var("transition", "ease");
+    transition-duration: var.var("transition", "duration");
 }
 
-/// Delayed transition effect
-/// @param {String} $fields - Properties to transition with a delay
+/// Delayed transition effect.
 ///
-/// @param {String} [ease] var("transition", "ease") - Global transition easing function
-/// @param {Number} [250ms] var("transition", "duration") - Global transition speed
-/// @param {Number} [100ms] var("transition", "delay") - Global transition delay
+/// @param {List} $fields - Properties to transition with a delay
+/// @require {Variable<EasingFunction>} var("transition", "ease") - Global transition easing function
+/// @require {Variable<Duration>} var("transition", "duration") - Global transition speed
+/// @require {Variable<Duration>} var("transition", "delay") - Global transition delay
 @mixin delayed-transition($fields) {
     @if $fields != all {
         will-change: list.append($fields, (), "comma");
     }
+
     transition-property: list.append($fields, (), "comma");
-    transition-timing-function: var.var("transition", "ease", linear);
-    transition-duration: var.var("transition", "duration", 250ms);
-    transition-delay: var.var("transition", "delay", 100ms);
+    transition-timing-function: var.var("transition", "ease");
+    transition-duration: var.var("transition", "duration");
+    transition-delay: var.var("transition", "delay");
 }
 
 /// Disabled state styling
 ///
-/// @param {Color} [null] var("input", "disabled-foreground") - Global disabled input text color
-/// @param {Color} [null] var("input", "disabled") - Global disabled input background color
-/// @param {Color} [null] var("input", "disabled-border") - Global disabled input border color
+/// @require {Variable<Color>} var("input", "disabled-foreground") - Global disabled input text color
+/// @require {Variable<Color>} var("input", "disabled") - Global disabled input background color
+/// @require {Variable<Color>} var("input", "disabled-border") - Global disabled input border color
 @mixin disabled() {
     opacity: 0.65;
     user-select: none;
@@ -364,7 +380,7 @@
 /// Text selection styling
 /// @param {String} $name - Color palette name
 ///
-/// @throws If the specified color palette name does not exist
+/// @throw If the specified color palette name does not exist
 @mixin selection($name) {
     $name: util.string-of($name, "selection", "name");
 
@@ -375,17 +391,18 @@
     }
 }
 
-/// Scrollable container with themed scrollbar
+/// Scrollable container with themed scrollbar.
+///
 /// @param {Color} $color - Scrollbar thumb hover color
 ///
-/// @param {Number} [1rem] var("scroll", "size") - Global scrollbar thickness
-/// @param {Color} [var("base", "section")] var("scroll", "track") - Global scrollbar track background
-/// @param {Color} [var("base", "separator")] var("scroll", "thumb") - Global scrollbar thumb color
+/// @require {Variable<Length>} var("scroll", "size") - Global scrollbar thickness
+/// @require {Variable<Color>} var("scroll", "track") [var("base", "section")] - Scrollbar track color
+/// @require {Variable<Color>} var("scroll", "thumb") [var("base", "separator")] - Scrollbar thumb color
 @mixin scrollable($color) {
     @include scrollbar(
-        var.var("scroll", "size", 1rem),
-        var.var("scroll", "track", var.var("base", "section", null)),
-        var.var("scroll", "thumb", var.var("base", "separator", null)),
+        var.var("scroll", "size"),
+        var.var("scroll", "track", var.var("base", "section")),
+        var.var("scroll", "thumb", var.var("base", "separator")),
         $color
     );
 }

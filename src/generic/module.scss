@@ -9,9 +9,10 @@
 @use "reset";
 @use "table";
 
-/// Applies all base styles including reset, base, headings, images, and tables
-/// @param {List} $image-sizes [null] - Image size variants to include
-/// @param {List} $table-colors [null] - Table color variants to include
+/// Applies reset, base, heading, image, and table styles.
+///
+/// @param {List} $image-sizes [null] - Image size names to include; `null` includes all registered sizes
+/// @param {List} $table-colors [null] - Table color names to include; `null` includes all registered colors
 @mixin use-generic($image-sizes: null, $table-colors: null) {
     @include reset.mini-reset();
     @include base.use-base();

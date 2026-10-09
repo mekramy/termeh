@@ -1,7 +1,8 @@
 @use "../core/module";
 
-/// Generates padder element styles with configurable padding
-/// @param {List} $gaps [()] - List of registered gap names to include. Pass null to include all registered gaps
+/// Generates padding styles from registered gap values.
+///
+/// @param {List} $gaps [()] - Registered gap names to include; `null` includes all registered gaps
 @mixin use-padder($gaps: ()) {
     @if not module.module-presented("padder") {
         @include module.present-module("padder");

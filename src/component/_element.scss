@@ -1,15 +1,13 @@
 @use "../core/module";
 
-/// Generates base element wrapper styles with configurable colors and sizes.
+/// Generates base styles for inline element wrappers.
 ///
-/// @param {Number} var("gap", "micro") - Spacing between items and after non-final icons
-///
-/// @param {Number} var("small", "size") - Text size for s, del, sub, sup, and small
-/// @param {Font Weight} var("small", "weight") - Text weight for s, del, sub, sup, and small
-/// @param {Font Weight} var("strong", "weight") - Text weight for b and strong
-///
-/// @param {Font Weight} var("control", "weight") - Base text weight; small and strong use their own
-/// @param {Number} var("control", "height") - Line height for the element and its text
+/// @require {Variable<Length>} var("gap", "micro") - Spacing between items and after non-final icons
+/// @require {Variable<Length>} var("small", "size") - Text size for `s`, `del`, `sub`, `sup`, and `small`
+/// @require {Variable<FontWeight>} var("small", "weight") - Text weight for `s`, `del`, `sub`, `sup`, and `small`
+/// @require {Variable<FontWeight>} var("strong", "weight") - Text weight for `b` and `strong`
+/// @require {Variable<FontWeight>} var("control", "weight") - Base text weight
+/// @require {Variable<Length>} var("control", "height") - Line height for the element and its text
 @mixin use-element() {
     @if not module.module-presented("element") {
         @include module.present-module("element");

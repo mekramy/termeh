@@ -1,22 +1,20 @@
 @use "../core/module";
 @use "./element";
 
-/// Generates header element styles with configurable colors and gaps.
+/// Generates header styles with configurable color and gap variants.
 ///
-/// @param {List} $colors - Colors for header variants; `null` includes all registered colors
-/// @param {List} $gaps - Gaps for header variants; `null` includes all registered gaps
+/// @param {List} $colors [()] - Color names for header variants; `null` includes all registered colors
+/// @param {List} $gaps [()] - Gap names for header variants; `null` includes all registered gaps
 ///
-/// @param {Color} color("shade") - Decorator color @throw
-/// @param {Color} variant("shade", "mute") - Secondary header color
-///
-/// @param {Font Weight} var("control", "weight") - Secondary header text weight
-/// @param {Font Weight} var("strong", "weight") - Primary header text weight
-/// @param {Number} var("control", "meta-size") - Secondary header text size
-/// @param {Font Weight} var("control", "meta-weight") - Secondary header text weight
-///
-/// @param {Number} var("decorator", "size") - Decorator thickness
-/// @param {Number} var("gap", "macro") - Header gap and bottom margin
-/// @param {Number} var("line-height", "normal") - Header line height
+/// @require {Variable<Color>} color("shade") - Decorator color @throw on missing
+/// @require {Variable<Color>} variant("shade", "mute") - Secondary header color
+/// @require {Variable<FontWeight>} var("control", "weight") - Secondary header text weight
+/// @require {Variable<FontWeight>} var("strong", "weight") - Primary header text weight
+/// @require {Variable<Length>} var("control", "meta-size") - Secondary header text size
+/// @require {Variable<FontWeight>} var("control", "meta-weight") - Secondary header text weight
+/// @require {Variable<Length>} var("decorator", "size") - Decorator thickness
+/// @require {Variable<Length>} var("gap", "macro") - Header gap and bottom margin
+/// @require {Variable<Length>} var("line-height", "normal") - Header line height
 @mixin use-header($colors: (), $gaps: ()) {
     @if not module.module-presented("header") {
         @include element.use-element();
@@ -62,11 +60,11 @@
                     h5,
                     h6 {
                         @extend .element;
-                        margin-bottom: 0;
 
                         display: flex;
                         justify-content: flex-start;
                         font-size: 1em;
+                        margin-bottom: 0;
                         line-height: $line-normal;
 
                         .filler {

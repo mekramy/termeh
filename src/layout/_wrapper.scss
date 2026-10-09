@@ -1,14 +1,15 @@
 @use "../core/module";
 
-/// Generates wrapper element styles with configurable gaps
-/// @param {List} $gaps [()] - List of registered gap names to include. Pass null to include all registered gaps
+/// Generates wrapper styles with configurable gap variants.
 ///
-/// @param {Number} [8px] var("gap", "micro") - default spacing between wrapper items
+/// @param {List} $gaps [()] - Registered gap names to include; `null` includes all registered gaps
+///
+/// @require {Variable<Length>} var("gap", "micro") - Default spacing between wrapper items
 @mixin use-wrapper($gaps: ()) {
     @if not module.module-presented("wrapper") {
         @include module.present-module("wrapper");
 
-        $gap-micro: module.var("gap", "micro", 8px);
+        $gap-micro: module.var("gap", "micro");
 
         @at-root {
             .wrapper {

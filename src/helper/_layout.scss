@@ -1,8 +1,8 @@
 @use "../core/module";
 
-/// Layout utility classes for common layout operations
+/// Generates layout utility classes.
 ///
-/// @termeh {Color} [error] - color("primary") -> accent color for scrollbars
+/// @require {Variable<Color>} color("primary") - Scrollbar accent color @throw on missing
 @mixin use-layout-helper() {
     @if not module.module-presented("layout-helper") {
         @include module.present-module("layout-helper");

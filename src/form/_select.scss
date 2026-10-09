@@ -2,52 +2,52 @@
 @use "../core/module";
 
 /// Generates select input styles with configurable colors.
-/// @param {List} $colors [()] - Registered color names for which to generate modifier styles. Pass null to include all registered colors.
 ///
-/// @param {Color} [error] color("error") - Border color when the select is invalid and not focused or open.
-/// @param {Color} [primary] color("primary") - Default accent color for the focused or open select.
-/// @param {Color} [null] variant("primary", "foreground") - Text and picker-icon color while the select is focused or open.
-/// @param {Color} [null] variant("primary", "readable") - Text and checkmark color of the selected option.
-/// @param {Color} [null] variant("shade", "mute") - Fallback color for the placeholder and picker icon.
-/// @param {Color} [#eee] var("base", "separator") - Fallback border color when no input border color is configured.
-/// @param {Color} [null] var("base", "section") - Background color on enabled options while hovered.
+/// @param {List} $colors [()] - Color names for select modifier styles; `null` includes all registered colors
 ///
-/// @param {Number} [null] var("radius", "normal") - Border radius of the select control.
-/// @param {Number} [8px] var("gap", "micro") - Gap between contents inside an option.
-/// @param {Font Weight} [bold] var("strong", "weight") - Font weight of the selected option.
-///
-/// @param {Number} [2.8em] var("input", "height") - Height of the select control.
-/// @param {Color} [FALLBACK] var("input", "border") - Select border color; falls back to the base separator color.
-/// @param {Color} [white] var("input", "background") - Select background color.
-/// @param {Color} [null] var("input", "disabled-foreground") - Text color of disabled options.
-///
-/// @param {Color} [FALLBACK] var("input", "placeholder") - Placeholder and picker-icon color; falls back to the muted shade variant.
-/// @param {Number} [0.85em] var("control", "placeholder-size") - Placeholder font size.
-/// @param {Number} [600] var("control", "placeholder-weight") - Placeholder font weight.
+/// @require {Variable<Color>} color("error") - Invalid-state border color @throw on missing
+/// @require {Variable<Color>} color("primary") - Focused and open select accent color @throw on missing
+/// @require {Variable<Color>} variant("primary", "foreground") - Focused text and picker-icon color
+/// @require {Variable<Color>} variant("primary", "readable") - Selected option text and checkmark color
+/// @require {Variable<Color>} var("base", "section") - Hovered option background color
+/// @require {Variable<Length>} var("gap", "micro")  - Gap between contents in an option
+/// @require {Variable<Length>} var("radius", "normal") - Select control border radius
+/// @require {Variable<FontWeight>} var("strong", "weight") - Selected option font weight
+/// @require {Variable<Length>} var("input", "height") - Select control height
+/// @require {Variable<Color>} var("input", "border") [var("base", "separator")] - Select border color
+/// @require {Variable<Color>} var("input", "background") - Select background color
+/// @require {Variable<Color>} var("input", "disabled-foreground") - Disabled option text color
+/// @require {Variable<Color>} var("input", "placeholder") [variant("shade", "mute")] - Placeholder and picker-icon color
+/// @require {Variable<Length>} var("control", "placeholder-size") - Placeholder font size
+/// @require {Variable<FontWeight>} var("control", "placeholder-weight") - Placeholder font weight
 @mixin use-select($colors: ()) {
     @if not module.module-presented("form-select") {
         @include module.present-module("form-select");
+
+        /** Fallbacks */
+        $-separator: module.var("base", "separator");
+        $-shade-mute: module.variant("shade", "mute");
+
+        /** --------- */
 
         $error: module.color("error");
         $primary: module.color("primary");
         $primary-foreground: module.variant("primary", "foreground");
         $primary-readable: module.variant("primary", "readable");
-        $shade-mute: module.variant("shade", "mute");
-        $separator: module.var("base", "separator", #eee);
         $section: module.var("base", "section");
 
+        $gap-micro: module.var("gap", "micro");
         $radius-normal: module.var("radius", "normal");
-        $gap-micro: module.var("gap", "micro", 8px);
-        $strong-weight: module.var("strong", "weight", bold);
+        $strong-weight: module.var("strong", "weight");
 
-        $height: module.var("input", "height", 2.8em);
-        $border: module.var("input", "border", $separator);
-        $background: module.var("input", "background", white);
+        $height: module.var("input", "height");
+        $border: module.var("input", "border", $-separator);
+        $background: module.var("input", "background");
         $disabled-foreground: module.var("input", "disabled-foreground");
 
-        $placeholder: module.var("input", "placeholder", $shade-mute);
-        $placeholder-size: module.var("control", "placeholder-size", 0.85em);
-        $placeholder-weight: module.var("control", "placeholder-weight", 600);
+        $placeholder: module.var("input", "placeholder", $-shade-mute);
+        $placeholder-size: module.var("control", "placeholder-size");
+        $placeholder-weight: module.var("control", "placeholder-weight");
 
         @at-root {
             @include animation.shake();

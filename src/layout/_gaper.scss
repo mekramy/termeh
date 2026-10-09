@@ -1,16 +1,17 @@
 @use "../core/module";
 
-/// Generates gaper element styles with configurable gaps and alignments
-/// @param {List} $gaps [()] - List of registered gap names to include. Pass null to include all registered gaps
+/// Generates gaper styles with configurable gap, alignment, and justification variants.
 ///
-/// @param {Color} [null] var("base", "separator") - default background color for divider
-/// @param {Number} [8px] var("gap", "micro") - default gap between gaper items
+/// @param {List} $gaps [()] - Registered gap names to include; `null` includes all registered gaps
+///
+/// @require {Variable<Color>} var("base", "separator") - Divider background color
+/// @require {Variable<Length>} var("gap", "micro") - Default spacing between items
 @mixin use-gaper($gaps: ()) {
     @if not module.module-presented("gaper") {
         @include module.present-module("gaper");
 
         $separator: module.var("base", "separator");
-        $gap-micro: module.var("gap", "micro", 8px);
+        $gap-micro: module.var("gap", "micro");
 
         @at-root {
             .gaper {

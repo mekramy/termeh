@@ -1,17 +1,16 @@
 @use "../core/module";
 @use "./element";
 
-/// Generates link element styles with configurable colors and sizes.
+/// Generates link styles with configurable color and size variants.
 ///
-/// @param {List} $colors - Colors for link variants; `null` includes all registered colors
-/// @param {List} $sizes - Sizes for link variants; `null` includes all registered sizes
+/// @param {List} $colors [()] - Color names for link variants; `null` includes all registered colors
+/// @param {List} $sizes [()] - Size names for link variants; `null` includes all registered sizes
 ///
-/// @param {Color} var("base", "foreground") - Link text color
-/// @param {Number} var("decorator", "size") - Loading spinner thickness
-///
-/// @param {Number} var("control", "height") - Link height
-/// @param {Number} var("control", "meta-size") - Link text size
-/// @param {Font Weight} var("control", "meta-weight") - Link text weight
+/// @require {Variable<Color>} var("base", "foreground") - Link text color
+/// @require {Variable<Length>} var("decorator", "size") - Loading spinner thickness
+/// @require {Variable<Length>} var("control", "height") - Link height
+/// @require {Variable<Length>} var("control", "meta-size") - Link text size
+/// @require {Variable<FontWeight>} var("control", "meta-weight") - Link text weight
 @mixin use-link($colors: (), $sizes: ()) {
     @if not module.module-presented("link") {
         @include element.use-element();

@@ -1,14 +1,14 @@
 @use "../core/module";
 
-/// Generates icon container element styles with configurable colors and sizes.
+/// Generates icon container styles with configurable color and size variants.
 ///
-/// @param {List} $colors - Colors for icon variants; `null` includes all registered colors
-/// @param {List} $sizes - Sizes for icon variants; `null` includes all registered sizes
+/// @param {List} $colors [()] - Color names for icon variants; `null` includes all registered colors
+/// @param {List} $sizes [()] - Size names for icon variants; `null` includes all registered sizes
 ///
-/// @param {Color} $shade color("shade") - Loading spinner color
-/// @param {Color} $shade-mute variant("shade", "mute") - Action icon color
-/// @param {Color} $shade-readable variant("shade", "readable") - Action hover color
-/// @param {Number} $decorator var("decorator", "size") - Loading spinner thickness
+/// @require {Variable<Color>} color("shade") - Loading spinner color @throw on missing
+/// @require {Variable<Color>} variant("shade", "mute") - Action icon color
+/// @require {Variable<Color>} variant("shade", "readable") - Action hover color
+/// @require {Variable<Length>} var("decorator", "size") - Loading spinner thickness
 @mixin use-icon($colors: (), $sizes: ()) {
     @if not module.module-presented("icon") {
         @include module.present-module("icon");
