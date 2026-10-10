@@ -5,7 +5,9 @@ import Preview from "../components/Preview.vue";
 import "@catppuccin/vitepress/theme/mocha/teal.css";
 import "virtual:group-icons.css";
 import "./block.scss";
+import "./definition.scss";
 import "./quote.scss";
+import "./scheme.scss";
 import "./style.scss";
 
 export default {

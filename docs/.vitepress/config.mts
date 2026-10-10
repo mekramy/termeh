@@ -10,8 +10,8 @@ import {
 import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
 import { fallbacks } from "./fallbacks";
 
+import Block from "./block";
 import Definition from "./definition";
-import Dependencies from "./dependencies";
 import ErrorBlock from "./error";
 import Scheme from "./scheme";
 import Sidebar from "./sidebar";
@@ -56,7 +56,7 @@ export default defineConfig({
             md.use(container, "error", ErrorBlock);
             md.use(container, "scheme", Scheme);
             md.use(container, "definition", Definition);
-            md.use(container, "dependencies", Dependencies);
+            md.use(container, "block", Block);
         },
     },
     vite: {

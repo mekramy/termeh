@@ -106,3 +106,11 @@
     box-sizing: border-box;
     padding: 8px;
 }
+
+:root {
+    @include termeh.variables();
+}
+
+html.is-dark {
+    @include termeh.variables("dark");
+}

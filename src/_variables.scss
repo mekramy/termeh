@@ -58,8 +58,8 @@
 @include module.define("small", "foreground", null); // Small text foreground
 
 // Strong text
-@include module.define("strong", "foreground", null); // Strong text foreground
 @include module.define("strong", "weight", bold); // Strong text weight
+@include module.define("strong", "foreground", null); // Strong text foreground
 
 // Decorated text
 @include module.define("decorated", "weight", normal); // Decorated text weight
