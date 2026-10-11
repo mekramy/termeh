@@ -1,4 +1,6 @@
 @use "sass:map";
+@use "sass:list";
+@use "sass:meta";
 @use "sass:color";
 @use "contrast";
 @use "palette";
@@ -8,6 +10,7 @@
 
 $-colors: () !default;
 $-overrides: () !default;
+$-resolvers: () !default;
 
 /// Generates a color variant for a base color.
 ///
@@ -22,29 +25,40 @@ $-overrides: () !default;
     }
 
     $tone: contrast.tone($base);
+    $isLight: $tone == "light";
+
+    // Apply custom resolvers
+    @each $resolver in $-resolvers {
+        $result: meta.call($resolver, $isLight, $base, $color, $variant);
+        @if $result {
+            @return $result;
+        }
+    }
+
+    // Default resolver
     @if $variant == "active" {
-        $v: util.ternary($tone == "light", "700", "300");
+        $v: util.ternary($isLight, "700", "300");
         @return palette.palette($color, $v);
     } @else if $variant == "light" {
-        $v: util.ternary($tone == "light", "800", "200");
+        $v: util.ternary($isLight, "800", "200");
         @return color.mix($base, palette.palette($color, $v), 85%);
     } @else if $variant == "light-active" {
-        $v: util.ternary($tone == "light", "800", "200");
+        $v: util.ternary($isLight, "800", "200");
         @return color.mix($base, palette.palette($color, $v), 70%);
     } @else if $variant == "mute" {
-        $v: util.ternary($tone == "light", "900", "100");
+        $v: util.ternary($isLight, "900", "100");
         @return color.mix($base, palette.palette($color, $v), 50%);
     } @else if $variant == "mute-active" {
-        $v: util.ternary($tone == "light", "900", "100");
+        $v: util.ternary($isLight, "900", "100");
         @return color.mix($base, palette.palette($color, $v), 5%);
     } @else if $variant == "readable" {
-        $v: util.ternary($tone == "light", "700", "200");
+        $v: util.ternary($isLight, "700", "200");
         @return color.mix($base, palette.palette($color, $v), 10%);
     } @else if $variant == "foreground" {
-        $v: util.ternary($tone == "light", "900", "100");
+        $v: util.ternary($isLight, "900", "100");
         @return color.mix($base, palette.palette($color, $v), 95%);
     } @else if $variant == "decorator" {
-        $v: util.ternary($tone == "light", "800", "200");
+        $v: util.ternary($isLight, "800", "200");
         @return color.mix($base, palette.palette($color, $v), 40%);
     }
 
@@ -86,6 +100,16 @@ $-overrides: () !default;
 
     $-overrides: map.set($-overrides, $name, $variants) !global;
     $-ignore: scm.define-scheme($scheme);
+}
+
+/// Registers a new color variant resolver.
+///
+/// @param {Function<(isLight, base, color, variant)>} $resolver - The resolver function to register
+/// @throw If the resolver is not a valid function
+@mixin define-resolver($resolver) {
+    $name: util.function-of($resolver, "define-resolver", "resolver");
+
+    $-resolvers: list.append($-resolvers, $resolver) !global;
 }
 
 /// Defines a color variant.

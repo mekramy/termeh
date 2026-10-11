@@ -44,16 +44,14 @@ $-schemes: () !default;
 @function define-variable($name, $value, $scheme: null) {
     $name: util.string-of($name, "define-variable", "name");
 
-    @if not $value {
-        @return null;
+    @if $value {
+        $name: util.tokenize($name);
+        $scheme: -resolve-scheme($scheme);
+
+        $schemes: util.alter($-tokens, $name, ());
+        $schemes: map.set($schemes, $scheme, $value);
+        $-tokens: map.set($-tokens, $name, $schemes) !global;
     }
-
-    $name: util.tokenize($name);
-    $scheme: -resolve-scheme($scheme);
-
-    $schemes: util.alter($-tokens, $name, ());
-    $schemes: map.set($schemes, $scheme, $value);
-    $-tokens: map.set($-tokens, $name, $schemes) !global;
 
     @return null;
 }
@@ -68,10 +66,10 @@ $-schemes: () !default;
     $name: util.string-of($name, "variable", "name");
 
     $name: util.tokenize($name);
-    @if not $fallback {
-        @return var($name);
+    @if $fallback {
+        @return var($name, $fallback);
     }
-    @return var($name, $fallback);
+    @return var($name);
 }
 
 /// Outputs CSS variables associated with a color scheme.
@@ -80,6 +78,9 @@ $-schemes: () !default;
 @mixin variables($scheme: null) {
     $scheme: -resolve-scheme($scheme);
     @each $name, $schemes in $-tokens {
-        #{$name}: map.get($schemes, $scheme);
+        $value: map.get($schemes, $scheme);
+        @if $value {
+            #{$name}: $value;
+        }
     }
 }
