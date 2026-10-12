@@ -333,31 +333,33 @@
 
 /// Standard transition effect
 ///
-/// @param {List} $fields - Properties to transition
+/// @param {Arglist} $fields - Properties to transition
 /// @require {Variable<EasingFunction>} var("transition", "ease") - Global transition easing function
 /// @require {Variable<Duration>} var("transition", "duration") - Global transition speed
-@mixin transition($fields) {
-    @if $fields != all {
-        will-change: list.append($fields, (), "comma");
+@mixin transition($fields...) {
+    $fields: list.append($fields, (), "comma");
+    @if not list.index($fields, all) {
+        will-change: $fields;
     }
 
-    transition-property: list.append($fields, (), "comma");
+    transition-property: $fields;
     transition-timing-function: var.var("transition", "ease");
     transition-duration: var.var("transition", "duration");
 }
 
 /// Delayed transition effect.
 ///
-/// @param {List} $fields - Properties to transition with a delay
+/// @param {Arglist} $fields - Properties to transition with a delay
 /// @require {Variable<EasingFunction>} var("transition", "ease") - Global transition easing function
 /// @require {Variable<Duration>} var("transition", "duration") - Global transition speed
 /// @require {Variable<Duration>} var("transition", "delay") - Global transition delay
-@mixin delayed-transition($fields) {
-    @if $fields != all {
-        will-change: list.append($fields, (), "comma");
+@mixin delayed-transition($fields...) {
+    $fields: list.append($fields, (), "comma");
+    @if not list.index($fields, all) {
+        will-change: $fields;
     }
 
-    transition-property: list.append($fields, (), "comma");
+    transition-property: $fields;
     transition-timing-function: var.var("transition", "ease");
     transition-duration: var.var("transition", "duration");
     transition-delay: var.var("transition", "delay");

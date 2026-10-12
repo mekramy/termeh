@@ -25,11 +25,11 @@ $-resolvers: () !default;
     }
 
     $tone: contrast.tone($base);
-    $isLight: $tone == "light";
+    $is-light: $tone == "light";
 
     // Apply custom resolvers
     @each $resolver in $-resolvers {
-        $result: meta.call($resolver, $isLight, $base, $color, $variant);
+        $result: meta.call($resolver, $is-light, $base, $color, $variant);
         @if $result {
             @return $result;
         }
@@ -37,28 +37,28 @@ $-resolvers: () !default;
 
     // Default resolver
     @if $variant == "active" {
-        $v: util.ternary($isLight, "700", "300");
+        $v: util.ternary($is-light, "700", "300");
         @return palette.palette($color, $v);
     } @else if $variant == "light" {
-        $v: util.ternary($isLight, "800", "200");
+        $v: util.ternary($is-light, "800", "200");
         @return color.mix($base, palette.palette($color, $v), 85%);
     } @else if $variant == "light-active" {
-        $v: util.ternary($isLight, "800", "200");
+        $v: util.ternary($is-light, "800", "200");
         @return color.mix($base, palette.palette($color, $v), 70%);
     } @else if $variant == "mute" {
-        $v: util.ternary($isLight, "900", "100");
+        $v: util.ternary($is-light, "900", "100");
         @return color.mix($base, palette.palette($color, $v), 50%);
     } @else if $variant == "mute-active" {
-        $v: util.ternary($isLight, "900", "100");
+        $v: util.ternary($is-light, "900", "100");
         @return color.mix($base, palette.palette($color, $v), 5%);
     } @else if $variant == "readable" {
-        $v: util.ternary($isLight, "700", "200");
+        $v: util.ternary($is-light, "700", "200");
         @return color.mix($base, palette.palette($color, $v), 10%);
     } @else if $variant == "foreground" {
-        $v: util.ternary($isLight, "900", "100");
+        $v: util.ternary($is-light, "900", "100");
         @return color.mix($base, palette.palette($color, $v), 95%);
     } @else if $variant == "decorator" {
-        $v: util.ternary($isLight, "800", "200");
+        $v: util.ternary($is-light, "800", "200");
         @return color.mix($base, palette.palette($color, $v), 40%);
     }
 

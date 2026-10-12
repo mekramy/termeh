@@ -48,7 +48,7 @@
 
 /// Returns the negated value of a number.
 ///
-/// @param {Variable<Number> | Number} $value - Input number to negate
+/// @param {Variable<Length> | Length} $value - Input number to negate
 /// @return {Calculation} Negated value
 @function negate($value) {
     @return calc(-1 * #{$value});
@@ -56,7 +56,7 @@
 
 /// Returns half of a number.
 ///
-/// @param {Variable<Number> | Number} $value - Input number to halve
+/// @param {Variable<Length> | Length} $value - Input number to halve
 /// @return {Calculation} Half of input value
 @function half($value) {
     @return calc(#{$value} / 2);
@@ -64,7 +64,7 @@
 
 /// Returns double of a number.
 ///
-/// @param {Variable<Number> | Number} $value - Input number to double
+/// @param {Variable<Length> | Length} $value - Input number to double
 /// @return {Calculation} Double of input value
 @function double($value) {
     @return calc(#{$value} * 2);
@@ -72,8 +72,8 @@
 
 /// Calculates the border radius for a child element based on parent radius and padding.
 ///
-/// @param {Variable<Number> | Number} $parent-radius - The border radius of the parent element
-/// @param {Variable<Number> | Number} $padding - The padding between parent and child elements
+/// @param {Variable<Length> | Length} $parent-radius - The border radius of the parent element
+/// @param {Variable<Length> | Length} $padding - The padding between parent and child elements
 /// @return {Calculation} Calculated child border radius
 @function child-radius($parent-radius, $padding) {
     @return calc($parent-radius - $padding);
@@ -116,16 +116,15 @@
 
 /// Generates a nested CSS `var()` fallback chain.
 ///
-/// @param {List} $vars - List of CSS variables
+/// @param {Arglist} $vars - List of CSS variables
 /// @return {Variable<Mixed>} CSS fallback chain
-/// @throw If the input is not a list
-@function fallback-vars($vars) {
-    $vars: list-of($vars, "fallback-vars", "vars");
+@function fallback-vars($vars...) {
+    $vars: list.join((), $vars, comma);
 
     $result: list.nth($vars, list.length($vars));
     @for $i from list.length($vars) - 1 through 1 {
         @if list.nth($vars, $i) {
-            $result: var(list.nth($vars, $i), $result);
+            $result: var(string.unquote(list.nth($vars, $i)), $result);
         }
     }
     @return $result;
@@ -142,8 +141,8 @@
 
 /// Generates a standard translucent box shadow.
 ///
-/// @param {Number} $x - Horizontal offset
-/// @param {Number} $y - Vertical offset
+/// @param {Length} $x - Horizontal offset
+/// @param {Length} $y - Vertical offset
 /// @param {Color} $color - Shadow base color
 /// @return {BoxShadow} Box shadow value
 /// @throw If the input x or y is not a number or if the input color is not a color
@@ -160,8 +159,8 @@
 
 /// Generates a soft, diffused box shadow.
 ///
-/// @param {Number} $x - Horizontal offset
-/// @param {Number} $y - Vertical offset
+/// @param {Length} $x - Horizontal offset
+/// @param {Length} $y - Vertical offset
 /// @param {Color} $color - Shadow base color
 /// @return {BoxShadow} Box shadow value
 /// @throw If the input x or y is not a number or if the input color is not a color
@@ -178,7 +177,7 @@
 
 /// Generates a flat box shadow.
 ///
-/// @param {Number} $size - Blur radius
+/// @param {Length} $size - Blur radius
 /// @param {Color} $color - Shadow base color
 /// @return {BoxShadow} Box shadow value
 /// @throw If the input size is not a number or if the input color is not a color
