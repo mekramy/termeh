@@ -13,6 +13,7 @@ import { fallbacks } from "./fallbacks";
 import Block from "./block";
 import Definition from "./definition";
 import ErrorBlock from "./error";
+import Resolver from "./resolver";
 import Scheme from "./scheme";
 import Sidebar from "./sidebar";
 
@@ -57,6 +58,7 @@ export default defineConfig({
             md.use(container, "scheme", Scheme);
             md.use(container, "definition", Definition);
             md.use(container, "block", Block);
+            md.use(container, "resolver", Resolver);
         },
     },
     vite: {
