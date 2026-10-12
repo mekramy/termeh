@@ -211,7 +211,7 @@
 /// @param {*} $value - Invalid value
 /// @param {String} $func - Function name
 /// @param {String} $param - Parameter name
-/// @param {String} $expected - Expected type
+/// @param {*} $expected - Expected type
 /// @return {String} Error message
 @function throw-error($value, $func, $param, $expected) {
     $kind: meta.type-of($value);

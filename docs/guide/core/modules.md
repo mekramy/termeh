@@ -1,30 +1,26 @@
-# Module Presented And Duplicated Check
+# Module Registration and Duplicate Checks
 
-Termeh provides utilities to manage custom modules. It allows you to check if a required module is loaded and throws an If not. You can also register modules as loaded and check if a module has been presented.
+Termeh provides utilities for managing custom modules. Use them to check whether required modules are available, register modules as loaded, and avoid defining a module more than once.
 
 ## Present Module
 
-Registers a module as available.
-
-::: error
-**throws** If the input is not a string.
-:::
+Registers a module as available so other module checks can recognize it.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@mixin present-module($module: STRING);
+@mixin present-module($module: String);
 ```
 
 **Example:**
 
 ```scss
 @include use-toast() {
-  // Skip define if module already defined
+  // Define the module only if it has not already been registered
   @if not termeh.module-presented("toast") {
-    // Register module to ignore duplicate call
+    // Register the module to prevent duplicate definitions
     @include termeh.present-module("toast");
 
     @at-root {
@@ -38,20 +34,20 @@ Registers a module as available.
 
 :::
 
+::: error
+**throw** If the input is not a string.
+:::
+
 ## Required Module Check
 
-Validates that required modules are present. Throws an If any required module is missing.
-
-::: error
-**throws** If either input is not a valid string or if the required module is not present.
-:::
+Checks that a required module is available. Throws an error if the required module has not been registered.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@mixin require($module: STRING, $requirement: STRING);
+@mixin require($module: String, $requirement: String);
 ```
 
 **Example:**
@@ -74,20 +70,20 @@ Validates that required modules are present. Throws an If any required module is
 
 :::
 
+::: error
+**throw** If either input is not a valid string, or if the required module is not present.
+:::
+
 ## Module Presented Check
 
-Checks whether a module has been registered.
-
-::: error
-**throws** If the input is not a valid string.
-:::
+Checks whether a module has been registered as available.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function module-presented($module: STRING): BOOLEAN;
+@function module-presented($module: String): Boolean;
 ```
 
 **Example:**
@@ -104,4 +100,8 @@ Checks whether a module has been registered.
 }
 ```
 
+:::
+
+::: error
+**throw** If the input is not a valid string.
 :::

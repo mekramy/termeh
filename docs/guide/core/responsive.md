@@ -1,10 +1,10 @@
 # Responsive Design
 
-Termeh provides utilities for managing responsive breakpoints, allowing you to apply styles conditionally based on device width. You can retrieve specific breakpoint values, get all defined breakpoints, or wrap your CSS in media queries using the provided mixins. A collection of functions and mixins is also available to efficiently handle responsive design, targeting specific devices, ranges, or interaction types (touch vs non-touch) with predefined media queries.
+Termeh makes responsive design easy. Use its helpers to apply styles based on device width, look up breakpoint values, or wrap your CSS in ready-made media queries. You can target specific devices, size ranges, or interaction types (such as touch vs. non-touch) without writing media queries by hand.
 
 ## Device Size Mixins
 
-Each mixin wraps content in a media query targeting specific device ranges.
+Each mixin wraps your styles in a media query for a device size or size range.
 
 ::: definition
 
@@ -52,7 +52,7 @@ Each mixin wraps content in a media query targeting specific device ranges.
 
 ### Touch Device Interaction
 
-Applies styles for devices without hover (touch devices).
+Applies styles on devices that can't hover, such as touch screens.
 
 ::: definition
 
@@ -76,7 +76,7 @@ Applies styles for devices without hover (touch devices).
 
 ### Non-Touch Device Interaction
 
-Applies styles for devices that support hover (non-touch devices).
+Applies styles on devices that support hover, such as desktops with a mouse.
 
 ::: definition
 
@@ -100,7 +100,7 @@ Applies styles for devices that support hover (non-touch devices).
 
 ### Fine Pointer Device Interaction
 
-Applies styles for devices with a fine pointer (mouse, stylus).
+Applies styles on devices with a precise pointer, such as a mouse or stylus.
 
 ::: definition
 
@@ -124,7 +124,7 @@ Applies styles for devices with a fine pointer (mouse, stylus).
 
 ### Coarse Pointer Device Interaction
 
-Applies styles for devices with a coarse pointer (touch).
+Applies styles on devices with an imprecise pointer, such as a finger on a touch screen.
 
 ::: definition
 
@@ -150,7 +150,7 @@ Applies styles for devices with a coarse pointer (touch).
 
 ### Retina Display
 
-Applies styles for high-resolution (retina) displays.
+Applies styles on high-resolution (retina) displays.
 
 ::: definition
 
@@ -174,7 +174,7 @@ Applies styles for high-resolution (retina) displays.
 
 ### Portrait Orientation
 
-Applies styles for portrait device orientation.
+Applies styles when the device is in portrait orientation.
 
 ::: definition
 
@@ -198,7 +198,7 @@ Applies styles for portrait device orientation.
 
 ### Landscape Orientation
 
-Applies styles for landscape device orientation.
+Applies styles when the device is in landscape orientation.
 
 ::: definition
 
@@ -224,7 +224,7 @@ Applies styles for landscape device orientation.
 
 ### Prefers HDR
 
-Applies styles the device supports high dynamic range (HDR).
+Applies styles when the device supports high dynamic range (HDR).
 
 ::: definition
 
@@ -322,7 +322,7 @@ Applies styles when the user prefers reduced motion.
 
 ### Prefers More Contrast
 
-Applies styles when the user prefers more contrast.
+Applies styles when the user asks for higher contrast.
 
 ::: definition
 
@@ -346,7 +346,7 @@ Applies styles when the user prefers more contrast.
 
 ### Prefers Less Contrast
 
-Applies styles when the user prefers less contrast.
+Applies styles when the user asks for lower contrast.
 
 ::: definition
 
@@ -372,7 +372,7 @@ Applies styles when the user prefers less contrast.
 
 ### Print Media
 
-Applies styles for print media.
+Applies styles when the page is printed.
 
 ::: definition
 
@@ -396,7 +396,7 @@ Applies styles for print media.
 
 ### Non-Print Media
 
-Applies styles for non-print media (e.g., screen).
+Applies styles everywhere except print, such as on screen.
 
 ::: definition
 
@@ -420,11 +420,7 @@ Applies styles for non-print media (e.g., screen).
 
 ## From
 
-Applies styles at and above a breakpoint.
-
-::: error
-**throws** If the input is not a string or if the breakpoint is not found.
-:::
+Applies styles from the given breakpoint and up.
 
 ::: definition
 
@@ -446,13 +442,13 @@ Applies styles at and above a breakpoint.
 
 :::
 
+::: error
+**throw** If the input is not a string or if the breakpoint is not found.
+:::
+
 ## Until
 
-Applies styles below a breakpoint.
-
-::: error
-**throws** If the input is not a string or if the breakpoint is not found.
-:::
+Applies styles only below the given breakpoint.
 
 ::: definition
 
@@ -474,20 +470,20 @@ Applies styles below a breakpoint.
 
 :::
 
+::: error
+**throw** If the input is not a string or if the breakpoint is not found.
+:::
+
 ## Media Query
 
-Returns the media query string for the specified name.
-
-::: error
-**throws** If the input is not a string or if the query is not found.
-:::
+Returns the media query string for a given name.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function media-query($name: STRING): STRING;
+@function media-query($name: String): String;
 ```
 
 **Example:**
@@ -499,7 +495,11 @@ $tablet-query: termeh.media-query("tablet"); // "screen and (min-width: 769px)"
 
 :::
 
-::: dependencies Available Queries
+::: error
+**throw** If the input is not a string or if the query is not found.
+:::
+
+::: block Available Queries
 
 | Key                  | Value                                                    |
 |----------------------|----------------------------------------------------------|
@@ -519,15 +519,14 @@ $tablet-query: termeh.media-query("tablet"); // "screen and (min-width: 769px)"
 
 ## Media Queries
 
-Gets a filtered map of media queries, returning both names and values, for iteration.
+Returns a map of media queries (names and values) that you can loop over. Use `$includes` and `$excludes` to filter the result.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function media-queries($includes: LIST = null, $excludes: LIST = null):
-    MAP<STRING, STRING>;
+@function media-queries($includes: List = null, $excludes: List = null): Map<String, String>;
 ```
 
 **Example:**
@@ -548,18 +547,14 @@ Gets a filtered map of media queries, returning both names and values, for itera
 
 ## Breakpoint
 
-Gets the numeric value of a specific breakpoint.
-
-::: error
-**throws** If the input is not a string or if the breakpoint is not found.
-:::
+Returns the numeric value of a single breakpoint.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function breakpoint($device: STRING): NUMBER;
+@function breakpoint($name: String): Number;
 ```
 
 **Example:**
@@ -571,27 +566,31 @@ $desktop: termeh.breakpoint("desktop"); // 1024px
 
 :::
 
-::: dependencies Available Devices
+::: error
+**throw** If the input is not a string or if the breakpoint is not found.
+:::
+
+::: block Available Devices
 
 | Key            | Value    |
 |----------------|----------|
-| **tablet**     | _769px_  |
-| **desktop**    | _1024px_ |
-| **widescreen** | _1216px_ |
-| **fullhd**     | _1408px_ |
+| **tablet**     | `769px`  |
+| **desktop**    | `1024px` |
+| **widescreen** | `1216px` |
+| **fullhd**     | `1408px` |
 
 :::
 
 ## Breakpoints
 
-Returns a map of all breakpoints with their names and values for iteration.
+Returns a map of all breakpoint names and values, handy for looping.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function breakpoints(): MAP<STRING, NUMBER>;
+@function breakpoints(): Map<String, Number>;
 ```
 
 **Example:**

@@ -1,25 +1,21 @@
 # Global Variables
 
-Termeh provides a centralized system for defining and retrieving component-specific variables. This allows for scoped, reusable, and easily maintainable styling across your project.
+Termeh gives you one place to define and retrieve component-specific variables. This keeps styles scoped, reusable, and easy to maintain across your project.
 
 ::: scheme
-Variables are scheme-based, meaning they can have different values depending on the active color scheme.
+Variables can have different values for each color scheme, so your components can adapt to the active scheme.
 :::
 
 ## Define
 
-Defines a component-scoped variable.
-
-::: error
-**throws** If the component name or property name is not a string.
-:::
+Defines a variable scoped to a component.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@mixin define($Component: STRING, $Property: STRING, $Value: ANY);
+@mixin define($com: String, $prop: String, $value: Mixed);
 ```
 
 **Example:**
@@ -31,20 +27,20 @@ Defines a component-scoped variable.
 
 :::
 
+::: error
+**throw** If the component name or property name is not a string.
+:::
+
 ## Override
 
-Overrides a component variable for a specific color scheme.
-
-::: error
-**throws** If the scheme name, component name, or property name is not a string.
-:::
+Sets a component variable to a different value for a specific color scheme.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@mixin override($Scheme: STRING, $Com: STRING, $Prop: STRING, $Value: ANY);
+@mixin override($scheme: String, $com: String, $prop: String, $value: Mixed);
 ```
 
 **Example:**
@@ -52,81 +48,86 @@ Overrides a component variable for a specific color scheme.
 ```scss
 @include termeh.override("dark", "base", "background", #222);
 @include termeh.override("dark", "base", "foreground", white);
+@include termeh.override("dark", "button", "border-radius", 10px);
 ```
 
 :::
 
+::: error
+**throw** If the scheme name, component name, or property name is not a string.
+:::
+
 ## Value
 
-Returns the value of a component-scoped variable. Returns a _fallback_ value if the variable is _not set_ or _null_.
-
-::: error
-**throws** If the component name or property name is not a string.
-:::
+Returns the value of a component variable. If the variable is not set or its value is `null` or `false`, returns the _fallback_ instead.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function value($Component: STRING, $Property: STRING, $Fallback: ANY = null);
+@function value($com: String, $prop: String, $fallback: Mixed = null): Mixed;
 ```
 
 **Example:**
 
 ```scss
-$radius: termeh.value("radius", "normal", null);
+$radius: termeh.value("button", "border-radius");
 $padding: termeh.value("card", "padding", 8px);
 ```
 
 :::
 
+::: error
+**throw** If the component name or property name is not a string.
+:::
+
 ## Scheme Value
 
-Returns the value of a component variable for a specific color scheme. Returns a _fallback_ value if the variable is _not set_ or _null_.
-
-::: error
-**throws** If the scheme name, component name, or property name is not a string.
-:::
+Returns the value of a component variable for a specific color scheme. If the override is not set or its value is `null` or `false`, returns the _fallback_ instead; it does not fall back to the main value.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function scheme-value($Scheme: STRING, $Com: STRING, $Prop: STRING, $Fallback: ANY = null);
+@function scheme-value($scheme: String, $com: String, $prop: String, $fallback: Mixed = null): Mixed;
 ```
 
 **Example:**
 
 ```scss
-$radius: termeh.scheme-value("dark", "radius", "normal", 0);
+$radius: termeh.scheme-value("dark", "button", "border-radius", 0);
 $background: termeh.scheme-value("dark", "base", "background", #222);
 ```
 
 :::
 
+::: error
+**throw** If the scheme name, component name, or property name is not a string.
+:::
+
 ## Var
 
-Returns the CSS variable reference for a component property.
-
-::: error
-**throws** If the component name or property name is not a string.
-:::
+Returns a CSS custom property reference for a component property.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function var($Component: STRING, $Property: STRING, $Fallback: ANY = null): ANY;
+@function var($com: String, $prop: String, $fallback: Mixed = null): Variable;
 ```
 
 **Example:**
 
 ```scss
-$radius: termeh.var("radius", "normal", 4px);
+$radius: termeh.var("button", "border-radius", 4px);
 $padding: termeh.var("card", "padding", 8px);
 ```
 
+:::
+
+::: error
+**throw** If the component name or property name is not a string.
 :::

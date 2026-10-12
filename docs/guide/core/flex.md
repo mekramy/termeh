@@ -11,8 +11,8 @@ Gets a filtered map of flex aligns, returning both names and values, for iterati
 **Signature:**
 
 ```scss
-@function flex-aligns($includes: LIST = null, $excludes: LIST = null):
-    MAP<STRING, FLEX-ALIGN>;
+@function flex-aligns($includes: List = null, $excludes: List = null):
+  Map<String, FlexAlign>;
 ```
 
 **Example:**
@@ -21,9 +21,9 @@ Gets a filtered map of flex aligns, returning both names and values, for iterati
 .my-grid {
   display: flex;
 
-  @each $name, $align in termeh.flex-aligns(null, ("stretch")) {
+  @each $name, $align in termeh.flex-aligns(null, ("baseline")) {
     &.is-#{$name}-aligned {
-      flex-align: $align;
+      align-items: $align;
     }
   }
 }
@@ -31,16 +31,15 @@ Gets a filtered map of flex aligns, returning both names and values, for iterati
 
 :::
 
-::: dependencies Available Aligns
+::: block Available Aligns
 
 | Key               | Value           |
 |-------------------|-----------------|
-| **flex-start**    | _flex-start_    |
-| **flex-end**      | _flex-end_      |
-| **center**        | _center_        |
-| **space-between** | _space-between_ |
-| **space-around**  | _space-around_  |
-| **space-evenly**  | _space-evenly_  |
+| **stretch**       | `stretch`       |
+| **flex-start**    | `flex-start`    |
+| **flex-end**      | `flex-end`      |
+| **center**        | `center`        |
+| **baseline**      | `baseline`      |
 
 :::
 
@@ -53,8 +52,8 @@ Gets a filtered map of flex justifies, returning both names and values, for iter
 **Signature:**
 
 ```scss
-@function flex-justifies($includes: LIST = null, $excludes: LIST = null):
-    MAP<STRING, FLEX-ALIGN>;
+@function flex-justifies($includes: List = null, $excludes: List = null):
+  Map<String, FlexJustify>;
 ```
 
 **Example:**
@@ -63,7 +62,7 @@ Gets a filtered map of flex justifies, returning both names and values, for iter
 .my-grid {
   display: flex;
 
-  @each $name, $justify in termeh.flex-justifies(null, ("stretch")) {
+  @each $name, $justify in termeh.flex-justifies(null, ("space-around")) {
     &.is-#{$name}-justified {
       justify-content: $justify;
     }
@@ -73,15 +72,15 @@ Gets a filtered map of flex justifies, returning both names and values, for iter
 
 :::
 
-::: dependencies Available Justifies
+::: block Available Justifies
 
 | Key               | Value           |
 |-------------------|-----------------|
-| **flex-start**    | _flex-start_    |
-| **flex-end**      | _flex-end_      |
-| **center**        | _center_        |
-| **space-between** | _space-between_ |
-| **space-around**  | _space-around_  |
-| **space-evenly**  | _space-evenly_  |
+| **flex-start**    | `flex-start`    |
+| **flex-end**      | `flex-end`      |
+| **center**        | `center`        |
+| **space-between** | `space-between` |
+| **space-around**  | `space-around`  |
+| **space-evenly**  | `space-evenly`  |
 
 :::

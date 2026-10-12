@@ -1,14 +1,14 @@
 # Color Schemes
 
-Termeh provides a centralized system for exporting CSS variables associated with color schemes. When a Termeh module is used, its required variables and variants are registered automatically. Only registered values are emitted, so unused module variables and variants are not added as CSS variables.
+Termeh provides a central way to export CSS variables for color schemes. Using a Termeh module automatically registers the variables and variants it needs. Only registered values are emitted, so unused module variables and variants are left out.
 
 ::: scheme
-By default, Termeh automatically registers the variables and colors used by its modules. Their getter functions return CSS variable references, so components use the generated custom properties and can respond to color scheme changes automatically. When a value needs special processing or custom registration, use the helper functions in this module to define and resolve it explicitly.
+Termeh automatically registers the variables and colors used by its modules. Their getter functions return CSS variable references, so components use the generated custom properties and respond to scheme changes automatically. For values that need special processing or custom registration, use this module's helpers to define and resolve them explicitly.
 :::
 
 ## Recommended Usage
 
-Call `variables()` after all Termeh modules have been used. It should be the last module-related call so every registered value is resolved before the CSS variables are emitted. Call it without an argument for shared variables and pass a scheme name inside a selector for scheme-specific variables.
+Call `variables()` after using all Termeh modules. Make it the last module-related call so every registered value is resolved before CSS variables are emitted. Call it without an argument to export shared variables, or pass a scheme name inside a selector to export variables for that scheme.
 
 ```scss
 @include termeh.use-button();
@@ -23,7 +23,7 @@ Call `variables()` after all Termeh modules have been used. It should be the las
 }
 ```
 
-The variable registration and resolution helpers are optional and are useful for special cases.
+The variable registration and resolution helpers are optional. Use them when you need to handle a special case explicitly.
 
 ```scss
 $_: termeh.define-variable("bottom-nav-gap", 4rem);
@@ -36,14 +36,14 @@ $_: termeh.define-variable("bottom-nav-gap", 3rem, "compact");
 
 ## Schemes
 
-Returns the list of registered schemes.
+Returns the names of the registered schemes.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function schemes(): LIST;
+@function schemes(): List;
 ```
 
 **Example:**
@@ -56,18 +56,14 @@ $available-schemes: termeh.schemes(); // schemes registered by component overrid
 
 ## Define Variable
 
-Registers a CSS variable with a value and optionally associates it with a color scheme. Variables without a scheme are exported by `variables()` without an argument. Variables associated with a scheme are exported by `variables($scheme)` for that scheme.
-
-::: error
-**throws** If the input name is not a string.
-:::
+Registers a CSS variable and its value, optionally associating it with a color scheme. Variables without a scheme are exported by `variables()` with no argument. Scheme-specific variables are exported by `variables($scheme)` for the matching scheme.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function define-variable($name: STRING, $value: ANY, $scheme: STRING = null);
+@function define-variable($name: String, $value: Mixed, $scheme: String = null);
 ```
 
 **Example:**
@@ -79,20 +75,20 @@ $_: termeh.define-variable("navbar-height", #8ec5ed, "dark");
 
 :::
 
+::: error
+**throw** If the input name is not a string.
+:::
+
 ## Variable
 
-Returns a CSS `var()` reference for a variable. This optional helper is useful when a component needs to resolve a scheme variable with a fallback value.
-
-::: error
-**throws** If the input name is not a string.
-:::
+Returns a CSS `var()` reference to a variable. This optional helper is useful when a component needs a fallback value for a scheme variable.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function variable($name: STRING, $fallback: ANY): ANY;
+@function variable($name: String, $fallback: Mixed): Mixed;
 ```
 
 **Example:**
@@ -105,16 +101,20 @@ Returns a CSS `var()` reference for a variable. This optional helper is useful w
 
 :::
 
+::: error
+**throw** If the input name is not a string.
+:::
+
 ## Variables
 
-Exports registered variables for a color scheme as CSS custom properties in the current selector. With no argument, it exports variables that are not associated with a scheme. With a scheme name, it exports variables associated with that scheme.
+Exports registered variables as CSS custom properties in the current selector. With no argument, it exports variables that are not associated with a scheme. Pass a scheme name to export variables associated with that scheme.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@mixin variables($scheme: STRING = null);
+@mixin variables($scheme: String = null);
 ```
 
 **Example:**

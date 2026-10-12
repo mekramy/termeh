@@ -33,30 +33,31 @@
         table-layout: auto;
 
         td.is-fallback {
+            opacity: 0.85;
             background: var(--vp-c-bg);
-            background: var(--vp-c-bg-soft);
             font-family: var(--vp-font-family-mono);
 
             ins {
+                margin-right: 1em;
                 font-size: 0.65rem;
-                color: var(--ctp-latte-flamingo);
+                font-weight: 700;
+                letter-spacing: 1px;
+                opacity: 0.5;
+                color: var(--vp-c-text-1);
             }
 
             code {
-                display: block;
+                display: inline-block;
                 padding: 0;
-                padding-left: 2em;
-                font-weight: 600;
                 line-height: 2;
                 white-space: nowrap;
-                color: var(--vp-c-black);
+                font-weight: 600;
                 background: transparent;
 
                 &:before {
                     content: "→";
-                    opacity: 0.5;
-                    margin-right: 1em;
-                    color: var(--ctp-latte-flamingo);
+                    margin-right: 0.5em;
+                    color: var(--vp-c-text-1);
                 }
             }
         }

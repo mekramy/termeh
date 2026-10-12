@@ -1,25 +1,21 @@
 # Text
 
-Termeh provides utilities to define and retrieve text sizes and styles for UI components.
+Use Termeh's text utilities to define and retrieve text sizes and styles for your UI components.
 
 ::: scheme
-Text sizes are scheme-based, meaning they can have different values depending on the active color scheme.
+Text sizes can vary by color scheme, so you can tailor them to the active scheme.
 :::
 
 ## Define Text Size
 
-Register a new text size.
-
-::: error
-**throws** If the input name is not a string or if the input size is not a number.
-:::
+Add a named text size for use throughout your styles.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@mixin define-size($name: STRING, $size: NUMBER);
+@mixin define-size($name: String, $size: Length);
 ```
 
 **Example:**
@@ -32,20 +28,20 @@ Register a new text size.
 
 :::
 
+::: error
+**throw** If the name is not a string or the size is not numeric.
+:::
+
 ## Override Size
 
-Overrides an existing size for a specific scheme.
-
-::: error
-**throws** If the input scheme or name is not a string, if the input size is not a number, or if the size is not defined in main scheme.
-:::
+Set a different value for an existing size in a specific scheme.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@mixin override-size($scheme: STRING, $name: STRING, $size: NUMBER);
+@mixin override-size($scheme: String, $name: String, $size: Length);
 ```
 
 **Example:**
@@ -56,20 +52,20 @@ Overrides an existing size for a specific scheme.
 
 :::
 
+::: error
+**throw** If the scheme or name is not a string, the size is not numeric, or the size is not defined in the main scheme.
+:::
+
 ## Size Value
 
-Gets the value of a size by name.
-
-::: error
-**throws** If the input name is not a string or if the size is not found.
-:::
+Get the value registered for a size name.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function size-value($name: STRING): NUMBER;
+@function size-value($name: String): Length;
 ```
 
 **Example:**
@@ -81,20 +77,20 @@ $large-size: termeh.size-value("large"); // 24px
 
 :::
 
+::: error
+**throw** If the name is not a string or no matching size is found.
+:::
+
 ## Scheme Size
 
-Gets the value of a size for a specific scheme. This function will return main scheme size as fallback.
-
-::: error
-**throws** If the input scheme or name is not a string, or if the size is not defined in the main scheme.
-:::
+Get a size value for a specific scheme. If that scheme has no override, the main scheme value is returned.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function scheme-size($scheme: STRING, $name: STRING): NUMBER;
+@function scheme-size($scheme: String, $name: String): Length;
 ```
 
 **Example:**
@@ -105,20 +101,20 @@ $small-dark: termeh.scheme-size("dark", "small"); // 14px
 
 :::
 
+::: error
+**throw** If the scheme or name is not a string, or the size is not defined in the main scheme.
+:::
+
 ## Text Size
 
-Returns the CSS variable reference for a size by its name.
-
-::: error
-**throws** If the input name is not a string or if the size is not found.
-:::
+Get the CSS variable reference for a named size.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function size($name: STRING): VAR();
+@function size($name: String): Variable;
 ```
 
 **Example:**
@@ -130,16 +126,20 @@ $large-text: termeh.size("large"); // var(--termeh-size-large, 24px)
 
 :::
 
+::: error
+**throw** If the name is not a string or no matching size is found.
+:::
+
 ## Text Sizes
 
-Gets a filtered map of text sizes, returning both names and CSS variable reference, for iteration.
+Get a filtered map of text sizes, with each name paired with its CSS variable reference, ready to iterate over.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function sizes($includes: LIST = null, $excludes: LIST = null): MAP<STRING, VAR()>;
+@function sizes($includes: List = null, $excludes: List = null): MAP<String, Variable>;
 ```
 
 **Example:**
@@ -158,15 +158,15 @@ Gets a filtered map of text sizes, returning both names and CSS variable referen
 
 ## Text Aligns
 
-Gets a filtered map of text aligns, returning both names and values, for iteration.
+Get a filtered map of text alignments, with each name paired with its value, ready to iterate over.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function text-aligns($includes: LIST = null, $excludes: LIST = null):
-    MAP<STRING, STRING>;
+@function text-aligns($includes: String = null, $excludes: String = null):
+    MAP<String, TextAlign>;
 ```
 
 **Example:**
@@ -183,9 +183,9 @@ span {
 
 :::
 
-::: dependencies Available Text Aligns
+::: block Available Text Aligns
 
-| Key         | Value            |
+| Key         | Description      |
 |-------------|------------------|
 | **left**    | _left aligned_   |
 | **right**   | _right aligned_  |
@@ -194,20 +194,16 @@ span {
 
 :::
 
-## Font Weight
+## FontWeight
 
-Gets the numeric font-weight value by its name or generates an _error_ if the weight is invalid.
-
-::: error
-**throws** If the input name is not a string or if the font weight is not found.
-:::
+Get the numeric font-weight value for a name. An _error_ is raised if the name is not a supported weight.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function weight($name: STRING): NUMBER;
+@function weight($name: String): FontWeight;
 ```
 
 **Example:**
@@ -219,30 +215,34 @@ $light: termeh.weight("light"); // 300
 
 :::
 
-::: dependencies Available Weights
+::: block Available Weights
 
 | Key          | Value |
 |--------------|-------|
-| **lighter**  | _100_ |
-| **light**    | _300_ |
-| **normal**   | _400_ |
-| **medium**   | _500_ |
-| **semibold** | _600_ |
-| **bold**     | _700_ |
-| **bolder**   | _900_ |
+| **lighter**  | `100` |
+| **light**    | `300` |
+| **normal**   | `400` |
+| **medium**   | `500` |
+| **semibold** | `600` |
+| **bold**     | `700` |
+| **bolder**   | `900` |
 
+:::
+
+::: error
+**throw** If the name is not a string or no matching font weight is found.
 :::
 
 ## Font Weights
 
-Gets a filtered map of font weights, returning both names and values, for iteration.
+Get a filtered map of font weights, with each name paired with its numeric value, ready to iterate over.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function weights($includes: LIST = null, $excludes: LIST = null): MAP<STRING, NUMBER>;
+@function weights($includes: List = null, $excludes: List = null): MAP<String, FontWeight>;
 ```
 
 **Example:**

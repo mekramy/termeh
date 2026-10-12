@@ -245,10 +245,10 @@ Customizes scrollbar width, track, thumb, and hover thumb color (WebKit).
 
 ```scss
 @mixin scrollbar(
-  $width: NUMBER,
-  $track: COLOR = null,
-  $thumb: COLOR = null,
-  $thumb-hover: COLOR = null
+  $width: Length,
+  $track: Color = null,
+  $thumb: Color = null,
+  $thumb-hover: Color = null
 );
 ```
 
@@ -271,7 +271,7 @@ Updates only the scrollbar thumb hover color.
 **Signature:**
 
 ```scss
-@mixin scroll-color($color: COLOR);
+@mixin scroll-color($color: Color);
 ```
 
 **Example:**
@@ -295,7 +295,7 @@ Base spinner element (intended for pseudo-elements).
 **Signature:**
 
 ```scss
-@mixin spinner($size: NUMBER, $color: COLOR, $width: NUMBER);
+@mixin spinner($size: Length, $color: Color, $thickness: Length);
 ```
 
 **Example:**
@@ -319,7 +319,7 @@ Updates the spinner’s visible stroke color.
 **Signature:**
 
 ```scss
-@mixin spinner-color($color: COLOR);
+@mixin spinner-color($color: Color);
 ```
 
 **Example:**
@@ -345,7 +345,7 @@ Centered loading spinner via `::after`.
 **Signature:**
 
 ```scss
-@mixin loader($size: NUMBER, $color: COLOR, $width: NUMBER);
+@mixin loader($size: Length, $color: Color, $thickness: Length);
 ```
 
 **Example:**
@@ -369,7 +369,7 @@ Updates the loader’s spinner color.
 **Signature:**
 
 ```scss
-@mixin loader-color($color: COLOR);
+@mixin loader-color($color: Color);
 ```
 
 **Example:**
@@ -388,14 +388,14 @@ Updates the loader’s spinner color.
 
 ## Overlay
 
-Creates a full-cover overlay via `::before`, with optional backdrop-filter.
+Creates a full-cover overlay via `::before` and applies a backdrop filter.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@mixin overlay($background: COLOR, $opacity: NUMBER, $filter: CSS-FILTER);
+@mixin overlay($background: Color, $opacity: Number, $filter: Filter);
 ```
 
 **Example:**
@@ -433,13 +433,13 @@ LTR-only styles. Applies styles when the global direction is _left-to-right_, or
 
 :::
 
-::: dependencies
+::: block Dependencies
 
 Global direction detected from the following Termeh global `var()`:
 
-| Component | Variable      | Type         | Default |
-|-----------|---------------|--------------|---------|
-| **base**  | **direction** | _ltr \| rtl_ | `ltr`   |
+| Component | Variable      | Type         |
+|-----------|---------------|--------------|
+| **base**  | **direction** | _ltr \| rtl_ |
 
 :::
 
@@ -468,19 +468,19 @@ RTL-only styles. Applies styles when the global direction is _right-to-left_, or
 
 :::
 
-::: dependencies
+::: block Dependencies
 
 Global direction detected from the following Termeh global `var()`:
 
-| Component | Variable      | Type         | Default |
-|-----------|---------------|--------------|---------|
-| **base**  | **direction** | _ltr \| rtl_ | `ltr`   |
+| Component | Variable      | Type         |
+|-----------|---------------|--------------|
+| **base**  | **direction** | _ltr \| rtl_ |
 
 :::
 
 ## Is-Invalid
 
-Styles for invalid state (works for elements and within `.field` containers).
+Styles for the `:invalid` state or `.is-failed` class, on the element itself or within a parent.
 
 ::: definition
 
@@ -559,7 +559,7 @@ Returns the standard control padding as a shorthand list.
 **Signature:**
 
 ```scss
-@function control-padding(): LIST;
+@function control-padding(): Padding;
 ```
 
 **Example:**
@@ -572,14 +572,14 @@ Returns the standard control padding as a shorthand list.
 
 :::
 
-::: dependencies
+::: block Dependencies
 
 Control padding is calculated from the following Termeh global `var()`:
 
-| Component   | Variable      | Type     | Default |
-|-------------|---------------|----------|---------|
-| **control** | **v-padding** | _NUMBER_ | `0`     |
-| **control** | **h-padding** | _NUMBER_ | `1.2em` |
+| Component   | Variable      | Type     |
+|-------------|---------------|----------|
+| **control** | **v-padding** | _Length_ |
+| **control** | **h-padding** | _Length_ |
 
 :::
 
@@ -592,7 +592,7 @@ Returns the standard inline element padding as a shorthand list.
 **Signature:**
 
 ```scss
-@function inline-padding(): LIST;
+@function inline-padding(): Padding;
 ```
 
 **Example:**
@@ -605,13 +605,13 @@ Returns the standard inline element padding as a shorthand list.
 
 :::
 
-::: dependencies
+::: block Dependencies
 
 Inline padding is calculated from the following Termeh global `var()`:
 
-| Component | Variable  | Type     | Default |
-|-----------|-----------|----------|---------|
-| **gap**   | **micro** | _NUMBER_ | `8px`   |
+| Component | Variable  | Type     |
+|-----------|-----------|----------|
+| **gap**   | **micro** | _Length_ |
 
 :::
 
@@ -624,27 +624,27 @@ Applies a standard transition using theme duration and easing.
 **Signature:**
 
 ```scss
-@mixin transition($fields: LIST);
+@mixin transition($fields...);
 ```
 
 **Example:**
 
 ```scss
 .button {
-  @include termeh.transition((background-color color));
+  @include termeh.transition(all);
 }
 ```
 
 :::
 
-::: dependencies
+::: block Dependencies
 
 UI transitions are calculated from the following Termeh global `var()`:
 
-| Component      | Variable     | Type       | Default |
-|----------------|--------------|------------|---------|
-| **transition** | **ease**     | _easing_   | `ease`  |
-| **transition** | **duration** | _duration_ | `250ms` |
+| Component      | Variable     | Type              |
+|----------------|--------------|-------------------|
+| **transition** | **ease**     | _Easing Function_ |
+| **transition** | **duration** | _Duration_        |
 
 :::
 
@@ -657,28 +657,28 @@ Applies a standard transition with a delay using theme duration, easing, and del
 **Signature:**
 
 ```scss
-@mixin delayed-transition($fields: LIST);
+@mixin delayed-transition($fields...);
 ```
 
 **Example:**
 
 ```scss
 .button {
-  @include termeh.delayed-transition((background-color color));
+  @include termeh.delayed-transition(color, background-color);
 }
 ```
 
 :::
 
-::: dependencies
+::: block Dependencies
 
 UI delayed transitions are calculated from the following Termeh global `var()`:
 
-| Component      | Variable     | Type       | Default |
-|----------------|--------------|------------|---------|
-| **transition** | **ease**     | _easing_   | `ease`  |
-| **transition** | **duration** | _duration_ | `250ms` |
-| **transition** | **delay**    | _duration_ | `100ms` |
+| Component      | Variable     | Type              |
+|----------------|--------------|-------------------|
+| **transition** | **ease**     | _Easing Function_ |
+| **transition** | **duration** | _Duration_        |
+| **transition** | **delay**    | _Duration_        |
 
 :::
 
@@ -705,15 +705,15 @@ Applies disabled theming to form controls (colors and borders).
 
 :::
 
-::: dependencies
+::: block Dependencies
 
 The disabled style is derived from the following Termeh global `var()`:
 
-| Component | Variable                | Type    | Default |
-|-----------|-------------------------|---------|---------|
-| **input** | **disabled**            | _color_ | `null`  |
-| **input** | **disabled-foreground** | _color_ | `null`  |
-| **input** | **disabled-border**     | _color_ | `null`  |
+| Component | Variable                | Type    |
+|-----------|-------------------------|---------|
+| **input** | **disabled**            | _Color_ |
+| **input** | **disabled-foreground** | _Color_ |
+| **input** | **disabled-border**     | _Color_ |
 
 :::
 
@@ -721,16 +721,12 @@ The disabled style is derived from the following Termeh global `var()`:
 
 Styles selection color pair based on a palette name (foreground & background).
 
-::: error
-**throws**  If the specified color palette name does not exist.
-:::
-
 ::: definition
 
 **Signature:**
 
 ```scss
-@mixin selection($name: STRING);
+@mixin selection($name: String);
 ```
 
 **Example:**
@@ -744,16 +740,20 @@ p,
 
 :::
 
+::: error
+**throw**  If the specified color palette name does not exist.
+:::
+
 ## Scrollable
 
-Provides a scrollable style with a themed scrollbar, where only the hover thumb color is applied directly.
+Adds a themed scrollbar to a scrollable area. The thumb color changes on hover.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@mixin scrollable($color: COLOR);
+@mixin scrollable($color: Color);
 ```
 
 **Example:**
@@ -766,14 +766,16 @@ Provides a scrollable style with a themed scrollbar, where only the hover thumb 
 
 :::
 
-::: dependencies
+::: block Dependencies
 
-The scrollbar style is derived from the following Termeh global `var()`:
+The scrollbar uses the following Termeh global `var()` values:
 
-| Component  | Variable  | Type     | Default |
-|------------|-----------|----------|---------|
-| **scroll** | **size**  | _NUMBER_ | `1rem`  |
-| **scroll** | **track** | _color_  | `null`  |
-| **scroll** | **thumb** | _color_  | `null`  |
+| Component                     | Variable  | Type     |
+|-------------------------------|-----------|----------|
+| **scroll**                    | **size**  | _Length_ |
+| **scroll**                    | **track** | _Color_  |
+| ++ `var("base", "section")`   |           |          |
+| **scroll**                    | **thumb** | _Color_  |
+| ++ `var("base", "separator")` |           |          |
 
 :::

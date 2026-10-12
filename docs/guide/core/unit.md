@@ -1,21 +1,17 @@
 # Grid Units
 
-Termeh provides utilities to define and retrieve grid size units. These units can represent fractional widths, full widths, or any custom unit for layouts and components.
+Use Termeh's grid unit utilities to define and retrieve reusable sizes for layouts and components. A unit can represent a fractional width, a full width, or any custom value.
 
 ## Define Unit
 
-Register a new grid unit.
-
-::: error
-**throws** If the input name is not a string or if the input unit is not a number.
-:::
+Register a named grid unit so you can reuse its value in your styles.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@mixin define-unit($name: STRING, $unit: NUMBER);
+@mixin define-unit($name: String, $unit: Length);
 ```
 
 **Example:**
@@ -28,20 +24,20 @@ Register a new grid unit.
 
 :::
 
+::: error
+**throw** If the name is not a string or the unit value is not a number.
+:::
+
 ## Unit
 
-Gets a unit value by its name or generates an _error_ if the unit is not defined.
-
-::: error
-**throws** If the input name is not a string or if the unit is not found.
-:::
+Look up a unit by name. If the unit is not defined, this function generates an _error_.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function unit($name: STRING): NUMBER;
+@function unit($name: String): Length;
 ```
 
 **Example:**
@@ -53,16 +49,20 @@ $full: termeh.unit("full"); // 100%
 
 :::
 
+::: error
+**throw** If the name is not a string or no unit with that name is defined.
+:::
+
 ## Units
 
-Gets a filtered map of units, returning both names and values, for iteration.
+Get a filtered map of units with their names and values. Use it to iterate over selected units in your styles.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function units($includes: LIST = null, $excludes: LIST = null): MAP<STRING, NUMBER>;
+@function units($includes: List = null, $excludes: List = null): MAP<String, Length>;
 ```
 
 **Example:**

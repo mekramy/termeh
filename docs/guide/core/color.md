@@ -1,25 +1,21 @@
 # Color Management
 
-The color system provides a consistent way to define, manage, and retrieve colors and their variants across the design system. It supports base palettes, custom variants, and automatically generated variants based on theme contrast.
+Use the color system to define and retrieve colors consistently across your design system. It supports base palettes, custom variants, and variants generated automatically to suit the active theme’s contrast.
 
 ::: scheme
-Colors are scheme-based, meaning they can have different values depending on the active color scheme.
+Colors can have different values in each scheme, so they adapt to the active color scheme.
 :::
 
 ## Define Palette
 
-Register a new base color in the palette.
-
-::: error
-**throws** If the input name is not a string or the input color is not a valid color.
-:::
+Add a base color to the palette.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@mixin define-palette($name: STRING, $color: COLOR);
+@mixin define-palette($name: String, $color: Color);
 ```
 
 **Example:**
@@ -31,20 +27,20 @@ Register a new base color in the palette.
 
 :::
 
+::: error
+**throw** If the name is not a string or the color is invalid.
+:::
+
 ## Override Palette
 
-Overrides a palette color for a specific scheme.
-
-::: error
-**throws** If the scheme or name is not a string, the color is invalid, or the color is not defined in the main scheme.
-:::
+Set a palette color to a different value in a specific scheme.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@mixin override-palette($scheme: STRING, $name: STRING, $color: COLOR);
+@mixin override-palette($scheme: String, $name: String, $color: Color);
 ```
 
 **Example:**
@@ -56,20 +52,75 @@ Overrides a palette color for a specific scheme.
 
 :::
 
-## Define Variant
-
-Set a custom variant for an existing color or _override_ its default variant.
-
 ::: error
-**throws** If the name or variant is not a string, the color is invalid, or color is not defined in the main scheme.
+**throw** If the scheme or name is not a string, the color is invalid, or the color has not been defined in the main scheme.
 :::
+
+## Define Resolver
+
+Register a resolver to generate color variants.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@mixin define-variant($name: STRING, $variant: STRING, $color: COLOR);
+@mixin define-resolver($resolver: Function<($is-light, $base, $color, $variant)>);
+```
+
+**Example:**
+
+```scss
+@function -badge-resolver($is-light, $base, $color, $variant) {
+  @if $variant == "badge" {
+    @if $is-light {
+      @return rgb($color / 35%);
+    } @else {
+      @return rgb($color / 15%);
+    }
+  } @else if $variant == "badge-active" {
+    @if $is-light {
+      @return rgb($color / 50%);
+    } @else {
+      @return rgb($color / 25%);
+    }
+  }
+
+  @return null; // Skip this resolver
+}
+
+@include termeh.define-resolver(meta.get-function("-badge-resolver"));
+```
+
+:::
+
+::: error
+**throw** If the resolver is not a valid function.
+:::
+
+::: block Resolver Function parameters
+
+The resolver function must accept four parameters: `$is-light`, `$base`, `$color`, and `$variant`.
+
+| Parameter     | Type      | Description                                 |
+|---------------|-----------|---------------------------------------------|
+| **$is-light** | _Boolean_ | Whether the `$base` color is light          |
+| **$base**     | _Color_   | The background color for the current scheme |
+| **$color**    | _Color_   | The original color value                    |
+| **$variant**  | _String_  | The name of the variant to resolve          |
+
+:::
+
+## Define Variant
+
+Add a custom variant to an existing color, or _override_ one of its default variants.
+
+::: definition
+
+**Signature:**
+
+```scss
+@mixin define-variant($name: String, $variant: String, $color: Color);
 ```
 
 **Example:**
@@ -81,20 +132,20 @@ Set a custom variant for an existing color or _override_ its default variant.
 
 :::
 
+::: error
+**throw** If the name or variant is not a string, the color is invalid, or the color has not been defined in the main scheme.
+:::
+
 ## Override Variant
 
-Overrides a specific variant of a palette color for a specific scheme.
-
-::: error
-**throws** If the scheme, name, or variant is not a string, the color is invalid, or the color is not defined in the main scheme.
-:::
+Set a palette color’s variant to a different value in a specific scheme.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@mixin override-variant($scheme: STRING, $name: STRING, $variant: STRING, $color: COLOR);
+@mixin override-variant($scheme: String, $name: String, $variant: String, $color: Color);
 ```
 
 **Example:**
@@ -106,20 +157,20 @@ Overrides a specific variant of a palette color for a specific scheme.
 
 :::
 
+::: error
+**throw** If the scheme, name, or variant is not a string, the color is invalid, or the color has not been defined in the main scheme.
+:::
+
 ## Color Value
 
-Retrieves the value of a base color by its name.
-
-::: error
-**throws** If the name is not a string or the color is not defined.
-:::
+Get a base color’s value by name.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function color-value($name: STRING): COLOR;
+@function color-value($name: String): Color;
 ```
 
 **Example:**
@@ -131,20 +182,20 @@ $green: termeh.color-value("green");
 
 :::
 
+::: error
+**throw** If the name is not a string or the color has not been defined.
+:::
+
 ## Scheme Color
 
-Retrieves the value of a color for a specific scheme.
-
-::: error
-**throws** If the scheme or name is not a string or color is not defined in the main scheme.
-:::
+Get a color’s value for a specific scheme.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function scheme-color($scheme: STRING, $name: STRING): COLOR;
+@function scheme-color($scheme: String, $name: String): Color;
 ```
 
 **Example:**
@@ -156,20 +207,20 @@ $green-dark: termeh.scheme-color("dark", "green");
 
 :::
 
+::: error
+**throw** If the scheme or name is not a string, or the color has not been defined in the main scheme.
+:::
+
 ## Variant Value
 
-Retrieves the value of a color variant for a specific color name.
-
-::: error
-**throws** If the name or variant is not a string.
-:::
+Get a color variant’s value by color name and variant. If the variant is unavailable, the optional fallback is returned.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function variant-value($name: STRING, $variant: STRING, $fallback: COLOR = null): COLOR;
+@function variant-value($name: String, $variant: String, $fallback: Color = null): Color;
 ```
 
 **Example:**
@@ -182,20 +233,20 @@ $unknown: termeh.variant-value("danger", "shadow", #a8220f); // fallback
 
 :::
 
+::: error
+**throw** If the name or variant is not a string.
+:::
+
 ## Scheme Variant
 
-Retrieves the value of a color variant for a specific color scheme and color name.
-
-::: error
-**throws** If the scheme, name, or variant is not a string.
-:::
+Get a color variant’s value for a specific scheme and color. If the variant is unavailable, the optional fallback is returned.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function scheme-variant($scheme: STRING, $name: STRING, $variant: STRING, $fallback: COLOR = null): COLOR;
+@function scheme-variant($scheme: String, $name: String, $variant: String, $fallback: Color = null): Color;
 ```
 
 **Example:**
@@ -208,20 +259,20 @@ $unknown-dark: termeh.scheme-variant("dark", "danger", "shadow", #a8220f); // fa
 
 :::
 
+::: error
+**throw** If the scheme, name, or variant is not a string.
+:::
+
 ## Color
 
-Returns the CSS variable reference for a base color by its name.
-
-::: error
-**throws** If the name is not a string or the color is not defined.
-:::
+Get the CSS variable reference for a base color by name.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function color($name: STRING): VAR();
+@function color($name: String): Variable;
 ```
 
 **Example:**
@@ -232,20 +283,24 @@ $primary: termeh.color("primary"); // var(--termeh-color-primary, #6200ee)
 
 :::
 
+::: error
+**throw** If the name is not a string or the color has not been defined.
+:::
+
 ## Variant
 
-Returns the CSS variable reference for a color variant by its name and variant.
-
-::: error
-**throws** If the name or variant is not a string.
-:::
+Get the CSS variable reference for a color variant by color name and variant. An optional fallback is used if the variant is unavailable.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function variant($name: STRING, $variant: STRING, $fallback: COLOR = null): VAR();
+@function variant(
+  $name: String,
+  $variant: String,
+  $fallback: Variable<Color> | Color = null
+): Variable<Color>;
 ```
 
 **Example:**
@@ -256,9 +311,13 @@ $primary-active: termeh.variant("primary", "active", #555); // var(--termeh-colo
 
 :::
 
-::: dependencies Available Variants
+::: error
+**throw** If the name or variant is not a string.
+:::
 
-By default, Termeh resolves these variants through _auto-generation_:
+::: block Available Variants
+
+Termeh automatically generates these variants by default:
 
 | Key               | Description                         |
 |-------------------|-------------------------------------|
@@ -276,14 +335,17 @@ By default, Termeh resolves these variants through _auto-generation_:
 
 ## Colors
 
-Gets a filtered map of colors, returning both names and CSS variable reference, for iteration.
+Get a filtered map of colors and their CSS variable references. Use it to iterate over colors in your styles.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function colors($includes: LIST = null, $excludes: LIST = null): MAP<STRING, VAR()>;
+@function colors(
+  $includes: List = null,
+  $excludes: List = null
+): Map<String, Variable<Color>>;
 ```
 
 **Example:**

@@ -1,17 +1,17 @@
 # Utilities
 
-Termeh provides helper functions for mathematical operations, map/list handling, type validation, and error handling.
+Termeh includes handy helpers for math, maps and lists, type validation, and clear error messages.
 
 ## Negate
 
-Returns the negated value of a number.
+Flip a number's sign.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function negate($value: NUMBER): CALC();
+@function negate($value: Variable<Length> | Length): Calculation;
 ```
 
 **Example:**
@@ -24,54 +24,57 @@ $negated: termeh.negate(10px); // calc(-1 * 10px)
 
 ## Half
 
-Returns half of a number.
+Divide a number by two.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function half($value: NUMBER): CALC();
+@function half($value: Variable<Length> | Length): Calculation;
 ```
 
 **Example:**
 
 ```scss
-$negated: termeh.half(20px); // calc(20px / 2)
+$half: termeh.half(20px); // calc(20px / 2)
 ```
 
 :::
 
 ## Double
 
-Returns double of a number.
+Multiply a number by two.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function double($value: NUMBER): CALC();
+@function double($value: Variable<Length> | Length): Calculation;
 ```
 
 **Example:**
 
 ```scss
-$negated: termeh.double(20px); // calc(20px * 2)
+$doubled: termeh.double(20px); // calc(20px * 2)
 ```
 
 :::
 
 ## Child Radius
 
-Calculates the border radius for a child element based on the parent element's radius and the padding between them.
+Calculate a child's border radius from the parent's radius and the space between the two elements.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function child-radius($parent-radius: NUMBER, $padding: NUMBER): CALC();
+@function child-radius(
+  $parent-radius: Variable<Length> | Length,
+  $padding: Variable<Length> | Length
+): Calculation;
 ```
 
 **Example:**
@@ -84,14 +87,14 @@ $child-radius: termeh.child-radius(10px, 2px); // calc(10px - 2px)
 
 ## ternary
 
-Ternary operator for Sass.
+Choose a value based on a condition, just like a ternary operator.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function ternary($condition: BOOLEAN, $truly: ANY, $falsy: ANY): ANY;
+@function ternary($condition: Boolean, $truly: Mixed, $falsy: Mixed): Mixed;
 ```
 
 **Example:**
@@ -104,14 +107,14 @@ $color: termeh.ternary($dark-theme, black, white);
 
 ## Alter
 
-Gets a value from a map with a _fallback_ if the key doesn't exist.
+Get a value from a map, or use the _fallback_ when the key is missing.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function alter($map: MAP, $key: STRING, $alt: ANY): ANY;
+@function alter($map: Map, $key: String, $fallback: Mixed): Mixed;
 ```
 
 **Example:**
@@ -128,18 +131,14 @@ $green: termeh.alter($colors, "green", #000); // #000
 
 ## Tokenize
 
-Tokenizes a given name into a CSS custom property format.
-
-::: error
-**throws** If the input name is not a string.
-:::
+Convert a name into the format used for Termeh CSS custom properties.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function tokenize($name: STRING): STRING;
+@function tokenize($name: String): String;
 ```
 
 **Example:**
@@ -150,49 +149,48 @@ $token: termeh.tokenize("primaryColor"); // --termeh-primary-color
 
 :::
 
+::: error
+**throw** If the name isn't a string.
+:::
+
 ## Fallback Vars
 
-Generates a nested CSS `var()` fallback chain.
-
-::: error
-**throws** If the input is not a valid list.
-:::
+Build a nested CSS `var()` fallback chain from a list of variable names and a fallback value.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function fallback-vars($vars: LIST): VAR();
+@function fallback-vars($vars...): Variable<Mixed>;
 ```
 
 **Example:**
 
 ```scss
-color: fallback-vars((
-  "--primary", 
-  "--secondary", 
-  "--tertiary",
+color: termeh.fallback-vars(
+  --primary,
+  --secondary,
+  --tertiary,
   red
-)); /// var("--primary", var("--secondary", var("--tertiary", red)))
+); // var(--primary, var(--secondary, var(--tertiary, red)))
 ```
 
 :::
 
 ## Alpha
 
-Generates a color from `VAR` or color with the specified alpha transparency.
-
-::: error
-**throws** If opacity not a valid number.
-:::
+Returns a color with the requested alpha transparency, accepting a color or CSS variable and a numeric or variable opacity.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function alpha($value: ANY, $opacity: NUMBER): COLOR;
+@function alpha(
+  $value: Variable<Color> | Color,
+  $opacity: Variable<Number> | Number
+): Color;
 ```
 
 **Example:**
@@ -206,42 +204,38 @@ $transparent-primary: termeh.alpha(var(--termeh-primary-color), 0.3); // rgb(fro
 
 ## Shadow
 
-Generates a standard translucent box shadow.
-
-::: error
-**throws** If the input x or y is not a number or if the input color is not a color.
-:::
+Create a standard, translucent box shadow.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function shadow($x: NUMBER, $y: NUMBER, $color: COLOR): LIST();
+@function shadow($x: Length, $y: Length, $color: Color): BoxShadow;
 ```
 
 **Example:**
 
 ```scss
-$box-shadow: termeh.shadow(0px, 2px, black); // 2px 2px 4px 0 rgba(0, 0, 0, 0.3)
+$box-shadow: termeh.shadow(0px, 2px, black); // 0px 2px 4px 0 rgba(0, 0, 0, 0.3)
 ```
 
 :::
 
+::: error
+**throw** If either offset isn't a number or the color isn't a valid color.
+:::
+
 ## Soft Shadow
 
-Generates a soft, diffused box shadow.
-
-::: error
-**throws** If the input x or y is not a number or if the input color is not a color.
-:::
+Create a soft, diffused box shadow.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function soft-shadow($x: NUMBER, $y: NUMBER, $color: COLOR): LIST();
+@function soft-shadow($x: Length, $y: Length, $color: Color): BoxShadow;
 ```
 
 **Example:**
@@ -252,20 +246,20 @@ $box-shadow: termeh.soft-shadow(0px, 2px, black); // 0px 2px 6px -2px rgba(0, 0,
 
 :::
 
+::: error
+**throw** If either offset isn't a number or the color isn't a valid color.
+:::
+
 ## Flat Shadow
 
-Generates a flat box shadow with transparency.
-
-::: error
-**throws** If the input size is not a number or if the input color is not a color.
-:::
+Create a flat box shadow using the supplied color as-is.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function flat-shadow($size: NUMBER, $color: COLOR): LIST();
+@function flat-shadow($size: Length, $color: Color): BoxShadow;
 ```
 
 **Example:**
@@ -276,20 +270,20 @@ $box-shadow: termeh.flat-shadow(4px, black); // 0 0 0 4px rgba(0, 0, 0, 1)
 
 :::
 
+::: error
+**throw** If the size isn't a number or the color isn't a valid color.
+:::
+
 ## Should Include
 
-Determines whether a key passes the include and exclude filters.
-
-::: error
-**throws** If the input key is not a string or if the includes/excludes lists are not valid lists.
-:::
+Check whether a key is allowed by the include and exclude filters.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function should-include($key: STRING, $includes: LIST, $excludes: LIST) BOOLEAN;
+@function should-include($key: String, $includes: List, $excludes: List): Boolean;
 ```
 
 **Example:**
@@ -310,12 +304,16 @@ $excluded: termeh.should-include(
 
 :::
 
+::: error
+**throw** If the key isn't a string or either filter isn't a valid list.
+:::
+
 ## Type Validators
 
-Functions to validate _number_, _string_, _color_, _list_, _map_, _bool_, and _function_. They generate an _error_ if validation fails, referencing the `function` and `parameter` names. Each also has a `-safe` variant that returns a _fallback_ value when the input is `null`.
+Use these helpers to validate _numbers_, _strings_, _colors_, _lists_, _maps_, _booleans_, and _functions_. If validation fails, they report the `function` and `parameter` names. Each type also has a `-safe` variant, which returns a _fallback_ when the input is `null`.
 
 ::: error
-**throws** If type mismatch.
+**throw** If the value doesn't match the expected type.
 :::
 
 ::: definition
@@ -323,55 +321,55 @@ Functions to validate _number_, _string_, _color_, _list_, _map_, _bool_, and _f
 **Signatures:**
 
 ```scss
-@function number-of($value: ANY, $func: STRING, $param: STRING): NUMBER;
+@function number-of($value: Mixed, $func: String, $param: String): Number;
 @function number-safe(
-    $value: ANY,
-    $func: STRING,
-    $param: STRING,
-    $fallback: NUMBER = 0
-  ): NUMBER;
-@function string-of($value: ANY, $func: STRING, $param: STRING): STRING;
+    $value: Mixed,
+    $func: String,
+    $param: String,
+    $fallback: Number = 0
+  ): Number;
+@function string-of($value: Mixed, $func: String, $param: String): String;
 @function string-safe(
-    $value: ANY,
-    $func: STRING,
-    $param: STRING,
-    $fallback: STRING = ""
-  ): STRING;
-@function color-of($value: ANY, $func: STRING, $param: STRING): COLOR;
+    $value: Mixed,
+    $func: String,
+    $param: String,
+    $fallback: String = ""
+  ): String;
+@function color-of($value: Mixed, $func: String, $param: String): Color;
 @function color-safe(
-    $value: ANY,
-    $func: STRING,
-    $param: STRING,
-    $fallback: COLOR = null
-  ): COLOR;
-@function list-of($value: ANY, $func: STRING, $param: STRING): LIST;
+    $value: Mixed,
+    $func: String,
+    $param: String,
+    $fallback: Color = null
+  ): Color;
+@function list-of($value: Mixed, $func: String, $param: String): List;
 @function list-safe(
-    $value: ANY,
-    $func: STRING,
-    $param: STRING,
-    $fallback: LIST = ()
-  ): LIST;
-@function map-of($value: ANY, $func: STRING, $param: STRING): MAP;
+    $value: Mixed,
+    $func: String,
+    $param: String,
+    $fallback: List = ()
+  ): List;
+@function map-of($value: Mixed, $func: String, $param: String): Map;
 @function map-safe(
-    $value: ANY,
-    $func: STRING,
-    $param: STRING,
-    $fallback: MAP = ()
-  ): MAP;
-@function bool-of($value: ANY, $func: STRING, $param: STRING): BOOLEAN;
+    $value: Mixed,
+    $func: String,
+    $param: String,
+    $fallback: Map = ()
+  ): Map;
+@function bool-of($value: Mixed, $func: String, $param: String): Boolean;
 @function bool-safe(
-    $value: ANY,
-    $func: STRING,
-    $param: STRING,
-    $fallback: BOOLEAN = false
-  ): BOOLEAN;
-@function function-of($value: ANY, $func: STRING, $param: STRING): FUNCTION;
+    $value: Mixed,
+    $func: String,
+    $param: String,
+    $fallback: Boolean = false
+  ): Boolean;
+@function function-of($value: Mixed, $func: String, $param: String): Function;
 @function function-safe(
-    $value: ANY,
-    $func: STRING,
-    $param: STRING,
-    $fallback: FUNCTION = null
-  ): FUNCTION;
+    $value: Mixed,
+    $func: String,
+    $param: String,
+    $fallback: Function = null
+  ): Function;
 ```
 
 **Example:**
@@ -423,7 +421,7 @@ $safe-fn: termeh.function-safe(null, "example", "fn", my-func);
 
 ## Throw Error
 
-Creates a detailed error message for type validation failures.
+Create a detailed error message when a value fails type validation.
 
 ::: definition
 
@@ -431,11 +429,11 @@ Creates a detailed error message for type validation failures.
 
 ```scss
 @function throw-error(
-  $value: ANY,
-  $func: STRING,
-  $param: STRING,
-  $expected: ANY
-);
+  $value: Mixed,
+  $func: String,
+  $param: String,
+  $expected: Mixed
+): String;
 ```
 
 **Example:**

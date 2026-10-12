@@ -1,25 +1,21 @@
 # UI Gap
 
-Termeh provides utilities to define and retrieve spacing gaps in a consistent and reusable way. You can create named gaps, access individual values, or filter sets of gaps for use in layouts and components.
+Termeh makes it easy to define and reuse spacing gaps throughout your styles. Give each gap a name, retrieve its value, or filter a set of gaps for use in layouts and components.
 
 ::: scheme
-Gaps are scheme-based, meaning they can have different values depending on the active color scheme.
+Gaps are scheme-based, so each gap can have a different value in the active color scheme.
 :::
 
 ## Define Gap
 
-Register a new gap value.
-
-::: error
-**throws** If the input name is not a string or the input gap is not a number.
-:::
+Define a named gap and its value.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@mixin define-gap($name: STRING, $gap: NUMBER);
+@mixin define-gap($name: String, $gap: Length);
 ```
 
 **Example:**
@@ -32,20 +28,20 @@ Register a new gap value.
 
 :::
 
+::: error
+**throw** If the name is not a string or the gap value is not a number.
+:::
+
 ## Override Gap
 
-Overrides an existing gap for a specific scheme.
-
-::: error
-**throws** If the input scheme or name is not a string, if the input gap is not a number, or if the gap is not defined in main scheme.
-:::
+Set a different value for an existing gap in a specific scheme.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@mixin override-gap($scheme: STRING, $name: STRING, $gap: NUMBER);
+@mixin override-gap($scheme: String, $name: String, $gap: Length);
 ```
 
 **Example:**
@@ -56,20 +52,20 @@ Overrides an existing gap for a specific scheme.
 
 :::
 
+::: error
+**throw** If the scheme or name is not a string, the gap value is not a number, or the gap is not defined in the main scheme.
+:::
+
 ## Gap Value
 
-Gets the value of a gap by its name.
-
-::: error
-**throws** If the input name is not a string or if the gap is not found.
-:::
+Get a gap's value by name.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function gap-value($name: STRING): NUMBER;
+@function gap-value($name: String): Length;
 ```
 
 **Example:**
@@ -81,20 +77,20 @@ $medium-gap: termeh.gap-value("medium"); // 16px
 
 :::
 
+::: error
+**throw** If the name is not a string or no gap with that name is found.
+:::
+
 ## Scheme Gap
 
-Retrieves the value of a gap for a specific scheme. This function will return main scheme gap as fallback.
-
-::: error
-**throws** If the input scheme or name is not a string, or if the gap is not defined in the main scheme.
-:::
+Get a gap's value for a specific scheme. If that scheme has no override, the main scheme's value is returned.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function scheme-gap($scheme: STRING, $name: STRING): NUMBER;
+@function scheme-gap($scheme: String, $name: String): Length;
 ```
 
 **Example:**
@@ -105,20 +101,20 @@ $small-gap-dark: termeh.scheme-gap("dark", "small"); // 10px
 
 :::
 
+::: error
+**throw** If the scheme or name is not a string, or the gap is not defined in the main scheme.
+:::
+
 ## Gap
 
-Returns the CSS variable reference for a gap by its name.
-
-::: error
-**throws** If the input name is not a string or if the gap is not found.
-:::
+Get the CSS variable reference for a gap by name.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function gap($name: STRING): VAR();
+@function gap($name: String): Variable;
 ```
 
 **Example:**
@@ -130,16 +126,23 @@ $medium-gap: termeh.gap("medium"); // var(--termeh-gap-medium, 16px)
 
 :::
 
+::: error
+**throw** If the name is not a string or no gap with that name is found.
+:::
+
 ## Gaps
 
-Gets a filtered map of gaps, returning both names and CSS variable reference, for iteration.
+Get a filtered map of gaps for iteration. Each entry contains a gap name and its CSS variable reference.
 
 ::: definition
 
 **Signature:**
 
 ```scss
-@function gaps($includes: LIST = null, $excludes: LIST = null): MAP<STRING, VAR()>;
+@function gaps(
+  $includes: List = null,
+  $excludes: List = null
+): Map<String, Variable<Length>>;
 ```
 
 **Example:**

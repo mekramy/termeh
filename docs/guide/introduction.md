@@ -2,14 +2,14 @@
 outline: deep
 ---
 
-# What Is Termeh
+# What Is Termeh?
 
-Termeh is a _Modern_, _responsive_, _modular_, and _scheme based_ CSS framework for scalable UIs. It has no external dependencies and is written entirely in _Sass_. Termeh provides advanced tools for managing _contrast_, _colors_, _palettes_, and _responsive design_, making it a powerful choice for building flexible and accessible interfaces.
+Termeh is a _modern_, _responsive_, _modular_, and _scheme-based_ CSS framework for building scalable user interfaces. Written entirely in _Sass_ and free of external dependencies, it gives you tools to manage colors, palettes, contrast, and responsive layouts—making it easier to create flexible, accessible interfaces.
 
-This library includes a wide range of components and predefined styles for various parts of the UI, enabling faster and more consistent development.
+Termeh also includes a wide range of components and ready-to-use styles, so you can build interfaces faster and more consistently.
 
 ::: tip
-Termeh writes in modern CSS and requires _CSS logical properties and values_. This ensures better support for internationalization and more flexible layout handling.
+Termeh uses modern CSS, including _CSS logical properties and values_. These help layouts adapt to different writing directions and support internationalization.
 :::
 
 ## Installation
@@ -32,36 +32,42 @@ pnpm add -D termeh
 
 ## Usage
 
-To use it in your project, simply import the termeh in your _Sass_ file and use the termeh functions and components.
+To get started, import Termeh into a _Sass_ file, then use its functions and components:
 
 ::: code-group
 
 ```scss [app.scss]
 @use "termeh";
 
-// Define variables
+// Define and customize palettes
 @include termeh.define-palette("primary", #2196f3);
+@include termeh.override-palette("dark", "primary", #5db1f7);
 
-// use components
+// Use components
 @include termeh.use-generic();
 @include termeh.use-container();
 @include termeh.use-grid(
-  $gaps: (
-    "mini" "normal" "large",
-  )
+  $gaps: ("mini" "normal" "large")
 );
 @include termeh.use-button(
-  $colors: (
-    "primary" "green" "blue",
-  )
+  $colors: ("primary" "green" "blue")
 );
+
+// Output variables for each color scheme
+:root{
+  @include termeh.variables();
+}
+
+[data-scheme="dark"]{
+  @include termeh.variables("dark");
+}
 ```
 
 :::
 
 ## External Usage
 
-To use Termeh in a custom component, import Termeh’s core functionality, then include your component in your app.
+You can also use Termeh in your own components. Import its core functionality, then include your component in your app:
 
 ::: code-group
 
@@ -69,7 +75,7 @@ To use Termeh in a custom component, import Termeh’s core functionality, then 
 @use "termeh";
 
 @mixin use-my-component(){
-  $fallback-background: termeh.var("base", "section")
+  $fallback-background: termeh.var("base", "section");
   $background: termeh.var("my-component", "background", $fallback-background);
 
   @at-root {
@@ -85,7 +91,7 @@ To use Termeh in a custom component, import Termeh’s core functionality, then 
 @use "termeh";
 @use "my-component";
 
-// Global termeh definitio and usages
+// Define a palette and include global styles
 @include termeh.define-palette("primary", #2196f3);
 // ...
 

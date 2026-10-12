@@ -4,20 +4,22 @@ outline: deep
 
 # Default Configuration
 
-Termeh ships with a set of _default Sass variables_. You can override any of them in your project.
+Termeh provides default Sass variables that its UI components use to build a consistent interface. Override these values in your project to customize the shared styles.
 
-Any `null` value is ignored, and Termeh _falls back_ to the default value if available.
+When a variable is set to `null`, Termeh ignores that value and uses the default when one is available.
 
 ## Animation
 
-Two keyframe animations are provided by default:
+Termeh includes two keyframe animations for its UI:
 
-- **spin** → Used for loaders.
-- **shake** → Used for invalid inputs.
+- **spin** → Animates loading indicators.
+- **shake** → Highlights invalid inputs.
 
 ## Variables
 
-### Layout AND UI
+### Layout and UI
+
+These variables provide shared layout and component styles used throughout Termeh's UI.
 
 #### Base
 
@@ -26,8 +28,8 @@ Two keyframe animations are provided by default:
 @include termeh.define("base", "min-width", 300px);
 ```
 
-- **direction:** _[`ltr | rtl`]_ → Document direction.
-- **min-width:** _[`number`]_ → Minimum width of the document.
+- **direction** ++direction++ → Sets the document's text direction.
+- **min-width** ++length++ → Sets the document's minimum width.
 
 #### Spacing
 
@@ -36,8 +38,8 @@ Two keyframe animations are provided by default:
 @include termeh.define("gap", "macro", 1.6rem);
 ```
 
-- **micro:** _[`number`]_ → Small spacing inside components.
-- **macro:** _[`number`]_ → Larger spacing between elements for layout/grid.
+- **micro** ++length++ → Small gaps within components.
+- **macro** ++length++ → Larger gaps between layout or grid elements.
 
 #### Border Radius
 
@@ -47,9 +49,9 @@ Two keyframe animations are provided by default:
 @include termeh.define("radius", "rounded", 290486px);
 ```
 
-- **normal:** _[`number`]_ → Default border-radius.
-- **circle:** _[`number`]_ → Perfect circle radius.
-- **rounded:** _[`number`]_ → Fully rounded corners (pills, tags, etc.).
+- **normal** ++length++ → Default corner radius.
+- **circle** ++length++ → Radius for circular shapes.
+- **rounded** ++length++ → Radius for fully rounded corners.
 
 #### Decorators
 
@@ -58,8 +60,8 @@ Two keyframe animations are provided by default:
 @include termeh.define("decorator", "spinner", 2em);
 ```
 
-- **size:** _[`number`]_ → Thickness for decorative elements (e.g., borders, spinner).
-- **spinner:** _[`number`]_ → Default spinner size.
+- **size** ++length++ → Thickness of decorative elements.
+- **spinner** ++length++ → Default size of spinners.
 
 #### Transitions
 
@@ -69,9 +71,9 @@ Two keyframe animations are provided by default:
 @include termeh.define("transition", "delay", 100ms);
 ```
 
-- **ease:** _[`easing function`]_ → Default transition timing function.
-- **duration:** _[`time duration`]_ → Default transition speed.
-- **delay:** _[`time duration`]_ → Default transition delay.
+- **ease** ++easing function++ → Timing function used by default for transitions.
+- **duration** ++duration++ → Default transition duration.
+- **delay** ++duration++ → Default delay before transitions start.
 
 #### Containers
 
@@ -81,9 +83,9 @@ Two keyframe animations are provided by default:
 @include termeh.define("container", "fullhd", 1500px);
 ```
 
-- **desktop:** _[`number`]_ → Max width for desktop.
-- **widescreen:** _[`number`]_ → Max width for widescreen.
-- **fullhd:** _[`number`]_ → Max width for full HD and larger.
+- **desktop** ++length++ → Maximum container width at the desktop breakpoint.
+- **widescreen** ++length++ → Maximum container width at the widescreen breakpoint.
+- **fullhd** ++length++ → Maximum container width at the full HD breakpoint and above.
 
 #### Gallery
 
@@ -93,9 +95,9 @@ Two keyframe animations are provided by default:
 @include termeh.define("gallery", "height-mobile", 100px);
 ```
 
-- **height:** _[`number`]_ → Default gallery item height.
-- **height-tablet:** _[`number`]_ → Tablet height.
-- **height-mobile:** _[`number`]_ → Mobile height.
+- **height** ++length++ → Default gallery item height.
+- **height-tablet** ++length++ → Gallery item height on tablets.
+- **height-mobile** ++length++ → Gallery item height on mobile devices.
 
 #### Control
 
@@ -108,18 +110,18 @@ Two keyframe animations are provided by default:
 @include termeh.define("control", "meta-weight", 600);
 ```
 
-- **weight:** _[`font weight`]_ → Base font weight.
-- **height:** _[`number`]_ → Default control height (`button`, `link`, `badge`, …).
-- **v-padding:** _[`number`]_ → Vertical padding.
-- **h-padding:** _[`number`]_ → Horizontal padding.
-- **meta-size:** _[`number`]_ → Font size for meta-like elements (`meta`, `tag`, `action`, `link`, `breadcrumb`).
-- **meta-weight:** _[`font weight`]_ → Font weight for meta-like elements (`meta`, `tag`, `action`, `link`, `breadcrumb`).
+- **weight** ++font weight++ → Base font weight for controls.
+- **height** ++length++ → Default control height.
+- **v-padding** ++length++ → Vertical padding inside controls.
+- **h-padding** ++length++ → Horizontal padding inside controls.
+- **meta-size** ++length++ → Font size for meta-like controls.
+- **meta-weight** ++font weight++ → Font weight for meta-like controls.
 
 ### Text
 
 #### Fonts
 
-Default ui fonts.
+Default font settings for Termeh's UI text.
 
 ```scss
 @include termeh.define("font", "family", ("Segoe UI", Verdana));
@@ -127,13 +129,13 @@ Default ui fonts.
 @include termeh.define("font", "weight", normal);
 ```
 
-- **family:** _[`font family`]_ → Default font stack.
-- **size:** _[`number`]_ → Base font size.
-- **weight:** _[`font weight`]_ → Base font weight.
+- **family** ++font family++ → Default font-family stack.
+- **size** ++length++ → Base text size.
+- **weight** ++font weight++ → Base text weight.
 
 #### Monospace Fonts
 
-Monospace element (code, pre, ...) fonts.
+Font settings for monospace elements such as `<code>` and `<pre>`.
 
 ```scss
 @include termeh.define("mono", "family", monospace);
@@ -141,13 +143,13 @@ Monospace element (code, pre, ...) fonts.
 @include termeh.define("mono", "weight", normal);
 ```
 
-- **family:** _[`font family`]_ → Monospace font family.
-- **size:** _[`number`]_ → Monospace font size.
-- **weight:** _[`font weight`]_ → Monospace font weight.
+- **family** ++font family++ → Monospace font-family stack.
+- **size** ++length++ → Monospace text size.
+- **weight** ++font weight++ → Monospace text weight.
 
 #### Small Text
 
-`<small>`, `<sub>`, `<sup>` and other small text elements.
+Text settings for `<small>`, `<sub>`, `<sup>`, and other small-text elements.
 
 ```scss
 @include termeh.define("small", "size", 0.8rem);
@@ -155,33 +157,33 @@ Monospace element (code, pre, ...) fonts.
 @include termeh.define("small", "foreground", null);
 ```
 
-- **size:** _[`number`]_ → Small text size.
-- **weight:** _[`font weight`]_ → Small text weight.
-- **foreground:** _[`color`]_ → Small text color (inherits if `null`).
+- **size** ++length++ → Font size for small text.
+- **weight** ++font weight++ → Font weight for small text.
+- **foreground** ++color++ → Text color for small text.
 
 #### Strong Text
 
-`<strong>` and other strong text elements.
+Text settings for `<strong>` and other emphasized text.
 
 ```scss
-@include termeh.define("strong", "foreground", null);
 @include termeh.define("strong", "weight", bold);
+@include termeh.define("strong", "foreground", null);
 ```
 
-- **foreground:** _[`color`]_ → Strong text color (inherits if `null`).
-- **weight:** _[`font weight`]_ → Strong text weight.
+- **weight** ++font weight++ → Font weight for emphasized text.
+- **foreground** ++color++ → Text color for emphasized text.
 
 #### Decorated Text
 
-`<u>` and other decorated text elements.
+Text settings for `<u>` and other decorated text.
 
 ```scss
 @include termeh.define("decorated", "weight", normal);
 @include termeh.define("decorated", "foreground", null);
 ```
 
-- **weight:** _[`font weight`]_ → Decorated text weight.
-- **foreground:** _[`color`]_ → Decorated text color (inherits if `null`).
+- **weight** ++font weight++ → Font weight for decorated text.
+- **foreground** ++color++ → Text color for decorated text.
 
 #### Line Heights
 
@@ -191,11 +193,13 @@ Monospace element (code, pre, ...) fonts.
 @include termeh.define("line-height", "large", 1.2em);
 ```
 
-- **normal:** _[`number`]_ → Default text line height.
-- **medium:** _[`number`]_ → Tighter line height.
-- **large:** _[`number`]_ → More compact line height.
+- **normal** ++length++ → Default text line height.
+- **medium** ++length++ → More compact line height.
+- **large** ++length++ → Most compact line height.
 
 ### Theme
+
+These color and appearance variables provide defaults for Termeh's themed UI components.
 
 #### Scheme
 
@@ -206,10 +210,10 @@ Monospace element (code, pre, ...) fonts.
 @include termeh.define("base", "separator", #e0e4eb);
 ```
 
-- **background:** _[`color`]_ → Base theme color (detect light/dark mode).
-- **foreground:** _[`color`]_ → Default text color.
-- **section:** _[`color`]_ → Section background color.
-- **separator:** _[`color`]_ → Divider/line color.
+- **background** ++color++ → Base page background color.
+- **foreground** ++color++ → Default text color.
+- **section** ++color++ → Background color for sections.
+- **separator** ++color++ → Color for dividers and lines.
 
 #### Scrollbar
 
@@ -219,9 +223,9 @@ Monospace element (code, pre, ...) fonts.
 @include termeh.define("scroll", "thumb", null);
 ```
 
-- **size:** _[`number`]_ → Scrollbar thickness.
-- **track:** _[`color`]_ → Scrollbar track background.
-- **thumb:** _[`color`]_ → Scrollbar thumb color.
+- **size** ++length++ → Scrollbar width or thickness.
+- **track** ++color++ → Scrollbar track color.
+- **thumb** ++color++ → Scrollbar thumb color.
 
 #### Overlay
 
@@ -232,10 +236,10 @@ Monospace element (code, pre, ...) fonts.
 @include termeh.define("overlay", "filter", none);
 ```
 
-- **background:** _[`color`]_ → Overlay background.
-- **foreground:** _[`color`]_ → Overlay foreground color.
-- **opacity:** _[`number`]_ → Overlay background opacity.
-- **filter:** _[`filter`]_ → Optional CSS filter (e.g., `blur(2px)`).
+- **background** ++color++ → Overlay background color.
+- **foreground** ++color++ → Overlay content color.
+- **opacity** ++number++ → Overlay background opacity.
+- **filter** ++filter++ → Optional CSS filter applied to the overlay.
 
 #### Tables
 
@@ -252,16 +256,16 @@ Monospace element (code, pre, ...) fonts.
 @include termeh.define("table", "strong-weight", null);
 ```
 
-- **background:** _[`color`]_ → Table background.
-- **foreground:** _[`color`]_ → Table text color.
-- **decorator:** _[`color`]_ → Table decorator (sort indicator) color.
-- **hover-background:** _[`color`]_ → Row hover background.
-- **striped-background:** _[`color`]_ → Background for even rows.
-- **sorted-background:** _[`color`]_ → Highlighted sorted column background.
-- **column-separator:** _[`color`]_ → Column dividers.
-- **row-separator:** _[`color`]_ → Row dividers.
-- **section-separator:** _[`color`]_ → Section dividers (header, footer, body).
-- **strong-weight:** _[`font weight`]_ → Emphasis text weight.
+- **background** ++color++ → Table background color.
+- **foreground** ++color++ → Table text color.
+- **decorator** ++color++ → Color for table decorations, such as sort indicators.
+- **hover-background** ++color++ → Background color for hovered rows.
+- **striped-background** ++color++ → Background color for alternating rows.
+- **sorted-background** ++color++ → Background color for the sorted column.
+- **column-separator** ++color++ → Color of column dividers.
+- **row-separator** ++color++ → Color of row dividers.
+- **section-separator** ++color++ → Color of dividers between table sections.
+- **strong-weight** ++font weight++ → Font weight for emphasized table text.
 
 #### Inputs
 
@@ -280,22 +284,22 @@ Monospace element (code, pre, ...) fonts.
 @include termeh.define("input", "placeholder-weight", 600); 
 ```
 
-- **height:** _[`number`]_ → Default input height.
-- **border:** _[`color`]_ → Input border color.
-- **background:** _[`color`]_ → Input background.
-- **disabled:** _[`color`]_ → Disabled background.
-- **disabled-foreground:** _[`color`]_ → Disabled text color.
-- **disabled-border:** _[`color`]_ → Disabled border color.
-- **checkbox:** _[`number`]_ → Checkbox and radio size.
-- **legend-size:** _[`number`]_ → Fieldset legend text size.
-- **legend-weight:** _[`font weight`]_ → Fieldset legend text weight.
-- **placeholder:** _[`color`]_ → Placeholder color.
-- **placeholder-size:** _[`number`]_ → Placeholder font size.
-- **placeholder-weight:** _[`font weight`]_ → Placeholder font weight.
+- **height** ++length++ → Default height of input controls.
+- **border** ++color++ → Input border color.
+- **background** ++color++ → Input background.
+- **disabled** ++color++ → Background color for disabled controls.
+- **disabled-foreground** ++color++ → Text color for disabled controls.
+- **disabled-border** ++color++ → Border color for disabled controls.
+- **checkbox** ++length++ → Size of checkboxes and radio buttons.
+- **legend-size** ++length++ → Font size for fieldset legends.
+- **legend-weight** ++font weight++ → Font weight for fieldset legends.
+- **placeholder** ++color++ → Placeholder text color.
+- **placeholder-size** ++length++ → Placeholder text size.
+- **placeholder-weight** ++font weight++ → Placeholder text weight.
 
 #### Box
 
-Default styles for card, modal and other box-like components.
+Default styles for cards, modals, and other box-like components.
 
 ```scss
 @include module.define("box", "background", null);
@@ -322,20 +326,20 @@ Default styles for card, modal and other box-like components.
 );
 ```
 
-- **background:** _[`color`]_ → Box background.
-- **foreground:** _[`color`]_ → Box foreground.
-- **section:** _[`color`]_ → Box section background.
-- **separator:** _[`color`]_ → Box separator color.
-- **overlay-background:** _[`color`]_ → Box overlay background color.
-- **overlay-foreground:** _[`color`]_ → Box overlay foreground color.
-- **overlay-opacity:** _[`number`]_ → Box overlay background opacity.
-- **overlay-filter:** _[`filter`]_ → Box overlay backdrop filter.
-- **shadow:** _[`shadow`]_ → Box shadow.
-- **sizes:** _[`list`]_ → List of box element sizes.
+- **background** ++color++ → Background color for boxes.
+- **foreground** ++color++ → Text color for boxes.
+- **section** ++color++ → Background color for box sections.
+- **separator** ++color++ → Color of separators within boxes.
+- **overlay-background** ++color++ → Background color for box overlays.
+- **overlay-foreground** ++color++ → Content color for box overlays.
+- **overlay-opacity** ++number++ → Opacity of box overlay backgrounds.
+- **overlay-filter** ++filter++ → Backdrop filter for box overlays.
+- **shadow** ++box shadow++ → Box shadow style.
+- **sizes** ++list++ → Available sizes for box components.
 
 ## Color Palettes
 
-Color tokens used across components.
+Shared color tokens used by Termeh's components.
 
 ```scss
 @include termeh.define-palette("shade", #667085);
@@ -343,13 +347,13 @@ Color tokens used across components.
 @include termeh.define-palette("primary", #2196f3);
 ```
 
-- **shade:** _[`color`]_ → Neutral color.
-- **error:** _[`color`]_ → Error/danger color.
-- **primary:** _[`color`]_ → Primary accent color.
+- **shade** ++color++ → Neutral color palette.
+- **error** ++color++ → Error and danger color palette.
+- **primary** ++color++ → Primary accent color palette.
 
 ## Gaps
 
-Spacing scale for margins and paddings.
+Shared spacing scale for component margins and padding.
 
 ```scss
 @include termeh.define-gap("mini", 0.5em);
@@ -363,7 +367,7 @@ Spacing scale for margins and paddings.
 
 ## Text Sizes
 
-Font sizing scale for text and headings.
+Shared font-size scale for text and headings.
 
 ```scss
 @include termeh.define-size("small", 0.8em);
@@ -377,7 +381,7 @@ Font sizing scale for text and headings.
 
 ## Grid Units
 
-Percentage-based widths for responsive grids (_2–12_ columns).
+Percentage-based width units for responsive grids with 2–12 columns.
 
 ```scss
 @include termeh.define-unit("full", 100%);

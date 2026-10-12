@@ -22,7 +22,7 @@ export function fallbacks(md: MarkdownIt) {
                     t.attrJoin("class", "is-fallback");
 
                     const ins = new state.Token("html_inline", "", 0);
-                    ins.content = "<ins>Fallback:</ins>&nbsp;";
+                    ins.content = "<ins>Fallback:</ins>";
                     inline.children!.unshift(ins);
                 }
                 cellIndex++;
