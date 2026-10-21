@@ -16,12 +16,12 @@ $-resolvers: () !default;
 
 /// Defines a resolver that is used for color variants of one component.
 ///
-/// @param {Function} $resolver - Called with `$scheme, $palette, $is-light, $base, $color, $variant`; returns a color, or `null` if it cannot resolve the variant
 /// @param {String} $component - Component name
+/// @param {Function} $resolver - Called with `$scheme, $palette, $is-light, $base, $color, $variant`; returns a color, or `null` if it cannot resolve the variant
 /// @throw If `$resolver` is not a function or `$component` is not a string
-@mixin define-component-resolver($resolver, $component) {
-    $resolver: utility.assert-function($resolver, "define-component-resolver", "resolver");
+@mixin define-component-resolver($component, $resolver) {
     $component: utility.assert-string($component, "define-component-resolver", "component");
+    $resolver: utility.assert-function($resolver, "define-component-resolver", "resolver");
 
     $-resolvers: utility.deep-prepend($-resolvers, $resolver, $component) !global;
 }

@@ -9,7 +9,7 @@
 
 // Resolvers
 @function -base-resolver($scheme, $palette, $is-light, $base, $color, $variant) {
-    @if $scheme != "base" {
+    @if $palette != "base" {
         @return null;
     } @else if $variant == "background" {
         @return module.color("base");
@@ -26,7 +26,7 @@
     @return null;
 }
 @function -variant-resolver($scheme, $palette, $is-light, $base, $color, $variant) {
-    @if $scheme == "base" {
+    @if $palette == "base" {
         @return null;
     } @else if $variant == "color" {
         $v: module.iif($is-light, "900", "100");
