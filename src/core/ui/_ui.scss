@@ -367,7 +367,7 @@
 @function inline-padding() {
     $gap: variable.var("gap", "micro");
 
-    @return $gap util.double($gap);
+    @return $gap utility.double($gap);
 }
 
 /// Sets the transition of the given properties with the theme easing and duration.

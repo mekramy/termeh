@@ -54,11 +54,11 @@ $-schemes: () !default;
 }
 
 /// Returns a `var()` reference to a Termeh CSS custom property.
-/// The fallback is added only when it is truthy.
+/// This function returns `null` when no fallback is provided.
 ///
 /// @param {String} $name - Variable name, converted to a Termeh CSS custom property name
 /// @param {*} $fallback - Value used when the variable is not defined
-/// @return {Variable<*>} The `var()` reference
+/// @return {Variable<*> | null} The `var()` reference
 /// @throw If `$name` is not a string
 @function variable($name, $fallback) {
     $name: utility.assert-string($name, "variable", "name");
@@ -67,7 +67,8 @@ $-schemes: () !default;
     @if $fallback {
         @return var($name, $fallback);
     }
-    @return var($name);
+
+    @return null;
 }
 
 /// Outputs the CSS variables stored for a scheme.

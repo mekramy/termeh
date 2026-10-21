@@ -70,7 +70,7 @@ $-overrides: () !default;
 /// @param {String} $component - Component name
 /// @param {String} $property - Property name
 /// @param {*} $fallback [null] - Value used when the property has no value
-/// @return {Variable<*>} CSS variable of the property
+/// @return {Variable<*> | null} CSS variable of the property or `null` if it cannot be resolved
 /// @throw If `$component` or `$property` is not a string
 @function var($component, $property, $fallback: null) {
     $component: utility.assert-string($component, "var", "component");

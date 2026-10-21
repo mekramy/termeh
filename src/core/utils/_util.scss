@@ -135,12 +135,12 @@
 /// Converts a name to a Termeh CSS custom property name.
 ///
 /// @param {String} $name - Name to convert
-/// @return {String} The name in kebab-case with the `--termeh-` prefix
+/// @return {String} The name in kebab-case with the `--` prefix
 /// @throw If `$name` is not a string
 @function tokenize($name) {
     $name: validation.assert-string($name, "tokenize", "name");
 
-    @return string.unquote("--termeh-" + -kebab-case($name));
+    @return string.unquote("--" + -kebab-case($name));
 }
 
 /// Sets a value at a path in a nested map.
@@ -168,6 +168,23 @@
 
     $sub-map: deep-set($sub-map, $value, $rest...);
     @return map.set($map, $key, $sub-map);
+}
+
+/// Adds a value to the end of the list at a path in a nested map.
+/// If there is no list at the path, a new list is created.
+///
+/// @param {Map<*, *>} $map - Map to update
+/// @param {*} $value - Value to add at the end
+/// @param {Arglist} $keys - Keys that make the path to the list
+/// @return {Map<*, *>} The updated map
+@function deep-append($map, $value, $keys...) {
+    $current: map.get($map, $keys...);
+    @if not $current {
+        $current: ();
+    }
+    $current: list.join($current, ($value), $separator: comma);
+
+    @return deep-set($map, $current, $keys...);
 }
 
 /// Adds a value to the start of the list at a path in a nested map.

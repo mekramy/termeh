@@ -297,7 +297,7 @@ $-overrides: () !default;
 /// @param {String} $name - Color name
 /// @param {String} $variant - Variant name
 /// @param {Variable<Color> | Color} $fallback [null] - Value used when the variant cannot be resolved
-/// @return {Variable<Color>} CSS variable of the variant
+/// @return {Variable<Color> | null} CSS variable of the variant or `null` if it cannot be resolved
 /// @throw If `$name` or `$variant` is not a string
 @function variant($name, $variant, $fallback: null) {
     $name: utility.assert-string($name, "variant", "name");
@@ -325,12 +325,12 @@ $-overrides: () !default;
 /// @param {String} $name - Color name
 /// @param {String} $variant - Variant name
 /// @param {Variable<Color> | Color} $fallback [null] - Value used when the variant cannot be resolved
-/// @return {Variable<Color>} CSS variable of the variant
+/// @return {Variable<Color> | null} CSS variable of the variant or `null` if it cannot be resolved
 /// @throw If `$component`, `$name` or `$variant` is not a string
 @function variant-for($component, $name, $variant, $fallback: null) {
     $component: utility.assert-string($component, "variant-for", "component");
-    $name: utility.assert-string($name, "variant", "name");
-    $variant: utility.assert-string($variant, "variant", "variant");
+    $name: utility.assert-string($name, "variant-for", "name");
+    $variant: utility.assert-string($variant, "variant-for", "variant");
 
     $token: "palette-#{$name}-#{$component}-#{$variant}";
     $value: variant-value-for($component, $name, $variant, $fallback);
