@@ -9,6 +9,7 @@ module.exports = {
         "scss/dollar-variable-empty-line-before": null,
         "scss/at-mixin-argumentless-call-parentheses": null,
         "scss/double-slash-comment-empty-line-before": null,
-        "scss/at-extend-no-missing-placeholder": null
-    }
+        "scss/at-extend-no-missing-placeholder": null,
+        "scss/dollar-variable-pattern": "^(_|-?[a-z][a-z0-9-]*)$",
+    },
 };
