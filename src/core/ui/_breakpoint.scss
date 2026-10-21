@@ -1,0 +1,71 @@
+@use "sass:map";
+@use "sass:math";
+@use "../utility";
+
+$-breakpoints: (
+    "tablet": 769px,
+    "desktop": 1024px,
+    "widescreen": 1216px,
+    "fullhd": 1408px,
+) !default;
+
+@function -missing($name) {
+    @return not map.has-key($-breakpoints, $name);
+}
+
+@function -fail($name) {
+    @return "Unknown breakpoint '#{$name}'. Available: #{utility.print($-breakpoints)}.";
+}
+
+/// Returns the width of a defined breakpoint.
+///
+/// @param {String} $name - Breakpoint name
+/// @return {Length} Breakpoint width
+/// @throw If `$name` is not a string or is not a defined breakpoint
+@function breakpoint($name) {
+    $name: utility.assert-string($name, "breakpoint", "name");
+    @if -missing($name) {
+        @error -fail($name);
+    }
+
+    @return map.get($-breakpoints, $name);
+}
+
+/// Applies styles from a breakpoint and up.
+///
+/// @param {String} $device - Breakpoint name where the styles start
+/// @output The content inside a `min-width` media query for the breakpoint
+/// @throw If `$device` is not a string or is not a defined breakpoint
+@mixin from($device) {
+    $device: utility.assert-string($device, "from", "device");
+    @if -missing($device) {
+        @error -fail($device);
+    }
+
+    @media screen and (min-width: breakpoint($device)) {
+        @content;
+    }
+}
+
+/// Applies styles below a breakpoint.
+///
+/// @param {String} $device - Breakpoint name where the styles stop
+/// @output The content inside a `max-width` media query, 1px below the breakpoint width
+/// @throw If `$device` is not a string or is not a defined breakpoint
+@mixin until($device) {
+    $device: utility.assert-string($device, "until", "device");
+    @if -missing($device) {
+        @error -fail($device);
+    }
+
+    @media screen and (max-width: math.sub(breakpoint($device), 1px)) {
+        @content;
+    }
+}
+
+/// Returns all defined breakpoints.
+///
+/// @return {Map<String, Length>} Breakpoint names and widths
+@function breakpoints() {
+    @return $-breakpoints;
+}

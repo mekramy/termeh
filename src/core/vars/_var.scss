@@ -1,0 +1,92 @@
+@use "sass:map";
+@use "../scheme";
+@use "../utility";
+
+$-vars: () !default;
+$-overrides: () !default;
+
+/// Defines a variable for a component.
+///
+/// @param {String} $component - Component name
+/// @param {String} $property - Property name
+/// @param {*} $value - Value of the property
+/// @throw If `$component` or `$property` is not a string
+@mixin define($component, $property, $value) {
+    $component: utility.assert-string($component, "define", "component");
+    $property: utility.assert-string($property, "define", "property");
+
+    $-vars: utility.deep-set($-vars, $value, $component, $property) !global;
+}
+
+/// Sets the value of a component variable for one scheme.
+///
+/// @param {String} $scheme - Scheme name
+/// @param {String} $component - Component name
+/// @param {String} $property - Property name
+/// @param {*} $value - Value of the property for the scheme
+/// @throw If `$scheme`, `$component` or `$property` is not a string
+@mixin override($scheme, $component, $property, $value) {
+    $scheme: utility.assert-string($scheme, "override", "scheme");
+    $component: utility.assert-string($component, "override", "component");
+    $property: utility.assert-string($property, "override", "property");
+
+    $_: scheme.define-scheme($scheme);
+    $-overrides: utility.deep-set($-overrides, $value, $scheme, $component, $property) !global;
+}
+
+/// Returns the value of a component variable.
+///
+/// @param {String} $component - Component name
+/// @param {String} $property - Property name
+/// @param {*} $fallback [null] - Value returned when the property has no value
+/// @return {*} Value of the property, or the fallback
+/// @throw If `$component` or `$property` is not a string
+@function value($component, $property, $fallback: null) {
+    $component: utility.assert-string($component, "value", "component");
+    $property: utility.assert-string($property, "value", "property");
+
+    @return map.get($-vars, $component, $property) or $fallback;
+}
+
+/// Returns the value of a component variable for one scheme.
+///
+/// @param {String} $scheme - Scheme name
+/// @param {String} $component - Component name
+/// @param {String} $property - Property name
+/// @param {*} $fallback [null] - Value returned when the scheme has no value for the property
+/// @return {*} Value of the property for the scheme, or the fallback
+/// @throw If `$scheme`, `$component` or `$property` is not a string
+@function scheme-value($scheme, $component, $property, $fallback: null) {
+    $scheme: utility.assert-string($scheme, "scheme-value", "scheme");
+    $component: utility.assert-string($component, "scheme-value", "component");
+    $property: utility.assert-string($property, "scheme-value", "property");
+
+    @return map.get($-overrides, $scheme, $component, $property) or $fallback;
+}
+
+/// Returns the CSS variable of a component property.
+/// It also registers the property value and each scheme override as CSS variables.
+///
+/// @param {String} $component - Component name
+/// @param {String} $property - Property name
+/// @param {*} $fallback [null] - Value used when the property has no value
+/// @return {Variable<*>} CSS variable of the property
+/// @throw If `$component` or `$property` is not a string
+@function var($component, $property, $fallback: null) {
+    $component: utility.assert-string($component, "var", "component");
+    $property: utility.assert-string($property, "var", "property");
+
+    $token: "var-#{$component}-#{$property}";
+    $value: map.get($-vars, $component, $property) or $fallback;
+    $_: scheme.define-variable(null, $token, $value);
+
+    @each $scheme in scheme.schemes() {
+        $_: scheme.define-variable(
+            $scheme,
+            $token,
+            map.get($-overrides, $scheme, $component, $property)
+        );
+    }
+
+    @return scheme.variable($token, $value);
+}

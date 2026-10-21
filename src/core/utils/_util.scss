@@ -1,0 +1,241 @@
+@use "sass:meta";
+@use "sass:math";
+@use "sass:map";
+@use "sass:list";
+@use "sass:color";
+@use "sass:string";
+@use "validation";
+
+/// Returns one of two values based on a condition.
+///
+/// @param {Boolean} $condition - Condition to check
+/// @param {*} $truly - Value returned when the condition is true
+/// @param {*} $falsy - Value returned when the condition is false
+/// @return {*} `$truly` or `$falsy`, based on the condition
+@function iif($condition, $truly, $falsy) {
+    @if $condition {
+        @return $truly;
+    }
+
+    @return $falsy;
+}
+
+/// Reverses the sign of a value using a CSS `calc()`.
+///
+/// @param {Variable<Length> | Length} $value - Value to negate
+/// @return {Calculation} The negated value
+@function negate($value) {
+    @return calc(-1 * #{$value});
+}
+
+/// Divides a value by two using a CSS `calc()`.
+///
+/// @param {Variable<Length> | Length} $value - Value to halve
+/// @return {Calculation} Half of the value
+@function half($value) {
+    @return calc(#{$value} / 2);
+}
+
+/// Multiplies a value by two using a CSS `calc()`.
+///
+/// @param {Variable<Length> | Length} $value - Value to double
+/// @return {Calculation} Twice the value
+@function double($value) {
+    @return calc(#{$value} * 2);
+}
+
+/// Sets the opacity of a color using CSS relative color syntax.
+///
+/// @param {Variable<Color> | Color} $value - Base color
+/// @param {Variable<Number> | Number} $opacity - Opacity, from 0 (transparent) to 1 (opaque)
+/// @return {Color} The color with the given opacity
+@function alpha($value, $opacity) {
+    @return rgb(from #{$value} r g b / #{$opacity});
+}
+
+/// Calculates the border radius of a child element inside a parent.
+/// The result is the parent radius minus the padding.
+///
+/// @param {Variable<Length> | Length} $parent-radius - Border radius of the parent
+/// @param {Variable<Length> | Length} $padding - Space between the parent and the child
+/// @return {Calculation} Border radius of the child
+@function child-radius($parent-radius, $padding) {
+    @return calc(#{$parent-radius} - #{$padding});
+}
+
+/// Creates a translucent box shadow.
+/// The blur is twice the larger offset, and the color opacity is set to 0.3.
+///
+/// @param {Length} $x - Horizontal offset
+/// @param {Length} $y - Vertical offset
+/// @param {Color} $color - Shadow color
+/// @return {BoxShadow} The shadow value
+/// @throw If `$x` or `$y` is not a number, or `$color` is not a color
+@function shadow($x, $y, $color) {
+    $x: validation.assert-number($x, "shadow", "x");
+    $y: validation.assert-number($y, "shadow", "y");
+    $color: validation.assert-color($color, "shadow", "color");
+
+    $max: math.max(math.abs($x), math.abs($y));
+    $color: color.change($color, $alpha: 0.3);
+
+    @return $x $y ($max * 2) 0 $color;
+}
+
+/// Creates a soft, spread-out box shadow.
+/// The blur is three times the larger offset, the spread is the negative of the larger offset, and the color opacity is set to 0.15.
+///
+/// @param {Length} $x - Horizontal offset
+/// @param {Length} $y - Vertical offset
+/// @param {Color} $color - Shadow color
+/// @return {BoxShadow} The shadow value
+/// @throw If `$x` or `$y` is not a number, or `$color` is not a color
+@function soft-shadow($x, $y, $color) {
+    $x: validation.assert-number($x, "soft-shadow", "x");
+    $y: validation.assert-number($y, "soft-shadow", "y");
+    $color: validation.assert-color($color, "soft-shadow", "color");
+
+    $max: math.max(math.abs($x), math.abs($y));
+    $color: color.change($color, $alpha: 0.15);
+
+    @return $x $y ($max * 3) negate($max) $color;
+}
+
+/// Creates a flat box shadow with no offset and no blur.
+///
+/// @param {Length} $size - Spread size of the shadow
+/// @param {Color} $color - Shadow color
+/// @return {BoxShadow} The shadow value
+/// @throw If `$size` is not a number or `$color` is not a color
+@function flat-shadow($size, $color) {
+    $size: validation.assert-number($size, "flat-shadow", "size");
+    $color: validation.assert-color($color, "flat-shadow", "color");
+
+    @return 0 0 0 $size $color;
+}
+
+/// Checks whether a key passes the include and exclude lists.
+///
+/// @param {String} $key - Key to check
+/// @param {List<String>} $includes - Allowed keys; an empty list allows any key
+/// @param {List<String>} $excludes - Blocked keys; an empty list blocks no key
+/// @return {Boolean} `true` if the key is allowed and not blocked, otherwise `false`
+/// @throw If `$key` is not a string, or `$includes` or `$excludes` is not a list
+@function should-include($key, $includes, $excludes) {
+    $key: validation.assert-string($key, "should-include", "key");
+    $includes: validation.assert-list($includes, "should-include", "includes");
+    $excludes: validation.assert-list($excludes, "should-include", "excludes");
+
+    $in-includes: list.length($includes) == 0 or list.index($includes, $key) != null;
+    $not-in-excludes: list.length($excludes) == 0 or list.index($excludes, $key) == null;
+
+    @return $in-includes and $not-in-excludes;
+}
+
+/// Converts a name to a Termeh CSS custom property name.
+///
+/// @param {String} $name - Name to convert
+/// @return {String} The name in kebab-case with the `--termeh-` prefix
+/// @throw If `$name` is not a string
+@function tokenize($name) {
+    $name: validation.assert-string($name, "tokenize", "name");
+
+    @return string.unquote("--termeh-" + -kebab-case($name));
+}
+
+/// Sets a value at a path in a nested map.
+/// Maps that do not exist on the path are created.
+///
+/// @param {Map<*, *>} $map - Map to update
+/// @param {*} $value - Value to set
+/// @param {Arglist} $keys - Keys that make the path to the value
+/// @return {Map<*, *>} The updated map
+@function deep-set($map, $value, $keys...) {
+    $key: list.nth($keys, 1);
+    @if list.length($keys) == 1 {
+        @return map.set($map, $key, $value);
+    }
+
+    $rest: ();
+    @for $i from 2 through list.length($keys) {
+        $rest: list.append($rest, list.nth($keys, $i), comma);
+    }
+
+    $sub-map: map.get($map, $key);
+    @if not $sub-map {
+        $sub-map: ();
+    }
+
+    $sub-map: deep-set($sub-map, $value, $rest...);
+    @return map.set($map, $key, $sub-map);
+}
+
+/// Adds a value to the start of the list at a path in a nested map.
+/// If there is no list at the path, a new list is created.
+///
+/// @param {Map<*, *>} $map - Map to update
+/// @param {*} $value - Value to add at the start
+/// @param {Arglist} $keys - Keys that make the path to the list
+/// @return {Map<*, *>} The updated map
+@function deep-prepend($map, $value, $keys...) {
+    $current: map.get($map, $keys...);
+    @if not $current {
+        $current: ();
+    }
+    $current: list.join(($value), $current, $separator: comma);
+
+    @return deep-set($map, $current, $keys...);
+}
+
+/// Joins the items of a list, or the keys of a map, into a comma-separated string.
+///
+/// @param {List<*> | Map<*, *>} $input - List or map to print
+/// @return {String} Comma-separated items or keys
+@function print($input) {
+    @if meta.type-of($input) == map {
+        @return string.unquote("#{list.join(map.keys($input), (), comma)}");
+    }
+
+    @return string.unquote("#{list.join($input, (), comma)}");
+}
+
+@function -is-uppercase-letter($char) {
+    @return $char != string.to-lower-case($char);
+}
+
+@function -can-add-separator($result) {
+    @return string.length($result) > 0 and string.slice($result, -1) != "-";
+}
+
+@function -kebab-case($value) {
+    $result: "";
+    $length: string.length($value);
+
+    @for $i from 1 through $length {
+        $char: string.slice($value, $i, $i);
+
+        @if $char == "_" or $char == "-" or $char == " " {
+            @if -can-add-separator($result) {
+                $result: $result + "-";
+            }
+        } @else if -is-uppercase-letter($char) {
+            @if -can-add-separator($result) {
+                $result: $result + "-";
+            }
+
+            $result: $result + string.to-lower-case($char);
+        } @else {
+            $result: $result + $char;
+        }
+    }
+
+    @if string.slice($result, 1, 1) == "-" {
+        $result: string.slice($result, 2);
+    }
+
+    @if string.slice($result, -1) == "-" {
+        $result: string.slice($result, 1, string.length($result) - 1);
+    }
+
+    @return $result;
+}

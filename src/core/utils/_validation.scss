@@ -1,0 +1,370 @@
+@use "sass:string";
+@use "sass:meta";
+
+@function -type-error($value, $caller, $param, $expected) {
+    @return "#{$caller}: Invalid `#{$param}`. Expected #{$expected}, got #{meta.type-of($value)} (`#{meta.inspect($value)}`).";
+}
+
+/// Checks whether a value is a boolean.
+///
+/// @param {*} $value - Value to check
+/// @return {Boolean} `true` if the value is a boolean, otherwise `false`
+@function is-bool($value) {
+    @return meta.type-of($value) == bool;
+}
+
+/// Checks whether a value is a boolean or `null`.
+///
+/// @param {*} $value - Value to check
+/// @return {Boolean} `true` if the value is a boolean or `null`, otherwise `false`
+@function is-nullable-bool($value) {
+    @return $value == null or is-bool($value);
+}
+
+/// Returns the value if it is a boolean. Otherwise, returns the fallback if it is a boolean.
+///
+/// @param {*} $value - Value to validate
+/// @param {String} $caller - Name of the calling function, used in the error message
+/// @param {String} $param - Name of the checked parameter, used in the error message
+/// @param {Boolean | null} $fallback [null] - Value to return when `$value` is not a boolean
+/// @return {Boolean} The value or the fallback
+/// @throw If neither `$value` nor `$fallback` is a boolean
+@function assert-bool($value, $caller, $param, $fallback: null) {
+    @if is-bool($value) {
+        @return $value;
+    } @else if is-bool($fallback) {
+        @return $fallback;
+    } @else {
+        @error -type-error($value, $caller, $param, "bool");
+    }
+}
+
+/// Returns the value if it is a boolean or `null`. Otherwise, returns the fallback if it is a boolean or `null`.
+///
+/// @param {*} $value - Value to validate
+/// @param {String} $caller - Name of the calling function, used in the error message
+/// @param {String} $param - Name of the checked parameter, used in the error message
+/// @param {Boolean | null} $fallback [""] - Value to return when `$value` is not a boolean or `null`
+/// @return {Boolean | null} The value or the fallback
+/// @throw If neither `$value` nor `$fallback` is a boolean or `null`
+@function assert-nullable-bool($value, $caller, $param, $fallback: "") {
+    @if is-nullable-bool($value) {
+        @return $value;
+    } @else if is-nullable-bool($fallback) {
+        @return $fallback;
+    } @else {
+        @error -type-error($value, $caller, $param, "bool or null");
+    }
+}
+
+/// Checks whether a value is a number.
+///
+/// @param {*} $value - Value to check
+/// @return {Boolean} `true` if the value is a number, otherwise `false`
+@function is-number($value) {
+    @return meta.type-of($value) == number;
+}
+
+/// Checks whether a value is a number or `null`.
+///
+/// @param {*} $value - Value to check
+/// @return {Boolean} `true` if the value is a number or `null`, otherwise `false`
+@function is-nullable-number($value) {
+    @return $value == null or is-number($value);
+}
+
+/// Returns the value if it is a number. Otherwise, returns the fallback if it is a number.
+///
+/// @param {*} $value - Value to validate
+/// @param {String} $caller - Name of the calling function, used in the error message
+/// @param {String} $param - Name of the checked parameter, used in the error message
+/// @param {Number | Length | null} $fallback [null] - Value to return when `$value` is not a number
+/// @return {Number | Length} The value or the fallback
+/// @throw If neither `$value` nor `$fallback` is a number
+@function assert-number($value, $caller, $param, $fallback: null) {
+    @if is-number($value) {
+        @return $value;
+    } @else if is-number($fallback) {
+        @return $fallback;
+    } @else {
+        @error -type-error($value, $caller, $param, "number");
+    }
+}
+
+/// Returns the value if it is a number or `null`. Otherwise, returns the fallback if it is a number or `null`.
+///
+/// @param {*} $value - Value to validate
+/// @param {String} $caller - Name of the calling function, used in the error message
+/// @param {String} $param - Name of the checked parameter, used in the error message
+/// @param {Number | Length | null} $fallback [false] - Value to return when `$value` is not a number or `null`
+/// @return {Number | Length | null} The value or the fallback
+/// @throw If neither `$value` nor `$fallback` is a number or `null`
+@function assert-nullable-number($value, $caller, $param, $fallback: false) {
+    @if is-nullable-number($value) {
+        @return $value;
+    } @else if is-nullable-number($fallback) {
+        @return $fallback;
+    } @else {
+        @error -type-error($value, $caller, $param, "number or null");
+    }
+}
+
+/// Checks whether a value is a string.
+///
+/// @param {*} $value - Value to check
+/// @return {Boolean} `true` if the value is a string, otherwise `false`
+@function is-string($value) {
+    @return meta.type-of($value) == string;
+}
+
+/// Checks whether a value is a string or `null`.
+///
+/// @param {*} $value - Value to check
+/// @return {Boolean} `true` if the value is a string or `null`, otherwise `false`
+@function is-nullable-string($value) {
+    @return $value == null or is-string($value);
+}
+
+/// Returns the value as a quoted string if it is a string. Otherwise, returns the fallback as a quoted string if it is a string.
+///
+/// @param {*} $value - Value to validate
+/// @param {String} $caller - Name of the calling function, used in the error message
+/// @param {String} $param - Name of the checked parameter, used in the error message
+/// @param {String | null} $fallback [null] - Value to use when `$value` is not a string
+/// @return {String} The quoted value or the quoted fallback
+/// @throw If neither `$value` nor `$fallback` is a string
+@function assert-string($value, $caller, $param, $fallback: null) {
+    @if is-string($value) {
+        @return string.quote($value);
+    } @else if is-string($fallback) {
+        @return string.quote($fallback);
+    } @else {
+        @error -type-error($value, $caller, $param, "string");
+    }
+}
+
+/// Returns the value if it is a string or `null`. Otherwise, returns the fallback if it is a string or `null`.
+///
+/// @param {*} $value - Value to validate
+/// @param {String} $caller - Name of the calling function, used in the error message
+/// @param {String} $param - Name of the checked parameter, used in the error message
+/// @param {String | null} $fallback [false] - Value to return when `$value` is not a string or `null`
+/// @return {String | null} The value or the fallback
+/// @throw If neither `$value` nor `$fallback` is a string or `null`
+@function assert-nullable-string($value, $caller, $param, $fallback: false) {
+    @if is-nullable-string($value) {
+        @return $value;
+    } @else if is-nullable-string($fallback) {
+        @return $fallback;
+    } @else {
+        @error -type-error($value, $caller, $param, "string or null");
+    }
+}
+
+/// Checks whether a value is a color.
+///
+/// @param {*} $value - Value to check
+/// @return {Boolean} `true` if the value is a color, otherwise `false`
+@function is-color($value) {
+    @return meta.type-of($value) == color;
+}
+
+/// Checks whether a value is a color or `null`.
+///
+/// @param {*} $value - Value to check
+/// @return {Boolean} `true` if the value is a color or `null`, otherwise `false`
+@function is-nullable-color($value) {
+    @return $value == null or is-color($value);
+}
+
+/// Returns the value if it is a color. Otherwise, returns the fallback if it is a color.
+///
+/// @param {*} $value - Value to validate
+/// @param {String} $caller - Name of the calling function, used in the error message
+/// @param {String} $param - Name of the checked parameter, used in the error message
+/// @param {Color | null} $fallback [null] - Value to return when `$value` is not a color
+/// @return {Color} The value or the fallback
+/// @throw If neither `$value` nor `$fallback` is a color
+@function assert-color($value, $caller, $param, $fallback: null) {
+    @if is-color($value) {
+        @return $value;
+    } @else if is-color($fallback) {
+        @return $fallback;
+    } @else {
+        @error -type-error($value, $caller, $param, "color");
+    }
+}
+
+/// Returns the value if it is a color or `null`. Otherwise, returns the fallback if it is a color or `null`.
+///
+/// @param {*} $value - Value to validate
+/// @param {String} $caller - Name of the calling function, used in the error message
+/// @param {String} $param - Name of the checked parameter, used in the error message
+/// @param {Color | null} $fallback [false] - Value to return when `$value` is not a color or `null`
+/// @return {Color | null} The value or the fallback
+/// @throw If neither `$value` nor `$fallback` is a color or `null`
+@function assert-nullable-color($value, $caller, $param, $fallback: false) {
+    @if is-nullable-color($value) {
+        @return $value;
+    } @else if is-nullable-color($fallback) {
+        @return $fallback;
+    } @else {
+        @error -type-error($value, $caller, $param, "color or null");
+    }
+}
+
+/// Checks whether a value is a list.
+///
+/// @param {*} $value - Value to check
+/// @return {Boolean} `true` if the value is a list, otherwise `false`
+@function is-list($value) {
+    @return meta.type-of($value) == list;
+}
+
+/// Checks whether a value is a list or `null`.
+///
+/// @param {*} $value - Value to check
+/// @return {Boolean} `true` if the value is a list or `null`, otherwise `false`
+@function is-nullable-list($value) {
+    @return $value == null or is-list($value);
+}
+
+/// Returns the value if it is a list. Otherwise, returns the fallback if it is a list.
+///
+/// @param {*} $value - Value to validate
+/// @param {String} $caller - Name of the calling function, used in the error message
+/// @param {String} $param - Name of the checked parameter, used in the error message
+/// @param {List<*> | null} $fallback [null] - Value to return when `$value` is not a list
+/// @return {List<*>} The value or the fallback
+/// @throw If neither `$value` nor `$fallback` is a list
+@function assert-list($value, $caller, $param, $fallback: null) {
+    @if is-list($value) {
+        @return $value;
+    } @else if is-list($fallback) {
+        @return $fallback;
+    } @else {
+        @error -type-error($value, $caller, $param, "list");
+    }
+}
+
+/// Returns the value if it is a list or `null`. Otherwise, returns the fallback if it is a list or `null`.
+///
+/// @param {*} $value - Value to validate
+/// @param {String} $caller - Name of the calling function, used in the error message
+/// @param {String} $param - Name of the checked parameter, used in the error message
+/// @param {List<*> | null} $fallback [false] - Value to return when `$value` is not a list or `null`
+/// @return {List<*> | null} The value or the fallback
+/// @throw If neither `$value` nor `$fallback` is a list or `null`
+@function assert-nullable-list($value, $caller, $param, $fallback: false) {
+    @if is-nullable-list($value) {
+        @return $value;
+    } @else if is-nullable-list($fallback) {
+        @return $fallback;
+    } @else {
+        @error -type-error($value, $caller, $param, "list or null");
+    }
+}
+
+/// Checks whether a value is a map.
+///
+/// @param {*} $value - Value to check
+/// @return {Boolean} `true` if the value is a map, otherwise `false`
+@function is-map($value) {
+    @return meta.type-of($value) == map;
+}
+
+/// Checks whether a value is a map or `null`.
+///
+/// @param {*} $value - Value to check
+/// @return {Boolean} `true` if the value is a map or `null`, otherwise `false`
+@function is-nullable-map($value) {
+    @return $value == null or is-map($value);
+}
+
+/// Returns the value if it is a map. Otherwise, returns the fallback if it is a map.
+///
+/// @param {*} $value - Value to validate
+/// @param {String} $caller - Name of the calling function, used in the error message
+/// @param {String} $param - Name of the checked parameter, used in the error message
+/// @param {Map<*, *> | null} $fallback [null] - Value to return when `$value` is not a map
+/// @return {Map<*, *>} The value or the fallback
+/// @throw If neither `$value` nor `$fallback` is a map
+@function assert-map($value, $caller, $param, $fallback: null) {
+    @if is-map($value) {
+        @return $value;
+    } @else if is-map($fallback) {
+        @return $fallback;
+    } @else {
+        @error -type-error($value, $caller, $param, "map");
+    }
+}
+
+/// Returns the value if it is a map or `null`. Otherwise, returns the fallback if it is a map or `null`.
+///
+/// @param {*} $value - Value to validate
+/// @param {String} $caller - Name of the calling function, used in the error message
+/// @param {String} $param - Name of the checked parameter, used in the error message
+/// @param {Map<*, *> | null} $fallback [false] - Value to return when `$value` is not a map or `null`
+/// @return {Map<*, *> | null} The value or the fallback
+/// @throw If neither `$value` nor `$fallback` is a map or `null`
+@function assert-nullable-map($value, $caller, $param, $fallback: false) {
+    @if is-nullable-map($value) {
+        @return $value;
+    } @else if is-nullable-map($fallback) {
+        @return $fallback;
+    } @else {
+        @error -type-error($value, $caller, $param, "map or null");
+    }
+}
+
+/// Checks whether a value is a function.
+///
+/// @param {*} $value - Value to check
+/// @return {Boolean} `true` if the value is a function, otherwise `false`
+@function is-function($value) {
+    @return meta.type-of($value) == function;
+}
+
+/// Checks whether a value is a function or `null`.
+///
+/// @param {*} $value - Value to check
+/// @return {Boolean} `true` if the value is a function or `null`, otherwise `false`
+@function is-nullable-function($value) {
+    @return $value == null or is-function($value);
+}
+
+/// Returns the value if it is a function. Otherwise, returns the fallback if it is a function.
+///
+/// @param {*} $value - Value to validate
+/// @param {String} $caller - Name of the calling function, used in the error message
+/// @param {String} $param - Name of the checked parameter, used in the error message
+/// @param {Function | null} $fallback [null] - Value to return when `$value` is not a function
+/// @return {Function} The value or the fallback
+/// @throw If neither `$value` nor `$fallback` is a function
+@function assert-function($value, $caller, $param, $fallback: null) {
+    @if is-function($value) {
+        @return $value;
+    } @else if is-function($fallback) {
+        @return $fallback;
+    } @else {
+        @error -type-error($value, $caller, $param, "function");
+    }
+}
+
+/// Returns the value if it is a function or `null`. Otherwise, returns the fallback if it is a function or `null`.
+///
+/// @param {*} $value - Value to validate
+/// @param {String} $caller - Name of the calling function, used in the error message
+/// @param {String} $param - Name of the checked parameter, used in the error message
+/// @param {Function | null} $fallback [false] - Value to return when `$value` is not a function or `null`
+/// @return {Function | null} The value or the fallback
+/// @throw If neither `$value` nor `$fallback` is a function or `null`
+@function assert-nullable-function($value, $caller, $param, $fallback: false) {
+    @if is-nullable-function($value) {
+        @return $value;
+    } @else if is-nullable-function($fallback) {
+        @return $fallback;
+    } @else {
+        @error -type-error($value, $caller, $param, "function or null");
+    }
+}

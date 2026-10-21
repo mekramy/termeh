@@ -1,10 +1,11 @@
-@use "sass:list";
 @use "sass:map";
+@use "sass:list";
 @use "sass:color";
 @use "util";
+@use "validation";
 
-/// Color ranges based on HSL values
-/// Format: (name, from hue, to hue, dark hue, bright hue)
+/// Hue ranges and adjustment hues used to generate palette variants.
+/// Each entry contains a name, hue range, dark hue, and bright hue.
 $-color-spaces: (
     red 355deg 360deg 0deg 355deg,
     red 0deg 11deg 0deg 11deg,
@@ -26,8 +27,7 @@ $-color-spaces: (
     pink_red 342deg 355deg 359deg 342deg
 );
 
-/// Color variant definitions
-/// Format: (percentage, variant-type)
+/// Blend amounts and target tones for each generated color variant.
 $-color-mixes: (
     "50": 95% brightest,
     "100": 85% brightest,
@@ -40,21 +40,21 @@ $-color-mixes: (
     "900": 90% darkest,
 );
 
-/// Checks if value is within range.
+/// Returns whether a value falls within an inclusive range.
 ///
 /// @param {Number} $v - Value to check
 /// @param {Number} $min - Minimum bound
 /// @param {Number} $max - Maximum bound
-/// @return {Boolean} True if within range
+/// @return {Boolean} Whether the value is within the range
 /// @access private
 @function -between($v, $min, $max) {
     @return $v >= $min and $v <= $max;
 }
 
-/// Finds color range for given hue.
+/// Finds the hue range that contains the color's hue.
 ///
 /// @param {Color} $color - Input color
-/// @return {List | null} Color range definition
+/// @return {List | null} Matching range, or `null` if none is found
 /// @access private
 @function -find($color) {
     $hue: color.channel($color, "hue", $space: hsl);
@@ -70,28 +70,28 @@ $-color-mixes: (
     @return null;
 }
 
-/// Generates darkest variant of color.
+/// Creates a dark palette tone based on the color's hue and lightness.
 ///
 /// @param {Color} $color - Base color
-/// @return {Color} Darkest variant
+/// @return {Color} Generated dark tone
 /// @access private
 @function -darkest($color) {
     $record: -find($color);
     $hue: list.nth($record, 4);
 
     // Adjust saturation and lightness based on the color's properties.
-    $sat: util.ternary(color.channel($color, "saturation", $space: hsl) > 40%, 100%, 50%);
-    $sat: util.ternary(color.channel($color, "saturation", $space: hsl) == 0%, 0%, $sat);
+    $sat: util.iif(color.channel($color, "saturation", $space: hsl) > 40%, 100%, 50%);
+    $sat: util.iif(color.channel($color, "saturation", $space: hsl) == 0%, 0%, $sat);
 
     // Calculate the darkest version based on lightness.
-    $lgh: util.ternary(color.channel($color, "lightness", $space: hsl) >= 50%, 40%, 17%);
+    $lgh: util.iif(color.channel($color, "lightness", $space: hsl) >= 50%, 40%, 17%);
     @return hsl($hue, $sat, $lgh);
 }
 
-/// Generates brightest variant of color.
+/// Creates a bright palette tone using the color's saturation.
 ///
 /// @param {Color} $color - Base color
-/// @return {Color} Brightest variant
+/// @return {Color} Generated bright tone
 /// @access private
 @function -brightest($color) {
     $record: -find($color);
@@ -101,39 +101,27 @@ $-color-mixes: (
     @return hsl($hue, color.channel($color, "saturation", $space: hsl), 95%);
 }
 
-/// Validates color variant.
-///
-/// @param {String} $var - Variant to validate
-/// @return {String} Validated variant
-/// @throw If the input variant is not valid
-/// @access private
-@function -validate($var) {
-    $var: util.string-of($var, "palette", "variant");
-    $valid-variants: "50" "100" "200" "300" "400" "500" "600" "700" "800" "900";
-
-    @if not list.index($valid-variants, $var) {
-        @error "Invalid color variant: '#{$var}'. Must be one of: #{$valid-variants}";
-    }
-
-    @return $var;
-}
-
-/// Generates color variant.
+/// Creates a palette variant of a color.
+/// Variant `500` returns the original color. Other variants mix it with a generated bright or dark tone.
 ///
 /// @param {Color} $color - Base color
-/// @param {String} $variant - Desired variant
-/// @return {Color} Resulting color variant
-/// @throw If the input color is not a valid color or if the variant is not valid
+/// @param {String} $variant - Variant name: `"50"`, `"100"`, `"200"`, `"300"`, `"400"`, `"500"`, `"600"`, `"700"`, `"800"` or `"900"`
+/// @return {Color} The color for the requested variant
+/// @throw If `$color` is not a color, `$variant` is not a string, or `$variant` is not a known variant
 @function palette($color, $variant) {
-    $color: util.color-of($color, "palette", "color");
+    $color: validation.assert-color($color, "palette", "color");
+    $variant: validation.assert-string($variant, "palette", "variant");
+    $variants: "50" "100" "200" "300" "400" "500" "600" "700" "800" "900";
+    @if not list.index($variants, $variant) {
+        @error "Unknown variant '#{$variant}'. Available: #{util.print($variants)}";
+    }
 
-    $variant: -validate($variant);
     $data: map.get($-color-mixes, $variant);
     @if not $data {
         @return $color;
     }
 
     $amount: list.nth($data, 1);
-    $base: util.ternary(list.nth($data, 2) == brightest, -brightest($color), -darkest($color));
+    $base: util.iif(list.nth($data, 2) == brightest, -brightest($color), -darkest($color));
     @return color.mix($base, $color, $amount);
 }

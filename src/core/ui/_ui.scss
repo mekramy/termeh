@@ -1,0 +1,479 @@
+@use "sass:list";
+@use "../utility";
+@use "../variable";
+@use "../../animation";
+
+/// Applies styles to elements that are not the last child and not marked `.is-marginless`.
+///
+/// @param {Arglist} $exclude - Extra selectors to exclude
+/// @output The content inside `&:not(:last-child, ...)` with the excluded selectors
+@mixin marged($exclude...) {
+    $skip: list.join(".is-marginless", $exclude, comma);
+
+    &:not(:last-child, #{$skip}) {
+        @content;
+    }
+}
+
+/// Applies styles to elements that are not marked `.is-paddingless`.
+///
+/// @param {Arglist} $exclude - Extra selectors to exclude
+/// @output The content inside `&:not(.is-paddingless, ...)` with the excluded selectors
+@mixin padded($exclude...) {
+    $skip: list.join(".is-paddingless", $exclude, comma);
+
+    &:not(#{$skip}) {
+        @content;
+    }
+}
+
+/// Applies styles to elements that are not marked `.is-gapless`.
+///
+/// @param {Arglist} $exclude - Extra selectors to exclude
+/// @output The content inside `&:not(.is-gapless, ...)` with the excluded selectors
+@mixin gapped($exclude...) {
+    $skip: list.join(".is-gapless", $exclude, comma);
+
+    &:not(#{$skip}) {
+        @content;
+    }
+}
+
+/// Clears floats after the element.
+///
+/// @output An `::after` pseudo-element with `clear: both`
+@mixin clearfix() {
+    &::after {
+        clear: both;
+        content: " ";
+        display: table;
+    }
+}
+
+/// Turns on momentum scrolling on iOS.
+///
+/// @output The `-webkit-overflow-scrolling: touch` declaration
+@mixin overflow-touch() {
+    -webkit-overflow-scrolling: touch;
+}
+
+/// Blocks pointer events and text selection.
+///
+/// @output Declarations that set the default cursor, and turn off user selection and pointer events
+@mixin locked() {
+    cursor: default;
+    user-select: none;
+    pointer-events: none;
+}
+
+/// Turns off text selection in all major browsers.
+///
+/// @output Prefixed and standard `user-select: none` declarations
+@mixin unselectable() {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/// Turns on text selection in all major browsers.
+///
+/// @output Prefixed and standard `user-select: text` declarations
+@mixin selectable() {
+    -webkit-touch-callout: default;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+/// Removes the native look of an element and resets its box styles.
+///
+/// @output Declarations that remove appearance, background, border, shadow, outline, margin and padding, and inherit font and color
+@mixin reset() {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    box-sizing: border-box;
+    box-shadow: none;
+    background: none;
+    position: relative;
+    border: none;
+    color: currentcolor;
+    font-family: inherit;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    font-size: 1em;
+    line-height: 1em;
+    overflow: hidden;
+}
+
+/// Creates a base style for interactive controls.
+/// It resets the element, removes outlines, and blocks interaction when the control is disabled.
+///
+/// @output The reset styles, plus rules for the focus, active, invalid and disabled states
+@mixin control() {
+    @include reset();
+
+    &:focus,
+    &.is-focused,
+    &:active,
+    &.is-active {
+        outline: none;
+    }
+
+    &:invalid {
+        outline: none;
+    }
+
+    &[disabled],
+    fieldset[disabled] &,
+    &.is-disabled {
+        cursor: default;
+        pointer-events: none;
+        user-select: none;
+    }
+
+    &::-moz-focus-inner {
+        border: 0;
+    }
+}
+
+/// Styles the WebKit scrollbar.
+///
+/// @param {Variable<Length> | Length} $width - Scrollbar width
+/// @param {Variable<Color> | Color} $track [null] - Track color
+/// @param {Variable<Color> | Color} $thumb [null] - Thumb color
+/// @param {Variable<Color> | Color} $thumb-hover [null] - Thumb color on hover
+/// @output Rules for the scrollbar, track and thumb pseudo-elements; the thumb color changes with a 200ms transition
+@mixin scrollbar($width, $track: null, $thumb: null, $thumb-hover: null) {
+    &::-webkit-scrollbar {
+        width: $width;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: $track;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $thumb;
+        transition: background 200ms linear;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: $thumb-hover;
+    }
+}
+
+/// Sets the WebKit scrollbar thumb color on hover.
+///
+/// @param {Variable<Color> | Color} $color - Thumb color on hover
+/// @output A rule for the hovered scrollbar thumb
+@mixin scroll-color($color) {
+    &::-webkit-scrollbar-thumb:hover {
+        background: $color;
+    }
+}
+
+/// Draws a spinning circle.
+///
+/// @param {Variable<Length> | Length} $size - Circle width and height
+/// @param {Variable<Color> | Color} $color - Border color
+/// @param {Variable<Length> | Length} $thickness - Border thickness
+/// @output Declarations for an absolutely positioned circle with a border, and a spin animation
+@mixin spinner($size, $color, $thickness) {
+    text-rendering: optimizelegibility;
+    display: block;
+    position: absolute;
+    box-sizing: border-box;
+    content: " ";
+    width: $size;
+    height: $size;
+    border: $thickness solid $color;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: spin 500ms infinite linear;
+
+    @include animation.spin();
+}
+
+/// Change spinner color.
+///
+/// @param {Variable<Color> | Color} $color - Border color
+/// @output The `border-left-color` and `border-bottom-color` declarations
+@mixin spinner-color($color) {
+    border-left-color: $color;
+    border-bottom-color: $color;
+}
+
+/// Shows a spinner in the center of the element.
+///
+/// @param {Variable<Length> | Length} $size - Spinner width and height
+/// @param {Variable<Color> | Color} $color - Spinner color
+/// @param {Variable<Length> | Length} $thickness - Spinner border thickness
+/// @output Relative positioning, and an `::after` pseudo-element with a centered spinner
+@mixin loader($size, $color, $thickness) {
+    z-index: 0;
+    position: relative;
+
+    &::after {
+        z-index: 2;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        @include spinner($size, $color, $thickness);
+    }
+}
+
+/// Sets the color of the spinner made by `loader`.
+///
+/// @param {Variable<Color> | Color} $color - Spinner color
+/// @output An `::after` rule with the spinner color
+@mixin loader-color($color) {
+    &::after {
+        @include spinner-color($color);
+    }
+}
+
+/// Covers the element with a translucent layer and a backdrop filter.
+///
+/// @param {Variable<Color> | Color} $background - Layer color
+/// @param {Variable<Number> | Number} $opacity - Layer opacity, from 0 (transparent) to 1 (opaque)
+/// @param {Variable<Filter> | Filter} $filter - Backdrop filter
+/// @output Relative positioning, and a `::before` pseudo-element that fills the element
+@mixin overlay($background, $opacity, $filter) {
+    z-index: 0;
+    position: relative;
+
+    &::before {
+        content: " ";
+        position: absolute;
+        z-index: 1;
+        inset: 0;
+        background: utility.alpha($background, $opacity);
+        backdrop-filter: $filter;
+    }
+}
+
+/// Applies styles for left-to-right direction.
+///
+/// @output The content when the document direction is `"ltr"`, and again inside `&.is-ltr`
+///
+/// @require {Variable<Direction>} var("document", "direction") - Document direction
+@mixin is-ltr() {
+    $direction: variable.var("document", "direction");
+
+    @if $direction == "ltr" {
+        @content;
+    }
+
+    &.is-ltr {
+        @content;
+    }
+}
+
+/// Applies styles for right-to-left direction.
+///
+/// @output The content when the document direction is `"rtl"`, and again inside `&.is-rtl`
+///
+/// @require {Variable<Direction>} var("document", "direction") - Document direction
+@mixin is-rtl() {
+    $direction: variable.var("document", "direction");
+
+    @if $direction == "rtl" {
+        @content;
+    }
+
+    &.is-rtl {
+        @content;
+    }
+}
+
+/// Applies styles when the element is invalid.
+///
+/// @output The content for `:invalid` and `.is-failed` on the element, and on the element inside an invalid or `.is-failed` ancestor
+@mixin is-invalid() {
+    &:invalid,
+    &.is-failed {
+        @content;
+    }
+
+    @at-root {
+        :invalid #{&},
+        .is-failed #{&} {
+            @content;
+        }
+    }
+}
+
+/// Applies styles when the element is disabled.
+///
+/// @output The content for `:disabled` and `.is-disabled` on the element, and on the element inside a disabled or `.is-disabled` ancestor
+@mixin is-disabled() {
+    &:disabled,
+    &.is-disabled {
+        @content;
+    }
+
+    @at-root {
+        :disabled #{&},
+        .is-disabled #{&} {
+            @content;
+        }
+    }
+}
+
+/// Applies styles when the element is focused and not disabled.
+///
+/// @param {Arglist} $exclude - Extra selectors to exclude
+/// @output The content for `&:focus` that is not `:disabled`, `.is-disabled` or an excluded selector, and for a focused element inside an ancestor that is not disabled
+@mixin is-focused($exclude...) {
+    $skip: list.join(".is-disabled", $exclude, comma);
+
+    &:focus:not(:disabled, #{$skip}),
+    :focus-within:not(:disabled, #{$skip}) {
+        @content;
+    }
+
+    @at-root {
+        :not(:disabled, .is-disabled) #{&}:focus,
+        :not(:disabled, .is-disabled) #{&}:focus-within {
+            @content;
+        }
+    }
+}
+
+/// Returns the padding of a control.
+///
+/// @return {Padding} Horizontal padding, then vertical padding
+///
+/// @require {Variable<Length>} var("control", "h-padding") - Horizontal padding of controls
+/// @require {Variable<Length>} var("control", "v-padding") - Vertical padding of controls
+@function control-padding() {
+    $h-padding: variable.var("control", "h-padding");
+    $v-padding: variable.var("control", "v-padding");
+
+    @return $h-padding $v-padding;
+}
+
+/// Returns the padding of an inline element.
+///
+/// @return {Padding} Micro gap, then double the micro gap
+///
+/// @require {Variable<Length>} var("gap", "micro") - Micro gap
+@function inline-padding() {
+    $gap: variable.var("gap", "micro");
+
+    @return $gap util.double($gap);
+}
+
+/// Sets the transition of the given properties with the theme easing and duration.
+/// It also sets `will-change` unless the properties include `all`.
+///
+/// @param {Arglist} $fields - Properties to transition
+/// @output The transition property, timing function and duration declarations
+///
+/// @require {Variable<EasingFunction>} var("transition", "ease") - Transition easing function
+/// @require {Variable<Duration>} var("transition", "duration") - Transition duration
+@mixin transition($fields...) {
+    $fields: list.append($fields, (), "comma");
+    $ease: variable.var("transition", "ease");
+    $duration: variable.var("transition", "duration");
+
+    transition-property: $fields;
+    transition-timing-function: $ease;
+    transition-duration: $duration;
+    @if not list.index($fields, all) {
+        will-change: $fields;
+    }
+}
+
+/// Sets the transition of the given properties with the theme easing, duration and delay.
+/// It also sets `will-change` unless the properties include `all`.
+///
+/// @param {Arglist} $fields - Properties to transition
+/// @output The transition property, timing function, duration and delay declarations
+///
+/// @require {Variable<EasingFunction>} var("transition", "ease") - Transition easing function
+/// @require {Variable<Duration>} var("transition", "duration") - Transition duration
+/// @require {Variable<Duration>} var("transition", "delay") - Transition delay
+@mixin delayed-transition($fields...) {
+    // stylelint-disable declaration-block-no-redundant-longhand-properties
+    $fields: list.append($fields, (), "comma");
+    $ease: variable.var("transition", "ease");
+    $duration: variable.var("transition", "duration");
+    $delay: variable.var("transition", "delay");
+
+    transition-property: $fields;
+    transition-timing-function: $ease;
+    transition-duration: $duration;
+    transition-delay: $delay;
+    @if not list.index($fields, all) {
+        will-change: $fields;
+    }
+    // stylelint-enable declaration-block-no-redundant-longhand-properties
+}
+
+/// Styles an element as disabled.
+///
+/// @output Declarations that block interaction and set the opacity, text color, background color and border color
+///
+/// @require {Variable<Number>} var("control", "disabled-opacity") - Opacity of disabled controls
+/// @require {Variable<Color>} variant-for("input", "base", "disabled-color") - Text color of disabled inputs
+/// @require {Variable<Color>} variant-for("input", "base", "disabled-background") - Background color of disabled inputs
+/// @require {Variable<Color>} variant-for("input", "base", "disabled-border") - Border color of disabled inputs
+@mixin disabled() {
+    $opacity: variable.var("control", "disabled-opacity");
+    $color: variable.variant-for("input", "base", "disabled-color");
+    $background: variable.variant-for("input", "base", "disabled-background");
+    $border: variable.variant-for("input", "base", "disabled-border");
+
+    user-select: none;
+    pointer-events: none;
+    opacity: $opacity;
+    color: $color !important;
+    background-color: $background !important;
+    border-color: $border !important;
+}
+
+/// Styles selected text with the colors of a palette color.
+///
+/// @param {String} $name - Palette color name
+/// @output A `::selection` rule with the text and background colors
+/// @throw If `$name` is not a string
+///
+/// @require {Variable<Color>} variant($name, "color") - Text color of the selection
+/// @require {Variable<Color>} color($name) - Background color of the selection
+@mixin selection($name) {
+    $name: utility.assert-string($name, "selection", "name");
+
+    $color: variable.variant($name, "color");
+    $background: variable.color($name);
+    &::selection,
+    *::selection {
+        color: $color;
+        background-color: $background;
+    }
+}
+
+/// Styles the WebKit scrollbar with the theme colors.
+///
+/// @param {Variable<Color> | Color} $color - Thumb color on hover
+/// @output The scrollbar rules, using the theme scrollbar width, track color and thumb color
+///
+/// @require {Variable<Length>} var("document", "scroll-width") - Scrollbar width
+/// @require {Variable<Color>} variant-for("scroll", "base", "track") [variant("base", "section")] - Track color
+/// @require {Variable<Color>} variant-for("scroll", "base", "thumb") [variant("base", "separator")] - Thumb color
+@mixin scrollable($color) {
+    $-section: variable.variant("base", "section");
+    $-separator: variable.variant("base", "separator");
+
+    $size: variable.var("document", "scroll-width");
+    $track: variable.variant-for("scroll", "base", "track", $-section);
+    $thumb: variable.variant-for("scroll", "base", "thumb", $-separator);
+
+    @include scrollbar($size, $track, $thumb, $color);
+}

@@ -1,0 +1,290 @@
+@use "sass:map";
+@use "../utility";
+
+$-queries: (
+    "until-fullhd": "screen and (max-width: 1407px)",
+    "until-widescreen": "screen and (max-width: 1215px)",
+    "until-desktop": "screen and (max-width: 1023px)",
+    "tablet": "screen and (min-width: 769px)",
+    "desktop": "screen and (min-width: 1024px)",
+    "widescreen": "screen and (min-width: 1216px)",
+    "fullhd": "screen and (min-width: 1408px)",
+    "mobile": "screen and (max-width: 768px)",
+    "tablet-only": "screen and (min-width: 769px) and (max-width: 1023px)",
+    "desktop-only": "screen and (min-width: 1024px) and (max-width: 1215px)",
+    "widescreen-only": "screen and (min-width: 1216px) and (max-width: 1407px)",
+) !default;
+
+@function -missing($name) {
+    @return not map.has-key($-queries, $name);
+}
+
+@function -fail($name) {
+    @return "Unknown media query '#{$name}'. Available: #{utility.print($-queries)}.";
+}
+
+/// Returns a defined media query.
+///
+/// @param {String} $name - Query name
+/// @return {String} Media query
+/// @throw If `$name` is not a string or is not a defined media query
+@function media-query($name) {
+    $name: utility.assert-string($name, "media-query", "name");
+    @if -missing($name) {
+        @error -fail($name);
+    }
+
+    @return map.get($-queries, $name);
+}
+
+/// Returns a map of query names and media queries, filtered by name.
+///
+/// @param {List<String>} $includes [null] - Query names to include; all queries when not a list
+/// @param {List<String>} $excludes [null] - Query names to exclude; none when not a list
+/// @return {Map<String, String>} Matching query names and media queries
+@function media-queries($includes: null, $excludes: null) {
+    $includes: utility.assert-list($includes, "media-queries", "includes", map.keys($-queries));
+    $excludes: utility.assert-list($excludes, "media-queries", "excludes", ());
+
+    $result: ();
+    @each $name, $query in $-queries {
+        @if utility.should-include($name, $includes, $excludes) {
+            $result: map.set($result, $name, $query);
+        }
+    }
+    @return $result;
+}
+
+/// Applies styles on devices that support hover.
+///
+/// @output The content inside a `hover: hover` media query
+@mixin non-touch() {
+    @media (hover: hover) {
+        @content;
+    }
+}
+
+/// Applies styles on devices that do not support hover.
+///
+/// @output The content inside a `hover: none` media query
+@mixin touch() {
+    @media (hover: none) {
+        @content;
+    }
+}
+
+/// Applies styles on mobile screens.
+///
+/// @output The content inside the `mobile` media query
+@mixin mobile() {
+    @media #{media-query("mobile")} {
+        @content;
+    }
+}
+
+/// Applies styles on tablet screens and wider.
+///
+/// @output The content inside the `tablet` media query
+@mixin tablet() {
+    @media #{media-query("tablet")} {
+        @content;
+    }
+}
+
+/// Applies styles on tablet screens only.
+///
+/// @output The content inside the `tablet-only` media query
+@mixin tablet-only() {
+    @media #{media-query("tablet-only")} {
+        @content;
+    }
+}
+
+/// Applies styles on screens narrower than desktop.
+///
+/// @output The content inside the `until-desktop` media query
+@mixin until-desktop() {
+    @media #{media-query("until-desktop")} {
+        @content;
+    }
+}
+
+/// Applies styles on desktop screens and wider.
+///
+/// @output The content inside the `desktop` media query
+@mixin desktop() {
+    @media #{media-query("desktop")} {
+        @content;
+    }
+}
+
+/// Applies styles on desktop screens only.
+///
+/// @output The content inside the `desktop-only` media query
+@mixin desktop-only() {
+    @media #{media-query("desktop-only")} {
+        @content;
+    }
+}
+
+/// Applies styles on screens narrower than widescreen.
+///
+/// @output The content inside the `until-widescreen` media query
+@mixin until-widescreen() {
+    @media #{media-query("until-widescreen")} {
+        @content;
+    }
+}
+
+/// Applies styles on widescreen screens and wider.
+///
+/// @output The content inside the `widescreen` media query
+@mixin widescreen() {
+    @media #{media-query("widescreen")} {
+        @content;
+    }
+}
+
+/// Applies styles on widescreen screens only.
+///
+/// @output The content inside the `widescreen-only` media query
+@mixin widescreen-only() {
+    @media #{media-query("widescreen-only")} {
+        @content;
+    }
+}
+
+/// Applies styles on screens narrower than fullhd.
+///
+/// @output The content inside the `until-fullhd` media query
+@mixin until-fullhd() {
+    @media #{media-query("until-fullhd")} {
+        @content;
+    }
+}
+
+/// Applies styles on fullhd screens and wider.
+///
+/// @output The content inside the `fullhd` media query
+@mixin fullhd() {
+    @media #{media-query("fullhd")} {
+        @content;
+    }
+}
+
+/// Applies styles on high-resolution screens.
+///
+/// @output The content inside a `resolution >= 2dppx` media query
+@mixin retina() {
+    @media screen and (resolution >= 2dppx) {
+        @content;
+    }
+}
+
+/// Applies styles on screens in portrait orientation.
+///
+/// @output The content inside an `orientation: portrait` media query
+@mixin portrait() {
+    @media screen and (orientation: portrait) {
+        @content;
+    }
+}
+
+/// Applies styles on screens in landscape orientation.
+///
+/// @output The content inside an `orientation: landscape` media query
+@mixin landscape() {
+    @media screen and (orientation: landscape) {
+        @content;
+    }
+}
+
+/// Applies styles on devices with a fine pointer, like a mouse or stylus.
+///
+/// @output The content inside a `pointer: fine` media query
+@mixin pointer-fine() {
+    @media screen and (pointer: fine) {
+        @content;
+    }
+}
+
+/// Applies styles on devices with a coarse pointer, like touch.
+///
+/// @output The content inside a `pointer: coarse` media query
+@mixin pointer-coarse() {
+    @media screen and (pointer: coarse) {
+        @content;
+    }
+}
+
+/// Applies styles on screens that support high dynamic range (HDR).
+///
+/// @output The content inside a `dynamic-range: high` media query
+@mixin prefers-hdr() {
+    @media screen and (dynamic-range: high) {
+        @content;
+    }
+}
+
+/// Applies styles when the user prefers a dark color scheme.
+///
+/// @output The content inside a `prefers-color-scheme: dark` media query
+@mixin prefers-dark() {
+    @media screen and (prefers-color-scheme: dark) {
+        @content;
+    }
+}
+
+/// Applies styles when the user prefers a light color scheme.
+///
+/// @output The content inside a `prefers-color-scheme: light` media query
+@mixin prefers-light() {
+    @media screen and (prefers-color-scheme: light) {
+        @content;
+    }
+}
+
+/// Applies styles when the user prefers reduced motion.
+///
+/// @output The content inside a `prefers-reduced-motion: reduce` media query
+@mixin prefers-reduced-motion() {
+    @media screen and (prefers-reduced-motion: reduce) {
+        @content;
+    }
+}
+
+/// Applies styles when the user prefers more contrast.
+///
+/// @output The content inside a `prefers-contrast: more` media query
+@mixin prefers-more-contrast() {
+    @media screen and (prefers-contrast: more) {
+        @content;
+    }
+}
+
+/// Applies styles when the user prefers less contrast.
+///
+/// @output The content inside a `prefers-contrast: less` media query
+@mixin prefers-less-contrast() {
+    @media screen and (prefers-contrast: less) {
+        @content;
+    }
+}
+
+/// Applies styles when printing.
+///
+/// @output The content inside a `print` media query
+@mixin print() {
+    @media print {
+        @content;
+    }
+}
+
+/// Applies styles when not printing.
+///
+/// @output The content inside a `not print` media query
+@mixin not-print() {
+    @media not print {
+        @content;
+    }
+}

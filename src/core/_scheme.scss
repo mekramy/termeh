@@ -1,84 +1,88 @@
 @use "sass:map";
 @use "sass:list";
-@use "util";
+@use "utility";
 
 $-tokens: () !default;
 $-schemes: () !default;
 
-@function -resolve-scheme($scheme) {
-    @if not $scheme {
-        @return "__base__";
-    }
-
-    @return $scheme;
+@function -missing($name) {
+    @return not list.index($-schemes, $name);
 }
 
-/// Defines a color scheme.
-///
-/// @param {String} $name - Color scheme name
-/// @throw If the input name is not a string
-/// @access private
-@function define-scheme($name) {
-    $name: util.string-of($name, "define-scheme", "name");
+@function -error($name) {
+    @return "Unknown scheme '#{$name}'. Available: #{utility.print($-schemes)}.";
+}
 
-    @if not list.index($-schemes, $name) {
+/// Defines a color scheme if it is not defined yet.
+///
+/// @param {String} $name - Scheme name
+/// @return {null} Always `null`
+/// @throw If `$name` is not a string
+@function define-scheme($name) {
+    $name: utility.assert-string($name, "define-scheme", "name");
+
+    @if -missing($name) {
         $-schemes: list.append($-schemes, $name) !global;
     }
-
     @return null;
 }
 
-/// Returns all defined color schemes.
+/// Returns the names of all defined color schemes.
 ///
-/// @return {List} Defined color schemes
+/// @return {List<String>} Defined scheme names
 @function schemes() {
     @return $-schemes;
 }
 
-/// Defines a CSS variable and associates it with a color scheme.
+/// Stores a CSS variable for a scheme, or for the default scheme when `$scheme` is `null`.
+/// Nothing is stored when `$value` is falsy.
 ///
-/// @param {String} $name - CSS variable name
-/// @param {*} $value - CSS variable value
-/// @param {String} $scheme [null] - Color scheme name
-/// @throw If the input name is not a string
-@function define-variable($name, $value, $scheme: null) {
-    $name: util.string-of($name, "define-variable", "name");
+/// @param {String | null} $scheme - Scheme name
+/// @param {String} $name - Variable name, converted to a Termeh CSS custom property name
+/// @param {*} $value - Variable value
+/// @return {null} Always `null`
+/// @throw If `$scheme` is not a string or `null`, or `$name` is not a string
+@function define-variable($scheme, $name, $value) {
+    $scheme: utility.assert-nullable-string($scheme, "define-variable", "scheme", null);
+    $name: utility.assert-string($name, "define-variable", "name");
 
     @if $value {
-        $name: util.tokenize($name);
-        $scheme: -resolve-scheme($scheme);
-
-        $schemes: util.alter($-tokens, $name, ());
-        $schemes: map.set($schemes, $scheme, $value);
-        $-tokens: map.set($-tokens, $name, $schemes) !global;
+        $name: utility.tokenize($name);
+        $-tokens: utility.deep-set($-tokens, $value, $scheme, $name) !global;
     }
-
     @return null;
 }
 
-/// Returns a CSS variable reference with an optional fallback.
+/// Returns a `var()` reference to a Termeh CSS custom property.
+/// The fallback is added only when it is truthy.
 ///
-/// @param {String} $name - CSS variable name
-/// @param {*} $fallback - Fallback value if the variable is not defined
-/// @return {Variable<Mixed>} CSS variable reference
-/// @throw If the input name is not a string
+/// @param {String} $name - Variable name, converted to a Termeh CSS custom property name
+/// @param {*} $fallback - Value used when the variable is not defined
+/// @return {Variable<*>} The `var()` reference
+/// @throw If `$name` is not a string
 @function variable($name, $fallback) {
-    $name: util.string-of($name, "variable", "name");
+    $name: utility.assert-string($name, "variable", "name");
 
-    $name: util.tokenize($name);
+    $name: utility.tokenize($name);
     @if $fallback {
         @return var($name, $fallback);
     }
     @return var($name);
 }
 
-/// Outputs CSS variables associated with a color scheme.
+/// Outputs the CSS variables stored for a scheme.
+/// When `$scheme` is `null`, it outputs the variables of the default scheme.
 ///
-/// @param {String} $scheme [null] - Color scheme name
+/// @param {String | null} $scheme [null] - Scheme name
+/// @output A custom property declaration for each stored variable that has a value
+/// @throw If `$scheme` is not a string or `null`, or is not a defined scheme
 @mixin variables($scheme: null) {
-    $scheme: -resolve-scheme($scheme);
-    @each $name, $schemes in $-tokens {
-        $value: map.get($schemes, $scheme);
+    $scheme: utility.assert-nullable-string($scheme, "variables", "scheme", null);
+    @if $scheme != null and -missing($scheme) {
+        @error -error($scheme);
+    }
+
+    @each $name, $value in map.get($-tokens, $scheme) or () {
         @if $value {
             #{$name}: $value;
         }

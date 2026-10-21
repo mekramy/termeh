@@ -1,0 +1,121 @@
+@use "sass:color";
+@use "sass:math";
+@use "util";
+@use "validation";
+
+/// Normalizes RGB value for luminance calculation.
+///
+/// @param {Number} $v - RGB value (0-255)
+/// @return {Number} Normalized value (0-1)
+/// @access private
+@function -normalize($v) {
+    $v: math.div($v, 255);
+    @return util.iif(
+        $v <= 0.04045,
+        math.div($v, 12.92),
+        math.pow(math.div($v + 0.055, 1.055), 2.4)
+    );
+}
+
+/// Calculates the relative luminance of a color using the WCAG formula.
+///
+/// @param {Color} $color - Color to measure
+/// @return {Number} Luminance, from 0 (darkest) to 1 (lightest)
+/// @throw If `$color` is not a color
+@function luminance($color) {
+    $color: validation.assert-color($color, "luminance", "color");
+
+    $red: -normalize(color.channel($color, "red", $space: rgb));
+    $green: -normalize(color.channel($color, "green", $space: rgb));
+    $blue: -normalize(color.channel($color, "blue", $space: rgb));
+    @return 0.2126 * $red + 0.7152 * $green + 0.0722 * $blue;
+}
+
+/// Returns the darker of two colors, based on luminance.
+///
+/// @param {Color} $color1 - First color
+/// @param {Color} $color2 - Second color
+/// @return {Color} The color with the lower luminance
+/// @throw If `$color1` or `$color2` is not a color
+@function darkest($color1, $color2) {
+    $color1: validation.assert-color($color1, "darkest", "color1");
+    $color2: validation.assert-color($color2, "darkest", "color2");
+
+    @return util.iif(luminance($color1) < luminance($color2), $color1, $color2);
+}
+
+/// Returns the lighter of two colors, based on luminance.
+///
+/// @param {Color} $color1 - First color
+/// @param {Color} $color2 - Second color
+/// @return {Color} The color with the higher luminance
+/// @throw If `$color1` or `$color2` is not a color
+@function lightest($color1, $color2) {
+    $color1: validation.assert-color($color1, "lightest", "color1");
+    $color2: validation.assert-color($color2, "lightest", "color2");
+
+    @return util.iif(luminance($color1) > luminance($color2), $color1, $color2);
+}
+
+/// Calculates the WCAG contrast ratio between two colors.
+///
+/// @param {Color} $back - Background color
+/// @param {Color} $color - Foreground color
+/// @return {Number} Contrast ratio, from 1 to 21
+/// @throw If `$back` or `$color` is not a color
+@function contrast-ratio($back, $color) {
+    $back: validation.assert-color($back, "contrast-ratio", "back");
+    $color: validation.assert-color($color, "contrast-ratio", "color");
+
+    $back-lum: luminance($back) + 0.05;
+    $color-lum: luminance($color) + 0.05;
+    @return math.div(math.max($back-lum, $color-lum), math.min($back-lum, $color-lum));
+}
+
+/// Tells whether a color is light or dark.
+/// It compares the color's contrast against white and against black with 0.87 opacity.
+///
+/// @param {Color} $color - Color to check
+/// @return {String} `"light"` or `"dark"`
+/// @throw If `$color` is not a color
+@function tone($color) {
+    $color: validation.assert-color($color, "tone", "color");
+
+    $light-cnt: contrast-ratio($color, white);
+    $dark-cnt: contrast-ratio($color, rgb(black, 0.87));
+    @return util.iif($light-cnt < 3.1 and $dark-cnt > $light-cnt, "light", "dark");
+}
+
+/// Picks the option that has the higher contrast against the base color.
+///
+/// @param {Color} $base - Base color
+/// @param {Color} $color1 - First option
+/// @param {Color} $color2 - Second option
+/// @return {Color} The option with the higher contrast
+/// @throw If `$base`, `$color1` or `$color2` is not a color
+@function contrast($base, $color1, $color2) {
+    $base: validation.assert-color($base, "contrast", "base");
+    $color1: validation.assert-color($color1, "contrast", "color1");
+    $color2: validation.assert-color($color2, "contrast", "color2");
+
+    $color1-cnt: contrast-ratio(darkest($base, $color1), lightest($base, $color1));
+    $color2-cnt: contrast-ratio(darkest($base, $color2), lightest($base, $color2));
+    @return util.iif($color1-cnt > $color2-cnt, $color1, $color2);
+}
+
+/// Picks the option that has the lower contrast against the base color.
+///
+/// @param {Color} $base - Base color
+/// @param {Color} $color1 - First option
+/// @param {Color} $color2 - Second option
+/// @return {Color} The option with the lower contrast
+/// @throw If `$base`, `$color1` or `$color2` is not a color
+@function harmony($base, $color1, $color2) {
+    $base: validation.assert-color($base, "harmony", "base");
+    $color1: validation.assert-color($color1, "harmony", "color1");
+    $color2: validation.assert-color($color2, "harmony", "color2");
+
+    $color1-cnt: contrast-ratio(darkest($base, $color1), lightest($base, $color1));
+    $color2-cnt: contrast-ratio(darkest($base, $color2), lightest($base, $color2));
+    @return util.iif($color1-cnt < $color2-cnt, $color1, $color2);
+}

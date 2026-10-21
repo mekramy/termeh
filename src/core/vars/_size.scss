@@ -1,0 +1,123 @@
+@use "sass:map";
+@use "../scheme";
+@use "../utility";
+
+$-sizes: () !default;
+$-overrides: () !default;
+
+@function -missing($name) {
+    @return not map.has-key($-sizes, $name);
+}
+
+@function -fail($name) {
+    @return "Unknown size '#{$name}'. Available: #{utility.print($-sizes)}.";
+}
+
+/// Defines a size that can be used in the theme.
+///
+/// @param {String} $name - Size name
+/// @param {Length} $size - Size value
+/// @throw If `$name` is not a string or `$size` is not a number
+@mixin define-size($name, $size) {
+    $name: utility.assert-string($name, "define-size", "name");
+    $size: utility.assert-number($size, "define-size", "size");
+
+    $-sizes: map.set($-sizes, $name, $size) !global;
+}
+
+/// Sets the value of a defined size for one scheme.
+///
+/// @param {String} $scheme - Scheme name
+/// @param {String} $name - Size name
+/// @param {Length} $size - Size value for the scheme
+/// @throw If `$scheme` or `$name` is not a string, `$size` is not a number, or the size is not defined
+@mixin override-size($scheme, $name, $size) {
+    $scheme: utility.assert-string($scheme, "override-size", "scheme");
+    $name: utility.assert-string($name, "override-size", "name");
+    $size: utility.assert-number($size, "override-size", "size");
+    @if -missing($name) {
+        @error -fail($name);
+    }
+
+    $_: scheme.define-scheme($scheme);
+    $-overrides: utility.deep-set($-overrides, $size, $scheme, $name) !global;
+}
+
+/// Returns the value of a defined size.
+///
+/// @param {String} $name - Size name
+/// @return {Length} Size value
+/// @throw If `$name` is not a string or the size is not defined
+@function size-value($name) {
+    $name: utility.assert-string($name, "size-value", "name");
+    @if -missing($name) {
+        @error -fail($name);
+    }
+
+    @return map.get($-sizes, $name);
+}
+
+/// Returns the value of a size for one scheme.
+///
+/// @param {String} $scheme - Scheme name
+/// @param {String} $name - Size name
+/// @return {Length | null} Size value for the scheme, or `null` if the scheme does not override it
+/// @throw If `$scheme` or `$name` is not a string, or the size is not defined
+@function scheme-size($scheme, $name) {
+    $scheme: utility.assert-string($scheme, "scheme-size", "scheme");
+    $name: utility.assert-string($name, "scheme-size", "name");
+    @if -missing($name) {
+        @error -fail($name);
+    }
+
+    @return map.get($-overrides, $scheme, $name);
+}
+
+/// Returns the CSS variable of a size.
+/// It also registers the size value and each scheme override as CSS variables.
+///
+/// @param {String} $name - Size name
+/// @return {Variable<Length>} CSS variable of the size
+/// @throw If `$name` is not a string or the size is not defined
+@function size($name) {
+    $name: utility.assert-string($name, "size", "name");
+    @if -missing($name) {
+        @error -fail($name);
+    }
+
+    $token: "size-#{$name}";
+    $value: map.get($-sizes, $name);
+    $_: scheme.define-variable(null, $token, $value);
+
+    @each $scheme in scheme.schemes() {
+        $_: scheme.define-variable($scheme, $token, map.get($-overrides, $scheme, $name));
+    }
+
+    @return scheme.variable($token, $value);
+}
+
+/// Returns a map of size names and their CSS variables, filtered by name.
+/// It also registers each size value and scheme override as CSS variables.
+///
+/// @param {List<String>} $includes [null] - Size names to include; all defined sizes when not a list
+/// @param {List<String>} $excludes [null] - Size names to exclude; none when not a list
+/// @return {Map<String, Variable<Length>>} Matching sizes and their CSS variables
+@function sizes($includes: null, $excludes: null) {
+    $includes: utility.assert-list($includes, "sizes", "includes", map.keys($-sizes));
+    $excludes: utility.assert-list($excludes, "sizes", "excludes", ());
+
+    $result: ();
+    @each $name, $size in $-sizes {
+        @if utility.should-include($name, $includes, $excludes) {
+            $token: "size-#{$name}";
+            $_: scheme.define-variable(null, $token, $size);
+
+            @each $scheme in scheme.schemes() {
+                $_: scheme.define-variable($scheme, $token, map.get($-overrides, $scheme, $name));
+            }
+
+            $result: map.set($result, $name, scheme.variable($token, $size));
+        }
+    }
+    @return $result;
+}

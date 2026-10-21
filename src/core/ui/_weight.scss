@@ -1,0 +1,52 @@
+@use "sass:map";
+@use "../utility";
+
+$-weights: (
+    "lighter": 100,
+    "light": 300,
+    "normal": 400,
+    "medium": 500,
+    "semibold": 600,
+    "bold": 700,
+    "bolder": 900,
+) !default;
+
+@function -missing($name) {
+    @return not map.has-key($-weights, $name);
+}
+
+@function -fail($name) {
+    @return "Unknown weight '#{$name}'. Available: #{utility.print($-weights)}.";
+}
+
+/// Returns the font weight of a defined weight name.
+///
+/// @param {String} $name - Weight name
+/// @return {FontWeight} Font weight value
+/// @throw If `$name` is not a string or is not a defined weight
+@function weight($name) {
+    $name: utility.assert-string($name, "weight", "name");
+    @if -missing($name) {
+        @error -fail($name);
+    }
+
+    @return map.get($-weights, $name);
+}
+
+/// Returns a map of weight names and font weights, filtered by name.
+///
+/// @param {List<String>} $includes [null] - Weight names to include; all weights when not a list
+/// @param {List<String>} $excludes [null] - Weight names to exclude; none when not a list
+/// @return {Map<String, FontWeight>} Matching weight names and font weights
+@function weights($includes: null, $excludes: null) {
+    $includes: utility.assert-list($includes, "weights", "includes", map.keys($-weights));
+    $excludes: utility.assert-list($excludes, "weights", "excludes", ());
+
+    $result: ();
+    @each $name, $weight in $-weights {
+        @if utility.should-include($name, $includes, $excludes) {
+            $result: map.set($result, $name, $weight);
+        }
+    }
+    @return $result;
+}

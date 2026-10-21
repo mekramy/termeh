@@ -1,0 +1,54 @@
+@use "sass:map";
+@use "../utility";
+
+$-aligns: (
+    "stretch": stretch,
+    "flex-start": flex-start,
+    "flex-end": flex-end,
+    "center": center,
+    "baseline": baseline,
+);
+$-justifies: (
+    "flex-start": flex-start,
+    "flex-end": flex-end,
+    "center": center,
+    "space-between": space-between,
+    "space-around": space-around,
+    "space-evenly": space-evenly,
+);
+
+/// Returns `align-items` values for flex layouts, filtered by name.
+///
+/// @param {List<String>} $includes [null] - Alignment names to include; all alignments when not a list
+/// @param {List<String>} $excludes [null] - Alignment names to exclude; none when not a list
+/// @return {Map<String, FlexAlign>} Matching alignment names and values
+@function flex-aligns($includes: null, $excludes: null) {
+    $includes: utility.assert-list($includes, "flex-aligns", "includes", map.keys($-aligns));
+    $excludes: utility.assert-list($excludes, "flex-aligns", "excludes", ());
+
+    $result: ();
+    @each $name, $align in $-aligns {
+        @if utility.should-include($name, $includes, $excludes) {
+            $result: map.set($result, $name, $align);
+        }
+    }
+    @return $result;
+}
+
+/// Returns `justify-content` values for flex layouts, filtered by name.
+///
+/// @param {List<String>} $includes [null] - Justification names to include; all values when not a list
+/// @param {List<String>} $excludes [null] - Justification names to exclude; none when not a list
+/// @return {Map<String, FlexJustify>} Matching justification names and values
+@function flex-justifies($includes: null, $excludes: null) {
+    $includes: utility.assert-list($includes, "flex-justifies", "includes", map.keys($-justifies));
+    $excludes: utility.assert-list($excludes, "flex-justifies", "excludes", ());
+
+    $result: ();
+    @each $name, $justify in $-justifies {
+        @if utility.should-include($name, $includes, $excludes) {
+            $result: map.set($result, $name, $justify);
+        }
+    }
+    @return $result;
+}

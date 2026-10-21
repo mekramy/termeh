@@ -1,0 +1,59 @@
+@use "sass:map";
+@use "sass:meta";
+@use "sass:color";
+@use "../utility";
+
+$-resolvers: () !default;
+
+/// Defines a resolver that is used for color variants of global scope.
+///
+/// @param {Function} $resolver - Called with `$scheme, $palette, $is-light, $base, $color, $variant`; returns a color, or `null` if it cannot resolve the variant
+/// @throw If `$resolver` is not a function
+@mixin define-global-resolver($resolver) {
+    $resolver: utility.assert-function($resolver, "define-global-resolver", "resolver");
+    $-resolvers: utility.deep-prepend($-resolvers, $resolver, null) !global;
+}
+
+/// Defines a resolver that is used for color variants of one component.
+///
+/// @param {Function} $resolver - Called with `$scheme, $palette, $is-light, $base, $color, $variant`; returns a color, or `null` if it cannot resolve the variant
+/// @param {String} $component - Component name
+/// @throw If `$resolver` is not a function or `$component` is not a string
+@mixin define-component-resolver($resolver, $component) {
+    $resolver: utility.assert-function($resolver, "define-component-resolver", "resolver");
+    $component: utility.assert-string($component, "define-component-resolver", "component");
+
+    $-resolvers: utility.deep-prepend($-resolvers, $resolver, $component) !global;
+}
+
+/// Resolves a color variant.
+/// It tries the resolvers of the component first, then two built-in resolvers.
+/// It returns `null` if a color, base or palette is missing, or if no resolver can resolve the variant.
+///
+/// @param {String | null} $scheme - Scheme name; a value that is not a string becomes `null`
+/// @param {String | null} $component - Component name; a value that is not a string becomes `null`
+/// @param {String | null} $palette - Palette color name; a value that is not a string becomes `null`
+/// @param {Color | null} $base - Base color, used to check if the background is light
+/// @param {Color | null} $color - Color of the palette to resolve the variant from
+/// @param {String | null} $variant - Variant name; a value that is not a string becomes `null`
+/// @return {Color | null} The resolved color, or `null` if the variant cannot be resolved
+@function resolve($scheme, $component, $palette, $base, $color, $variant) {
+    $scheme: utility.iif(utility.is-string($scheme), $scheme, null);
+    $component: utility.iif(utility.is-string($component), $component, null);
+    $palette: utility.iif(utility.is-string($palette), $palette, null);
+    $variant: utility.iif(utility.is-string($variant), $variant, null);
+    @if not $color or not $base or not $palette or not $variant {
+        @return null;
+    }
+
+    $is-light: utility.tone($base) == "light";
+    $resolvers: map.get($-resolvers, $component) or ();
+    @each $resolver in $resolvers {
+        $result: meta.call($resolver, $scheme, $palette, $is-light, $base, $color, $variant);
+        @if $result {
+            @return $result;
+        }
+    }
+
+    @return null;
+}

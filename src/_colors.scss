@@ -1,5 +1,61 @@
+@use "sass:meta";
+@use "sass:color";
 @use "core/module";
 
+@include module.define-palette("base", white);
 @include module.define-palette("shade", #667085);
 @include module.define-palette("error", #c00021);
 @include module.define-palette("primary", #2196f3);
+
+// Resolvers
+@function -base-resolver($scheme, $palette, $is-light, $base, $color, $variant) {
+    @if $scheme != "base" {
+        @return null;
+    } @else if $variant == "background" {
+        @return module.color("base");
+    } @else if $variant == "color" {
+        @return #0d1b2a;
+    } @else if $variant == "section" {
+        @return #f8f9fa;
+    } @else if $variant == "separator" {
+        @return #e0e4eb;
+    } @else if $variant == "overlay" {
+        @return module.color("base");
+    }
+
+    @return null;
+}
+@function -variant-resolver($scheme, $palette, $is-light, $base, $color, $variant) {
+    @if $scheme == "base" {
+        @return null;
+    } @else if $variant == "color" {
+        $v: module.iif($is-light, "900", "100");
+        @return color.mix($base, module.palette($color, $v), 95%);
+    } @else if $variant == "active" {
+        $v: module.iif($is-light, "700", "300");
+        @return module.palette($color, $v);
+    } @else if $variant == "readable" {
+        $v: module.iif($is-light, "700", "200");
+        @return color.mix($base, module.palette($color, $v), 10%);
+    } @else if $variant == "decorator" {
+        $v: module.iif($is-light, "800", "200");
+        @return color.mix($base, module.palette($color, $v), 40%);
+    } @else if $variant == "light" {
+        $v: module.iif($is-light, "800", "200");
+        @return color.mix($base, module.palette($color, $v), 85%);
+    } @else if $variant == "light-active" {
+        $v: module.iif($is-light, "800", "200");
+        @return color.mix($base, module.palette($color, $v), 70%);
+    } @else if $variant == "mute" {
+        $v: module.iif($is-light, "900", "100");
+        @return color.mix($base, module.palette($color, $v), 50%);
+    } @else if $variant == "mute-active" {
+        $v: module.iif($is-light, "900", "100");
+        @return color.mix($base, module.palette($color, $v), 5%);
+    }
+
+    @return null;
+}
+
+@include module.define-global-resolver(meta.get-function("-base-resolver"));
+@include module.define-global-resolver(meta.get-function("-variant-resolver"));

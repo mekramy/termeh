@@ -2,8 +2,9 @@
 
 /** Layout And UI */
 // Base
-@include module.define("base", "direction", ltr); // App direction
-@include module.define("base", "min-width", 300px); // Minimum document width
+@include module.define("document", "direction", ltr); // App direction
+@include module.define("document", "min-width", 300px); // Minimum document width
+@include module.define("document", "scroll-width", 0.75rem); // Scrollable width
 
 // Spacing
 @include module.define("gap", "micro", 8px); // Small gap within components/text
@@ -40,6 +41,11 @@
 @include module.define("control", "h-padding", 1.2em); // control horizontal padding
 @include module.define("control", "meta-size", 0.9em); // control meta-like font size
 @include module.define("control", "meta-weight", 600); // control meta-like font weight
+@include module.define("control", "disabled-opacity", 0.65); // control disabled opacity
+
+// Overlay
+@include module.define("overlay", "opacity", 0.75); // Overlay background opacity
+@include module.define("overlay", "filter", none); // Overlay backdrop filter
 
 /** Texts */
 // Fonts
@@ -71,23 +77,6 @@
 @include module.define("line-height", "large", 1.2em); // Large text line height
 
 /** Theme */
-
-// Scheme
-@include module.define("base", "background", white); // Theme color (detect light/dark mode)
-@include module.define("base", "foreground", #0d1b2a); // Default foreground
-@include module.define("base", "section", #f8f9fa); // Section background
-@include module.define("base", "separator", #e0e4eb); // Separator background
-
-// Scrollbar
-@include module.define("scroll", "size", 10px); // Scrollbar width
-@include module.define("scroll", "track", null); // Scrollbar track background
-@include module.define("scroll", "thumb", null); // Scrollbar thumb background
-
-// Overlay
-@include module.define("overlay", "background", white); // Overlay background
-@include module.define("overlay", "foreground", null); // Overlay foreground
-@include module.define("overlay", "opacity", 0.75); // Overlay background opacity
-@include module.define("overlay", "filter", none); // Overlay backdrop filter
 
 // Table
 @include module.define("table", "background", null); // Table background

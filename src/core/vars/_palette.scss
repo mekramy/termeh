@@ -1,0 +1,379 @@
+@use "sass:map";
+@use "resolver";
+@use "../scheme";
+@use "../utility";
+
+$-colors: () !default;
+$-overrides: () !default;
+
+@function -missing($name) {
+    @return not map.has-key($-colors, $name);
+}
+
+@function -fail($name) {
+    @return "Unknown color '#{$name}'. Available: #{utility.print(map.remove($-colors, "base"))}.";
+}
+
+@function -scheme-color($scheme, $name) {
+    $color: map.get($-overrides, $scheme, $name, null, "base");
+    @if $color {
+        @return $color;
+    }
+
+    @return map.get($-colors, $name, null, "base");
+}
+
+/// Defines a palette color.
+///
+/// @param {String} $name - Color name
+/// @param {Color} $color - Base color
+/// @throw If `$name` is not a string or `$color` is not a color
+@mixin define-palette($name, $color) {
+    $name: utility.assert-string($name, "define-palette", "name");
+    $color: utility.assert-color($color, "define-palette", "color");
+
+    $-colors: utility.deep-set($-colors, $color, $name, null, "base") !global;
+}
+
+/// Sets the base color of a defined palette color for one scheme.
+///
+/// @param {String} $scheme - Scheme name
+/// @param {String} $name - Color name
+/// @param {Color} $color - Base color for the scheme
+/// @throw If `$scheme` or `$name` is not a string, `$color` is not a color, or the palette color is not defined
+@mixin override-palette($scheme, $name, $color) {
+    $scheme: utility.assert-string($scheme, "override-palette", "scheme");
+    $name: utility.assert-string($name, "override-palette", "name");
+    $color: utility.assert-color($color, "override-palette", "color");
+    @if -missing($name) {
+        @error -fail($name);
+    }
+
+    $_: scheme.define-scheme($scheme);
+    $-overrides: utility.deep-set($-overrides, $color, $scheme, $name, null, "base") !global;
+}
+
+/// Defines a variant color for a defined palette color.
+///
+/// @param {String} $name - Color name
+/// @param {String} $variant - Variant name
+/// @param {Color} $color - Color of the variant
+/// @throw If `$name` or `$variant` is not a string, `$color` is not a color, or the palette color is not defined
+@mixin define-variant($name, $variant, $color) {
+    $name: utility.assert-string($name, "define-variant", "name");
+    $variant: utility.assert-string($variant, "define-variant", "variant");
+    $color: utility.assert-color($color, "define-variant", "color");
+    @if -missing($name) {
+        @error -fail($name);
+    }
+
+    $-colors: utility.deep-set($-colors, $color, $name, null, $variant) !global;
+}
+
+/// Defines a variant color of a defined palette color for one component.
+///
+/// @param {String} $component - Component name
+/// @param {String} $name - Color name
+/// @param {String} $variant - Variant name
+/// @param {Color} $color - Color of the variant
+/// @throw If `$component`, `$name` or `$variant` is not a string, `$color` is not a color, or the palette color is not defined
+@mixin define-component-variant($component, $name, $variant, $color) {
+    $component: utility.assert-string($component, "define-component-variant", "component");
+    $name: utility.assert-string($name, "define-component-variant", "name");
+    $variant: utility.assert-string($variant, "define-component-variant", "variant");
+    $color: utility.assert-color($color, "define-component-variant", "color");
+    @if -missing($name) {
+        @error -fail($name);
+    }
+
+    $-colors: utility.deep-set($-colors, $color, $name, $component, $variant) !global;
+}
+
+/// Sets a variant color of a defined palette color for one scheme.
+///
+/// @param {String} $scheme - Scheme name
+/// @param {String} $name - Color name
+/// @param {String} $variant - Variant name
+/// @param {Color} $color - Color of the variant for the scheme
+/// @throw If `$scheme`, `$name` or `$variant` is not a string, `$color` is not a color, or the palette color is not defined
+@mixin override-variant($scheme, $name, $variant, $color) {
+    $scheme: utility.assert-string($scheme, "override-variant", "scheme");
+    $name: utility.assert-string($name, "override-variant", "name");
+    $variant: utility.assert-string($variant, "override-variant", "variant");
+    $color: utility.assert-color($color, "override-variant", "color");
+    @if -missing($name) {
+        @error -fail($name);
+    }
+
+    $_: scheme.define-scheme($scheme);
+    $-overrides: utility.deep-set($-overrides, $color, $scheme, $name, null, $variant) !global;
+}
+
+/// Sets a variant color of a defined palette color for one component and one scheme.
+///
+/// @param {String} $scheme - Scheme name
+/// @param {String} $component - Component name
+/// @param {String} $name - Color name
+/// @param {String} $variant - Variant name
+/// @param {Color} $color - Color of the variant for the scheme
+/// @throw If `$scheme`, `$component`, `$name` or `$variant` is not a string, `$color` is not a color, or the palette color is not defined
+@mixin override-component-variant($scheme, $component, $name, $variant, $color) {
+    $scheme: utility.assert-string($scheme, "override-component-variant", "scheme");
+    $component: utility.assert-string($component, "override-component-variant", "component");
+    $name: utility.assert-string($name, "override-component-variant", "name");
+    $variant: utility.assert-string($variant, "override-component-variant", "variant");
+    $color: utility.assert-color($color, "override-component-variant", "color");
+    @if -missing($name) {
+        @error -fail($name);
+    }
+
+    $_: scheme.define-scheme($scheme);
+    $-overrides: utility.deep-set(
+        $-overrides,
+        $color,
+        $scheme,
+        $name,
+        $component,
+        $variant
+    ) !global;
+}
+
+/// Returns the base color of a defined palette color.
+///
+/// @param {String} $name - Color name
+/// @return {Color} Base color
+/// @throw If `$name` is not a string or the palette color is not defined
+@function color-value($name) {
+    $name: utility.assert-string($name, "color-value", "name");
+    @if -missing($name) {
+        @error -fail($name);
+    }
+
+    @return map.get($-colors, $name, null, "base");
+}
+
+/// Returns the base color of a palette color for one scheme.
+///
+/// @param {String} $scheme - Scheme name
+/// @param {String} $name - Color name
+/// @return {Color | null} Base color for the scheme, or `null` if the scheme does not override it
+/// @throw If `$scheme` or `$name` is not a string, or the palette color is not defined
+@function scheme-color($scheme, $name) {
+    $scheme: utility.assert-string($scheme, "scheme-color", "scheme");
+    $name: utility.assert-string($name, "scheme-color", "name");
+    @if -missing($name) {
+        @error -fail($name);
+    }
+
+    @return map.get($-overrides, $scheme, $name, null, "base");
+}
+
+/// Returns the variant color of a palette color.
+/// If the variant is not defined, it is resolved from the base color. If that fails, the fallback is returned.
+///
+/// @param {String} $name - Color name
+/// @param {String} $variant - Variant name
+/// @param {Variable<Color> | Color} $fallback [null] - Value returned when the variant cannot be resolved
+/// @return {Variable<Color> | Color | null} The variant color, or the fallback
+/// @throw If `$name` or `$variant` is not a string
+@function variant-value($name, $variant, $fallback: null) {
+    $name: utility.assert-string($name, "variant-value", "name");
+    $variant: utility.assert-string($variant, "variant-value", "variant");
+
+    $defined: map.get($-colors, $name, null, $variant);
+    @if $defined {
+        @return $defined;
+    }
+
+    $base: map.get($-colors, "base", null, "base");
+    $color: map.get($-colors, $name, null, "base");
+    @return resolver.resolve(null, null, $name, $base, $color, $variant) or $fallback;
+}
+
+/// Returns the variant color of a palette color for one component.
+/// If the variant is not defined, it is resolved from the base color. If that fails, the fallback is returned.
+///
+/// @param {String} $component - Component name
+/// @param {String} $name - Color name
+/// @param {String} $variant - Variant name
+/// @param {Variable<Color> | Color} $fallback [null] - Value returned when the variant cannot be resolved
+/// @return {Variable<Color> | Color | null} The variant color, or the fallback
+/// @throw If `$component`, `$name` or `$variant` is not a string
+@function variant-value-for($component, $name, $variant, $fallback: null) {
+    $component: utility.assert-string($component, "variant-value-for", "component");
+    $name: utility.assert-string($name, "variant-value-for", "name");
+    $variant: utility.assert-string($variant, "variant-value-for", "variant");
+
+    $defined: map.get($-colors, $name, $component, $variant);
+    @if $defined {
+        @return $defined;
+    }
+
+    $base: map.get($-colors, "base", null, "base");
+    $color: map.get($-colors, $name, null, "base");
+    @return resolver.resolve(null, $component, $name, $base, $color, $variant) or $fallback;
+}
+
+/// Returns the variant color of a palette color for one scheme.
+/// If the scheme does not define the variant, it is resolved from the scheme's colors. If that fails, the fallback is returned.
+///
+/// @param {String} $scheme - Scheme name
+/// @param {String} $name - Color name
+/// @param {String} $variant - Variant name
+/// @param {Variable<Color> | Color} $fallback [null] - Value returned when the variant cannot be resolved
+/// @return {Variable<Color> | Color | null} The variant color for the scheme, or the fallback
+/// @throw If `$scheme`, `$name` or `$variant` is not a string
+@function scheme-variant($scheme, $name, $variant, $fallback: null) {
+    $scheme: utility.assert-string($scheme, "scheme-variant", "scheme");
+    $name: utility.assert-string($name, "scheme-variant", "name");
+    $variant: utility.assert-string($variant, "scheme-variant", "variant");
+
+    $defined: map.get($-overrides, $scheme, $name, null, $variant);
+    @if $defined {
+        @return $defined;
+    }
+
+    $base: map.get($-overrides, $scheme, "base", null, "base");
+    $color: -scheme-color($scheme, $name);
+    @return resolver.resolve($scheme, null, $name, $base, $color, $variant) or $fallback;
+}
+
+/// Returns the variant color of a palette color for one component and one scheme.
+/// If the scheme does not define the variant, it is resolved from the scheme's colors. If that fails, the fallback is returned.
+///
+/// @param {String} $scheme - Scheme name
+/// @param {String} $component - Component name
+/// @param {String} $name - Color name
+/// @param {String} $variant - Variant name
+/// @param {Variable<Color> | Color} $fallback [null] - Value returned when the variant cannot be resolved
+/// @return {Variable<Color> | Color | null} The variant color for the scheme, or the fallback
+/// @throw If `$scheme`, `$component`, `$name` or `$variant` is not a string
+@function scheme-variant-for($scheme, $component, $name, $variant, $fallback: null) {
+    $scheme: utility.assert-string($scheme, "scheme-variant-for", "scheme");
+    $component: utility.assert-string($component, "scheme-variant-for", "component");
+    $name: utility.assert-string($name, "scheme-variant-for", "name");
+    $variant: utility.assert-string($variant, "scheme-variant-for", "variant");
+
+    $defined: map.get($-overrides, $scheme, $name, $component, $variant);
+    @if $defined {
+        @return $defined;
+    }
+
+    $base: map.get($-overrides, $scheme, "base", null, "base");
+    $color: -scheme-color($scheme, $name);
+    @return resolver.resolve($scheme, $component, $name, $base, $color, $variant) or $fallback;
+}
+
+/// Returns the CSS variable of a palette color.
+/// It also registers the base color and each scheme override as CSS variables.
+///
+/// @param {String} $name - Color name
+/// @return {Variable<Color>} CSS variable of the color
+/// @throw If `$name` is not a string or the palette color is not defined
+@function color($name) {
+    $name: utility.assert-string($name, "color", "name");
+    @if -missing($name) {
+        @error -fail($name);
+    }
+
+    $token: "palette-#{$name}";
+    $value: map.get($-colors, $name, null, "base");
+    $_: scheme.define-variable(null, $token, $value);
+
+    @each $scheme in scheme.schemes() {
+        $_: scheme.define-variable(
+            $scheme,
+            $token,
+            map.get($-overrides, $scheme, $name, null, "base")
+        );
+    }
+
+    @return scheme.variable($token, $value);
+}
+
+/// Returns the CSS variable of a palette color variant.
+/// It also registers the variant color and each scheme override as CSS variables.
+///
+/// @param {String} $name - Color name
+/// @param {String} $variant - Variant name
+/// @param {Variable<Color> | Color} $fallback [null] - Value used when the variant cannot be resolved
+/// @return {Variable<Color>} CSS variable of the variant
+/// @throw If `$name` or `$variant` is not a string
+@function variant($name, $variant, $fallback: null) {
+    $name: utility.assert-string($name, "variant", "name");
+    $variant: utility.assert-string($variant, "variant", "variant");
+
+    $token: "palette-#{$name}-#{$variant}";
+    $value: variant-value($name, $variant, $fallback);
+    $_: scheme.define-variable(null, $token, $value);
+
+    @each $scheme in scheme.schemes() {
+        $_: scheme.define-variable(
+            $scheme,
+            $token,
+            scheme-variant($scheme, $name, $variant, $fallback)
+        );
+    }
+
+    @return scheme.variable($token, $value);
+}
+
+/// Returns the CSS variable of a palette color variant for one component.
+/// It also registers the variant color and each scheme override as CSS variables.
+///
+/// @param {String} $component - Component name
+/// @param {String} $name - Color name
+/// @param {String} $variant - Variant name
+/// @param {Variable<Color> | Color} $fallback [null] - Value used when the variant cannot be resolved
+/// @return {Variable<Color>} CSS variable of the variant
+/// @throw If `$component`, `$name` or `$variant` is not a string
+@function variant-for($component, $name, $variant, $fallback: null) {
+    $component: utility.assert-string($component, "variant-for", "component");
+    $name: utility.assert-string($name, "variant", "name");
+    $variant: utility.assert-string($variant, "variant", "variant");
+
+    $token: "palette-#{$name}-#{$component}-#{$variant}";
+    $value: variant-value-for($component, $name, $variant, $fallback);
+    $_: scheme.define-variable(null, $token, $value);
+
+    @each $scheme in scheme.schemes() {
+        $_: scheme.define-variable(
+            $scheme,
+            $token,
+            scheme-variant-for($scheme, $component, $name, $variant, $fallback)
+        );
+    }
+
+    @return scheme.variable($token, $value);
+}
+
+/// Returns a map of palette color names and their CSS variables, filtered by name.
+/// It also registers each base color and scheme override as CSS variables.
+///
+/// @param {List<String>} $includes [null] - Color names to include; all defined colors when not a list
+/// @param {List<String>} $excludes [null] - Color names to exclude; `"base"` and `""` when not a list
+/// @return {Map<String, Variable<Color>>} Matching colors and their CSS variables
+@function colors($includes: null, $excludes: null) {
+    $includes: utility.assert-list($includes, "colors", "includes", map.keys($-colors));
+    $excludes: utility.assert-list($excludes, "colors", "excludes", ("base", ""));
+
+    $result: ();
+    @each $name in map.keys($-colors) {
+        @if utility.should-include($name, $includes, $excludes) {
+            $token: "palette-#{$name}";
+            $value: map.get($-colors, $name, null, "base");
+            $_: scheme.define-variable(null, $token, $value);
+
+            @each $scheme in scheme.schemes() {
+                $_: scheme.define-variable(
+                    $scheme,
+                    $token,
+                    map.get($-overrides, $scheme, $name, null, "base")
+                );
+            }
+
+            $result: map.set($result, $name, scheme.variable($token, $value));
+        }
+    }
+    @return $result;
+}

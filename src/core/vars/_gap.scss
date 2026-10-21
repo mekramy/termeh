@@ -1,0 +1,123 @@
+@use "sass:map";
+@use "../scheme";
+@use "../utility";
+
+$-gaps: () !default;
+$-overrides: () !default;
+
+@function -missing($name) {
+    @return not map.has-key($-gaps, $name);
+}
+
+@function -fail($name) {
+    @return "Unknown gap '#{$name}'. Available: #{utility.print($-gaps)}.";
+}
+
+/// Defines a gap that can be used in the theme.
+///
+/// @param {String} $name - Gap name
+/// @param {Length} $gap - Gap size
+/// @throw If `$name` is not a string or `$gap` is not a number
+@mixin define-gap($name, $gap) {
+    $name: utility.assert-string($name, "define-gap", "name");
+    $gap: utility.assert-number($gap, "define-gap", "gap");
+
+    $-gaps: map.set($-gaps, $name, $gap) !global;
+}
+
+/// Sets the size of a defined gap for one scheme.
+///
+/// @param {String} $scheme - Scheme name
+/// @param {String} $name - Gap name
+/// @param {Length} $gap - Gap size for the scheme
+/// @throw If `$scheme` or `$name` is not a string, `$gap` is not a number, or the gap is not defined
+@mixin override-gap($scheme, $name, $gap) {
+    $scheme: utility.assert-string($scheme, "override-gap", "scheme");
+    $name: utility.assert-string($name, "override-gap", "name");
+    $gap: utility.assert-number($gap, "override-gap", "gap");
+    @if -missing($name) {
+        @error -fail($name);
+    }
+
+    $_: scheme.define-scheme($scheme);
+    $-overrides: utility.deep-set($-overrides, $gap, $scheme, $name) !global;
+}
+
+/// Returns the size of a defined gap.
+///
+/// @param {String} $name - Gap name
+/// @return {Length} Gap size
+/// @throw If `$name` is not a string or the gap is not defined
+@function gap-value($name) {
+    $name: utility.assert-string($name, "gap-value", "name");
+    @if -missing($name) {
+        @error -fail($name);
+    }
+
+    @return map.get($-gaps, $name);
+}
+
+/// Returns the size of a gap for one scheme.
+///
+/// @param {String} $scheme - Scheme name
+/// @param {String} $name - Gap name
+/// @return {Length | null} Gap size for the scheme, or `null` if the scheme does not override it
+/// @throw If `$scheme` or `$name` is not a string, or the gap is not defined
+@function scheme-gap($scheme, $name) {
+    $scheme: utility.assert-string($scheme, "scheme-gap", "scheme");
+    $name: utility.assert-string($name, "scheme-gap", "name");
+    @if -missing($name) {
+        @error -fail($name);
+    }
+
+    @return map.get($-overrides, $scheme, $name);
+}
+
+/// Returns the CSS variable of a gap.
+/// It also registers the gap value and each scheme override as CSS variables.
+///
+/// @param {String} $name - Gap name
+/// @return {Variable<Length>} CSS variable of the gap
+/// @throw If `$name` is not a string or the gap is not defined
+@function gap($name) {
+    $name: utility.assert-string($name, "gap", "name");
+    @if -missing($name) {
+        @error -fail($name);
+    }
+
+    $token: "gap-#{$name}";
+    $value: map.get($-gaps, $name);
+    $_: scheme.define-variable(null, $token, $value);
+
+    @each $scheme in scheme.schemes() {
+        $_: scheme.define-variable($scheme, $token, map.get($-overrides, $scheme, $name));
+    }
+
+    @return scheme.variable($token, $value);
+}
+
+/// Returns a map of gap names and their CSS variables, filtered by name.
+/// It also registers each gap value and scheme override as CSS variables.
+///
+/// @param {List<String>} $includes [null] - Gap names to include; all defined gaps when not a list
+/// @param {List<String>} $excludes [null] - Gap names to exclude; none when not a list
+/// @return {Map<String, Variable<Length>>} Matching gaps and their CSS variables
+@function gaps($includes: null, $excludes: null) {
+    $includes: utility.assert-list($includes, "gaps", "includes", map.keys($-gaps));
+    $excludes: utility.assert-list($excludes, "gaps", "excludes", ());
+
+    $result: ();
+    @each $name, $gap in $-gaps {
+        @if utility.should-include($name, $includes, $excludes) {
+            $token: "gap-#{$name}";
+            $_: scheme.define-variable(null, $token, $gap);
+
+            @each $scheme in scheme.schemes() {
+                $_: scheme.define-variable($scheme, $token, map.get($-overrides, $scheme, $name));
+            }
+
+            $result: map.set($result, $name, scheme.variable($token, $gap));
+        }
+    }
+    @return $result;
+}

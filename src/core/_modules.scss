@@ -1,39 +1,36 @@
 @use "sass:list";
-@use "util";
+@use "utility";
 
 $-modules: () !default;
 
-/// Registers a module as available.
+/// Registers a module, after checking that the modules it requires are registered.
+/// If the module is already registered, it only warns and outputs nothing.
 ///
-/// @param {String} $module - Module to add
-/// @throw If the input is not a string
-@mixin present-module($module) {
-    $module: util.string-of($module, "present-module", "module");
+/// @param {String} $module - Module name
+/// @param {Arglist} $requirements - Names of the modules that must be registered first; values that are not strings are ignored
+/// @output The content block, once, at the root level
+/// @throw If `$module` is not a string or a required module is not registered
+@mixin define-module($module, $requirements...) {
+    $module: utility.assert-string($module, "present-module", "module");
 
-    $-modules: list.append($-modules, $module) !global;
-}
+    @if list.index($-modules, $module) {
+        @warn "Module `#{$module}` has already been presented!";
+    } @else {
+        // Check for missing required modules
+        $missing: ();
+        @each $requirement in $requirements {
+            @if utility.is-string($requirement) and not list.index($-modules, $requirement) {
+                $missing: list.append($missing, $requirement, comma);
+            }
+        }
+        @if list.length($missing) > 0 {
+            @error "Module #{$module} requires [#{$missing}] modules!";
+        }
 
-/// Validates that required modules are present.
-///
-/// @param {String} $module - Input module that requires another module
-/// @param {String} $requirement - Input required module that must be present
-/// @throw If either input is not a valid string or if the required module is not present
-@mixin require($module, $requirement) {
-    $module: util.string-of($module, "require", "module");
-    $requirement: util.string-of($requirement, "require", "requirement");
-
-    @if not list.index($-modules, $requirement) {
-        @error "Module #{$module} requires [#{$requirement}] modules";
+        // Register the module and run the content
+        $-modules: list.append($-modules, $module) !global;
+        @at-root {
+            @content;
+        }
     }
-}
-
-/// Checks whether a module has been registered.
-///
-/// @param {String} $module - Module to check
-/// @return {Boolean} `true` if the module is registered, `false` otherwise
-/// @throw If the input is not a string
-@function module-presented($module) {
-    $module: util.string-of($module, "module-presented", "module");
-
-    @return util.ternary(list.index($-modules, $module), true, false);
 }
