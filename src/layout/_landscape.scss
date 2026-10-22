@@ -9,12 +9,12 @@
 /// @param {List<String>} $gaps [()] - Gap names to include; `null` includes all defined gaps
 /// @output The `.landscape` class and its variation classes
 ///
-/// @require {Variable<Color>} color("primary") - Accent color of the scrollbar
 /// @require {Variable<Length>} var("gap", "micro") - Default space between items
+/// @require {Variable<Color>} color("primary") - Accent color of the scrollbar
 @mixin use-landscape($gaps: ()) {
     @include module.define-module("landscape") {
-        $primary: module.color("primary");
         $gap-micro: module.var("gap", "micro");
+        $primary: module.color("primary");
 
         .landscape {
             display: flex;

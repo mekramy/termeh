@@ -9,12 +9,12 @@
 /// @param {List<String>} $gaps [()] - Gap names to include; `null` includes all defined gaps
 /// @output The `.gaper` class and its variation classes
 ///
-/// @require {Variable<Color>} variant("base", "separator") - Background color of `.divider`
 /// @require {Variable<Length>} var("gap", "micro") - Default space between items
+/// @require {Variable<Color>} variant("base", "separator") - Background color of `.divider`
 @mixin use-gaper($gaps: ()) {
     @include module.define-module("gaper") {
-        $separator: module.variant("base", "separator");
         $gap-micro: module.var("gap", "micro");
+        $separator: module.variant("base", "separator");
 
         .gaper {
             display: flex;

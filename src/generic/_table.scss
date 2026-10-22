@@ -224,10 +224,10 @@
                 background: $hover-background;
             }
 
-            @each $name, $color in module.colors($includes: $colors) {
+            @each $name, $palette in module.colors($includes: $colors) {
                 $-color: module.variant-for("table", $name, "color");
                 $-background: module.variant-for("table", $name, "background");
-                $-indicator: module.variant-for("table", $name, "decorator", $color);
+                $-indicator: module.variant-for("table", $name, "decorator", $palette);
 
                 $-hover-background: module.variant-for("table", $name, "hover-background");
                 $-striped-background: module.variant-for("table", $name, "striped-background");

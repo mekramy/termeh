@@ -55,7 +55,7 @@
 /// @require {Variable<Color>} variant($name, "readable") - Text color of each color name
 @mixin use-text-colors($colors: ()) {
     @include module.define-module("text-colors") {
-        @each $name, $color in module.colors($includes: $colors) {
+        @each $name, $palette in module.colors($includes: $colors) {
             $readable: module.variant($name, "readable");
 
             .is-#{$name}-color {

@@ -63,54 +63,34 @@
     @return calc(#{$parent-radius} - #{$padding});
 }
 
-/// Creates a translucent box shadow.
-/// The blur is twice the larger offset, and the color opacity is set to 0.3.
+/// Creates a standard box shadow with specified offset and depth.
 ///
-/// @param {Length} $x - Horizontal offset
-/// @param {Length} $y - Vertical offset
-/// @param {Color} $color - Shadow color
+/// @param {Variable<Length> | Length} $x - Horizontal offset of the shadow
+/// @param {Variable<Length> | Length} $y - Vertical offset of the shadow
+/// @param {Variable<Length> | Length} $depth - Depth of the shadow
+/// @param {Variable<Color> | Color} $color - Shadow color
 /// @return {BoxShadow} The shadow value
-/// @throw If `$x` or `$y` is not a number, or `$color` is not a color
-@function shadow($x, $y, $color) {
-    $x: validation.assert-number($x, "shadow", "x");
-    $y: validation.assert-number($y, "shadow", "y");
-    $color: validation.assert-color($color, "shadow", "color");
-
-    $max: math.max(math.abs($x), math.abs($y));
-    $color: color.change($color, $alpha: 0.3);
-
-    @return $x $y ($max * 2) 0 $color;
+@function shadow($x, $y, $depth, $color) {
+    @return $x $y calc($depth * 2) 0 $color;
 }
 
-/// Creates a soft, spread-out box shadow.
-/// The blur is three times the larger offset, the spread is the negative of the larger offset, and the color opacity is set to 0.15.
+/// Creates a soft box shadow with specified offset and depth.
 ///
-/// @param {Length} $x - Horizontal offset
-/// @param {Length} $y - Vertical offset
-/// @param {Color} $color - Shadow color
+/// @param {Variable<Length> | Length} $x - Horizontal offset of the shadow
+/// @param {Variable<Length> | Length} $y - Vertical offset of the shadow
+/// @param {Variable<Length> | Length} $depth - Depth of the shadow
+/// @param {Variable<Color> | Color} $color - Shadow color
 /// @return {BoxShadow} The shadow value
-/// @throw If `$x` or `$y` is not a number, or `$color` is not a color
-@function soft-shadow($x, $y, $color) {
-    $x: validation.assert-number($x, "soft-shadow", "x");
-    $y: validation.assert-number($y, "soft-shadow", "y");
-    $color: validation.assert-color($color, "soft-shadow", "color");
-
-    $max: math.max(math.abs($x), math.abs($y));
-    $color: color.change($color, $alpha: 0.15);
-
-    @return $x $y ($max * 3) negate($max) $color;
+@function soft-shadow($x, $y, $depth, $color) {
+    @return $x $y calc($depth * 3) negate($depth) $color;
 }
 
 /// Creates a flat box shadow with no offset and no blur.
 ///
-/// @param {Length} $size - Spread size of the shadow
-/// @param {Color} $color - Shadow color
+/// @param {Variable<Length> | Length} $size - Spread size of the shadow
+/// @param {Variable<Color> | Color} $color - Shadow color
 /// @return {BoxShadow} The shadow value
-/// @throw If `$size` is not a number or `$color` is not a color
 @function flat-shadow($size, $color) {
-    $size: validation.assert-number($size, "flat-shadow", "size");
-    $color: validation.assert-color($color, "flat-shadow", "color");
-
     @return 0 0 0 $size $color;
 }
 
