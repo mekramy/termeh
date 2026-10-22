@@ -1,21 +1,20 @@
 @use "../core/module";
 
-/// Generates padding styles from registered gap values.
+/// Generates the `.padder` class with padding from gap values.
 ///
-/// @param {List} $gaps [()] - Registered gap names to include; `null` includes all registered gaps
+/// Supports `gap` variations.
+///
+/// @param {List<String>} $gaps [()] - Gap names to include; `null` includes all defined gaps
+/// @output The `.padder` class and a `.is-<name>` class for each gap
 @mixin use-padder($gaps: ()) {
-    @if not module.module-presented("padder") {
-        @include module.present-module("padder");
+    @include module.define-module("padder") {
+        .padder {
+            display: block;
+            box-sizing: border-box;
 
-        @at-root {
-            .padder {
-                display: block;
-                box-sizing: border-box;
-
-                @each $name, $gap in module.gaps($includes: $gaps) {
-                    &.is-#{$name} {
-                        padding: $gap;
-                    }
+            @each $name, $gap in module.gaps($includes: $gaps) {
+                &.is-#{$name} {
+                    padding: $gap;
                 }
             }
         }

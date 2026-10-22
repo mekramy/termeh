@@ -1,56 +1,57 @@
 @use "../core/module";
 
-/// Generates container styles with configurable padding variants.
+/// Generates the `.container` layout with a maximum width for each breakpoint.
 ///
-/// @param {List} $paddings [()] - Registered gap names to use as padding variants; `null` includes all registered gaps
+/// Use `.is-fullwidth` to remove the width limit.
+///
+/// Supports `gap` variations.
+///
+/// @param {List<String>} $paddings [()] - Gap names to use as padding classes; `null` includes all defined gaps
+/// @output The `.container` class and its padding classes
 ///
 /// @require {Variable<Length>} var("gap", "macro") - Default padding and bottom margin
-/// @require {Variable<Length>} var("container", "desktop") - Maximum width from desktop up to widescreen
-/// @require {Variable<Length>} var("container", "widescreen") - Maximum width at widescreen
-/// @require {Variable<Length>} var("container", "fullhd") - Maximum width at full HD
+/// @require {Variable<Length>} var("container", "desktop") - Maximum width on desktop
+/// @require {Variable<Length>} var("container", "widescreen") - Maximum width on widescreen
+/// @require {Variable<Length>} var("container", "fullhd") - Maximum width on full HD
 @mixin use-container($paddings: ()) {
-    @if not module.module-presented("container") {
-        @include module.present-module("container");
-
+    @include module.define-module("container") {
         $gap-macro: module.var("gap", "macro");
         $desktop: module.var("container", "desktop");
         $widescreen: module.var("container", "widescreen");
         $fullhd: module.var("container", "fullhd");
 
-        @at-root {
-            .container {
-                display: block;
-                position: relative;
-                max-width: 100%;
-                box-sizing: border-box;
+        .container {
+            display: block;
+            position: relative;
+            max-width: 100%;
+            box-sizing: border-box;
 
-                @include module.marged() {
-                    margin-bottom: $gap-macro;
+            &:not(.is-fullwidth) {
+                @include module.desktop() {
+                    margin-left: auto;
+                    margin-right: auto;
+                    max-width: $desktop;
                 }
 
-                &:not(.is-fullwidth) {
-                    @include module.desktop() {
-                        margin-left: auto;
-                        margin-right: auto;
-                        max-width: $desktop;
-                    }
-
-                    @include module.widescreen() {
-                        max-width: $widescreen;
-                    }
-
-                    @include module.fullhd() {
-                        max-width: $fullhd;
-                    }
+                @include module.widescreen() {
+                    max-width: $widescreen;
                 }
 
-                @include module.padded() {
-                    padding: $gap-macro;
+                @include module.fullhd() {
+                    max-width: $fullhd;
+                }
+            }
 
-                    @each $name, $gap in module.gaps($includes: $paddings) {
-                        &.is-#{$name}-padded {
-                            padding: $gap;
-                        }
+            @include module.marged() {
+                margin-bottom: $gap-macro;
+            }
+
+            @include module.padded() {
+                padding: $gap-macro;
+
+                @each $name, $gap in module.gaps($includes: $paddings) {
+                    &.is-#{$name}-padded {
+                        padding: $gap;
                     }
                 }
             }

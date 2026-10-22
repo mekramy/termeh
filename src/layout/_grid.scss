@@ -1,105 +1,106 @@
 @use "../core/module";
 
-/// Generates grid styles with configurable gap and unit variants.
+/// Generates the `.grid` layout with `.column` and `.break` children.
 ///
-/// @param {List} $gaps [()] - Registered gap names to include; `null` includes all registered gaps
-/// @param {List} $units [()] - Registered unit names to include; `null` includes all registered units
+/// Column width can be set by unit or with `.is-fit`.
 ///
-/// @require {Variable<Length>} var("gap", "macro") - Default spacing between grid rows and columns
+/// Supports `unit`, `align`, `justify`, `gap` and `device` variations.
+///
+/// @param {List<String>} $gaps [()] - Gap names to include; `null` includes all defined gaps
+/// @param {List<String>} $units [()] - Unit names to include; `null` includes all defined units
+/// @output The `.grid` class and its variation classes
+///
+/// @require {Variable<Length>} var("gap", "macro") - Default space between rows and columns
 @mixin use-grid($gaps: (), $units: ()) {
-    @if not module.module-presented("grid") {
-        @include module.present-module("grid");
-
+    @include module.define-module("grid") {
         $gap-macro: module.var("gap", "macro");
 
-        @at-root {
-            .grid {
-                display: flex;
-                flex-flow: row wrap;
+        .grid {
+            display: flex;
+            flex-flow: row wrap;
+            box-sizing: border-box;
+
+            > .break {
+                height: 0;
+                display: block;
+                flex-basis: 100%;
+            }
+
+            > .column {
+                flex: 1 1 0;
+                display: block;
+                min-width: 0;
+                max-width: 100%;
                 box-sizing: border-box;
 
-                > .break {
-                    height: 0;
-                    display: block;
-                    flex-basis: 100%;
-                }
-
-                > .column {
-                    flex: 1 1 0;
-                    display: block;
-                    min-width: 0;
-                    max-width: 100%;
-                    box-sizing: border-box;
-
-                    @each $name, $unit in module.units($includes: $units) {
-                        &.is-#{$name} {
-                            width: $unit;
-                            flex: 0 0 auto;
-                        }
-                    }
-
-                    &.is-fit {
-                        width: auto;
+                @each $name, $unit in module.units($includes: $units) {
+                    &.is-#{$name} {
+                        width: $unit;
                         flex: 0 0 auto;
                     }
                 }
 
-                @include module.gapped() {
-                    margin: module.negate(module.half($gap-macro));
+                &.is-fit {
+                    width: auto;
+                    flex: 0 0 auto;
+                }
+            }
 
-                    > .column {
-                        padding: module.half($gap-macro);
-                    }
+            @each $name, $align in module.flex-aligns() {
+                &.is-#{$name}-align {
+                    align-items: $align;
+                }
+            }
 
-                    @each $name, $gap in module.gaps($includes: $gaps) {
-                        &.is-#{$name}-gap {
-                            margin: module.negate(module.half($gap));
+            @each $name, $justify in module.flex-justifies() {
+                &.is-#{$name}-justify {
+                    justify-content: $justify;
+                }
+            }
 
-                            > .column {
-                                padding: module.half($gap);
-                            }
+            @include module.gapped() {
+                margin: module.negate(module.half($gap-macro));
+
+                > .column {
+                    padding: module.half($gap-macro);
+                }
+
+                @each $name, $gap in module.gaps($includes: $gaps) {
+                    &.is-#{$name}-gap {
+                        margin: module.negate(module.half($gap));
+
+                        > .column {
+                            padding: module.half($gap);
                         }
                     }
                 }
+            }
 
-                @each $name, $align in module.flex-aligns() {
-                    &.is-#{$name}-align {
-                        align-items: $align;
-                    }
-                }
-
-                @each $name, $justify in module.flex-justifies() {
-                    &.is-#{$name}-justify {
-                        justify-content: $justify;
-                    }
-                }
-
-                @each $device, $query in module.media-queries() {
-                    @media #{$query} {
-                        > .column {
-                            @each $name, $unit in module.units($includes: $units) {
-                                &.is-#{$device}-#{$name} {
-                                    width: $unit;
-                                    flex: 0 0 auto;
-                                }
-                            }
-
-                            &.is-#{$device}-fit {
-                                width: auto;
+            @each $device, $query in module.media-queries() {
+                @media #{$query} {
+                    > .column {
+                        @each $name, $unit in module.units($includes: $units) {
+                            &.is-#{$device}-#{$name} {
+                                width: $unit;
                                 flex: 0 0 auto;
                             }
                         }
 
-                        @each $name, $align in module.flex-aligns() {
-                            &.is-#{$device}-#{$name}-align {
-                                align-items: $align;
-                            }
+                        &.is-#{$device}-fit {
+                            width: auto;
+                            flex: 0 0 auto;
                         }
+                    }
 
-                        @each $name, $justify in module.flex-justifies() {
-                            &.is-#{$device}-#{$name}-justify {
-                                justify-content: $justify;
-                            }
+                    @each $name, $align in module.flex-aligns() {
+                        &.is-#{$device}-#{$name}-align {
+                            align-items: $align;
+                        }
+                    }
+
+                    @each $name, $justify in module.flex-justifies() {
+                        &.is-#{$device}-#{$name}-justify {
+                            justify-content: $justify;
                         }
                     }
                 }

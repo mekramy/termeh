@@ -1,98 +1,159 @@
 @use "../core/module";
 
-/// Generates gaper styles with configurable gap, alignment, and justification variants.
+/// Generates the `.gaper` layout that puts children in a row with space between them.
 ///
-/// @param {List} $gaps [()] - Registered gap names to include; `null` includes all registered gaps
+/// It supports `.filler`, `.divider` and `.gutter` children, and can be stacked in a column.
 ///
-/// @require {Variable<Color>} var("base", "separator") - Divider background color
-/// @require {Variable<Length>} var("gap", "micro") - Default spacing between items
+/// Supports `align`, `justify`, `gap` and `device` variations.
+///
+/// @param {List<String>} $gaps [()] - Gap names to include; `null` includes all defined gaps
+/// @output The `.gaper` class and its variation classes
+///
+/// @require {Variable<Color>} variant("base", "separator") - Background color of `.divider`
+/// @require {Variable<Length>} var("gap", "micro") - Default space between items
 @mixin use-gaper($gaps: ()) {
-    @if not module.module-presented("gaper") {
-        @include module.present-module("gaper");
-
-        $separator: module.var("base", "separator");
+    @include module.define-module("gaper") {
+        $separator: module.variant("base", "separator");
         $gap-micro: module.var("gap", "micro");
 
-        @at-root {
-            .gaper {
-                display: flex;
-                flex-flow: row nowrap;
-                align-items: center;
-                justify-content: flex-start;
-                box-sizing: border-box;
+        .gaper {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: flex-start;
+            box-sizing: border-box;
 
-                > * {
-                    flex: 0 0 auto;
-                }
+            > * {
+                flex: 0 0 auto;
+            }
 
-                > .filler {
-                    flex: 1 1 0;
-                }
+            > .filler {
+                flex: 1 1 0;
+            }
 
+            > .divider,
+            > .gutter {
+                width: 1px;
+                display: none;
+                align-self: stretch;
+            }
+
+            > .divider {
+                background-color: $separator;
+            }
+
+            &.is-stacked {
+                flex-direction: column;
+            }
+
+            &.is-stacked-reverse {
+                flex-direction: column-reverse;
+            }
+
+            &.is-stacked,
+            &.is-stacked-reverse {
                 > .divider,
                 > .gutter {
-                    width: 1px;
-                    display: none;
-                    align-self: stretch;
+                    height: 1px;
+                    width: unset;
+                }
+            }
+
+            @each $name, $align in module.flex-aligns() {
+                &.is-#{$name}-align {
+                    align-items: $align;
+                }
+            }
+
+            @each $name, $justify in module.flex-justifies() {
+                &.is-#{$name}-justify {
+                    justify-content: $justify;
+                }
+            }
+
+            @include module.gapped() {
+                > .divider,
+                > .gutter {
+                    display: block;
                 }
 
-                > .divider {
-                    background-color: $separator;
+                &.is-auto {
+                    gap: $gap-micro;
+
+                    @each $name, $gap in module.gaps($includes: $gaps) {
+                        &.is-#{$name}-gap {
+                            gap: $gap;
+                        }
+                    }
                 }
 
-                &.is-stacked {
-                    flex-direction: column;
-                }
-
-                &.is-stacked-reverse {
-                    flex-direction: column-reverse;
-                }
-
-                &.is-stacked,
-                &.is-stacked-reverse {
+                &:not(.is-auto) {
                     > .divider,
                     > .gutter {
-                        height: 1px;
-                        width: unset;
-                    }
-                }
-
-                @each $name, $align in module.flex-aligns() {
-                    &.is-#{$name}-align {
-                        align-items: $align;
-                    }
-                }
-
-                @each $name, $justify in module.flex-justifies() {
-                    &.is-#{$name}-justify {
-                        justify-content: $justify;
-                    }
-                }
-
-                @include module.gapped() {
-                    > .divider,
-                    > .gutter {
-                        display: block;
+                        margin: 0 module.half($gap-micro);
                     }
 
-                    &.is-auto {
-                        gap: $gap-micro;
+                    &.is-stacked,
+                    &.is-stacked-reverse {
+                        > .divider,
+                        > .gutter {
+                            margin: module.half($gap-micro) 0;
+                        }
+                    }
 
-                        @each $name, $gap in module.gaps($includes: $gaps) {
-                            &.is-#{$name}-gap {
-                                gap: $gap;
+                    @each $name, $gap in module.gaps($includes: $gaps) {
+                        &.is-#{$name}-gap {
+                            > .divider,
+                            > .gutter {
+                                margin: 0 module.half($gap);
+                            }
+
+                            &.is-stacked,
+                            &.is-stacked-reverse {
+                                > .divider,
+                                > .gutter {
+                                    margin: module.half($gap) 0;
+                                }
                             }
                         }
                     }
+                }
+            }
 
-                    &:not(.is-auto) {
+            @each $device, $query in module.media-queries() {
+                @media #{$query} {
+                    &.is-#{$device}-stacked {
+                        flex-direction: column;
+                    }
+
+                    &.is-#{$device}-stacked-reverse {
+                        flex-direction: column-reverse;
+                    }
+
+                    &.is-#{$device}-stacked,
+                    &.is-#{$device}-stacked-reverse {
                         > .divider,
                         > .gutter {
-                            margin: 0 module.half($gap-micro);
+                            height: 1px;
+                            width: unset;
                         }
+                    }
 
-                        &.is-stacked,
-                        &.is-stacked-reverse {
+                    @each $name, $align in module.flex-aligns() {
+                        &.is-#{$device}-#{$name}-align {
+                            align-items: $align;
+                        }
+                    }
+
+                    @each $name, $justify in module.flex-justifies() {
+                        &.is-#{$device}-#{$name}-justify {
+                            justify-content: $justify;
+                        }
+                    }
+
+                    @include module.gapped(".is-auto") {
+                        &.is-#{$device}-stacked,
+                        &.is-#{$device}-stacked-reverse {
                             > .divider,
                             > .gutter {
                                 margin: module.half($gap-micro) 0;
@@ -101,71 +162,11 @@
 
                         @each $name, $gap in module.gaps($includes: $gaps) {
                             &.is-#{$name}-gap {
-                                > .divider,
-                                > .gutter {
-                                    margin: 0 module.half($gap);
-                                }
-
-                                &.is-stacked,
-                                &.is-stacked-reverse {
+                                &.is-#{$device}-stacked,
+                                &.is-#{$device}-stacked-reverse {
                                     > .divider,
                                     > .gutter {
                                         margin: module.half($gap) 0;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                @each $device, $query in module.media-queries() {
-                    @media #{$query} {
-                        &.is-#{$device}-stacked {
-                            flex-direction: column;
-                        }
-
-                        &.is-#{$device}-stacked-reverse {
-                            flex-direction: column-reverse;
-                        }
-
-                        &.is-#{$device}-stacked,
-                        &.is-#{$device}-stacked-reverse {
-                            > .divider,
-                            > .gutter {
-                                height: 1px;
-                                width: unset;
-                            }
-                        }
-
-                        @each $name, $align in module.flex-aligns() {
-                            &.is-#{$device}-#{$name}-align {
-                                align-items: $align;
-                            }
-                        }
-
-                        @each $name, $justify in module.flex-justifies() {
-                            &.is-#{$device}-#{$name}-justify {
-                                justify-content: $justify;
-                            }
-                        }
-
-                        @include module.gapped(".is-auto") {
-                            &.is-#{$device}-stacked,
-                            &.is-#{$device}-stacked-reverse {
-                                > .divider,
-                                > .gutter {
-                                    margin: module.half($gap-micro) 0;
-                                }
-                            }
-
-                            @each $name, $gap in module.gaps($includes: $gaps) {
-                                &.is-#{$name}-gap {
-                                    &.is-#{$device}-stacked,
-                                    &.is-#{$device}-stacked-reverse {
-                                        > .divider,
-                                        > .gutter {
-                                            margin: module.half($gap) 0;
-                                        }
                                     }
                                 }
                             }

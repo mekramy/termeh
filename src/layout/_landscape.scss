@@ -1,102 +1,101 @@
 @use "../core/module";
 
-/// Generates horizontal and vertical landscape layouts with scroll snapping.
+/// Generates the `.landscape` layout, a scrollable row with scroll snapping.
 ///
-/// @param {List} $gaps [()] - Registered gap names to include; `null` includes all registered gaps
+/// Use `.is-stacked` for a vertical layout, and `.is-center-snapped`, `.is-end-snapped` or `.is-mandatory` to change snapping.
 ///
-/// @throw If the primary color is not registered
+/// Supports `align`, `justify`, `gap` and `device` variations.
 ///
-/// @require {Variable<Color>} color("primary") - Scrollbar accent color @throw on missing
-/// @require {Variable<Length>} var("gap", "micro") - Default spacing between items
+/// @param {List<String>} $gaps [()] - Gap names to include; `null` includes all defined gaps
+/// @output The `.landscape` class and its variation classes
+///
+/// @require {Variable<Color>} color("primary") - Accent color of the scrollbar
+/// @require {Variable<Length>} var("gap", "micro") - Default space between items
 @mixin use-landscape($gaps: ()) {
-    @if not module.module-presented("landscape") {
-        @include module.present-module("landscape");
-
+    @include module.define-module("landscape") {
         $primary: module.color("primary");
         $gap-micro: module.var("gap", "micro");
 
-        @at-root {
-            .landscape {
-                display: flex;
-                flex-flow: row nowrap;
-                box-sizing: border-box;
-                overflow: hidden;
-                overflow-x: auto;
-                scroll-snap-type: x proximity;
-                @include module.overflow-touch();
-                @include module.scrollable($primary);
+        .landscape {
+            display: flex;
+            flex-flow: row nowrap;
+            box-sizing: border-box;
+            overflow: hidden;
+            overflow-x: auto;
+            scroll-snap-type: x proximity;
+            @include module.overflow-touch();
+            @include module.scrollable($primary);
 
-                > * {
-                    flex-shrink: 0;
-                    scroll-snap-align: start;
-                }
+            > * {
+                flex-shrink: 0;
+                scroll-snap-align: start;
+            }
 
-                &.is-center-snapped > * {
-                    scroll-snap-align: center;
-                }
+            &.is-center-snapped > * {
+                scroll-snap-align: center;
+            }
 
-                &.is-end-snapped > * {
-                    scroll-snap-align: end;
-                }
+            &.is-end-snapped > * {
+                scroll-snap-align: end;
+            }
+
+            &.is-mandatory {
+                scroll-snap-type: x mandatory;
+            }
+
+            &.is-stacked {
+                flex-direction: column;
+                overflow: hidden auto;
+                scroll-snap-type: y proximity;
 
                 &.is-mandatory {
-                    scroll-snap-type: x mandatory;
+                    scroll-snap-type: y mandatory;
                 }
+            }
 
-                &.is-stacked {
-                    flex-direction: column;
-                    overflow: hidden auto;
-                    scroll-snap-type: y proximity;
+            @each $name, $align in module.flex-aligns() {
+                &.is-#{$name}-align {
+                    align-items: $align;
+                }
+            }
 
-                    &.is-mandatory {
-                        scroll-snap-type: y mandatory;
+            @each $name, $justify in module.flex-justifies() {
+                &.is-#{$name}-justify {
+                    justify-content: $justify;
+                }
+            }
+
+            @include module.gapped() {
+                gap: $gap-micro;
+
+                @each $name, $gap in module.gaps($includes: $gaps) {
+                    &.is-#{$name}-gap {
+                        gap: $gap;
                     }
                 }
+            }
 
-                @each $name, $align in module.flex-aligns() {
-                    &.is-#{$name}-align {
-                        align-items: $align;
-                    }
-                }
-
-                @each $name, $justify in module.flex-justifies() {
-                    &.is-#{$name}-justify {
-                        justify-content: $justify;
-                    }
-                }
-
-                @include module.gapped() {
-                    gap: $gap-micro;
-
-                    @each $name, $gap in module.gaps($includes: $gaps) {
-                        &.is-#{$name}-gap {
-                            gap: $gap;
+            @each $device, $query in module.media-queries() {
+                @media #{$query} {
+                    @each $name, $align in module.flex-aligns() {
+                        &.is-#{$device}-#{$name}-align {
+                            align-items: $align;
                         }
                     }
-                }
 
-                @each $device, $query in module.media-queries() {
-                    @media #{$query} {
-                        @each $name, $align in module.flex-aligns() {
-                            &.is-#{$device}-#{$name}-align {
-                                align-items: $align;
-                            }
+                    @each $name, $justify in module.flex-justifies() {
+                        &.is-#{$device}-#{$name}-justify {
+                            justify-content: $justify;
                         }
+                    }
 
-                        @each $name, $justify in module.flex-justifies() {
-                            &.is-#{$device}-#{$name}-justify {
-                                justify-content: $justify;
-                            }
-                        }
+                    &.is-#{$device}-stacked {
+                        flex-direction: column;
+                        overflow: hidden auto;
+                        scroll-snap-type: y proximity;
 
-                        &.is-#{$device}-stacked {
-                            flex-direction: column;
-                            overflow: hidden auto;
-                            scroll-snap-type: y proximity;
-
-                            &.is-mandatory {
-                                scroll-snap-type: y mandatory;
-                            }
+                        &.is-mandatory {
+                            scroll-snap-type: y mandatory;
                         }
                     }
                 }

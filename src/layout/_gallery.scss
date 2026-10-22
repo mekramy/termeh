@@ -1,50 +1,84 @@
 @use "../core/module";
 
-/// Generates gallery styles with configurable gap variants.
+/// Generates the `.gallery` layout that fills each row with `.item` children.
 ///
-/// @param {List} $gaps [()] - Registered gap names to include; `null` includes all registered gaps
+/// Item height changes by screen size. Use `.is-block` on an item for automatic height, and `.is-stackable` to stack items on mobile.
 ///
-/// @require {Variable<Length>} var("gap", "micro") - Default gap between gallery items
-/// @require {Variable<Length>} var("gallery", "height") - Default item height
-/// @require {Variable<Length>} var("gallery", "height-tablet") - Item height on tablet screens
-/// @require {Variable<Length>} var("gallery", "height-mobile") - Item height on mobile screens
+/// Supports `gap` variations.
+///
+/// @param {List<String>} $gaps [()] - Gap names to include; `null` includes all defined gaps
+/// @output The `.gallery` class and its gap classes
+///
+/// @require {Variable<Length>} var("gap", "micro") - Default gap between items
+/// @require {Variable<Length>} var("gallery", "height") - Item height on desktop
+/// @require {Variable<Length>} var("gallery", "height-tablet") - Item height on tablet
+/// @require {Variable<Length>} var("gallery", "height-mobile") - Item height on mobile
 @mixin use-gallery($gaps: ()) {
-    @if not module.module-presented("gallery") {
-        @include module.present-module("gallery");
-
+    @include module.define-module("gallery") {
         $gap-micro: module.var("gap", "micro");
         $height: module.var("gallery", "height");
         $height-tablet: module.var("gallery", "height-tablet");
         $height-mobile: module.var("gallery", "height-mobile");
 
-        @at-root {
-            .gallery {
-                display: flex;
-                overflow: hidden;
-                flex-wrap: wrap;
+        .gallery {
+            display: flex;
+            overflow: hidden;
+            flex-wrap: wrap;
 
-                &::after {
-                    height: 0;
-                    content: "";
-                    flex-grow: 999999999;
-                    min-width: $height-mobile;
+            &::after {
+                height: 0;
+                content: "";
+                flex-grow: 999999999;
+                min-width: $height-mobile;
+            }
+
+            > .item {
+                flex-grow: 1;
+                display: block;
+                position: relative;
+                text-decoration: none;
+
+                > img,
+                .thumbnail {
+                    max-width: 100%;
+                    min-width: 100%;
+                    object-fit: cover;
+                    vertical-align: bottom;
                 }
 
-                > .item {
-                    flex-grow: 1;
-                    display: block;
-                    position: relative;
-                    text-decoration: none;
+                &.is-block {
+                    width: 100%;
+                    height: auto;
 
                     > img,
                     .thumbnail {
-                        max-width: 100%;
-                        min-width: 100%;
-                        object-fit: cover;
-                        vertical-align: bottom;
+                        height: auto;
                     }
+                }
 
-                    &.is-block {
+                &:not(.is-block) {
+                    height: $height-mobile;
+
+                    > img,
+                    .thumbnail {
+                        height: $height-mobile;
+                    }
+                }
+            }
+
+            @include module.gapped() {
+                gap: $gap-micro;
+
+                @each $name, $gap in module.gaps($includes: $gaps) {
+                    &.is-#{$name}-gap {
+                        gap: $gap;
+                    }
+                }
+            }
+
+            @include module.mobile() {
+                &.is-stackable {
+                    > .item {
                         width: 100%;
                         height: auto;
 
@@ -53,68 +87,35 @@
                             height: auto;
                         }
                     }
+                }
+            }
 
-                    &:not(.is-block) {
-                        height: $height-mobile;
-
-                        > img,
-                        .thumbnail {
-                            height: $height-mobile;
-                        }
-                    }
+            @include module.tablet() {
+                &::after {
+                    min-width: $height-tablet;
                 }
 
-                @include module.gapped() {
-                    gap: $gap-micro;
+                > .item:not(.is-block) {
+                    height: $height-tablet;
 
-                    @each $name, $gap in module.gaps($includes: $gaps) {
-                        &.is-#{$name}-gap {
-                            gap: $gap;
-                        }
-                    }
-                }
-
-                @include module.mobile() {
-                    &.is-stackable {
-                        > .item {
-                            width: 100%;
-                            height: auto;
-
-                            > img,
-                            .thumbnail {
-                                height: auto;
-                            }
-                        }
-                    }
-                }
-
-                @include module.tablet() {
-                    &::after {
-                        min-width: $height-tablet;
-                    }
-
-                    > .item:not(.is-block) {
+                    > img,
+                    .thumbnail {
                         height: $height-tablet;
-
-                        > img,
-                        .thumbnail {
-                            height: $height-tablet;
-                        }
                     }
                 }
+            }
 
-                @include module.desktop() {
-                    &::after {
-                        min-width: $height;
-                    }
+            @include module.desktop() {
+                &::after {
+                    min-width: $height;
+                }
 
-                    > .item:not(.is-block) {
+                > .item:not(.is-block) {
+                    height: $height;
+
+                    > img,
+                    .thumbnail {
                         height: $height;
-
-                        > img,
-                        .thumbnail {
-                            height: $height;
-                        }
                     }
                 }
             }

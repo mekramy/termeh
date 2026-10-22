@@ -1,35 +1,34 @@
 @use "../core/module";
 
-/// Generates wrapper styles with configurable gap variants.
+/// Generates the `.wrapper` layout that wraps children into rows with equal width.
 ///
-/// @param {List} $gaps [()] - Registered gap names to include; `null` includes all registered gaps
+/// Supports `gap` variations.
 ///
-/// @require {Variable<Length>} var("gap", "micro") - Default spacing between wrapper items
+/// @param {List<String>} $gaps [()] - Gap names to include; `null` includes all defined gaps
+/// @output The `.wrapper` class and its gap classes
+///
+/// @require {Variable<Length>} var("gap", "micro") - Default space between items
 @mixin use-wrapper($gaps: ()) {
-    @if not module.module-presented("wrapper") {
-        @include module.present-module("wrapper");
-
+    @include module.define-module("wrapper") {
         $gap-micro: module.var("gap", "micro");
 
-        @at-root {
-            .wrapper {
-                display: flex;
-                flex-flow: row wrap;
-                align-items: center;
+        .wrapper {
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
+            box-sizing: border-box;
+
+            > * {
+                flex: 1 1 0;
                 box-sizing: border-box;
+            }
 
-                > * {
-                    flex: 1 1 0;
-                    box-sizing: border-box;
-                }
+            @include module.gapped() {
+                gap: $gap-micro;
 
-                @include module.gapped() {
-                    gap: $gap-micro;
-
-                    @each $name, $gap in module.gaps($includes: $gaps) {
-                        &.is-#{$name}-gap {
-                            gap: $gap;
-                        }
+                @each $name, $gap in module.gaps($includes: $gaps) {
+                    &.is-#{$name}-gap {
+                        gap: $gap;
                     }
                 }
             }

@@ -1,57 +1,59 @@
 @use "../core/module";
 
-/// Generates attacher styles with alignment and justification variants.
+/// Generates the `.attacher` layout that joins its children in one row.
 ///
-/// @require {Variable<Color>} var("base", "separator") - Divider background color
+/// Children lose their inner border radii and margins. It also supports `.filler` and `.divider` children.
+///
+/// Supports `align` and `justify` variations.
+///
+/// @output The `.attacher` class and its variation classes
+///
+/// @require {Variable<Color>} variant("base", "separator") - Background color of `.divider`
 @mixin use-attacher() {
-    @if not module.module-presented("attacher") {
-        @include module.present-module("attacher");
+    @include module.define-module("attacher") {
+        $separator: module.variant("base", "separator");
 
-        $separator: module.var("base", "separator");
+        .attacher {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: stretch;
+            box-sizing: border-box;
 
-        @at-root {
-            .attacher {
-                display: flex;
-                flex-flow: row nowrap;
-                align-items: stretch;
-                box-sizing: border-box;
+            > * {
+                flex: 0 0 auto;
+                margin: 0 !important;
 
-                > * {
-                    flex: 0 0 auto;
-                    margin: 0 !important;
-
-                    &:not(:first-child) {
-                        border-start-start-radius: 0 !important;
-                        border-end-start-radius: 0 !important;
-                    }
-
-                    &:not(:last-child) {
-                        border-start-end-radius: 0 !important;
-                        border-end-end-radius: 0 !important;
-                    }
+                &:not(:first-child) {
+                    border-start-start-radius: 0 !important;
+                    border-end-start-radius: 0 !important;
                 }
 
-                > .filler {
-                    flex: 1 1 0;
+                &:not(:last-child) {
+                    border-start-end-radius: 0 !important;
+                    border-end-end-radius: 0 !important;
                 }
+            }
 
-                > .divider {
-                    width: 1px;
-                    display: block;
-                    align-self: stretch;
-                    background-color: $separator;
+            > .filler {
+                flex: 1 1 0;
+            }
+
+            > .divider {
+                width: 1px;
+                display: block;
+                align-self: stretch;
+                background-color: $separator;
+            }
+
+            @each $name, $align in module.flex-aligns() {
+                &.is-#{$name}-align {
+                    align-items: $align;
                 }
+            }
 
-                @each $name, $align in module.flex-aligns() {
-                    &.is-#{$name}-align {
-                        align-items: $align;
-                    }
-                }
-
-                @each $name, $justify in module.flex-justifies() {
-                    &.is-#{$name}-justify {
-                        justify-content: $justify;
-                    }
+            @each $name, $justify in module.flex-justifies() {
+                &.is-#{$name}-justify {
+                    justify-content: $justify;
                 }
             }
         }
