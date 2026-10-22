@@ -2,7 +2,8 @@
 @forward "heading";
 @forward "image";
 @forward "reset";
-@forward "table";
+@forward "table" hide table-resolver;
+
 @use "base";
 @use "heading";
 @use "image";

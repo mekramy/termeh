@@ -15,6 +15,7 @@
 /// @require {Variable<Color>} variant-for("table", "base", "decorator") - Color of the sort direction marks
 /// @require {Variable<Color>} variant-for("table", "base", "hover-background") - Background of hovered rows
 /// @require {Variable<Color>} variant-for("table", "base", "striped-background") - Background of even rows
+/// @require {Variable<Color>} variant-for("table", "base", "sorted-color") - Text color of sorted header cells
 /// @require {Variable<Color>} variant-for("table", "base", "sorted-background") - Background of sorted columns
 /// @require {Variable<Color>} variant-for("table", "base", "row-separator") - Row separator color
 /// @require {Variable<Color>} variant-for("table", "base", "column-separator") - Column separator color
@@ -26,6 +27,7 @@
 /// @require {Variable<Color>} variant-for("table", $name, "decorator") - Color of the sort direction marks of the color class
 /// @require {Variable<Color>} variant-for("table", $name, "hover-background") - Background of hovered rows of the color class
 /// @require {Variable<Color>} variant-for("table", $name, "striped-background") - Background of even rows of the color class
+/// @require {Variable<Color>} variant-for("table", $name, "sorted-color") - Text color of sorted header cells of the color class
 /// @require {Variable<Color>} variant-for("table", $name, "sorted-background") - Background of sorted columns of the color class
 /// @require {Variable<Color>} variant-for("table", $name, "row-separator") - Row separator color of the color class
 /// @require {Variable<Color>} variant-for("table", $name, "column-separator") - Column separator color of the color class
@@ -34,7 +36,7 @@
     $-strong-weight: module.var("text", "strong-weight");
 
     @include module.define-module("base-table") {
-        @include module.define-component-resolver("table", meta.get-function("-resolver"));
+        @include module.define-component-resolver("table", meta.get-function("table-resolver"));
 
         $primary: module.color("primary");
         $strong-weight: module.var("table", "strong-weight", $-strong-weight);
@@ -45,6 +47,7 @@
 
         $hover-background: module.variant-for("table", "base", "hover-background");
         $striped-background: module.variant-for("table", "base", "striped-background");
+        $sorted-color: module.variant-for("table", "base", "sorted-color");
         $sorted-background: module.variant-for("table", "base", "sorted-background");
 
         $row-separator: module.variant-for("table", "base", "row-separator");
@@ -115,6 +118,7 @@
                         }
 
                         &.is-sorted {
+                            color: $sorted-color;
                             background-color: $sorted-background;
 
                             &.is-asc {
@@ -231,6 +235,7 @@
 
                 $-hover-background: module.variant-for("table", $name, "hover-background");
                 $-striped-background: module.variant-for("table", $name, "striped-background");
+                $-sorted-color: module.variant-for("table", $name, "sorted-color");
                 $-sorted-background: module.variant-for("table", $name, "sorted-background");
 
                 $-row-separator: module.variant-for("table", $name, "row-separator");
@@ -258,7 +263,7 @@
                                 }
 
                                 &.is-sorted {
-                                    color: module.variant($name, "readable");
+                                    color: $-sorted-color;
                                     background-color: $-sorted-background;
 
                                     &.is-asc {
@@ -321,18 +326,22 @@
     }
 }
 
-@function -resolver($scheme, $palette, $is-light, $base, $color, $variant) {
+@function table-resolver($scheme, $palette, $is-light, $base, $color, $variant) {
     $shade: module.color("shade");
+    $primary: module.color("primary");
+    $primary-readable: module.variant("primary", "readable");
 
     @if $palette == "base" {
         @if $variant == "decorator" {
-            @return $shade;
+            @return $primary;
         } @else if $variant == "hover-background" {
             @return module.alpha($shade, 0.15);
         } @else if $variant == "striped-background" {
             @return module.variant("base", "section");
+        } @else if $variant == "sorted-color" {
+            @return $primary-readable;
         } @else if $variant == "sorted-background" {
-            @return module.alpha($shade, 0.05);
+            @return module.alpha($primary, 0.05);
         } @else if $variant == "row-separator" {
             @return module.variant("base", "separator");
         } @else if $variant == "column-separator" {
@@ -343,6 +352,8 @@
     } @else {
         @if $variant == "decorator" {
             @return $color;
+        } @else if $variant == "sorted-color" {
+            @return module.variant($palette, "readable");
         } @else if $variant == "sorted-background" {
             @return module.alpha($color, 0.05);
         }
