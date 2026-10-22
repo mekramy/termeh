@@ -1,21 +1,22 @@
 @use "../core/module";
 
-/// Applies consistent styles to heading elements.
+/// Applies styles to heading elements `h1` to `h6`.
+/// Headings are bold, and each level gets its own font size and line height.
 ///
-/// @require {Variable<Length>} var("gap", "macro") - Heading bottom margin
-/// @require {Variable<Length>} var("line-height", "large") - Line height for `h1` and `h2`
-/// @require {Variable<Length>} var("line-height", "medium") - Line height for `h3` and `h4`
-/// @require {Variable<Length>} var("line-height", "normal") - Line height for `h5` and `h6`
-/// @require {Variable<Length>} size("massive") - `h1` font size @throw on missing
-/// @require {Variable<Length>} size("huge") - `h2` font size @throw on missing
-/// @require {Variable<Length>} size("big") - `h3` font size @throw on missing
-/// @require {Variable<Length>} size("large") - `h4` font size @throw on missing
-/// @require {Variable<Length>} size("medium") - `h5` font size @throw on missing
-/// @require {Variable<Length>} size("normal") - `h6` font size @throw on missing
+/// @output The heading styles, emitted once
+///
+/// @require {Variable<Length>} var("gap", "macro") - Bottom margin of headings
+/// @require {Variable<LineHeight>} var("line-height", "large") - Line height of `h1` and `h2`
+/// @require {Variable<LineHeight>} var("line-height", "medium") - Line height of `h3` and `h4`
+/// @require {Variable<LineHeight>} var("line-height", "normal") - Line height of `h5` and `h6`
+/// @require {Variable<Length>} size("massive") - Font size of `h1`
+/// @require {Variable<Length>} size("huge") - Font size of `h2`
+/// @require {Variable<Length>} size("big") - Font size of `h3`
+/// @require {Variable<Length>} size("large") - Font size of `h4`
+/// @require {Variable<Length>} size("medium") - Font size of `h5`
+/// @require {Variable<Length>} size("normal") - Font size of `h6`
 @mixin use-heading() {
-    @if not module.module-presented("heading") {
-        @include module.present-module("heading");
-
+    @include module.define-module("base-heading") {
         $gap-macro: module.var("gap", "macro");
 
         $line-large: module.var("line-height", "large");
@@ -29,49 +30,47 @@
         $size-medium: module.size("medium");
         $size-normal: module.size("normal");
 
-        @at-root {
-            h1,
-            h2,
-            h3,
-            h4,
-            h5,
-            h6 {
-                font-weight: bold;
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: bold;
 
-                @include module.marged() {
-                    margin-bottom: $gap-macro;
-                }
+            @include module.marged() {
+                margin-bottom: $gap-macro;
             }
+        }
 
-            h1 {
-                font-size: $size-massive;
-                line-height: $line-large;
-            }
+        h1 {
+            font-size: $size-massive;
+            line-height: $line-large;
+        }
 
-            h2 {
-                font-size: $size-huge;
-                line-height: $line-large;
-            }
+        h2 {
+            font-size: $size-huge;
+            line-height: $line-large;
+        }
 
-            h3 {
-                font-size: $size-big;
-                line-height: $line-medium;
-            }
+        h3 {
+            font-size: $size-big;
+            line-height: $line-medium;
+        }
 
-            h4 {
-                font-size: $size-large;
-                line-height: $line-medium;
-            }
+        h4 {
+            font-size: $size-large;
+            line-height: $line-medium;
+        }
 
-            h5 {
-                font-size: $size-medium;
-                line-height: $line-normal;
-            }
+        h5 {
+            font-size: $size-medium;
+            line-height: $line-normal;
+        }
 
-            h6 {
-                font-size: $size-normal;
-                line-height: $line-normal;
-            }
+        h6 {
+            font-size: $size-normal;
+            line-height: $line-normal;
         }
     }
 }

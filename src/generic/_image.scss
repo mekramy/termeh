@@ -1,36 +1,35 @@
 @use "../core/module";
 
-/// Applies image styles and size variants.
+/// Applies image styles and width classes.
+/// It adds `.is-centered`, `.is-rounded`, `.is-circular` and an `.is-<size>` class for each size.
 ///
-/// @param {List} $sizes [()] - Registered size names to include; `null` includes all registered sizes
+/// @param {List<String>} $sizes [()] - Size names to add width classes for; all defined sizes when empty
+/// @output The image styles, emitted once
 ///
-/// @require {Variable<Length>} var("radius", "normal") - Rounded image border radius
-/// @require {Variable<Length>} var("radius", "circle") - Circular image border radius
+/// @require {Variable<Length>} var("radius", "normal") - Border radius of rounded images
+/// @require {Variable<Length>} var("radius", "circle") - Border radius of circular images
+/// @require {Map<String, Variable<Length>>} sizes($includes: $sizes) - Sizes to add width classes for
 @mixin use-image($sizes: ()) {
-    @if not module.module-presented("image") {
-        @include module.present-module("image");
-
+    @include module.define-module("base-image") {
         $radius-normal: module.var("radius", "normal");
         $radius-circle: module.var("radius", "circle");
 
-        @at-root {
-            img {
-                &.is-centered {
-                    margin: auto;
-                }
+        img {
+            &.is-centered {
+                margin: auto;
+            }
 
-                &.is-rounded {
-                    border-radius: $radius-normal;
-                }
+            &.is-rounded {
+                border-radius: $radius-normal;
+            }
 
-                &.is-circular {
-                    border-radius: $radius-circle;
-                }
+            &.is-circular {
+                border-radius: $radius-circle;
+            }
 
-                @each $name, $size in module.sizes($includes: $sizes) {
-                    &.is-#{$name} {
-                        width: $size;
-                    }
+            @each $name, $size in module.sizes($includes: $sizes) {
+                &.is-#{$name} {
+                    width: $size;
                 }
             }
         }

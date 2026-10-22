@@ -1,273 +1,352 @@
+@use "sass:meta";
 @use "sass:color";
 @use "../core/module";
 
-/// Applies table styles with configurable color variants.
+/// Applies table styles and color classes.
+/// It adds a `.is-<color>` class for each color, and registers the table color resolver.
 ///
-/// @param {List} $colors [()] - Registered color names to include; `null` includes all registered colors
+/// @param {List<String>} $colors [()] - Color names to add color classes for; all defined colors when empty
+/// @output The table styles, emitted once
 ///
-/// @require {Variable<Color>} color("shade") - Sort backgrounds and decorators color @throw on missing
-/// @require {Variable<Color>} color("primary") - Scrollbar accent color @throw on missing
-/// @require {Variable<Color>} var("table", "background") - Table background color
-/// @require {Variable<Color>} var("table", "foreground") - Table text color
-/// @require {Variable<Color>} var("table", "decorator") [color("shade")] - Sort decorator color
-/// @require {Variable<Color>} var("table", "hover-background") [module.alpha(color("shade"), 0.1)] - Hovered row background
-/// @require {Variable<Color>} var("table", "striped-background") [var("base", "section")] - Even row background
-/// @require {Variable<Color>} var("table", "sorted-background") [module.alpha(color("shade"), 0.025)] - Sorted column background
-/// @require {Variable<Color>} var("table", "column-separator") - Column separator color
-/// @require {Variable<Color>} var("table", "row-separator") [var("base", "separator")] - Row separator color
-/// @require {Variable<Color>} var("table", "section-separator") [var("base", "separator")] - Section separator color
-/// @require {Variable<FontWeight>} var("table", "strong-weight") [var("strong", "weight")] - Header emphasis weight
+/// @require {Variable<Color>} color("primary") - Scrollbar color
+/// @require {Variable<FontWeight>} var("table", "strong-weight") [var("text", "strong-weight")] - Font weight of table headers
+/// @require {Variable<Color>} variant-for("table", "base", "color") - Text color
+/// @require {Variable<Color>} variant-for("table", "base", "background") - Row background
+/// @require {Variable<Color>} variant-for("table", "base", "decorator") - Color of the sort direction marks
+/// @require {Variable<Color>} variant-for("table", "base", "hover-background") - Background of hovered rows
+/// @require {Variable<Color>} variant-for("table", "base", "striped-background") - Background of even rows
+/// @require {Variable<Color>} variant-for("table", "base", "sorted-background") - Background of sorted columns
+/// @require {Variable<Color>} variant-for("table", "base", "row-separator") - Row separator color
+/// @require {Variable<Color>} variant-for("table", "base", "column-separator") - Column separator color
+/// @require {Variable<Color>} variant-for("table", "base", "section-separator") - Header and footer separator color
+/// @require {Map<String, Variable<Color>>} colors($includes: $colors) - Colors to add color classes for
+/// @require {Variable<Color>} variant($name, "readable") - Text color of sorted header cells of the color class
+/// @require {Variable<Color>} variant-for("table", $name, "color") - Text color of the color class
+/// @require {Variable<Color>} variant-for("table", $name, "background") - Row background of the color class
+/// @require {Variable<Color>} variant-for("table", $name, "decorator") - Color of the sort direction marks of the color class
+/// @require {Variable<Color>} variant-for("table", $name, "hover-background") - Background of hovered rows of the color class
+/// @require {Variable<Color>} variant-for("table", $name, "striped-background") - Background of even rows of the color class
+/// @require {Variable<Color>} variant-for("table", $name, "sorted-background") - Background of sorted columns of the color class
+/// @require {Variable<Color>} variant-for("table", $name, "row-separator") - Row separator color of the color class
+/// @require {Variable<Color>} variant-for("table", $name, "column-separator") - Column separator color of the color class
+/// @require {Variable<Color>} variant-for("table", $name, "section-separator") - Header and footer separator color of the color class
 @mixin use-table($colors: ()) {
-    @if not module.module-presented("table") {
-        @include module.present-module("table");
+    $-strong-weight: module.var("text", "strong-weight");
 
-        /** Fallbacks */
-        $-shade: module.color("shade");
-        $-decorator: $-shade;
-        $-hover-background: module.alpha($-shade, 0.1);
-        $-striped-background: module.var("base", "section");
-        $-sorted-background: module.alpha($-shade, 0.025);
-        $-row-separator: module.var("base", "separator");
-        $-section-separator: module.var("base", "separator");
-        $-strong-weight: module.var("strong", "weight");
-
-        /** --------- */
+    @include module.define-module("base-table") {
+        @include module.define-component-resolver("table", meta.get-function("-resolver"));
 
         $primary: module.color("primary");
-
-        $background: module.var("table", "background");
-        $foreground: module.var("table", "foreground");
-        $decorator: module.var("table", "decorator", $-decorator);
-
-        $hover-background: module.var("table", "hover-background", $-hover-background);
-        $striped-background: module.var("table", "striped-background", $-striped-background);
-        $sorted-background: module.var("table", "sorted-background", $-sorted-background);
-
-        $column-separator: module.var("table", "column-separator");
-        $row-separator: module.var("table", "row-separator", $-row-separator);
-        $section-separator: module.var("table", "section-separator", $-section-separator);
-
         $strong-weight: module.var("table", "strong-weight", $-strong-weight);
 
-        @at-root {
-            .table-container {
-                display: block;
-                overflow: auto visible;
-                @include module.overflow-touch();
-                @include module.scrollable($primary);
+        $color: module.variant-for("table", "base", "color");
+        $background: module.variant-for("table", "base", "background");
+        $indicator: module.variant-for("table", "base", "decorator");
+
+        $hover-background: module.variant-for("table", "base", "hover-background");
+        $striped-background: module.variant-for("table", "base", "striped-background");
+        $sorted-background: module.variant-for("table", "base", "sorted-background");
+
+        $row-separator: module.variant-for("table", "base", "row-separator");
+        $column-separator: module.variant-for("table", "base", "column-separator");
+        $section-separator: module.variant-for("table", "base", "section-separator");
+
+        .table-container {
+            display: block;
+            overflow: auto visible;
+            @include module.overflow-touch();
+            @include module.scrollable($primary);
+        }
+
+        table {
+            margin: 0;
+            padding: 0;
+            font: inherit;
+            table-layout: auto;
+
+            thead {
+                padding: 0;
+                margin: 0;
+                border-bottom: 1px solid $section-separator;
+
+                tr {
+                    overflow: hidden;
+                    white-space: nowrap;
+                    background: $background;
+                    @include module.transition(all);
+
+                    &:not(:first-child) {
+                        border-top: 1px solid $row-separator;
+                    }
+
+                    th {
+                        width: 1px;
+                        vertical-align: middle;
+                        color: $color;
+                        font-weight: $strong-weight;
+                        padding: module.inline-padding();
+                        @include module.transition(all);
+
+                        &:not(:first-child) {
+                            border-inline-start: 1px solid $column-separator;
+                        }
+
+                        &.is-center-aligned {
+                            text-align: center;
+                        }
+
+                        &.is-right-aligned {
+                            text-align: right;
+                        }
+
+                        &.is-left-aligned {
+                            text-align: left;
+                        }
+
+                        &.is-ellipsis {
+                            max-width: 1px;
+                            text-overflow: ellipsis;
+                        }
+
+                        &.is-filler {
+                            width: auto;
+                            max-width: 1px;
+                            text-overflow: ellipsis;
+                        }
+
+                        &.is-sorted {
+                            background-color: $sorted-background;
+
+                            &.is-asc {
+                                border-top: 1px solid $indicator;
+                            }
+
+                            &.is-desc {
+                                border-bottom: 1px solid $indicator;
+                            }
+                        }
+
+                        &.is-sortable {
+                            cursor: pointer;
+                        }
+                    }
+                }
             }
 
-            table {
-                margin: 0;
-                padding: 0;
-                font: inherit;
-                table-layout: auto;
+            tbody,
+            tfoot {
+                tr {
+                    background: $background;
+                    @include module.transition(all);
 
-                thead {
-                    padding: 0;
-                    margin: 0;
-                    border-bottom: 1px solid $section-separator;
+                    &:not(:last-child) {
+                        border-bottom: 1px solid $row-separator;
+                    }
 
-                    tr {
-                        overflow: hidden;
-                        white-space: nowrap;
-                        background: $background;
-                        border-top: 1px solid $row-separator;
+                    td {
+                        width: 1px;
+                        font-weight: inherit;
+                        vertical-align: middle;
+                        color: $color;
+                        padding: module.inline-padding();
                         @include module.transition(all);
 
-                        th {
-                            width: 1px;
-                            vertical-align: middle;
-                            color: $foreground;
-                            font-weight: $strong-weight;
-                            padding: module.inline-padding();
-                            @include module.transition(all);
+                        &:not(:first-child) {
+                            border-inline-start: 1px solid $column-separator;
+                        }
 
-                            &.is-center-aligned {
-                                text-align: center;
-                            }
+                        &.is-center-aligned {
+                            text-align: center;
+                        }
 
-                            &.is-right-aligned {
-                                text-align: right;
-                            }
+                        &.is-right-aligned {
+                            text-align: right;
+                        }
 
-                            &.is-left-aligned {
-                                text-align: left;
-                            }
+                        &.is-left-aligned {
+                            text-align: left;
+                        }
 
-                            &.is-ellipsis {
-                                max-width: 1px;
-                                text-overflow: ellipsis;
-                            }
+                        &.is-ellipsis {
+                            max-width: 1px;
+                            text-overflow: ellipsis;
+                        }
 
-                            &.is-filler {
-                                width: auto;
-                                max-width: 1px;
-                                text-overflow: ellipsis;
-                            }
+                        &.is-filler {
+                            width: auto;
+                            max-width: 1px;
+                            text-overflow: ellipsis;
+                        }
 
-                            &.is-sorted {
-                                background-color: $sorted-background;
-                            }
+                        &.is-sorted {
+                            background-color: $sorted-background;
+                        }
 
-                            &.is-sortable {
-                                cursor: pointer;
-
-                                &.is-asc {
-                                    border-top: 1px solid $decorator;
-                                }
-
-                                &.is-desc {
-                                    border-bottom: 1px solid $decorator;
-                                }
-                            }
+                        &:not(.is-multiline) {
+                            overflow: hidden;
+                            white-space: nowrap;
                         }
                     }
                 }
+            }
 
-                tbody,
-                tfoot {
-                    tr {
-                        background: $background;
-                        @include module.transition(all);
-
-                        &:not(:last-child) {
-                            border-bottom: 1px solid $row-separator;
-                        }
-
-                        td {
-                            width: 1px;
-                            font-weight: inherit;
-                            vertical-align: middle;
-                            color: $foreground;
-                            padding: module.inline-padding();
-                            @include module.transition(all);
-
-                            &.is-center-aligned {
-                                text-align: center;
-                            }
-
-                            &.is-right-aligned {
-                                text-align: right;
-                            }
-
-                            &.is-left-aligned {
-                                text-align: left;
-                            }
-
-                            &.is-ellipsis {
-                                max-width: 1px;
-                                text-overflow: ellipsis;
-                            }
-
-                            &.is-filler {
-                                width: auto;
-                                max-width: 1px;
-                                text-overflow: ellipsis;
-                            }
-
-                            &.is-sorted {
-                                background-color: $sorted-background;
-                            }
-
-                            &:not(.is-multiline) {
-                                overflow: hidden;
-                                white-space: nowrap;
-                            }
-                        }
+            tbody {
+                tr {
+                    &.is-even {
+                        background: $striped-background;
                     }
-                }
 
-                tbody {
-                    tr {
-                        &.is-even {
-                            background: $striped-background;
-                        }
+                    &:not(.is-expanded) .extra {
+                        display: none;
+                    }
 
-                        &:not(.is-expanded) .extra {
+                    &:not(.is-expanded):has(+ tr.extra) {
+                        + tr.extra {
                             display: none;
                         }
+                    }
+                }
+            }
 
-                        &:not(.is-expanded):has(+ tr.extra) {
-                            + tr.extra {
-                                display: none;
+            tfoot {
+                border-top: 1px solid $section-separator;
+            }
+
+            &.is-fullwidth {
+                width: 100%;
+            }
+
+            &.is-stripped > tbody > tr:nth-child(even) {
+                background: $striped-background;
+            }
+
+            &.is-hoverable > tbody > tr:hover {
+                background: $hover-background;
+            }
+
+            @each $name, $color in module.colors($includes: $colors) {
+                $-color: module.variant-for("table", $name, "color");
+                $-background: module.variant-for("table", $name, "background");
+                $-indicator: module.variant-for("table", $name, "decorator", $color);
+
+                $-hover-background: module.variant-for("table", $name, "hover-background");
+                $-striped-background: module.variant-for("table", $name, "striped-background");
+                $-sorted-background: module.variant-for("table", $name, "sorted-background");
+
+                $-row-separator: module.variant-for("table", $name, "row-separator");
+                $-column-separator: module.variant-for("table", $name, "column-separator");
+                $-section-separator: module.variant-for("table", $name, "section-separator");
+
+                &.is-#{$name} {
+                    @include module.selection($name);
+
+                    thead {
+                        border-bottom-color: $-section-separator;
+
+                        tr {
+                            background: $-background;
+
+                            &:not(:first-child) {
+                                border-top-color: $-row-separator;
                             }
-                        }
 
-                        &:not(:last-child) {
-                            border-bottom: 1px solid $row-separator;
-                        }
-                    }
-                }
+                            th {
+                                color: $-color;
 
-                tfoot {
-                    border-top: 1px solid $section-separator;
-                }
+                                &:not(:first-child) {
+                                    border-inline-start-color: $-column-separator;
+                                }
 
-                @if $column-separator {
-                    tbody tr td:not(:first-child) {
-                        border-inline-start: 1px solid $column-separator;
-                    }
-                }
+                                &.is-sorted {
+                                    color: module.variant($name, "readable");
+                                    background-color: $-sorted-background;
 
-                &.is-fullwidth {
-                    width: 100%;
-                }
-
-                &.is-stripped > tbody > tr:nth-child(even) {
-                    background: $striped-background;
-                }
-
-                &.is-hoverable > tbody > tr:hover {
-                    background: $hover-background;
-                }
-
-                @each $name, $color in module.colors($includes: $colors) {
-                    &.is-#{$name} {
-                        @include module.selection($name);
-
-                        thead {
-                            tr {
-                                th {
-                                    &.is-sorted {
-                                        color: module.variant($name, "readable");
-                                        background-color: module.alpha($color, 0.025);
+                                    &.is-asc {
+                                        border-top-color: $-indicator;
                                     }
 
-                                    &.is-sortable {
-                                        &.is-asc {
-                                            border-top-color: $color;
-                                        }
-
-                                        &.is-desc {
-                                            border-bottom-color: $color;
-                                        }
+                                    &.is-desc {
+                                        border-bottom-color: $-indicator;
                                     }
                                 }
                             }
                         }
+                    }
 
-                        tbody,
-                        tfoot {
-                            tr {
-                                td {
-                                    &.is-sorted {
-                                        background-color: module.alpha($color, 0.025);
-                                    }
+                    tbody,
+                    tfoot {
+                        tr {
+                            background: $-background;
+
+                            &:not(:last-child) {
+                                border-bottom-color: $-row-separator;
+                            }
+
+                            td {
+                                color: $-color;
+
+                                &:not(:first-child) {
+                                    border-inline-start-color: $-column-separator;
+                                }
+
+                                &.is-sorted {
+                                    background-color: $-sorted-background;
                                 }
                             }
                         }
                     }
 
-                    thead tr th:not(.is-sorted),
-                    tbody tr td:not(.is-sorted),
-                    tfoot tr td:not(.is-sorted) {
-                        &.is-#{$name} {
-                            background-color: module.alpha($color, 0.025);
+                    tbody {
+                        tr {
+                            &.is-even {
+                                background-color: $-striped-background;
+                            }
                         }
+                    }
+
+                    tfoot {
+                        border-top-color: $-section-separator;
+                    }
+
+                    &.is-stripped > tbody > tr:nth-child(even) {
+                        background: $-striped-background;
+                    }
+
+                    &.is-hoverable > tbody > tr:hover {
+                        background: $-hover-background;
                     }
                 }
             }
         }
     }
+}
+
+@function -resolver($scheme, $palette, $is-light, $base, $color, $variant) {
+    $shade: module.color("shade");
+
+    @if $palette == "base" {
+        @if $variant == "decorator" {
+            @return $shade;
+        } @else if $variant == "hover-background" {
+            @return module.alpha($shade, 0.15);
+        } @else if $variant == "striped-background" {
+            @return module.variant("base", "section");
+        } @else if $variant == "sorted-background" {
+            @return module.alpha($shade, 0.05);
+        } @else if $variant == "row-separator" {
+            @return module.variant("base", "separator");
+        } @else if $variant == "column-separator" {
+            @return transparent;
+        } @else if $variant == "section-separator" {
+            @return module.alpha($shade, 0.5);
+        }
+    } @else {
+        @if $variant == "decorator" {
+            @return $color;
+        } @else if $variant == "sorted-background" {
+            @return module.alpha($color, 0.05);
+        }
+    }
+
+    @return null;
 }

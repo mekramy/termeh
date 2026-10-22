@@ -1,279 +1,274 @@
 @use "../core/module";
 
 /// Applies base styles to the document and common HTML elements.
+/// It covers text, links, rules, quotes, code, tables and lists.
 ///
-/// @require {Variable<Direction>} var("base", "direction") - Document text direction
-/// @require {Variable<Length>} var("base", "min-width") - Document minimum width
-/// @require {Variable<Length>} var("radius", "normal") - Blockquote border radius
-/// @require {Variable<Length>} var("line-height", "normal") - Default line height
-/// @require {Variable<Length>} var("gap", "micro") - Spacing between list items
-/// @require {Variable<Length>} var("gap", "macro") - Spacing between blocks
-/// @require {Variable<FontFamily>} var("font", "family") - Default font family
-/// @require {Variable<Length>} var("font", "size") - Default font size
-/// @require {Variable<FontWeight>} var("font", "weight") - Default font weight
-/// @require {Variable<FontFamily>} var("mono", "family") - Code and preformatted text font family
-/// @require {Variable<Length>} var("mono", "size") - Code and preformatted text font size
-/// @require {Variable<FontWeight>} var("mono", "weight") - Code and preformatted text font weight
-/// @require {Variable<Length>} var("small", "size") - Small, subscript, and superscript font size
-/// @require {Variable<FontWeight>} var("small", "weight") - Small, subscript, and superscript font weight
-/// @require {Variable<Color>} var("small", "foreground") - Small, subscript, and superscript text color
-/// @require {Variable<Color>} var("strong", "foreground") - Strong, bold, and table-header text color
-/// @require {Variable<FontWeight>} var("strong", "weight") - Strong, bold, and table-header font weight
-/// @require {Variable<Color>} var("decorated", "foreground") - Underlined, inserted, struck-through, and deleted text color
-/// @require {Variable<FontWeight>} var("decorated", "weight") - Underlined, inserted, struck-through, and deleted text weight
-/// @require {Variable<Color>} var("base", "background") - Document background color
-/// @require {Variable<Color>} var("base", "foreground") - Default text color
-/// @require {Variable<Color>} var("base", "section") - Blockquote, code, and preformatted text background
-/// @require {Variable<Color>} var("base", "separator") - Horizontal rule and list decorator color
-/// @require {Variable<Color>} color("primary") - Selection background, scrollbar, and input accent color @throw on missing
+/// @output The base styles, emitted once
+///
+/// @require {Variable<Direction>} var("document", "direction") - Document text direction
+/// @require {Variable<Length>} var("document", "min-width") - Document minimum width
+/// @require {Variable<Length>} var("gap", "micro") - Space between list items
+/// @require {Variable<Length>} var("gap", "macro") - Space between blocks
+/// @require {Variable<Length>} var("radius", "normal") - Border radius of blockquotes
+/// @require {Variable<LineHeight>} var("line-height", "normal") - Document line height
+/// @require {Variable<FontFamily>} var("text", "font-family") - Document font family
+/// @require {Variable<Length>} var("text", "font-size") - Document font size
+/// @require {Variable<FontWeight>} var("text", "font-weight") - Document font weight
+/// @require {Variable<FontFamily>} var("text", "mono-family") - Font family of code and preformatted text
+/// @require {Variable<Length>} var("text", "mono-size") - Font size of code and preformatted text
+/// @require {Variable<FontWeight>} var("text", "mono-weight") - Font weight of code and preformatted text
+/// @require {Variable<Length>} var("text", "small-size") - Font size of `small`, `sub` and `sup`
+/// @require {Variable<FontWeight>} var("text", "small-weight") - Font weight of `small`, `sub` and `sup`
+/// @require {Variable<FontWeight>} var("text", "strong-weight") - Font weight of `strong`, `b` and table headers
+/// @require {Variable<FontWeight>} var("text", "decorated-weight") - Font weight of `u`, `ins`, `s` and `del`
+/// @require {Variable<Color>} variant("base", "color") - Document text color
+/// @require {Variable<Color>} variant("base", "background") - Document background color
+/// @require {Variable<Color>} variant("base", "section") - Background of blockquotes, code and preformatted text
+/// @require {Variable<Color>} variant("base", "separator") - Color of horizontal rules and list markers
+/// @require {Variable<Color>} variant-for("text", "base", "small-color") - Text color of `small`, `sub` and `sup`
+/// @require {Variable<Color>} variant-for("text", "base", "strong-color") - Text color of `strong`, `b` and table headers
+/// @require {Variable<Color>} variant-for("text", "base", "decorated-color") - Text color of `u`, `ins`, `s` and `del`
+/// @require {Variable<Color>} color("primary") - Selection background, scrollbar and checkbox and radio accent color
+/// @require {Variable<Color>} variant("primary", "color") - Selection text color
 /// @require {Variable<Color>} variant("primary", "readable") - Link color
-/// @require {Variable<Color>} variant("primary", "foreground") - Selection text color
 @mixin use-base() {
-    @if not module.module-presented("base") {
-        @include module.present-module("base");
-
-        $direction: module.var("base", "direction");
-        $min-width: module.var("base", "min-width");
-
-        $radius-normal: module.var("radius", "normal");
-        $line-height: module.var("line-height", "normal");
+    @include module.define-module("base") {
+        $direction: module.var("document", "direction");
+        $min-width: module.var("document", "min-width");
 
         $gap-micro: module.var("gap", "micro");
         $gap-macro: module.var("gap", "macro");
 
-        $font-family: module.var("font", "family");
-        $font-size: module.var("font", "size");
-        $font-weight: module.var("font", "weight");
+        $radius-normal: module.var("radius", "normal");
+        $line-height: module.var("line-height", "normal");
 
-        $mono-family: module.var("mono", "family");
-        $mono-size: module.var("mono", "size");
-        $mono-weight: module.var("mono", "weight");
+        $font-family: module.var("text", "font-family");
+        $font-size: module.var("text", "font-size");
+        $font-weight: module.var("text", "font-weight");
+        $mono-family: module.var("text", "mono-family");
+        $mono-size: module.var("text", "mono-size");
+        $mono-weight: module.var("text", "mono-weight");
+        $small-size: module.var("text", "small-size");
+        $small-weight: module.var("text", "small-weight");
+        $strong-weight: module.var("text", "strong-weight");
+        $decorated-weight: module.var("text", "decorated-weight");
 
-        $small-size: module.var("small", "size");
-        $small-weight: module.var("small", "weight");
-        $small-foreground: module.var("small", "foreground");
+        $base-color: module.variant("base", "color");
+        $base-background: module.variant("base", "background");
+        $base-section: module.variant("base", "section");
+        $base-separator: module.variant("base", "separator");
+        $small-color: module.variant-for("text", "base", "small-color");
+        $strong-color: module.variant-for("text", "base", "strong-color");
+        $decorated-color: module.variant-for("text", "base", "decorated-color");
 
-        $strong-color: module.var("strong", "foreground");
-        $strong-weight: module.var("strong", "weight");
-
-        $decorated-color: module.var("decorated", "foreground");
-        $decorated-weight: module.var("decorated", "weight");
-
-        $base-background: module.var("base", "background");
-        $base-foreground: module.var("base", "foreground");
-        $base-section: module.var("base", "section");
-        $base-separator: module.var("base", "separator");
-
-        $primary-color: module.color("primary");
+        $primary: module.color("primary");
+        $primary-color: module.variant("primary", "color");
         $primary-readable: module.variant("primary", "readable");
-        $primary-foreground: module.variant("primary", "foreground");
 
-        @at-root {
-            :root {
-                font-size: $font-size;
+        :root {
+            font-size: $font-size;
+        }
+
+        ::selection {
+            color: $primary-color;
+            background-color: $primary;
+        }
+
+        html {
+            overflow: hidden auto;
+            scroll-behavior: smooth;
+            direction: $direction;
+            min-width: $min-width;
+            font-size: $font-size;
+            font-family: $font-family;
+            font-weight: $font-weight;
+            line-height: $line-height;
+            text-size-adjust: 100%;
+            text-rendering: optimizelegibility;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-font-smoothing: antialiased;
+            color: $base-color;
+            background-color: $base-background;
+
+            @include module.scrollable($primary);
+        }
+
+        article,
+        aside,
+        figure,
+        footer,
+        header,
+        hgroup,
+        section {
+            display: block;
+        }
+
+        body,
+        button,
+        input,
+        optgroup,
+        select,
+        textarea,
+        select option {
+            font-size: 1rem;
+            font-family: $font-family;
+        }
+
+        button,
+        input,
+        optgroup,
+        select,
+        textarea {
+            font: inherit;
+            color: inherit;
+        }
+
+        small,
+        sub,
+        sup {
+            font-size: $small-size;
+            font-weight: $small-weight;
+            color: $small-color;
+        }
+
+        strong,
+        b {
+            color: $strong-color;
+            font-weight: $strong-weight;
+        }
+
+        u,
+        ins,
+        s,
+        del {
+            color: $decorated-color;
+            font-weight: $decorated-weight;
+        }
+
+        a {
+            cursor: pointer;
+            text-decoration: none;
+            color: $primary-readable;
+
+            strong {
+                color: $primary-readable;
             }
 
-            ::selection {
-                color: $primary-foreground;
-                background-color: $primary-color;
+            &:visited {
+                opacity: 0.8;
             }
 
-            html {
-                overflow: hidden auto;
-                scroll-behavior: smooth;
-                direction: $direction;
-                min-width: $min-width;
-                font-size: $font-size;
-                font-family: $font-family;
-                font-weight: $font-weight;
-                line-height: $line-height;
-                text-size-adjust: 100%;
-                text-rendering: optimizelegibility;
-                -moz-osx-font-smoothing: grayscale;
-                -webkit-font-smoothing: antialiased;
-                color: $base-foreground;
-                background-color: $base-background;
-
-                @include module.scrollable($primary-color);
+            &:hover {
+                opacity: 1;
+                text-decoration: underline;
             }
+        }
 
-            article,
-            aside,
-            figure,
-            footer,
-            header,
-            hgroup,
-            section {
-                display: block;
+        hr {
+            display: block;
+            border: none;
+            height: 1px;
+            background-color: $base-separator;
+
+            @include module.marged() {
+                margin: $gap-macro 0;
             }
+        }
 
-            body,
-            button,
-            input,
-            optgroup,
-            select,
-            textarea,
-            select option {
-                font-size: 1rem;
-                font-family: $font-family;
+        select {
+            appearance: auto;
+            -moz-appearance: menulist;
+            -webkit-appearance: menulist;
+        }
+
+        input[type="checkbox"],
+        input[type="radio"] {
+            vertical-align: baseline;
+            accent-color: $primary;
+        }
+
+        span {
+            font-style: inherit;
+            font-weight: inherit;
+        }
+
+        fieldset {
+            border: none;
+        }
+
+        blockquote {
+            display: block;
+            padding: $gap-macro;
+            margin: $gap-macro 0;
+            border-radius: $radius-normal;
+            background-color: $base-section;
+        }
+
+        code,
+        pre {
+            direction: ltr;
+            padding: $gap-macro;
+            font-size: $mono-size;
+            font-family: $mono-family;
+            font-weight: $mono-weight;
+            background-color: $base-section;
+            -moz-osx-font-smoothing: auto;
+            -webkit-font-smoothing: auto;
+        }
+
+        pre {
+            white-space: pre;
+            overflow-wrap: normal;
+            overflow-x: auto;
+
+            @include module.scrollable($primary);
+            @include module.overflow-touch();
+
+            code {
+                padding: 0;
+                font-size: 1em;
+                color: currentcolor;
+                background-color: transparent;
             }
+        }
 
-            button,
-            input,
-            optgroup,
-            select,
-            textarea {
-                font: inherit;
-                color: inherit;
-            }
-
-            small,
-            sub,
-            sup {
-                font-size: $small-size;
-                font-weight: $small-weight;
-                color: $small-foreground;
-            }
-
-            strong,
-            b {
+        table {
+            th {
                 color: $strong-color;
                 font-weight: $strong-weight;
             }
 
-            u,
-            ins,
-            s,
-            del {
-                color: $decorated-color;
-                font-weight: $decorated-weight;
-            }
+            td,
+            th {
+                vertical-align: top;
 
-            a {
-                cursor: pointer;
-                text-decoration: none;
-                color: $primary-readable;
-
-                strong {
-                    color: $primary-readable;
-                }
-
-                &:visited {
-                    opacity: 0.8;
-                }
-
-                &:hover {
-                    opacity: 1;
-                    text-decoration: underline;
+                &:not([align]) {
+                    text-align: inherit;
                 }
             }
+        }
 
-            hr {
-                display: block;
-                border: none;
-                height: 1px;
-                background-color: $base-separator;
+        p,
+        ol,
+        ul {
+            @include module.marged() {
+                margin-bottom: $gap-macro;
+            }
+        }
 
-                @include module.marged() {
-                    margin: $gap-macro 0;
-                }
+        ul li {
+            position: relative;
+            padding-inline-start: 2em;
+
+            @include module.marged() {
+                margin-bottom: $gap-micro;
             }
 
-            select {
-                appearance: auto;
-                -moz-appearance: menulist;
-                -webkit-appearance: menulist;
-            }
-
-            input[type="checkbox"],
-            input[type="radio"] {
-                vertical-align: baseline;
-                accent-color: $primary-color;
-            }
-
-            span {
-                font-style: inherit;
-                font-weight: inherit;
-            }
-
-            fieldset {
-                border: none;
-            }
-
-            blockquote {
-                display: block;
-                padding: $gap-macro;
-                margin: $gap-macro 0;
-                border-radius: $radius-normal;
-                background-color: $base-section;
-            }
-
-            code,
-            pre {
-                direction: ltr;
-                padding: $gap-macro;
-                font-size: $mono-size;
-                font-family: $mono-family;
-                font-weight: $mono-weight;
-                background-color: $base-section;
-                -moz-osx-font-smoothing: auto;
-                -webkit-font-smoothing: auto;
-            }
-
-            pre {
-                white-space: pre;
-                overflow-wrap: normal;
-                overflow-x: auto;
-
-                @include module.scrollable($primary-color);
-                @include module.overflow-touch();
-
-                code {
-                    padding: 0;
-                    font-size: 1em;
-                    color: currentcolor;
-                    background-color: transparent;
-                }
-            }
-
-            table {
-                th {
-                    color: $strong-color;
-                    font-weight: $strong-weight;
-                }
-
-                td,
-                th {
-                    vertical-align: top;
-
-                    &:not([align]) {
-                        text-align: inherit;
-                    }
-                }
-            }
-
-            p,
-            ol,
-            ul {
-                @include module.marged() {
-                    margin-bottom: $gap-macro;
-                }
-            }
-
-            ul li {
-                position: relative;
-                padding-inline-start: 2em;
-
-                @include module.marged() {
-                    margin-bottom: $gap-micro;
-                }
-
-                &::before {
-                    content: "—";
-                    position: absolute;
-                    right: 0;
-                    color: $base-separator;
-                }
+            &::before {
+                content: "—";
+                position: absolute;
+                right: 0;
+                color: $base-separator;
             }
         }
     }

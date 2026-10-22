@@ -1,6 +1,5 @@
 @use "core/module";
 
-/** Layout And UI */
 // Base
 @include module.define("document", "direction", ltr); // App direction
 @include module.define("document", "min-width", 300px); // Minimum document width
@@ -14,6 +13,23 @@
 @include module.define("radius", "normal", 2px); // Base border-radius
 @include module.define("radius", "circle", 50%); // Circular border-radius
 @include module.define("radius", "rounded", 290486px); // Fully rounded border-radius
+
+// Line heights
+@include module.define("line-height", "normal", 1.6em); // Default line height
+@include module.define("line-height", "medium", 1.4em); // Medium text line height
+@include module.define("line-height", "large", 1.2em); // Large text line height
+
+// Text And Fonts
+@include module.define("text", "font-family", ("Segoe UI", Verdana)); // Font family
+@include module.define("text", "font-size", 14px); // Font size
+@include module.define("text", "font-weight", normal); // Font weight
+@include module.define("text", "mono-family", monospace); // Code font family
+@include module.define("text", "mono-size", 1rem); // Code font size
+@include module.define("text", "mono-weight", normal); // Code Font weight
+@include module.define("text", "small-size", 0.875rem); // Small text size
+@include module.define("text", "small-weight", normal); // Small text weight
+@include module.define("text", "strong-weight", bold); // Strong text weight
+@include module.define("text", "decorated-weight", normal); // Decorated text weight
 
 // Decorators
 @include module.define("decorator", "size", 2px); // Decorator border width
@@ -46,37 +62,6 @@
 // Overlay
 @include module.define("overlay", "opacity", 0.75); // Overlay background opacity
 @include module.define("overlay", "filter", none); // Overlay backdrop filter
-
-/** Texts */
-// Fonts
-@include module.define("font", "family", ("Segoe UI", Verdana)); // Font family
-@include module.define("font", "size", 14px); // Font size
-@include module.define("font", "weight", normal); // Font weight
-
-// Monospace fonts
-@include module.define("mono", "family", monospace); // Code font family
-@include module.define("mono", "size", 1rem); // Code font size
-@include module.define("mono", "weight", normal); // Code Font weight
-
-// Small text
-@include module.define("small", "size", 0.875rem); // Small text size
-@include module.define("small", "weight", normal); // Small text weight
-@include module.define("small", "foreground", null); // Small text foreground
-
-// Strong text
-@include module.define("strong", "weight", bold); // Strong text weight
-@include module.define("strong", "foreground", null); // Strong text foreground
-
-// Decorated text
-@include module.define("decorated", "weight", normal); // Decorated text weight
-@include module.define("decorated", "foreground", null); // Decorated text foreground
-
-// Line heights
-@include module.define("line-height", "normal", 1.6em); // Default line height
-@include module.define("line-height", "medium", 1.4em); // Medium text line height
-@include module.define("line-height", "large", 1.2em); // Large text line height
-
-/** Theme */
 
 // Table
 @include module.define("table", "background", null); // Table background
