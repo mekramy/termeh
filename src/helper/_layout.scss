@@ -1,59 +1,61 @@
 @use "../core/module";
 
-/// Generates layout utility classes.
+/// Generates layout helper classes.
 ///
-/// @require {Variable<Color>} color("primary") - Scrollbar accent color @throw on missing
+/// Classes cover clearfix, text direction, overflow clipping, radius and shadow removal, cursor, text selection, locking, and scrolling.
+///
+/// @output Layout helper classes
+///
+/// @require {Variable<Color>} color("primary") - Accent color of the scrollbar in `.is-scrollable`
 @mixin use-layout-helper() {
-    @if not module.module-presented("layout-helper") {
-        @include module.present-module("layout-helper");
+    @include module.define-module("layout-helper") {
+        $primary: module.color("primary");
 
-        @at-root {
-            .is-clearfix {
-                @include module.clearfix();
-            }
+        .is-clearfix {
+            @include module.clearfix();
+        }
 
-            .is-ltr {
-                direction: ltr !important;
-            }
+        .is-ltr {
+            direction: ltr !important;
+        }
 
-            .is-rtl {
-                direction: rtl !important;
-            }
+        .is-rtl {
+            direction: rtl !important;
+        }
 
-            .is-clipped {
-                overflow: hidden !important;
-            }
+        .is-clipped {
+            overflow: hidden !important;
+        }
 
-            .is-radiusless {
-                border-radius: 0 !important;
-            }
+        .is-radiusless {
+            border-radius: 0 !important;
+        }
 
-            .is-shadowless {
-                box-shadow: none !important;
-            }
+        .is-shadowless {
+            box-shadow: none !important;
+        }
 
-            .is-clickable {
-                cursor: pointer !important;
-                pointer-events: all !important;
-            }
+        .is-clickable {
+            cursor: pointer !important;
+            pointer-events: all !important;
+        }
 
-            .is-unselectable {
-                @include module.unselectable();
-            }
+        .is-unselectable {
+            @include module.unselectable();
+        }
 
-            .is-selectable {
-                @include module.selectable();
-            }
+        .is-selectable {
+            @include module.selectable();
+        }
 
-            .is-locked {
-                @include module.locked();
-            }
+        .is-locked {
+            @include module.locked();
+        }
 
-            .is-scrollable {
-                overflow: hidden;
-                overflow-y: auto;
-                @include module.scrollable(module.color("primary"));
-            }
+        .is-scrollable {
+            overflow: hidden;
+            overflow-y: auto;
+            @include module.scrollable($primary);
         }
     }
 }

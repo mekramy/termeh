@@ -1,86 +1,86 @@
 @use "../core/module";
 
-/// Removes adjoining border radii from attached elements.
+/// Generates helper classes that remove border radii from attached elements.
+///
+/// Attached classes are created for all sides and corners, like `.is-attached`, `.is-left-attached` and `.is-top-right-attached`. Side classes also stretch the element with `align-self`.
+///
+/// @output Border radius reset classes using `!important`
 @mixin use-attachment-helper() {
-    @if not module.module-presented("attachment-helper") {
-        @include module.present-module("attachment-helper");
+    @include module.define-module("attachment-helper") {
+        .is-attached {
+            border-radius: 0 !important;
+        }
 
-        @at-root {
-            .is-attached {
-                border-radius: 0 !important;
-            }
+        .is-left-attached {
+            border-top-right-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+            align-self: stretch;
+        }
 
-            .is-left-attached {
-                border-top-right-radius: 0 !important;
-                border-bottom-right-radius: 0 !important;
-                align-self: stretch;
-            }
+        .is-left-top-attached {
+            border-top-right-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
+        }
 
-            .is-left-top-attached {
-                border-top-right-radius: 0 !important;
-                border-bottom-right-radius: 0 !important;
-                border-bottom-left-radius: 0 !important;
-            }
+        .is-left-bottom-attached {
+            border-top-right-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+            border-top-left-radius: 0 !important;
+        }
 
-            .is-left-bottom-attached {
-                border-top-right-radius: 0 !important;
-                border-bottom-right-radius: 0 !important;
-                border-top-left-radius: 0 !important;
-            }
+        .is-right-attached {
+            border-top-left-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
+            align-self: stretch;
+        }
 
-            .is-right-attached {
-                border-top-left-radius: 0 !important;
-                border-bottom-left-radius: 0 !important;
-                align-self: stretch;
-            }
+        .is-right-top-attached {
+            border-top-left-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+        }
 
-            .is-right-top-attached {
-                border-top-left-radius: 0 !important;
-                border-bottom-left-radius: 0 !important;
-                border-bottom-right-radius: 0 !important;
-            }
+        .is-right-bottom-attached {
+            border-top-left-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
+            border-top-right-radius: 0 !important;
+        }
 
-            .is-right-bottom-attached {
-                border-top-left-radius: 0 !important;
-                border-bottom-left-radius: 0 !important;
-                border-top-right-radius: 0 !important;
-            }
+        .is-top-attached {
+            border-bottom-right-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
+            align-self: stretch;
+        }
 
-            .is-top-attached {
-                border-bottom-right-radius: 0 !important;
-                border-bottom-left-radius: 0 !important;
-                align-self: stretch;
-            }
+        .is-top-left-attached {
+            border-bottom-right-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
+            border-top-right-radius: 0 !important;
+        }
 
-            .is-top-left-attached {
-                border-bottom-right-radius: 0 !important;
-                border-bottom-left-radius: 0 !important;
-                border-top-right-radius: 0 !important;
-            }
+        .is-top-right-attached {
+            border-bottom-right-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
+            border-top-left-radius: 0 !important;
+        }
 
-            .is-top-right-attached {
-                border-bottom-right-radius: 0 !important;
-                border-bottom-left-radius: 0 !important;
-                border-top-left-radius: 0 !important;
-            }
+        .is-bottom-attached {
+            border-top-right-radius: 0 !important;
+            border-top-left-radius: 0 !important;
+            align-self: stretch;
+        }
 
-            .is-bottom-attached {
-                border-top-right-radius: 0 !important;
-                border-top-left-radius: 0 !important;
-                align-self: stretch;
-            }
+        .is-bottom-left-attached {
+            border-top-right-radius: 0 !important;
+            border-top-left-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+        }
 
-            .is-bottom-left-attached {
-                border-top-right-radius: 0 !important;
-                border-top-left-radius: 0 !important;
-                border-bottom-right-radius: 0 !important;
-            }
-
-            .is-bottom-right-attached {
-                border-top-right-radius: 0 !important;
-                border-top-left-radius: 0 !important;
-                border-bottom-left-radius: 0 !important;
-            }
+        .is-bottom-right-attached {
+            border-top-right-radius: 0 !important;
+            border-top-left-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
         }
     }
 }

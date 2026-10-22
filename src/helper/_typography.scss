@@ -1,112 +1,114 @@
 @use "../core/module";
 
-/// Generates text decoration and transformation utility classes.
+/// Generates text style helper classes.
+///
+/// Classes cover italic, underline, line-through, no decoration, text case, and ellipsis.
+///
+/// @output Text style helper classes
 @mixin use-text-helper() {
-    @if not module.module-presented("text-helper") {
-        @include module.present-module("text-helper");
+    @include module.define-module("text-helper") {
+        .is-italic {
+            font-style: italic !important;
+        }
 
-        @at-root {
-            .is-italic {
-                font-style: italic !important;
-            }
+        .is-underline {
+            text-decoration: underline !important;
+        }
 
-            .is-underline {
-                text-decoration: underline !important;
-            }
+        .is-line-through {
+            text-decoration: line-through !important;
+        }
 
-            .is-line-through {
-                text-decoration: line-through !important;
-            }
+        .is-undecorated {
+            text-decoration: none !important;
+        }
 
-            .is-undecorated {
-                text-decoration: none !important;
-            }
+        .is-capitalized {
+            text-transform: capitalize !important;
+        }
 
-            .is-capitalized {
-                text-transform: capitalize !important;
-            }
+        .is-lowercase {
+            text-transform: lowercase !important;
+        }
 
-            .is-lowercase {
-                text-transform: lowercase !important;
-            }
+        .is-uppercase {
+            text-transform: uppercase !important;
+        }
 
-            .is-uppercase {
-                text-transform: uppercase !important;
-            }
-
-            .is-ellipsis {
-                overflow: hidden;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-            }
+        .is-ellipsis {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
         }
     }
 }
 
-/// Generates text color utility classes.
+/// Generates text color helper classes.
 ///
-/// @param {List} $colors [()] - Registered color names to include; `null` includes all registered colors
+/// Each class sets the text color and the selection style of the color.
+///
+/// Supports `color` variations.
+///
+/// @param {List<String>} $colors [()] - Color names to include; `null` includes all defined colors
+/// @output A `.is-<name>-color` class for each color
+///
+/// @require {Variable<Color>} variant($name, "readable") - Text color of each color name
 @mixin use-text-colors($colors: ()) {
-    @if not module.module-presented("text-colors") {
-        @include module.present-module("text-colors");
+    @include module.define-module("text-colors") {
+        @each $name, $color in module.colors($includes: $colors) {
+            $readable: module.variant($name, "readable");
 
-        @at-root {
-            @each $name, $color in module.colors($includes: $colors) {
-                .is-#{$name}-color {
-                    color: module.variant($name, "readable");
-                    @include module.selection($name);
-                }
+            .is-#{$name}-color {
+                color: $readable;
+                @include module.selection($name);
             }
         }
     }
 }
 
-/// Generates text size utility classes.
+/// Generates font size helper classes.
 ///
-/// @param {List} $sizes [()] - Registered size names to include; `null` includes all registered sizes
+/// Supports `size` variations.
+///
+/// @param {List<String>} $sizes [()] - Size names to include; `null` includes all defined sizes
+/// @output A `.is-<name>-size` class for each size
 @mixin use-text-sizes($sizes: ()) {
-    @if not module.module-presented("text-sizes") {
-        @include module.present-module("text-sizes");
-
-        @at-root {
-            @each $label, $size in module.sizes($includes: $sizes) {
-                .is-#{$label}-size {
-                    font-size: $size !important;
-                }
+    @include module.define-module("text-sizes") {
+        @each $label, $size in module.sizes($includes: $sizes) {
+            .is-#{$label}-size {
+                font-size: $size !important;
             }
         }
     }
 }
 
-/// Generates text weight utility classes.
+/// Generates font weight helper classes.
 ///
-/// @param {List} $weights [()] - Registered weight names to include; `null` includes all registered weights
+/// Supports `weight` variations.
+///
+/// @param {List<String>} $weights [()] - Weight names to include; `null` includes all defined weights
+/// @output A `.is-<name>-weight` class for each weight
 @mixin use-text-weights($weights: ()) {
-    @if not module.module-presented("text-weights") {
-        @include module.present-module("text-weights");
-
-        @at-root {
-            @each $label, $weight in module.weights($includes: $weights) {
-                .is-#{$label}-weight {
-                    font-weight: $weight !important;
-                }
+    @include module.define-module("text-weights") {
+        @each $label, $weight in module.weights($includes: $weights) {
+            .is-#{$label}-weight {
+                font-weight: $weight !important;
             }
         }
     }
 }
 
-/// Generates text alignment utility classes.
+/// Generates text alignment helper classes.
 ///
-/// @param {List} $aligns [()] - Registered alignment names to include; `null` includes all registered alignments
+/// Supports `align` variations.
+///
+/// @param {List<String>} $aligns [()] - Alignment names to include; `null` includes all defined alignments
+/// @output A `.is-<name>-align` class for each alignment
 @mixin use-text-aligns($aligns: ()) {
-    @if not module.module-presented("text-aligns") {
-        @include module.present-module("text-aligns");
-
-        @at-root {
-            @each $label, $align in module.text-aligns($includes: $aligns) {
-                .is-#{$label}-align {
-                    text-align: $align !important;
-                }
+    @include module.define-module("text-aligns") {
+        @each $label, $align in module.text-aligns($includes: $aligns) {
+            .is-#{$label}-align {
+                text-align: $align !important;
             }
         }
     }

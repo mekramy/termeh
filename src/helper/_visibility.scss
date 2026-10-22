@@ -1,111 +1,111 @@
 @use "../core/module";
 
-/// Generates responsive visibility utility classes.
+/// Generates visibility helper classes.
+///
+/// Classes hide elements always, or only on some breakpoints and devices, like `.is-hidden`, `.is-mobile-only`, `.is-desktop-hidden` and `.is-touch-only`.
+///
+/// @output Visibility helper classes inside breakpoint media queries
 @mixin use-visibility-helper() {
-    @if not module.module-presented("visibility-helper") {
-        @include module.present-module("visibility-helper");
+    @include module.define-module("visibility-helper") {
+        .is-hidden {
+            display: none !important;
+        }
 
-        @at-root {
-            .is-hidden {
+        @include module.until-fullhd() {
+            .is-until-fullhd-hidden {
                 display: none !important;
             }
+        }
 
-            @include module.until-fullhd() {
-                .is-until-fullhd-hidden {
-                    display: none !important;
-                }
+        @include module.until-widescreen() {
+            .is-until-widescreen-hidden {
+                display: none !important;
             }
+        }
 
-            @include module.until-widescreen() {
-                .is-until-widescreen-hidden {
-                    display: none !important;
-                }
+        @include module.until-desktop() {
+            .is-until-desktop-hidden {
+                display: none !important;
             }
+        }
 
-            @include module.until-desktop() {
-                .is-until-desktop-hidden {
-                    display: none !important;
-                }
+        @include module.tablet() {
+            .is-mobile-only,
+            .is-tablet-hidden,
+            .is-desktop-only,
+            .is-widescreen-only,
+            .is-fullhd-only {
+                display: none !important;
             }
+        }
 
-            @include module.tablet() {
-                .is-mobile-only,
-                .is-tablet-hidden,
-                .is-desktop-only,
-                .is-widescreen-only,
-                .is-fullhd-only {
-                    display: none !important;
-                }
+        @include module.desktop() {
+            .is-mobile-only,
+            .is-tablet-only,
+            .is-desktop-hidden,
+            .is-widescreen-only,
+            .is-fullhd-only {
+                display: none !important;
             }
+        }
 
-            @include module.desktop() {
-                .is-mobile-only,
-                .is-tablet-only,
-                .is-desktop-hidden,
-                .is-widescreen-only,
-                .is-fullhd-only {
-                    display: none !important;
-                }
+        @include module.widescreen() {
+            .is-mobile-only,
+            .is-tablet-only,
+            .is-desktop-only,
+            .is-widescreen-hidden,
+            .is-fullhd-only {
+                display: none !important;
             }
+        }
 
-            @include module.widescreen() {
-                .is-mobile-only,
-                .is-tablet-only,
-                .is-desktop-only,
-                .is-widescreen-hidden,
-                .is-fullhd-only {
-                    display: none !important;
-                }
+        @include module.fullhd() {
+            .is-mobile-only,
+            .is-tablet-only,
+            .is-desktop-only,
+            .is-widescreen-only,
+            .is-fullhd-hidden {
+                display: none !important;
             }
+        }
 
-            @include module.fullhd() {
-                .is-mobile-only,
-                .is-tablet-only,
-                .is-desktop-only,
-                .is-widescreen-only,
-                .is-fullhd-hidden {
-                    display: none !important;
-                }
+        @include module.mobile() {
+            .is-mobile-hidden,
+            .is-tablet-only,
+            .is-desktop-only,
+            .is-widescreen-only,
+            .is-fullhd-only {
+                display: none !important;
             }
+        }
 
-            @include module.mobile() {
-                .is-mobile-hidden,
-                .is-tablet-only,
-                .is-desktop-only,
-                .is-widescreen-only,
-                .is-fullhd-only {
-                    display: none !important;
-                }
+        @include module.tablet-only() {
+            .is-tablet-only-hidden {
+                display: none !important;
             }
+        }
 
-            @include module.tablet-only() {
-                .is-tablet-only-hidden {
-                    display: none !important;
-                }
+        @include module.desktop-only() {
+            .is-desktop-only-hidden {
+                display: none !important;
             }
+        }
 
-            @include module.desktop-only() {
-                .is-desktop-only-hidden {
-                    display: none !important;
-                }
+        @include module.widescreen-only() {
+            .is-widescreen-only-hidden {
+                display: none !important;
             }
+        }
 
-            @include module.widescreen-only() {
-                .is-widescreen-only-hidden {
-                    display: none !important;
-                }
+        @include module.non-touch() {
+            .is-touch-only {
+                display: none !important;
             }
+        }
 
-            @include module.non-touch() {
-                .is-touch-only {
-                    display: none !important;
-                }
-            }
-
-            @include module.touch() {
-                .is-touch-hidden {
-                    display: none !important;
-                }
+        @include module.touch() {
+            .is-touch-hidden {
+                display: none !important;
             }
         }
     }
