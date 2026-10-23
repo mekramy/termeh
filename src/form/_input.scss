@@ -1,127 +1,131 @@
 @use "../animation";
+@use "../resolvers";
 @use "../core/module";
 
-/// Generates input element styles with configurable gaps and colors.
+/// Applies input wrapper styles.
 ///
-/// @param {List} $gaps [()] - Gap names for size modifier styles; `null` includes all registered gaps
-/// @param {List} $colors [()] - Color names for modifier styles; `null` includes all registered colors
+/// Supports `gap` and `color` variations.
 ///
-/// @require {Variable<Color>} color("error") - Invalid-state border color @throw on missing
-/// @require {Variable<Color>} color("primary") - Focused-state border color @throw on missing
-/// @require {Variable<Length>} var("radius", "normal") - Input wrapper border radius
+/// Variants can be overridden by defining them explicitly or by registering a custom resolver for `input`.
+///
+/// @param {List<String>} $gaps [()] - Gap names to include in the gap variations
+/// @param {List<String>} $colors [()] - Color names to include in the color variations
+/// @output Input wrapper styles with focus, invalid, disabled, gap, and color states
+///
+/// @require {Variable<Color>} color("error") - Invalid-state border color
 /// @require {Variable<Length>} var("input", "height") - Input wrapper height
-/// @require {Variable<Color>} var("input", "border") [var("base", "separator")] - Input wrapper border color
-/// @require {Variable<Color>} var("input", "background") - Input wrapper background color
-/// @require {Variable<Color>} var("input", "placeholder") [variant("shade", "mute")] - Placeholder text color
-/// @require {Variable<Length>} var("control", "placeholder-size") - Placeholder font size
-/// @require {Variable<FontWeight>} var("control", "placeholder-weight") - Placeholder font weight
+/// @require {Variable<Length>} var("radius", "normal") - Input wrapper border radius
+/// @require {Variable<Color>} variant-for("input", "base", "accent") - Focused border color
+/// @require {Variable<Color>} variant-for("input", "base", "background") - Input wrapper background color
+/// @require {Variable<Color>} variant-for("input", "base", "border") - Input wrapper border color
+/// @require {Variable<Color>} variant-for("input", "base", "placeholder") - Placeholder text color
+/// @require {Variable<Length>} var("input", "placeholder-size") - Placeholder font size
+/// @require {Variable<FontWeight>} var("input", "placeholder-weight") - Placeholder font weight
+/// @require {Map<String, Variable<Length>>} gaps($includes: $gaps) - Gap entries used to generate gap variations
+/// @require {Map<String, Variable<Color>>} colors($includes: $colors) - Colors to add color classes for
+/// @require {Variable<Color>} variant-for("input", $name, "accent") - Focus border color for each color variation
 @mixin use-input($gaps: (), $colors: ()) {
-    @if not module.module-presented("form-input") {
-        @include module.present-module("form-input");
+    @include animation.shake();
+    @include resolvers.register("input");
 
-        /** Fallbacks */
-        $-separator: module.var("base", "separator");
-        $-shade-mute: module.variant("shade", "mute");
-
-        /** --------- */
-
+    @include module.define-module("form-input") {
         $error: module.color("error");
-        $primary: module.color("primary");
 
-        $radius-normal: module.var("radius", "normal");
         $height: module.var("input", "height");
+        $radius-normal: module.var("radius", "normal");
 
-        $border: module.var("input", "border", $-separator);
-        $background: module.var("input", "background");
+        $accent: module.variant-for("input", "base", "accent");
+        $background-color: module.variant-for("input", "base", "background");
+        $border-color: module.variant-for("input", "base", "border");
+        $placeholder-color: module.variant-for("input", "base", "placeholder");
 
-        $placeholder: module.var("input", "placeholder", $-shade-mute);
-        $placeholder-size: module.var("control", "placeholder-size");
-        $placeholder-weight: module.var("control", "placeholder-weight");
+        $placeholder-size: module.var("input", "placeholder-size");
+        $placeholder-weight: module.var("input", "placeholder-weight");
 
-        @at-root {
-            @include animation.shake();
+        @include animation.shake();
 
-            .input {
-                display: flex;
-                align-items: center;
-                flex-flow: row nowrap;
-                height: $height;
-                line-height: 1em;
-                border-radius: $radius-normal;
-                border: 1px solid $border;
-                background-color: $background;
-                padding: module.inline-padding();
-                @include module.transition(all);
+        .input {
+            display: flex;
+            align-items: center;
+            flex-flow: row nowrap;
+            height: $height;
+            line-height: 1em;
+            border-radius: $radius-normal;
+            border: 1px solid $border-color;
+            background-color: $background-color;
+            padding: module.inline-padding();
+            @include module.transition(all);
 
-                > .divider {
-                    width: 1px;
-                    height: 1em;
-                    display: block;
-                    margin: 0 1em;
-                    background-color: $border;
+            > .divider {
+                width: 1px;
+                height: 1em;
+                display: block;
+                margin: 0 1em;
+                background-color: $border-color;
+            }
+
+            > .gutter {
+                display: block;
+                flex: 0 0 auto;
+                width: 1em;
+                box-sizing: border-box;
+            }
+
+            > * {
+                line-height: 1em !important;
+            }
+
+            input {
+                @include module.control();
+
+                display: block;
+                flex: 1 1 0;
+                border-radius: 0;
+
+                &::placeholder {
+                    color: $placeholder-color;
+                    font-size: $placeholder-size;
+                    font-weight: $placeholder-weight;
                 }
+            }
 
-                > .gutter {
-                    display: block;
-                    flex: 0 0 auto;
-                    width: 1em;
-                    box-sizing: border-box;
-                }
+            &.is-focused,
+            &:focus-within {
+                border-color: $accent;
+            }
 
-                > * {
-                    line-height: 1em !important;
-                }
+            @each $name, $gap in module.gaps($includes: $gaps) {
+                &.is-#{$name}-gap {
+                    > .divider {
+                        margin: 0 module.half($gap);
+                    }
 
-                input {
-                    @include module.control();
-
-                    display: block;
-                    flex: 1 1 0;
-                    border-radius: 0;
-
-                    &::placeholder {
-                        color: $placeholder;
-                        font-size: $placeholder-size;
-                        font-weight: $placeholder-weight;
+                    > .gutter {
+                        width: $gap;
                     }
                 }
+            }
 
-                &.is-focused,
-                &:focus-within {
-                    border-color: $primary;
-                }
+            @each $name, $color in module.colors($includes: $colors) {
+                $-accent: module.variant-for("input", $name, "accent");
 
-                @each $name, $gap in module.gaps($includes: $gaps) {
-                    &.is-#{$name}-gap {
-                        > .divider {
-                            margin: 0 module.half($gap);
-                        }
-
-                        > .gutter {
-                            width: $gap;
-                        }
+                &.is-#{$name} {
+                    &.is-focused,
+                    &:focus-within {
+                        border-color: $-accent;
                     }
-                }
 
-                @each $name, $color in module.colors($includes: $colors) {
-                    &.is-#{$name} {
-                        &.is-focused,
-                        &:focus-within {
-                            border-color: $color;
-                        }
-
-                        @include module.selection($name);
-                    }
+                    @include module.selection($name);
                 }
+            }
 
-                @include module.is-invalid() {
-                    border-color: $error;
-                    animation: shake 0.5s ease;
-                }
+            @include module.is-invalid() {
+                border-color: $error;
+                animation: shake 0.5s ease;
+            }
 
-                @include module.is-disabled() {
-                    @include module.disabled();
-                }
+            @include module.is-disabled() {
+                @include module.disabled();
             }
         }
     }

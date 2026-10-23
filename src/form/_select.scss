@@ -1,187 +1,188 @@
 @use "../animation";
+@use "../resolvers";
 @use "../core/module";
 
-/// Generates select input styles with configurable colors.
+/// Applies select styles.
 ///
-/// @param {List} $colors [()] - Color names for select modifier styles; `null` includes all registered colors
+/// Supports `color` variations.
 ///
-/// @require {Variable<Color>} color("error") - Invalid-state border color @throw on missing
-/// @require {Variable<Color>} color("primary") - Focused and open select accent color @throw on missing
-/// @require {Variable<Color>} variant("primary", "foreground") - Focused text and picker-icon color
-/// @require {Variable<Color>} variant("primary", "readable") - Selected option text and checkmark color
-/// @require {Variable<Color>} var("base", "section") - Hovered option background color
-/// @require {Variable<Length>} var("gap", "micro")  - Gap between contents in an option
-/// @require {Variable<Length>} var("radius", "normal") - Select control border radius
-/// @require {Variable<FontWeight>} var("strong", "weight") - Selected option font weight
+/// Variants can be overridden by defining them explicitly or by registering a custom resolver for `input`.
+///
+/// @param {List<String>} $colors [()] - Color names to include in the color variations
+/// @output Select styles for options, focus, invalid, disabled, and color variation states
+///
+/// @require {Variable<Color>} color("error") - Invalid-state border color
 /// @require {Variable<Length>} var("input", "height") - Select control height
-/// @require {Variable<Color>} var("input", "border") [var("base", "separator")] - Select border color
-/// @require {Variable<Color>} var("input", "background") - Select background color
-/// @require {Variable<Color>} var("input", "disabled-foreground") - Disabled option text color
-/// @require {Variable<Color>} var("input", "placeholder") [variant("shade", "mute")] - Placeholder and picker-icon color
-/// @require {Variable<Length>} var("control", "placeholder-size") - Placeholder font size
-/// @require {Variable<FontWeight>} var("control", "placeholder-weight") - Placeholder font weight
+/// @require {Variable<Length>} var("gap", "micro") - Gap between contents in an option
+/// @require {Variable<Length>} var("radius", "normal") - Select control border radius
+/// @require {Variable<FontWeight>} var("text", "strong-weight") - Selected option font weight
+/// @require {Variable<Color>} variant-for("input", "base", "accent") - Focused and open select background and border color
+/// @require {Variable<Color>} variant-for("input", "base", "accent-color") - Focused text and picker-icon color
+/// @require {Variable<Color>} variant-for("input", "base", "accent-readable") - Selected option text and checkmark color
+/// @require {Variable<Color>} variant-for("input", "base", "background") - Select background color
+/// @require {Variable<Color>} variant-for("input", "base", "border") - Select border color
+/// @require {Variable<Color>} variant-for("input", "base", "placeholder") - Placeholder and picker-icon color
+/// @require {Variable<Color>} variant-for("input", "base", "hover-background") - Hovered option background color
+/// @require {Variable<Color>} variant-for("input", "base", "disabled-color") - Disabled option text color
+/// @require {Variable<Length>} var("input", "placeholder-size") - Placeholder font size
+/// @require {Variable<FontWeight>} var("input", "placeholder-weight") - Placeholder font weight
+/// @require {Map<String, Variable<Color>>} colors($includes: $colors) - Colors to add color classes for
+/// @require {Variable<Color>} variant-for("input", $name, "accent") - Focus background and border color for each color variation
+/// @require {Variable<Color>} variant-for("input", $name, "accent-color") - Focus text and picker-icon color for each color variation
+/// @require {Variable<Color>} variant-for("input", $name, "accent-readable") - Selected option text and checkmark color for each color variation
 @mixin use-select($colors: ()) {
-    @if not module.module-presented("form-select") {
-        @include module.present-module("form-select");
+    @include animation.shake();
+    @include resolvers.register("input");
 
-        /** Fallbacks */
-        $-separator: module.var("base", "separator");
-        $-shade-mute: module.variant("shade", "mute");
-
-        /** --------- */
-
+    @include module.define-module("form-select") {
         $error: module.color("error");
-        $primary: module.color("primary");
-        $primary-foreground: module.variant("primary", "foreground");
-        $primary-readable: module.variant("primary", "readable");
-        $section: module.var("base", "section");
-
-        $gap-micro: module.var("gap", "micro");
-        $radius-normal: module.var("radius", "normal");
-        $strong-weight: module.var("strong", "weight");
 
         $height: module.var("input", "height");
-        $border: module.var("input", "border", $-separator);
-        $background: module.var("input", "background");
-        $disabled-foreground: module.var("input", "disabled-foreground");
+        $gap-micro: module.var("gap", "micro");
+        $radius-normal: module.var("radius", "normal");
+        $strong-weight: module.var("text", "strong-weight");
 
-        $placeholder: module.var("input", "placeholder", $-shade-mute);
-        $placeholder-size: module.var("control", "placeholder-size");
-        $placeholder-weight: module.var("control", "placeholder-weight");
+        $accent: module.variant-for("input", "base", "accent");
+        $accent-color: module.variant-for("input", "base", "accent-color");
+        $accent-readable: module.variant-for("input", "base", "accent-readable");
+        $background-color: module.variant-for("input", "base", "background");
+        $border-color: module.variant-for("input", "base", "border");
+        $placeholder-color: module.variant-for("input", "base", "placeholder");
+        $hover-background: module.variant-for("input", "base", "hover-background");
+        $disabled-color: module.variant-for("input", "base", "disabled-color");
 
-        @at-root {
-            @include animation.shake();
+        $placeholder-size: module.var("input", "placeholder-size");
+        $placeholder-weight: module.var("input", "placeholder-weight");
 
-            select {
-                @include module.control();
+        select {
+            @include module.control();
 
+            display: flex;
+            align-items: center;
+            flex-flow: row nowrap;
+            width: 100%;
+            max-width: 100%;
+            height: $height;
+            line-height: 1em;
+            border-radius: $radius-normal;
+            border: 1px solid $border-color;
+            background-color: $background-color;
+            padding: module.inline-padding();
+            @include module.transition(all);
+
+            &,
+            &::picker(select) {
+                appearance: base-select;
+            }
+
+            &::picker(select) {
+                border: 1px solid $border-color;
+            }
+
+            &::picker-icon {
+                color: $placeholder-color;
+                @include module.transition(transform);
+            }
+
+            &::placeholder {
+                color: $placeholder-color;
+                font-size: $placeholder-size;
+                font-weight: $placeholder-weight;
+            }
+
+            &:open {
+                &::picker-icon {
+                    transform: rotate(180deg);
+                }
+            }
+
+            option {
                 display: flex;
                 align-items: center;
-                flex-flow: row nowrap;
-                width: 100%;
-                max-width: 100%;
-                height: $height;
-                line-height: 1em;
-                border-radius: $radius-normal;
-                border: 1px solid $border;
-                background-color: $background;
+                gap: $gap-micro;
+                cursor: pointer;
                 padding: module.inline-padding();
-                @include module.transition(all);
 
-                &,
-                &::picker(select) {
-                    appearance: base-select;
+                &:checked {
+                    color: $accent-readable;
+                    font-weight: $strong-weight;
                 }
 
+                &::checkmark {
+                    color: $accent-readable;
+                }
+
+                &:disabled {
+                    cursor: default;
+                    color: $disabled-color;
+                }
+
+                &:not(:disabled):hover {
+                    background-color: $hover-background;
+                }
+            }
+
+            &:focus,
+            &:open,
+            &.is-focused {
+                color: $accent-color;
+                background-color: $accent;
+                border-color: $accent;
+
                 &::picker(select) {
-                    border: 1px solid $border;
+                    border-color: $accent;
                 }
 
                 &::picker-icon {
-                    color: $placeholder;
-                    @include module.transition(transform);
+                    color: $accent-color;
                 }
+            }
 
-                &::placeholder {
-                    color: $placeholder;
-                    font-size: $placeholder-size;
-                    font-weight: $placeholder-weight;
-                }
+            @each $name, $palette in module.colors($includes: $colors) {
+                $-accent: module.variant-for("input", $name, "accent");
+                $-accent-color: module.variant-for("input", $name, "accent-color");
+                $-accent-readable: module.variant-for("input", $name, "accent-readable");
 
-                &:open {
-                    &::picker-icon {
-                        transform: rotate(180deg);
-                    }
-                }
-
-                option {
-                    display: flex;
-                    align-items: center;
-                    gap: $gap-micro;
-                    cursor: pointer;
-                    padding: module.inline-padding();
-
-                    &:checked {
-                        color: $primary-readable;
-                        font-weight: $strong-weight;
-                    }
-
-                    &::checkmark {
-                        color: $primary-readable;
-                    }
-
-                    &:disabled {
-                        cursor: default;
-                        color: $disabled-foreground;
-                    }
-
-                    &:not(:disabled):hover {
-                        background-color: $section;
-                    }
-                }
-
-                &:focus,
-                &:open,
-                &.is-focused {
-                    color: $primary-foreground;
-                    background-color: $primary;
-                    border-color: $primary;
-
-                    &::picker(select) {
-                        border-color: $primary;
-                    }
-
-                    &::picker-icon {
-                        color: $primary-foreground;
-                    }
-                }
-
-                @each $name, $color in module.colors($includes: $colors) {
-                    &.is-#{$name} {
-                        option {
-                            $-foreground: module.variant($name, "readable");
-
-                            &:checked {
-                                color: $-foreground;
-                            }
-
-                            &::checkmark {
-                                color: $-foreground;
-                            }
+                &.is-#{$name} {
+                    option {
+                        &:checked {
+                            color: $-accent-readable;
                         }
 
-                        &:focus,
-                        &:open,
-                        &.is-focused {
-                            $-foreground: module.variant($name, "foreground");
+                        &::checkmark {
+                            color: $-accent-readable;
+                        }
+                    }
 
-                            color: $-foreground;
-                            background-color: $color;
-                            border-color: $color;
+                    &:focus,
+                    &:open,
+                    &.is-focused {
+                        color: $-accent-color;
+                        background-color: $-accent;
+                        border-color: $-accent;
 
-                            &::picker(select) {
-                                border-color: $color;
-                            }
-
-                            &::picker-icon {
-                                color: $-foreground;
-                            }
+                        &::picker(select) {
+                            border-color: $-accent;
                         }
 
-                        @include module.selection($name);
+                        &::picker-icon {
+                            color: $-accent-color;
+                        }
                     }
-                }
 
-                @include module.is-invalid() {
-                    &:not(:focus, :open, .is-focused) {
-                        border-color: $error;
-                        animation: shake 0.5s ease;
-                    }
+                    @include module.selection($name);
                 }
+            }
 
-                @include module.is-disabled() {
-                    @include module.disabled();
+            @include module.is-invalid() {
+                &:not(:focus, :open, .is-focused) {
+                    border-color: $error;
+                    animation: shake 0.5s ease;
                 }
+            }
+
+            @include module.is-disabled() {
+                @include module.disabled();
             }
         }
     }

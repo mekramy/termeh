@@ -37,7 +37,7 @@
 @include module.define("transition", "delay", 100ms); // Delay for delayed-animations
 
 // Decorators
-@include module.define("decorator", "size", 2px); // Decorator border width
+@include module.define("decorator", "size", 2px); // Decorator thickness
 @include module.define("decorator", "spinner", 2em); // Spinner size
 
 // Overlay
@@ -69,12 +69,14 @@
 // Inputs
 @include module.define("input", "height", 2.8em); // Input height
 @include module.define("input", "checkbox", 1.3em); // Checkbox size
-@include module.define("input", "legend-size", null); // Fieldset Legend text size
-@include module.define("input", "legend-weight", null); // Fieldset Legend text weight
+@include module.define("input", "legend-size", 0.9em); // Fieldset Legend text size
+@include module.define("input", "legend-weight", 600); // Fieldset Legend text weight
 @include module.define("input", "placeholder-size", 0.85em); // placeholder font size
 @include module.define("input", "placeholder-weight", 600); // placeholder font weight
 
 // Boxes
+@include module.define("box", "opacity", 1); // box background opacity
+@include module.define("box", "backdrop-filter", none); // box backdrop filter
 @include module.define("box", "overlay-opacity", null); // box overlay opacity
 @include module.define("box", "overlay-filter", null); // box overlay filter
 @include module.define(

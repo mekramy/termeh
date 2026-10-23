@@ -1,5 +1,26 @@
+@use "sass:meta";
+@use "sass:list";
 @use "sass:color";
 @use "core/module.scss";
+
+$-defined: () !default;
+@mixin register($resolver) {
+    @if not list.index($-defined, $resolver) {
+        $-defined: list.append($-defined, $resolver) !global;
+
+        @if $resolver == "base" {
+            @include module.define-global-resolver(meta.get-function("base-resolver"));
+        } @else if $resolver == "variant" {
+            @include module.define-global-resolver(meta.get-function("variant-resolver"));
+        } @else if $resolver == "table" {
+            @include module.define-component-resolver("table", meta.get-function("table-resolver"));
+        } @else if $resolver == "box" {
+            @include module.define-component-resolver("box", meta.get-function("box-resolver"));
+        } @else if $resolver == "input" {
+            @include module.define-component-resolver("input", meta.get-function("input-resolver"));
+        }
+    }
+}
 
 @function base-resolver($scheme, $palette, $is-light, $base, $color, $variant) {
     @if $palette != "base" {
@@ -12,7 +33,9 @@
         @return #f8f9fa;
     } @else if $variant == "separator" {
         @return #e0e4eb;
-    } @else if $variant == "overlay" {
+    } @else if $variant == "overlay-color" {
+        @return module.variant("base", "color");
+    } @else if $variant == "overlay-background" {
         @return module.color("base");
     }
 
@@ -82,6 +105,58 @@
         } @else if $variant == "sorted-background" {
             @return module.alpha($color, 0.05);
         }
+    }
+
+    @return null;
+}
+
+@function box-resolver($scheme, $palette, $is-light, $base, $color, $variant) {
+    @if $variant == "background" {
+        @return module.color("base");
+    } @else if $variant == "section" {
+        @return module.variant("base", "section");
+    } @else if $variant == "separator" {
+        @return module.variant("base", "separator");
+    } @else if $variant == "overlay-color" {
+        @return module.variant("base", "color");
+    } @else if $variant == "overlay-background" {
+        @return module.color("base");
+    }
+
+    @return null;
+}
+
+@function input-resolver($scheme, $palette, $is-light, $base, $color, $variant) {
+    @if $variant == "accent" {
+        @return module.iif($palette == "base", module.color("primary"), $color);
+    } @else if $variant == "accent-color" {
+        @return module.iif(
+            $palette == "base",
+            module.variant("primary", "color"),
+            module.variant($palette, "color")
+        );
+    } @else if $variant == "accent-readable" {
+        @return module.iif(
+            $palette == "base",
+            module.variant("primary", "readable"),
+            module.variant($palette, "readable")
+        );
+    } @else if $variant == "meta" {
+        @return module.variant("shade", "readable");
+    } @else if $variant == "placeholder" {
+        @return module.color("shade");
+    } @else if $variant == "border" {
+        @return module.variant("base", "separator");
+    } @else if $variant == "background" {
+        @return module.iif($is-light, white, $base);
+    } @else if $variant == "hover-background" {
+        @return module.variant("base", "section");
+    } @else if $variant == "disabled-color" {
+        @return module.variant("base", "separator");
+    } @else if $variant == "disabled-border" {
+        @return module.variant("base", "separator");
+    } @else if $variant == "disabled-background" {
+        @return module.variant("base", "section");
     }
 
     @return null;

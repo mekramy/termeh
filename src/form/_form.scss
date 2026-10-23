@@ -1,53 +1,57 @@
+@use "../resolvers";
 @use "../core/module";
 
-/// Generates form element styles.
+/// Applies form styles.
 ///
-/// @param {List} $colors [()] - Color names reserved for future form variants; currently unused
+/// Variants can be overridden by defining them explicitly or by registering a custom resolver for `box`.
 ///
-/// @require {Variable<Color>} var("box", "background") [var("base", "background")] - Form and fallback overlay background
-/// @require {Variable<Color>} var("box", "foreground") [var("base", "foreground")] - Form text and fallback spinner color
+/// @output Form styles and a loading overlay with a spinner
+///
 /// @require {Variable<Length>} var("gap", "macro") - Bottom margin after the form
 /// @require {Variable<Length>} var("decorator", "size") - Loading spinner stroke width
 /// @require {Variable<Length>} var("decorator", "spinner") - Loading spinner diameter
-/// @require {Variable<Color>} var("overlay", "background") [var("box", "background", var("base", "background"))] - Loading overlay background
-/// @require {Variable<Color>} var("overlay", "foureground") [var("box", "foreground", var("base", "foreground"))] - Loading spinner color
-/// @require {Variable<Number>} var("overlay", "opacity") - Loading overlay opacity
-/// @require {Variable<Filter>} var("overlay", "filter") - Loading overlay backdrop filter
-@mixin use-form($colors: ()) {
-    @if not module.module-presented("form") {
-        @include module.present-module("form");
+/// @require {Variable<Number>} var("box", "opacity") - Form background opacity
+/// @require {Variable<Filter>} var("box", "backdrop-filter") - Form backdrop filter
+/// @require {Variable<Number>} var("box", "overlay-opacity") [var("overlay", "opacity")] - Loading overlay opacity
+/// @require {Variable<Filter>} var("box", "overlay-filter") [var("overlay", "filter")] - Loading overlay filter
+/// @require {Variable<Color>} variant-for("box", "base", "color") - Form text color
+/// @require {Variable<Color>} variant-for("box", "base", "background") - Form background color
+/// @require {Variable<Color>} variant-for("box", "base", "overlay-color") - Loading spinner color
+/// @require {Variable<Color>} variant-for("box", "base", "overlay-background") - Loading overlay background color
+@mixin use-form() {
+    @include resolvers.register("box");
+    @include resolvers.register("input");
 
-        /** Fallbacks */
-        $-base-background: module.var("base", "background");
-        $-base-foreground: module.var("base", "foreground");
+    $-overlay-opacity: module.var("overlay", "opacity");
+    $-overlay-filter: module.var("overlay", "filter");
 
-        /** --------- */
-
-        $background: module.var("box", "background", $-base-background);
-        $foreground: module.var("box", "foreground", $-base-foreground);
-
+    @include module.define-module("form") {
         $gap-macro: module.var("gap", "macro");
-        $decorator: module.var("decorator", "size");
-        $spinner: module.var("decorator", "spinner");
+        $decorator-thickness: module.var("decorator", "size");
+        $spinner-size: module.var("decorator", "spinner");
 
-        $overlay-background: module.var("overlay", "background", $background);
-        $overlay-foreground: module.var("overlay", "foureground", $foreground);
-        $overlay-opacity: module.var("overlay", "opacity");
-        $overlay-filter: module.var("overlay", "filter");
+        $opacity: module.var("box", "opacity");
+        $backdrop-filter: module.var("box", "backdrop-filter");
+        $overlay-opacity: module.var("box", "overlay-opacity", $-overlay-opacity);
+        $overlay-filter: module.var("box", "overlay-filter", $-overlay-filter);
 
-        @at-root {
-            form {
-                color: $foreground;
-                background: $background;
+        $color: module.variant-for("box", "base", "color");
+        $background-color: module.variant-for("box", "base", "background");
+        $overlay-color: module.variant-for("box", "base", "overlay-color");
+        $overlay-background: module.variant-for("box", "base", "overlay-background");
 
-                @include module.marged() {
-                    margin-bottom: $gap-macro;
-                }
+        form {
+            color: $color;
+            background-color: module.alpha($background-color, $opacity);
+            backdrop-filter: $backdrop-filter;
 
-                &.is-loading {
-                    @include module.overlay($overlay-background, $overlay-opacity, $overlay-filter);
-                    @include module.loader($spinner, $overlay-foreground, $decorator);
-                }
+            @include module.marged() {
+                margin-bottom: $gap-macro;
+            }
+
+            &.is-loading {
+                @include module.overlay($overlay-background, $overlay-opacity, $overlay-filter);
+                @include module.loader($spinner-size, $overlay-color, $decorator-thickness);
             }
         }
     }

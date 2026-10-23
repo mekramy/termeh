@@ -1,100 +1,102 @@
 @use "../animation";
+@use "../resolvers";
 @use "../core/module";
 
-/// Generates textarea input styles with configurable colors.
+/// Applies textarea styles.
 ///
-/// @param {List} $colors [()] - Color names for textarea modifier styles; `null` includes all registered colors
+/// Supports `color` variations.
 ///
-/// @require {Variable<Color>} color("error") - Invalid-state border color @throw on missing
-/// @require {Variable<Color>} color("primary") - Focus border and scrollbar accent color @throw on missing
-/// @require {Variable<Length>} var("gap", "micro") - Padding unit; used at twice its value on each side
+/// Variants can be overridden by defining them explicitly or by registering a custom resolver for `input`.
+///
+/// @param {List<String>} $colors [()] - Color names to include in the color variations
+/// @output Textarea styles for focus, invalid, disabled, and color variation states
+///
+/// @require {Variable<Color>} color("error") - Invalid-state border color
+/// @require {Variable<Length>} var("gap", "micro") - Unit used to calculate textarea padding
 /// @require {Variable<Length>} var("radius", "normal") - Textarea border radius
 /// @require {Variable<Length>} var("line-height", "normal") - Text line height
-/// @require {Variable<Color>} var("input", "border") [var("base", "separator")] - Textarea border color
-/// @require {Variable<Color>} var("input", "background") - Textarea background color
-/// @require {Variable<Color>} var("input", "placeholder") [variant("shade", "mute")] - Placeholder text color
-/// @require {Variable<Length>} var("control", "placeholder-size") - Placeholder font size
-/// @require {Variable<FontWeight>} var("control", "placeholder-weight") - Placeholder font weight
+/// @require {Variable<Color>} variant-for("input", "base", "accent") - Focus border and scrollbar accent color
+/// @require {Variable<Color>} variant-for("input", "base", "background") - Textarea background color
+/// @require {Variable<Color>} variant-for("input", "base", "border") - Textarea border color
+/// @require {Variable<Color>} variant-for("input", "base", "placeholder") - Placeholder text color
+/// @require {Variable<Length>} var("input", "placeholder-size") - Placeholder font size
+/// @require {Variable<FontWeight>} var("input", "placeholder-weight") - Placeholder font weight
+/// @require {Map<String, Variable<Color>>} colors($includes: $colors) - Colors to add color classes for
+/// @require {Variable<Color>} variant-for("input", $name, "accent") - Focus border and scrollbar accent color for each color variation
 @mixin use-textarea($colors: ()) {
-    @if not module.module-presented("form-textarea") {
-        @include module.present-module("form-textarea");
+    @include animation.shake();
+    @include resolvers.register("input");
 
-        /** Fallbacks */
-        $-separator: module.var("base", "separator");
-        $-shade-mute: module.variant("shade", "mute");
-
-        /** --------- */
-
+    @include module.define-module("form-textarea") {
         $error: module.color("error");
-        $primary: module.color("primary");
 
         $gap-micro: module.var("gap", "micro");
         $radius-normal: module.var("radius", "normal");
         $line-height: module.var("line-height", "normal");
 
-        $border: module.var("input", "border", $-separator);
-        $background: module.var("input", "background");
+        $accent: module.variant-for("input", "base", "accent");
+        $background-color: module.variant-for("input", "base", "background");
+        $border-color: module.variant-for("input", "base", "border");
+        $placeholder-color: module.variant-for("input", "base", "placeholder");
 
-        $placeholder: module.var("input", "placeholder", $-shade-mute);
-        $placeholder-size: module.var("control", "placeholder-size");
-        $placeholder-weight: module.var("control", "placeholder-weight");
+        $placeholder-size: module.var("input", "placeholder-size");
+        $placeholder-weight: module.var("input", "placeholder-weight");
 
-        @at-root {
-            @include animation.shake();
+        textarea {
+            @include module.control();
 
-            textarea {
-                @include module.control();
+            width: 100%;
+            max-width: 100%;
+            resize: vertical;
+            overflow-y: auto;
+            padding: module.double($gap-micro);
+            line-height: $line-height;
+            border-radius: $radius-normal;
+            border: 1px solid $border-color;
+            background-color: $background-color;
+            @include module.scrollable($accent);
 
-                width: 100%;
-                max-width: 100%;
-                resize: vertical;
-                overflow-y: auto;
-                padding: module.double($gap-micro);
-                line-height: $line-height;
-                border-radius: $radius-normal;
-                border: 1px solid $border;
-                background-color: $background;
-                @include module.scrollable($primary);
+            &:not([rows]) {
+                max-height: 40em;
+                min-height: 8em;
+            }
 
-                &:not([rows]) {
-                    max-height: 40em;
-                    min-height: 8em;
-                }
+            &[rows] {
+                height: initial;
+            }
 
-                &[rows] {
-                    height: initial;
-                }
+            &::placeholder {
+                color: $placeholder-color;
+                font-size: $placeholder-size;
+                font-weight: $placeholder-weight;
+            }
 
-                &::placeholder {
-                    color: $placeholder;
-                    font-size: $placeholder-size;
-                    font-weight: $placeholder-weight;
-                }
+            &:focus,
+            &.is-focused {
+                border-color: $accent;
+            }
 
-                &:focus,
-                &.is-focused {
-                    border-color: $primary;
-                }
+            @each $name, $color in module.colors($includes: $colors) {
+                $-accent: module.variant-for("input", $name, "accent");
 
-                @each $name, $color in module.colors($includes: $colors) {
-                    &.is-#{$name} {
-                        &:focus,
-                        &.is-focused {
-                            border-color: $color;
-                        }
-
-                        @include module.selection($name);
+                &.is-#{$name} {
+                    &:focus,
+                    &.is-focused {
+                        border-color: $-accent;
                     }
-                }
 
-                @include module.is-invalid() {
-                    border-color: $error;
-                    animation: shake 0.5s ease;
+                    @include module.scroll-color($-accent);
+                    @include module.selection($name);
                 }
+            }
 
-                @include module.is-disabled() {
-                    @include module.disabled();
-                }
+            @include module.is-invalid() {
+                border-color: $error;
+                animation: shake 0.5s ease;
+            }
+
+            @include module.is-disabled() {
+                @include module.disabled();
             }
         }
     }

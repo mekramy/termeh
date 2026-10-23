@@ -1,128 +1,128 @@
 @use "../animation";
+@use "../resolvers";
 @use "../core/module";
 
-/// Generates radio input styles with configurable colors.
+/// Applies radio styles.
 ///
-/// @param {List} $colors [()] - Color names for radio modifier styles; `null` includes all registered colors
+/// Supports `color` variations.
 ///
-/// @require {Variable<Color>} color("error") - Invalid-state radio color @throw on missing
-/// @require {Variable<Color>} color("primary") - Default focus and selected-dot color @throw on missing
+/// Variants can be overridden by defining them explicitly or by registering a custom resolver for `input`.
+///
+/// @param {List<String>} $colors [()] - Color names to include in the color variations
+/// @output Radio styles for default, invalid, disabled, and color variation states
+///
+/// @require {Variable<Color>} color("error") - Invalid-state radio border and selected-dot color
+/// @require {Variable<Length>} var("input", "checkbox") - Radio control width and height
+/// @require {Variable<Length>} var("input", "height") - Radio label row height
 /// @require {Variable<Length>} var("gap", "micro") - Space between the radio and its label
 /// @require {Variable<Length>} var("radius", "circle") - Radio and selected-dot border radius
-/// @require {Variable<Length>} var("input", "height")  - Radio label row height
-/// @require {Variable<Length>} var("input", "checkbox") - Radio control width and height
-/// @require {Variable<Color>} var("input", "border") [var("base", "separator")] - Radio border color
-/// @require {Variable<Color>} var("input", "disabled-foreground") - Disabled label and selected-dot color
-/// @require {Variable<Color>} var("input", "disabled-border") - Disabled radio border color
+/// @require {Variable<Color>} variant-for("input", "base", "accent") - Focus border and selected-dot color
+/// @require {Variable<Color>} variant-for("input", "base", "border") - Radio border color
+/// @require {Variable<Color>} variant-for("input", "base", "disabled-color") - Disabled label and selected-dot color
+/// @require {Variable<Color>} variant-for("input", "base", "disabled-border") - Disabled radio border color
+/// @require {Map<String, Variable<Color>>} colors($includes: $colors) - Colors to add color classes for
+/// @require {Variable<Color>} variant-for("input", $name, "accent") - Accent color for each color variation
 @mixin use-radio($colors: ()) {
-    @if not module.module-presented("form-radio") {
-        @include module.present-module("form-radio");
+    @include animation.shake();
+    @include resolvers.register("input");
 
-        /** Fallbacks */
-        $-separator: module.var("base", "separator");
-
-        /** --------- */
-
+    @include module.define-module("form-radio") {
         $error: module.color("error");
-        $primary: module.color("primary");
+
+        $size: module.var("input", "checkbox");
+        $height: module.var("input", "height");
 
         $gap-micro: module.var("gap", "micro");
         $radius-circle: module.var("radius", "circle");
 
-        $height: module.var("input", "height");
-        $size: module.var("input", "checkbox");
+        $accent: module.variant-for("input", "base", "accent");
+        $border-color: module.variant-for("input", "base", "border");
+        $disabled-color: module.variant-for("input", "base", "disabled-color");
+        $disabled-border: module.variant-for("input", "base", "disabled-border");
 
-        $border: module.var("input", "border", $-separator);
-        $disabled: module.var("input", "disabled-foreground");
-        $disabled-border: module.var("input", "disabled-border");
+        label.radio {
+            display: flex;
+            align-items: center;
+            flex-flow: row nowrap;
+            gap: $gap-micro;
+            margin: 0;
+            padding: 0;
+            height: $height;
+            line-height: 1em;
+            cursor: pointer;
+            box-sizing: border-box;
 
-        @at-root {
-            @include animation.shake();
+            input[type="radio"] {
+                @include module.control();
 
-            label.radio {
-                display: flex;
-                align-items: center;
-                flex-flow: row nowrap;
-                gap: $gap-micro;
-                margin: 0;
-                padding: 0;
-                height: $height;
-                line-height: 1em;
+                display: grid;
+                place-content: center;
+                width: $size;
+                height: $size;
+                border-radius: $radius-circle;
+                border: 1px solid $border-color;
                 cursor: pointer;
-                box-sizing: border-box;
+                flex: 0 0 auto;
+                @include module.transition(all);
 
-                input[type="radio"] {
-                    @include module.control();
-
-                    display: grid;
-                    place-content: center;
+                &::after {
+                    content: "";
                     width: $size;
                     height: $size;
+                    display: block;
+                    box-sizing: border-box;
+                    transform: scale(0);
                     border-radius: $radius-circle;
-                    border: 1px solid $border;
-                    cursor: pointer;
-                    flex: 0 0 auto;
-                    @include module.transition(all);
+                    background-color: $accent;
+                    @include module.transition(transform);
+                }
 
+                &:focus,
+                &:focus-within {
+                    border-color: $accent;
+                }
+
+                &:checked::after {
+                    transform: scale(0.6);
+                }
+            }
+
+            @each $name, $palette in module.colors($includes: $colors) {
+                $-accent: module.variant-for("input", $name, "accent");
+
+                &.is-#{$name} input[type="radio"] {
                     &::after {
-                        content: "";
-                        width: $size;
-                        height: $size;
-                        display: block;
-                        box-sizing: border-box;
-                        transform: scale(0);
-                        border-radius: $radius-circle;
-                        background-color: $primary;
-                        @include module.transition(transform);
+                        background-color: $-accent;
                     }
 
                     &:focus,
                     &:focus-within {
-                        border-color: $primary;
-                    }
-
-                    &:checked {
-                        &::after {
-                            transform: scale(0.6);
-                        }
+                        border-color: $-accent;
                     }
                 }
+            }
 
-                @each $name, $color in module.colors($includes: $colors) {
-                    &.is-#{$name} input[type="radio"] {
-                        &::after {
-                            background-color: $color;
-                        }
+            @include module.is-invalid() {
+                animation: shake 0.5s ease;
 
-                        &:focus,
-                        &:focus-within {
-                            border-color: $color;
-                        }
+                input[type="radio"] {
+                    border-color: $error;
+
+                    &::after {
+                        background-color: $error;
                     }
                 }
+            }
 
-                @include module.is-invalid() {
-                    animation: shake 0.5s ease;
+            @include module.is-disabled() {
+                color: $disabled-color;
+                @include module.locked();
 
-                    input[type="radio"] {
-                        border-color: $error;
+                input[type="radio"] {
+                    border-color: $disabled-border;
 
-                        &::after {
-                            background-color: $error;
-                        }
-                    }
-                }
-
-                @include module.is-disabled() {
-                    color: $disabled;
-                    @include module.locked();
-
-                    input[type="radio"] {
-                        border-color: $disabled-border;
-
-                        &::after {
-                            background-color: $disabled;
-                        }
+                    &::after {
+                        background-color: $disabled-color;
                     }
                 }
             }

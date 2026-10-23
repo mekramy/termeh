@@ -1,82 +1,100 @@
+@use "../resolvers";
 @use "../core/module";
 
-/// Generates field element styles with configurable colors.
+/// Applies field styles.
 ///
-/// @param {List} $colors [()] - Color names for field modifier styles; `null` includes all registered colors
+/// Supports `color` variations.
 ///
-/// @require {Variable<Color>} variant("shade", "readable") - Help text color
-/// @require {Variable<Color>} variant("primary", "readable") - Required-field indicator color
+/// Variants can be overridden by defining them explicitly or by registering a custom resolver for `input`.
+///
+/// @param {List<String>} $colors [()] - Color names to include in the color variations
+/// @output Field styles for labels, help text, required indicators, errors, and disabled states
+///
 /// @require {Variable<Color>} variant("error", "readable") - Validation error text color
+/// @require {Variable<Color>} variant-for("input", "base", "meta") - Help text color
+/// @require {Variable<Color>} variant-for("input", "base", "accent-readable") - Required-field indicator color
 /// @require {Variable<Length>} var("gap", "micro") - Spacing between field contents
 /// @require {Variable<Length>} var("gap", "macro") - Bottom margin after each field
-/// @require {Variable<FontWeight>} var("strong", "weight") - Required-field indicator weight
+/// @require {Variable<FontWeight>} var("text", "strong-weight") - Required-field indicator weight
+/// @require {Variable<Number>} var("control", "disabled-opacity") - Disabled content opacity
+/// @require {Map<String, Variable<Color>>} colors($includes: $colors) - Colors to add color classes for
+/// @require {Variable<Color>} variant-for("input", $name, "accent-readable") - Required-field indicator color for each color variation
 @mixin use-field($colors: ()) {
-    @if not module.module-presented("form-field") {
-        @include module.present-module("form-field");
+    @include resolvers.register("input");
 
-        $shade-readable: module.variant("shade", "readable");
-        $primary-readable: module.variant("primary", "readable");
-        $error-readable: module.variant("error", "readable");
+    @include module.define-module("form-field") {
+        $error-color: module.variant("error", "readable");
+        $meta-color: module.variant-for("input", "base", "meta");
+        $accent-color: module.variant-for("input", "base", "accent-readable");
 
         $gap-micro: module.var("gap", "micro");
         $gap-macro: module.var("gap", "macro");
-        $strong-weight: module.var("strong", "weight");
+        $strong-weight: module.var("text", "strong-weight");
+        $disabled-opacity: module.var("control", "disabled-opacity");
 
-        @at-root {
-            .field {
+        .field {
+            display: block;
+
+            @include module.marged() {
+                margin-bottom: $gap-macro;
+            }
+
+            > * {
+                @include module.marged(".help", ".error") {
+                    margin-bottom: $gap-micro;
+                }
+            }
+
+            > label,
+            .help {
                 display: block;
+            }
 
-                @include module.marged() {
-                    margin-bottom: $gap-macro;
+            .help {
+                color: $meta-color;
+            }
+
+            .error {
+                display: none;
+                color: $error-color;
+            }
+
+            &.is-required {
+                > label::after,
+                .field-label::after {
+                    content: " *";
+                    color: $accent-color;
+                    font-weight: $strong-weight;
                 }
+            }
 
-                > * {
-                    @include module.marged(".help", ".error") {
-                        margin-bottom: $gap-micro;
+            @each $name, $palette in module.colors($includes: $colors) {
+                $-accent-color: module.variant-for("input", $name, "accent-readable");
+
+                &.is-#{$name} {
+                    &.is-required {
+                        > label::after,
+                        .field-label::after {
+                            color: $-accent-color;
+                        }
                     }
-                }
 
-                > label,
-                .help {
+                    @include module.selection($name);
+                }
+            }
+
+            &:invalid,
+            &.is-failed {
+                .error {
                     display: block;
                 }
+            }
 
-                .help {
-                    color: $shade-readable;
-                }
-
+            @include module.is-disabled() {
+                > label,
+                .help,
                 .error {
-                    display: none;
-                    color: $error-readable;
-                }
-
-                &.is-required {
-                    > label::after,
-                    .field-label::after {
-                        content: " *";
-                        color: $primary-readable;
-                        font-weight: $strong-weight;
-                    }
-                }
-
-                @each $name, $color in module.colors($includes: $colors) {
-                    &.is-#{$name} {
-                        &.is-required {
-                            > label::after,
-                            .field-label::after {
-                                color: module.variant($name, "readable");
-                            }
-                        }
-
-                        @include module.selection($name);
-                    }
-                }
-
-                &:invalid,
-                &.is-failed {
-                    .error {
-                        display: block;
-                    }
+                    opacity: $disabled-opacity;
                 }
             }
         }

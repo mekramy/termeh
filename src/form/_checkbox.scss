@@ -1,143 +1,147 @@
 @use "../animation";
+@use "../resolvers";
 @use "../core/module";
 
-/// Generates checkbox input styles with configurable colors.
+/// Applies checkbox styles.
 ///
-/// @param {List} $colors [()] - Color names for modifier styles; `null` includes all registered colors
+/// Supports `color` variations.
 ///
-/// @require {Variable<Color>} color("error") - Invalid-state accent color @throw on missing
-/// @require {Variable<Color>} color("primary") - Default focus and checked-state accent color @throw on missing
-/// @require {Variable<Color>} variant("error", "foreground") - Invalid-state checkmark color
-/// @require {Variable<Color>} variant("primary", "foreground") - Default checked-state checkmark color
+/// Variants can be overridden by defining them explicitly or by registering a custom resolver for `input`.
+///
+/// @param {List<String>} $colors [()] - Color names to include in the color variations
+/// @output Checkbox styles for default, invalid, disabled, and color variation states
+///
+/// @require {Variable<Color>} color("error") - Invalid-state checkbox background and border color
+/// @require {Variable<Color>} variant("error", "color") - Invalid-state checkmark color
+/// @require {Variable<Length>} var("input", "checkbox") - Checkbox width and height
+/// @require {Variable<Length>} var("input", "height") - Checkbox label row height
 /// @require {Variable<Length>} var("gap", "micro") - Space between the checkbox and its label
 /// @require {Variable<Length>} var("radius", "normal") - Checkbox border radius
 /// @require {Variable<Length>} var("decorator", "size") - Checkmark stroke thickness
-/// @require {Variable<Length>} var("input", "height") - Checkbox label row height
-/// @require {Variable<Length>} var("input", "checkbox") - Checkbox width and height
-/// @require {Variable<Color>} var("input", "border") [var("base", "separator")] - Checkbox border color
-/// @require {Variable<Color>} var("input", "disabled-foreground") - Disabled label and checkmark color
-/// @require {Variable<Color>} var("input", "disabled-border") - Disabled checkbox border color
+/// @require {Variable<Color>} variant-for("input", "base", "accent") - Focus and checked-state background and border color
+/// @require {Variable<Color>} variant-for("input", "base", "accent-color") - Checkmark color
+/// @require {Variable<Color>} variant-for("input", "base", "border") - Checkbox border color
+/// @require {Variable<Color>} variant-for("input", "base", "disabled-color") - Disabled label and checkmark color
+/// @require {Variable<Color>} variant-for("input", "base", "disabled-border") - Disabled checkbox border color
+/// @require {Map<String, Variable<Color>>} colors($includes: $colors) - Colors to add color classes for
+/// @require {Variable<Color>} variant-for("input", $name, "accent") - Accent color for each color variation
+/// @require {Variable<Color>} variant-for("input", $name, "accent-color") - Checkmark color for each color variation
 @mixin use-checkbox($colors: ()) {
-    @if not module.module-presented("form-checkbox") {
-        @include module.present-module("form-checkbox");
+    @include animation.shake();
+    @include resolvers.register("input");
 
-        /** Fallbacks */
-        $-separator: module.var("base", "separator");
-
-        /** --------- */
-
+    @include module.define-module("form-checkbox") {
         $error: module.color("error");
-        $primary: module.color("primary");
-        $error-foreground: module.variant("error", "foreground");
-        $primary-foreground: module.variant("primary", "foreground");
+        $error-color: module.variant("error", "color");
+
+        $size: module.var("input", "checkbox");
+        $height: module.var("input", "height");
 
         $gap-micro: module.var("gap", "micro");
         $radius-normal: module.var("radius", "normal");
-        $decorator: module.var("decorator", "size");
+        $decorator-thickness: module.var("decorator", "size");
 
-        $height: module.var("input", "height");
-        $size: module.var("input", "checkbox");
+        $accent: module.variant-for("input", "base", "accent");
+        $accent-color: module.variant-for("input", "base", "accent-color");
+        $border-color: module.variant-for("input", "base", "border");
+        $disabled-color: module.variant-for("input", "base", "disabled-color");
+        $disabled-border: module.variant-for("input", "base", "disabled-border");
 
-        $border: module.var("input", "border", $-separator);
-        $disabled: module.var("input", "disabled-foreground");
-        $disabled-border: module.var("input", "disabled-border");
+        label.checkbox {
+            display: flex;
+            align-items: center;
+            flex-flow: row nowrap;
+            gap: $gap-micro;
+            margin: 0;
+            padding: 0;
+            height: $height;
+            line-height: 1em;
+            cursor: pointer;
+            box-sizing: border-box;
 
-        @at-root {
-            @include animation.shake();
+            input[type="checkbox"] {
+                @include module.control();
 
-            label.checkbox {
-                display: flex;
-                align-items: center;
-                flex-flow: row nowrap;
-                gap: $gap-micro;
-                margin: 0;
-                padding: 0;
-                height: $height;
-                line-height: 1em;
+                display: grid;
+                place-content: center;
+                width: $size;
+                height: $size;
+                border-radius: $radius-normal;
+                border: 1px solid $border-color;
                 cursor: pointer;
-                box-sizing: border-box;
+                flex: 0 0 auto;
+                @include module.transition(all);
 
-                input[type="checkbox"] {
-                    @include module.control();
+                &::after {
+                    content: "";
+                    width: calc($size * 0.25);
+                    height: calc($size * 0.45);
+                    border: solid $accent-color;
+                    border-width: 0 $decorator-thickness $decorator-thickness 0;
+                    transform: scale(0) rotate(45deg);
+                    @include module.delayed-transition(transform);
+                }
 
-                    display: grid;
-                    place-content: center;
-                    width: $size;
-                    height: $size;
-                    border-radius: $radius-normal;
-                    border: 1px solid $border;
-                    cursor: pointer;
-                    flex: 0 0 auto;
-                    @include module.transition(all);
+                &:focus,
+                &:focus-within {
+                    border-color: $accent;
+                }
+
+                &:checked {
+                    background-color: $accent;
 
                     &::after {
-                        content: "";
-                        width: calc($size * 0.25);
-                        height: calc($size * 0.45);
-                        border: solid $primary-foreground;
-                        border-width: 0 $decorator $decorator 0;
-                        transform: scale(0) rotate(45deg);
-                        @include module.delayed-transition(transform);
+                        transform: scale(1) rotate(45deg);
+                    }
+                }
+            }
+
+            @each $name, $palette in module.colors($includes: $colors) {
+                $-accent: module.variant-for("input", $name, "accent");
+                $-accent-color: module.variant-for("input", $name, "accent-color");
+
+                &.is-#{$name} input[type="checkbox"] {
+                    &::after {
+                        border-color: $-accent-color;
                     }
 
                     &:focus,
                     &:focus-within {
-                        border-color: $primary;
+                        border-color: $-accent;
                     }
 
                     &:checked {
-                        background-color: $primary;
-
-                        &::after {
-                            transform: scale(1) rotate(45deg);
-                        }
+                        background-color: $-accent;
                     }
                 }
+            }
 
-                @each $name, $color in module.colors($includes: $colors) {
-                    &.is-#{$name} input[type="checkbox"] {
-                        &::after {
-                            border-color: module.variant($name, "foreground");
-                        }
+            @include module.is-invalid() {
+                animation: shake 0.5s ease;
 
-                        &:focus,
-                        &:focus-within {
-                            border-color: $color;
-                        }
+                input[type="checkbox"] {
+                    border-color: $error;
 
-                        &:checked {
-                            background-color: $color;
-                        }
+                    &::after {
+                        border-color: $error-color;
+                    }
+
+                    &:checked {
+                        background-color: $error;
                     }
                 }
+            }
 
-                @include module.is-invalid() {
-                    animation: shake 0.5s ease;
+            @include module.is-disabled() {
+                color: $disabled-color;
+                @include module.locked();
 
-                    input[type="checkbox"] {
-                        border-color: $error;
+                input[type="checkbox"] {
+                    border-color: $disabled-border;
+                    background-color: transparent;
 
-                        &::after {
-                            border-color: $error-foreground;
-                        }
-
-                        &:checked {
-                            background-color: $error;
-                        }
-                    }
-                }
-
-                @include module.is-disabled() {
-                    color: $disabled;
-                    @include module.locked();
-
-                    input[type="checkbox"] {
-                        border-color: $disabled-border;
-                        background-color: transparent;
-
-                        &::after {
-                            border-color: $disabled;
-                        }
+                    &::after {
+                        border-color: $disabled-color;
                     }
                 }
             }

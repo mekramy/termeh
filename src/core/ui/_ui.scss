@@ -154,16 +154,16 @@
     }
 
     &::-webkit-scrollbar-track {
-        background: $track;
+        background-color: $track;
     }
 
     &::-webkit-scrollbar-thumb {
-        background: $thumb;
+        background-color: $thumb;
         transition: background 200ms linear;
     }
 
     &::-webkit-scrollbar-thumb:hover {
-        background: $thumb-hover;
+        background-color: $thumb-hover;
     }
 }
 
@@ -173,7 +173,7 @@
 /// @output A rule for the hovered scrollbar thumb
 @mixin scroll-color($color) {
     &::-webkit-scrollbar-thumb:hover {
-        background: $color;
+        background-color: $color;
     }
 }
 
@@ -253,7 +253,7 @@
         position: absolute;
         z-index: 1;
         inset: 0;
-        background: utility.alpha($background, $opacity);
+        background-color: utility.alpha($background, $opacity);
         backdrop-filter: $filter;
     }
 }

@@ -1,44 +1,40 @@
+@use "../resolvers";
 @use "../core/module";
 
-/// Generates fieldset styles.
+/// Applies fieldset styles.
 ///
+/// @output Fieldset styles with a padded border and formatted legend
+///
+/// @require {Variable<Color>} variant-for("input", "base", "border") - Fieldset border color
 /// @require {Variable<Length>} var("gap", "macro") - Inner padding and bottom margin
 /// @require {Variable<Length>} var("radius", "normal") - Fieldset border radius
-/// @require {Variable<Color>} var("input", "border") [var("base", "separator")] - Fieldset border color
 /// @require {Variable<Length>} var("input", "legend-size") - Legend font size
 /// @require {Variable<FontWeight>} var("input", "legend-weight") - Legend font weight
 @mixin use-fieldset() {
-    @if not module.module-presented("form-fieldset") {
-        @include module.present-module("form-fieldset");
+    @include resolvers.register("input");
 
-        /** Fallbacks */
-        $-separator: module.var("base", "separator");
-
-        /** --------- */
+    @include module.define-module("form-fieldset") {
+        $border-color: module.variant-for("input", "base", "border");
 
         $gap-macro: module.var("gap", "macro");
         $radius-normal: module.var("radius", "normal");
-
-        $border: module.var("input", "border", $-separator);
         $legend-size: module.var("input", "legend-size");
         $legend-weight: module.var("input", "legend-weight");
 
-        @at-root {
-            fieldset {
-                padding: $gap-macro;
-                border-radius: $radius-normal;
-                border: 1px solid $border;
+        fieldset {
+            padding: $gap-macro;
+            border-radius: $radius-normal;
+            border: 1px solid $border-color;
 
-                @include module.marged() {
-                    margin-bottom: $gap-macro;
-                }
+            @include module.marged() {
+                margin-bottom: $gap-macro;
+            }
 
-                legend {
-                    line-height: 1em;
-                    font-size: $legend-size;
-                    font-weight: $legend-weight;
-                    padding: module.inline-padding();
-                }
+            legend {
+                line-height: 1em;
+                font-size: $legend-size;
+                font-weight: $legend-weight;
+                padding: module.inline-padding();
             }
         }
     }
