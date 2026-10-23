@@ -1,5 +1,5 @@
 @use "sass:meta";
-@use "sass:color";
+@use "../resolvers";
 @use "../core/module";
 
 /// Applies table styles and color classes.
@@ -36,7 +36,10 @@
     $-strong-weight: module.var("text", "strong-weight");
 
     @include module.define-module("base-table") {
-        @include module.define-component-resolver("table", meta.get-function("table-resolver"));
+        @include module.define-component-resolver(
+            "table",
+            meta.get-function("table-resolver", $module: "resolvers")
+        );
 
         $primary: module.color("primary");
         $strong-weight: module.var("table", "strong-weight", $-strong-weight);
@@ -324,40 +327,4 @@
             }
         }
     }
-}
-
-@function table-resolver($scheme, $palette, $is-light, $base, $color, $variant) {
-    $shade: module.color("shade");
-    $primary: module.color("primary");
-    $primary-readable: module.variant("primary", "readable");
-
-    @if $palette == "base" {
-        @if $variant == "decorator" {
-            @return $primary;
-        } @else if $variant == "hover-background" {
-            @return module.alpha($shade, 0.15);
-        } @else if $variant == "striped-background" {
-            @return module.variant("base", "section");
-        } @else if $variant == "sorted-color" {
-            @return $primary-readable;
-        } @else if $variant == "sorted-background" {
-            @return module.alpha($primary, 0.05);
-        } @else if $variant == "row-separator" {
-            @return module.variant("base", "separator");
-        } @else if $variant == "column-separator" {
-            @return transparent;
-        } @else if $variant == "section-separator" {
-            @return module.alpha($shade, 0.5);
-        }
-    } @else {
-        @if $variant == "decorator" {
-            @return $color;
-        } @else if $variant == "sorted-color" {
-            @return module.variant($palette, "readable");
-        } @else if $variant == "sorted-background" {
-            @return module.alpha($color, 0.05);
-        }
-    }
-
-    @return null;
 }
