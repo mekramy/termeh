@@ -8,8 +8,8 @@
 /// @param {List<String>} $colors [()] - Color names to add color classes for; all defined colors when empty
 /// @output The table styles, emitted once
 ///
-/// @require {Variable<Color>} color("primary") - Scrollbar color
 /// @require {Variable<FontWeight>} var("table", "strong-weight") [var("text", "strong-weight")] - Font weight of table headers
+/// @require {Variable<Color>} color("primary") - Scrollbar color
 /// @require {Variable<Color>} variant-for("table", "base", "color") - Text color
 /// @require {Variable<Color>} variant-for("table", "base", "background") - Row background
 /// @require {Variable<Color>} variant-for("table", "base", "decorator") - Color of the sort direction marks
@@ -20,6 +20,7 @@
 /// @require {Variable<Color>} variant-for("table", "base", "row-separator") - Row separator color
 /// @require {Variable<Color>} variant-for("table", "base", "column-separator") - Column separator color
 /// @require {Variable<Color>} variant-for("table", "base", "section-separator") - Header and footer separator color
+///
 /// @require {Map<String, Variable<Color>>} colors($includes: $colors) - Colors to add color classes for
 /// @require {Variable<Color>} variant($name, "readable") - Text color of sorted header cells of the color class
 /// @require {Variable<Color>} variant-for("table", $name, "color") - Text color of the color class
@@ -37,8 +38,9 @@
     $-strong-weight: module.var("text", "strong-weight");
 
     @include module.define-module("base-table") {
-        $primary: module.color("primary");
         $strong-weight: module.var("table", "strong-weight", $-strong-weight);
+
+        $primary: module.color("primary");
 
         $color: module.variant-for("table", "base", "color");
         $background: module.variant-for("table", "base", "background");

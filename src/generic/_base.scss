@@ -21,6 +21,9 @@
 /// @require {Variable<FontWeight>} var("text", "small-weight") - Font weight of `small`, `sub` and `sup`
 /// @require {Variable<FontWeight>} var("text", "strong-weight") - Font weight of `strong`, `b` and table headers
 /// @require {Variable<FontWeight>} var("text", "decorated-weight") - Font weight of `u`, `ins`, `s` and `del`
+/// @require {Variable<Color>} color("primary") - Selection background, scrollbar and checkbox and radio accent color
+/// @require {Variable<Color>} variant("primary", "color") - Selection text color
+/// @require {Variable<Color>} variant("primary", "readable") - Link color
 /// @require {Variable<Color>} variant("base", "color") - Document text color
 /// @require {Variable<Color>} variant("base", "background") - Document background color
 /// @require {Variable<Color>} variant("base", "section") - Background of blockquotes, code and preformatted text
@@ -28,9 +31,6 @@
 /// @require {Variable<Color>} variant-for("text", "base", "small-color") - Text color of `small`, `sub` and `sup`
 /// @require {Variable<Color>} variant-for("text", "base", "strong-color") - Text color of `strong`, `b` and table headers
 /// @require {Variable<Color>} variant-for("text", "base", "decorated-color") - Text color of `u`, `ins`, `s` and `del`
-/// @require {Variable<Color>} color("primary") - Selection background, scrollbar and checkbox and radio accent color
-/// @require {Variable<Color>} variant("primary", "color") - Selection text color
-/// @require {Variable<Color>} variant("primary", "readable") - Link color
 @mixin use-base() {
     @include module.define-module("base") {
         $direction: module.var("document", "direction");
@@ -53,6 +53,10 @@
         $strong-weight: module.var("text", "strong-weight");
         $decorated-weight: module.var("text", "decorated-weight");
 
+        $primary: module.color("primary");
+        $primary-color: module.variant("primary", "color");
+        $primary-readable: module.variant("primary", "readable");
+
         $base-color: module.variant("base", "color");
         $base-background: module.variant("base", "background");
         $base-section: module.variant("base", "section");
@@ -60,10 +64,6 @@
         $small-color: module.variant-for("text", "base", "small-color");
         $strong-color: module.variant-for("text", "base", "strong-color");
         $decorated-color: module.variant-for("text", "base", "decorated-color");
-
-        $primary: module.color("primary");
-        $primary-color: module.variant("primary", "color");
-        $primary-readable: module.variant("primary", "readable");
 
         :root {
             font-size: $font-size;

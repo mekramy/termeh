@@ -8,6 +8,7 @@
 ///
 /// @require {Variable<Length>} var("radius", "normal") - Border radius of rounded images
 /// @require {Variable<Length>} var("radius", "circle") - Border radius of circular images
+///
 /// @require {Map<String, Variable<Length>>} sizes($includes: $sizes) - Sizes to add width classes for
 @mixin use-image($sizes: ()) {
     @include module.define-module("base-image") {

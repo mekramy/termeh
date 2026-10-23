@@ -445,8 +445,8 @@
 /// @output A `::selection` rule with the text and background colors
 /// @throw If `$name` is not a string
 ///
-/// @require {Variable<Color>} variant($name, "color") - Text color of the selection
 /// @require {Variable<Color>} color($name) - Background color of the selection
+/// @require {Variable<Color>} variant($name, "color") - Text color of the selection
 @mixin selection($name) {
     $name: utility.assert-string($name, "selection", "name");
 

@@ -10,27 +10,28 @@
 /// @param {List<String>} $colors [()] - Color names to include in the color variations
 /// @output Field styles for labels, help text, required indicators, errors, and disabled states
 ///
-/// @require {Variable<Color>} variant("error", "readable") - Validation error text color
-/// @require {Variable<Color>} variant-for("input", "base", "meta") - Help text color
-/// @require {Variable<Color>} variant-for("input", "base", "accent-readable") - Required-field indicator color
 /// @require {Variable<Length>} var("gap", "micro") - Spacing between field contents
 /// @require {Variable<Length>} var("gap", "macro") - Bottom margin after each field
 /// @require {Variable<FontWeight>} var("text", "strong-weight") - Required-field indicator weight
 /// @require {Variable<Number>} var("control", "disabled-opacity") - Disabled content opacity
+/// @require {Variable<Color>} variant("error", "readable") - Validation error text color
+/// @require {Variable<Color>} variant-for("input", "base", "meta") - Help text color
+/// @require {Variable<Color>} variant-for("input", "base", "accent-readable") - Required-field indicator color
+///
 /// @require {Map<String, Variable<Color>>} colors($includes: $colors) - Colors to add color classes for
 /// @require {Variable<Color>} variant-for("input", $name, "accent-readable") - Required-field indicator color for each color variation
 @mixin use-field($colors: ()) {
     @include resolvers.register("input");
 
     @include module.define-module("form-field") {
-        $error-color: module.variant("error", "readable");
-        $meta-color: module.variant-for("input", "base", "meta");
-        $accent-color: module.variant-for("input", "base", "accent-readable");
-
         $gap-micro: module.var("gap", "micro");
         $gap-macro: module.var("gap", "macro");
         $strong-weight: module.var("text", "strong-weight");
         $disabled-opacity: module.var("control", "disabled-opacity");
+
+        $error-color: module.variant("error", "readable");
+        $meta-color: module.variant-for("input", "base", "meta");
+        $accent-color: module.variant-for("input", "base", "accent-readable");
 
         .field {
             display: block;

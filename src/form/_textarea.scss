@@ -11,16 +11,17 @@
 /// @param {List<String>} $colors [()] - Color names to include in the color variations
 /// @output Textarea styles for focus, invalid, disabled, and color variation states
 ///
-/// @require {Variable<Color>} color("error") - Invalid-state border color
 /// @require {Variable<Length>} var("gap", "micro") - Unit used to calculate textarea padding
 /// @require {Variable<Length>} var("radius", "normal") - Textarea border radius
 /// @require {Variable<Length>} var("line-height", "normal") - Text line height
+/// @require {Variable<Length>} var("input", "placeholder-size") - Placeholder font size
+/// @require {Variable<FontWeight>} var("input", "placeholder-weight") - Placeholder font weight
+/// @require {Variable<Color>} color("error") - Invalid-state border color
 /// @require {Variable<Color>} variant-for("input", "base", "accent") - Focus border and scrollbar accent color
 /// @require {Variable<Color>} variant-for("input", "base", "background") - Textarea background color
 /// @require {Variable<Color>} variant-for("input", "base", "border") - Textarea border color
 /// @require {Variable<Color>} variant-for("input", "base", "placeholder") - Placeholder text color
-/// @require {Variable<Length>} var("input", "placeholder-size") - Placeholder font size
-/// @require {Variable<FontWeight>} var("input", "placeholder-weight") - Placeholder font weight
+///
 /// @require {Map<String, Variable<Color>>} colors($includes: $colors) - Colors to add color classes for
 /// @require {Variable<Color>} variant-for("input", $name, "accent") - Focus border and scrollbar accent color for each color variation
 @mixin use-textarea($colors: ()) {
@@ -28,19 +29,19 @@
     @include resolvers.register("input");
 
     @include module.define-module("form-textarea") {
-        $error: module.color("error");
-
         $gap-micro: module.var("gap", "micro");
         $radius-normal: module.var("radius", "normal");
         $line-height: module.var("line-height", "normal");
+
+        $placeholder-size: module.var("input", "placeholder-size");
+        $placeholder-weight: module.var("input", "placeholder-weight");
+
+        $error: module.color("error");
 
         $accent: module.variant-for("input", "base", "accent");
         $background-color: module.variant-for("input", "base", "background");
         $border-color: module.variant-for("input", "base", "border");
         $placeholder-color: module.variant-for("input", "base", "placeholder");
-
-        $placeholder-size: module.var("input", "placeholder-size");
-        $placeholder-weight: module.var("input", "placeholder-weight");
 
         textarea {
             @include module.control();
