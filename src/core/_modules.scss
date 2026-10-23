@@ -11,11 +11,41 @@ $-modules: () !default;
 /// @output The content block, once, at the root level
 /// @throw If `$module` is not a string or a required module is not registered
 @mixin define-module($module, $requirements...) {
-    $module: utility.assert-string($module, "present-module", "module");
+    $module: utility.assert-string($module, "define-module", "module");
 
     @if list.index($-modules, $module) {
         @warn "Module `#{$module}` has already been presented!";
     } @else {
+        // Check for missing required modules
+        $missing: ();
+        @each $requirement in $requirements {
+            @if utility.is-string($requirement) and not list.index($-modules, $requirement) {
+                $missing: list.append($missing, $requirement, comma);
+            }
+        }
+        @if list.length($missing) > 0 {
+            @error "Module #{$module} requires [#{$missing}] modules!";
+        }
+
+        // Register the module and run the content
+        $-modules: list.append($-modules, $module) !global;
+        @at-root {
+            @content;
+        }
+    }
+}
+
+/// Registers a module silently, without warning if it has already been presented.
+/// If the module is already registered, it only checks for missing requirements and outputs nothing.
+///
+/// @param {String} $module - Module name
+/// @param {Arglist} $requirements - Names of the modules that must be registered first; values that are not strings are ignored
+/// @output The content block, once, at the root level
+/// @throw If `$module` is not a string or a required module is not registered
+@mixin define-module-silent($module, $requirements...) {
+    $module: utility.assert-string($module, "define-module-silent", "module");
+
+    @if not list.index($-modules, $module) {
         // Check for missing required modules
         $missing: ();
         @each $requirement in $requirements {

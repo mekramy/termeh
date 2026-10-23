@@ -21,6 +21,8 @@
 /// @require {Variable<Color>} variant-for("input", "base", "background") - Textarea background color
 /// @require {Variable<Color>} variant-for("input", "base", "border") - Textarea border color
 /// @require {Variable<Color>} variant-for("input", "base", "placeholder") - Placeholder text color
+/// @require {Variable<Color>} variant-for("input", "base", "disabled-color") - Disabled text color
+/// @require {Variable<Color>} variant-for("input", "base", "disabled-border") - Disabled border color
 ///
 /// @require {Map<String, Variable<Color>>} colors($includes: $colors) - Colors to add color classes for
 /// @require {Variable<Color>} variant-for("input", $name, "accent") - Focus border and scrollbar accent color for each color variation
@@ -42,6 +44,9 @@
         $background-color: module.variant-for("input", "base", "background");
         $border-color: module.variant-for("input", "base", "border");
         $placeholder-color: module.variant-for("input", "base", "placeholder");
+
+        $disabled-color: module.variant-for("input", "base", "disabled-color");
+        $disabled-border: module.variant-for("input", "base", "disabled-border");
 
         textarea {
             @include module.control();
@@ -97,7 +102,13 @@
             }
 
             @include module.is-disabled() {
-                @include module.disabled();
+                resize: none;
+
+                &::placeholder {
+                    color: $disabled-color;
+                }
+
+                @include module.disabled($disabled-color, transparent, $disabled-border);
             }
         }
     }

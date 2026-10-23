@@ -356,7 +356,7 @@
     $h-padding: variable.var("control", "h-padding");
     $v-padding: variable.var("control", "v-padding");
 
-    @return $h-padding $v-padding;
+    @return $v-padding $h-padding;
 }
 
 /// Returns the padding of an inline element.
@@ -419,17 +419,14 @@
 
 /// Styles an element as disabled.
 ///
+/// @param {Variable<Color> | Color | null} $color - Disabled text color
+/// @param {Variable<Color> | Color | null} $background - Disabled background color
+/// @param {Variable<Color> | Color | null} $border - Disabled border color
 /// @output Declarations that block interaction and set the opacity, text color, background color and border color
 ///
 /// @require {Variable<Number>} var("control", "disabled-opacity") - Opacity of disabled controls
-/// @require {Variable<Color>} variant-for("input", "base", "disabled-color") - Text color of disabled inputs
-/// @require {Variable<Color>} variant-for("input", "base", "disabled-background") - Background color of disabled inputs
-/// @require {Variable<Color>} variant-for("input", "base", "disabled-border") - Border color of disabled inputs
-@mixin disabled() {
+@mixin disabled($color, $background, $border) {
     $opacity: variable.var("control", "disabled-opacity");
-    $color: variable.variant-for("input", "base", "disabled-color");
-    $background: variable.variant-for("input", "base", "disabled-background");
-    $border: variable.variant-for("input", "base", "disabled-border");
 
     user-select: none;
     pointer-events: none;

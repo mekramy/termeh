@@ -21,6 +21,8 @@
 /// @require {Variable<Color>} variant-for("input", "base", "background") - Input wrapper background color
 /// @require {Variable<Color>} variant-for("input", "base", "border") - Input wrapper border color
 /// @require {Variable<Color>} variant-for("input", "base", "placeholder") - Placeholder text color
+/// @require {Variable<Color>} variant-for("input", "base", "disabled-color") - Disabled text color
+/// @require {Variable<Color>} variant-for("input", "base", "disabled-border") - Disabled border color
 ///
 /// @require {Map<String, Variable<Length>>} gaps($includes: $gaps) - Gap entries used to generate gap variations
 /// @require {Map<String, Variable<Color>>} colors($includes: $colors) - Colors to add color classes for
@@ -42,6 +44,9 @@
         $background-color: module.variant-for("input", "base", "background");
         $border-color: module.variant-for("input", "base", "border");
         $placeholder-color: module.variant-for("input", "base", "placeholder");
+
+        $disabled-color: module.variant-for("input", "base", "disabled-color");
+        $disabled-border: module.variant-for("input", "base", "disabled-border");
 
         @include animation.shake();
 
@@ -126,7 +131,11 @@
             }
 
             @include module.is-disabled() {
-                @include module.disabled();
+                input::placeholder {
+                    color: $disabled-color;
+                }
+
+                @include module.disabled($disabled-color, transparent, $disabled-border);
             }
         }
     }

@@ -17,6 +17,7 @@
 /// @require {Variable<Color>} variant("error", "readable") - Validation error text color
 /// @require {Variable<Color>} variant-for("input", "base", "meta") - Help text color
 /// @require {Variable<Color>} variant-for("input", "base", "accent-readable") - Required-field indicator color
+/// @require {Variable<Color>} variant-for("input", "base", "disabled-color") - Disabled text color
 ///
 /// @require {Map<String, Variable<Color>>} colors($includes: $colors) - Colors to add color classes for
 /// @require {Variable<Color>} variant-for("input", $name, "accent-readable") - Required-field indicator color for each color variation
@@ -32,6 +33,7 @@
         $error-color: module.variant("error", "readable");
         $meta-color: module.variant-for("input", "base", "meta");
         $accent-color: module.variant-for("input", "base", "accent-readable");
+        $disabled-color: module.variant-for("input", "base", "disabled-color");
 
         .field {
             display: block;
@@ -96,6 +98,10 @@
                 .help,
                 .error {
                     opacity: $disabled-opacity;
+                }
+
+                .help {
+                    color: $disabled-color;
                 }
             }
         }

@@ -26,6 +26,7 @@
 /// @require {Variable<Color>} variant-for("input", "base", "placeholder") - Placeholder and picker-icon color
 /// @require {Variable<Color>} variant-for("input", "base", "hover-background") - Hovered option background color
 /// @require {Variable<Color>} variant-for("input", "base", "disabled-color") - Disabled option text color
+/// @require {Variable<Color>} variant-for("input", "base", "disabled-border") - Disabled option border color
 ///
 /// @require {Map<String, Variable<Color>>} colors($includes: $colors) - Colors to add color classes for
 /// @require {Variable<Color>} variant-for("input", $name, "accent") - Focus background and border color for each color variation
@@ -53,7 +54,9 @@
         $border-color: module.variant-for("input", "base", "border");
         $placeholder-color: module.variant-for("input", "base", "placeholder");
         $hover-background: module.variant-for("input", "base", "hover-background");
+
         $disabled-color: module.variant-for("input", "base", "disabled-color");
+        $disabled-border: module.variant-for("input", "base", "disabled-border");
 
         select {
             @include module.control();
@@ -183,7 +186,15 @@
             }
 
             @include module.is-disabled() {
-                @include module.disabled();
+                &::picker-icon {
+                    color: $disabled-color;
+                }
+
+                &::placeholder {
+                    color: $disabled-color;
+                }
+
+                @include module.disabled($disabled-color, transparent, $disabled-border);
             }
         }
     }
