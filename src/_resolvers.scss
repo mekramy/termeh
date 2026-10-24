@@ -1,109 +1,54 @@
-@use "sass:meta";
-@use "sass:list";
 @use "sass:color";
-@use "core/module.scss";
-
-$-defined: () !default;
-@mixin register($resolver) {
-    @if not list.index($-defined, $resolver) {
-        $-defined: list.append($-defined, $resolver) !global;
-
-        @if $resolver == "base" {
-            @include module.define-global-resolver(meta.get-function("base-resolver"));
-        } @else if $resolver == "variant" {
-            @include module.define-global-resolver(meta.get-function("variant-resolver"));
-        } @else if $resolver == "table" {
-            @include module.define-component-resolver("table", meta.get-function("table-resolver"));
-        } @else if $resolver == "box" {
-            @include module.define-component-resolver("box", meta.get-function("box-resolver"));
-        } @else if $resolver == "input" {
-            @include module.define-component-resolver("input", meta.get-function("input-resolver"));
-        }
-    }
-}
+@use "core/module";
 
 @function base-resolver($scheme, $palette, $is-light, $base, $color, $variant) {
-    @if $palette != "base" {
-        @return null;
-    } @else if $variant == "background" {
-        @return module.color("base");
-    } @else if $variant == "color" {
-        @return #0d1b2a;
-    } @else if $variant == "section" {
-        @return #f8f9fa;
-    } @else if $variant == "separator" {
-        @return #e0e4eb;
-    } @else if $variant == "overlay-color" {
-        @return module.variant("base", "color");
-    } @else if $variant == "overlay-background" {
-        @return module.color("base");
-    }
-
-    @return null;
-}
-
-@function variant-resolver($scheme, $palette, $is-light, $base, $color, $variant) {
     @if $palette == "base" {
-        @return null;
-    } @else if $variant == "color" {
-        $v: module.iif($is-light, "900", "100");
-        @return color.mix($base, module.palette($color, $v), 95%);
-    } @else if $variant == "active" {
-        $v: module.iif($is-light, "700", "300");
-        @return module.palette($color, $v);
-    } @else if $variant == "readable" {
-        $v: module.iif($is-light, "700", "200");
-        @return color.mix($base, module.palette($color, $v), 10%);
-    } @else if $variant == "decorator" {
-        $v: module.iif($is-light, "800", "200");
-        @return color.mix($base, module.palette($color, $v), 40%);
-    } @else if $variant == "light" {
-        $v: module.iif($is-light, "800", "200");
-        @return color.mix($base, module.palette($color, $v), 85%);
-    } @else if $variant == "light-active" {
-        $v: module.iif($is-light, "800", "200");
-        @return color.mix($base, module.palette($color, $v), 70%);
-    } @else if $variant == "mute" {
-        $v: module.iif($is-light, "900", "100");
-        @return color.mix($base, module.palette($color, $v), 50%);
-    } @else if $variant == "mute-active" {
-        $v: module.iif($is-light, "900", "100");
-        @return color.mix($base, module.palette($color, $v), 5%);
-    }
-
-    @return null;
-}
-
-@function table-resolver($scheme, $palette, $is-light, $base, $color, $variant) {
-    $shade: module.color("shade");
-    $primary: module.color("primary");
-    $primary-readable: module.variant("primary", "readable");
-
-    @if $palette == "base" {
-        @if $variant == "decorator" {
-            @return $primary;
-        } @else if $variant == "hover-background" {
-            @return module.alpha($shade, 0.15);
-        } @else if $variant == "striped-background" {
-            @return module.variant("base", "section");
-        } @else if $variant == "sorted-color" {
-            @return $primary-readable;
-        } @else if $variant == "sorted-background" {
-            @return module.alpha($primary, 0.05);
-        } @else if $variant == "row-separator" {
+        @if $variant == "foreground" {
+            @return #0d1b2a;
+        } @else if $variant == "background" {
+            @return module.color("base");
+        } @else if $variant == "separator" {
+            @return #e0e4eb;
+        } @else if $variant == "surface" {
+            @return #f8f9fa;
+        } @else if $variant == "surface-hover" {
+            @return #eef0f3;
+        } @else if $variant == "disabled-border" {
             @return module.variant("base", "separator");
-        } @else if $variant == "column-separator" {
-            @return transparent;
-        } @else if $variant == "section-separator" {
-            @return module.alpha($shade, 0.5);
+        } @else if $variant == "disabled-foreground" {
+            @return module.variant("base", "separator");
+        } @else if $variant == "disabled-background" {
+            @return module.variant("base", "surface");
+        } @else if $variant == "overlay-foreground" {
+            @return module.variant("base", "foreground");
+        } @else if $variant == "overlay-background" {
+            @return module.color("base");
         }
     } @else {
-        @if $variant == "decorator" {
-            @return $color;
-        } @else if $variant == "sorted-color" {
-            @return module.variant($palette, "readable");
-        } @else if $variant == "sorted-background" {
-            @return module.alpha($color, 0.05);
+        @if $variant == "text" {
+            $v: module.iif($is-light, "700", "200");
+            @return color.mix($base, module.palette($color, $v), 10%);
+        } @else if $variant == "foreground" {
+            $v: module.iif($is-light, "900", "100");
+            @return color.mix($base, module.palette($color, $v), 95%);
+        } @else if $variant == "decorator" {
+            $v: module.iif($is-light, "800", "200");
+            @return color.mix($base, module.palette($color, $v), 40%);
+        } @else if $variant == "hover" {
+            $v: module.iif($is-light, "700", "300");
+            @return module.palette($color, $v);
+        } @else if $variant == "light" {
+            $v: module.iif($is-light, "800", "200");
+            @return color.mix($base, module.palette($color, $v), 85%);
+        } @else if $variant == "light-hover" {
+            $v: module.iif($is-light, "800", "200");
+            @return color.mix($base, module.palette($color, $v), 70%);
+        } @else if $variant == "muted-text" {
+            $v: module.iif($is-light, "900", "100");
+            @return color.mix($base, module.palette($color, $v), 50%);
+        } @else if $variant == "muted-text-hover" {
+            $v: module.iif($is-light, "900", "100");
+            @return color.mix($base, module.palette($color, $v), 5%);
         }
     }
 
@@ -113,50 +58,84 @@ $-defined: () !default;
 @function box-resolver($scheme, $palette, $is-light, $base, $color, $variant) {
     @if $variant == "background" {
         @return module.color("base");
-    } @else if $variant == "section" {
-        @return module.variant("base", "section");
+    } @else if $variant == "surface" {
+        @return module.variant("base", "surface");
     } @else if $variant == "separator" {
         @return module.variant("base", "separator");
-    } @else if $variant == "overlay-color" {
-        @return module.variant("base", "color");
+    } @else if $variant == "overlay-foreground" {
+        @return module.variant("base", "overlay-foreground");
     } @else if $variant == "overlay-background" {
-        @return module.color("base");
+        @return module.variant("base", "overlay-background");
+    }
+
+    @return null;
+}
+
+@function table-resolver($scheme, $palette, $is-light, $base, $color, $variant) {
+    @if $palette != "base" {
+        @if $variant == "decorator" {
+            @return $color;
+        } @else if $variant == "sorted-text" {
+            @return module.variant($palette, "text");
+        } @else if $variant == "sorted-background" {
+            @return module.alpha($color, 0.05);
+        }
+    }
+
+    @if $variant == "decorator" {
+        @return module.color("primary");
+    } @else if $variant == "sorted-text" {
+        @return module.variant("primary", "text");
+    } @else if $variant == "sorted-background" {
+        @return module.alpha(module.color("primary"), 0.05);
+    } @else if $variant == "striped-background" {
+        @return module.variant("base", "surface");
+    } @else if $variant == "hover-background" {
+        @return module.variant("base", "surface-hover");
+    } @else if $variant == "row-separator" {
+        @return module.variant("base", "separator");
+    } @else if $variant == "column-separator" {
+        @return transparent;
+    } @else if $variant == "section-separator" {
+        @return module.alpha(module.color("shade"), 0.35);
     }
 
     @return null;
 }
 
 @function input-resolver($scheme, $palette, $is-light, $base, $color, $variant) {
+    @if $palette != "base" {
+        @if $variant == "accent" {
+            @return $color;
+        } @else if $variant == "accent-text" {
+            @return module.variant($palette, "text");
+        } @else if $variant == "accent-foreground" {
+            @return module.variant($palette, "foreground");
+        }
+    }
+
     @if $variant == "accent" {
-        @return module.iif($palette == "base", module.color("primary"), $color);
-    } @else if $variant == "accent-color" {
-        @return module.iif(
-            $palette == "base",
-            module.variant("primary", "color"),
-            module.variant($palette, "color")
-        );
-    } @else if $variant == "accent-readable" {
-        @return module.iif(
-            $palette == "base",
-            module.variant("primary", "readable"),
-            module.variant($palette, "readable")
-        );
+        @return module.color("primary");
+    } @else if $variant == "accent-text" {
+        @return module.variant("primary", "text");
+    } @else if $variant == "accent-foreground" {
+        @return module.variant("primary", "foreground");
     } @else if $variant == "meta" {
-        @return module.variant("shade", "readable");
+        @return module.variant("shade", "text");
     } @else if $variant == "placeholder" {
-        @return module.color("shade");
+        @return module.variant("shade", "light");
     } @else if $variant == "border" {
         @return module.variant("base", "separator");
     } @else if $variant == "background" {
         @return module.iif($is-light, white, $base);
     } @else if $variant == "hover-background" {
-        @return module.variant("base", "section");
-    } @else if $variant == "disabled-color" {
-        @return module.variant("base", "separator");
+        @return module.variant("base", "surface");
     } @else if $variant == "disabled-border" {
-        @return module.variant("base", "separator");
+        @return module.variant("base", "disabled-border");
+    } @else if $variant == "disabled-foreground" {
+        @return module.variant("base", "disabled-foreground");
     } @else if $variant == "disabled-background" {
-        @return module.variant("base", "section");
+        @return transparent;
     }
 
     @return null;

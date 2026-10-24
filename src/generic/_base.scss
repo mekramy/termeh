@@ -7,10 +7,13 @@
 ///
 /// @require {Variable<Direction>} var("document", "direction") - Document text direction
 /// @require {Variable<Length>} var("document", "min-width") - Document minimum width
+///
 /// @require {Variable<Length>} var("gap", "micro") - Space between list items
 /// @require {Variable<Length>} var("gap", "macro") - Space between blocks
+///
 /// @require {Variable<Length>} var("radius", "normal") - Border radius of blockquotes
 /// @require {Variable<LineHeight>} var("line-height", "normal") - Document line height
+///
 /// @require {Variable<FontFamily>} var("text", "font-family") - Document font family
 /// @require {Variable<Length>} var("text", "font-size") - Document font size
 /// @require {Variable<FontWeight>} var("text", "font-weight") - Document font weight
@@ -21,16 +24,18 @@
 /// @require {Variable<FontWeight>} var("text", "small-weight") - Font weight of `small`, `sub` and `sup`
 /// @require {Variable<FontWeight>} var("text", "strong-weight") - Font weight of `strong`, `b` and table headers
 /// @require {Variable<FontWeight>} var("text", "decorated-weight") - Font weight of `u`, `ins`, `s` and `del`
+///
 /// @require {Variable<Color>} color("primary") - Selection background, scrollbar and checkbox and radio accent color
-/// @require {Variable<Color>} variant("primary", "color") - Selection text color
-/// @require {Variable<Color>} variant("primary", "readable") - Link color
-/// @require {Variable<Color>} variant("base", "color") - Document text color
+/// @require {Variable<Color>} variant("primary", "text") - Link color
+/// @require {Variable<Color>} variant("primary", "foreground") - Selection text color
+///
+/// @require {Variable<Color>} variant("base", "foreground") - Document text color
 /// @require {Variable<Color>} variant("base", "background") - Document background color
-/// @require {Variable<Color>} variant("base", "section") - Background of blockquotes, code and preformatted text
+/// @require {Variable<Color>} variant("base", "surface") - Background of blockquotes, code and preformatted text
 /// @require {Variable<Color>} variant("base", "separator") - Color of horizontal rules and list markers
-/// @require {Variable<Color>} variant-for("text", "base", "small-color") - Text color of `small`, `sub` and `sup`
-/// @require {Variable<Color>} variant-for("text", "base", "strong-color") - Text color of `strong`, `b` and table headers
-/// @require {Variable<Color>} variant-for("text", "base", "decorated-color") - Text color of `u`, `ins`, `s` and `del`
+/// @require {Variable<Color>} variant-for("text", "base", "small-text") - Text color of `small`, `sub` and `sup`
+/// @require {Variable<Color>} variant-for("text", "base", "strong-text") - Text color of `strong`, `b` and table headers
+/// @require {Variable<Color>} variant-for("text", "base", "decorated-text") - Text color of `u`, `ins`, `s` and `del`
 @mixin use-base() {
     @include module.define-module("base") {
         $direction: module.var("document", "direction");
@@ -54,23 +59,23 @@
         $decorated-weight: module.var("text", "decorated-weight");
 
         $primary: module.color("primary");
-        $primary-color: module.variant("primary", "color");
-        $primary-readable: module.variant("primary", "readable");
+        $primary-text: module.variant("primary", "text");
+        $primary-foreground: module.variant("primary", "foreground");
 
-        $base-color: module.variant("base", "color");
-        $base-background: module.variant("base", "background");
-        $base-section: module.variant("base", "section");
-        $base-separator: module.variant("base", "separator");
-        $small-color: module.variant-for("text", "base", "small-color");
-        $strong-color: module.variant-for("text", "base", "strong-color");
-        $decorated-color: module.variant-for("text", "base", "decorated-color");
+        $foreground: module.variant("base", "foreground");
+        $background: module.variant("base", "background");
+        $surface: module.variant("base", "surface");
+        $separator: module.variant("base", "separator");
+        $small-text: module.variant-for("text", "base", "small-text");
+        $strong-text: module.variant-for("text", "base", "strong-text");
+        $decorated-text: module.variant-for("text", "base", "decorated-text");
 
         :root {
             font-size: $font-size;
         }
 
         ::selection {
-            color: $primary-color;
+            color: $primary-foreground;
             background-color: $primary;
         }
 
@@ -87,8 +92,8 @@
             text-rendering: optimizelegibility;
             -moz-osx-font-smoothing: grayscale;
             -webkit-font-smoothing: antialiased;
-            color: $base-color;
-            background-color: $base-background;
+            color: $foreground;
+            background-color: $background;
 
             @include module.scrollable($primary);
         }
@@ -126,14 +131,14 @@
         small,
         sub,
         sup {
+            color: $small-text;
             font-size: $small-size;
             font-weight: $small-weight;
-            color: $small-color;
         }
 
         strong,
         b {
-            color: $strong-color;
+            color: $strong-text;
             font-weight: $strong-weight;
         }
 
@@ -141,17 +146,17 @@
         ins,
         s,
         del {
-            color: $decorated-color;
+            color: $decorated-text;
             font-weight: $decorated-weight;
         }
 
         a {
             cursor: pointer;
             text-decoration: none;
-            color: $primary-readable;
+            color: $primary-text;
 
             strong {
-                color: $primary-readable;
+                color: $primary-text;
             }
 
             &:visited {
@@ -168,7 +173,7 @@
             display: block;
             border: none;
             height: 1px;
-            background-color: $base-separator;
+            background-color: $separator;
 
             @include module.marged() {
                 margin: $gap-macro 0;
@@ -201,7 +206,7 @@
             padding: $gap-macro;
             margin: $gap-macro 0;
             border-radius: $radius-normal;
-            background-color: $base-section;
+            background-color: $surface;
         }
 
         code,
@@ -211,7 +216,7 @@
             font-size: $mono-size;
             font-family: $mono-family;
             font-weight: $mono-weight;
-            background-color: $base-section;
+            background-color: $surface;
             -moz-osx-font-smoothing: auto;
             -webkit-font-smoothing: auto;
         }
@@ -234,7 +239,6 @@
 
         table {
             th {
-                color: $strong-color;
                 font-weight: $strong-weight;
             }
 
@@ -268,7 +272,7 @@
                 content: "—";
                 position: absolute;
                 right: 0;
-                color: $base-separator;
+                color: $separator;
             }
         }
     }

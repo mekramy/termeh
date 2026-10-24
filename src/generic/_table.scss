@@ -1,5 +1,4 @@
 @use "sass:meta";
-@use "../resolvers";
 @use "../core/module";
 
 /// Applies table styles and color classes.
@@ -8,48 +7,49 @@
 /// @param {List<String>} $colors [()] - Color names to add color classes for; all defined colors when empty
 /// @output The table styles, emitted once
 ///
-/// @require {Variable<FontWeight>} var("table", "strong-weight") [var("text", "strong-weight")] - Font weight of table headers
+/// @require {Variable<FontWeight>} var("text", "strong-weight") - Font weight of table headers
+///
 /// @require {Variable<Color>} color("primary") - Scrollbar color
-/// @require {Variable<Color>} variant-for("table", "base", "color") - Text color
+///
+/// @require {Variable<Color>} variant-for("table", "base", "foreground") - Text color
 /// @require {Variable<Color>} variant-for("table", "base", "background") - Row background
 /// @require {Variable<Color>} variant-for("table", "base", "decorator") - Color of the sort direction marks
-/// @require {Variable<Color>} variant-for("table", "base", "hover-background") - Background of hovered rows
-/// @require {Variable<Color>} variant-for("table", "base", "striped-background") - Background of even rows
-/// @require {Variable<Color>} variant-for("table", "base", "sorted-color") - Text color of sorted header cells
+/// @require {Variable<Color>} variant-for("table", "base", "sorted-text") - Text color of sorted header cells
+///
 /// @require {Variable<Color>} variant-for("table", "base", "sorted-background") - Background of sorted columns
+/// @require {Variable<Color>} variant-for("table", "base", "striped-background") - Background of even rows
+/// @require {Variable<Color>} variant-for("table", "base", "hover-background") - Background of hovered rows
+///
 /// @require {Variable<Color>} variant-for("table", "base", "row-separator") - Row separator color
 /// @require {Variable<Color>} variant-for("table", "base", "column-separator") - Column separator color
 /// @require {Variable<Color>} variant-for("table", "base", "section-separator") - Header and footer separator color
 ///
-/// @require {Map<String, Variable<Color>>} colors($includes: $colors) - Colors to add color classes for
-/// @require {Variable<Color>} variant($name, "readable") - Text color of sorted header cells of the color class
-/// @require {Variable<Color>} variant-for("table", $name, "color") - Text color of the color class
-/// @require {Variable<Color>} variant-for("table", $name, "background") - Row background of the color class
-/// @require {Variable<Color>} variant-for("table", $name, "decorator") - Color of the sort direction marks of the color class
-/// @require {Variable<Color>} variant-for("table", $name, "hover-background") - Background of hovered rows of the color class
-/// @require {Variable<Color>} variant-for("table", $name, "striped-background") - Background of even rows of the color class
-/// @require {Variable<Color>} variant-for("table", $name, "sorted-color") - Text color of sorted header cells of the color class
-/// @require {Variable<Color>} variant-for("table", $name, "sorted-background") - Background of sorted columns of the color class
-/// @require {Variable<Color>} variant-for("table", $name, "row-separator") - Row separator color of the color class
-/// @require {Variable<Color>} variant-for("table", $name, "column-separator") - Column separator color of the color class
-/// @require {Variable<Color>} variant-for("table", $name, "section-separator") - Header and footer separator color of the color class
+/// @require {Variable<Color>} variant-for("table", $palette, "foreground") - Text color of the color class
+/// @require {Variable<Color>} variant-for("table", $palette, "background") - Row background of the color class
+/// @require {Variable<Color>} variant-for("table", $palette, "decorator") - Color of the sort direction marks of the color class
+/// @require {Variable<Color>} variant-for("table", $palette, "sorted-text") - Text color of sorted header cells of the color class
+///
+/// @require {Variable<Color>} variant-for("table", $palette, "sorted-background") - Background of sorted columns of the color class
+/// @require {Variable<Color>} variant-for("table", $palette, "striped-background") - Background of even rows of the color class
+/// @require {Variable<Color>} variant-for("table", $palette, "hover-background") - Background of hovered rows of the color class
+///
+/// @require {Variable<Color>} variant-for("table", $palette, "row-separator") - Row separator color of the color class
+/// @require {Variable<Color>} variant-for("table", $palette, "column-separator") - Column separator color of the color class
+/// @require {Variable<Color>} variant-for("table", $palette, "section-separator") - Header and footer separator color of the color class
 @mixin use-table($colors: ()) {
-    @include resolvers.register("table");
-    $-strong-weight: module.var("text", "strong-weight");
-
     @include module.define-module("base-table") {
-        $strong-weight: module.var("table", "strong-weight", $-strong-weight);
+        $strong-weight: module.var("text", "strong-weight");
 
         $primary: module.color("primary");
 
-        $color: module.variant-for("table", "base", "color");
+        $foreground: module.variant-for("table", "base", "foreground");
         $background: module.variant-for("table", "base", "background");
-        $indicator: module.variant-for("table", "base", "decorator");
+        $decorator: module.variant-for("table", "base", "decorator");
+        $sorted-text: module.variant-for("table", "base", "sorted-text");
 
-        $hover-background: module.variant-for("table", "base", "hover-background");
-        $striped-background: module.variant-for("table", "base", "striped-background");
-        $sorted-color: module.variant-for("table", "base", "sorted-color");
         $sorted-background: module.variant-for("table", "base", "sorted-background");
+        $striped-background: module.variant-for("table", "base", "striped-background");
+        $hover-background: module.variant-for("table", "base", "hover-background");
 
         $row-separator: module.variant-for("table", "base", "row-separator");
         $column-separator: module.variant-for("table", "base", "column-separator");
@@ -86,7 +86,7 @@
                     th {
                         width: 1px;
                         vertical-align: middle;
-                        color: $color;
+                        color: $foreground;
                         font-weight: $strong-weight;
                         padding: module.inline-padding();
                         @include module.transition(all);
@@ -119,15 +119,15 @@
                         }
 
                         &.is-sorted {
-                            color: $sorted-color;
+                            color: $sorted-text;
                             background-color: $sorted-background;
 
                             &.is-asc {
-                                border-top: 1px solid $indicator;
+                                border-top: 1px solid $decorator;
                             }
 
                             &.is-desc {
-                                border-bottom: 1px solid $indicator;
+                                border-bottom: 1px solid $decorator;
                             }
                         }
 
@@ -152,7 +152,7 @@
                         width: 1px;
                         font-weight: inherit;
                         vertical-align: middle;
-                        color: $color;
+                        color: $foreground;
                         padding: module.inline-padding();
                         @include module.transition(all);
 
@@ -230,14 +230,14 @@
             }
 
             @each $name, $palette in module.colors($includes: $colors) {
-                $-color: module.variant-for("table", $name, "color");
+                $-foreground: module.variant-for("table", $name, "foreground");
                 $-background: module.variant-for("table", $name, "background");
-                $-indicator: module.variant-for("table", $name, "decorator", $palette);
+                $-decorator: module.variant-for("table", $name, "decorator", $palette);
+                $-sorted-text: module.variant-for("table", $name, "sorted-text");
 
-                $-hover-background: module.variant-for("table", $name, "hover-background");
-                $-striped-background: module.variant-for("table", $name, "striped-background");
-                $-sorted-color: module.variant-for("table", $name, "sorted-color");
                 $-sorted-background: module.variant-for("table", $name, "sorted-background");
+                $-striped-background: module.variant-for("table", $name, "striped-background");
+                $-hover-background: module.variant-for("table", $name, "hover-background");
 
                 $-row-separator: module.variant-for("table", $name, "row-separator");
                 $-column-separator: module.variant-for("table", $name, "column-separator");
@@ -257,22 +257,22 @@
                             }
 
                             th {
-                                color: $-color;
+                                color: $-foreground;
 
                                 &:not(:first-child) {
                                     border-inline-start-color: $-column-separator;
                                 }
 
                                 &.is-sorted {
-                                    color: $-sorted-color;
+                                    color: $-sorted-text;
                                     background-color: $-sorted-background;
 
                                     &.is-asc {
-                                        border-top-color: $-indicator;
+                                        border-top-color: $-decorator;
                                     }
 
                                     &.is-desc {
-                                        border-bottom-color: $-indicator;
+                                        border-bottom-color: $-decorator;
                                     }
                                 }
                             }
@@ -289,7 +289,7 @@
                             }
 
                             td {
-                                color: $-color;
+                                color: $-foreground;
 
                                 &:not(:first-child) {
                                     border-inline-start-color: $-column-separator;

@@ -74,8 +74,8 @@
 /// @output A `.is-<name>-size` class for each size
 @mixin use-text-sizes($sizes: ()) {
     @include module.define-module("text-sizes") {
-        @each $label, $size in module.sizes($includes: $sizes) {
-            .is-#{$label}-size {
+        @each $name, $size in module.sizes($includes: $sizes) {
+            .is-#{$name}-size {
                 font-size: $size !important;
             }
         }
@@ -90,8 +90,8 @@
 /// @output A `.is-<name>-weight` class for each weight
 @mixin use-text-weights($weights: ()) {
     @include module.define-module("text-weights") {
-        @each $label, $weight in module.weights($includes: $weights) {
-            .is-#{$label}-weight {
+        @each $name, $weight in module.weights($includes: $weights) {
+            .is-#{$name}-weight {
                 font-weight: $weight !important;
             }
         }
@@ -106,8 +106,8 @@
 /// @output A `.is-<name>-align` class for each alignment
 @mixin use-text-aligns($aligns: ()) {
     @include module.define-module("text-aligns") {
-        @each $label, $align in module.text-aligns($includes: $aligns) {
-            .is-#{$label}-align {
+        @each $name, $align in module.text-aligns($includes: $aligns) {
+            .is-#{$name}-align {
                 text-align: $align !important;
             }
         }

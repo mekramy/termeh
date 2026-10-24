@@ -6,7 +6,7 @@
 @include module.define("document", "scroll-width", 0.75rem); // Scrollable width
 
 // Spacing
-@include module.define("gap", "micro", 8px); // Small gap within components/text
+@include module.define("gap", "micro", 0.6em); // Small gap within components/text
 @include module.define("gap", "macro", 1.6rem); // Large gap for layout structure
 
 // Border radius
@@ -62,9 +62,6 @@
 @include module.define("control", "meta-size", 0.9em); // control meta-like font size
 @include module.define("control", "meta-weight", 600); // control meta-like font weight
 @include module.define("control", "disabled-opacity", 0.65); // control disabled opacity
-
-// Table
-@include module.define("table", "strong-weight", null); // Strong content weight
 
 // Inputs
 @include module.define("input", "height", 2.8em); // Input height

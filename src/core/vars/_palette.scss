@@ -3,15 +3,15 @@
 @use "../scheme";
 @use "../utility";
 
-$-colors: () !default;
+$-palettes: () !default;
 $-overrides: () !default;
 
 @function -missing($name) {
-    @return not map.has-key($-colors, $name);
+    @return not map.has-key($-palettes, $name);
 }
 
 @function -fail($name) {
-    @return "Unknown color '#{$name}'. Available: #{utility.print(map.remove($-colors, "base"))}.";
+    @return "Unknown palette '#{$name}'. Available: #{utility.print(map.remove($-palettes, "base"))}.";
 }
 
 @function -scheme-color($scheme, $name) {
@@ -20,7 +20,7 @@ $-overrides: () !default;
         @return $color;
     }
 
-    @return map.get($-colors, $name, null, "base");
+    @return map.get($-palettes, $name, null, "base");
 }
 
 /// Defines a palette color.
@@ -32,7 +32,7 @@ $-overrides: () !default;
     $name: utility.assert-string($name, "define-palette", "name");
     $color: utility.assert-color($color, "define-palette", "color");
 
-    $-colors: utility.deep-set($-colors, $color, $name, null, "base") !global;
+    $-palettes: utility.deep-set($-palettes, $color, $name, null, "base") !global;
 }
 
 /// Sets the base color of a defined palette color for one scheme.
@@ -67,7 +67,7 @@ $-overrides: () !default;
         @error -fail($name);
     }
 
-    $-colors: utility.deep-set($-colors, $color, $name, null, $variant) !global;
+    $-palettes: utility.deep-set($-palettes, $color, $name, null, $variant) !global;
 }
 
 /// Defines a variant color of a defined palette color for one component.
@@ -86,7 +86,7 @@ $-overrides: () !default;
         @error -fail($name);
     }
 
-    $-colors: utility.deep-set($-colors, $color, $name, $component, $variant) !global;
+    $-palettes: utility.deep-set($-palettes, $color, $name, $component, $variant) !global;
 }
 
 /// Sets a variant color of a defined palette color for one scheme.
@@ -149,7 +149,7 @@ $-overrides: () !default;
         @error -fail($name);
     }
 
-    @return map.get($-colors, $name, null, "base");
+    @return map.get($-palettes, $name, null, "base");
 }
 
 /// Returns the base color of a palette color for one scheme.
@@ -180,13 +180,13 @@ $-overrides: () !default;
     $name: utility.assert-string($name, "variant-value", "name");
     $variant: utility.assert-string($variant, "variant-value", "variant");
 
-    $defined: map.get($-colors, $name, null, $variant);
+    $defined: map.get($-palettes, $name, null, $variant);
     @if $defined {
         @return $defined;
     }
 
-    $base: map.get($-colors, "base", null, "base");
-    $color: map.get($-colors, $name, null, "base");
+    $base: map.get($-palettes, "base", null, "base");
+    $color: map.get($-palettes, $name, null, "base");
     @return resolver.resolve(null, null, $name, $base, $color, $variant) or $fallback;
 }
 
@@ -204,13 +204,13 @@ $-overrides: () !default;
     $name: utility.assert-string($name, "variant-value-for", "name");
     $variant: utility.assert-string($variant, "variant-value-for", "variant");
 
-    $defined: map.get($-colors, $name, $component, $variant);
+    $defined: map.get($-palettes, $name, $component, $variant);
     @if $defined {
         @return $defined;
     }
 
-    $base: map.get($-colors, "base", null, "base");
-    $color: map.get($-colors, $name, null, "base");
+    $base: map.get($-palettes, "base", null, "base");
+    $color: map.get($-palettes, $name, null, "base");
     @return resolver.resolve(null, $component, $name, $base, $color, $variant) or $fallback;
 }
 
@@ -277,7 +277,7 @@ $-overrides: () !default;
     }
 
     $token: "palette-#{$name}";
-    $value: map.get($-colors, $name, null, "base");
+    $value: map.get($-palettes, $name, null, "base");
     $_: scheme.define-variable(null, $token, $value);
 
     @each $scheme in scheme.schemes() {
@@ -354,14 +354,14 @@ $-overrides: () !default;
 /// @param {List<String>} $excludes [null] - Color names to exclude; `"base"` and `""` when not a list
 /// @return {Map<String, Variable<Color>>} Matching colors and their CSS variables
 @function colors($includes: null, $excludes: null) {
-    $includes: utility.assert-list($includes, "colors", "includes", map.keys($-colors));
+    $includes: utility.assert-list($includes, "colors", "includes", map.keys($-palettes));
     $excludes: utility.assert-list($excludes, "colors", "excludes", ("base", ""));
 
     $result: ();
-    @each $name in map.keys($-colors) {
+    @each $name in map.keys($-palettes) {
         @if utility.should-include($name, $includes, $excludes) {
             $token: "palette-#{$name}";
-            $value: map.get($-colors, $name, null, "base");
+            $value: map.get($-palettes, $name, null, "base");
             $_: scheme.define-variable(null, $token, $value);
 
             @each $scheme in scheme.schemes() {

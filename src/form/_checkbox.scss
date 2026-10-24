@@ -1,5 +1,4 @@
 @use "../animation";
-@use "../resolvers";
 @use "../core/module";
 
 /// Applies checkbox styles.
@@ -11,42 +10,45 @@
 /// @param {List<String>} $colors [()] - Color names to include in the color variations
 /// @output Checkbox styles for default, invalid, disabled, and color variation states
 ///
-/// @require {Variable<Length>} var("input", "checkbox") - Checkbox width and height
 /// @require {Variable<Length>} var("input", "height") - Checkbox label row height
+/// @require {Variable<Length>} var("input", "checkbox") - Checkbox width and height
+///
 /// @require {Variable<Length>} var("gap", "micro") - Space between the checkbox and its label
 /// @require {Variable<Length>} var("radius", "normal") - Checkbox border radius
 /// @require {Variable<Length>} var("decorator", "size") - Checkmark stroke thickness
-/// @require {Variable<Color>} color("error") - Invalid-state checkbox background and border color
-/// @require {Variable<Color>} variant("error", "color") - Invalid-state checkmark color
-/// @require {Variable<Color>} variant-for("input", "base", "accent") - Focus and checked-state background and border color
-/// @require {Variable<Color>} variant-for("input", "base", "accent-color") - Checkmark color
-/// @require {Variable<Color>} variant-for("input", "base", "border") - Checkbox border color
-/// @require {Variable<Color>} variant-for("input", "base", "disabled-color") - Disabled label and checkmark color
-/// @require {Variable<Color>} variant-for("input", "base", "disabled-border") - Disabled checkbox border color
 ///
-/// @require {Map<String, Variable<Color>>} colors($includes: $colors) - Colors to add color classes for
-/// @require {Variable<Color>} variant-for("input", $name, "accent") - Accent color for each color variation
-/// @require {Variable<Color>} variant-for("input", $name, "accent-color") - Checkmark color for each color variation
+/// @require {Variable<Color>} color("error") - Invalid-state checkbox background and border color
+/// @require {Variable<Color>} variant("error", "foreground") - Invalid-state checkmark color
+///
+/// @require {Variable<Color>} variant-for("input", "base", "accent") - Focus and checked-state background and border color
+/// @require {Variable<Color>} variant-for("input", "base", "accent-foreground") - Checkmark color
+/// @require {Variable<Color>} variant-for("input", "base", "border") - Checkbox border color
+/// @require {Variable<Color>} variant-for("input", "base", "disabled-border") - Disabled checkbox border color
+/// @require {Variable<Color>} variant-for("input", "base", "disabled-foreground") - Disabled label and checkmark color
+/// @require {Variable<Color>} variant-for("input", "base", "disabled-background") - Disabled checkbox background color
+///
+/// @require {Variable<Color>} variant-for("input", $palette, "accent") - Accent color for each color variation
+/// @require {Variable<Color>} variant-for("input", $palette, "accent-foreground") - Checkmark color for each color variation
 @mixin use-checkbox($colors: ()) {
     @include animation.shake();
-    @include resolvers.register("input");
 
     @include module.define-module("form-checkbox") {
-        $size: module.var("input", "checkbox");
         $height: module.var("input", "height");
+        $size: module.var("input", "checkbox");
 
         $gap-micro: module.var("gap", "micro");
         $radius-normal: module.var("radius", "normal");
         $decorator-thickness: module.var("decorator", "size");
 
         $error: module.color("error");
-        $error-color: module.variant("error", "color");
+        $error-foreground: module.variant("error", "foreground");
 
         $accent: module.variant-for("input", "base", "accent");
-        $accent-color: module.variant-for("input", "base", "accent-color");
+        $accent-foreground: module.variant-for("input", "base", "accent-foreground");
         $border-color: module.variant-for("input", "base", "border");
-        $disabled-color: module.variant-for("input", "base", "disabled-color");
         $disabled-border: module.variant-for("input", "base", "disabled-border");
+        $disabled-foreground: module.variant-for("input", "base", "disabled-foreground");
+        $disabled-background: module.variant-for("input", "base", "disabled-background");
 
         label.checkbox {
             display: flex;
@@ -77,7 +79,7 @@
                     content: "";
                     width: calc($size * 0.25);
                     height: calc($size * 0.45);
-                    border: solid $accent-color;
+                    border: solid $accent-foreground;
                     border-width: 0 $decorator-thickness $decorator-thickness 0;
                     transform: scale(0) rotate(45deg);
                     @include module.delayed-transition(transform);
@@ -99,7 +101,7 @@
 
             @each $name, $palette in module.colors($includes: $colors) {
                 $-accent: module.variant-for("input", $name, "accent");
-                $-accent-color: module.variant-for("input", $name, "accent-color");
+                $-accent-color: module.variant-for("input", $name, "accent-foreground");
 
                 &.is-#{$name} input[type="checkbox"] {
                     &::after {
@@ -124,7 +126,7 @@
                     border-color: $error;
 
                     &::after {
-                        border-color: $error-color;
+                        border-color: $error-foreground;
                     }
 
                     &:checked {
@@ -134,15 +136,15 @@
             }
 
             @include module.is-disabled() {
-                color: $disabled-color;
+                color: $disabled-foreground;
                 @include module.locked();
 
                 input[type="checkbox"] {
                     border-color: $disabled-border;
-                    background-color: transparent;
+                    background-color: $disabled-background;
 
                     &::after {
-                        border-color: $disabled-color;
+                        border-color: $disabled-foreground;
                     }
                 }
             }

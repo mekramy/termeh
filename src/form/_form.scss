@@ -1,4 +1,3 @@
-@use "../resolvers";
 @use "../core/module";
 
 /// Applies form styles.
@@ -10,18 +9,15 @@
 /// @require {Variable<Length>} var("gap", "macro") - Bottom margin after the form
 /// @require {Variable<Length>} var("decorator", "size") - Loading spinner stroke width
 /// @require {Variable<Length>} var("decorator", "spinner") - Loading spinner diameter
-/// @require {Variable<Number>} var("box", "opacity") - Form background opacity
-/// @require {Variable<Filter>} var("box", "backdrop-filter") - Form backdrop filter
+///
 /// @require {Variable<Number>} var("box", "overlay-opacity") [var("overlay", "opacity")] - Loading overlay opacity
 /// @require {Variable<Filter>} var("box", "overlay-filter") [var("overlay", "filter")] - Loading overlay filter
-/// @require {Variable<Color>} variant-for("box", "base", "color") - Form text color
+///
+/// @require {Variable<Color>} variant-for("box", "base", "foreground") - Form text color
 /// @require {Variable<Color>} variant-for("box", "base", "background") - Form background color
-/// @require {Variable<Color>} variant-for("box", "base", "overlay-color") - Loading spinner color
+/// @require {Variable<Color>} variant-for("box", "base", "overlay-foreground") - Loading spinner color
 /// @require {Variable<Color>} variant-for("box", "base", "overlay-background") - Loading overlay background color
 @mixin use-form() {
-    @include resolvers.register("box");
-    @include resolvers.register("input");
-
     $-overlay-opacity: module.var("overlay", "opacity");
     $-overlay-filter: module.var("overlay", "filter");
 
@@ -30,20 +26,17 @@
         $decorator-thickness: module.var("decorator", "size");
         $spinner-size: module.var("decorator", "spinner");
 
-        $opacity: module.var("box", "opacity");
-        $backdrop-filter: module.var("box", "backdrop-filter");
         $overlay-opacity: module.var("box", "overlay-opacity", $-overlay-opacity);
         $overlay-filter: module.var("box", "overlay-filter", $-overlay-filter);
 
-        $color: module.variant-for("box", "base", "color");
-        $background-color: module.variant-for("box", "base", "background");
-        $overlay-color: module.variant-for("box", "base", "overlay-color");
+        $foreground: module.variant-for("box", "base", "foreground");
+        $background: module.variant-for("box", "base", "background");
+        $overlay-foreground: module.variant-for("box", "base", "overlay-foreground");
         $overlay-background: module.variant-for("box", "base", "overlay-background");
 
         form {
-            color: $color;
-            background-color: module.alpha($background-color, $opacity);
-            backdrop-filter: $backdrop-filter;
+            color: $foreground;
+            background-color: $background;
 
             @include module.marged() {
                 margin-bottom: $gap-macro;
@@ -51,7 +44,7 @@
 
             &.is-loading {
                 @include module.overlay($overlay-background, $overlay-opacity, $overlay-filter);
-                @include module.loader($spinner-size, $overlay-color, $decorator-thickness);
+                @include module.loader($spinner-size, $overlay-foreground, $decorator-thickness);
             }
         }
     }

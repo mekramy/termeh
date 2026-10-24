@@ -1,5 +1,5 @@
 @forward "design";
 @forward "modules";
 @forward "scheme" hide define-scheme;
-@forward "utility" hide print;
+@forward "utility" hide should-include, tokenize, deep-set, deep-append, deep-prepend, print;
 @forward "variable" hide resolve;

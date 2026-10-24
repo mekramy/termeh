@@ -1,4 +1,3 @@
-@use "../resolvers";
 @use "../core/module";
 
 /// Applies field styles.
@@ -14,26 +13,24 @@
 /// @require {Variable<Length>} var("gap", "macro") - Bottom margin after each field
 /// @require {Variable<FontWeight>} var("text", "strong-weight") - Required-field indicator weight
 /// @require {Variable<Number>} var("control", "disabled-opacity") - Disabled content opacity
-/// @require {Variable<Color>} variant("error", "readable") - Validation error text color
-/// @require {Variable<Color>} variant-for("input", "base", "meta") - Help text color
-/// @require {Variable<Color>} variant-for("input", "base", "accent-readable") - Required-field indicator color
-/// @require {Variable<Color>} variant-for("input", "base", "disabled-color") - Disabled text color
 ///
-/// @require {Map<String, Variable<Color>>} colors($includes: $colors) - Colors to add color classes for
-/// @require {Variable<Color>} variant-for("input", $name, "accent-readable") - Required-field indicator color for each color variation
+/// @require {Variable<Color>} variant("error", "text") - Validation error text color
+/// @require {Variable<Color>} variant-for("input", "base", "meta") - Help text color
+/// @require {Variable<Color>} variant-for("input", "base", "accent-text") - Required-field indicator color
+/// @require {Variable<Color>} variant-for("input", "base", "disabled-foreground") - Disabled text color
+///
+/// @require {Variable<Color>} variant-for("input", $palette, "accent-text") - Required-field indicator color for each color variation
 @mixin use-field($colors: ()) {
-    @include resolvers.register("input");
-
     @include module.define-module("form-field") {
         $gap-micro: module.var("gap", "micro");
         $gap-macro: module.var("gap", "macro");
         $strong-weight: module.var("text", "strong-weight");
         $disabled-opacity: module.var("control", "disabled-opacity");
 
-        $error-color: module.variant("error", "readable");
-        $meta-color: module.variant-for("input", "base", "meta");
-        $accent-color: module.variant-for("input", "base", "accent-readable");
-        $disabled-color: module.variant-for("input", "base", "disabled-color");
+        $error-text: module.variant("error", "text");
+        $meta-text: module.variant-for("input", "base", "meta");
+        $accent-text: module.variant-for("input", "base", "accent-text");
+        $disabled-foreground: module.variant-for("input", "base", "disabled-foreground");
 
         .field {
             display: block;
@@ -54,25 +51,25 @@
             }
 
             .help {
-                color: $meta-color;
+                color: $meta-text;
             }
 
             .error {
                 display: none;
-                color: $error-color;
+                color: $error-text;
             }
 
             &.is-required {
                 > label::after,
                 .field-label::after {
                     content: " *";
-                    color: $accent-color;
+                    color: $accent-text;
                     font-weight: $strong-weight;
                 }
             }
 
             @each $name, $palette in module.colors($includes: $colors) {
-                $-accent-color: module.variant-for("input", $name, "accent-readable");
+                $-accent-color: module.variant-for("input", $name, "accent-text");
 
                 &.is-#{$name} {
                     &.is-required {
@@ -101,7 +98,7 @@
                 }
 
                 .help {
-                    color: $disabled-color;
+                    color: $disabled-foreground;
                 }
             }
         }

@@ -1,11 +1,22 @@
 @use "sass:meta";
-@use "core/module";
 @use "resolvers";
-
-@include resolvers.register("base");
-@include resolvers.register("variant");
+@use "core/module";
 
 @include module.define-palette("base", white);
 @include module.define-palette("shade", #667085);
 @include module.define-palette("error", #c00021);
 @include module.define-palette("primary", #2196f3);
+
+@include module.define-global-resolver(meta.get-function("base-resolver", $module: "resolvers"));
+@include module.define-component-resolver(
+    "box",
+    meta.get-function("box-resolver", $module: "resolvers")
+);
+@include module.define-component-resolver(
+    "table",
+    meta.get-function("table-resolver", $module: "resolvers")
+);
+@include module.define-component-resolver(
+    "input",
+    meta.get-function("input-resolver", $module: "resolvers")
+);

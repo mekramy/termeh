@@ -1,4 +1,3 @@
-@use "../resolvers";
 @use "../core/module";
 
 /// Applies fieldset styles.
@@ -10,10 +9,9 @@
 /// @require {Variable<Length>} var("input", "legend-size") - Legend font size
 /// @require {Variable<FontWeight>} var("input", "legend-weight") - Legend font weight
 /// @require {Variable<Number>} var("control", "disabled-opacity") - Disabled content opacity
+///
 /// @require {Variable<Color>} variant-for("input", "base", "border") - Fieldset border color
 @mixin use-fieldset() {
-    @include resolvers.register("input");
-
     @include module.define-module("form-fieldset") {
         $gap-macro: module.var("gap", "macro");
         $radius-normal: module.var("radius", "normal");

@@ -1,5 +1,4 @@
 @use "../animation";
-@use "../resolvers";
 @use "../core/module";
 
 /// Applies input wrapper styles.
@@ -14,22 +13,24 @@
 ///
 /// @require {Variable<Length>} var("input", "height") - Input wrapper height
 /// @require {Variable<Length>} var("radius", "normal") - Input wrapper border radius
+///
 /// @require {Variable<Length>} var("input", "placeholder-size") - Placeholder font size
 /// @require {Variable<FontWeight>} var("input", "placeholder-weight") - Placeholder font weight
+///
 /// @require {Variable<Color>} color("error") - Invalid-state border color
+///
 /// @require {Variable<Color>} variant-for("input", "base", "accent") - Focused border color
 /// @require {Variable<Color>} variant-for("input", "base", "background") - Input wrapper background color
 /// @require {Variable<Color>} variant-for("input", "base", "border") - Input wrapper border color
 /// @require {Variable<Color>} variant-for("input", "base", "placeholder") - Placeholder text color
-/// @require {Variable<Color>} variant-for("input", "base", "disabled-color") - Disabled text color
-/// @require {Variable<Color>} variant-for("input", "base", "disabled-border") - Disabled border color
 ///
-/// @require {Map<String, Variable<Length>>} gaps($includes: $gaps) - Gap entries used to generate gap variations
-/// @require {Map<String, Variable<Color>>} colors($includes: $colors) - Colors to add color classes for
-/// @require {Variable<Color>} variant-for("input", $name, "accent") - Focus border color for each color variation
+/// @require {Variable<Color>} variant-for("input", "base", "disabled-border") - Disabled border color
+/// @require {Variable<Color>} variant-for("input", "base", "disabled-foreground") - Disabled text color
+/// @require {Variable<Color>} variant-for("input", "base", "disabled-background") - Disabled background color
+///
+/// @require {Variable<Color>} variant-for("input", $palette, "accent") - Focus border color for each color variation
 @mixin use-input($gaps: (), $colors: ()) {
     @include animation.shake();
-    @include resolvers.register("input");
 
     @include module.define-module("form-input") {
         $height: module.var("input", "height");
@@ -41,12 +42,13 @@
         $error: module.color("error");
 
         $accent: module.variant-for("input", "base", "accent");
-        $background-color: module.variant-for("input", "base", "background");
+        $background: module.variant-for("input", "base", "background");
         $border-color: module.variant-for("input", "base", "border");
-        $placeholder-color: module.variant-for("input", "base", "placeholder");
+        $placeholder: module.variant-for("input", "base", "placeholder");
 
-        $disabled-color: module.variant-for("input", "base", "disabled-color");
         $disabled-border: module.variant-for("input", "base", "disabled-border");
+        $disabled-foreground: module.variant-for("input", "base", "disabled-foreground");
+        $disabled-background: module.variant-for("input", "base", "disabled-background");
 
         @include animation.shake();
 
@@ -58,7 +60,7 @@
             line-height: 1em;
             border-radius: $radius-normal;
             border: 1px solid $border-color;
-            background-color: $background-color;
+            background-color: $background;
             padding: module.inline-padding();
             @include module.transition(all);
 
@@ -89,7 +91,7 @@
                 border-radius: 0;
 
                 &::placeholder {
-                    color: $placeholder-color;
+                    color: $placeholder;
                     font-size: $placeholder-size;
                     font-weight: $placeholder-weight;
                 }
@@ -132,10 +134,14 @@
 
             @include module.is-disabled() {
                 input::placeholder {
-                    color: $disabled-color;
+                    color: $disabled-foreground;
                 }
 
-                @include module.disabled($disabled-color, transparent, $disabled-border);
+                @include module.disabled(
+                    $disabled-foreground,
+                    $disabled-background,
+                    $disabled-border
+                );
             }
         }
     }

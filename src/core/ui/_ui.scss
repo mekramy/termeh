@@ -350,11 +350,11 @@
 ///
 /// @return {Padding} Horizontal padding, then vertical padding
 ///
-/// @require {Variable<Length>} var("control", "h-padding") - Horizontal padding of controls
 /// @require {Variable<Length>} var("control", "v-padding") - Vertical padding of controls
+/// @require {Variable<Length>} var("control", "h-padding") - Horizontal padding of controls
 @function control-padding() {
-    $h-padding: variable.var("control", "h-padding");
     $v-padding: variable.var("control", "v-padding");
+    $h-padding: variable.var("control", "h-padding");
 
     @return $v-padding $h-padding;
 }
@@ -380,6 +380,7 @@
 /// @require {Variable<Duration>} var("transition", "duration") - Transition duration
 @mixin transition($fields...) {
     $fields: list.append($fields, (), "comma");
+
     $ease: variable.var("transition", "ease");
     $duration: variable.var("transition", "duration");
 
@@ -403,6 +404,7 @@
 @mixin delayed-transition($fields...) {
     // stylelint-disable declaration-block-no-redundant-longhand-properties
     $fields: list.append($fields, (), "comma");
+
     $ease: variable.var("transition", "ease");
     $duration: variable.var("transition", "duration");
     $delay: variable.var("transition", "delay");
@@ -443,15 +445,15 @@
 /// @throw If `$name` is not a string
 ///
 /// @require {Variable<Color>} color($name) - Background color of the selection
-/// @require {Variable<Color>} variant($name, "color") - Text color of the selection
+/// @require {Variable<Color>} variant($name, "foreground") - Text color of the selection
 @mixin selection($name) {
     $name: utility.assert-string($name, "selection", "name");
 
-    $color: variable.variant($name, "color");
     $background: variable.color($name);
+    $foreground: variable.variant($name, "foreground");
     &::selection,
     *::selection {
-        color: $color;
+        color: $foreground;
         background-color: $background;
     }
 }
@@ -462,14 +464,14 @@
 /// @output The scrollbar rules, using the theme scrollbar width, track color and thumb color
 ///
 /// @require {Variable<Length>} var("document", "scroll-width") - Scrollbar width
-/// @require {Variable<Color>} variant-for("scroll", "base", "track") [variant("base", "section")] - Track color
+/// @require {Variable<Color>} variant-for("scroll", "base", "track") [variant("base", "surface")] - Track color
 /// @require {Variable<Color>} variant-for("scroll", "base", "thumb") [variant("base", "separator")] - Thumb color
 @mixin scrollable($color) {
-    $-section: variable.variant("base", "section");
+    $-surface: variable.variant("base", "surface");
     $-separator: variable.variant("base", "separator");
 
     $size: variable.var("document", "scroll-width");
-    $track: variable.variant-for("scroll", "base", "track", $-section);
+    $track: variable.variant-for("scroll", "base", "track", $-surface);
     $thumb: variable.variant-for("scroll", "base", "thumb", $-separator);
 
     @include scrollbar($size, $track, $thumb, $color);

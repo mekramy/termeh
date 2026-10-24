@@ -1,46 +1,75 @@
 $-spin-defined: false !default;
 $-shake-defined: false !default;
 
-/// Generates continuous 360-degree rotation animation keyframes
-/// @output spin keyframes
+/// Defines the `spin` keyframes from the supplied keyframe content.
+///
+/// Marks the spin animation as defined to prevent the default keyframes from
+/// being emitted by `spin()`.
+/// @content Keyframe rules for `spin`.
+/// @output A `spin` keyframes rule.
+@mixin define-spin() {
+    $-spin-defined: true !global;
+    @at-root {
+        @keyframes spin {
+            @content;
+        }
+    }
+}
+
+/// Defines the `shake` keyframes from the supplied keyframe content.
+///
+/// Marks the shake animation as defined to prevent the default keyframes from
+/// being emitted by `shake()`.
+/// @content Keyframe rules for `shake`.
+/// @output A `shake` keyframes rule.
+@mixin define-shake() {
+    $-shake-defined: true !global;
+    @at-root {
+        @keyframes shake {
+            @content;
+        }
+    }
+}
+
+/// Emits default `spin` keyframes unless they have already been defined.
+///
+/// The keyframes rotate from 0 to 360 degrees while translating by -50% on
+/// both axes.
+/// @output Default `spin` keyframes when no custom definition exists.
 @mixin spin() {
     @if not $-spin-defined {
-        $-spin-defined: true !global;
-        @at-root {
-            @keyframes spin {
-                from {
-                    transform: translate(-50%, -50%) rotate(0deg);
-                }
+        @include define-spin() {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
 
-                to {
-                    transform: translate(-50%, -50%) rotate(360deg);
-                }
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
             }
         }
     }
 }
 
-/// Generates subtle shaking animation keyframes
-/// @output shake keyframes
+/// Emits default `shake` keyframes unless they have already been defined.
+///
+/// The keyframes shift horizontally by 5 pixels and return to the origin.
+/// @output Default `shake` keyframes when no custom definition exists.
 @mixin shake() {
     @if not $-shake-defined {
-        $-shake-defined: true !global;
-        @at-root {
-            @keyframes shake {
-                5%,
-                40% {
-                    transform: translateX(-5px);
-                }
+        @include define-shake() {
+            5%,
+            40% {
+                transform: translateX(-5px);
+            }
 
-                25%,
-                60% {
-                    transform: translateX(5px);
-                }
+            25%,
+            60% {
+                transform: translateX(5px);
+            }
 
-                0%,
-                100% {
-                    transform: translateX(0);
-                }
+            0%,
+            100% {
+                transform: translateX(0);
             }
         }
     }
