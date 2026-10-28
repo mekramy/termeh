@@ -146,13 +146,7 @@
         }
     }
 
-    @if $variant == "accent" {
-        @return module.color("primary");
-    } @else if $variant == "accent-text" {
-        @return module.variant("primary", "text");
-    } @else if $variant == "accent-foreground" {
-        @return module.variant("primary", "foreground");
-    } @else if $variant == "meta" {
+    @if $variant == "meta" {
         @return module.variant("shade", "text");
     } @else if $variant == "placeholder" {
         @return module.variant("shade", "light");
@@ -162,12 +156,123 @@
         @return module.iif($is-light, white, $base);
     } @else if $variant == "hover-background" {
         @return module.variant("base", "surface");
-    } @else if $variant == "disabled-border" {
+    }
+
+    @if $variant == "accent" {
+        @return module.color("primary");
+    } @else if $variant == "accent-text" {
+        @return module.variant("primary", "text");
+    } @else if $variant == "accent-foreground" {
+        @return module.variant("primary", "foreground");
+    }
+
+    @if $variant == "disabled-border" {
         @return module.variant("base", "disabled-border");
     } @else if $variant == "disabled-foreground" {
         @return module.variant("base", "disabled-foreground");
     } @else if $variant == "disabled-background" {
         @return transparent;
+    }
+
+    @return null;
+}
+
+@function component-resolver($scheme, $palette, $is-light, $base, $color, $variant) {
+    @if -is-colorize($palette) {
+        // Defaults
+        @if $variant == "muted" {
+            @return module.variant($palette, "muted");
+        }
+
+        // Simple
+        @if $variant == "simple-accent" {
+            @return $color;
+        } @else if $variant == "simple-foreground" {
+            @return module.variant($palette, "text");
+        } @else if $variant == "simple-background" {
+            @return transparent;
+        } @else if $variant == "simple-hover" {
+            @return module.variant($palette, "light");
+        }
+
+        // Light
+        @if $variant == "light-accent" {
+            @return $color;
+        } @else if $variant == "light-foreground" {
+            @return module.variant($palette, "text");
+        } @else if $variant == "light-background" {
+            @return module.variant($palette, "light");
+        } @else if $variant == "light-hover" {
+            @return module.variant($palette, "light-hover");
+        }
+
+        // Accent
+        @if $variant == "accent" {
+            @return $color;
+        } @else if $variant == "accent-text" {
+            @return module.variant($palette, "text");
+        } @else if $variant == "accent-foreground" {
+            @return module.variant($palette, "foreground");
+        } @else if $variant == "accent-background" {
+            @return $color;
+        } @else if $variant == "accent-hover" {
+            @return module.variant($palette, "hover");
+        }
+    }
+
+    // Defaults
+    @if $variant == "text" {
+        @return module.variant("shade", "text");
+    } @else if $variant == "separator" {
+        @return module.variant("base", "separator");
+    } @else if $variant == "muted" {
+        @return module.variant("shade", "muted");
+    }
+
+    // Simple
+    @if $variant == "simple-accent" {
+        @return module.color("shade");
+    } @else if $variant == "simple-foreground" {
+        @return module.variant("shade", "text");
+    } @else if $variant == "simple-background" {
+        @return transparent;
+    } @else if $variant == "simple-hover" {
+        @return module.variant("shade", "light");
+    }
+
+    // Light
+    @if $variant == "light-accent" {
+        @return module.color("shade");
+    } @else if $variant == "light-foreground" {
+        @return module.variant("shade", "text");
+    } @else if $variant == "light-background" {
+        @return module.variant("shade", "light");
+    } @else if $variant == "light-hover" {
+        @return module.variant("shade", "light-hover");
+    }
+
+    // Accent
+    @if $variant == "accent" {
+        @return module.color("primary");
+    } @else if $variant == "accent-text" {
+        @return module.variant("primary", "text");
+    } @else if $variant == "accent-foreground" {
+        @return module.variant("primary", "foreground");
+    } @else if $variant == "accent-background" {
+        @return module.color("primary");
+    } @else if $variant == "accent-hover" {
+        @return module.variant("primary", "hover");
+    }
+
+    // Disabled states
+    @if $variant == "disabled-text" {
+        @return module.variant("shade", "muted");
+    } @else if $variant == "disabled-border" {
+        @return module.variant("base", "disabled-border");
+    } @else if $variant == "disabled-foreground" {
+        @return module.variant("base", "disabled-foreground");
+    } @else if $variant == "disabled-background" {
+        @return module.variant("base", "disabled-background");
     }
 
     @return null;

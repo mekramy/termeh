@@ -20,3 +20,7 @@
     "input",
     meta.get-function("input-resolver", $module: "resolvers")
 );
+@include module.define-component-resolver(
+    "component",
+    meta.get-function("component-resolver", $module: "resolvers")
+);
