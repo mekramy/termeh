@@ -2,17 +2,17 @@
 @use "../utility";
 
 $-queries: (
-    "until-fullhd": "screen and (max-width: 1407px)",
-    "until-widescreen": "screen and (max-width: 1215px)",
-    "until-desktop": "screen and (max-width: 1023px)",
-    "tablet": "screen and (min-width: 769px)",
-    "desktop": "screen and (min-width: 1024px)",
-    "widescreen": "screen and (min-width: 1216px)",
-    "fullhd": "screen and (min-width: 1408px)",
-    "mobile": "screen and (max-width: 768px)",
-    "tablet-only": "screen and (min-width: 769px) and (max-width: 1023px)",
-    "desktop-only": "screen and (min-width: 1024px) and (max-width: 1215px)",
-    "widescreen-only": "screen and (min-width: 1216px) and (max-width: 1407px)",
+    "until-ultrawide": "screen and (width < 1536px)",
+    "until-widescreen": "screen and (width < 1280px)",
+    "until-desktop": "screen and (width < 1024px)",
+    "tablet": "screen and (width >= 768px)",
+    "desktop": "screen and (width >= 1024px)",
+    "widescreen": "screen and (width >= 1280px)",
+    "ultrawide": "screen and (width >= 1536px)",
+    "mobile": "screen and (width < 768px)",
+    "tablet-only": "screen and (768px <= width < 1024px)",
+    "desktop-only": "screen and (1024px <= width < 1280px)",
+    "widescreen-only": "screen and (1280px <= width < 1536px)",
 ) !default;
 
 @function -missing($name) {
@@ -154,20 +154,20 @@ $-queries: (
     }
 }
 
-/// Applies styles on screens narrower than fullhd.
+/// Applies styles on screens narrower than ultrawide.
 ///
-/// @output The content inside the `until-fullhd` media query
-@mixin until-fullhd() {
-    @media #{media-query("until-fullhd")} {
+/// @output The content inside the `until-ultrawide` media query
+@mixin until-ultrawide() {
+    @media #{media-query("until-ultrawide")} {
         @content;
     }
 }
 
-/// Applies styles on fullhd screens and wider.
+/// Applies styles on ultrawide screens and wider.
 ///
-/// @output The content inside the `fullhd` media query
-@mixin fullhd() {
-    @media #{media-query("fullhd")} {
+/// @output The content inside the `ultrawide` media query
+@mixin ultrawide() {
+    @media #{media-query("ultrawide")} {
         @content;
     }
 }

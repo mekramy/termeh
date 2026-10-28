@@ -10,12 +10,13 @@
 /// @param {List<String>} $colors [()] - Color names to include in the color variations
 /// @output Checkbox styles for default, invalid, disabled, and color variation states
 ///
-/// @require {Variable<Length>} var("input", "height") - Checkbox label row height
-/// @require {Variable<Length>} var("input", "checkbox") - Checkbox width and height
-///
 /// @require {Variable<Length>} var("gap", "micro") - Space between the checkbox and its label
 /// @require {Variable<Length>} var("radius", "normal") - Checkbox border radius
 /// @require {Variable<Length>} var("decorator", "size") - Checkmark stroke thickness
+///
+/// @require {Variable<Length>} var("input", "height") - Checkbox label row height
+/// @require {Variable<Length>} var("input", "checkbox") - Checkbox width and height
+/// @require {Variable<Number>} var("input", "disabled-opacity") - Disabled opacity
 ///
 /// @require {Variable<Color>} color("error") - Invalid-state checkbox background and border color
 /// @require {Variable<Color>} variant("error", "foreground") - Invalid-state checkmark color
@@ -33,12 +34,13 @@
     @include animation.shake();
 
     @include module.define-module("form-checkbox") {
-        $height: module.var("input", "height");
-        $size: module.var("input", "checkbox");
-
         $gap-micro: module.var("gap", "micro");
         $radius-normal: module.var("radius", "normal");
         $decorator-thickness: module.var("decorator", "size");
+
+        $height: module.var("input", "height");
+        $size: module.var("input", "checkbox");
+        $disabled-opacity: module.var("input", "disabled-opacity");
 
         $error: module.color("error");
         $error-foreground: module.variant("error", "foreground");
@@ -137,6 +139,7 @@
 
             @include module.is-disabled() {
                 color: $disabled-foreground;
+                opacity: $disabled-opacity;
                 @include module.locked();
 
                 input[type="checkbox"] {

@@ -2,7 +2,7 @@
 
 /// Generates the `.wrapper` layout that wraps children into rows with equal width.
 ///
-/// Supports `gap` variations.
+/// Supports `gap` and `justify` variations.
 ///
 /// @param {List<String>} $gaps [()] - Gap names to include; `null` includes all defined gaps
 /// @output The `.wrapper` class and its gap classes
@@ -19,7 +19,7 @@
             box-sizing: border-box;
 
             > * {
-                flex: 1 1 0;
+                flex: 0 1 auto;
                 box-sizing: border-box;
             }
 
@@ -30,6 +30,12 @@
                     &.is-#{$name}-gap {
                         gap: $gap;
                     }
+                }
+            }
+
+            @each $name, $justify in module.flex-justifies() {
+                &.is-#{$name} {
+                    justify-content: $justify;
                 }
             }
         }

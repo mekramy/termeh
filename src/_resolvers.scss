@@ -1,8 +1,31 @@
 @use "sass:color";
 @use "core/module";
 
+@function -is-base($palette) {
+    @return $palette == "base";
+}
+
+@function -is-colorize($palette) {
+    @return $palette != "base";
+}
+
+@function -color-safe($scheme, $palette) {
+    $result: null;
+    @if $scheme {
+        $result: module.scheme-color($scheme, $palette);
+    }
+
+    @if not $result {
+        $result: module.color-value($palette);
+    }
+
+    @return $result;
+}
+
 @function base-resolver($scheme, $palette, $is-light, $base, $color, $variant) {
-    @if $palette == "base" {
+    $shade: -color-safe($scheme, "shade");
+
+    @if -is-base($palette) {
         @if $variant == "foreground" {
             @return #0d1b2a;
         } @else if $variant == "background" {
@@ -16,7 +39,7 @@
         } @else if $variant == "disabled-border" {
             @return module.variant("base", "separator");
         } @else if $variant == "disabled-foreground" {
-            @return module.variant("base", "separator");
+            @return module.variant("shade", "muted");
         } @else if $variant == "disabled-background" {
             @return module.variant("base", "surface");
         } @else if $variant == "overlay-foreground" {
@@ -26,29 +49,38 @@
         }
     } @else {
         @if $variant == "text" {
-            $v: module.iif($is-light, "700", "200");
-            @return color.mix($base, module.palette($color, $v), 10%);
+            $weight: module.iif($is-light, "700", "200");
+            $variation: module.palette($color, $weight);
+            @return color.mix($base, $variation, 10%);
         } @else if $variant == "foreground" {
-            $v: module.iif($is-light, "900", "100");
-            @return color.mix($base, module.palette($color, $v), 95%);
+            $weight: module.iif($is-light, "900", "100");
+            $variation: module.palette($color, $weight);
+            @return color.mix($base, $variation, 95%);
         } @else if $variant == "decorator" {
-            $v: module.iif($is-light, "800", "200");
-            @return color.mix($base, module.palette($color, $v), 40%);
+            $weight: module.iif($is-light, "800", "200");
+            $variation: module.palette($color, $weight);
+            @return color.mix($base, $variation, 40%);
         } @else if $variant == "hover" {
-            $v: module.iif($is-light, "700", "300");
-            @return module.palette($color, $v);
+            $weight: module.iif($is-light, "700", "300");
+            @return module.palette($color, $weight);
         } @else if $variant == "light" {
-            $v: module.iif($is-light, "800", "200");
-            @return color.mix($base, module.palette($color, $v), 85%);
+            $weight: module.iif($is-light, "800", "200");
+            $variation: module.palette($color, $weight);
+            @return color.mix($base, $variation, 90%);
         } @else if $variant == "light-hover" {
-            $v: module.iif($is-light, "800", "200");
-            @return color.mix($base, module.palette($color, $v), 70%);
-        } @else if $variant == "muted-text" {
-            $v: module.iif($is-light, "900", "100");
-            @return color.mix($base, module.palette($color, $v), 50%);
-        } @else if $variant == "muted-text-hover" {
-            $v: module.iif($is-light, "900", "100");
-            @return color.mix($base, module.palette($color, $v), 5%);
+            $weight: module.iif($is-light, "800", "200");
+            $variation: module.palette($color, $weight);
+            @return color.mix($base, $variation, 85%);
+        } @else if $variant == "muted" {
+            $weight: module.iif($is-light, "900", "100");
+            $variation: module.palette($color, $weight);
+            $grayscale: color.mix($shade, $variation, 35%);
+            @return color.mix($base, $grayscale, 35%);
+        } @else if $variant == "muted-hover" {
+            $weight: module.iif($is-light, "900", "100");
+            $variation: module.palette($color, $weight);
+            $grayscale: color.mix($shade, $variation, 35%);
+            @return color.mix($base, $grayscale, 15%);
         }
     }
 
@@ -72,7 +104,7 @@
 }
 
 @function table-resolver($scheme, $palette, $is-light, $base, $color, $variant) {
-    @if $palette != "base" {
+    @if -is-colorize($palette) {
         @if $variant == "decorator" {
             @return $color;
         } @else if $variant == "sorted-text" {
@@ -104,7 +136,7 @@
 }
 
 @function input-resolver($scheme, $palette, $is-light, $base, $color, $variant) {
-    @if $palette != "base" {
+    @if -is-colorize($palette) {
         @if $variant == "accent" {
             @return $color;
         } @else if $variant == "accent-text" {

@@ -195,7 +195,7 @@
     border-top-color: transparent;
     border-right-color: transparent;
     border-radius: 50%;
-    animation: spin 500ms infinite linear;
+    animation: spin 600ms infinite linear;
 
     @include animation.spin();
 }
@@ -350,11 +350,11 @@
 ///
 /// @return {Padding} Horizontal padding, then vertical padding
 ///
-/// @require {Variable<Length>} var("control", "v-padding") - Vertical padding of controls
-/// @require {Variable<Length>} var("control", "h-padding") - Horizontal padding of controls
+/// @require {Variable<Length>} var("component", "v-padding") - Vertical padding of components
+/// @require {Variable<Length>} var("component", "h-padding") - Horizontal padding of components
 @function control-padding() {
-    $v-padding: variable.var("control", "v-padding");
-    $h-padding: variable.var("control", "h-padding");
+    $v-padding: variable.var("component", "v-padding");
+    $h-padding: variable.var("component", "h-padding");
 
     @return $v-padding $h-padding;
 }
@@ -424,12 +424,9 @@
 /// @param {Variable<Color> | Color | null} $color - Disabled text color
 /// @param {Variable<Color> | Color | null} $background - Disabled background color
 /// @param {Variable<Color> | Color | null} $border - Disabled border color
+/// @param {Variable<Number> | Number | null} $opacity - Disabled opacity
 /// @output Declarations that block interaction and set the opacity, text color, background color and border color
-///
-/// @require {Variable<Number>} var("control", "disabled-opacity") - Opacity of disabled controls
-@mixin disabled($color, $background, $border) {
-    $opacity: variable.var("control", "disabled-opacity");
-
+@mixin disabled($color, $background, $border, $opacity) {
     user-select: none;
     pointer-events: none;
     opacity: $opacity;

@@ -1,81 +1,86 @@
 @use "core/module";
 
 // Base
-@include module.define("document", "direction", ltr); // App direction
-@include module.define("document", "min-width", 300px); // Minimum document width
-@include module.define("document", "scroll-width", 0.75rem); // Scrollable width
+@include module.define("document", "direction", ltr); // App text direction
+@include module.define("document", "min-width", 300px); // Minimum page width
+@include module.define("document", "scroll-width", 0.75rem); // Scrollbar width
 
 // Spacing
-@include module.define("gap", "micro", 0.6em); // Small gap within components/text
-@include module.define("gap", "macro", 1.6rem); // Large gap for layout structure
+@include module.define("gap", "micro", 0.6em); // Small gap inside components and text
+@include module.define("gap", "macro", 1.6em); // Large gap between layout sections
 
 // Border radius
-@include module.define("radius", "normal", 2px); // Base border-radius
-@include module.define("radius", "circle", 50%); // Circular border-radius
-@include module.define("radius", "rounded", 290486px); // Fully rounded border-radius
+@include module.define("radius", "normal", 2px); // Default corner radius
+@include module.define("radius", "circle", 50%); // Fully circular corners
+@include module.define("radius", "rounded", 290486px); // Pill-shaped corners
 
 // Line heights
 @include module.define("line-height", "normal", 1.6em); // Default line height
-@include module.define("line-height", "medium", 1.4em); // Medium text line height
-@include module.define("line-height", "large", 1.2em); // Large text line height
+@include module.define("line-height", "medium", 1.4em); // Medium line height
+@include module.define("line-height", "large", 1.2em); // Large line height
 
 // Text And Fonts
-@include module.define("text", "font-family", ("Segoe UI", Verdana)); // Font family
-@include module.define("text", "font-size", 14px); // Font size
-@include module.define("text", "font-weight", normal); // Font weight
-@include module.define("text", "mono-family", monospace); // Code font family
-@include module.define("text", "mono-size", 1rem); // Code font size
-@include module.define("text", "mono-weight", normal); // Code Font weight
-@include module.define("text", "small-size", 0.875rem); // Small text size
-@include module.define("text", "small-weight", normal); // Small text weight
+@include module.define("text", "font-family", ("Segoe UI", Verdana)); // Main font family
+@include module.define("text", "font-size", 14px); // Main font size
+@include module.define("text", "font-weight", normal); // Main font weight
+@include module.define("text", "mono-family", monospace); // Monospace font family
+@include module.define("text", "mono-size", 1rem); // Monospace font size
+@include module.define("text", "mono-weight", normal); // Monospace font weight
+@include module.define("text", "small-size", 0.875em); // Small text size
+@include module.define("text", "small-weight", 500); // Small text weight
 @include module.define("text", "strong-weight", bold); // Strong text weight
 @include module.define("text", "decorated-weight", normal); // Decorated text weight
 
 // Transitions
-@include module.define("transition", "ease", ease); // Default transition timing
-@include module.define("transition", "duration", 250ms); // Default transition duration
-@include module.define("transition", "delay", 100ms); // Delay for delayed-animations
+@include module.define("transition", "ease", ease); // Default easing
+@include module.define("transition", "duration", 250ms); // Default animation duration
+@include module.define("transition", "delay", 100ms); // Delay for staggered animations
 
 // Decorators
-@include module.define("decorator", "size", 2px); // Decorator thickness
-@include module.define("decorator", "spinner", 2em); // Spinner size
+@include module.define("decorator", "size", 2px); // Decorator line thickness
+@include module.define("decorator", "spinner", 2em); // Loading spinner size
 
 // Overlay
 @include module.define("overlay", "opacity", 0.75); // Overlay background opacity
-@include module.define("overlay", "filter", none); // Overlay backdrop filter
+@include module.define("overlay", "filter", none); // Backdrop filter for overlays
 
 // Container
-@include module.define("container", "desktop", 960px); // Desktop container width
-@include module.define("container", "widescreen", 1200px); // Widescreen container width
-@include module.define("container", "fullhd", 1500px); // Full HD container width
+@include module.define("container", "desktop", 960px); // Desktop max width
+@include module.define("container", "widescreen", 1200px); // Widescreen max width
+@include module.define("container", "ultrawide", 1500px); // Ultrawide max width
 
 // Gallery
-@include module.define("gallery", "height", 300px); // Default gallery row height
-@include module.define("gallery", "height-tablet", 200px); // Tablet gallery row height
-@include module.define("gallery", "height-mobile", 100px); // Mobile gallery row height
-
-// Control elements (button, link, badge, ...)
-@include module.define("control", "weight", 500); // control font weight
-@include module.define("control", "height", 2.2em); // control height
-@include module.define("control", "v-padding", 0); // control vertical padding
-@include module.define("control", "h-padding", 1.2em); // control horizontal padding
-@include module.define("control", "meta-size", 0.9em); // control meta-like font size
-@include module.define("control", "meta-weight", 600); // control meta-like font weight
-@include module.define("control", "disabled-opacity", 0.65); // control disabled opacity
+@include module.define("gallery", "height", 300px); // Default row height
+@include module.define("gallery", "height-tablet", 200px); // Tablet row height
+@include module.define("gallery", "height-mobile", 100px); // Mobile row height
 
 // Inputs
 @include module.define("input", "height", 2.8em); // Input height
 @include module.define("input", "checkbox", 1.3em); // Checkbox size
-@include module.define("input", "legend-size", 0.9em); // Fieldset Legend text size
-@include module.define("input", "legend-weight", 600); // Fieldset Legend text weight
-@include module.define("input", "placeholder-size", 0.85em); // placeholder font size
-@include module.define("input", "placeholder-weight", 600); // placeholder font weight
+@include module.define("input", "legend-size", 0.875em); // Fieldset legend size
+@include module.define("input", "legend-weight", 600); // Fieldset legend weight
+@include module.define("input", "placeholder-size", 0.875em); // Placeholder size
+@include module.define("input", "placeholder-weight", 600); // Placeholder weight
+@include module.define("input", "disabled-opacity", 0.45); // Opacity for disabled inputs
+
+// Components (button, link, badge, ...)
+@include module.define("component", "weight", 500); // Font weight
+@include module.define("component", "height", 2.2em); // Height
+@include module.define("component", "v-padding", 0); // Vertical padding
+@include module.define("component", "h-padding", 1.2em); // Horizontal padding
+@include module.define("component", "meta-size", 0.9em); // Meta text size
+@include module.define("component", "meta-weight", 600); // Meta text weight
+@include module.define("component", "light-opacity", 0.4); // Tag opacity
+@include module.define("component", "action-opacity", 0.85); // Action opacity
+@include module.define("component", "button-opacity", 1); // Button opacity
+@include module.define("component", "outline-opacity", 0.2); // Outline opacity
+@include module.define("component", "disabled-opacity", 0.45); // Opacity for disabled component
 
 // Boxes
-@include module.define("box", "opacity", 1); // box background opacity
-@include module.define("box", "backdrop-filter", none); // box backdrop filter
-@include module.define("box", "overlay-opacity", null); // box overlay opacity
-@include module.define("box", "overlay-filter", null); // box overlay filter
+@include module.define("box", "opacity", 1); // Background opacity
+@include module.define("box", "backdrop-filter", none); // Backdrop filter
+@include module.define("box", "overlay-opacity", null); // Overlay opacity
+@include module.define("box", "overlay-filter", null); // Overlay filter
 @include module.define(
     "box",
     "shadow",
@@ -84,5 +89,9 @@
         module.soft-shadow(0, -1px, 1px, module.color-value("shade")),
         module.soft-shadow(0, 3px, 3px, module.color-value("shade"))
     )
-); // box shadow
-@include module.define("box", "sizes", ("small" 22em, "normal" 26em, "medium" 36em)); // box sizes
+); // Layered soft shadow
+@include module.define(
+    "box",
+    "sizes",
+    ("small" 22em, "normal" 26em, "medium" 36em)
+); // Available sizes

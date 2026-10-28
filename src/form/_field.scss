@@ -12,7 +12,8 @@
 /// @require {Variable<Length>} var("gap", "micro") - Spacing between field contents
 /// @require {Variable<Length>} var("gap", "macro") - Bottom margin after each field
 /// @require {Variable<FontWeight>} var("text", "strong-weight") - Required-field indicator weight
-/// @require {Variable<Number>} var("control", "disabled-opacity") - Disabled content opacity
+///
+/// @require {Variable<Number>} var("input", "disabled-opacity") - Disabled content opacity
 ///
 /// @require {Variable<Color>} variant("error", "text") - Validation error text color
 /// @require {Variable<Color>} variant-for("input", "base", "meta") - Help text color
@@ -25,7 +26,8 @@
         $gap-micro: module.var("gap", "micro");
         $gap-macro: module.var("gap", "macro");
         $strong-weight: module.var("text", "strong-weight");
-        $disabled-opacity: module.var("control", "disabled-opacity");
+
+        $disabled-opacity: module.var("input", "disabled-opacity");
 
         $error-text: module.variant("error", "text");
         $meta-text: module.variant-for("input", "base", "meta");

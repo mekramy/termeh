@@ -16,6 +16,7 @@
 ///
 /// @require {Variable<Length>} var("input", "placeholder-size") - Placeholder font size
 /// @require {Variable<FontWeight>} var("input", "placeholder-weight") - Placeholder font weight
+/// @require {Variable<Number>} var("input", "disabled-opacity") - Disabled content opacity
 ///
 /// @require {Variable<Color>} color("error") - Invalid-state border color
 ///
@@ -39,6 +40,7 @@
 
         $placeholder-size: module.var("input", "placeholder-size");
         $placeholder-weight: module.var("input", "placeholder-weight");
+        $disabled-opacity: module.var("input", "disabled-opacity");
 
         $error: module.color("error");
 
@@ -114,7 +116,8 @@
                 @include module.disabled(
                     $disabled-foreground,
                     $disabled-background,
-                    $disabled-border
+                    $disabled-border,
+                    $disabled-opacity
                 );
             }
         }

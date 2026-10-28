@@ -6,18 +6,20 @@
 ///
 /// @require {Variable<Length>} var("gap", "macro") - Inner padding and bottom margin
 /// @require {Variable<Length>} var("radius", "normal") - Fieldset border radius
+///
 /// @require {Variable<Length>} var("input", "legend-size") - Legend font size
 /// @require {Variable<FontWeight>} var("input", "legend-weight") - Legend font weight
-/// @require {Variable<Number>} var("control", "disabled-opacity") - Disabled content opacity
+/// @require {Variable<Number>} var("input", "disabled-opacity") - Disabled content opacity
 ///
 /// @require {Variable<Color>} variant-for("input", "base", "border") - Fieldset border color
 @mixin use-fieldset() {
     @include module.define-module("form-fieldset") {
         $gap-macro: module.var("gap", "macro");
         $radius-normal: module.var("radius", "normal");
+
         $legend-size: module.var("input", "legend-size");
         $legend-weight: module.var("input", "legend-weight");
-        $disabled-opacity: module.var("control", "disabled-opacity");
+        $disabled-opacity: module.var("input", "disabled-opacity");
 
         $border-color: module.variant-for("input", "base", "border");
 

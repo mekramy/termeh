@@ -3,10 +3,10 @@
 @use "../utility";
 
 $-breakpoints: (
-    "tablet": 769px,
+    "tablet": 768px,
     "desktop": 1024px,
-    "widescreen": 1216px,
-    "fullhd": 1408px,
+    "widescreen": 1280px,
+    "ultrawide": 1536px,
 ) !default;
 
 @function -missing($name) {
@@ -42,7 +42,7 @@ $-breakpoints: (
         @error -fail($device);
     }
 
-    @media screen and (min-width: breakpoint($device)) {
+    @media screen and (width >= #{breakpoint($device)}) {
         @content;
     }
 }
@@ -58,7 +58,7 @@ $-breakpoints: (
         @error -fail($device);
     }
 
-    @media screen and (max-width: math.sub(breakpoint($device), 1px)) {
+    @media screen and (width < #{breakpoint($device)}) {
         @content;
     }
 }

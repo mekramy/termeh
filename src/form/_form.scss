@@ -26,6 +26,8 @@
         $decorator-thickness: module.var("decorator", "size");
         $spinner-size: module.var("decorator", "spinner");
 
+        $opacity: module.var("box", "opacity");
+        $filter: module.var("box", "backdrop-filter");
         $overlay-opacity: module.var("box", "overlay-opacity", $-overlay-opacity);
         $overlay-filter: module.var("box", "overlay-filter", $-overlay-filter);
 
@@ -36,7 +38,8 @@
 
         form {
             color: $foreground;
-            background-color: $background;
+            background-color: module.alpha($background, $opacity);
+            backdrop-filter: $filter;
 
             @include module.marged() {
                 margin-bottom: $gap-macro;

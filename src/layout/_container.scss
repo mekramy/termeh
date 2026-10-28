@@ -12,13 +12,13 @@
 /// @require {Variable<Length>} var("gap", "macro") - Default padding and bottom margin
 /// @require {Variable<Length>} var("container", "desktop") - Maximum width on desktop
 /// @require {Variable<Length>} var("container", "widescreen") - Maximum width on widescreen
-/// @require {Variable<Length>} var("container", "fullhd") - Maximum width on full HD
+/// @require {Variable<Length>} var("container", "ultrawide") - Maximum width on ultrawide
 @mixin use-container($paddings: ()) {
     @include module.define-module("container") {
         $gap-macro: module.var("gap", "macro");
         $desktop: module.var("container", "desktop");
         $widescreen: module.var("container", "widescreen");
-        $fullhd: module.var("container", "fullhd");
+        $ultrawide: module.var("container", "ultrawide");
 
         .container {
             display: block;
@@ -37,8 +37,8 @@
                     max-width: $widescreen;
                 }
 
-                @include module.fullhd() {
-                    max-width: $fullhd;
+                @include module.ultrawide() {
+                    max-width: $ultrawide;
                 }
             }
 

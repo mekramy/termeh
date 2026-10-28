@@ -11,8 +11,8 @@
             display: none !important;
         }
 
-        @include module.until-fullhd() {
-            .is-until-fullhd-hidden {
+        @include module.until-ultrawide() {
+            .is-until-ultrawide-hidden {
                 display: none !important;
             }
         }
@@ -34,7 +34,7 @@
             .is-tablet-hidden,
             .is-desktop-only,
             .is-widescreen-only,
-            .is-fullhd-only {
+            .is-ultrawide-only {
                 display: none !important;
             }
         }
@@ -44,7 +44,7 @@
             .is-tablet-only,
             .is-desktop-hidden,
             .is-widescreen-only,
-            .is-fullhd-only {
+            .is-ultrawide-only {
                 display: none !important;
             }
         }
@@ -54,17 +54,17 @@
             .is-tablet-only,
             .is-desktop-only,
             .is-widescreen-hidden,
-            .is-fullhd-only {
+            .is-ultrawide-only {
                 display: none !important;
             }
         }
 
-        @include module.fullhd() {
+        @include module.ultrawide() {
             .is-mobile-only,
             .is-tablet-only,
             .is-desktop-only,
             .is-widescreen-only,
-            .is-fullhd-hidden {
+            .is-ultrawide-hidden {
                 display: none !important;
             }
         }
@@ -74,7 +74,7 @@
             .is-tablet-only,
             .is-desktop-only,
             .is-widescreen-only,
-            .is-fullhd-only {
+            .is-ultrawide-only {
                 display: none !important;
             }
         }

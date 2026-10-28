@@ -12,6 +12,7 @@
 ///
 /// @require {Variable<Length>} var("input", "height") - Radio label row height
 /// @require {Variable<Length>} var("input", "checkbox") - Radio control width and height
+/// @require {Variable<Number>} var("input", "disabled-opacity") - Disabled radio opacity
 ///
 /// @require {Variable<Length>} var("gap", "micro") - Space between the radio and its label
 /// @require {Variable<Length>} var("radius", "circle") - Radio and selected-dot border radius
@@ -31,6 +32,7 @@
     @include module.define-module("form-radio") {
         $height: module.var("input", "height");
         $size: module.var("input", "checkbox");
+        $disabled-opacity: module.var("input", "disabled-opacity");
 
         $gap-micro: module.var("gap", "micro");
         $radius-circle: module.var("radius", "circle");
@@ -119,6 +121,7 @@
 
             @include module.is-disabled() {
                 color: $disabled-foreground;
+                opacity: $disabled-opacity;
                 @include module.locked();
 
                 input[type="radio"] {
