@@ -10,6 +10,7 @@
 ///
 /// @require {Variable<Length>} var("gap", "micro") - Space between list items
 /// @require {Variable<Length>} var("gap", "macro") - Space between blocks
+/// @require {Variable<Length>} var("padding", "control") - Padding for blockquote, code, and pre
 ///
 /// @require {Variable<Length>} var("radius", "normal") - Border radius of blockquotes
 /// @require {Variable<LineHeight>} var("line-height", "normal") - Document line height
@@ -43,6 +44,7 @@
 
         $gap-micro: module.var("gap", "micro");
         $gap-macro: module.var("gap", "macro");
+        $padding-control: module.var("padding", "control");
 
         $radius-normal: module.var("radius", "normal");
         $line-height: module.var("line-height", "normal");
@@ -203,7 +205,7 @@
 
         blockquote {
             display: block;
-            padding: $gap-macro;
+            padding: $padding-control;
             margin: $gap-macro 0;
             border-radius: $radius-normal;
             background-color: $surface;
@@ -212,7 +214,7 @@
         code,
         pre {
             direction: ltr;
-            padding: $gap-macro;
+            padding: $padding-control;
             font-size: $mono-size;
             font-family: $mono-family;
             font-weight: $mono-weight;

@@ -6,8 +6,13 @@
 @include module.define("document", "scroll-width", 0.75rem); // Scrollbar width
 
 // Spacing
-@include module.define("gap", "micro", 0.6em); // Small gap inside components and text
-@include module.define("gap", "macro", 1.6em); // Large gap between layout sections
+@include module.define("gap", "micro", 0.5em); // Small gap inside components and text
+@include module.define("gap", "macro", 1.8rem); // Large gap between layout sections
+
+// Padding
+@include module.define("padding", "control", 1.2em); // Padding for inline controls
+@include module.define("padding", "container", 1.6em); // Padding for container elements
+@include module.define("padding", "section", 2.2em); // Padding for sections
 
 // Border radius
 @include module.define("radius", "normal", 2px); // Default corner radius

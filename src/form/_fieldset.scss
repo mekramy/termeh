@@ -4,7 +4,8 @@
 ///
 /// @output Fieldset styles with a padded border and formatted legend
 ///
-/// @require {Variable<Length>} var("gap", "macro") - Inner padding and bottom margin
+/// @require {Variable<Length>} var("gap", "macro") - Bottom margin
+/// @require {Variable<Length>} var("padding", "container") - Fieldset padding
 /// @require {Variable<Length>} var("radius", "normal") - Fieldset border radius
 ///
 /// @require {Variable<Length>} var("input", "legend-size") - Legend font size
@@ -15,6 +16,7 @@
 @mixin use-fieldset() {
     @include module.define-module("form-fieldset") {
         $gap-macro: module.var("gap", "macro");
+        $padding-container: module.var("padding", "container");
         $radius-normal: module.var("radius", "normal");
 
         $legend-size: module.var("input", "legend-size");
@@ -24,7 +26,7 @@
         $border-color: module.variant-for("input", "base", "border");
 
         fieldset {
-            padding: $gap-macro;
+            padding: $padding-container;
             border-radius: $radius-normal;
             border: 1px solid $border-color;
 

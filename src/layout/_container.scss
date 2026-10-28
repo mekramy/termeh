@@ -9,13 +9,17 @@
 /// @param {List<String>} $paddings [()] - Gap names to use as padding classes; `null` includes all defined gaps
 /// @output The `.container` class and its padding classes
 ///
-/// @require {Variable<Length>} var("gap", "macro") - Default padding and bottom margin
+/// @require {Variable<Length>} var("gap", "macro") - Bottom margin
+/// @require {Variable<Length>} var("padding", "container") - Default Container padding
+///
 /// @require {Variable<Length>} var("container", "desktop") - Maximum width on desktop
 /// @require {Variable<Length>} var("container", "widescreen") - Maximum width on widescreen
 /// @require {Variable<Length>} var("container", "ultrawide") - Maximum width on ultrawide
 @mixin use-container($paddings: ()) {
     @include module.define-module("container") {
         $gap-macro: module.var("gap", "macro");
+        $padding-container: module.var("padding", "container");
+
         $desktop: module.var("container", "desktop");
         $widescreen: module.var("container", "widescreen");
         $ultrawide: module.var("container", "ultrawide");
@@ -47,7 +51,7 @@
             }
 
             @include module.padded() {
-                padding: $gap-macro;
+                padding: $padding-container;
 
                 @each $name, $gap in module.gaps($includes: $paddings) {
                     &.is-#{$name}-padded {

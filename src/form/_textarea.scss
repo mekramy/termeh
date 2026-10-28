@@ -10,7 +10,7 @@
 /// @param {List<String>} $colors [()] - Color names to include in the color variations
 /// @output Textarea styles for focus, invalid, disabled, and color variation states
 ///
-/// @require {Variable<Length>} var("gap", "micro") - Unit used to calculate textarea padding
+/// @require {Variable<Length>} var("padding", "control") - Textarea padding
 /// @require {Variable<Length>} var("radius", "normal") - Textarea border radius
 /// @require {Variable<Length>} var("line-height", "normal") - Text line height
 ///
@@ -34,7 +34,7 @@
     @include animation.shake();
 
     @include module.define-module("form-textarea") {
-        $gap-micro: module.var("gap", "micro");
+        $control-padding: module.var("padding", "control");
         $radius-normal: module.var("radius", "normal");
         $line-height: module.var("line-height", "normal");
 
@@ -60,7 +60,7 @@
             max-width: 100%;
             resize: vertical;
             overflow-y: auto;
-            padding: module.double($gap-micro);
+            padding: $control-padding;
             line-height: $line-height;
             border-radius: $radius-normal;
             border: 1px solid $border-color;

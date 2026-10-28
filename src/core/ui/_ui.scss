@@ -361,13 +361,13 @@
 
 /// Returns the padding of an inline element.
 ///
-/// @return {Padding} Micro gap, then double the micro gap
+/// @return {Padding} Global registered control padding
 ///
-/// @require {Variable<Length>} var("gap", "micro") - Micro gap
+/// @require {Variable<Length>} var("padding", "control") - Control padding
 @function inline-padding() {
-    $gap: variable.var("gap", "micro");
+    $control-padding: variable.var("padding", "control");
 
-    @return $gap utility.double($gap);
+    @return utility.half($control-padding) $control-padding;
 }
 
 /// Sets the transition of the given properties with the theme easing and duration.
