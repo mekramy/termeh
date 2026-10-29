@@ -2,17 +2,17 @@
 @use "../utility";
 
 $-queries: (
-    "until-ultrawide": "screen and (width < 1536px)",
-    "until-widescreen": "screen and (width < 1280px)",
-    "until-desktop": "screen and (width < 1024px)",
-    "tablet": "screen and (width >= 768px)",
-    "desktop": "screen and (width >= 1024px)",
-    "widescreen": "screen and (width >= 1280px)",
-    "ultrawide": "screen and (width >= 1536px)",
-    "mobile": "screen and (width < 768px)",
-    "tablet-only": "screen and (768px <= width < 1024px)",
-    "desktop-only": "screen and (1024px <= width < 1280px)",
-    "widescreen-only": "screen and (1280px <= width < 1536px)",
+    "until-ultrawide": "screen and (max-width: 1535.98px)",
+    "until-widescreen": "screen and (max-width: 1279.98px)",
+    "until-desktop": "screen and (max-width: 1023.98px)",
+    "tablet": "screen and (min-width: 768px)",
+    "desktop": "screen and (min-width: 1024px)",
+    "widescreen": "screen and (min-width: 1280px)",
+    "ultrawide": "screen and (min-width: 1536px)",
+    "mobile": "screen and (max-width: 767.98px)",
+    "tablet-only": "screen and (min-width: 768px) and (max-width: 1023.98px)",
+    "desktop-only": "screen and (min-width: 1024px) and (max-width: 1279.98px)",
+    "widescreen-only": "screen and (min-width: 1280px) and (max-width: 1535.98px)",
 ) !default;
 
 @function -missing($name) {

@@ -42,7 +42,7 @@ $-breakpoints: (
         @error -fail($device);
     }
 
-    @media screen and (width >= #{breakpoint($device)}) {
+    @media screen and (min-width: #{breakpoint($device)}) {
         @content;
     }
 }
@@ -58,7 +58,7 @@ $-breakpoints: (
         @error -fail($device);
     }
 
-    @media screen and (width < #{breakpoint($device)}) {
+    @media screen and (max-width: #{breakpoint($device) - 0.02px}) {
         @content;
     }
 }

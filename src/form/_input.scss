@@ -99,8 +99,7 @@
                 }
             }
 
-            &.is-focused,
-            &:focus-within {
+            @include module.is-field-focused() {
                 border-color: $accent;
             }
 
@@ -120,8 +119,7 @@
                 $-accent: module.variant-for("input", $name, "accent");
 
                 &.is-#{$name} {
-                    &.is-focused,
-                    &:focus-within {
+                    @include module.is-field-focused() {
                         border-color: $-accent;
                     }
 

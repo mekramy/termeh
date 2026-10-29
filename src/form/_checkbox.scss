@@ -87,8 +87,7 @@
                     @include module.delayed-transition(transform);
                 }
 
-                &:focus,
-                &:focus-within {
+                @include module.is-field-focused() {
                     border-color: $accent;
                 }
 
@@ -110,8 +109,7 @@
                         border-color: $-accent-color;
                     }
 
-                    &:focus,
-                    &:focus-within {
+                    @include module.is-field-focused() {
                         border-color: $-accent;
                     }
 
@@ -138,16 +136,16 @@
             }
 
             @include module.is-disabled() {
-                color: $disabled-foreground;
-                opacity: $disabled-opacity;
+                color: $disabled-foreground !important;
+                opacity: $disabled-opacity !important;
                 @include module.locked();
 
                 input[type="checkbox"] {
-                    border-color: $disabled-border;
-                    background-color: $disabled-background;
+                    border-color: $disabled-border !important;
+                    background-color: $disabled-background !important;
 
                     &::after {
-                        border-color: $disabled-foreground;
+                        border-color: $disabled-foreground !important;
                     }
                 }
             }

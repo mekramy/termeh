@@ -1,0 +1,11 @@
+chrome >= 88        # Jan 2021
+edge >= 88          # Jan 2021
+firefox >= 84       # Dec 2020
+safari >= 14.1      # Apr 2021
+ios_saf >= 14.5     # Apr 2021
+opera >= 74         # Mar 2021
+samsung >= 15       # Apr 2021
+and_chr >= 88       # Jan 2021
+and_ff >= 84        # Dec 2020
+not op_mini all
+not dead

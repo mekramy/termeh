@@ -118,19 +118,13 @@
     @include reset();
 
     &:focus,
-    &.is-focused,
     &:active,
-    &.is-active {
-        outline: none;
-    }
-
     &:invalid {
         outline: none;
     }
 
     &[disabled],
-    fieldset[disabled] &,
-    &.is-disabled {
+    fieldset[disabled] & {
         cursor: default;
         pointer-events: none;
         user-select: none;
@@ -292,57 +286,71 @@
     }
 }
 
-/// Applies styles when the element is invalid.
+/// Applies styles when the element is invalid or is inside an invalid ancestor.
 ///
-/// @output The content for `:invalid` and `.is-failed` on the element, and on the element inside an invalid or `.is-failed` ancestor
+/// @output The content when the element matches `:invalid` or `.is-failed`, or when it is inside an invalid ancestor (except `form` and `fieldset`)
 @mixin is-invalid() {
-    &:invalid,
-    &.is-failed {
+    &:is(:invalid, .is-failed),
+    :is(:invalid:not(form, fieldset), .is-failed) & {
         @content;
-    }
-
-    @at-root {
-        :invalid #{&},
-        .is-failed #{&} {
-            @content;
-        }
     }
 }
 
-/// Applies styles when the element is disabled.
+/// Applies styles when the element is disabled or is inside a disabled ancestor.
 ///
-/// @output The content for `:disabled` and `.is-disabled` on the element, and on the element inside a disabled or `.is-disabled` ancestor
+/// @output The content when the element or an ancestor matches `:disabled` or `.is-disabled`
 @mixin is-disabled() {
-    &:disabled,
-    &.is-disabled {
+    &:is(:disabled, .is-disabled),
+    :is(:disabled, .is-disabled) & {
         @content;
-    }
-
-    @at-root {
-        :disabled #{&},
-        .is-disabled #{&} {
-            @content;
-        }
     }
 }
 
-/// Applies styles when the element is focused and not disabled.
+/// Applies styles when the element has visible focus and neither it nor any ancestor is disabled, inert or loading.
 ///
-/// @param {Arglist} $exclude - Extra selectors to exclude
-/// @output The content for `&:focus` that is not `:disabled`, `.is-disabled` or an excluded selector, and for a focused element inside an ancestor that is not disabled
+/// @param {Arglist} $exclude - Extra selectors that must not match the element itself
+/// @output The content for `:focus-visible` when the element is not disabled, inert or loading, is not inside a disabled, inert or loading ancestor, and does not match an excluded selector
 @mixin is-focused($exclude...) {
-    $skip: list.join(".is-disabled", $exclude, comma);
+    $blocked: list.join(
+        (
+            ":disabled",
+            ".is-disabled",
+            ".is-loading",
+            "[inert]",
+            ":is(:disabled, .is-disabled,  .is-loading, [inert]) *"
+        ),
+        $exclude,
+        comma
+    );
 
-    &:focus:not(:disabled, #{$skip}),
-    :focus-within:not(:disabled, #{$skip}) {
+    &:not(#{$blocked}):focus-visible {
         @content;
     }
+}
 
-    @at-root {
-        :not(:disabled, .is-disabled) #{&}:focus,
-        :not(:disabled, .is-disabled) #{&}:focus-within {
-            @content;
-        }
+/// Applies styles when the field, or a descendant of it, has focus or an open picker,
+/// and neither it nor any ancestor is disabled, inert or loading.
+///
+/// Meant for composite fields such as `select`, `fieldset` or an input group.
+/// For a simple control such as a button, use `is-focused` instead.
+///
+/// @param {Arglist} $exclude - Extra selectors that must not match the element itself
+/// @output The content for `:focus-visible`, `:focus-within` or `:open` when the element is not disabled, inert or loading, is not inside a disabled, inert or loading ancestor, and does not match an excluded selector
+@mixin is-field-focused($exclude...) {
+    $blocked: list.join(
+        (
+            ":disabled",
+            ".is-disabled",
+            ".is-loading",
+            "[inert]",
+            ":is(:disabled, .is-disabled,  .is-loading, [inert]) *"
+        ),
+        $exclude,
+        comma
+    );
+
+    &:not(#{$blocked}):is(:focus-visible, :focus-within, :open) {
+        @content;
     }
 }
 
@@ -427,9 +435,9 @@
 /// @param {Variable<Number> | Number | null} $opacity - Disabled opacity
 /// @output Declarations that block interaction and set the opacity, text color, background color and border color
 @mixin disabled($color, $background, $border, $opacity) {
-    user-select: none;
-    pointer-events: none;
-    opacity: $opacity;
+    user-select: none !important;
+    pointer-events: none !important;
+    opacity: $opacity !important;
     color: $color !important;
     background-color: $background !important;
     border-color: $border !important;

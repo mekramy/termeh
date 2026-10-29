@@ -131,9 +131,7 @@
                 }
             }
 
-            &:focus,
-            &:open,
-            &.is-focused {
+            @include module.is-field-focused() {
                 color: $accent-foreground;
                 background-color: $accent;
                 border-color: $accent;
@@ -163,9 +161,7 @@
                         }
                     }
 
-                    &:focus,
-                    &:open,
-                    &.is-focused {
+                    @include module.is-field-focused() {
                         color: $-accent-foreground;
                         background-color: $-accent;
                         border-color: $-accent;
@@ -184,7 +180,7 @@
             }
 
             @include module.is-invalid() {
-                &:not(:focus, :open, .is-focused) {
+                &:not(:focus, :open) {
                     border-color: $error;
                     animation: shake 0.5s ease;
                 }

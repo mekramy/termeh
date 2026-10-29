@@ -82,8 +82,7 @@
                 font-weight: $placeholder-weight;
             }
 
-            &:focus,
-            &.is-focused {
+            @include module.is-field-focused() {
                 border-color: $accent;
             }
 
@@ -91,8 +90,7 @@
                 $-accent: module.variant-for("input", $name, "accent");
 
                 &.is-#{$name} {
-                    &:focus,
-                    &.is-focused {
+                    @include module.is-field-focused() {
                         border-color: $-accent;
                     }
 
