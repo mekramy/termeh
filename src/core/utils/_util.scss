@@ -53,6 +53,23 @@
     @return rgb(from #{$value} r g b / #{$opacity});
 }
 
+/// Mixes two colors with a specified weight, keep the alpha of main color.
+///
+/// @param {Variable<Color> | Color} $color - The color to mix
+/// @param {Variable<Color> | Color} $base - The base color to mix with
+/// @param {Variable<Number> | Number} $weight - Weight of the mix, from 0 to 1
+/// @return {Color} The mixed color with the original alpha of `$color`
+@function mix($color, $base, $weight) {
+    $color: validation.assert-color($color, "mix", "color");
+    $base: validation.assert-color($base, "mix", "base");
+    $weight: validation.assert-number($weight, "mix", "weight");
+
+    $alpha: color.channel($color, "alpha");
+    $color: color.change($color, $alpha: 1);
+    $mixed: color.mix($color, $base, $weight);
+    @return color.change($mixed, $alpha: $alpha);
+}
+
 /// Calculates the border radius of a child element inside a parent.
 /// The result is the parent radius minus the padding.
 ///

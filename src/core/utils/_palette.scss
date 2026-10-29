@@ -29,15 +29,15 @@ $-color-spaces: (
 
 /// Blend amounts and target tones for each generated color variant.
 $-color-mixes: (
-    "50": 95% brightest,
-    "100": 85% brightest,
-    "200": 60% brightest,
-    "300": 35% brightest,
-    "400": 20% brightest,
-    "600": 20% darkest,
-    "700": 40% darkest,
-    "800": 75% darkest,
-    "900": 90% darkest,
+    "50": 5% brightest,
+    "100": 15% brightest,
+    "200": 40% brightest,
+    "300": 65% brightest,
+    "400": 80% brightest,
+    "600": 80% darkest,
+    "700": 60% darkest,
+    "800": 25% darkest,
+    "900": 10% darkest,
 );
 
 /// Returns whether a value falls within an inclusive range.
@@ -123,5 +123,5 @@ $-color-mixes: (
 
     $amount: list.nth($data, 1);
     $base: util.iif(list.nth($data, 2) == brightest, -brightest($color), -darkest($color));
-    @return color.mix($base, $color, $amount);
+    @return util.mix($color, $base, $amount);
 }

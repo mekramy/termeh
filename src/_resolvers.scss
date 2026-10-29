@@ -1,4 +1,3 @@
-@use "sass:color";
 @use "core/module";
 
 @function -is-base($palette) {
@@ -51,36 +50,36 @@
         @if $variant == "text" {
             $weight: module.iif($is-light, "700", "200");
             $variation: module.palette($color, $weight);
-            @return color.mix($base, $variation, 10%);
+            @return module.mix($variation, $base, 90%);
         } @else if $variant == "foreground" {
             $weight: module.iif($is-light, "900", "100");
             $variation: module.palette($color, $weight);
-            @return color.mix($base, $variation, 95%);
+            @return module.mix($variation, $base, 5%);
         } @else if $variant == "decorator" {
             $weight: module.iif($is-light, "800", "200");
             $variation: module.palette($color, $weight);
-            @return color.mix($base, $variation, 40%);
+            @return module.mix($variation, $base, 60%);
         } @else if $variant == "hover" {
             $weight: module.iif($is-light, "700", "300");
             @return module.palette($color, $weight);
         } @else if $variant == "light" {
             $weight: module.iif($is-light, "800", "200");
             $variation: module.palette($color, $weight);
-            @return color.mix($base, $variation, 90%);
+            @return module.mix($variation, $base, 10%);
         } @else if $variant == "light-hover" {
             $weight: module.iif($is-light, "800", "200");
             $variation: module.palette($color, $weight);
-            @return color.mix($base, $variation, 85%);
+            @return module.mix($variation, $base, 15%);
         } @else if $variant == "muted" {
             $weight: module.iif($is-light, "900", "100");
             $variation: module.palette($color, $weight);
-            $grayscale: color.mix($shade, $variation, 35%);
-            @return color.mix($base, $grayscale, 35%);
+            $grayscale: module.mix($variation, $shade, 65%);
+            @return module.mix($grayscale, $base, 65%);
         } @else if $variant == "muted-hover" {
             $weight: module.iif($is-light, "900", "100");
             $variation: module.palette($color, $weight);
-            $grayscale: color.mix($shade, $variation, 35%);
-            @return color.mix($base, $grayscale, 15%);
+            $grayscale: module.mix($variation, $shade, 65%);
+            @return module.mix($grayscale, $base, 85%);
         }
     }
 
@@ -187,10 +186,8 @@
         // Simple
         @if $variant == "simple-accent" {
             @return $color;
-        } @else if $variant == "simple-foreground" {
+        } @else if $variant == "simple-text" {
             @return module.variant($palette, "text");
-        } @else if $variant == "simple-background" {
-            @return transparent;
         } @else if $variant == "simple-hover" {
             @return module.variant($palette, "light");
         }
@@ -232,10 +229,8 @@
     // Simple
     @if $variant == "simple-accent" {
         @return module.color("shade");
-    } @else if $variant == "simple-foreground" {
+    } @else if $variant == "simple-text" {
         @return module.variant("shade", "text");
-    } @else if $variant == "simple-background" {
-        @return transparent;
     } @else if $variant == "simple-hover" {
         @return module.variant("shade", "light");
     }
