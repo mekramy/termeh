@@ -88,7 +88,7 @@
 /// @param {Variable<Color> | Color} $color - Shadow color
 /// @return {BoxShadow} The shadow value
 @function shadow($x, $y, $depth, $color) {
-    @return $x $y calc($depth * 2) 0 $color;
+    @return $x $y calc($depth * 2) 0 alpha($color, 0.1);
 }
 
 /// Creates a soft box shadow with specified offset and depth.
@@ -99,7 +99,7 @@
 /// @param {Variable<Color> | Color} $color - Shadow color
 /// @return {BoxShadow} The shadow value
 @function soft-shadow($x, $y, $depth, $color) {
-    @return $x $y calc($depth * 3) negate($depth) $color;
+    @return $x $y calc($depth * 3) negate($depth) alpha($color, 0.1);
 }
 
 /// Creates a flat box shadow with no offset and no blur.
@@ -108,7 +108,7 @@
 /// @param {Variable<Color> | Color} $color - Shadow color
 /// @return {BoxShadow} The shadow value
 @function flat-shadow($size, $color) {
-    @return 0 0 0 $size $color;
+    @return 0 0 0 $size alpha($color, 0.1);
 }
 
 /// Checks whether a key passes the include and exclude lists.

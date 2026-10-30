@@ -1,260 +1,282 @@
 @use "sass:list";
 @use "../core/module";
 
-/// Generates card styles with configurable color and gap variants.
+/// Applies card styles.
 ///
-/// @param {List} $colors [()] - Color names for card variants; `null` includes all registered colors
-/// @param {List} $gaps [()] - Gap names for card variants; `null` includes all registered gaps
+/// Supports `gap` and `color` variations.
 ///
-/// @require {Variable<Color>} color("shade") - Decorator border color @throw on missing
-/// @require {Variable<Color>} color("primary") - Overlay scrollbar color @throw on missing
-/// @require {Variable<Length>} var("gap", "macro") - Spacing between card sections
-/// @require {Variable<Length>} var("radius", "normal") - Card corner radius
-/// @require {Variable<Length>} var("decorator", "size") - Decorator and loader thickness
-/// @require {Variable<Length>} var("decorator", "spinner") - Loading spinner size
-/// @require {Variable<Color>} var("card", "background") [var("box", "background", var("base", "background"))] - Card background color
-/// @require {Variable<Color>} var("card", "foreground") [var("box", "foreground", var("base", "foreground"))] - Card text color
-/// @require {Variable<Color>} var("card", "section") [var("box", "section", var("base", "section"))] - Secondary section background
-/// @require {Variable<Color>} var("card", "separator") [var("box", "separator", var("base", "separator"))] - Section separator color
-/// @require {Variable<Box Shadow>} var("card", "shadow") [var("box", "shadow")] - Card shadow
-/// @require {Variable<List>} var("card", "sizes") [var("box", "sizes")] - Card size variants
-/// @require {Variable<Color>} var("card", "overlay-background") [var("box", "overlay-background", var("overlay", "background", var("base", "background")))] - Overlay background color
-/// @require {Variable<Color>} var("card", "overlay-foreground") [var("box", "overlay-foreground", var("overlay", "foreground", var("base", "foreground")))] - Overlay text color
+/// Variants can be overridden by defining them explicitly or by registering a custom resolver for `box`, `card`, and `component`.
+///
+/// @param {List<String>} $colors [()] - Registered color names to include
+/// @param {List<String>} $gaps [()] - Registered gap names to include
+///
+/// @require {Variable<Length>} var("gap", "macro") - Bottom margin of the card
+/// @require {Variable<Length>} var("radius", "normal") - Corner radius
+/// @require {Variable<Length>} var("decorator", "size") - Decorator border and loader thickness
+/// @require {Variable<Length>} var("decorator", "spinner") - Loader size
+///
+/// @require {Variable<Length>} var("padding", "container") - Card padding
+///
+/// @require {List<List<String | Length>>} var("card", "sizes") [var("box", "sizes")] - List of size names and widths
+/// @require {Variable<Number>} var("card", "opacity") [var("box", "opacity")] - Background opacity
+/// @require {Variable<Filter>} var("card", "backdrop-filter") [var("box", "backdrop-filter")] - Backdrop filter
+/// @require {Variable<BoxShadow>} var("card", "shadow") [var("box", "shadow")] - Card shadow
 /// @require {Variable<Number>} var("card", "overlay-opacity") [var("box", "overlay-opacity", var("overlay", "opacity"))] - Overlay opacity
 /// @require {Variable<Filter>} var("card", "overlay-filter") [var("box", "overlay-filter", var("overlay", "filter"))] - Overlay backdrop filter
+///
+/// @require {Variable<Color>} variant-for("card", "base", "foreground") [variant-for("box", "base", "foreground")] - Text color
+/// @require {Variable<Color>} variant-for("card", "base", "background") [variant-for("box", "base", "background")] - Background color
+/// @require {Variable<Color>} variant-for("card", "base", "surface") [variant-for("box", "base", "surface")] - Secondary section background color
+/// @require {Variable<Color>} variant-for("card", "base", "separator") [variant-for("box", "base", "separator")] - Separator color
+/// @require {Variable<Color>} variant-for("card", "base", "overlay-accent") [variant-for("box", "base", "overlay-accent")] - Overlay loader color
+/// @require {Variable<Color>} variant-for("card", "base", "overlay-foreground") [variant-for("box", "base", "overlay-foreground")] - Overlay text color
+/// @require {Variable<Color>} variant-for("card", "base", "overlay-background") [variant-for("box", "base", "overlay-background")] - Overlay background color
+///
+/// @require {Variable<Color>} variant-for("component", "base", "accent") - Scrollbar and decorator color
+///
+/// @require {Variable<Color>} variant-for("component", $name, "accent") - Scrollbar, decorator, and loader color of each color variation
 @mixin use-card($colors: (), $gaps: ()) {
-    @if not module.module-presented("card") {
-        @include module.present-module("card");
+    $-overlay-opacity: module.var("overlay", "opacity");
+    $-overlay-filter: module.var("overlay", "filter");
 
-        /** Fallbacks */
-        $-base-background: module.var("base", "background");
-        $-base-foreground: module.var("base", "foreground");
-        $-base-section: module.var("base", "section");
-        $-base-separator: module.var("base", "separator");
+    $-box-sizes: module.var("box", "sizes");
+    $-box-opacity: module.var("box", "opacity");
+    $-box-filter: module.var("box", "backdrop-filter");
+    $-box-shadow: module.var("box", "shadow");
+    $-box-overlay-opacity: module.var("box", "overlay-opacity", $-overlay-opacity);
+    $-box-overlay-filter: module.var("box", "overlay-filter", $-overlay-filter);
 
-        $-overlay-background: module.var("overlay", "background", $-base-background);
-        $-overlay-foreground: module.var("overlay", "foreground", $-base-foreground);
-        $-overlay-opacity: module.var("overlay", "opacity");
-        $-overlay-filter: module.var("overlay", "filter");
+    $-box-foreground: module.variant-for("box", "base", "foreground");
+    $-box-background: module.variant-for("box", "base", "background");
+    $-box-surface: module.variant-for("box", "base", "surface");
+    $-box-separator: module.variant-for("box", "base", "separator");
+    $-box-overlay-accent: module.variant-for("box", "base", "overlay-accent");
+    $-box-overlay-foreground: module.variant-for("box", "base", "overlay-foreground");
+    $-box-overlay-background: module.variant-for("box", "base", "overlay-background");
 
-        $-box-background: module.var("box", "background", $-base-background);
-        $-box-foreground: module.var("box", "foreground", $-base-foreground);
-        $-box-section: module.var("box", "section", $-base-section);
-        $-box-separator: module.var("box", "separator", $-base-separator);
-        $-box-overlay-background: module.var("box", "overlay-background", $-overlay-background);
-        $-box-overlay-foreground: module.var("box", "overlay-foreground", $-overlay-foreground);
-        $-box-overlay-opacity: module.var("box", "overlay-opacity", $-overlay-opacity);
-        $-box-overlay-filter: module.var("box", "overlay-filter", $-overlay-filter);
-        $-box-shadow: module.var("box", "shadow");
-        $-box-sizes: module.var("box", "sizes");
-
-        /** --------- */
-
-        $shade: module.color("shade");
-        $primary: module.color("primary");
-
+    @include module.define-module("card") {
         $gap-macro: module.var("gap", "macro");
         $radius-normal: module.var("radius", "normal");
-        $decorator: module.var("decorator", "size");
-        $spinner: module.var("decorator", "spinner");
+        $decorator-thickness: module.var("decorator", "size");
+        $spinner-size: module.var("decorator", "spinner");
 
-        $background: module.var("card", "background", $-box-background);
-        $foreground: module.var("card", "foreground", $-box-foreground);
-        $section: module.var("card", "section", $-box-section);
-        $separator: module.var("card", "separator", $-box-separator);
-        $shadow: module.var("card", "shadow", $-box-shadow);
+        $padding-container: module.var("padding", "container");
+
         $sizes: module.var("card", "sizes", $-box-sizes);
-
-        $overlay-background: module.var("card", "overlay-background", $-box-overlay-background);
-        $overlay-foreground: module.var("card", "overlay-foreground", $-box-overlay-foreground);
+        $opacity: module.var("card", "opacity", $-box-opacity);
+        $filter: module.var("card", "backdrop-filter", $-box-filter);
+        $shadow: module.var("card", "shadow", $-box-shadow);
         $overlay-opacity: module.var("card", "overlay-opacity", $-box-overlay-opacity);
         $overlay-filter: module.var("card", "overlay-filter", $-box-overlay-filter);
 
-        @at-root {
-            .card {
+        $foreground: module.variant-for("card", "base", "foreground", $-box-foreground);
+        $background: module.variant-for("card", "base", "background", $-box-background);
+        $surface: module.variant-for("card", "base", "surface", $-box-surface);
+        $separator: module.variant-for("card", "base", "separator", $-box-separator);
+        $overlay-accent: module.variant-for("card", "base", "overlay-accent", $-box-overlay-accent);
+        $overlay-foreground: module.variant-for(
+            "card",
+            "base",
+            "overlay-foreground",
+            $-box-overlay-foreground
+        );
+        $overlay-background: module.variant-for(
+            "card",
+            "base",
+            "overlay-background",
+            $-box-overlay-background
+        );
+
+        $accent: module.variant-for("component", "base", "accent");
+
+        .card {
+            display: block;
+            position: relative;
+            max-width: 100%;
+            padding: $padding-container;
+            color: $foreground;
+            background-color: module.alpha($background, $opacity);
+            backdrop-filter: $filter;
+            border-radius: $radius-normal;
+            box-shadow: $shadow;
+
+            @include module.marged() {
+                margin-bottom: $gap-macro;
+            }
+
+            > .separator {
                 display: block;
-                position: relative;
-                max-width: 100%;
-                padding: $gap-macro;
-                color: $foreground;
-                background-color: $background;
+                height: 1px;
+                background-color: $separator;
+
+                &.is-attached {
+                    margin: 0 module.negate($padding-container);
+                }
+            }
+
+            > .section {
+                display: block;
+                padding: 0;
+                margin: 0 module.negate($padding-container);
+
+                &:first-child,
+                &.is-header {
+                    margin-top: module.negate($padding-container);
+                }
+
+                &:last-child,
+                &.is-footer {
+                    margin-bottom: module.negate($padding-container);
+                }
+
+                &:not(.is-attached) {
+                    padding: $padding-container;
+                }
+
+                &.is-secondary {
+                    background-color: module.alpha($surface, $opacity);
+                }
+            }
+
+            > .overlay {
+                display: flex;
+                position: absolute;
+                box-sizing: border-box;
+                inset: 0;
+                opacity: 0;
+                z-index: -1;
+                overflow: hidden;
+                overflow-y: auto;
+                padding: $padding-container;
+                color: $overlay-foreground;
+                background-color: module.alpha($overlay-background, $overlay-opacity);
+                backdrop-filter: $overlay-filter;
+                @include module.transition(opacity);
+                @include module.scrollable($accent);
+
+                & > * {
+                    margin: auto;
+                    max-width: 100%;
+                }
+            }
+
+            > .overlay,
+            &::after {
                 border-radius: $radius-normal;
-                box-shadow: $shadow;
+            }
 
-                @include module.marged() {
-                    margin-bottom: $gap-macro;
-                }
+            &.is-top-decorated {
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+                border-top: $decorator-thickness solid $accent;
+            }
 
-                > .separator {
-                    display: block;
-                    height: 1px;
-                    background: $separator;
+            &.is-bottom-decorated {
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+                border-bottom: $decorator-thickness solid $accent;
+            }
 
-                    &.is-attached {
-                        margin: 0 module.negate($gap-macro);
-                    }
-                }
+            &.is-loading {
+                @include module.overlay($overlay-background, $overlay-opacity, $overlay-filter);
+                @include module.loader($spinner-size, $overlay-accent, $decorator-thickness);
+            }
 
-                > .section {
-                    display: block;
-                    padding: 0;
-                    margin: 0 module.negate($gap-macro);
-                    background-color: $background;
-
-                    &:first-child,
-                    &.is-header {
-                        margin-top: module.negate($gap-macro);
-                    }
-
-                    &:last-child,
-                    &.is-footer {
-                        margin-bottom: module.negate($gap-macro);
-                    }
-
-                    &:not(.is-attached) {
-                        padding: $gap-macro;
-                    }
-
-                    &.is-secondary {
-                        background: $section;
-                    }
-                }
-
+            &.is-overlaid:not(.is-loading) {
                 > .overlay {
-                    display: flex;
-                    position: absolute;
-                    box-sizing: border-box;
-                    inset: 0;
-                    opacity: 0;
-                    z-index: -1;
-                    overflow: hidden;
-                    overflow-y: auto;
-                    padding: $gap-macro;
-                    color: $overlay-foreground;
-                    background: module.alpha($overlay-background, $overlay-opacity);
-                    backdrop-filter: $overlay-filter;
-                    @include module.transition(opacity);
-                    @include module.scrollable($primary);
+                    opacity: 1;
+                    z-index: auto;
+                }
+            }
 
-                    & > * {
-                        margin: auto;
-                        max-width: 100%;
-                    }
+            &:not(.is-overlaid, .is-loading) > .section {
+                &.top-sticky {
+                    position: sticky;
+                    top: module.negate($padding-container);
+                    background-color: module.alpha($background, $opacity);
                 }
 
-                > .overlay,
-                &::after {
-                    border-radius: $radius-normal;
+                &.bottom-sticky {
+                    position: sticky;
+                    bottom: module.negate($padding-container);
+                    background-color: module.alpha($background, $opacity);
                 }
+            }
 
-                &.is-top-decorated {
-                    border-top-left-radius: 0;
-                    border-top-right-radius: 0;
-                    border-top: $decorator solid $shade;
-                }
+            @each $name, $gap in module.gaps($includes: $gaps) {
+                &.is-#{$name}-gap {
+                    padding: $gap;
 
-                &.is-bottom-decorated {
-                    border-bottom-left-radius: 0;
-                    border-bottom-right-radius: 0;
-                    border-bottom: $decorator solid $shade;
-                }
-
-                &.is-loading {
-                    @include module.overlay($overlay-background, $overlay-opacity, $overlay-filter);
-                    @include module.loader($spinner, $overlay-foreground, $decorator);
-                }
-
-                &.is-overlaid:not(.is-loading) {
-                    > .overlay {
-                        opacity: 1;
-                        z-index: auto;
-                    }
-                }
-
-                &:not(.is-overlaid, .is-loading) > .section {
-                    &.top-sticky {
-                        position: sticky;
-                        top: module.negate($gap-macro);
+                    > .separator.is-attached {
+                        margin: 0 module.negate($gap);
                     }
 
-                    &.bottom-sticky {
-                        position: sticky;
-                        bottom: module.negate($gap-macro);
-                    }
-                }
+                    > .section {
+                        margin: 0 module.negate($gap);
 
-                @each $name, $gap in module.gaps($includes: $gaps) {
-                    &.is-#{$name}-gap {
-                        padding: $gap;
-
-                        > .separator.is-attached {
-                            margin: 0 module.negate($gap);
+                        &:first-child,
+                        &.is-header {
+                            margin-top: module.negate($gap);
                         }
 
-                        > .section {
-                            margin: 0 module.negate($gap);
-
-                            &:first-child,
-                            &.is-header {
-                                margin-top: module.negate($gap);
-                            }
-
-                            &:last-child,
-                            &.is-footer {
-                                margin-bottom: module.negate($gap);
-                            }
-
-                            &:not(.is-attached) {
-                                padding: $gap;
-                            }
+                        &:last-child,
+                        &.is-footer {
+                            margin-bottom: module.negate($gap);
                         }
 
-                        > .overlay {
+                        &:not(.is-attached) {
                             padding: $gap;
                         }
+                    }
 
-                        &:not(.is-overlaid, .is-loading) > .section {
-                            &.top-sticky {
-                                top: module.negate($gap);
-                            }
+                    > .overlay {
+                        padding: $gap;
+                    }
 
-                            &.bottom-sticky {
-                                bottom: module.negate($gap);
-                            }
+                    &:not(.is-overlaid, .is-loading) > .section {
+                        &.top-sticky {
+                            top: module.negate($gap);
+                        }
+
+                        &.bottom-sticky {
+                            bottom: module.negate($gap);
                         }
                     }
                 }
+            }
 
-                @each $name, $color in module.colors($includes: $colors) {
-                    &.is-#{$name} {
-                        @include module.selection($name);
+            @each $name, $_ in module.colors($includes: $colors) {
+                $-overlay-accent: module.variant-for("component", $name, "accent");
+                $-accent: module.variant-for("component", $name, "accent");
 
-                        > .overlay {
-                            @include module.scroll-color($color);
-                        }
-
-                        &.is-top-decorated {
-                            border-top-color: $color;
-                        }
-
-                        &.is-bottom-decorated {
-                            border-bottom-color: $color;
-                        }
-
-                        &.is-loading {
-                            @include module.loader-color(module.variant($name, "readable"));
-                        }
+                &.is-#{$name} {
+                    > .overlay {
+                        @include module.scroll-color($-accent);
                     }
-                }
 
-                @each $size in $sizes {
-                    @if list.length($size) == 2 {
-                        $name: list.nth($size, 1);
-                        $width: list.nth($size, 2);
-                        @if $name and $width {
-                            &.is-#{$name} {
-                                width: $width;
-                            }
+                    &.is-top-decorated {
+                        border-top-color: $-accent;
+                    }
+
+                    &.is-bottom-decorated {
+                        border-bottom-color: $-accent;
+                    }
+
+                    &.is-loading {
+                        @include module.loader-color($-accent);
+                    }
+
+                    @include module.selection($name);
+                }
+            }
+
+            @each $size in $sizes {
+                @if list.length($size) == 2 {
+                    $name: list.nth($size, 1);
+                    $width: list.nth($size, 2);
+                    @if $name and $width {
+                        &.is-#{$name} {
+                            width: $width;
                         }
                     }
                 }

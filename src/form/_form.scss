@@ -13,9 +13,7 @@
 /// @require {Variable<Number>} var("box", "overlay-opacity") [var("overlay", "opacity")] - Loading overlay opacity
 /// @require {Variable<Filter>} var("box", "overlay-filter") [var("overlay", "filter")] - Loading overlay filter
 ///
-/// @require {Variable<Color>} variant-for("box", "base", "foreground") - Form text color
-/// @require {Variable<Color>} variant-for("box", "base", "background") - Form background color
-/// @require {Variable<Color>} variant-for("box", "base", "overlay-foreground") - Loading spinner color
+/// @require {Variable<Color>} variant-for("box", "base", "overlay-accent") - Loading spinner color
 /// @require {Variable<Color>} variant-for("box", "base", "overlay-background") - Loading overlay background color
 @mixin use-form() {
     $-overlay-opacity: module.var("overlay", "opacity");
@@ -26,28 +24,20 @@
         $decorator-thickness: module.var("decorator", "size");
         $spinner-size: module.var("decorator", "spinner");
 
-        $opacity: module.var("box", "opacity");
-        $filter: module.var("box", "backdrop-filter");
         $overlay-opacity: module.var("box", "overlay-opacity", $-overlay-opacity);
         $overlay-filter: module.var("box", "overlay-filter", $-overlay-filter);
 
-        $foreground: module.variant-for("box", "base", "foreground");
-        $background: module.variant-for("box", "base", "background");
-        $overlay-foreground: module.variant-for("box", "base", "overlay-foreground");
+        $overlay-accent: module.variant-for("box", "base", "overlay-accent");
         $overlay-background: module.variant-for("box", "base", "overlay-background");
 
         form {
-            color: $foreground;
-            background-color: module.alpha($background, $opacity);
-            backdrop-filter: $filter;
-
             @include module.marged() {
                 margin-bottom: $gap-macro;
             }
 
             &.is-loading {
                 @include module.overlay($overlay-background, $overlay-opacity, $overlay-filter);
-                @include module.loader($spinner-size, $overlay-foreground, $decorator-thickness);
+                @include module.loader($spinner-size, $overlay-accent, $decorator-thickness);
             }
         }
     }

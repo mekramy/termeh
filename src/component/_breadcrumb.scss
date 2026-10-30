@@ -1,57 +1,71 @@
 @use "../core/module";
 
-/// Generates breadcrumb styles with configurable color variants.
+/// Applies breadcrumb styles.
 ///
-/// @param {List} $colors [()] - Color names for breadcrumb variants; `null` includes all registered colors
+/// Supports `color` variations.
 ///
-/// @require {Variable<Color>} variant("primary", "readable") - Active item color
-/// @require {Variable<Color>} var("base", "separator") - Divider color
+/// Variants can be overridden by defining them explicitly or by registering a custom resolver for `component`.
+///
+/// @param {List<String>} $colors [()] - Registered color names to include
+///
 /// @require {Variable<Length>} var("gap", "micro") - Space around dividers
-/// @require {Variable<Length>} var("control", "height") - Item line height
-/// @require {Variable<Length>} var("control", "meta-size") - Breadcrumb text size
-/// @require {Variable<FontWeight>} var("control", "meta-weight") - Breadcrumb text weight
-/// @require {Variable<FontWeight>} var("strong", "weight") - Active item text weight
+/// @require {Variable<FontWeight>} var("text", "strong-weight") - Active item text weight
+///
+/// @require {Variable<Length>} var("component", "height") - Item line height
+/// @require {Variable<Length>} var("component", "meta-size") - Breadcrumb text size
+/// @require {Variable<FontWeight>} var("component", "meta-weight") - Breadcrumb text weight
+///
+/// @require {Variable<Color>} variant-for("component", "base", "text") - Item text color
+/// @require {Variable<Color>} variant-for("component", "base", "accent-text") - Active item text color
+/// @require {Variable<Color>} variant-for("component", "base", "separator") - Divider color
+///
+/// @require {Variable<Color>} variant-for("component", $name, "accent-text") - Active item text color of each color variation
 @mixin use-breadcrumb($colors: ()) {
-    @if not module.module-presented("breadcrumb") {
-        @include module.present-module("breadcrumb");
-
-        $primary-readable: module.variant("primary", "readable");
-        $separator: module.var("base", "separator");
+    @include module.define-module("breadcrumb") {
         $gap-micro: module.var("gap", "micro");
+        $strong-weight: module.var("text", "strong-weight");
 
-        $height: module.var("control", "height");
-        $font-size: module.var("control", "meta-size");
-        $font-weight: module.var("control", "meta-weight");
-        $strong-weight: module.var("strong", "weight");
+        $height: module.var("component", "height");
+        $font-size: module.var("component", "meta-size");
+        $font-weight: module.var("component", "meta-weight");
 
-        @at-root {
-            .breadcrumb {
-                display: flex;
-                flex-flow: row wrap;
-                align-items: center;
-                justify-content: flex-start;
-                box-sizing: border-box;
-                font-size: $font-size;
-                font-weight: $font-weight;
+        $text: module.variant-for("component", "base", "text");
+        $accent-text: module.variant-for("component", "base", "accent-text");
+        $separator: module.variant-for("component", "base", "separator");
 
-                > * {
-                    line-height: $height;
-                }
+        .breadcrumb {
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
+            justify-content: flex-start;
+            box-sizing: border-box;
+            font-size: $font-size;
+            font-weight: $font-weight;
 
-                .divider {
-                    color: $separator;
-                    margin: 0 $gap-micro;
-                }
+            > * {
+                color: $text;
+                line-height: $height;
+            }
 
-                .active {
-                    color: $primary-readable;
-                    font-weight: $strong-weight;
-                }
+            .divider {
+                color: $separator;
+                margin: 0 $gap-micro;
+            }
 
-                @each $name, $color in module.colors($includes: $colors) {
-                    &.is-#{$name} .active {
-                        color: module.variant($name, "readable");
+            .active {
+                color: $accent-text;
+                font-weight: $strong-weight;
+            }
+
+            @each $name, $_ in module.colors($includes: $colors) {
+                $-accent-text: module.variant-for("component", $name, "accent-text");
+
+                &.is-#{$name} {
+                    .active {
+                        color: $-accent-text;
                     }
+
+                    @include module.selection($name);
                 }
             }
         }

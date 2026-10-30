@@ -1,91 +1,101 @@
 @use "../core/module";
 @use "./element";
 
-/// Generates link styles with configurable color and size variants.
+/// Applies link styles.
 ///
-/// @param {List} $colors [()] - Color names for link variants; `null` includes all registered colors
-/// @param {List} $sizes [()] - Size names for link variants; `null` includes all registered sizes
+/// Supports `size` and `color` variations.
 ///
-/// @require {Variable<Color>} var("base", "foreground") - Link text color
-/// @require {Variable<Length>} var("decorator", "size") - Loading spinner thickness
-/// @require {Variable<Length>} var("control", "height") - Link height
-/// @require {Variable<Length>} var("control", "meta-size") - Link text size
-/// @require {Variable<FontWeight>} var("control", "meta-weight") - Link text weight
+/// Variants can be overridden by defining them explicitly or by registering a custom resolver for `component`.
+///
+/// @param {List<String>} $colors [()] - Registered color names to include
+/// @param {List<String>} $sizes [()] - Registered size names to include
+///
+/// @require {Variable<Length>} var("component", "height") - Link height
+/// @require {Variable<Length>} var("component", "meta-size") - Link text size
+/// @require {Variable<FontWeight>} var("component", "meta-weight") - Link text weight
+/// @require {Variable<Number>} var("component", "disabled-opacity") - Opacity when disabled
+///
+/// @require {Variable<Color>} variant-for("component", "base", "accent") - Loader color
+/// @require {Variable<Color>} variant-for("component", "base", "accent-text") - Link text color
+/// @require {Variable<Color>} variant-for("component", "base", "disabled-text") - Text color when disabled
+///
+/// @require {Variable<Color>} variant-for("component", $name, "accent") - Loader color of each color variation
+/// @require {Variable<Color>} variant-for("component", $name, "accent-text") - Link text color of each color variation
 @mixin use-link($colors: (), $sizes: ()) {
-    @if not module.module-presented("link") {
-        @include element.use-element();
-        @include module.present-module("link");
+    @include element.use-element();
 
-        $foreground: module.var("base", "foreground");
-        $decorator: module.var("decorator", "size");
+    @include module.define-module("link") {
+        $height: module.var("component", "height");
+        $font-size: module.var("component", "meta-size");
+        $font-weight: module.var("component", "meta-weight");
+        $disabled-opacity: module.var("component", "disabled-opacity");
 
-        $height: module.var("control", "height");
-        $font-size: module.var("control", "meta-size");
-        $font-weight: module.var("control", "meta-weight");
+        $accent: module.variant-for("component", "base", "accent");
+        $accent-text: module.variant-for("component", "base", "accent-text");
+        $disabled-text: module.variant-for("component", "base", "disabled-text");
 
-        @at-root {
-            .link {
-                @include module.control();
-                @extend .element;
+        .link {
+            @include module.control();
+            @extend .element;
 
-                cursor: pointer;
-                height: $height;
-                font-size: $font-size;
-                font-weight: $font-weight;
-                text-overflow: ellipsis;
-                color: $foreground;
-                @include module.transition(color);
+            cursor: pointer;
+            height: $height;
+            font-size: $font-size;
+            font-weight: $font-weight;
+            text-overflow: ellipsis;
+            color: $accent-text;
+            @include module.transition(color);
 
-                &::after {
-                    content: " ";
-                    position: absolute;
-                    left: 50%;
-                    bottom: 0%;
-                    width: 0%;
-                    height: 1px;
-                    transform: translateX(-50%);
-                    background: currentcolor;
-                    @include module.transition((width));
+            &::before {
+                content: " ";
+                position: absolute;
+                left: 50%;
+                bottom: 0%;
+                width: 0%;
+                height: 1px;
+                transform: translateX(-50%);
+                background-color: currentcolor;
+                @include module.transition(width);
+            }
+
+            &:hover {
+                text-decoration: none;
+
+                &::before {
+                    width: 100%;
                 }
+            }
 
-                &:hover {
-                    text-decoration: none;
+            &.is-loading {
+                color: transparent;
+                @include module.locked();
+                @include module.loader(1em, $accent, 1px);
+            }
 
-                    &::after {
-                        width: 100%;
+            @each $name, $size in module.sizes($sizes) {
+                &.is-#{$name} {
+                    font-size: $size;
+                }
+            }
+
+            @each $name, $color in module.colors($colors) {
+                $-accent: module.variant-for("component", $name, "accent");
+                $-text: module.variant-for("component", $name, "accent-text");
+
+                &.is-#{$name} {
+                    color: $-text;
+
+                    &.is-loading {
+                        color: transparent;
+                        @include module.loader-color($-accent);
                     }
+
+                    @include module.selection($name);
                 }
+            }
 
-                &.is-loading {
-                    color: transparent;
-                    @include module.locked();
-                    @include module.loader(1em, $foreground, $decorator);
-                }
-
-                @each $name, $size in module.sizes($sizes) {
-                    &.is-#{$name} {
-                        font-size: $size;
-                    }
-                }
-
-                @each $name, $color in module.colors($colors) {
-                    &.is-#{$name} {
-                        color: module.variant($name, "readable");
-                        @include module.selection($name);
-
-                        &.is-loading {
-                            color: transparent;
-                            @include module.loader-color(module.variant($name, "readable"));
-                        }
-                    }
-                }
-
-                @include module.is-disabled() {
-                    @include module.disabled();
-
-                    background-color: transparent !important;
-                    border-color: transparent !important;
-                }
+            @include module.is-disabled() {
+                @include module.disabled($disabled-text, null, null, $disabled-opacity);
             }
         }
     }

@@ -1,120 +1,177 @@
 @use "../core/module";
 @use "./element";
 
-/// Generates tag styles with configurable color and size variants.
+/// Applies tag styles.
 ///
-/// @param {List} $colors [()] - Color names for tag variants; `null` includes all registered colors
-/// @param {List} $sizes [()] - Size names for tag variants; `null` includes all registered sizes
+/// Supports `size` and `color` variations.
 ///
-/// @require {Variable<Color>} color("shade") - Focus-outline color @throw on missing
-/// @require {Variable<Color>} variant("shade", "light") - Default background color
-/// @require {Variable<Color>} variant("shade", "readable") - Default text and spinner color
-/// @require {Variable<Length>} var("radius", "normal") - Standard corner radius
-/// @require {Variable<Length>} var("radius", "rounded") - Rounded corner radius
-/// @require {Variable<Length>} var("decorator", "size") - Focus-outline and loading spinner thickness
-/// @require {Variable<Length>} var("control", "height") - Tag height
-/// @require {Variable<Length>} var("control", "meta-size") - Default text size
-/// @require {Variable<FontWeight>} var("control", "meta-weight") - Default text weight
+/// Variants can be overridden by defining them explicitly or by registering a custom resolver for `component`.
+///
+/// @param {List<String>} $colors [()] - Registered color names to include
+/// @param {List<String>} $sizes [()] - Registered size names to include
+///
+/// @require {Variable<Length>} var("radius", "normal") - Corner radius of tags
+/// @require {Variable<Length>} var("radius", "circle") - Corner radius of rounded icon tags
+/// @require {Variable<Length>} var("radius", "rounded") - Corner radius of rounded tags
+/// @require {Variable<Length>} var("decorator", "size") - Focus outline thickness
+///
+/// @require {Variable<Length>} var("component", "height") - Tag height
+/// @require {Variable<Length>} var("component", "meta-size") - Tag text size
+/// @require {Variable<FontWeight>} var("component", "meta-weight") - Tag text weight
+/// @require {Variable<Number>} var("component", "light-opacity") - Background opacity
+/// @require {Variable<Number>} var("component", "outline-opacity") - Focus outline opacity
+/// @require {Variable<Number>} var("component", "disabled-opacity") - Opacity when disabled
+///
+/// @require {Variable<Color>} variant-for("component", "base", "light-accent") - Focus outline color
+/// @require {Variable<Color>} variant-for("component", "base", "light-foreground") - Text and loader color
+/// @require {Variable<Color>} variant-for("component", "base", "light-background") - Background color
+/// @require {Variable<Color>} variant-for("component", "base", "light-hover") - Hover background of action tags
+///
+/// @require {Variable<Color>} variant-for("component", "base", "disabled-foreground") - Text color when disabled
+/// @require {Variable<Color>} variant-for("component", "base", "disabled-background") - Background color when disabled
+///
+/// @require {Variable<Color>} variant-for("component", $name, "light-accent") - Focus outline color of each color variation
+/// @require {Variable<Color>} variant-for("component", $name, "light-foreground") - Text and loader color of each color variation
+/// @require {Variable<Color>} variant-for("component", $name, "light-background") - Background color of each color variation
+/// @require {Variable<Color>} variant-for("component", $name, "light-hover") - Hover background of action tags in each color variation
 @mixin use-tag($colors: (), $sizes: ()) {
-    @if not module.module-presented("tag") {
-        @include element.use-element();
-        @include module.present-module("tag");
+    @include element.use-element();
 
-        $shade: module.color("shade");
-        $shade-light: module.variant("shade", "light");
-        $shade-readable: module.variant("shade", "readable");
-
-        $background: module.alpha($shade-light, 0.35);
-        $hover: module.alpha($shade-light, 0.9);
-        $outline: module.alpha($shade, 0.2);
-
+    @include module.define-module("tag") {
         $radius-normal: module.var("radius", "normal");
+        $radius-circle: module.var("radius", "circle");
         $radius-rounded: module.var("radius", "rounded");
-        $decorator: module.var("decorator", "size");
+        $decorator-thickness: module.var("decorator", "size");
 
-        $height: module.var("control", "height");
-        $font-size: module.var("control", "meta-size");
-        $font-weight: module.var("control", "meta-weight");
+        $height: module.var("component", "height");
+        $font-size: module.var("component", "meta-size");
+        $font-weight: module.var("component", "meta-weight");
+        $opacity: module.var("component", "light-opacity");
+        $outline-opacity: module.var("component", "outline-opacity");
+        $disabled-opacity: module.var("component", "disabled-opacity");
 
-        @at-root {
-            .tag {
-                @include module.control();
-                @extend .element;
+        $accent: module.variant-for("component", "base", "light-accent");
+        $foreground: module.variant-for("component", "base", "light-foreground");
+        $background: module.variant-for("component", "base", "light-background");
+        $hover-background: module.variant-for("component", "base", "light-hover");
 
-                cursor: default;
-                height: $height;
-                font-size: $font-size;
-                font-weight: $font-weight;
-                text-overflow: ellipsis;
-                color: $shade-readable;
+        $disabled-foreground: module.variant-for("component", "base", "disabled-foreground");
+        $disabled-background: module.variant-for("component", "base", "disabled-background");
+
+        .tag {
+            @include module.control();
+            @extend .element;
+
+            cursor: default;
+            height: $height;
+            font-size: $font-size;
+            font-weight: $font-weight;
+            text-overflow: ellipsis;
+            color: $foreground;
+            background-color: module.alpha($background, $opacity);
+            border-radius: $radius-normal;
+            padding: module.control-padding();
+            @include module.transition(all);
+            @include module.unselectable();
+
+            &.is-icon {
+                align-items: center;
+                justify-content: center;
+                width: $height;
+                padding: 0;
+                aspect-ratio: 1;
+            }
+
+            &.is-action {
+                cursor: pointer;
                 background-color: $background;
-                border-radius: $radius-normal;
-                padding: module.control-padding();
-                @include module.transition(all);
-                @include module.unselectable();
 
-                &.is-action {
-                    cursor: pointer;
-                    text-decoration: underline;
-                    text-underline-offset: 3px;
-
-                    &:hover {
-                        background-color: $hover;
-                    }
-
-                    @include module.is-focused(".is-loading") {
-                        outline: $decorator solid $outline;
-                    }
+                &:hover {
+                    text-decoration: none;
+                    background-color: $hover-background;
                 }
 
-                &.is-loading {
+                @include module.is-focused() {
+                    outline-offset: 1px;
+                    outline: $decorator-thickness solid module.alpha($accent, $outline-opacity);
+                }
+            }
+
+            &.is-loading {
+                @include module.locked();
+
+                &:not(.is-iconic) {
                     color: transparent;
-                    @include module.locked();
-                    @include module.loader(1em, $shade-readable, $decorator);
+                    @include module.loader(1em, $foreground, 1px);
                 }
 
-                &.is-rounded {
-                    border-radius: $radius-rounded;
-                }
-
-                @each $name, $size in module.sizes($sizes) {
-                    &.is-#{$name} {
-                        font-size: $size;
+                &.is-iconic {
+                    .icon {
+                        color: transparent;
+                        @include module.loader(1em, $foreground, 1px);
                     }
                 }
+            }
 
-                @each $name, $color in module.colors($colors) {
-                    $-foreground: module.variant($name, "readable");
-                    $-background: module.alpha(module.variant($name, "light"), 0.35);
-                    $-hover: module.alpha(module.variant($name, "light"), 0.9);
-                    $-outline: module.alpha($color, 0.2);
+            &.is-rounded {
+                border-radius: $radius-rounded;
 
-                    &.is-#{$name} {
-                        color: $-foreground;
+                &.is-icon {
+                    border-radius: $radius-circle;
+                }
+            }
+
+            @each $name, $size in module.sizes($sizes) {
+                &.is-#{$name} {
+                    font-size: $size;
+                }
+            }
+
+            @each $name, $_ in module.colors($colors) {
+                $-accent: module.variant-for("component", $name, "light-accent");
+                $-foreground: module.variant-for("component", $name, "light-foreground");
+                $-background: module.variant-for("component", $name, "light-background");
+                $-hover-background: module.variant-for("component", $name, "light-hover");
+
+                &.is-#{$name} {
+                    color: $-foreground;
+                    background-color: module.alpha($-background, $opacity);
+
+                    &.is-action {
                         background-color: $-background;
 
-                        &.is-action {
-                            &:hover {
-                                background-color: $-hover;
-                            }
-
-                            @include module.is-focused(".is-loading") {
-                                outline-color: $-outline;
-                            }
+                        &:hover {
+                            background-color: $-hover-background;
                         }
 
-                        &.is-loading {
+                        @include module.is-focused() {
+                            outline-color: module.alpha($-accent, $outline-opacity);
+                        }
+                    }
+
+                    &.is-loading {
+                        &:not(.is-iconic) {
                             color: transparent;
                             @include module.loader-color($-foreground);
                         }
+
+                        &.is-iconic {
+                            .icon {
+                                color: transparent;
+                                @include module.loader-color($-foreground);
+                            }
+                        }
                     }
                 }
+            }
 
-                @include module.is-disabled() {
-                    @include module.disabled();
-
-                    border-color: transparent !important;
-                }
+            @include module.is-disabled() {
+                @include module.disabled(
+                    $disabled-foreground,
+                    $disabled-background,
+                    null,
+                    $disabled-opacity
+                );
             }
         }
     }

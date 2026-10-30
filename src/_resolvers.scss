@@ -41,10 +41,6 @@
             @return module.variant("shade", "muted");
         } @else if $variant == "disabled-background" {
             @return module.variant("base", "surface");
-        } @else if $variant == "overlay-foreground" {
-            @return module.variant("base", "foreground");
-        } @else if $variant == "overlay-background" {
-            @return module.color("base");
         }
     } @else {
         @if $variant == "text" {
@@ -86,6 +82,22 @@
     @return null;
 }
 
+@function overlay-resolver($scheme, $palette, $is-light, $base, $color, $variant) {
+    @if -is-colorize($palette) {
+        @if $variant == "accent" {
+            @return module.variant($palette, "text");
+        }
+    }
+
+    @if $variant == "accent" {
+        @return module.variant("base", "foreground");
+    } @else if $variant == "foreground" {
+        @return module.variant("base", "foreground");
+    } @else if $variant == "background" {
+        @return module.color("base");
+    }
+}
+
 @function box-resolver($scheme, $palette, $is-light, $base, $color, $variant) {
     @if $variant == "background" {
         @return module.color("base");
@@ -93,10 +105,12 @@
         @return module.variant("base", "surface");
     } @else if $variant == "separator" {
         @return module.variant("base", "separator");
+    } @else if $variant == "overlay-accent" {
+        @return module.variant-for("overlay", $palette, "accent");
     } @else if $variant == "overlay-foreground" {
-        @return module.variant("base", "overlay-foreground");
+        @return module.variant-for("overlay", $palette, "foreground");
     } @else if $variant == "overlay-background" {
-        @return module.variant("base", "overlay-background");
+        @return module.variant-for("overlay", $palette, "background");
     }
 
     @return null;

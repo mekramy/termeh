@@ -78,6 +78,7 @@
 @include module.define("component", "light-opacity", 0.4); // Tag opacity
 @include module.define("component", "action-opacity", 0.85); // Action opacity
 @include module.define("component", "button-opacity", 1); // Button opacity
+@include module.define("component", "skeleton-opacity", 0.85); // Skeleton opacity
 @include module.define("component", "outline-opacity", 0.2); // Outline opacity
 @include module.define("component", "disabled-opacity", 0.45); // Opacity for disabled component
 

@@ -1,0 +1,124 @@
+@use "../core/module";
+
+/// Applies skeleton loading placeholder styles.
+///
+/// Supports `size` variations.
+///
+/// @param {List<String>} $sizes [()] - Registered size names to include
+///
+/// @require {Variable<Length>} var("radius", "normal") - Corner radius
+/// @require {Variable<Length>} var("radius", "circle") - Corner radius of rounded image placeholders
+/// @require {Variable<Length>} var("radius", "rounded") - Corner radius of rounded input, control, and text placeholders
+///
+/// @require {Variable<Length>} var("component", "height") - Placeholder height
+/// @require {Variable<Number>} var("component", "skeleton-opacity") - Placeholder opacity
+///
+/// @require {Variable<Color>} variant("shade", "light") - Placeholder background color
+/// @require {Variable<Color>} variant("shade", "light-hover") - Highlight color of the shimmer
+@mixin use-skeleton($sizes: ()) {
+    @include module.define-module("skeleton") {
+        $radius-normal: module.var("radius", "normal");
+        $radius-circle: module.var("radius", "circle");
+        $radius-rounded: module.var("radius", "rounded");
+
+        $height: module.var("component", "height");
+        $opacity: module.var("component", "skeleton-opacity");
+
+        $light: module.variant("shade", "light");
+        $light-hover: module.variant("shade", "light-hover");
+
+        @at-root {
+            @keyframes skeleton-pulse {
+                0%,
+                100% {
+                    opacity: calc($opacity * 0.5);
+                }
+                50% {
+                    opacity: $opacity;
+                }
+            }
+
+            @keyframes skeleton-shimmer {
+                0% {
+                    background-position-x: 200%;
+                }
+                100% {
+                    background-position-x: 0%;
+                }
+            }
+        }
+
+        .skeleton {
+            display: block;
+            overflow: hidden;
+            opacity: $opacity;
+            background-color: $light;
+            background-size: 200% 100%;
+            background-image: linear-gradient(
+                100deg,
+                $light,
+                $light 30%,
+                $light-hover 50%,
+                $light 70%
+            );
+            animation:
+                skeleton-pulse 3s cubic-bezier(0.4, 0, 0.2, 1) infinite,
+                skeleton-shimmer 2s ease-in-out infinite;
+            animation-delay: var(--skeleton-delay, 0s);
+            border-radius: $radius-normal;
+            @include module.unselectable();
+            @include module.prefers-reduced-motion() {
+                animation: none;
+            }
+
+            &.is-image {
+                width: $height;
+                height: $height;
+                aspect-ratio: 1;
+            }
+
+            &.is-input {
+                width: 100%;
+                height: $height;
+            }
+
+            &.is-control {
+                width: 6em;
+                height: $height;
+            }
+
+            &.is-text {
+                width: 100%;
+                height: calc($height * 0.3);
+
+                &.is-inline {
+                    width: 75%;
+                }
+            }
+
+            &.is-separator {
+                width: 100%;
+                height: 1px;
+                animation: none;
+            }
+
+            &.is-rounded {
+                &.is-image {
+                    border-radius: $radius-circle;
+                }
+
+                &.is-input,
+                &.is-control,
+                &.is-text {
+                    border-radius: $radius-rounded;
+                }
+            }
+
+            @each $name, $size in module.sizes($sizes) {
+                &.is-#{$name} {
+                    font-size: $size;
+                }
+            }
+        }
+    }
+}

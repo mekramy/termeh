@@ -1,101 +1,50 @@
 @use "../core/module";
 @use "./element";
 
-/// Generates meta element styles with configurable color and size variants.
+/// Applies meta text styles.
 ///
-/// @param {List} $colors [()] - Color names for meta variants; `null` includes all registered colors
-/// @param {List} $sizes [()] - Size names for meta variants; `null` includes all registered sizes
+/// Supports `size` and `color` variations.
 ///
-/// @require {Variable<Color>} variant("shade", "mute") - Default text color
-/// @require {Variable<Color>} variant("shade", "mute-active") - Action hover and spinner color
-/// @require {Variable<Length>} var("decorator", "size") - Loading spinner thickness
-/// @require {Variable<Length>} var("control", "height") - Meta element height
-/// @require {Variable<Length>} var("control", "meta-size") - Default text size
-/// @require {Variable<FontWeight>} var("control", "meta-weight") - Default text weight
+/// Variants can be overridden by defining them explicitly or by registering a custom resolver for `component`.
+///
+/// @param {List<String>} $colors [()] - Registered color names to include
+/// @param {List<String>} $sizes [()] - Registered size names to include
+///
+/// @require {Variable<Length>} var("component", "meta-size") - Text size
+/// @require {Variable<FontWeight>} var("component", "meta-weight") - Text weight
+///
+/// @require {Variable<Color>} variant-for("component", "base", "muted") - Text color
+///
+/// @require {Variable<Color>} variant-for("component", $name, "muted") - Text color of each color variation
 @mixin use-meta($colors: (), $sizes: ()) {
-    @if not module.module-presented("meta") {
-        @include element.use-element();
-        @include module.present-module("meta");
+    @include element.use-element();
 
-        $mute: module.variant("shade", "mute");
-        $active: module.variant("shade", "mute-active");
-        $decorator: module.var("decorator", "size");
+    @include module.define-module("meta") {
+        $font-size: module.var("component", "meta-size");
+        $font-weight: module.var("component", "meta-weight");
 
-        $height: module.var("control", "height");
-        $font-size: module.var("control", "meta-size");
-        $font-weight: module.var("control", "meta-weight");
+        $muted: module.variant-for("component", "base", "muted");
 
-        @at-root {
-            .meta {
-                @include module.control();
-                @extend .element;
+        .meta {
+            @extend .element;
 
-                cursor: default;
-                height: $height;
-                font-size: $font-size;
-                font-weight: $font-weight;
-                text-overflow: ellipsis;
-                color: $mute;
-                padding: module.inline-padding();
-                @include module.transition(all);
-                @include module.unselectable();
+            font-size: $font-size;
+            font-weight: $font-weight;
+            text-overflow: ellipsis;
+            color: $muted;
+            @include module.unselectable();
 
-                &.is-action {
-                    cursor: pointer;
-                    text-decoration: underline;
-                    text-underline-offset: 3px;
-
-                    &:hover {
-                        color: $active;
-                    }
-
-                    @include module.is-focused(".is-loading") {
-                        color: $active;
-                        text-decoration-style: double;
-                    }
+            @each $name, $size in module.sizes($sizes) {
+                &.is-#{$name} {
+                    font-size: $size;
                 }
+            }
 
-                &.is-loading {
-                    color: transparent;
-                    @include module.locked();
-                    @include module.loader(1em, $active, $decorator);
-                }
+            @each $name, $color in module.colors($colors) {
+                $-muted: module.variant-for("component", $name, "muted");
 
-                @each $name, $size in module.sizes($sizes) {
-                    &.is-#{$name} {
-                        font-size: $size;
-                    }
-                }
-
-                @each $name, $color in module.colors($colors) {
-                    $-mute: module.variant($name, "mute");
-                    $-active: module.variant($name, "mute-active");
-
-                    &.is-#{$name} {
-                        color: $-mute;
-
-                        &.is-action {
-                            &:hover {
-                                color: $-active;
-                            }
-
-                            @include module.is-focused(".is-loading") {
-                                color: $-active;
-                            }
-                        }
-
-                        &.is-loading {
-                            color: transparent;
-                            @include module.loader-color($-active);
-                        }
-                    }
-                }
-
-                @include module.is-disabled() {
-                    @include module.disabled();
-
-                    background-color: transparent !important;
-                    border-color: transparent !important;
+                &.is-#{$name} {
+                    color: $-muted;
                 }
             }
         }

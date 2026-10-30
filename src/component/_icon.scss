@@ -1,134 +1,71 @@
 @use "../core/module";
 
-/// Generates icon container styles with configurable color and size variants.
+/// Applies icon styles.
 ///
-/// @param {List} $colors [()] - Color names for icon variants; `null` includes all registered colors
-/// @param {List} $sizes [()] - Size names for icon variants; `null` includes all registered sizes
+/// Supports `size` and `color` variations.
 ///
-/// @require {Variable<Color>} color("shade") - Loading spinner color @throw on missing
-/// @require {Variable<Color>} variant("shade", "mute") - Action icon color
-/// @require {Variable<Color>} variant("shade", "readable") - Action hover color
-/// @require {Variable<Length>} var("decorator", "size") - Loading spinner thickness
+/// Variants can be overridden by defining them explicitly or by registering a custom resolver for `component`.
+///
+/// @param {List<String>} $colors [()] - Registered color names to include
+/// @param {List<String>} $sizes [()] - Registered size names to include
+///
+/// @require {Variable<Color>} variant-for("component", $name, "accent") - Icon color of each color variation
 @mixin use-icon($colors: (), $sizes: ()) {
-    @if not module.module-presented("icon") {
-        @include module.present-module("icon");
+    @include module.define-module("icon") {
+        .icon {
+            display: inline-flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            width: 1em;
+            height: 1em;
+            aspect-ratio: 1;
+            @include module.unselectable();
 
-        $shade: module.color("shade");
-        $shade-mute: module.variant("shade", "mute");
-        $shade-readable: module.variant("shade", "readable");
-        $decorator: module.var("decorator", "size");
+            img {
+                display: block;
+                max-height: 100%;
+                max-width: 100%;
+            }
 
-        @at-root {
-            .icon {
-                display: inline-flex;
-                flex-flow: row nowrap;
-                align-items: center;
-                justify-content: center;
-                width: 1em;
-                height: 1em;
-                @include module.transition(all);
-                @include module.unselectable();
+            svg {
+                width: 100%;
+                max-height: 100%;
+                max-width: 100%;
+            }
 
-                img {
-                    display: block;
-                    max-height: 100%;
-                    max-width: 100%;
-                    @include module.transition(all);
-                }
-
+            &:not(.is-outline) {
                 svg {
-                    width: 100%;
-                    @include module.transition(all);
-                }
+                    fill: currentcolor;
 
-                &:not(.is-outline) {
-                    svg {
+                    > * {
                         fill: currentcolor;
-
-                        > * {
-                            fill: currentcolor;
-                        }
                     }
                 }
+            }
 
-                &.is-outline {
-                    svg {
+            &.is-outline {
+                svg {
+                    stroke: currentcolor;
+
+                    > * {
                         stroke: currentcolor;
-
-                        > * {
-                            stroke: currentcolor;
-                        }
                     }
                 }
+            }
 
-                &.is-loading {
-                    @include module.locked();
-                    @include module.loader(1em, $shade, $decorator);
-
-                    img,
-                    svg {
-                        opacity: 0;
-                    }
+            @each $name, $size in module.sizes($sizes) {
+                &.is-#{$name} {
+                    height: $size;
+                    width: $size;
                 }
+            }
 
-                &.is-action {
-                    color: $shade-mute;
-                    cursor: pointer;
-                    text-decoration: none;
+            @each $name, $palette in module.colors($colors) {
+                $-accent: module.variant-for("component", $name, "accent");
 
-                    > img {
-                        filter: grayscale(0.5);
-                    }
-
-                    &:hover {
-                        text-decoration: none;
-                        color: $shade-readable;
-
-                        > img {
-                            filter: grayscale(0);
-                        }
-                    }
-                }
-
-                @each $name, $size in module.sizes($sizes) {
-                    &.is-#{$name} {
-                        height: $size;
-                        width: $size;
-                    }
-                }
-
-                @each $name, $color in module.colors($colors) {
-                    $-mute: module.variant($name, "mute");
-                    $-readable: module.variant($name, "readable");
-
-                    &.is-#{$name} {
-                        &:not(.is-action) {
-                            color: $-readable;
-                        }
-
-                        &.is-action {
-                            color: $-mute;
-
-                            &:hover {
-                                color: $-readable;
-                            }
-                        }
-
-                        &.is-loading {
-                            @include module.loader-color($-readable);
-                        }
-                    }
-                }
-
-                @include module.is-disabled() {
-                    @include module.disabled();
-
-                    background-color: transparent !important;
-                    border-color: transparent !important;
-
-                    > img {
-                        filter: grayscale(1) !important;
-                    }
+                &.is-#{$name} {
+                    color: $-accent;
                 }
             }
         }

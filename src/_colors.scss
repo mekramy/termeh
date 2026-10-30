@@ -9,6 +9,10 @@
 
 @include module.define-global-resolver(meta.get-function("base-resolver", $module: "resolvers"));
 @include module.define-component-resolver(
+    "overlay",
+    meta.get-function("overlay-resolver", $module: "resolvers")
+);
+@include module.define-component-resolver(
     "box",
     meta.get-function("box-resolver", $module: "resolvers")
 );

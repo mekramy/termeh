@@ -1,182 +1,280 @@
-@use "../core/module";
 @use "./element";
+@use "../core/module";
 
-/// Generates button styles with configurable color and size variants.
+/// Applies button styles.
 ///
-/// @param {List} $colors [()] - Color names for button variants; `null` includes all registered colors
-/// @param {List} $sizes [()] - Size names for button variants; `null` includes all registered sizes
+/// Supports `size` and `color` variations.
 ///
-/// @require {Variable<Color>} color("shade") - Default button Focus-outline color @throw on missing
-/// @require {Variable<Color>} variant("shade", "light") - Default button background
-/// @require {Variable<Color>} variant("shade", "readable") - Default button text color
-/// @require {Variable<Color>} variant("shade", "light-active") - Default button Hover background
-/// @require {Variable<Length>} var("gap", "micro") - Gap between grouped buttons
-/// @require {Variable<Length>} var("radius", "normal") - Standard button radius
-/// @require {Variable<Length>} var("radius", "rounded") - Rounded button radius
-/// @require {Variable<Length>} var("decorator", "size") - Focus-outline and loading spinner thickness
-/// @require {Variable<Length>} var("control", "height") - Button height
+/// Variants can be overridden by defining them explicitly or by registering a custom resolver for `component`.
+///
+/// @param {List<String>} $colors [()] - Registered color names to include
+/// @param {List<String>} $sizes [()] - Registered size names to include
+///
+/// @require {Variable<Length>} var("radius", "normal") - Corner radius of buttons
+/// @require {Variable<Length>} var("radius", "circle") - Corner radius of rounded icon buttons
+/// @require {Variable<Length>} var("radius", "rounded") - Corner radius of rounded buttons
+/// @require {Variable<Length>} var("decorator", "size") - Focus outline thickness and base for group gap and padding
+///
+/// @require {Variable<Length>} var("component", "height") - Button height
+/// @require {Variable<Number>} var("component", "button-opacity") - Button background opacity
+/// @require {Variable<Number>} var("component", "light-opacity") - Light opacity, read but not used in the styles
+/// @require {Variable<Number>} var("component", "outline-opacity") - Focus outline opacity
+/// @require {Variable<Number>} var("component", "disabled-opacity") - Opacity when disabled
+///
+/// @require {Variable<Color>} variant-for("component", "base", "simple-accent") - Focus outline color of simple buttons
+/// @require {Variable<Color>} variant-for("component", "base", "simple-text") - Text and loader color of simple buttons
+/// @require {Variable<Color>} variant-for("component", "base", "simple-hover") - Hover background of simple buttons
+///
+/// @require {Variable<Color>} variant-for("component", "base", "light-accent") - Focus outline color
+/// @require {Variable<Color>} variant-for("component", "base", "light-foreground") - Text and loader color
+/// @require {Variable<Color>} variant-for("component", "base", "light-background") - Background color
+/// @require {Variable<Color>} variant-for("component", "base", "light-hover") - Hover background color
+///
+/// @require {Variable<Color>} variant-for("component", "base", "disabled-foreground") - Text color when disabled
+/// @require {Variable<Color>} variant-for("component", "base", "disabled-background") - Background color when disabled
+///
+/// @require {Variable<Color>} variant-for("component", $name, "simple-accent") - Focus outline color of simple buttons in each color variation
+/// @require {Variable<Color>} variant-for("component", $name, "simple-text") - Text and loader color of simple buttons in each color variation
+/// @require {Variable<Color>} variant-for("component", $name, "simple-hover") - Hover background of simple buttons in each color variation
+///
+/// @require {Variable<Color>} variant-for("component", $name, "light-accent") - Focus outline color of light buttons in each color variation
+/// @require {Variable<Color>} variant-for("component", $name, "light-foreground") - Text and loader color of light buttons in each color variation
+/// @require {Variable<Color>} variant-for("component", $name, "light-background") - Background color of light buttons in each color variation
+/// @require {Variable<Color>} variant-for("component", $name, "light-hover") - Hover background of light buttons in each color variation
+///
+/// @require {Variable<Color>} variant-for("component", $name, "accent") - Focus outline color of each color variation
+/// @require {Variable<Color>} variant-for("component", $name, "accent-foreground") - Text and loader color of each color variation
+/// @require {Variable<Color>} variant-for("component", $name, "accent-background") - Background color of each color variation
+/// @require {Variable<Color>} variant-for("component", $name, "accent-hover") - Hover background color of each color variation
 @mixin use-button($colors: (), $sizes: ()) {
-    @if not module.module-presented("button") {
-        @include element.use-element();
-        @include module.present-module("button");
+    @include element.use-element();
 
-        $shade: module.color("shade");
-        $shade-light: module.variant("shade", "light");
-        $shade-readable: module.variant("shade", "readable");
-        $shade-light-active: module.variant("shade", "light-active");
-        $outline: module.alpha($shade, 0.2);
-
-        $gap-micro: module.var("gap", "micro");
+    @include module.define-module("button") {
         $radius-normal: module.var("radius", "normal");
+        $radius-circle: module.var("radius", "circle");
         $radius-rounded: module.var("radius", "rounded");
-        $decorator: module.var("decorator", "size");
+        $decorator-thickness: module.var("decorator", "size");
 
-        $height: module.var("control", "height");
+        $height: module.var("component", "height");
+        $opacity: module.var("component", "button-opacity");
+        $light-opacity: module.var("component", "light-opacity");
+        $outline-opacity: module.var("component", "outline-opacity");
+        $disabled-opacity: module.var("component", "disabled-opacity");
 
-        @at-root {
-            .buttons {
-                display: flex;
-                flex-flow: row nowrap;
-                align-items: stretch;
-                justify-content: flex-end;
-                box-sizing: border-box;
-                padding: $decorator;
-                gap: module.half($gap-micro);
+        $simple-accent: module.variant-for("component", "base", "simple-accent");
+        $simple-text: module.variant-for("component", "base", "simple-text");
+        $simple-hover: module.variant-for("component", "base", "simple-hover");
 
-                .button.is-cta {
-                    flex: 1 1 0;
-                }
+        $light-accent: module.variant-for("component", "base", "light-accent");
+        $light-foreground: module.variant-for("component", "base", "light-foreground");
+        $light-background: module.variant-for("component", "base", "light-background");
+        $light-hover: module.variant-for("component", "base", "light-hover");
 
-                @include module.mobile() {
-                    overflow: hidden;
-                    overflow-x: auto;
+        $disabled-foreground: module.variant-for("component", "base", "disabled-foreground");
+        $disabled-background: module.variant-for("component", "base", "disabled-background");
+
+        .buttons {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: stretch;
+            justify-content: flex-end;
+            box-sizing: border-box;
+            gap: module.double($decorator-thickness);
+            padding: module.double($decorator-thickness);
+
+            .filler {
+                flex: 1 1 0;
+            }
+
+            @include module.mobile() {
+                overflow: hidden;
+                overflow-x: auto;
+            }
+        }
+
+        .button {
+            @include module.control();
+            @extend .element;
+
+            cursor: pointer;
+            width: auto;
+            height: $height;
+            text-overflow: ellipsis;
+            color: $light-foreground;
+            background-color: module.alpha($light-background, $opacity);
+            border-radius: $radius-normal;
+            padding: module.control-padding();
+            @include module.transition(all);
+            @include module.unselectable();
+
+            &.is-icon {
+                flex: none;
+                align-items: center;
+                justify-content: center;
+                width: $height;
+                padding: 0;
+                aspect-ratio: 1;
+            }
+
+            &.is-simple {
+                color: $simple-text;
+                background-color: transparent;
+            }
+
+            &:hover {
+                text-decoration: none;
+                background-color: $light-hover;
+
+                &.is-simple {
+                    background-color: $simple-hover;
                 }
             }
 
-            .button {
-                @include module.control();
-                @extend .element;
+            @include module.is-focused() {
+                outline-offset: 1px;
+                outline: $decorator-thickness solid module.alpha($light-accent, $outline-opacity);
 
-                cursor: pointer;
-                width: auto;
-                height: $height;
-                text-overflow: ellipsis;
-                border-radius: $radius-normal;
-                padding: module.control-padding();
-                @include module.transition(all);
-                @include module.unselectable();
+                &.is-simple {
+                    outline-color: module.alpha($simple-accent, $outline-opacity);
+                }
+            }
 
-                &:hover {
-                    text-decoration: none;
+            &.is-loading {
+                @include module.locked();
+
+                &:not(.is-iconic) {
+                    color: transparent;
+                    @include module.loader(1em, $light-foreground, 1px);
+
+                    &.is-simple {
+                        @include module.loader-color($simple-text);
+                    }
                 }
 
-                @include module.is-focused(".is-loading") {
-                    outline: $decorator solid $outline;
-                }
+                &.is-iconic {
+                    .icon {
+                        color: transparent;
+                        @include module.loader(1em, $light-foreground, 1px);
+                    }
 
-                &:not(.is-simple) {
-                    color: $shade-readable;
-                    background-color: $shade-light;
+                    &.is-simple .icon {
+                        @include module.loader-color($simple-text);
+                    }
+                }
+            }
+
+            &.is-cta {
+                flex: 1 1 auto;
+            }
+
+            &.is-rounded {
+                border-radius: $radius-rounded;
+
+                &.is-icon {
+                    border-radius: $radius-circle;
+                }
+            }
+
+            @each $name, $size in module.sizes($sizes) {
+                &.is-#{$name} {
+                    font-size: $size;
+                }
+            }
+
+            @each $name, $_ in module.colors($colors) {
+                $-simple-accent: module.variant-for("component", $name, "simple-accent");
+                $-simple-text: module.variant-for("component", $name, "simple-text");
+                $-simple-hover: module.variant-for("component", $name, "simple-hover");
+
+                $-light-accent: module.variant-for("component", $name, "light-accent");
+                $-light-foreground: module.variant-for("component", $name, "light-foreground");
+                $-light-background: module.variant-for("component", $name, "light-background");
+                $-light-hover: module.variant-for("component", $name, "light-hover");
+
+                $-accent: module.variant-for("component", $name, "accent");
+                $-accent-foreground: module.variant-for("component", $name, "accent-foreground");
+                $-accent-background: module.variant-for("component", $name, "accent-background");
+                $-accent-hover: module.variant-for("component", $name, "accent-hover");
+
+                &.is-#{$name} {
+                    color: $-accent-foreground;
+                    background-color: module.alpha($-accent-background, $opacity);
+
+                    &.is-simple {
+                        color: $-simple-text;
+                        background-color: transparent;
+                    }
+
+                    &.is-light {
+                        color: $-light-foreground;
+                        background-color: module.alpha($-light-background, $opacity);
+                    }
 
                     &:hover {
-                        background-color: $shade-light-active;
+                        background-color: $-accent-hover;
+
+                        &.is-simple {
+                            background-color: $-simple-hover;
+                        }
+
+                        &.is-light {
+                            background-color: $-light-hover;
+                        }
+                    }
+
+                    @include module.is-focused() {
+                        outline-color: module.alpha($-accent, $outline-opacity);
+
+                        &.is-simple {
+                            outline-color: module.alpha($-simple-accent, $outline-opacity);
+                        }
+
+                        &.is-light {
+                            outline-color: module.alpha($-light-accent, $outline-opacity);
+                        }
                     }
 
                     &.is-loading {
-                        color: transparent;
                         @include module.locked();
-                        @include module.loader(1em, $shade-readable, $decorator);
-                    }
-                }
 
-                &.is-simple:not(.is-light) {
-                    color: $shade-readable;
+                        &:not(.is-iconic) {
+                            color: transparent;
+                            @include module.loader(1em, $-accent-foreground, 1px);
 
-                    &:hover {
-                        background-color: $shade-light;
-                    }
-
-                    &.is-loading {
-                        color: transparent;
-                        @include module.locked();
-                        @include module.loader(1em, $shade-readable, $decorator);
-                    }
-                }
-
-                &.is-rounded {
-                    border-radius: $radius-rounded;
-                }
-
-                @each $name, $size in module.sizes($sizes) {
-                    &.is-#{$name} {
-                        font-size: $size;
-                    }
-                }
-
-                @each $name, $color in module.colors($colors) {
-                    &.is-#{$name} {
-                        &:not(.is-simple, .is-light) {
-                            $-foreground: module.variant($name, "foreground");
-                            $-background-hover: module.variant($name, "active");
-
-                            color: $-foreground;
-                            background-color: $color;
-
-                            &:hover {
-                                background-color: $-background-hover;
+                            &.is-simple {
+                                @include module.loader-color($-simple-text);
                             }
 
-                            &.is-loading {
+                            &.is-light {
+                                @include module.loader-color($-light-foreground);
+                            }
+                        }
+
+                        &.is-iconic {
+                            .icon {
                                 color: transparent;
-                                @include module.loader-color($-foreground);
-                            }
-                        }
-
-                        &.is-simple:not(.is-light) {
-                            $-foreground: module.variant($name, "readable");
-                            $-background: module.variant($name, "light");
-
-                            color: $-foreground;
-
-                            &:hover {
-                                background-color: $-background;
+                                @include module.loader(1em, $-accent-foreground, 1px);
                             }
 
-                            &.is-loading {
-                                color: transparent;
-                                @include module.loader-color($-foreground);
-                            }
-                        }
-
-                        &.is-light:not(.is-simple) {
-                            $-foreground: module.variant($name, "readable");
-                            $-background: module.variant($name, "light");
-                            $-background-hover: module.variant($name, "light-active");
-
-                            color: $-foreground;
-                            background-color: $-background;
-
-                            &:hover {
-                                background-color: $-background-hover;
+                            &.is-simple .icon {
+                                @include module.loader-color($-simple-text);
                             }
 
-                            &.is-loading {
-                                color: transparent;
-                                @include module.loader-color($-foreground);
+                            &.is-light .icon {
+                                @include module.loader-color($-light-foreground);
                             }
-                        }
-
-                        @include module.is-focused(".is-loading") {
-                            outline-color: module.alpha($color, 0.2);
                         }
                     }
                 }
+            }
 
-                @include module.is-disabled() {
-                    @include module.disabled();
-
-                    border-color: transparent !important;
-                }
+            @include module.is-disabled() {
+                @include module.disabled(
+                    $disabled-foreground,
+                    $disabled-background,
+                    null,
+                    $disabled-opacity
+                );
             }
         }
     }

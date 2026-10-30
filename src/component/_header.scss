@@ -1,133 +1,139 @@
 @use "../core/module";
 @use "./element";
 
-/// Generates header styles with configurable color and gap variants.
+/// Applies header styles.
 ///
-/// @param {List} $colors [()] - Color names for header variants; `null` includes all registered colors
-/// @param {List} $gaps [()] - Gap names for header variants; `null` includes all registered gaps
+/// Supports `gap` and `color` variations.
 ///
-/// @require {Variable<Color>} color("shade") - Decorator color @throw on missing
-/// @require {Variable<Color>} variant("shade", "mute") - Secondary header color
-/// @require {Variable<FontWeight>} var("control", "weight") - Secondary header text weight
-/// @require {Variable<FontWeight>} var("strong", "weight") - Primary header text weight
-/// @require {Variable<Length>} var("control", "meta-size") - Secondary header text size
-/// @require {Variable<FontWeight>} var("control", "meta-weight") - Secondary header text weight
-/// @require {Variable<Length>} var("decorator", "size") - Decorator thickness
+/// Variants can be overridden by defining them explicitly or by registering a custom resolver for `component`.
+///
+/// @param {List<String>} $colors [()] - Registered color names to include
+/// @param {List<String>} $gaps [()] - Registered gap names to include
+///
 /// @require {Variable<Length>} var("gap", "macro") - Header gap and bottom margin
-/// @require {Variable<Length>} var("line-height", "normal") - Header line height
+/// @require {Variable<Length>} var("line-height", "normal") - Title line height
+/// @require {Variable<FontWeight>} var("text", "strong-weight") - Primary title text weight
+/// @require {Variable<Length>} var("decorator", "size") - Decorator thickness
+///
+/// @require {Variable<Length>} var("component", "meta-size") - Secondary title text size
+/// @require {Variable<FontWeight>} var("component", "meta-weight") - Secondary title text weight
+///
+/// @require {Variable<Color>} variant-for("component", "base", "accent") - Decorator color
+/// @require {Variable<Color>} variant-for("component", "base", "muted") - Secondary title text color
+///
+/// @require {Variable<Color>} variant-for("component", $name, "accent") - Decorator color of each color variation
 @mixin use-header($colors: (), $gaps: ()) {
-    @if not module.module-presented("header") {
-        @include element.use-element();
-        @include module.present-module("header");
+    @include element.use-element();
 
-        $shade: module.color("shade");
-        $shade-mute: module.variant("shade", "mute");
-
-        $normal-weight: module.var("control", "weight");
-        $strong-weight: module.var("strong", "weight");
-        $meta-size: module.var("control", "meta-size");
-        $meta-weight: module.var("control", "meta-weight");
-
-        $decorator: module.var("decorator", "size");
+    @include module.define-module("header") {
         $gap-macro: module.var("gap", "macro");
         $line-normal: module.var("line-height", "normal");
-        @at-root {
-            .header {
-                display: flex;
-                align-items: center;
-                gap: $gap-macro;
+        $strong-weight: module.var("text", "strong-weight");
+        $decorator-thickness: module.var("decorator", "size");
 
-                @include module.padded() {
-                    padding: module.control-padding();
-                }
+        $meta-size: module.var("component", "meta-size");
+        $meta-weight: module.var("component", "meta-weight");
 
-                @include module.marged() {
-                    margin-bottom: $gap-macro;
-                }
+        $accent: module.variant-for("component", "base", "accent");
+        $muted: module.variant-for("component", "base", "muted");
 
-                .thumbnail {
-                    flex: 0 0 auto;
-                }
+        .header {
+            display: flex;
+            align-items: center;
+            gap: $gap-macro;
 
-                .headers {
-                    min-width: 0;
-                    flex: 1 1 0;
+            @include module.padded() {
+                padding: module.control-padding();
+            }
 
-                    h1,
-                    h2,
-                    h3,
-                    h4,
-                    h5,
-                    h6 {
-                        @extend .element;
+            @include module.marged() {
+                margin-bottom: $gap-macro;
+            }
 
-                        display: flex;
-                        justify-content: flex-start;
-                        font-size: 1em;
-                        margin-bottom: 0;
-                        line-height: $line-normal;
+            .thumbnail {
+                flex: 0 0 auto;
+            }
 
-                        .filler {
-                            flex: 1 1 0;
-                        }
-                    }
+            .headers {
+                min-width: 0;
+                flex: 1 1 0;
 
-                    h1,
-                    h2 {
-                        font-weight: $strong-weight;
-                    }
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                h6 {
+                    @extend .element;
 
-                    h3,
-                    h4,
-                    h5,
-                    h6 {
-                        font-size: $meta-size;
-                        font-weight: $meta-weight;
-                        color: $shade-mute;
-                    }
+                    display: flex;
+                    justify-content: flex-start;
+                    font-size: 1em;
+                    margin-bottom: 0;
+                    line-height: $line-normal;
 
-                    h5,
-                    h6 {
-                        opacity: 0.75;
+                    .filler {
+                        flex: 1 1 0;
                     }
                 }
 
-                &.is-decorated {
-                    margin-inline-start: module.half($decorator);
-                    border-inline-start: $decorator solid $shade;
+                h1,
+                h2 {
+                    font-weight: $strong-weight;
                 }
 
-                &.is-centered {
-                    text-align: center;
-
-                    h1,
-                    h2,
-                    h3,
-                    h4,
-                    h5,
-                    h6 {
-                        justify-content: center;
-                    }
+                h3,
+                h4,
+                h5,
+                h6 {
+                    color: $muted;
+                    font-size: $meta-size;
+                    font-weight: $meta-weight;
                 }
 
-                @each $name, $gap in module.gaps($gaps) {
-                    &.is-#{$name}-gap {
-                        gap: $gap;
+                h5,
+                h6 {
+                    opacity: 0.75;
+                }
+            }
 
-                        @include module.padded() {
-                            padding: module.half($gap) $gap;
-                        }
+            &.is-decorated {
+                margin-inline-start: module.half($decorator-thickness);
+                border-inline-start: $decorator-thickness solid $accent;
+            }
+
+            &.is-centered {
+                text-align: center;
+
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                h6 {
+                    justify-content: center;
+                }
+            }
+
+            @each $name, $gap in module.gaps($gaps) {
+                &.is-#{$name}-gap {
+                    gap: $gap;
+
+                    @include module.padded() {
+                        padding: module.half($gap) $gap;
                     }
                 }
+            }
 
-                @each $name, $color in module.colors($colors) {
-                    &.is-#{$name} {
-                        @include module.selection($name);
+            @each $name, $palette in module.colors($colors) {
+                $-accent: module.variant-for("component", $name, "accent");
 
-                        &.is-decorated {
-                            border-inline-start-color: $shade;
-                        }
+                &.is-#{$name} {
+                    &.is-decorated {
+                        border-inline-start-color: $-accent;
                     }
+
+                    @include module.selection($name);
                 }
             }
         }
