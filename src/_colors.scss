@@ -7,24 +7,16 @@
 @include module.define-palette("error", #c00021);
 @include module.define-palette("primary", #2196f3);
 
-@include module.define-global-resolver(meta.get-function("base-resolver", $module: "resolvers"));
-@include module.define-component-resolver(
-    "overlay",
-    meta.get-function("overlay-resolver", $module: "resolvers")
-);
-@include module.define-component-resolver(
-    "box",
-    meta.get-function("box-resolver", $module: "resolvers")
-);
-@include module.define-component-resolver(
-    "table",
-    meta.get-function("table-resolver", $module: "resolvers")
-);
-@include module.define-component-resolver(
-    "input",
-    meta.get-function("input-resolver", $module: "resolvers")
-);
-@include module.define-component-resolver(
-    "component",
-    meta.get-function("component-resolver", $module: "resolvers")
-);
+$-base: meta.get-function("base-resolver", $module: "resolvers");
+$-overlay: meta.get-function("overlay-resolver", $module: "resolvers");
+$-box: meta.get-function("box-resolver", $module: "resolvers");
+$-table: meta.get-function("table-resolver", $module: "resolvers");
+$-input: meta.get-function("input-resolver", $module: "resolvers");
+$-component: meta.get-function("component-resolver", $module: "resolvers");
+
+@include module.define-fallback-resolver($-base);
+@include module.define-fallback-resolver($-overlay, "overlay");
+@include module.define-fallback-resolver($-box, "box");
+@include module.define-fallback-resolver($-table, "table");
+@include module.define-fallback-resolver($-input, "input");
+@include module.define-fallback-resolver($-component, "component");

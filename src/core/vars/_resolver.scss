@@ -4,25 +4,35 @@
 
 $-resolvers: () !default;
 
-/// Defines a resolver that is used for color variants of global scope.
-/// Resolvers call in reverse order of definition, with the most recently defined resolver being called first.
+/// Defines a resolver that is used for color variants for global scope or specific component.
+/// Resolvers are called in the order they were defined, with the earliest defined resolver called first.
+/// Resolver function should return a color, or `null` if it cannot resolve the variant
 ///
-/// @param {Function} $resolver - Called with `$scheme, $palette, $is-light, $base, $color, $variant`; returns a color, or `null` if it cannot resolve the variant
-/// @throw If `$resolver` is not a function
-@mixin define-global-resolver($resolver) {
-    $resolver: utility.assert-function($resolver, "define-global-resolver", "resolver");
-    $-resolvers: utility.deep-prepend($-resolvers, $resolver, null) !global;
+/// @param {Function} $resolver - Called with `$scheme, $palette, $is-light, $base, $color, $variant`
+/// @param {String | null} $component [null] - Component name or `null` for global resolver
+/// @throw If `$component` is neither a string nor `null`, or `$resolver` is not a function
+@mixin define-resolver($resolver, $component: null) {
+    $resolver: utility.assert-function($resolver, "define-resolver", "resolver");
+    $component: utility.assert-nullable-string($component, "define-resolver", "component", null);
+
+    $-resolvers: utility.deep-prepend($-resolvers, $resolver, $component) !global;
 }
 
-/// Defines a resolver that is used for color variants of one component.
-/// Resolvers call in normal order of definition, with the earliest defined resolver being called first.
+/// Defines a fallback resolver that is used for color variants for global scope or specific component.
+/// Fallback resolvers are called after all other resolvers have been tried.
+/// Resolver function should return a color, or `null` if it cannot resolve the variant
 ///
-/// @param {String} $component - Component name
-/// @param {Function} $resolver - Called with `$scheme, $palette, $is-light, $base, $color, $variant`; returns a color, or `null` if it cannot resolve the variant
-/// @throw If `$component` is not a string or `$resolver` is not a function
-@mixin define-component-resolver($component, $resolver) {
-    $component: utility.assert-string($component, "define-component-resolver", "component");
-    $resolver: utility.assert-function($resolver, "define-component-resolver", "resolver");
+/// @param {Function} $resolver - Called with `$scheme, $palette, $is-light, $base, $color, $variant`
+/// @param {String | null} $component [null] - Component name or `null` for global resolver
+/// @throw If `$component` is neither a string nor `null`, or `$resolver` is not a function
+@mixin define-fallback-resolver($resolver, $component: null) {
+    $resolver: utility.assert-function($resolver, "define-fallback-resolver", "resolver");
+    $component: utility.assert-nullable-string(
+        $component,
+        "define-fallback-resolver",
+        "component",
+        null
+    );
 
     $-resolvers: utility.deep-append($-resolvers, $resolver, $component) !global;
 }
