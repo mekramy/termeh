@@ -39,17 +39,6 @@
     }
 }
 
-/// Clears floats after the element.
-///
-/// @output An `::after` pseudo-element with `clear: both`
-@mixin clearfix() {
-    &::after {
-        clear: both;
-        content: " ";
-        display: table;
-    }
-}
-
 /// Turns on momentum scrolling on iOS.
 ///
 /// @output The `-webkit-overflow-scrolling: touch` declaration

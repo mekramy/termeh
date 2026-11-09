@@ -1,5 +1,4 @@
 @use "../core/module";
-@use "./element";
 
 /// Applies link styles.
 ///
@@ -21,10 +20,10 @@
 ///
 /// @require {Variable<Color>} variant-for("component", $name, "accent") - Loader color of each color variation
 /// @require {Variable<Color>} variant-for("component", $name, "accent-text") - Link text color of each color variation
+///
+/// @require reset, base, element
 @mixin use-link($colors: (), $sizes: ()) {
-    @include element.use-element();
-
-    @include module.define-module("link") {
+    @include module.define-module("link", "reset", "base", "element") {
         $height: module.var("component", "height");
         $font-size: module.var("component", "meta-size");
         $font-weight: module.var("component", "meta-weight");

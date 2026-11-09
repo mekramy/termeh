@@ -10,8 +10,10 @@
 /// @param {List<String>} $sizes [()] - Registered size names to include
 ///
 /// @require {Variable<Color>} variant-for("component", $name, "accent") - Icon color of each color variation
+///
+/// @require reset, base
 @mixin use-icon($colors: (), $sizes: ()) {
-    @include module.define-module("icon") {
+    @include module.define-module("icon", "reset", "base") {
         .icon {
             display: inline-flex;
             flex-direction: row;

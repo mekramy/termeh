@@ -27,8 +27,10 @@
 /// @require {Variable<Color>} variant-for("component", $name, "light-accent") - Ring and status dot color of each color variation
 /// @require {Variable<Color>} variant-for("component", $name, "light-foreground") - Text and loader color of each color variation
 /// @require {Variable<Color>} variant-for("component", $name, "light-background") - Background color of each color variation
+///
+/// @require reset, base
 @mixin use-avatar($colors: (), $sizes: ()) {
-    @include module.define-module("avatar") {
+    @include module.define-module("avatar", "reset", "base") {
         $radius-normal: module.var("radius", "normal");
         $radius-circle: module.var("radius", "circle");
         $strong-weight: module.var("text", "strong-weight");

@@ -2,7 +2,7 @@
 
 /// Generates layout helper classes.
 ///
-/// Classes cover clearfix, text direction, overflow clipping, radius and shadow removal, cursor, text selection, locking, and scrolling.
+/// Classes cover text direction, overflow clipping, radius and shadow removal, cursor, text selection, locking, and scrolling.
 ///
 /// @output Layout helper classes
 ///
@@ -10,10 +10,6 @@
 @mixin use-layout-helper() {
     @include module.define-module("layout-helper") {
         $primary: module.color("primary");
-
-        .is-clearfix {
-            @include module.clearfix();
-        }
 
         .is-ltr {
             direction: ltr !important;

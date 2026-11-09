@@ -11,8 +11,10 @@
 ///
 /// @require {Variable<Length>} var("gap", "micro") - Default space between items
 /// @require {Variable<Color>} variant("base", "separator") - Background color of `.divider`
+///
+/// @require reset, base
 @mixin use-gaper($gaps: ()) {
-    @include module.define-module("gaper") {
+    @include module.define-module("gaper", "reset", "base") {
         $gap-micro: module.var("gap", "micro");
         $separator: module.variant("base", "separator");
 
@@ -60,13 +62,13 @@
             }
 
             @each $name, $align in module.flex-aligns() {
-                &.is-#{$name}-align {
+                &.is-#{$name}-aligned {
                     align-items: $align;
                 }
             }
 
             @each $name, $justify in module.flex-justifies() {
-                &.is-#{$name}-justify {
+                &.is-#{$name}-justified {
                     justify-content: $justify;
                 }
             }
@@ -140,13 +142,13 @@
                     }
 
                     @each $name, $align in module.flex-aligns() {
-                        &.is-#{$device}-#{$name}-align {
+                        &.is-#{$device}-#{$name}-aligned {
                             align-items: $align;
                         }
                     }
 
                     @each $name, $justify in module.flex-justifies() {
-                        &.is-#{$device}-#{$name}-justify {
+                        &.is-#{$device}-#{$name}-justified {
                             justify-content: $justify;
                         }
                     }

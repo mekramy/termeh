@@ -9,8 +9,10 @@
 ///
 /// @require {Variable<FontWeight>} var("component", "weight") - Base text weight
 /// @require {Variable<Length>} var("component", "height") - Line height of the element and its text
+///
+/// @require reset, base
 @mixin use-element() {
-    @include module.define-module-silent("element") {
+    @include module.define-module("element", "reset", "base") {
         $gap-micro: module.var("gap", "micro");
         $small-size: module.var("text", "small-size");
         $small-weight: module.var("text", "small-weight");

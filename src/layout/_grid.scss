@@ -11,8 +11,10 @@
 /// @output The `.grid` class and its variation classes
 ///
 /// @require {Variable<Length>} var("gap", "macro") - Default space between rows and columns
+///
+/// @require reset, base
 @mixin use-grid($gaps: (), $units: ()) {
-    @include module.define-module("grid") {
+    @include module.define-module("grid", "reset", "base") {
         $gap-macro: module.var("gap", "macro");
 
         .grid {
@@ -47,13 +49,13 @@
             }
 
             @each $name, $align in module.flex-aligns() {
-                &.is-#{$name}-align {
+                &.is-#{$name}-aligned {
                     align-items: $align;
                 }
             }
 
             @each $name, $justify in module.flex-justifies() {
-                &.is-#{$name}-justify {
+                &.is-#{$name}-justified {
                     justify-content: $justify;
                 }
             }
@@ -93,13 +95,13 @@
                     }
 
                     @each $name, $align in module.flex-aligns() {
-                        &.is-#{$device}-#{$name}-align {
+                        &.is-#{$device}-#{$name}-aligned {
                             align-items: $align;
                         }
                     }
 
                     @each $name, $justify in module.flex-justifies() {
-                        &.is-#{$device}-#{$name}-justify {
+                        &.is-#{$device}-#{$name}-justified {
                             justify-content: $justify;
                         }
                     }

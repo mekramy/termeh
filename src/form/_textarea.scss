@@ -29,11 +29,13 @@
 /// @require {Variable<Color>} variant-for("input", "base", "disabled-foreground") - Disabled text color
 /// @require {Variable<Color>} variant-for("input", "base", "disabled-background") - Disabled background color
 ///
-/// @require {Variable<Color>} variant-for("input", $palette, "accent") - Focus border and scrollbar accent color for each color variation
+/// @require {Variable<Color>} variant-for("input", $name, "accent") - Focus border and scrollbar accent color for each color variation
+///
+/// @require reset, base
 @mixin use-textarea($colors: ()) {
     @include animation.shake();
 
-    @include module.define-module("form-textarea") {
+    @include module.define-module("form-textarea", "reset", "base") {
         $control-padding: module.var("padding", "control");
         $radius-normal: module.var("radius", "normal");
         $line-height: module.var("line-height", "normal");

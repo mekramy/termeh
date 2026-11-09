@@ -9,8 +9,10 @@
 /// @output The `.attacher` class and its variation classes
 ///
 /// @require {Variable<Color>} variant("base", "separator") - Background color of `.divider`
+///
+/// @require reset, base
 @mixin use-attacher() {
-    @include module.define-module("attacher") {
+    @include module.define-module("attacher", "reset", "base") {
         $separator: module.variant("base", "separator");
 
         .attacher {
@@ -46,13 +48,13 @@
             }
 
             @each $name, $align in module.flex-aligns() {
-                &.is-#{$name}-align {
+                &.is-#{$name}-aligned {
                     align-items: $align;
                 }
             }
 
             @each $name, $justify in module.flex-justifies() {
-                &.is-#{$name}-justify {
+                &.is-#{$name}-justified {
                     justify-content: $justify;
                 }
             }

@@ -11,8 +11,10 @@
 ///
 /// @require {Variable<Length>} var("gap", "micro") - Default space between items
 /// @require {Variable<Color>} color("primary") - Accent color of the scrollbar
+///
+/// @require reset, base
 @mixin use-landscape($gaps: ()) {
-    @include module.define-module("landscape") {
+    @include module.define-module("landscape", "reset", "base") {
         $gap-micro: module.var("gap", "micro");
         $primary: module.color("primary");
 
@@ -54,13 +56,13 @@
             }
 
             @each $name, $align in module.flex-aligns() {
-                &.is-#{$name}-align {
+                &.is-#{$name}-aligned {
                     align-items: $align;
                 }
             }
 
             @each $name, $justify in module.flex-justifies() {
-                &.is-#{$name}-justify {
+                &.is-#{$name}-justified {
                     justify-content: $justify;
                 }
             }
@@ -78,13 +80,13 @@
             @each $device, $query in module.media-queries() {
                 @media #{$query} {
                     @each $name, $align in module.flex-aligns() {
-                        &.is-#{$device}-#{$name}-align {
+                        &.is-#{$device}-#{$name}-aligned {
                             align-items: $align;
                         }
                     }
 
                     @each $name, $justify in module.flex-justifies() {
-                        &.is-#{$device}-#{$name}-justify {
+                        &.is-#{$device}-#{$name}-justified {
                             justify-content: $justify;
                         }
                     }

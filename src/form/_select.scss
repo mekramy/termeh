@@ -33,13 +33,15 @@
 /// @require {Variable<Color>} variant-for("input", "base", "disabled-foreground") - Disabled option text color
 /// @require {Variable<Color>} variant-for("input", "base", "disabled-background") - Disabled option background color
 ///
-/// @require {Variable<Color>} variant-for("input", $palette, "accent") - Focus background and border color for each color variation
-/// @require {Variable<Color>} variant-for("input", $palette, "accent-text") - Selected option text and checkmark color for each color variation
-/// @require {Variable<Color>} variant-for("input", $palette, "accent-foreground") - Focus text and picker-icon color for each color variation
+/// @require {Variable<Color>} variant-for("input", $name, "accent") - Focus background and border color for each color variation
+/// @require {Variable<Color>} variant-for("input", $name, "accent-text") - Selected option text and checkmark color for each color variation
+/// @require {Variable<Color>} variant-for("input", $name, "accent-foreground") - Focus text and picker-icon color for each color variation
+///
+/// @require reset, base
 @mixin use-select($colors: ()) {
     @include animation.shake();
 
-    @include module.define-module("form-select") {
+    @include module.define-module("form-select", "reset", "base") {
         $gap-micro: module.var("gap", "micro");
         $radius-normal: module.var("radius", "normal");
         $strong-weight: module.var("text", "strong-weight");

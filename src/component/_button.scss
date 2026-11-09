@@ -1,4 +1,3 @@
-@use "./element";
 @use "../core/module";
 
 /// Applies button styles.
@@ -46,10 +45,10 @@
 /// @require {Variable<Color>} variant-for("component", $name, "accent-foreground") - Text and loader color of each color variation
 /// @require {Variable<Color>} variant-for("component", $name, "accent-background") - Background color of each color variation
 /// @require {Variable<Color>} variant-for("component", $name, "accent-hover") - Hover background color of each color variation
+///
+/// @require reset, base, element
 @mixin use-button($colors: (), $sizes: ()) {
-    @include element.use-element();
-
-    @include module.define-module("button") {
+    @include module.define-module("button", "reset", "base", "element") {
         $radius-normal: module.var("radius", "normal");
         $radius-circle: module.var("radius", "circle");
         $radius-rounded: module.var("radius", "rounded");

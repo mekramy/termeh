@@ -1,6 +1,6 @@
 ---
 name: docs
-description: Generate ONE VitePress markdown documentation page from one or more SCSS files of the Termeh framework, using their `///` doc comments and the mixin/function bodies. Handles regular pages (utilities, validators, setters, getters, ...) and Styles pages (mixins that register a module with define-module or define-module-silent). The only output is markdown text. Use whenever the user gives or references one or more .scss files and asks for docs, a markdown page, an API reference, or "generate documentation", even if VitePress isn't mentioned.
+description: Generate ONE VitePress markdown documentation page from one or more SCSS files of the Termeh framework, using their `///` doc comments and the mixin/function bodies. Handles regular pages (utilities, validators, setters, getters, ...) and Styles pages (mixins that register a module with define-module). The only output is markdown text. Use whenever the user gives or references one or more .scss files and asks for docs, a markdown page, an API reference, or "generate documentation", even if VitePress isn't mentioned.
 ---
 
 # SCSS → Markdown documentation
@@ -19,7 +19,7 @@ Read this once so you understand what you are documenting. Use these ideas to wr
 
 - Utility functions: small helper functions with a self-explanatory purpose.
 - Validation functions: functions that start with `assert-` (for example `assert-string`). They validate input values and throw an error when the value is wrong. They are used everywhere in the framework, so their errors feed the `::: error` line of the functions that call them.
-- Module: everything that emits CSS is registered as a module with `define-module` or `define-module-silent`. A module is emitted only once in the final CSS, and it can declare the modules it depends on (for example a `button` module can require the `element` module). The body of a module is placed inside `@at-root`, so it is safe to include it anywhere.
+- Module: everything that emits CSS is registered as a module with `define-module`. A module is emitted only once in the final CSS, and it can declare the modules it depends on (for example a `button` module can require the `element` module). The body of a module is placed inside `@at-root`, so it is safe to include it anywhere.
 - Scheme system: the core support for multiple themes (for example `null` as the default, `dark`, `dracula`). Setters define the schemes, and getters register their values for every scheme. Then `@include termeh.variables` or `termeh.variable("dark")` writes the CSS variables into `:root` or a specific selector. A getter such as `termeh.color("primary")` registers all variables defined for the different schemes.
 - Setters: mixins that define variables, colors, sizes, gaps and units: `define`, `define-palette`, `define-variant`, `define-gap`, `define-size`, and so on.
 - Scheme setters: mixins that override a value for a scheme, usually named `override-*` (`override`, `override-palette`, `override-gap`, `override-variant`).
@@ -27,7 +27,7 @@ Read this once so you understand what you are documenting. Use these ideas to wr
   - Raw-value getters return the plain value and usually have `value` or `scheme` in the name (`value`, `color-value`, `scheme-color`, `size-value`, `scheme-size`). Use them when you need the raw value to compute something.
   - CSS-variable getters are the general rule: they return a CSS variable (`var(--...)`) and register that variable in the scheme system.
 - Iterator getters: getters that return a map of registered values, such as `colors` (which gives `$name` and `$color`). They are mostly used to generate variations like `.is-primary`, `.is-secondary` and `.is-shade`.
-- Styles: mixins that register a module (inside `define-module` or `define-module-silent`) and emit the styles of a component. They accept parameters, usually which variations to generate (for example which of the registered colors a button should generate). They use everything above. Most of them start with `use-`, but the real rule is: a mixin whose body is wrapped in `define-module` or `define-module-silent` is a style.
+- Styles: mixins that register a module (inside `define-module`) and emit the styles of a component. They accept parameters, usually which variations to generate (for example which of the registered colors a button should generate). They use everything above. Most of them start with `use-`, but the real rule is: a mixin whose body is wrapped in `define-module` is a style.
 
 ## Page types
 
@@ -191,7 +191,7 @@ Button module uses the following Termeh _colors_ and _variants_:
 - Page title: `# <Name> Styles`, for example `# Button Styles`. Write the title once per style; never repeat it.
 - Introduction: starts with "Termeh's <name> style provides ..." or "Termeh provides ...", then what the style renders and which variations it can generate. Same rules as the regular introduction (2–4 sentences, 1–3 highlights, never "This file").
 - Signature block: same as in regular pages (signature, parameter list, 1 to 3 realistic examples), but there is no explanation paragraph between the title and the block, because the introduction already explains the style. Parameters usually say which variations to generate; describe them that way. If an example call is longer than about 80 characters, break the arguments over multiple lines.
-- `::: module`: always right after the signature block, with one or two sentences: "This module is registered as `<name>`." The name is the first argument of `define-module` / `define-module-silent`. If the module declares dependencies (further arguments), add "and requires the `<dep>` module" (list them all). Never omit this block.
+- `::: module`: always right after the signature block, with one or two sentences: "This module is registered as `<name>`." The name is the first argument of `define-module`. If the module declares dependencies (further arguments), add "and requires the `<dep>` module" (list them all). Never omit this block.
 - `::: error`: optional, right after `::: module`, with the same single-line `If ...` rule as regular pages. Include it only if the body or doc comment can throw.
 - Elements (`## Elements`): list only the non-obvious elements and selectors the module styles or uses, including children and ancestors (for example a `.buttons` wrapper or `em` inside a button). Skip ordinary and expected ones (for example the usual children of a table). One bullet per element: ``- `selector` - what it is for and what is applied to it``. Read selectors from the body. Omit the section if there are none.
 - Modifiers (`## Modifiers`): list the static modifiers found in the body (for example `.is-light`, `.is-loading`), one bullet each: ``- `.is-light` - what it changes``. Do NOT list modifiers that come from an `@each` over sizes, colors, gaps or units; those belong only in the variation sections. Omit the section if there are none.
@@ -283,7 +283,7 @@ Amount: at least 1 highlight per prose paragraph, usually 2 to 3, 1–3 words ea
 
 Before outputting, verify:
 
-1. The page type is right: a mixin wrapped in `define-module` / `define-module-silent` gets the Styles format, everything else gets the regular format.
+1. The page type is right: a mixin wrapped in `define-module` gets the Styles format, everything else gets the regular format.
 2. The introduction starts with "Termeh", not "This file".
 3. The introduction describes everything given, not only the first file.
 4. No file names appear anywhere in the page.

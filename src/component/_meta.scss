@@ -1,5 +1,4 @@
 @use "../core/module";
-@use "./element";
 
 /// Applies meta text styles.
 ///
@@ -16,10 +15,10 @@
 /// @require {Variable<Color>} variant-for("component", "base", "muted") - Text color
 ///
 /// @require {Variable<Color>} variant-for("component", $name, "muted") - Text color of each color variation
+///
+/// @require reset, base, element
 @mixin use-meta($colors: (), $sizes: ()) {
-    @include element.use-element();
-
-    @include module.define-module("meta") {
+    @include module.define-module("meta", "reset", "base", "element") {
         $font-size: module.var("component", "meta-size");
         $font-weight: module.var("component", "meta-weight");
 

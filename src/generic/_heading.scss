@@ -15,8 +15,10 @@
 /// @require {Variable<Length>} size("large") - Font size of `h4`
 /// @require {Variable<Length>} size("medium") - Font size of `h5`
 /// @require {Variable<Length>} size("normal") - Font size of `h6`
+///
+/// @require reset, base
 @mixin use-heading() {
-    @include module.define-module("base-heading") {
+    @include module.define-module("base-heading", "reset", "base") {
         $gap-macro: module.var("gap", "macro");
 
         $line-large: module.var("line-height", "large");

@@ -1,5 +1,4 @@
 @use "../core/module";
-@use "./element";
 
 /// Applies header styles.
 ///
@@ -22,10 +21,10 @@
 /// @require {Variable<Color>} variant-for("component", "base", "muted") - Secondary title text color
 ///
 /// @require {Variable<Color>} variant-for("component", $name, "accent") - Decorator color of each color variation
+///
+/// @require reset, base, base-heading, element
 @mixin use-header($colors: (), $gaps: ()) {
-    @include element.use-element();
-
-    @include module.define-module("header") {
+    @include module.define-module("header", "reset", "base", "base-heading", "element") {
         $gap-macro: module.var("gap", "macro");
         $line-normal: module.var("line-height", "normal");
         $strong-weight: module.var("text", "strong-weight");

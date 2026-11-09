@@ -13,8 +13,10 @@
 /// @require {Variable<Number>} var("input", "disabled-opacity") - Disabled content opacity
 ///
 /// @require {Variable<Color>} variant-for("input", "base", "border") - Fieldset border color
+///
+/// @require reset, base
 @mixin use-fieldset() {
-    @include module.define-module("form-fieldset") {
+    @include module.define-module("form-fieldset", "reset", "base") {
         $gap-macro: module.var("gap", "macro");
         $padding-container: module.var("padding", "container");
         $radius-normal: module.var("radius", "normal");

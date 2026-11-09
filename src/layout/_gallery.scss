@@ -13,8 +13,10 @@
 /// @require {Variable<Length>} var("gallery", "height") - Item height on desktop
 /// @require {Variable<Length>} var("gallery", "height-tablet") - Item height on tablet
 /// @require {Variable<Length>} var("gallery", "height-mobile") - Item height on mobile
+///
+/// @require reset, base
 @mixin use-gallery($gaps: ()) {
-    @include module.define-module("gallery") {
+    @include module.define-module("gallery", "reset", "base") {
         $gap-micro: module.var("gap", "micro");
         $height: module.var("gallery", "height");
         $height-tablet: module.var("gallery", "height-tablet");

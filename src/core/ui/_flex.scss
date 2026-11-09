@@ -3,14 +3,14 @@
 
 $-aligns: (
     "stretch": stretch,
-    "flex-start": flex-start,
-    "flex-end": flex-end,
+    "start": flex-start,
+    "end": flex-end,
     "center": center,
     "baseline": baseline,
 );
 $-justifies: (
-    "flex-start": flex-start,
-    "flex-end": flex-end,
+    "start": flex-start,
+    "end": flex-end,
     "center": center,
     "space-between": space-between,
     "space-around": space-around,

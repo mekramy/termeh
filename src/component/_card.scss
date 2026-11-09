@@ -35,6 +35,8 @@
 /// @require {Variable<Color>} variant-for("component", "base", "accent") - Scrollbar and decorator color
 ///
 /// @require {Variable<Color>} variant-for("component", $name, "accent") - Scrollbar, decorator, and loader color of each color variation
+///
+/// @require reset, base
 @mixin use-card($colors: (), $gaps: ()) {
     $-overlay-opacity: module.var("overlay", "opacity");
     $-overlay-filter: module.var("overlay", "filter");
@@ -54,7 +56,7 @@
     $-box-overlay-foreground: module.variant-for("box", "base", "overlay-foreground");
     $-box-overlay-background: module.variant-for("box", "base", "overlay-background");
 
-    @include module.define-module("card") {
+    @include module.define-module("card", "reset", "base") {
         $gap-macro: module.var("gap", "macro");
         $radius-normal: module.var("radius", "normal");
         $decorator-thickness: module.var("decorator", "size");

@@ -8,8 +8,10 @@
 /// @output The `.wrapper` class and its gap classes
 ///
 /// @require {Variable<Length>} var("gap", "micro") - Default space between items
+///
+/// @require reset, base
 @mixin use-wrapper($gaps: ()) {
-    @include module.define-module("wrapper") {
+    @include module.define-module("wrapper", "reset", "base") {
         $gap-micro: module.var("gap", "micro");
 
         .wrapper {
@@ -38,7 +40,7 @@
             }
 
             @each $name, $justify in module.flex-justifies() {
-                &.is-#{$name} {
+                &.is-#{$name}-justified {
                     justify-content: $justify;
                 }
             }

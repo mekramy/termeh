@@ -37,8 +37,10 @@
 /// @require {Variable<Color>} variant-for("text", "base", "small-text") - Text color of `small`, `sub` and `sup`
 /// @require {Variable<Color>} variant-for("text", "base", "strong-text") - Text color of `strong`, `b` and table headers
 /// @require {Variable<Color>} variant-for("text", "base", "decorated-text") - Text color of `u`, `ins`, `s` and `del`
+///
+/// @require reset
 @mixin use-base() {
-    @include module.define-module("base") {
+    @include module.define-module("base", "reset") {
         $direction: module.var("document", "direction");
         $min-width: module.var("document", "min-width");
 

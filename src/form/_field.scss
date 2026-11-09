@@ -20,9 +20,11 @@
 /// @require {Variable<Color>} variant-for("input", "base", "accent-text") - Required-field indicator color
 /// @require {Variable<Color>} variant-for("input", "base", "disabled-foreground") - Disabled text color
 ///
-/// @require {Variable<Color>} variant-for("input", $palette, "accent-text") - Required-field indicator color for each color variation
+/// @require {Variable<Color>} variant-for("input", $name, "accent-text") - Required-field indicator color for each color variation
+///
+/// @require reset, base
 @mixin use-field($colors: ()) {
-    @include module.define-module("form-field") {
+    @include module.define-module("form-field", "reset", "base") {
         $gap-micro: module.var("gap", "micro");
         $gap-macro: module.var("gap", "macro");
         $strong-weight: module.var("text", "strong-weight");

@@ -15,8 +15,10 @@
 ///
 /// @require {Variable<Color>} variant("shade", "light") - Placeholder background color
 /// @require {Variable<Color>} variant("shade", "light-hover") - Highlight color of the shimmer
+///
+/// @require reset, base
 @mixin use-skeleton($sizes: ()) {
-    @include module.define-module("skeleton") {
+    @include module.define-module("skeleton", "reset", "base") {
         $radius-normal: module.var("radius", "normal");
         $radius-circle: module.var("radius", "circle");
         $radius-rounded: module.var("radius", "rounded");

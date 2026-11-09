@@ -1,5 +1,4 @@
 @use "../core/module";
-@use "./element";
 
 /// Applies tag styles.
 ///
@@ -34,10 +33,10 @@
 /// @require {Variable<Color>} variant-for("component", $name, "light-foreground") - Text and loader color of each color variation
 /// @require {Variable<Color>} variant-for("component", $name, "light-background") - Background color of each color variation
 /// @require {Variable<Color>} variant-for("component", $name, "light-hover") - Hover background of action tags in each color variation
+///
+/// @require reset, base, element
 @mixin use-tag($colors: (), $sizes: ()) {
-    @include element.use-element();
-
-    @include module.define-module("tag") {
+    @include module.define-module("tag", "reset", "base", "element") {
         $radius-normal: module.var("radius", "normal");
         $radius-circle: module.var("radius", "circle");
         $radius-rounded: module.var("radius", "rounded");

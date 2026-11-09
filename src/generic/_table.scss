@@ -1,4 +1,3 @@
-@use "sass:meta";
 @use "../core/module";
 
 /// Applies table styles and color classes.
@@ -36,8 +35,10 @@
 /// @require {Variable<Color>} variant-for("table", $palette, "row-separator") - Row separator color of the color class
 /// @require {Variable<Color>} variant-for("table", $palette, "column-separator") - Column separator color of the color class
 /// @require {Variable<Color>} variant-for("table", $palette, "section-separator") - Header and footer separator color of the color class
+///
+/// @require reset, base
 @mixin use-table($colors: ()) {
-    @include module.define-module("base-table") {
+    @include module.define-module("base-table", "reset", "base") {
         $strong-weight: module.var("text", "strong-weight");
 
         $primary: module.color("primary");

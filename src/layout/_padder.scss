@@ -6,8 +6,10 @@
 ///
 /// @param {List<String>} $gaps [()] - Gap names to include; `null` includes all defined gaps
 /// @output The `.padder` class and a `.is-<name>` class for each gap
+///
+/// @require reset, base
 @mixin use-padder($gaps: ()) {
-    @include module.define-module("padder") {
+    @include module.define-module("padder", "reset", "base") {
         .padder {
             display: block;
             box-sizing: border-box;

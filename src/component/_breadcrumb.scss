@@ -20,8 +20,10 @@
 /// @require {Variable<Color>} variant-for("component", "base", "separator") - Divider color
 ///
 /// @require {Variable<Color>} variant-for("component", $name, "accent-text") - Active item text color of each color variation
+///
+/// @require reset, base
 @mixin use-breadcrumb($colors: ()) {
-    @include module.define-module("breadcrumb") {
+    @include module.define-module("breadcrumb", "reset", "base") {
         $gap-micro: module.var("gap", "micro");
         $strong-weight: module.var("text", "strong-weight");
 
