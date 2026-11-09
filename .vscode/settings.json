@@ -1,0 +1,32 @@
+{
+    "highlight.regexes": {
+        "~[^~\\n]+~": {
+            "filterFileRegex": ".*\\.md$",
+            "decorations": [
+                {
+                    "color": "#ea9ab2",
+                    "fontStyle": "underline"
+                }
+            ]
+        },
+        "@[^@\\n]+@": {
+            "filterFileRegex": ".*\\.md$",
+            "decorations": [
+                {
+                    "color": "#ffd6a5",
+                    "fontStyle": "underline"
+                }
+            ]
+        },
+        "=[^=\\n]+=": {
+            "filterFileRegex": ".*\\.md$",
+            "decorations": [
+                {
+                    "color": "#6c757d",
+                    "fontWeight": "bold"
+                }
+            ]
+        }
+    }
+}
+

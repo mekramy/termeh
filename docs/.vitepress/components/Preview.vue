@@ -1,10 +1,12 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount, watch } from "vue";
+import { useData } from "vitepress";
+import { onBeforeUnmount, onMounted, ref, watch } from "vue";
 
 const props = defineProps(["height"]);
 const slotRef = ref();
 const iframeRef = ref();
 const content = ref("");
+const { isDark } = useData();
 
 function onMessage(e) {
     if (e.data?.iframeHeight && iframeRef.value) {
@@ -20,10 +22,10 @@ onBeforeUnmount(() => {
 });
 
 watch(
-    () => slotRef.value?.innerHTML,
-    (html) => {
+    () => [isDark.value, slotRef.value?.innerHTML],
+    ([isDarkValue, html]) => {
         content.value = `
-            <html>
+            <html data-scheme="${isDarkValue ? "dark" : "light"}">
                 <head>
                     <meta charset="UTF-8" />
                     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -50,12 +52,12 @@ watch(
                 <body>${html}</body>
             </html>`;
     },
-    { immediate: true }
+    { immediate: true },
 );
 </script>
 
 <template>
-    <div class="demo-container">
+    <div class="demo-container" :class="{ 'is-dark': isDark }">
         <div style="display: none" ref="slotRef"><slot /></div>
         <iframe
             ref="iframeRef"
@@ -72,13 +74,17 @@ watch(
 .demo-container {
     width: 100%;
     height: 100%;
-    background-color: white;
     padding: 1rem;
+    background-color: white;
 
     .responsive-iframe {
         width: 100%;
         min-height: 0;
         overflow: visible;
+    }
+
+    &.is-dark {
+        background-color: #0f0f15;
     }
 }
 </style>

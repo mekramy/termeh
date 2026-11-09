@@ -1,11 +1,15 @@
-@import url("https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght,MONO@0,300..800,1;1,300..800,1&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
 
 :root {
-    /* Typography */
-    --vp-font-family-base: "Ubuntu", "Segoe UI", Roboto, sans-serif;
+    --font-base: "Ubuntu", sans-serif;
+    --font-title: "Playwrite MX Guides", cursive;
+    --font-title: "Ubuntu", sans-serif;
+    --font-text: "Ubuntu", sans-serif;
+    --font-code: "Google Sans Code", monospace;
 
-    /* Code Snippet font */
-    --vp-font-family-mono: "Google Sans Code", monospace, Menlo, Monaco, Consolas;
+    /* Typography */
+    --vp-font-family-base: var(--font-base);
+    --vp-font-family-mono: var(--font-code);
 }
 
 html {
@@ -23,109 +27,244 @@ html {
 }
 
 .vp-doc {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .custom-block-title {
+        font-family: var(--font-title);
+    }
+
     h1 {
-        font-weight: 600;
         font-size: 1.6rem;
     }
 
     h2 {
-        font-weight: 600;
         font-size: 1.3rem;
     }
 
     h3 {
-        font-weight: 600;
         font-size: 1.1rem;
     }
 
     h4 {
-        font-weight: bold;
         font-size: 1rem;
-    }
-
-    p {
-        text-align: justify;
     }
 
     p,
     ul,
     ol,
     table {
+        q,
         em,
-        ins {
-            font-style: normal;
+        ins,
+        mark,
+        strong {
+            font-size: 0.8rem;
             font-weight: 600;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            color: var(--ctp-latte-flamingo);
+            font-style: normal;
+            text-transform: capitalize;
+            text-decoration: none;
+            font-family: var(--font-code);
+        }
+
+        q {
+            &::before,
+            &::after {
+                display: none;
+            }
+
+            padding: 0 4px;
+            font-style: oblique;
+            text-decoration: underline;
+            text-decoration-style: dashed;
+            text-underline-offset: 6px;
+            text-decoration-color: var(--vp-c-border);
+            color: var(--vp-c-text-1);
+        }
+
+        em {
+            padding: 0 2px;
+            font-style: oblique;
+            text-transform: none;
+            color: var(--vp-c-text-3);
         }
 
         ins {
-            text-decoration: none;
-            color: var(--ctp-latte-rosewater);
+            font-weight: 500;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            text-transform: capitalize;
+            color: var(--ctp-latte-green);
+        }
+
+        mark {
+            background: none;
+            color: var(--ctp-latte-flamingo);
+        }
+
+        strong {
+            color: var(--ctp-latte-sky);
+        }
+
+        code {
+            font-weight: 500;
+            background-color: var(--vp-c-bg-elv);
+        }
+
+        q,
+        em,
+        ins,
+        mark,
+        strong,
+        code {
+            text-shadow: none;
+        }
+    }
+
+    p {
+        font-size: 0.9rem;
+        font-family: var(--font-text);
+        text-shadow:
+            0px 0px 1px rgba(0, 0, 0, 0.2),
+            0px 0px 1px rgba(0, 0, 0, 0.1);
+    }
+
+    table {
+        td.is-fallback {
+            line-height: 2;
+            text-align: end;
+            background: var(--vp-c-bg);
+
+            ins {
+                opacity: 0.65;
+                font-size: 0.65rem;
+                text-transform: uppercase;
+                color: var(--vp-c-text-3);
+            }
+
+            code.vp-code {
+                display: inline-block;
+                white-space: nowrap;
+                font-size: 0.875rem;
+                background: none;
+            }
+
+            > :not(:last-child) {
+                margin-inline-end: 8px;
+            }
         }
     }
 
     ul {
+        font-size: 0.9rem;
         list-style-type: square;
 
         li {
             &::marker {
                 color: var(--vp-c-divider);
             }
-
-            strong {
-                display: inline-block;
-                padding: 2px 6px;
-                margin-right: 0.5rem;
-                border-radius: 2px;
-
-                font-weight: 600;
-                font-size: 0.65rem;
-                letter-spacing: 1px;
-                line-height: 1.6;
-                text-transform: uppercase;
-                white-space: nowrap;
-
-                color: var(--vp-button-alt-bg);
-                background-color: var(--vp-button-alt-text);
-            }
-
-            a {
-                display: inline-block;
-                font-weight: 700;
-                font-size: 0.8rem;
-                letter-spacing: 1px;
-                text-transform: uppercase;
-
-                border-radius: 2px;
-
-                font-family: var(--vp-font-family-mono);
-            }
-
-            ins {
-                font-size: 0.65rem;
-                letter-spacing: 1px;
-                color: var(--ctp-latte-sky);
-            }
-
-            code {
-                padding: 0;
-                font-weight: 600;
-                font-size: 0.9rem;
-                background-color: transparent;
-                font-family: var(--vp-font-family-mono);
-            }
         }
-    }
-
-    p code {
-        font-weight: 600;
-        background-color: var(--vp-c-bg-elv);
     }
 
     pre code {
         font-weight: 500 !important;
         font-size: 0.875rem !important;
+    }
+
+    div[class*="language-"] + div[class*="language-"] {
+        margin-top: 1rem;
+    }
+
+    h1 + blockquote {
+        padding: 0;
+        border: none;
+
+        p {
+            display: flex;
+            gap: 8px;
+        }
+
+        a {
+            display: inline-block;
+            cursor: help;
+            user-select: none;
+            padding: 0.6em 1.2em;
+            border-radius: 999px;
+            border-radius: 3px;
+            transition: background-color 300ms ease;
+
+            font-weight: 600;
+            font-size: 0.65rem;
+            font-family: var(--font-code);
+            line-height: 1em;
+            letter-spacing: 1px;
+            white-space: nowrap;
+            text-transform: uppercase;
+            text-decoration: none;
+            text-shadow: none;
+
+            color: var(--ctp-latte-overlay1);
+            background-color: rgb(from var(--ctp-latte-overlay1) r g b / 0.1);
+
+            &:hover {
+                color: var(--ctp-latte-overlay1);
+                background-color: rgb(from var(--ctp-latte-overlay1) r g b / 0.2);
+            }
+
+            &[href="#scheme-var"] {
+                color: var(--ctp-latte-lavender);
+                background-color: rgb(from var(--ctp-latte-lavender) r g b / 0.1);
+
+                &:hover {
+                    color: var(--ctp-latte-lavender);
+                    background-color: rgb(from var(--ctp-latte-lavender) r g b / 0.2);
+                }
+            }
+
+            &[href="#colorize"] {
+                color: var(--ctp-latte-rosewater);
+                background-color: rgb(from var(--ctp-latte-rosewater) r g b / 0.1);
+
+                &:hover {
+                    color: var(--ctp-latte-rosewater);
+                    background-color: rgb(from var(--ctp-latte-rosewater) r g b / 0.2);
+                }
+            }
+
+            &[href="#sizes"] {
+                color: var(--ctp-latte-green);
+                background-color: rgb(from var(--ctp-latte-green) r g b / 0.1);
+
+                &:hover {
+                    color: var(--ctp-latte-green);
+                    background-color: rgb(from var(--ctp-latte-green) r g b / 0.2);
+                }
+            }
+
+            &[href="#gaps"] {
+                color: var(--ctp-latte-yellow);
+                background-color: rgb(from var(--ctp-latte-yellow) r g b / 0.1);
+
+                &:hover {
+                    color: var(--ctp-latte-yellow);
+                    background-color: rgb(from var(--ctp-latte-yellow) r g b / 0.2);
+                }
+            }
+        }
+    }
+
+    p + blockquote {
+        margin: 0;
+        border-inline-start-color: var(--ctp-latte-sky);
+
+        p {
+            font-size: 0.9rem;
+            position: relative;
+            color: var(--ctp-latte-subtext0);
+            text-shadow: none;
+        }
     }
 }

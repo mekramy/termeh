@@ -1,42 +1,66 @@
-.quote {
+.vp-doc .quote {
     width: 100%;
-    display: block;
-    padding: 0.6rem;
+    display: flex;
+    align-items: baseline;
+    gap: 1ch;
+    padding: 0.6rem 1.2rem;
     box-sizing: border-box;
-    font-family: var(--vp-font-family-mono);
     border-top-right-radius: 2px;
     border-bottom-right-radius: 2px;
+
+    &:not(:last-child) {
+        margin-bottom: 1rem;
+    }
 
     > p {
         margin: 0;
         padding: 0;
-        display: flex;
-        align-items: baseline;
-        gap: 1rem;
-        font-weight: 600;
-        font-size: 0.8rem;
         line-height: 1.6;
+    }
 
-        strong {
-            flex: none;
-            font-weight: 600;
-            font-size: 0.6rem;
-            line-height: 0.8rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            border-radius: 2px;
-            padding: 4px 8px;
-            color: var(--vp-c-bg);
-        }
+    > strong {
+        flex: none;
+        font-weight: 600;
+        font-size: 0.6rem;
+        line-height: 0.8rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        border-radius: 2px;
+        padding: 4px 8px;
+        color: var(--vp-c-bg);
+    }
+
+    ins {
+        padding: 0 4px;
+        letter-spacing: normal;
+        text-decoration: underline;
+        text-decoration-style: dotted;
+        text-underline-offset: 6px;
     }
 
     &.is-error {
         color: var(--vp-c-text-1);
-        border: 1px solid var(--vp-badge-warning-bg);
-        border-left: 3px solid var(--vp-badge-warning-text);
+        border: 1px solid var(--vp-badge-danger-bg);
+        border-left: 3px solid var(--vp-badge-danger-text);
+        box-shadow: 0 2px 7px -3px rgb(from var(--vp-c-text-1) r g b / 0.3);
 
-        > p strong {
-            background: var(--vp-badge-warning-text);
+        > strong {
+            background: var(--vp-badge-danger-text);
+        }
+
+        code {
+            background: none;
+        }
+    }
+
+    &.is-module {
+        color: var(--vp-c-text-1);
+        border: 1px solid var(--vp-badge-tip-bg);
+        border-left: 3px solid var(--vp-badge-tip-text);
+        box-shadow: 0 2px 7px -3px rgb(from var(--vp-c-text-1) r g b / 0.3);
+
+        > strong {
+            background: var(--vp-badge-tip-text);
         }
     }
 }

@@ -1,0 +1,32 @@
+.vp-doc .custom-block.is-appendix {
+    --accent: var(--vp-c-text-2);
+    --shadow: rgb(from var(--vp-c-black) r g b / 0.1);
+    padding: 32px;
+    margin: 32px -32px 0;
+    border-radius: 4px;
+    border: 1px solid var(--accent);
+    box-shadow:
+        0 2px 4px -1px var(--shadow),
+        0 8px 20px -12px var(--shadow);
+
+    .title {
+        padding: 0;
+        margin-top: 0;
+        border: none;
+        color: var(--ctp-latte-sky);
+    }
+
+    .quote {
+        box-shadow: none;
+
+        p {
+            margin: 0;
+        }
+    }
+
+    h3:not(:first-of-type) {
+        margin: 48px 0 16px;
+        padding-top: 24px;
+        border-top: 1px solid var(--vp-c-divider);
+    }
+}

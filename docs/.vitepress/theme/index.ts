@@ -4,10 +4,11 @@ import Preview from "../components/Preview.vue";
 
 import "@catppuccin/vitepress/theme/mocha/teal.css";
 import "virtual:group-icons.css";
+import "./appendix.scss";
 import "./block.scss";
-import "./definition.scss";
 import "./quote.scss";
 import "./scheme.scss";
+import "./signature.scss";
 import "./style.scss";
 
 export default {

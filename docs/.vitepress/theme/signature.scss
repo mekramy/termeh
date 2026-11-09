@@ -1,0 +1,69 @@
+.vp-doc .custom-block.is-signature {
+    position: relative;
+    margin: 1rem 0;
+    padding: 0;
+
+    ul {
+        margin: 1rem;
+        margin-bottom: 2rem;
+
+        li + li {
+            margin-top: 0;
+        }
+    }
+
+    > table {
+        display: table;
+        width: 100%;
+        table-layout: auto;
+        border: none;
+        margin: 0 0 2rem;
+
+        thead {
+            tr {
+                border-top: none;
+                background-color: transparent;
+
+                th {
+                    font-size: 0.75rem;
+                    font-weight: 500;
+                    border-top: none;
+                    color: var(--vp-c-text-3);
+                    background-color: transparent;
+
+                    &:first-child {
+                        border-inline-start: none;
+                    }
+
+                    &:last-child {
+                        border-inline-end: none;
+                    }
+                }
+            }
+        }
+
+        tr {
+            background-color: transparent;
+
+            td {
+                border-bottom: none;
+                background-color: transparent;
+
+                &:first-child {
+                    border-inline-start: none;
+                }
+
+                &:last-child {
+                    border-inline-end: none;
+                }
+            }
+        }
+
+        code {
+            font-weight: 500;
+            font-size: 0.875rem;
+            white-space: nowrap;
+            background-color: transparent;
+        }
+    }
+}

@@ -1,4 +1,13 @@
-.custom-block {
+.vp-doc .custom-block {
+    .custom-block-title {
+        font-family: var(--font-title);
+    }
+
+    p {
+        font-family: var(--font-text);
+        text-shadow: none;
+    }
+
     &.is-block {
         position: relative;
         padding: 1rem;
@@ -21,6 +30,7 @@
 
             font-weight: 900;
             font-size: 0.65rem;
+            font-family: var(--font-text);
             letter-spacing: 2px;
             text-transform: uppercase;
 
@@ -33,62 +43,28 @@
             width: 100%;
             table-layout: auto;
 
-            td.is-fallback {
-                opacity: 0.85;
-                background: var(--vp-c-bg);
-                font-family: var(--vp-font-family-mono);
-
-                ins {
-                    margin-right: 1em;
-                    font-size: 0.65rem;
-                    font-weight: 700;
-                    letter-spacing: 1px;
-                    opacity: 0.5;
-                    color: var(--vp-c-text-1);
-                }
-
-                code {
-                    display: inline-block;
-                    padding: 0;
-                    line-height: 2;
-                    white-space: nowrap;
-                    font-weight: 600;
-                    background: transparent;
-
-                    &:before {
-                        content: "→";
-                        margin-right: 0.5em;
-                        color: var(--vp-c-text-1);
-                    }
-                }
-            }
-
             strong {
+                font-weight: 500;
                 white-space: nowrap;
-                color: var(--ctp-latte-sky);
-                font-family: var(--vp-font-family-mono);
-            }
-
-            em {
-                font-size: 0.65rem;
-                letter-spacing: 1px;
-                white-space: nowrap;
-                color: var(--ctp-latte-yellow);
-                font-family: var(--vp-font-family-mono);
             }
 
             mark {
-                padding: 2px 6px;
-                border-radius: 2px;
-                font-weight: 600;
+                padding: 0.3em 0.7em;
                 font-size: 0.65rem;
                 letter-spacing: 1px;
                 text-transform: uppercase;
-                text-decoration: none;
                 white-space: nowrap;
+
+                border-radius: 999px;
                 color: var(--vp-custom-block-caution-text);
                 background-color: var(--vp-custom-block-caution-bg);
-                font-family: var(--vp-font-family-mono);
+            }
+
+            code {
+                font-weight: 500;
+                font-size: 0.875rem;
+                white-space: nowrap;
+                background-color: transparent;
             }
         }
 
@@ -101,7 +77,7 @@
         }
 
         &.is-resolver {
-            border: 1px solid var(--ctp-latte-green);
+            border-color: var(--ctp-latte-green);
 
             h1 {
                 background-color: var(--ctp-latte-green);

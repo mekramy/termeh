@@ -1,6 +1,4 @@
-import type MarkdownIt from "markdown-it";
-
-export function fallbacks(md: MarkdownIt) {
+export const tableFallbackPlugin = (md) => {
     md.core.ruler.after("inline", "table_colspan", (state) => {
         const tokens = state.tokens;
         let cols = 0;
@@ -23,10 +21,10 @@ export function fallbacks(md: MarkdownIt) {
 
                     const ins = new state.Token("html_inline", "", 0);
                     ins.content = "<ins>Fallback:</ins>";
-                    inline.children!.unshift(ins);
+                    inline.children.unshift(ins);
                 }
                 cellIndex++;
             }
         }
     });
-}
+};

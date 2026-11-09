@@ -44,18 +44,18 @@
     },
     "devDependencies": {
         "@catppuccin/vitepress": "^0.1.4",
+        "@types/markdown-it": "^14.2.0",
+        "@types/markdown-it-container": "^4.0.1",
         "markdown-it-container": "^4.0.0",
-        "markdown-it-ins": "^4.0.0",
-        "markdown-it-mark": "^4.0.0",
         "stylelint": "^17.16.0",
         "stylelint-config-standard-scss": "^17.0.0",
         "stylelint-scss": "^7.4.0",
         "vitepress": "^1.6.4",
         "vitepress-plugin-group-icons": "^1.8.1",
         "vitepress-plugin-tabs": "^0.9.1",
-        "vue": "^3.5.44"
+        "vue": "^3.5.45"
     },
     "peerDependencies": {
-        "sass": "^1.107.0"
+        "sass": "^1.108.1"
     }
 }
