@@ -1,12 +1,11 @@
-import type { Highlighter } from "shiki";
-
-import { defineConfig } from "vitepress";
-
 import container from "markdown-it-container";
+import type { Highlighter } from "shiki";
+import { defineConfig } from "vitepress";
 import {
     groupIconMdPlugin,
     groupIconVitePlugin,
 } from "vitepress-plugin-group-icons";
+import llmstxt from "vitepress-plugin-llms";
 import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
 
 import {
@@ -25,9 +24,8 @@ import Scheme from "./elements/scheme";
 import Signature from "./elements/signature";
 import Sidebar from "./sidebar";
 
-let highlighter: Highlighter;
-
 // https://vitepress.dev/reference/site-config
+let highlighter: Highlighter;
 export default defineConfig({
     cleanUrls: true,
     assetsDir: "static",
@@ -86,18 +84,18 @@ export default defineConfig({
             md.use(tableFallbackPlugin);
             md.use(inline_marks_plugin);
 
-            md.use(container, "error", ErrorBlock);
-            md.use(container, "module", ModuleBlock);
+            md.use(container as never, "error", ErrorBlock);
+            md.use(container as never, "module", ModuleBlock);
 
-            md.use(container, "scheme", Scheme);
-            md.use(container, "signature", Signature);
+            md.use(container as never, "scheme", Scheme);
+            md.use(container as never, "signature", Signature);
 
-            md.use(container, "block", Block);
-            md.use(container, "appendix", Appendix);
-            md.use(container, "resolver", Resolver);
+            md.use(container as never, "block", Block);
+            md.use(container as never, "appendix", Appendix);
+            md.use(container as never, "resolver", Resolver);
         },
     },
     vite: {
-        plugins: [groupIconVitePlugin()],
+        plugins: [llmstxt(), groupIconVitePlugin()],
     },
 });
