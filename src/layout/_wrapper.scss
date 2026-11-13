@@ -9,9 +9,9 @@
 ///
 /// @require {Variable<Length>} var("gap", "micro") - Default space between items
 ///
-/// @require reset, base
+/// @require reset
 @mixin use-wrapper($gaps: ()) {
-    @include module.define-module("wrapper", "reset", "base") {
+    @include module.define-module("wrapper", "reset") {
         $gap-micro: module.var("gap", "micro");
 
         .wrapper {

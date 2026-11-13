@@ -1,11 +1,88 @@
 @use "../core/module";
 
-/// Applies a minimal reset, based on minireset.css v0.0.6 (https://github.com/jgthms/minireset.css).
-/// It removes default margins, paddings and list styles, sets `border-box` sizing, and makes images and videos responsive.
+/// Applies a minimal reset, based on minireset.css v0.0.6 (https://github.com/jgthms/minireset.css),
+/// to the document and common HTML elements. It removes default margins, paddings and list styles,
+/// sets `border-box` sizing, makes images and videos responsive, and covers text, links, rules,
+/// quotes, code, tables and lists.
 ///
 /// @output The reset styles, emitted once
-@mixin mini-reset() {
+///
+/// @require {Variable<Direction>} var("document", "direction") - Document text direction
+/// @require {Variable<Length>} var("document", "min-width") - Document minimum width
+///
+/// @require {Variable<Length>} var("gap", "micro") - Space between list items
+/// @require {Variable<Length>} var("gap", "macro") - Space between blocks
+/// @require {Variable<Length>} var("padding", "control") - Padding for blockquote, code, and pre
+///
+/// @require {Variable<Length>} var("radius", "normal") - Border radius of blockquotes
+/// @require {Variable<LineHeight>} var("line-height", "normal") - Document line height
+///
+/// @require {Variable<FontFamily>} var("text", "font-family") - Document font family
+/// @require {Variable<Length>} var("text", "font-size") - Document font size
+/// @require {Variable<FontWeight>} var("text", "font-weight") - Document font weight
+/// @require {Variable<FontFamily>} var("text", "mono-family") - Font family of code and preformatted text
+/// @require {Variable<Length>} var("text", "mono-size") - Font size of code and preformatted text
+/// @require {Variable<FontWeight>} var("text", "mono-weight") - Font weight of code and preformatted text
+/// @require {Variable<Length>} var("text", "small-size") - Font size of `small`, `sub` and `sup`
+/// @require {Variable<FontWeight>} var("text", "small-weight") - Font weight of `small`, `sub` and `sup`
+/// @require {Variable<FontWeight>} var("text", "strong-weight") - Font weight of `strong`, `b` and table headers
+/// @require {Variable<FontWeight>} var("text", "decorated-weight") - Font weight of `u`, `ins`, `s` and `del`
+///
+/// @require {Variable<Color>} color("primary") - Selection background, scrollbar and checkbox and radio accent color
+/// @require {Variable<Color>} variant("primary", "text") - Link color
+/// @require {Variable<Color>} variant("primary", "foreground") - Selection text color
+///
+/// @require {Variable<Color>} variant("base", "foreground") - Document text color
+/// @require {Variable<Color>} variant("base", "background") - Document background color
+/// @require {Variable<Color>} variant("base", "surface") - Background of blockquotes, code and preformatted text
+/// @require {Variable<Color>} variant("base", "separator") - Color of horizontal rules and list markers
+/// @require {Variable<Color>} variant-for("text", "base", "small-text") - Text color of `small`, `sub` and `sup`
+/// @require {Variable<Color>} variant-for("text", "base", "strong-text") - Text color of `strong`, `b` and table headers
+/// @require {Variable<Color>} variant-for("text", "base", "decorated-text") - Text color of `u`, `ins`, `s` and `del`
+@mixin use-reset() {
     @include module.define-module("reset") {
+        $direction: module.var("document", "direction");
+        $min-width: module.var("document", "min-width");
+
+        $gap-micro: module.var("gap", "micro");
+        $gap-macro: module.var("gap", "macro");
+        $padding-control: module.var("padding", "control");
+
+        $radius-normal: module.var("radius", "normal");
+        $line-height: module.var("line-height", "normal");
+
+        $font-family: module.var("text", "font-family");
+        $font-size: module.var("text", "font-size");
+        $font-weight: module.var("text", "font-weight");
+        $mono-family: module.var("text", "mono-family");
+        $mono-size: module.var("text", "mono-size");
+        $mono-weight: module.var("text", "mono-weight");
+        $small-size: module.var("text", "small-size");
+        $small-weight: module.var("text", "small-weight");
+        $strong-weight: module.var("text", "strong-weight");
+        $decorated-weight: module.var("text", "decorated-weight");
+
+        $primary: module.color("primary");
+        $primary-text: module.variant("primary", "text");
+        $primary-foreground: module.variant("primary", "foreground");
+
+        $foreground: module.variant("base", "foreground");
+        $background: module.variant("base", "background");
+        $surface: module.variant("base", "surface");
+        $separator: module.variant("base", "separator");
+        $small-text: module.variant-for("text", "base", "small-text");
+        $strong-text: module.variant-for("text", "base", "strong-text");
+        $decorated-text: module.variant-for("text", "base", "decorated-text");
+
+        :root {
+            font-size: $font-size;
+        }
+
+        ::selection {
+            color: $primary-foreground;
+            background-color: $primary;
+        }
+
         /* Reset margin and padding for structural elements */
         html,
         body,
@@ -58,10 +135,6 @@
         }
 
         /* Universal box-sizing with inheritance */
-        html {
-            box-sizing: border-box;
-        }
-
         *,
         *::before,
         *::after {
@@ -84,11 +157,253 @@
         table {
             border-collapse: collapse;
             border-spacing: 0;
+
+            th {
+                font-weight: $strong-weight;
+            }
+
+            td,
+            th {
+                vertical-align: top;
+
+                &:not([align]) {
+                    text-align: inherit;
+                }
+            }
         }
 
         td,
         th {
             padding: 0;
+        }
+
+        html {
+            box-sizing: border-box;
+            overflow: hidden auto;
+            scroll-behavior: smooth;
+            direction: $direction;
+            min-width: $min-width;
+            font-size: $font-size;
+            font-family: $font-family;
+            font-weight: $font-weight;
+            line-height: $line-height;
+            text-size-adjust: 100%;
+            text-rendering: optimizelegibility;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-font-smoothing: antialiased;
+            color: $foreground;
+            background-color: $background;
+
+            @include module.scrollable($primary);
+        }
+
+        article,
+        aside,
+        figure,
+        footer,
+        header,
+        hgroup,
+        section {
+            display: block;
+        }
+
+        body,
+        button,
+        input,
+        optgroup,
+        select,
+        textarea,
+        select option {
+            font-size: 1rem;
+            font-family: $font-family;
+        }
+
+        button,
+        input,
+        optgroup,
+        select,
+        textarea {
+            font: inherit;
+            color: inherit;
+        }
+
+        small,
+        sub,
+        sup {
+            color: $small-text;
+            font-size: $small-size;
+            font-weight: $small-weight;
+        }
+
+        strong,
+        b {
+            color: $strong-text;
+            font-weight: $strong-weight;
+        }
+
+        u,
+        ins,
+        s,
+        del {
+            color: $decorated-text;
+            font-weight: $decorated-weight;
+        }
+
+        a {
+            cursor: pointer;
+            text-decoration: none;
+            color: $primary-text;
+
+            strong {
+                color: $primary-text;
+            }
+
+            &:visited {
+                opacity: 0.8;
+            }
+
+            &:hover {
+                opacity: 1;
+                text-decoration: underline;
+            }
+        }
+
+        hr {
+            display: block;
+            border: none;
+            height: 1px;
+            background-color: $separator;
+
+            @include module.marged() {
+                margin: $gap-macro 0;
+            }
+        }
+
+        select {
+            appearance: auto;
+            -moz-appearance: menulist;
+            -webkit-appearance: menulist;
+        }
+
+        input[type="checkbox"],
+        input[type="radio"] {
+            vertical-align: baseline;
+            accent-color: $primary;
+        }
+
+        span {
+            font-style: inherit;
+            font-weight: inherit;
+        }
+
+        fieldset {
+            border: none;
+        }
+
+        blockquote {
+            display: block;
+            padding: $padding-control;
+            margin: $gap-macro 0;
+            border-radius: $radius-normal;
+            background-color: $surface;
+        }
+
+        code,
+        pre {
+            direction: ltr;
+            padding: $padding-control;
+            font-size: $mono-size;
+            font-family: $mono-family;
+            font-weight: $mono-weight;
+            background-color: $surface;
+            -moz-osx-font-smoothing: auto;
+            -webkit-font-smoothing: auto;
+        }
+
+        pre {
+            white-space: pre;
+            overflow-wrap: normal;
+            overflow-x: auto;
+
+            @include module.scrollable($primary);
+            @include module.overflow-touch();
+
+            code {
+                padding: 0;
+                font-size: 1em;
+                color: currentcolor;
+                background-color: transparent;
+            }
+        }
+
+        p,
+        ol,
+        ul {
+            @include module.marged() {
+                margin-bottom: $gap-macro;
+            }
+        }
+
+        ul li {
+            position: relative;
+            padding-inline-start: 2em;
+
+            @include module.marged() {
+                margin-bottom: $gap-micro;
+            }
+
+            &::before {
+                content: "—";
+                position: absolute;
+                right: 0;
+                color: $separator;
+            }
+        }
+
+        %locked {
+            cursor: default;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        %reset {
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            appearance: none;
+            box-sizing: border-box;
+            box-shadow: none;
+            background: none;
+            position: relative;
+            border: none;
+            color: currentcolor;
+            font-family: inherit;
+            margin: 0;
+            padding: 0;
+            outline: none;
+            font-size: 1em;
+            line-height: 1em;
+            overflow: hidden;
+        }
+
+        %control {
+            @extend %reset;
+
+            &:focus,
+            &:active,
+            &:invalid {
+                outline: none;
+            }
+
+            &[disabled],
+            fieldset[disabled] & {
+                cursor: default;
+                pointer-events: none;
+                user-select: none;
+            }
+
+            &::-moz-focus-inner {
+                border: 0;
+            }
         }
     }
 }

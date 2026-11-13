@@ -16,9 +16,9 @@
 ///
 /// @require {Variable<Color>} variant-for("component", $name, "muted") - Text color of each color variation
 ///
-/// @require reset, base, element
+/// @require reset, element
 @mixin use-meta($colors: (), $sizes: ()) {
-    @include module.define-module("meta", "reset", "base", "element") {
+    @include module.define-module("meta", "reset", "element") {
         $font-size: module.var("component", "meta-size");
         $font-weight: module.var("component", "meta-weight");
 

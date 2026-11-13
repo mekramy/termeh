@@ -3,6 +3,49 @@
 @use "../variable";
 @use "../../animation";
 
+/// Removes the native look of an element and resets its box styles.
+///
+/// @output Declarations that remove appearance, background, border, shadow, outline, margin and padding, and inherit font and color
+@mixin reset() {
+    @extend %reset;
+}
+
+/// Creates a base style for interactive controls.
+/// It resets the element, removes outlines, and blocks interaction when the control is disabled.
+///
+/// @output The reset styles, plus rules for the focus, active, invalid and disabled states
+@mixin control() {
+    @extend %control;
+}
+
+/// Blocks pointer events and text selection.
+///
+/// @output Declarations that set the default cursor, and turn off user selection and pointer events
+@mixin locked() {
+    @extend %locked;
+}
+
+/// Makes the element unselectable.
+///
+/// @output `user-select: none`
+@mixin unselectable() {
+    user-select: none;
+}
+
+/// Makes the element selectable.
+///
+/// @output `user-select: all`
+@mixin selectable() {
+    user-select: all;
+}
+
+/// Turns on momentum scrolling on iOS.
+///
+/// @output The `-webkit-overflow-scrolling: touch` declaration
+@mixin overflow-touch() {
+    -webkit-overflow-scrolling: touch;
+}
+
 /// Applies styles to elements that are not the last child and not marked `.is-marginless`.
 ///
 /// @param {Arglist} $exclude - Extra selectors to exclude
@@ -36,91 +79,6 @@
 
     &:not(#{$skip}) {
         @content;
-    }
-}
-
-/// Turns on momentum scrolling on iOS.
-///
-/// @output The `-webkit-overflow-scrolling: touch` declaration
-@mixin overflow-touch() {
-    -webkit-overflow-scrolling: touch;
-}
-
-/// Blocks pointer events and text selection.
-///
-/// @output Declarations that set the default cursor, and turn off user selection and pointer events
-@mixin locked() {
-    cursor: default;
-    user-select: none;
-    pointer-events: none;
-}
-
-/// Turns off text selection in all major browsers.
-///
-/// @output Prefixed and standard `user-select: none` declarations
-@mixin unselectable() {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-/// Turns on text selection in all major browsers.
-///
-/// @output Prefixed and standard `user-select: text` declarations
-@mixin selectable() {
-    -webkit-touch-callout: default;
-    -webkit-user-select: text;
-    -moz-user-select: text;
-    -ms-user-select: text;
-    user-select: text;
-}
-
-/// Removes the native look of an element and resets its box styles.
-///
-/// @output Declarations that remove appearance, background, border, shadow, outline, margin and padding, and inherit font and color
-@mixin reset() {
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    appearance: none;
-    box-sizing: border-box;
-    box-shadow: none;
-    background: none;
-    position: relative;
-    border: none;
-    color: currentcolor;
-    font-family: inherit;
-    margin: 0;
-    padding: 0;
-    outline: none;
-    font-size: 1em;
-    line-height: 1em;
-    overflow: hidden;
-}
-
-/// Creates a base style for interactive controls.
-/// It resets the element, removes outlines, and blocks interaction when the control is disabled.
-///
-/// @output The reset styles, plus rules for the focus, active, invalid and disabled states
-@mixin control() {
-    @include reset();
-
-    &:focus,
-    &:active,
-    &:invalid {
-        outline: none;
-    }
-
-    &[disabled],
-    fieldset[disabled] & {
-        cursor: default;
-        pointer-events: none;
-        user-select: none;
-    }
-
-    &::-moz-focus-inner {
-        border: 0;
     }
 }
 

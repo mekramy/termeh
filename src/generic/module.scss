@@ -1,23 +1,20 @@
-@forward "base";
 @forward "heading";
 @forward "image";
 @forward "reset";
 @forward "table" hide table-resolver;
 
-@use "base";
 @use "heading";
 @use "image";
 @use "reset";
 @use "table";
 
-/// Applies all generic styles: reset, base, headings, images and tables.
+/// Applies all generic styles: reset, headings, images and tables.
 ///
 /// @param {List<String>} $image-sizes [null] - Image size names to add width classes for; all defined sizes when `null`
 /// @param {List<String>} $table-colors [null] - Table color names to add color classes for; all defined colors when `null`
 /// @output The reset, base, heading, image and table styles
 @mixin use-generic($image-sizes: null, $table-colors: null) {
-    @include reset.mini-reset();
-    @include base.use-base();
+    @include reset.use-reset();
     @include heading.use-heading();
     @include image.use-image($image-sizes);
     @include table.use-table($table-colors);

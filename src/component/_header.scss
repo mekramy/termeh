@@ -22,9 +22,9 @@
 ///
 /// @require {Variable<Color>} variant-for("component", $name, "accent") - Decorator color of each color variation
 ///
-/// @require reset, base, base-heading, element
+/// @require reset, base-heading, element
 @mixin use-header($colors: (), $gaps: ()) {
-    @include module.define-module("header", "reset", "base", "base-heading", "element") {
+    @include module.define-module("header", "reset", "base-heading", "element") {
         $gap-macro: module.var("gap", "macro");
         $line-normal: module.var("line-height", "normal");
         $strong-weight: module.var("text", "strong-weight");

@@ -37,11 +37,11 @@
 /// @require {Variable<Color>} variant-for("input", $name, "accent-text") - Selected option text and checkmark color for each color variation
 /// @require {Variable<Color>} variant-for("input", $name, "accent-foreground") - Focus text and picker-icon color for each color variation
 ///
-/// @require reset, base
+/// @require reset
 @mixin use-select($colors: ()) {
     @include animation.shake();
 
-    @include module.define-module("form-select", "reset", "base") {
+    @include module.define-module("form-select", "reset") {
         $gap-micro: module.var("gap", "micro");
         $radius-normal: module.var("radius", "normal");
         $strong-weight: module.var("text", "strong-weight");

@@ -34,9 +34,9 @@
 /// @require {Variable<Color>} variant-for("component", $name, "light-background") - Background color of each color variation
 /// @require {Variable<Color>} variant-for("component", $name, "light-hover") - Hover background of action tags in each color variation
 ///
-/// @require reset, base, element
+/// @require reset, element
 @mixin use-tag($colors: (), $sizes: ()) {
-    @include module.define-module("tag", "reset", "base", "element") {
+    @include module.define-module("tag", "reset", "element") {
         $radius-normal: module.var("radius", "normal");
         $radius-circle: module.var("radius", "circle");
         $radius-rounded: module.var("radius", "rounded");

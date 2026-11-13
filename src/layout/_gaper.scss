@@ -12,9 +12,9 @@
 /// @require {Variable<Length>} var("gap", "micro") - Default space between items
 /// @require {Variable<Color>} variant("base", "separator") - Background color of `.divider`
 ///
-/// @require reset, base
+/// @require reset
 @mixin use-gaper($gaps: ()) {
-    @include module.define-module("gaper", "reset", "base") {
+    @include module.define-module("gaper", "reset") {
         $gap-micro: module.var("gap", "micro");
         $separator: module.variant("base", "separator");
 

@@ -31,11 +31,11 @@
 /// @require {Variable<Color>} variant-for("input", $name, "accent") - Accent color for each color variation
 /// @require {Variable<Color>} variant-for("input", $name, "accent-foreground") - Checkmark color for each color variation
 ///
-/// @require reset, base
+/// @require reset
 @mixin use-checkbox($colors: ()) {
     @include animation.shake();
 
-    @include module.define-module("form-checkbox", "reset", "base") {
+    @include module.define-module("form-checkbox", "reset") {
         $gap-micro: module.var("gap", "micro");
         $radius-normal: module.var("radius", "normal");
         $decorator-thickness: module.var("decorator", "size");

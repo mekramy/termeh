@@ -9,9 +9,9 @@
 /// @require {Variable<Length>} var("radius", "normal") - Border radius of rounded images
 /// @require {Variable<Length>} var("radius", "circle") - Border radius of circular images
 ///
-/// @require reset, base
+/// @require reset
 @mixin use-image($sizes: ()) {
-    @include module.define-module("base-image", "reset", "base") {
+    @include module.define-module("base-image", "reset") {
         $radius-normal: module.var("radius", "normal");
         $radius-circle: module.var("radius", "circle");
 

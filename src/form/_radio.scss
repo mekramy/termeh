@@ -27,11 +27,11 @@
 ///
 /// @require {Variable<Color>} variant-for("input", $name, "accent") - Accent color for each color variation
 ///
-/// @require reset, base
+/// @require reset
 @mixin use-radio($colors: ()) {
     @include animation.shake();
 
-    @include module.define-module("form-radio", "reset", "base") {
+    @include module.define-module("form-radio", "reset") {
         $height: module.var("input", "height");
         $size: module.var("input", "checkbox");
         $disabled-opacity: module.var("input", "disabled-opacity");

@@ -36,9 +36,9 @@
 /// @require {Variable<Color>} variant-for("table", $palette, "column-separator") - Column separator color of the color class
 /// @require {Variable<Color>} variant-for("table", $palette, "section-separator") - Header and footer separator color of the color class
 ///
-/// @require reset, base
+/// @require reset
 @mixin use-table($colors: ()) {
-    @include module.define-module("base-table", "reset", "base") {
+    @include module.define-module("base-table", "reset") {
         $strong-weight: module.var("text", "strong-weight");
 
         $primary: module.color("primary");

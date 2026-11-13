@@ -14,9 +14,9 @@
 ///
 /// @require {Variable<Color>} variant-for("input", "base", "border") - Fieldset border color
 ///
-/// @require reset, base
+/// @require reset
 @mixin use-fieldset() {
-    @include module.define-module("form-fieldset", "reset", "base") {
+    @include module.define-module("form-fieldset", "reset") {
         $gap-macro: module.var("gap", "macro");
         $padding-container: module.var("padding", "container");
         $radius-normal: module.var("radius", "normal");

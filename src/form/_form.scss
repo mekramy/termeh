@@ -16,12 +16,12 @@
 /// @require {Variable<Color>} variant-for("box", "base", "overlay-accent") - Loading spinner color
 /// @require {Variable<Color>} variant-for("box", "base", "overlay-background") - Loading overlay background color
 ///
-/// @require reset, base
+/// @require reset
 @mixin use-form() {
     $-overlay-opacity: module.var("overlay", "opacity");
     $-overlay-filter: module.var("overlay", "filter");
 
-    @include module.define-module("form", "reset", "base") {
+    @include module.define-module("form", "reset") {
         $gap-macro: module.var("gap", "macro");
         $decorator-thickness: module.var("decorator", "size");
         $spinner-size: module.var("decorator", "spinner");

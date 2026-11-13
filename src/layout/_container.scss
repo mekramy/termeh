@@ -16,9 +16,9 @@
 /// @require {Variable<Length>} var("container", "widescreen") - Maximum width on widescreen
 /// @require {Variable<Length>} var("container", "ultrawide") - Maximum width on ultrawide
 ///
-/// @require reset, base
+/// @require reset
 @mixin use-container($paddings: ()) {
-    @include module.define-module("container", "reset", "base") {
+    @include module.define-module("container", "reset") {
         $gap-macro: module.var("gap", "macro");
         $padding-container: module.var("padding", "container");
 

@@ -31,11 +31,11 @@
 ///
 /// @require {Variable<Color>} variant-for("input", $name, "accent") - Focus border and scrollbar accent color for each color variation
 ///
-/// @require reset, base
+/// @require reset
 @mixin use-textarea($colors: ()) {
     @include animation.shake();
 
-    @include module.define-module("form-textarea", "reset", "base") {
+    @include module.define-module("form-textarea", "reset") {
         $control-padding: module.var("padding", "control");
         $radius-normal: module.var("radius", "normal");
         $line-height: module.var("line-height", "normal");

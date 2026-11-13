@@ -46,9 +46,9 @@
 /// @require {Variable<Color>} variant-for("component", $name, "accent-background") - Background color of each color variation
 /// @require {Variable<Color>} variant-for("component", $name, "accent-hover") - Hover background color of each color variation
 ///
-/// @require reset, base, element
+/// @require reset, element
 @mixin use-button($colors: (), $sizes: ()) {
-    @include module.define-module("button", "reset", "base", "element") {
+    @include module.define-module("button", "reset", "element") {
         $radius-normal: module.var("radius", "normal");
         $radius-circle: module.var("radius", "circle");
         $radius-rounded: module.var("radius", "rounded");

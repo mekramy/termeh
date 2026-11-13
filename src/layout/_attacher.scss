@@ -10,9 +10,9 @@
 ///
 /// @require {Variable<Color>} variant("base", "separator") - Background color of `.divider`
 ///
-/// @require reset, base
+/// @require reset
 @mixin use-attacher() {
-    @include module.define-module("attacher", "reset", "base") {
+    @include module.define-module("attacher", "reset") {
         $separator: module.variant("base", "separator");
 
         .attacher {

@@ -12,9 +12,9 @@
 /// @require {Variable<Length>} var("gap", "micro") - Default space between items
 /// @require {Variable<Color>} color("primary") - Accent color of the scrollbar
 ///
-/// @require reset, base
+/// @require reset
 @mixin use-landscape($gaps: ()) {
-    @include module.define-module("landscape", "reset", "base") {
+    @include module.define-module("landscape", "reset") {
         $gap-micro: module.var("gap", "micro");
         $primary: module.color("primary");
 

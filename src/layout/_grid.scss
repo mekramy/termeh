@@ -12,9 +12,9 @@
 ///
 /// @require {Variable<Length>} var("gap", "macro") - Default space between rows and columns
 ///
-/// @require reset, base
+/// @require reset
 @mixin use-grid($gaps: (), $units: ()) {
-    @include module.define-module("grid", "reset", "base") {
+    @include module.define-module("grid", "reset") {
         $gap-macro: module.var("gap", "macro");
 
         .grid {

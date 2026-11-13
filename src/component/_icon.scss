@@ -11,9 +11,9 @@
 ///
 /// @require {Variable<Color>} variant-for("component", $name, "accent") - Icon color of each color variation
 ///
-/// @require reset, base
+/// @require reset
 @mixin use-icon($colors: (), $sizes: ()) {
-    @include module.define-module("icon", "reset", "base") {
+    @include module.define-module("icon", "reset") {
         .icon {
             display: inline-flex;
             flex-direction: row;

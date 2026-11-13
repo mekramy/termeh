@@ -21,9 +21,9 @@
 ///
 /// @require {Variable<Color>} variant-for("component", $name, "accent-text") - Active item text color of each color variation
 ///
-/// @require reset, base
+/// @require reset
 @mixin use-breadcrumb($colors: ()) {
-    @include module.define-module("breadcrumb", "reset", "base") {
+    @include module.define-module("breadcrumb", "reset") {
         $gap-micro: module.var("gap", "micro");
         $strong-weight: module.var("text", "strong-weight");
 
