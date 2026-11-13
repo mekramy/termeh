@@ -7,6 +7,7 @@
     box-sizing: border-box;
     border-top-right-radius: 2px;
     border-bottom-right-radius: 2px;
+    box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
 
     &:not(:last-child) {
         margin-bottom: 1rem;
@@ -22,12 +23,10 @@
         flex: none;
         font-weight: 600;
         font-size: 0.6rem;
-        line-height: 0.8rem;
-        letter-spacing: 1px;
+        line-height: 1.2;
         text-transform: uppercase;
         border-radius: 2px;
         padding: 4px 8px;
-        color: var(--vp-c-bg);
     }
 
     ins {
@@ -41,11 +40,10 @@
     &.is-error {
         color: var(--vp-c-text-1);
         border: 1px solid var(--vp-badge-danger-bg);
-        border-left: 3px solid var(--vp-badge-danger-text);
-        box-shadow: 0 2px 7px -3px rgb(from var(--vp-c-text-1) r g b / 0.3);
+        border-left: 2px solid var(--vp-badge-danger-text);
 
         > strong {
-            background: var(--vp-badge-danger-text);
+            background: var(--vp-badge-danger-bg);
         }
 
         code {
@@ -56,11 +54,10 @@
     &.is-module {
         color: var(--vp-c-text-1);
         border: 1px solid var(--vp-badge-tip-bg);
-        border-left: 3px solid var(--vp-badge-tip-text);
-        box-shadow: 0 2px 7px -3px rgb(from var(--vp-c-text-1) r g b / 0.3);
+        border-left: 2px solid var(--vp-badge-tip-text);
 
         > strong {
-            background: var(--vp-badge-tip-text);
+            background: var(--vp-badge-tip-bg);
         }
     }
 }

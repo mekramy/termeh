@@ -1,18 +1,44 @@
+@use "sass:meta";
 @use "../termeh.scss";
 
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
+@function table-resolver($scheme, $palette, $is-light, $base, $color, $variant) {
+    @if $variant == "column-separator" {
+        @return termeh.alpha(termeh.variant("base", "separator"), 0.5);
+    }
+
+    @return null;
+}
 
 @include termeh.define("control", "weight", 600);
-@include termeh.define("font", "size", 14px);
-@include termeh.define("font", "weight", 500);
-@include termeh.define("font", "family", ("Space Grotesk", sans-serif));
+@include termeh.define("text", "font-size", 14px);
+@include termeh.define("text", "font-weight", 500);
+@include termeh.define("text", "font-family", ("Space Grotesk", sans-serif));
+@include termeh.define("card", "opacity", 0.5);
 
+@include termeh.define-palette("shade", #9199aa);
+@include termeh.define-palette("error", #c3324a);
 @include termeh.define-palette("primary", #179299);
 @include termeh.define-palette("indigo", #5b5fc7);
 @include termeh.define-palette("green", #76c893);
 @include termeh.define-palette("maroon", #8b1e3f);
 
-@include termeh.use-generic();
+@include termeh.override-palette("dark", "primary", #5fdae0);
+@include termeh.override-palette("dark", "indigo", #8b8edd);
+@include termeh.override-palette("dark", "green", #9dedb9);
+@include termeh.override-palette("dark", "maroon", #c96c88);
+@include termeh.override-palette("dark", "base", #0f0f15);
+@include termeh.override-variant("dark", "base", "foreground", white);
+@include termeh.override-variant("dark", "base", "separator", #32323e);
+@include termeh.override-variant("dark", "base", "surface", #26262c);
+@include termeh.override-variant("dark", "base", "surface-hover", #3d3d46);
+
+@include termeh.define-resolver(meta.get-function("table-resolver"), "table");
+
+@include termeh.use-reset();
+@include termeh.use-heading();
+@include termeh.use-image();
+@include termeh.use-table();
 
 @include termeh.use-layout-helper();
 @include termeh.use-text-helper();
@@ -48,9 +74,11 @@
 @include termeh.use-header();
 @include termeh.use-card();
 @include termeh.use-icon();
+@include termeh.use-avatar();
 @include termeh.use-link();
 @include termeh.use-breadcrumb();
 @include termeh.use-action();
+@include termeh.use-skeleton();
 
 .placeholder {
     display: flex;
@@ -64,12 +92,12 @@
     }
 
     &.is-light {
-        color: termeh.variant("primary", "readable");
+        color: termeh.variant("primary", "text");
         background-color: termeh.variant("primary", "light");
     }
 
     &.is-1x {
-        min-width: 7;
+        min-width: 7rem;
     }
 
     &.is-2x {
@@ -111,6 +139,6 @@
     @include termeh.variables();
 }
 
-html.is-dark {
+html[data-scheme="dark"] {
     @include termeh.variables("dark");
 }

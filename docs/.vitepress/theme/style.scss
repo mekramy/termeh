@@ -85,19 +85,12 @@ html {
             color: var(--vp-c-text-1);
         }
 
-        em {
-            padding: 0 2px;
-            font-style: oblique;
-            text-transform: none;
-            color: var(--vp-c-text-3);
-        }
-
         ins {
             font-weight: 500;
             font-size: 0.75rem;
             white-space: nowrap;
             text-transform: capitalize;
-            color: var(--ctp-latte-green);
+            color: #a87ff8;
         }
 
         mark {
@@ -109,13 +102,23 @@ html {
             color: var(--ctp-latte-sky);
         }
 
+        em {
+            padding: 0 2px;
+            font-weight: 500;
+            font-style: oblique;
+            text-transform: none;
+            text-decoration: underline;
+            text-underline-offset: 6px;
+            text-decoration-color: var(--ctp-latte-sky);
+            user-select: all;
+        }
+
         code {
             font-weight: 500;
             background-color: var(--vp-c-bg-elv);
         }
 
         q,
-        em,
         ins,
         mark,
         strong,
@@ -263,8 +266,11 @@ html {
         p {
             font-size: 0.9rem;
             position: relative;
-            color: var(--ctp-latte-subtext0);
             text-shadow: none;
+        }
+
+        em {
+            color: var(--vp-c-text-1);
         }
     }
 }
