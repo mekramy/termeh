@@ -12,7 +12,7 @@
 /// @require {Variable<Length>} var("radius", "normal") - Corner radius of square avatars
 /// @require {Variable<Length>} var("radius", "circle") - Corner radius of round avatars and status dot
 /// @require {Variable<FontWeight>} var("text", "strong-weight") - Initials text weight
-/// @require {Variable<Length>} var("decorator", "size") - Ring and status dot border thickness
+/// @require {Variable<Length>} var("decorator", "thickness") - Ring and status dot border thickness
 ///
 /// @require {Variable<Length>} var("component", "height") - Avatar width and height
 /// @require {Variable<Number>} var("component", "disabled-opacity") - Opacity when disabled
@@ -34,7 +34,7 @@
         $radius-normal: module.var("radius", "normal");
         $radius-circle: module.var("radius", "circle");
         $strong-weight: module.var("text", "strong-weight");
-        $decorator-thickness: module.var("decorator", "size");
+        $decorator-thickness: module.var("decorator", "thickness");
 
         $height: module.var("component", "height");
         $disabled-opacity: module.var("component", "disabled-opacity");

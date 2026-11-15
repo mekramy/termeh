@@ -12,7 +12,7 @@
 ///
 /// @require {Variable<Length>} var("gap", "macro") - Bottom margin of the card
 /// @require {Variable<Length>} var("radius", "normal") - Corner radius
-/// @require {Variable<Length>} var("decorator", "size") - Decorator border and loader thickness
+/// @require {Variable<Length>} var("decorator", "thickness") - Decorator border and loader thickness
 /// @require {Variable<Length>} var("decorator", "spinner") - Loader size
 ///
 /// @require {Variable<Length>} var("padding", "container") - Card padding
@@ -59,7 +59,7 @@
     @include module.define-module("card", "reset") {
         $gap-macro: module.var("gap", "macro");
         $radius-normal: module.var("radius", "normal");
-        $decorator-thickness: module.var("decorator", "size");
+        $decorator-thickness: module.var("decorator", "thickness");
         $spinner-size: module.var("decorator", "spinner");
 
         $padding-container: module.var("padding", "container");

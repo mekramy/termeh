@@ -7,7 +7,7 @@
 /// @output Form styles and a loading overlay with a spinner
 ///
 /// @require {Variable<Length>} var("gap", "macro") - Bottom margin
-/// @require {Variable<Length>} var("decorator", "size") - Loading spinner stroke width
+/// @require {Variable<Length>} var("decorator", "thickness") - Loading spinner stroke width
 /// @require {Variable<Length>} var("decorator", "spinner") - Loading spinner diameter
 ///
 /// @require {Variable<Number>} var("box", "overlay-opacity") [var("overlay", "opacity")] - Loading overlay opacity
@@ -23,7 +23,7 @@
 
     @include module.define-module("form", "reset") {
         $gap-macro: module.var("gap", "macro");
-        $decorator-thickness: module.var("decorator", "size");
+        $decorator-thickness: module.var("decorator", "thickness");
         $spinner-size: module.var("decorator", "spinner");
 
         $overlay-opacity: module.var("box", "overlay-opacity", $-overlay-opacity);

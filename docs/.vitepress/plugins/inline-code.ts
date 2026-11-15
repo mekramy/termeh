@@ -32,8 +32,8 @@ export function inlineCode(md: MarkdownIt, highlighter: Highlighter) {
             defaultColor: false,
             lang: token.meta.lang,
             themes: {
-                light: "github-light",
-                dark: "github-dark",
+                light: "one-light",
+                dark: "catppuccin-frappe",
             },
         });
 

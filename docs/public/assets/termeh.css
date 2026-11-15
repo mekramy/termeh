@@ -6998,7 +6998,7 @@ label.checkbox input[type=checkbox]::after {
   width: calc(var(--var-input-checkbox) * 0.25);
   height: calc(var(--var-input-checkbox) * 0.45);
   border: solid var(--palette-base-input-accent-foreground);
-  border-width: 0 var(--var-decorator-size) var(--var-decorator-size) 0;
+  border-width: 0 var(--var-decorator-thickness) var(--var-decorator-thickness) 0;
   transform: scale(0) rotate(45deg);
   transition-property: transform;
   transition-timing-function: var(--var-transition-ease);
@@ -7236,7 +7236,7 @@ form.is-loading::after {
   content: " ";
   width: var(--var-decorator-spinner);
   height: var(--var-decorator-spinner);
-  border: var(--var-decorator-size) solid var(--palette-base-box-overlay-accent);
+  border: var(--var-decorator-thickness) solid var(--palette-base-box-overlay-accent);
   border-top-color: transparent;
   border-right-color: transparent;
   border-radius: 50%;
@@ -8197,7 +8197,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 }
 .tag.is-action:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible {
   outline-offset: 1px;
-  outline: var(--var-decorator-size) solid rgb(from var(--palette-base-component-light-accent) r g b/var(--var-component-outline-opacity));
+  outline: var(--var-decorator-thickness) solid rgb(from var(--palette-base-component-light-accent) r g b/var(--var-component-outline-opacity));
 }
 .tag.is-loading:not(.is-iconic) {
   color: transparent;
@@ -8449,8 +8449,8 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   align-items: stretch;
   justify-content: flex-end;
   box-sizing: border-box;
-  gap: calc(var(--var-decorator-size) * 2);
-  padding: calc(var(--var-decorator-size) * 2);
+  gap: calc(var(--var-decorator-thickness) * 2);
+  padding: calc(var(--var-decorator-thickness) * 2);
 }
 .buttons .filler {
   flex: 1 1 0;
@@ -8497,7 +8497,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 }
 .button:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible {
   outline-offset: 1px;
-  outline: var(--var-decorator-size) solid rgb(from var(--palette-base-component-light-accent) r g b/var(--var-component-outline-opacity));
+  outline: var(--var-decorator-thickness) solid rgb(from var(--palette-base-component-light-accent) r g b/var(--var-component-outline-opacity));
 }
 .button:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible.is-simple {
   outline-color: rgb(from var(--palette-base-component-simple-accent) r g b/var(--var-component-outline-opacity));
@@ -9202,8 +9202,8 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   opacity: 0.75;
 }
 .header.is-decorated {
-  margin-inline-start: calc(var(--var-decorator-size) / 2);
-  border-inline-start: var(--var-decorator-size) solid var(--palette-base-component-accent);
+  margin-inline-start: calc(var(--var-decorator-thickness) / 2);
+  border-inline-start: var(--var-decorator-thickness) solid var(--palette-base-component-accent);
 }
 .header.is-centered {
   text-align: center;
@@ -9386,12 +9386,12 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 .card.is-top-decorated {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-  border-top: var(--var-decorator-size) solid var(--palette-base-component-accent);
+  border-top: var(--var-decorator-thickness) solid var(--palette-base-component-accent);
 }
 .card.is-bottom-decorated {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-  border-bottom: var(--var-decorator-size) solid var(--palette-base-component-accent);
+  border-bottom: var(--var-decorator-thickness) solid var(--palette-base-component-accent);
 }
 .card.is-loading {
   z-index: 0;
@@ -9421,7 +9421,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   content: " ";
   width: var(--var-decorator-spinner);
   height: var(--var-decorator-spinner);
-  border: var(--var-decorator-size) solid var(--palette-base-card-overlay-accent);
+  border: var(--var-decorator-thickness) solid var(--palette-base-card-overlay-accent);
   border-top-color: transparent;
   border-right-color: transparent;
   border-radius: 50%;
@@ -9850,7 +9850,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 }
 .avatar.has-ring {
   outline-offset: 1px;
-  outline: var(--var-decorator-size) solid var(--palette-base-component-light-accent);
+  outline: var(--var-decorator-thickness) solid var(--palette-base-component-light-accent);
 }
 .avatar.has-status::before {
   content: "";
@@ -9860,7 +9860,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   height: 0.85rem;
   background: var(--palette-base-component-light-accent);
   border-radius: var(--var-radius-circle);
-  border: var(--var-decorator-size) solid var(--palette-base-component-light-background);
+  border: var(--var-decorator-thickness) solid var(--palette-base-component-light-background);
   inset-inline-end: 0;
   inset-block-end: 0;
   transform: translate(14%, 14%);
@@ -10301,8 +10301,8 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   align-items: stretch;
   justify-content: flex-end;
   box-sizing: border-box;
-  gap: calc(var(--var-decorator-size) * 2);
-  padding: calc(var(--var-decorator-size) * 2);
+  gap: calc(var(--var-decorator-thickness) * 2);
+  padding: calc(var(--var-decorator-thickness) * 2);
 }
 .actions > .filler {
   flex: 1 1 0;
@@ -10350,7 +10350,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 }
 .actions > .action:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible {
   outline-offset: 1px;
-  outline: var(--var-decorator-size) solid rgb(from var(--palette-base-component-accent) r g b/var(--var-component-outline-opacity));
+  outline: var(--var-decorator-thickness) solid rgb(from var(--palette-base-component-accent) r g b/var(--var-component-outline-opacity));
 }
 .actions > .action:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible.is-secondary {
   outline-color: rgb(from var(--palette-base-component-simple-accent) r g b/var(--var-component-outline-opacity));
@@ -10705,6 +10705,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 }
 
 :root {
+  --palette-shade: #9199aa;
   --var-document-direction: ltr;
   --var-document-min-width: 300px;
   --var-gap-micro: 0.5em;
@@ -10751,7 +10752,6 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   --palette-base-table-hover-background: var(--palette-base-surface-hover);
   --palette-base-table-row-separator: var(--palette-base-separator);
   --palette-base-table-column-separator: rgb(from var(--palette-base-separator) r g b/0.5);
-  --palette-shade: #9199aa;
   --palette-base-table-section-separator: rgb(from var(--palette-shade) r g b/0.35);
   --var-transition-ease: ease;
   --var-transition-duration: 250ms;
@@ -10831,7 +10831,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   --var-gallery-height: 300px;
   --var-gallery-height-tablet: 200px;
   --var-gallery-height-mobile: 100px;
-  --var-decorator-size: 2px;
+  --var-decorator-thickness: 2px;
   --var-input-height: 2.8em;
   --var-input-checkbox: 1.3em;
   --var-input-disabled-opacity: 0.45;
@@ -11002,7 +11002,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   --var-box-sizes: "small" 22em, "normal" 26em, "medium" 36em;
   --var-box-opacity: 1;
   --var-box-backdrop-filter: none;
-  --var-box-shadow: 0 1px 3px calc(-1 * 1px) rgb(from #667085 r g b/0.1), 0 -1px 3px calc(-1 * 1px) rgb(from #667085 r g b/0.1), 0 3px 9px calc(-1 * 3px) rgb(from #667085 r g b/0.1);
+  --var-box-shadow: 0 1px 3px calc(-1 * 1px) rgb(from var(--palette-shade) r g b/0.1), 0 -1px 3px calc(-1 * 1px) rgb(from var(--palette-shade) r g b/0.1), 0 3px 9px calc(-1 * 3px) rgb(from var(--palette-shade) r g b/0.1);
   --palette-base-box-background: var(--palette-base);
   --palette-base-box-surface: var(--palette-base-surface);
   --palette-base-box-separator: var(--palette-base-separator);

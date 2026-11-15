@@ -12,7 +12,7 @@
 /// @require {Variable<Length>} var("gap", "macro") - Header gap and bottom margin
 /// @require {Variable<Length>} var("line-height", "normal") - Title line height
 /// @require {Variable<FontWeight>} var("text", "strong-weight") - Primary title text weight
-/// @require {Variable<Length>} var("decorator", "size") - Decorator thickness
+/// @require {Variable<Length>} var("decorator", "thickness") - Decorator thickness
 ///
 /// @require {Variable<Length>} var("component", "meta-size") - Secondary title text size
 /// @require {Variable<FontWeight>} var("component", "meta-weight") - Secondary title text weight
@@ -28,7 +28,7 @@
         $gap-macro: module.var("gap", "macro");
         $line-normal: module.var("line-height", "normal");
         $strong-weight: module.var("text", "strong-weight");
-        $decorator-thickness: module.var("decorator", "size");
+        $decorator-thickness: module.var("decorator", "thickness");
 
         $meta-size: module.var("component", "meta-size");
         $meta-weight: module.var("component", "meta-weight");

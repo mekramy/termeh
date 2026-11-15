@@ -12,7 +12,7 @@
 /// @require {Variable<Length>} var("radius", "normal") - Corner radius of tags
 /// @require {Variable<Length>} var("radius", "circle") - Corner radius of rounded icon tags
 /// @require {Variable<Length>} var("radius", "rounded") - Corner radius of rounded tags
-/// @require {Variable<Length>} var("decorator", "size") - Focus outline thickness
+/// @require {Variable<Length>} var("decorator", "thickness") - Focus outline thickness
 ///
 /// @require {Variable<Length>} var("component", "height") - Tag height
 /// @require {Variable<Length>} var("component", "meta-size") - Tag text size
@@ -40,7 +40,7 @@
         $radius-normal: module.var("radius", "normal");
         $radius-circle: module.var("radius", "circle");
         $radius-rounded: module.var("radius", "rounded");
-        $decorator-thickness: module.var("decorator", "size");
+        $decorator-thickness: module.var("decorator", "thickness");
 
         $height: module.var("component", "height");
         $font-size: module.var("component", "meta-size");

@@ -72,6 +72,11 @@ export default defineConfig({
     },
 
     markdown: {
+        theme: {
+            light: "one-light",
+            dark: "catppuccin-frappe",
+        },
+
         shikiSetup(instance) {
             highlighter = instance;
         },

@@ -42,7 +42,7 @@
 @include module.define("transition", "delay", 100ms); // Delay for staggered animations
 
 // Decorators
-@include module.define("decorator", "size", 2px); // Decorator line thickness
+@include module.define("decorator", "thickness", 2px); // Decorator line thickness
 @include module.define("decorator", "spinner", 2em); // Loading spinner size
 
 // Overlay
@@ -91,9 +91,9 @@
     "box",
     "shadow",
     (
-        module.soft-shadow(0, 1px, 1px, module.color-value("shade")),
-        module.soft-shadow(0, -1px, 1px, module.color-value("shade")),
-        module.soft-shadow(0, 3px, 3px, module.color-value("shade"))
+        module.soft-shadow(0, 1px, 1px, module.color("shade")),
+        module.soft-shadow(0, -1px, 1px, module.color("shade")),
+        module.soft-shadow(0, 3px, 3px, module.color("shade"))
     )
 ); // Layered soft shadow
 @include module.define(

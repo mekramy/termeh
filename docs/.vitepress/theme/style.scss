@@ -20,6 +20,8 @@ html {
     }
 
     &:not(.dark) {
+        --vp-code-block-bg: #e6eaef;
+
         .dark-only {
             display: none;
         }
@@ -168,6 +170,10 @@ html {
         li {
             &::marker {
                 color: var(--vp-c-divider);
+            }
+
+            mark {
+                text-decoration: none;
             }
         }
     }

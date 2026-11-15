@@ -11,7 +11,7 @@
 /// @require {Variable<Length>} var("radius", "normal") - Corner radius of actions
 /// @require {Variable<Length>} var("radius", "circle") - Corner radius of rounded icon actions
 /// @require {Variable<Length>} var("radius", "rounded") - Corner radius of rounded actions
-/// @require {Variable<Length>} var("decorator", "size") - Focus outline thickness and base for gap and padding
+/// @require {Variable<Length>} var("decorator", "thickness") - Focus outline thickness and base for gap and padding
 ///
 /// @require {Variable<Length>} var("component", "height") - Action height
 /// @require {Variable<Length>} var("component", "meta-size") - Action text size
@@ -43,7 +43,7 @@
         $radius-normal: module.var("radius", "normal");
         $radius-circle: module.var("radius", "circle");
         $radius-rounded: module.var("radius", "rounded");
-        $decorator-thickness: module.var("decorator", "size");
+        $decorator-thickness: module.var("decorator", "thickness");
 
         $height: module.var("component", "height");
         $font-size: module.var("component", "meta-size");
