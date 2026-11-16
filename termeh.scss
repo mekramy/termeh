@@ -1,9 +1,9 @@
-@forward "src/core/module.scss";
-@forward "src/generic/module.scss";
-@forward "src/helper/module.scss";
-@forward "src/layout/module.scss";
-@forward "src/form/module.scss";
-@forward "src/component/module.scss";
+@forward "src/core";
+@forward "src/generic";
+@forward "src/helper";
+@forward "src/layout";
+@forward "src/form";
+@forward "src/component";
 @forward "src/animation";
 
 // Predefined

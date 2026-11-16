@@ -1,4 +1,4 @@
-@use "../core/module";
+@use "../core";
 
 /// Generates the `.landscape` layout, a scrollable row with scroll snapping.
 ///
@@ -14,9 +14,9 @@
 ///
 /// @require reset
 @mixin use-landscape($gaps: ()) {
-    @include module.define-module("landscape", "reset") {
-        $gap-micro: module.var("gap", "micro");
-        $primary: module.color("primary");
+    @include core.define-module("landscape", "reset") {
+        $gap-micro: core.var("gap", "micro");
+        $primary: core.color("primary");
 
         .landscape {
             display: flex;
@@ -25,8 +25,8 @@
             overflow: hidden;
             overflow-x: auto;
             scroll-snap-type: x proximity;
-            @include module.overflow-touch();
-            @include module.scrollable($primary);
+            @include core.overflow-touch();
+            @include core.scrollable($primary);
 
             > * {
                 flex-shrink: 0;
@@ -55,37 +55,37 @@
                 }
             }
 
-            @each $name, $align in module.flex-aligns() {
+            @each $name, $align in core.flex-aligns() {
                 &.is-#{$name}-aligned {
                     align-items: $align;
                 }
             }
 
-            @each $name, $justify in module.flex-justifies() {
+            @each $name, $justify in core.flex-justifies() {
                 &.is-#{$name}-justified {
                     justify-content: $justify;
                 }
             }
 
-            @include module.gapped() {
+            @include core.gapped() {
                 gap: $gap-micro;
 
-                @each $name, $gap in module.gaps($includes: $gaps) {
+                @each $name, $gap in core.gaps($includes: $gaps) {
                     &.is-#{$name}-gap {
                         gap: $gap;
                     }
                 }
             }
 
-            @each $device, $query in module.media-queries() {
+            @each $device, $query in core.media-queries() {
                 @media #{$query} {
-                    @each $name, $align in module.flex-aligns() {
+                    @each $name, $align in core.flex-aligns() {
                         &.is-#{$device}-#{$name}-aligned {
                             align-items: $align;
                         }
                     }
 
-                    @each $name, $justify in module.flex-justifies() {
+                    @each $name, $justify in core.flex-justifies() {
                         &.is-#{$device}-#{$name}-justified {
                             justify-content: $justify;
                         }

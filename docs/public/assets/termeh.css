@@ -556,7 +556,7 @@ table tbody tr.is-even {
 table tbody tr:not(.is-expanded) .extra {
   display: none;
 }
-table tbody tr:not(.is-expanded):has(+ tr.extra) + tr.extra {
+table tbody tr:not(.is-expanded) + tr.extra {
   display: none;
 }
 table tfoot {
@@ -1147,75 +1147,75 @@ table.is-maroon.is-hoverable > tbody > tr:hover {
 }
 
 .is-left-attached {
-  border-top-right-radius: 0 !important;
-  border-bottom-right-radius: 0 !important;
+  border-start-end-radius: 0 !important;
+  border-end-end-radius: 0 !important;
   align-self: stretch;
 }
 
 .is-left-top-attached {
-  border-top-right-radius: 0 !important;
-  border-bottom-right-radius: 0 !important;
-  border-bottom-left-radius: 0 !important;
+  border-start-end-radius: 0 !important;
+  border-end-end-radius: 0 !important;
+  border-end-start-radius: 0 !important;
 }
 
 .is-left-bottom-attached {
-  border-top-right-radius: 0 !important;
-  border-bottom-right-radius: 0 !important;
-  border-top-left-radius: 0 !important;
+  border-start-end-radius: 0 !important;
+  border-end-end-radius: 0 !important;
+  border-start-start-radius: 0 !important;
 }
 
 .is-right-attached {
-  border-top-left-radius: 0 !important;
-  border-bottom-left-radius: 0 !important;
+  border-start-start-radius: 0 !important;
+  border-end-start-radius: 0 !important;
   align-self: stretch;
 }
 
 .is-right-top-attached {
-  border-top-left-radius: 0 !important;
-  border-bottom-left-radius: 0 !important;
-  border-bottom-right-radius: 0 !important;
+  border-start-start-radius: 0 !important;
+  border-end-start-radius: 0 !important;
+  border-end-end-radius: 0 !important;
 }
 
 .is-right-bottom-attached {
-  border-top-left-radius: 0 !important;
-  border-bottom-left-radius: 0 !important;
-  border-top-right-radius: 0 !important;
+  border-start-start-radius: 0 !important;
+  border-end-start-radius: 0 !important;
+  border-start-end-radius: 0 !important;
 }
 
 .is-top-attached {
-  border-bottom-right-radius: 0 !important;
-  border-bottom-left-radius: 0 !important;
+  border-end-end-radius: 0 !important;
+  border-end-start-radius: 0 !important;
   align-self: stretch;
 }
 
 .is-top-left-attached {
-  border-bottom-right-radius: 0 !important;
-  border-bottom-left-radius: 0 !important;
-  border-top-right-radius: 0 !important;
+  border-end-end-radius: 0 !important;
+  border-end-start-radius: 0 !important;
+  border-start-end-radius: 0 !important;
 }
 
 .is-top-right-attached {
-  border-bottom-right-radius: 0 !important;
-  border-bottom-left-radius: 0 !important;
-  border-top-left-radius: 0 !important;
+  border-end-end-radius: 0 !important;
+  border-end-start-radius: 0 !important;
+  border-start-start-radius: 0 !important;
 }
 
 .is-bottom-attached {
-  border-top-right-radius: 0 !important;
-  border-top-left-radius: 0 !important;
+  border-start-end-radius: 0 !important;
+  border-start-start-radius: 0 !important;
   align-self: stretch;
 }
 
 .is-bottom-left-attached {
-  border-top-right-radius: 0 !important;
-  border-top-left-radius: 0 !important;
-  border-bottom-right-radius: 0 !important;
+  border-start-end-radius: 0 !important;
+  border-start-start-radius: 0 !important;
+  border-end-end-radius: 0 !important;
 }
 
 .is-bottom-right-attached {
-  border-top-right-radius: 0 !important;
-  border-top-left-radius: 0 !important;
-  border-bottom-left-radius: 0 !important;
+  border-start-end-radius: 0 !important;
+  border-start-start-radius: 0 !important;
+  border-end-start-radius: 0 !important;
 }
 
 .attacher {
@@ -7217,7 +7217,7 @@ form.is-loading::before {
   position: absolute;
   z-index: 1;
   inset: 0;
-  background-color: rgb(from var(--palette-base-box-overlay-background) r g b/var(--var-box-overlay-opacity));
+  background-color: rgba(var(--rgb-base-box-overlay-background), var(--var-box-overlay-opacity));
   backdrop-filter: var(--var-box-overlay-filter);
 }
 form.is-loading {
@@ -8172,7 +8172,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   font-weight: var(--var-component-meta-weight);
   text-overflow: ellipsis;
   color: var(--palette-base-component-light-foreground);
-  background-color: rgb(from var(--palette-base-component-light-background) r g b/var(--var-component-light-opacity));
+  background-color: rgba(var(--rgb-base-component-light-background), var(--var-component-light-opacity));
   border-radius: var(--var-radius-normal);
   padding: var(--var-component-v-padding) var(--var-component-h-padding);
   transition-property: all;
@@ -8197,7 +8197,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 }
 .tag.is-action:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible {
   outline-offset: 1px;
-  outline: var(--var-decorator-thickness) solid rgb(from var(--palette-base-component-light-accent) r g b/var(--var-component-outline-opacity));
+  outline: var(--var-decorator-thickness) solid rgba(var(--rgb-base-component-light-accent), var(--var-component-outline-opacity));
 }
 .tag.is-loading:not(.is-iconic) {
   color: transparent;
@@ -8274,7 +8274,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 }
 .tag.is-shade {
   color: var(--palette-shade-component-light-foreground);
-  background-color: rgb(from var(--palette-shade-component-light-background) r g b/var(--var-component-light-opacity));
+  background-color: rgba(var(--rgb-shade-component-light-background), var(--var-component-light-opacity));
 }
 .tag.is-shade.is-action {
   background-color: var(--palette-shade-component-light-background);
@@ -8283,7 +8283,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   background-color: var(--palette-shade-component-light-hover);
 }
 .tag.is-shade.is-action:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible {
-  outline-color: rgb(from var(--palette-shade-component-light-accent) r g b/var(--var-component-outline-opacity));
+  outline-color: rgba(var(--rgb-shade-component-light-accent), var(--var-component-outline-opacity));
 }
 .tag.is-shade.is-loading:not(.is-iconic) {
   color: transparent;
@@ -8301,7 +8301,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 }
 .tag.is-error {
   color: var(--palette-error-component-light-foreground);
-  background-color: rgb(from var(--palette-error-component-light-background) r g b/var(--var-component-light-opacity));
+  background-color: rgba(var(--rgb-error-component-light-background), var(--var-component-light-opacity));
 }
 .tag.is-error.is-action {
   background-color: var(--palette-error-component-light-background);
@@ -8310,7 +8310,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   background-color: var(--palette-error-component-light-hover);
 }
 .tag.is-error.is-action:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible {
-  outline-color: rgb(from var(--palette-error-component-light-accent) r g b/var(--var-component-outline-opacity));
+  outline-color: rgba(var(--rgb-error-component-light-accent), var(--var-component-outline-opacity));
 }
 .tag.is-error.is-loading:not(.is-iconic) {
   color: transparent;
@@ -8328,7 +8328,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 }
 .tag.is-primary {
   color: var(--palette-primary-component-light-foreground);
-  background-color: rgb(from var(--palette-primary-component-light-background) r g b/var(--var-component-light-opacity));
+  background-color: rgba(var(--rgb-primary-component-light-background), var(--var-component-light-opacity));
 }
 .tag.is-primary.is-action {
   background-color: var(--palette-primary-component-light-background);
@@ -8337,7 +8337,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   background-color: var(--palette-primary-component-light-hover);
 }
 .tag.is-primary.is-action:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible {
-  outline-color: rgb(from var(--palette-primary-component-light-accent) r g b/var(--var-component-outline-opacity));
+  outline-color: rgba(var(--rgb-primary-component-light-accent), var(--var-component-outline-opacity));
 }
 .tag.is-primary.is-loading:not(.is-iconic) {
   color: transparent;
@@ -8355,7 +8355,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 }
 .tag.is-indigo {
   color: var(--palette-indigo-component-light-foreground);
-  background-color: rgb(from var(--palette-indigo-component-light-background) r g b/var(--var-component-light-opacity));
+  background-color: rgba(var(--rgb-indigo-component-light-background), var(--var-component-light-opacity));
 }
 .tag.is-indigo.is-action {
   background-color: var(--palette-indigo-component-light-background);
@@ -8364,7 +8364,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   background-color: var(--palette-indigo-component-light-hover);
 }
 .tag.is-indigo.is-action:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible {
-  outline-color: rgb(from var(--palette-indigo-component-light-accent) r g b/var(--var-component-outline-opacity));
+  outline-color: rgba(var(--rgb-indigo-component-light-accent), var(--var-component-outline-opacity));
 }
 .tag.is-indigo.is-loading:not(.is-iconic) {
   color: transparent;
@@ -8382,7 +8382,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 }
 .tag.is-green {
   color: var(--palette-green-component-light-foreground);
-  background-color: rgb(from var(--palette-green-component-light-background) r g b/var(--var-component-light-opacity));
+  background-color: rgba(var(--rgb-green-component-light-background), var(--var-component-light-opacity));
 }
 .tag.is-green.is-action {
   background-color: var(--palette-green-component-light-background);
@@ -8391,7 +8391,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   background-color: var(--palette-green-component-light-hover);
 }
 .tag.is-green.is-action:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible {
-  outline-color: rgb(from var(--palette-green-component-light-accent) r g b/var(--var-component-outline-opacity));
+  outline-color: rgba(var(--rgb-green-component-light-accent), var(--var-component-outline-opacity));
 }
 .tag.is-green.is-loading:not(.is-iconic) {
   color: transparent;
@@ -8409,7 +8409,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 }
 .tag.is-maroon {
   color: var(--palette-maroon-component-light-foreground);
-  background-color: rgb(from var(--palette-maroon-component-light-background) r g b/var(--var-component-light-opacity));
+  background-color: rgba(var(--rgb-maroon-component-light-background), var(--var-component-light-opacity));
 }
 .tag.is-maroon.is-action {
   background-color: var(--palette-maroon-component-light-background);
@@ -8418,7 +8418,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   background-color: var(--palette-maroon-component-light-hover);
 }
 .tag.is-maroon.is-action:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible {
-  outline-color: rgb(from var(--palette-maroon-component-light-accent) r g b/var(--var-component-outline-opacity));
+  outline-color: rgba(var(--rgb-maroon-component-light-accent), var(--var-component-outline-opacity));
 }
 .tag.is-maroon.is-loading:not(.is-iconic) {
   color: transparent;
@@ -8468,7 +8468,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   height: var(--var-component-height);
   text-overflow: ellipsis;
   color: var(--palette-base-component-light-foreground);
-  background-color: rgb(from var(--palette-base-component-light-background) r g b/var(--var-component-button-opacity));
+  background-color: rgba(var(--rgb-base-component-light-background), var(--var-component-button-opacity));
   border-radius: var(--var-radius-normal);
   padding: var(--var-component-v-padding) var(--var-component-h-padding);
   transition-property: all;
@@ -8497,10 +8497,10 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 }
 .button:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible {
   outline-offset: 1px;
-  outline: var(--var-decorator-thickness) solid rgb(from var(--palette-base-component-light-accent) r g b/var(--var-component-outline-opacity));
+  outline: var(--var-decorator-thickness) solid rgba(var(--rgb-base-component-light-accent), var(--var-component-outline-opacity));
 }
 .button:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible.is-simple {
-  outline-color: rgb(from var(--palette-base-component-simple-accent) r g b/var(--var-component-outline-opacity));
+  outline-color: rgba(var(--rgb-base-component-simple-accent), var(--var-component-outline-opacity));
 }
 .button.is-loading:not(.is-iconic) {
   color: transparent;
@@ -8588,7 +8588,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 }
 .button.is-shade {
   color: var(--palette-shade-component-accent-foreground);
-  background-color: rgb(from var(--palette-shade-component-accent-background) r g b/var(--var-component-button-opacity));
+  background-color: rgba(var(--rgb-shade-component-accent-background), var(--var-component-button-opacity));
 }
 .button.is-shade.is-simple {
   color: var(--palette-shade-component-simple-text);
@@ -8596,7 +8596,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 }
 .button.is-shade.is-light {
   color: var(--palette-shade-component-light-foreground);
-  background-color: rgb(from var(--palette-shade-component-light-background) r g b/var(--var-component-button-opacity));
+  background-color: rgba(var(--rgb-shade-component-light-background), var(--var-component-button-opacity));
 }
 .button.is-shade:hover {
   background-color: var(--palette-shade-component-accent-hover);
@@ -8608,13 +8608,13 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   background-color: var(--palette-shade-component-light-hover);
 }
 .button.is-shade:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible {
-  outline-color: rgb(from var(--palette-shade-component-accent) r g b/var(--var-component-outline-opacity));
+  outline-color: rgba(var(--rgb-shade-component-accent), var(--var-component-outline-opacity));
 }
 .button.is-shade:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible.is-simple {
-  outline-color: rgb(from var(--palette-shade-component-simple-accent) r g b/var(--var-component-outline-opacity));
+  outline-color: rgba(var(--rgb-shade-component-simple-accent), var(--var-component-outline-opacity));
 }
 .button.is-shade:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible.is-light {
-  outline-color: rgb(from var(--palette-shade-component-light-accent) r g b/var(--var-component-outline-opacity));
+  outline-color: rgba(var(--rgb-shade-component-light-accent), var(--var-component-outline-opacity));
 }
 .button.is-shade.is-loading:not(.is-iconic) {
   color: transparent;
@@ -8680,7 +8680,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 }
 .button.is-error {
   color: var(--palette-error-component-accent-foreground);
-  background-color: rgb(from var(--palette-error-component-accent-background) r g b/var(--var-component-button-opacity));
+  background-color: rgba(var(--rgb-error-component-accent-background), var(--var-component-button-opacity));
 }
 .button.is-error.is-simple {
   color: var(--palette-error-component-simple-text);
@@ -8688,7 +8688,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 }
 .button.is-error.is-light {
   color: var(--palette-error-component-light-foreground);
-  background-color: rgb(from var(--palette-error-component-light-background) r g b/var(--var-component-button-opacity));
+  background-color: rgba(var(--rgb-error-component-light-background), var(--var-component-button-opacity));
 }
 .button.is-error:hover {
   background-color: var(--palette-error-component-accent-hover);
@@ -8700,13 +8700,13 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   background-color: var(--palette-error-component-light-hover);
 }
 .button.is-error:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible {
-  outline-color: rgb(from var(--palette-error-component-accent) r g b/var(--var-component-outline-opacity));
+  outline-color: rgba(var(--rgb-error-component-accent), var(--var-component-outline-opacity));
 }
 .button.is-error:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible.is-simple {
-  outline-color: rgb(from var(--palette-error-component-simple-accent) r g b/var(--var-component-outline-opacity));
+  outline-color: rgba(var(--rgb-error-component-simple-accent), var(--var-component-outline-opacity));
 }
 .button.is-error:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible.is-light {
-  outline-color: rgb(from var(--palette-error-component-light-accent) r g b/var(--var-component-outline-opacity));
+  outline-color: rgba(var(--rgb-error-component-light-accent), var(--var-component-outline-opacity));
 }
 .button.is-error.is-loading:not(.is-iconic) {
   color: transparent;
@@ -8772,7 +8772,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 }
 .button.is-primary {
   color: var(--palette-primary-component-accent-foreground);
-  background-color: rgb(from var(--palette-primary-component-accent-background) r g b/var(--var-component-button-opacity));
+  background-color: rgba(var(--rgb-primary-component-accent-background), var(--var-component-button-opacity));
 }
 .button.is-primary.is-simple {
   color: var(--palette-primary-component-simple-text);
@@ -8780,7 +8780,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 }
 .button.is-primary.is-light {
   color: var(--palette-primary-component-light-foreground);
-  background-color: rgb(from var(--palette-primary-component-light-background) r g b/var(--var-component-button-opacity));
+  background-color: rgba(var(--rgb-primary-component-light-background), var(--var-component-button-opacity));
 }
 .button.is-primary:hover {
   background-color: var(--palette-primary-component-accent-hover);
@@ -8792,13 +8792,13 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   background-color: var(--palette-primary-component-light-hover);
 }
 .button.is-primary:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible {
-  outline-color: rgb(from var(--palette-primary-component-accent) r g b/var(--var-component-outline-opacity));
+  outline-color: rgba(var(--rgb-primary-component-accent), var(--var-component-outline-opacity));
 }
 .button.is-primary:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible.is-simple {
-  outline-color: rgb(from var(--palette-primary-component-simple-accent) r g b/var(--var-component-outline-opacity));
+  outline-color: rgba(var(--rgb-primary-component-simple-accent), var(--var-component-outline-opacity));
 }
 .button.is-primary:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible.is-light {
-  outline-color: rgb(from var(--palette-primary-component-light-accent) r g b/var(--var-component-outline-opacity));
+  outline-color: rgba(var(--rgb-primary-component-light-accent), var(--var-component-outline-opacity));
 }
 .button.is-primary.is-loading:not(.is-iconic) {
   color: transparent;
@@ -8864,7 +8864,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 }
 .button.is-indigo {
   color: var(--palette-indigo-component-accent-foreground);
-  background-color: rgb(from var(--palette-indigo-component-accent-background) r g b/var(--var-component-button-opacity));
+  background-color: rgba(var(--rgb-indigo-component-accent-background), var(--var-component-button-opacity));
 }
 .button.is-indigo.is-simple {
   color: var(--palette-indigo-component-simple-text);
@@ -8872,7 +8872,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 }
 .button.is-indigo.is-light {
   color: var(--palette-indigo-component-light-foreground);
-  background-color: rgb(from var(--palette-indigo-component-light-background) r g b/var(--var-component-button-opacity));
+  background-color: rgba(var(--rgb-indigo-component-light-background), var(--var-component-button-opacity));
 }
 .button.is-indigo:hover {
   background-color: var(--palette-indigo-component-accent-hover);
@@ -8884,13 +8884,13 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   background-color: var(--palette-indigo-component-light-hover);
 }
 .button.is-indigo:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible {
-  outline-color: rgb(from var(--palette-indigo-component-accent) r g b/var(--var-component-outline-opacity));
+  outline-color: rgba(var(--rgb-indigo-component-accent), var(--var-component-outline-opacity));
 }
 .button.is-indigo:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible.is-simple {
-  outline-color: rgb(from var(--palette-indigo-component-simple-accent) r g b/var(--var-component-outline-opacity));
+  outline-color: rgba(var(--rgb-indigo-component-simple-accent), var(--var-component-outline-opacity));
 }
 .button.is-indigo:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible.is-light {
-  outline-color: rgb(from var(--palette-indigo-component-light-accent) r g b/var(--var-component-outline-opacity));
+  outline-color: rgba(var(--rgb-indigo-component-light-accent), var(--var-component-outline-opacity));
 }
 .button.is-indigo.is-loading:not(.is-iconic) {
   color: transparent;
@@ -8956,7 +8956,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 }
 .button.is-green {
   color: var(--palette-green-component-accent-foreground);
-  background-color: rgb(from var(--palette-green-component-accent-background) r g b/var(--var-component-button-opacity));
+  background-color: rgba(var(--rgb-green-component-accent-background), var(--var-component-button-opacity));
 }
 .button.is-green.is-simple {
   color: var(--palette-green-component-simple-text);
@@ -8964,7 +8964,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 }
 .button.is-green.is-light {
   color: var(--palette-green-component-light-foreground);
-  background-color: rgb(from var(--palette-green-component-light-background) r g b/var(--var-component-button-opacity));
+  background-color: rgba(var(--rgb-green-component-light-background), var(--var-component-button-opacity));
 }
 .button.is-green:hover {
   background-color: var(--palette-green-component-accent-hover);
@@ -8976,13 +8976,13 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   background-color: var(--palette-green-component-light-hover);
 }
 .button.is-green:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible {
-  outline-color: rgb(from var(--palette-green-component-accent) r g b/var(--var-component-outline-opacity));
+  outline-color: rgba(var(--rgb-green-component-accent), var(--var-component-outline-opacity));
 }
 .button.is-green:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible.is-simple {
-  outline-color: rgb(from var(--palette-green-component-simple-accent) r g b/var(--var-component-outline-opacity));
+  outline-color: rgba(var(--rgb-green-component-simple-accent), var(--var-component-outline-opacity));
 }
 .button.is-green:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible.is-light {
-  outline-color: rgb(from var(--palette-green-component-light-accent) r g b/var(--var-component-outline-opacity));
+  outline-color: rgba(var(--rgb-green-component-light-accent), var(--var-component-outline-opacity));
 }
 .button.is-green.is-loading:not(.is-iconic) {
   color: transparent;
@@ -9048,7 +9048,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 }
 .button.is-maroon {
   color: var(--palette-maroon-component-accent-foreground);
-  background-color: rgb(from var(--palette-maroon-component-accent-background) r g b/var(--var-component-button-opacity));
+  background-color: rgba(var(--rgb-maroon-component-accent-background), var(--var-component-button-opacity));
 }
 .button.is-maroon.is-simple {
   color: var(--palette-maroon-component-simple-text);
@@ -9056,7 +9056,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 }
 .button.is-maroon.is-light {
   color: var(--palette-maroon-component-light-foreground);
-  background-color: rgb(from var(--palette-maroon-component-light-background) r g b/var(--var-component-button-opacity));
+  background-color: rgba(var(--rgb-maroon-component-light-background), var(--var-component-button-opacity));
 }
 .button.is-maroon:hover {
   background-color: var(--palette-maroon-component-accent-hover);
@@ -9068,13 +9068,13 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   background-color: var(--palette-maroon-component-light-hover);
 }
 .button.is-maroon:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible {
-  outline-color: rgb(from var(--palette-maroon-component-accent) r g b/var(--var-component-outline-opacity));
+  outline-color: rgba(var(--rgb-maroon-component-accent), var(--var-component-outline-opacity));
 }
 .button.is-maroon:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible.is-simple {
-  outline-color: rgb(from var(--palette-maroon-component-simple-accent) r g b/var(--var-component-outline-opacity));
+  outline-color: rgba(var(--rgb-maroon-component-simple-accent), var(--var-component-outline-opacity));
 }
 .button.is-maroon:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible.is-light {
-  outline-color: rgb(from var(--palette-maroon-component-light-accent) r g b/var(--var-component-outline-opacity));
+  outline-color: rgba(var(--rgb-maroon-component-light-accent), var(--var-component-outline-opacity));
 }
 .button.is-maroon.is-loading:not(.is-iconic) {
   color: transparent;
@@ -9312,7 +9312,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   position: relative;
   max-width: 100%;
   padding: var(--var-padding-container);
-  background-color: rgb(from var(--palette-base-card-background) r g b/var(--var-card-opacity));
+  background-color: rgba(var(--rgb-base-card-background), var(--var-card-opacity));
   backdrop-filter: var(--var-card-backdrop-filter);
   border-radius: var(--var-radius-normal);
   box-shadow: var(--var-card-shadow);
@@ -9343,7 +9343,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   padding: var(--var-padding-container);
 }
 .card > .section.is-secondary {
-  background-color: rgb(from var(--palette-base-card-surface) r g b/var(--var-card-opacity));
+  background-color: rgba(var(--rgb-base-card-surface), var(--var-card-opacity));
 }
 .card > .overlay {
   display: flex;
@@ -9356,7 +9356,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   overflow-y: auto;
   padding: var(--var-padding-container);
   color: var(--palette-base-card-overlay-foreground);
-  background-color: rgb(from var(--palette-base-card-overlay-background) r g b/var(--var-card-overlay-opacity));
+  background-color: rgba(var(--rgb-base-card-overlay-background), var(--var-card-overlay-opacity));
   backdrop-filter: var(--var-card-overlay-filter);
   transition-property: opacity;
   transition-timing-function: var(--var-transition-ease);
@@ -9402,7 +9402,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   position: absolute;
   z-index: 1;
   inset: 0;
-  background-color: rgb(from var(--palette-base-card-overlay-background) r g b/var(--var-card-overlay-opacity));
+  background-color: rgba(var(--rgb-base-card-overlay-background), var(--var-card-overlay-opacity));
   backdrop-filter: var(--var-card-overlay-filter);
 }
 .card.is-loading {
@@ -9434,12 +9434,12 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 .card:not(.is-overlaid, .is-loading) > .section.top-sticky {
   position: sticky;
   top: calc(-1 * var(--var-padding-container));
-  background-color: rgb(from var(--palette-base-card-background) r g b/var(--var-card-opacity));
+  background-color: rgba(var(--rgb-base-card-background), var(--var-card-opacity));
 }
 .card:not(.is-overlaid, .is-loading) > .section.bottom-sticky {
   position: sticky;
   bottom: calc(-1 * var(--var-padding-container));
-  background-color: rgb(from var(--palette-base-card-background) r g b/var(--var-card-opacity));
+  background-color: rgba(var(--rgb-base-card-background), var(--var-card-opacity));
 }
 .card.is-mini-gap {
   padding: var(--gap-mini);
@@ -10321,7 +10321,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   font-weight: var(--var-component-meta-weight);
   text-overflow: ellipsis;
   color: var(--palette-base-component-accent-foreground);
-  background-color: rgb(from var(--palette-base-component-accent-background) r g b/var(--var-component-action-opacity));
+  background-color: rgba(var(--rgb-base-component-accent-background), var(--var-component-action-opacity));
   border-radius: var(--var-radius-normal);
   padding: var(--var-component-v-padding) var(--var-component-h-padding);
   transition-property: all;
@@ -10350,10 +10350,10 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 }
 .actions > .action:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible {
   outline-offset: 1px;
-  outline: var(--var-decorator-thickness) solid rgb(from var(--palette-base-component-accent) r g b/var(--var-component-outline-opacity));
+  outline: var(--var-decorator-thickness) solid rgba(var(--rgb-base-component-accent), var(--var-component-outline-opacity));
 }
 .actions > .action:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible.is-secondary {
-  outline-color: rgb(from var(--palette-base-component-simple-accent) r g b/var(--var-component-outline-opacity));
+  outline-color: rgba(var(--rgb-base-component-simple-accent), var(--var-component-outline-opacity));
 }
 .actions > .action.is-loading:not(.is-iconic) {
   color: transparent;
@@ -10420,13 +10420,13 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 }
 .actions.is-shade > .action:not(.is-secondary), .is-shade .actions > .action:not(.is-secondary) {
   color: var(--palette-shade-component-accent-foreground);
-  background-color: rgb(from var(--palette-shade-component-accent-background) r g b/var(--var-component-action-opacity));
+  background-color: rgba(var(--rgb-shade-component-accent-background), var(--var-component-action-opacity));
 }
 .actions.is-shade > .action:not(.is-secondary):hover, .is-shade .actions > .action:not(.is-secondary):hover {
   background-color: var(--palette-shade-component-accent-hover);
 }
 .actions.is-shade > .action:not(.is-secondary):not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible, .is-shade .actions > .action:not(.is-secondary):not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible {
-  outline-color: rgb(from var(--palette-shade-component-accent) r g b/var(--var-component-outline-opacity));
+  outline-color: rgba(var(--rgb-shade-component-accent), var(--var-component-outline-opacity));
 }
 .actions.is-shade > .action:not(.is-secondary).is-loading:not(.is-iconic), .is-shade .actions > .action:not(.is-secondary).is-loading:not(.is-iconic) {
   color: transparent;
@@ -10444,13 +10444,13 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 }
 .actions.is-error > .action:not(.is-secondary), .is-error .actions > .action:not(.is-secondary) {
   color: var(--palette-error-component-accent-foreground);
-  background-color: rgb(from var(--palette-error-component-accent-background) r g b/var(--var-component-action-opacity));
+  background-color: rgba(var(--rgb-error-component-accent-background), var(--var-component-action-opacity));
 }
 .actions.is-error > .action:not(.is-secondary):hover, .is-error .actions > .action:not(.is-secondary):hover {
   background-color: var(--palette-error-component-accent-hover);
 }
 .actions.is-error > .action:not(.is-secondary):not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible, .is-error .actions > .action:not(.is-secondary):not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible {
-  outline-color: rgb(from var(--palette-error-component-accent) r g b/var(--var-component-outline-opacity));
+  outline-color: rgba(var(--rgb-error-component-accent), var(--var-component-outline-opacity));
 }
 .actions.is-error > .action:not(.is-secondary).is-loading:not(.is-iconic), .is-error .actions > .action:not(.is-secondary).is-loading:not(.is-iconic) {
   color: transparent;
@@ -10468,13 +10468,13 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 }
 .actions.is-primary > .action:not(.is-secondary), .is-primary .actions > .action:not(.is-secondary) {
   color: var(--palette-primary-component-accent-foreground);
-  background-color: rgb(from var(--palette-primary-component-accent-background) r g b/var(--var-component-action-opacity));
+  background-color: rgba(var(--rgb-primary-component-accent-background), var(--var-component-action-opacity));
 }
 .actions.is-primary > .action:not(.is-secondary):hover, .is-primary .actions > .action:not(.is-secondary):hover {
   background-color: var(--palette-primary-component-accent-hover);
 }
 .actions.is-primary > .action:not(.is-secondary):not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible, .is-primary .actions > .action:not(.is-secondary):not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible {
-  outline-color: rgb(from var(--palette-primary-component-accent) r g b/var(--var-component-outline-opacity));
+  outline-color: rgba(var(--rgb-primary-component-accent), var(--var-component-outline-opacity));
 }
 .actions.is-primary > .action:not(.is-secondary).is-loading:not(.is-iconic), .is-primary .actions > .action:not(.is-secondary).is-loading:not(.is-iconic) {
   color: transparent;
@@ -10492,13 +10492,13 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 }
 .actions.is-indigo > .action:not(.is-secondary), .is-indigo .actions > .action:not(.is-secondary) {
   color: var(--palette-indigo-component-accent-foreground);
-  background-color: rgb(from var(--palette-indigo-component-accent-background) r g b/var(--var-component-action-opacity));
+  background-color: rgba(var(--rgb-indigo-component-accent-background), var(--var-component-action-opacity));
 }
 .actions.is-indigo > .action:not(.is-secondary):hover, .is-indigo .actions > .action:not(.is-secondary):hover {
   background-color: var(--palette-indigo-component-accent-hover);
 }
 .actions.is-indigo > .action:not(.is-secondary):not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible, .is-indigo .actions > .action:not(.is-secondary):not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible {
-  outline-color: rgb(from var(--palette-indigo-component-accent) r g b/var(--var-component-outline-opacity));
+  outline-color: rgba(var(--rgb-indigo-component-accent), var(--var-component-outline-opacity));
 }
 .actions.is-indigo > .action:not(.is-secondary).is-loading:not(.is-iconic), .is-indigo .actions > .action:not(.is-secondary).is-loading:not(.is-iconic) {
   color: transparent;
@@ -10516,13 +10516,13 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 }
 .actions.is-green > .action:not(.is-secondary), .is-green .actions > .action:not(.is-secondary) {
   color: var(--palette-green-component-accent-foreground);
-  background-color: rgb(from var(--palette-green-component-accent-background) r g b/var(--var-component-action-opacity));
+  background-color: rgba(var(--rgb-green-component-accent-background), var(--var-component-action-opacity));
 }
 .actions.is-green > .action:not(.is-secondary):hover, .is-green .actions > .action:not(.is-secondary):hover {
   background-color: var(--palette-green-component-accent-hover);
 }
 .actions.is-green > .action:not(.is-secondary):not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible, .is-green .actions > .action:not(.is-secondary):not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible {
-  outline-color: rgb(from var(--palette-green-component-accent) r g b/var(--var-component-outline-opacity));
+  outline-color: rgba(var(--rgb-green-component-accent), var(--var-component-outline-opacity));
 }
 .actions.is-green > .action:not(.is-secondary).is-loading:not(.is-iconic), .is-green .actions > .action:not(.is-secondary).is-loading:not(.is-iconic) {
   color: transparent;
@@ -10540,13 +10540,13 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 }
 .actions.is-maroon > .action:not(.is-secondary), .is-maroon .actions > .action:not(.is-secondary) {
   color: var(--palette-maroon-component-accent-foreground);
-  background-color: rgb(from var(--palette-maroon-component-accent-background) r g b/var(--var-component-action-opacity));
+  background-color: rgba(var(--rgb-maroon-component-accent-background), var(--var-component-action-opacity));
 }
 .actions.is-maroon > .action:not(.is-secondary):hover, .is-maroon .actions > .action:not(.is-secondary):hover {
   background-color: var(--palette-maroon-component-accent-hover);
 }
 .actions.is-maroon > .action:not(.is-secondary):not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible, .is-maroon .actions > .action:not(.is-secondary):not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):focus-visible {
-  outline-color: rgb(from var(--palette-maroon-component-accent) r g b/var(--var-component-outline-opacity));
+  outline-color: rgba(var(--rgb-maroon-component-accent), var(--var-component-outline-opacity));
 }
 .actions.is-maroon > .action:not(.is-secondary).is-loading:not(.is-iconic), .is-maroon .actions > .action:not(.is-secondary).is-loading:not(.is-iconic) {
   color: transparent;
@@ -10572,31 +10572,23 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 }
 
 @keyframes skeleton-pulse {
-  0%, 100% {
-    opacity: calc(var(--var-component-skeleton-opacity) * 0.5);
+  0% {
+    opacity: 1;
   }
   50% {
     opacity: var(--var-component-skeleton-opacity);
   }
-}
-@keyframes skeleton-shimmer {
-  0% {
-    background-position-x: 200%;
-  }
   100% {
-    background-position-x: 0%;
+    opacity: 1;
   }
 }
 .skeleton {
   display: block;
   overflow: hidden;
   opacity: var(--var-component-skeleton-opacity);
-  background-color: var(--palette-shade-light);
-  background-size: 200% 100%;
-  background-image: linear-gradient(100deg, var(--palette-shade-light), var(--palette-shade-light) 30%, var(--palette-shade-light-hover) 50%, var(--palette-shade-light) 70%);
-  animation: skeleton-pulse 3s cubic-bezier(0.4, 0, 0.2, 1) infinite, skeleton-shimmer 2s ease-in-out infinite;
-  animation-delay: var(--skeleton-delay, 0s);
   border-radius: var(--var-radius-normal);
+  background-color: var(--palette-base-skeleton-background);
+  animation: skeleton-pulse 2s ease-in-out 0.5s infinite;
   user-select: none;
 }
 @media screen and (prefers-reduced-motion: reduce) {
@@ -10628,6 +10620,35 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   width: 100%;
   height: 1px;
   animation: none;
+}
+.skeleton.is-block {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1/1;
+}
+.skeleton.is-block.is-1-2 {
+  aspect-ratio: 1/2;
+}
+.skeleton.is-block.is-2-1 {
+  aspect-ratio: 2/1;
+}
+.skeleton.is-block.is-3-2 {
+  aspect-ratio: 3/2;
+}
+.skeleton.is-block.is-2-3 {
+  aspect-ratio: 2/3;
+}
+.skeleton.is-block.is-4-3 {
+  aspect-ratio: 4/3;
+}
+.skeleton.is-block.is-3-4 {
+  aspect-ratio: 3/4;
+}
+.skeleton.is-block.is-16-9 {
+  aspect-ratio: 16/9;
+}
+.skeleton.is-block.is-9-16 {
+  aspect-ratio: 9/16;
 }
 .skeleton.is-rounded.is-image {
   border-radius: var(--var-radius-circle);
@@ -10706,6 +10727,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 
 :root {
   --palette-shade: #9199aa;
+  --rgb-shade: 145, 153, 170;
   --var-document-direction: ltr;
   --var-document-min-width: 300px;
   --var-gap-micro: 0.5em;
@@ -10724,16 +10746,26 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   --var-text-strong-weight: bold;
   --var-text-decorated-weight: normal;
   --palette-primary: #179299;
+  --rgb-primary: 23, 146, 153;
   --palette-primary-text: rgb(14.8705882353%, 48.8736470588%, 54.64%);
+  --rgb-primary-text: 37.92, 124.6278, 139.332;
   --palette-primary-foreground: rgb(95.0450980392%, 96.2807745098%, 96.83%);
+  --rgb-primary-foreground: 242.365, 245.515975, 246.9165;
   --palette-base-foreground: #0d1b2a;
+  --rgb-base-foreground: 13, 27, 42;
   --palette-base: white;
+  --rgb-base: 255, 255, 255;
   --palette-base-background: var(--palette-base);
+  --rgb-base-background: var(--rgb-base);
   --palette-base-surface: #f8f9fa;
+  --rgb-base-surface: 248, 249, 250;
   --palette-base-separator: #e0e4eb;
+  --rgb-base-separator: 224, 228, 235;
   --var-document-scroll-width: 0.75rem;
   --palette-base-scroll-track: var(--palette-base-surface);
+  --rgb-base-scroll-track: var(--rgb-base-surface);
   --palette-base-scroll-thumb: var(--palette-base-separator);
+  --rgb-base-scroll-thumb: var(--rgb-base-separator);
   --var-line-height-large: 1.2em;
   --var-line-height-medium: 1.4em;
   --size-massive: 3em;
@@ -10745,78 +10777,134 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   --var-radius-circle: 50%;
   --size-small: 0.8em;
   --palette-base-table-decorator: var(--palette-primary);
+  --rgb-base-table-decorator: var(--rgb-primary);
   --palette-base-table-sorted-text: var(--palette-primary-text);
-  --palette-base-table-sorted-background: rgb(from var(--palette-primary) r g b/0.05);
+  --rgb-base-table-sorted-text: var(--rgb-primary-text);
+  --palette-base-table-sorted-background: rgba(var(--rgb-primary), 0.05);
   --palette-base-table-striped-background: var(--palette-base-surface);
+  --rgb-base-table-striped-background: var(--rgb-base-surface);
   --palette-base-surface-hover: #eef0f3;
+  --rgb-base-surface-hover: 238, 240, 243;
   --palette-base-table-hover-background: var(--palette-base-surface-hover);
+  --rgb-base-table-hover-background: var(--rgb-base-surface-hover);
   --palette-base-table-row-separator: var(--palette-base-separator);
-  --palette-base-table-column-separator: rgb(from var(--palette-base-separator) r g b/0.5);
-  --palette-base-table-section-separator: rgb(from var(--palette-shade) r g b/0.35);
+  --rgb-base-table-row-separator: var(--rgb-base-separator);
+  --palette-base-table-column-separator: rgba(var(--rgb-base-separator), 0.5);
+  --palette-base-table-section-separator: rgba(var(--rgb-shade), 0.35);
   --var-transition-ease: ease;
   --var-transition-duration: 250ms;
   --palette-error: #c3324a;
+  --rgb-error: 195, 50, 74;
   --palette-indigo: #5b5fc7;
+  --rgb-indigo: 91, 95, 199;
   --palette-green: #76c893;
+  --rgb-green: 118, 200, 147;
   --palette-maroon: #8b1e3f;
+  --rgb-maroon: 139, 30, 63;
   --palette-shade-table-decorator: #9199aa;
+  --rgb-shade-table-decorator: 145, 153, 170;
   --palette-shade-text: rgb(47.9058823529%, 54.16%, 67.6%);
+  --rgb-shade-text: 122.16, 138.108, 172.38;
   --palette-shade-table-sorted-text: var(--palette-shade-text);
-  --palette-shade-table-sorted-background: rgb(from #9199aa r g b/0.05);
+  --rgb-shade-table-sorted-text: var(--rgb-shade-text);
+  --palette-shade-table-sorted-background: rgba(145, 153, 170, 0.05);
+  --rgb-shade-table-sorted-background: 145, 153, 170;
   --palette-shade-table-striped-background: var(--palette-base-surface);
+  --rgb-shade-table-striped-background: var(--rgb-base-surface);
   --palette-shade-table-hover-background: var(--palette-base-surface-hover);
+  --rgb-shade-table-hover-background: var(--rgb-base-surface-hover);
   --palette-shade-table-row-separator: var(--palette-base-separator);
-  --palette-shade-table-column-separator: rgb(from var(--palette-base-separator) r g b/0.5);
-  --palette-shade-table-section-separator: rgb(from var(--palette-shade) r g b/0.35);
+  --rgb-shade-table-row-separator: var(--rgb-base-separator);
+  --palette-shade-table-column-separator: rgba(var(--rgb-base-separator), 0.5);
+  --palette-shade-table-section-separator: rgba(var(--rgb-shade), 0.35);
   --palette-shade-foreground: rgb(96.1843137255%, 96.77%, 98.0333333333%);
+  --rgb-shade-foreground: 245.27, 246.7635, 249.985;
   --palette-error-table-decorator: #c3324a;
+  --rgb-error-table-decorator: 195, 50, 74;
   --palette-error-text: rgb(63.5341176471%, 20.5882352941%, 25.8745882353%);
+  --rgb-error-text: 162.012, 52.5, 65.9802;
   --palette-error-table-sorted-text: var(--palette-error-text);
-  --palette-error-table-sorted-background: rgb(from #c3324a r g b/0.05);
+  --rgb-error-table-sorted-text: var(--rgb-error-text);
+  --palette-error-table-sorted-background: rgba(195, 50, 74, 0.05);
+  --rgb-error-table-sorted-background: 195, 50, 74;
   --palette-error-table-striped-background: var(--palette-base-surface);
+  --rgb-error-table-striped-background: var(--rgb-base-surface);
   --palette-error-table-hover-background: var(--palette-base-surface-hover);
+  --rgb-error-table-hover-background: var(--rgb-base-surface-hover);
   --palette-error-table-row-separator: var(--palette-base-separator);
-  --palette-error-table-column-separator: rgb(from var(--palette-base-separator) r g b/0.5);
-  --palette-error-table-section-separator: rgb(from var(--palette-shade) r g b/0.35);
+  --rgb-error-table-row-separator: var(--rgb-base-separator);
+  --palette-error-table-column-separator: rgba(var(--rgb-base-separator), 0.5);
+  --palette-error-table-section-separator: rgba(var(--rgb-shade), 0.35);
   --palette-error-foreground: rgb(96.9123529412%, 95.0980392157%, 95.1705980392%);
+  --rgb-error-foreground: 247.1265, 242.5, 242.685025;
   --palette-primary-table-decorator: #179299;
+  --rgb-primary-table-decorator: 23, 146, 153;
   --palette-primary-table-sorted-text: var(--palette-primary-text);
-  --palette-primary-table-sorted-background: rgb(from #179299 r g b/0.05);
+  --rgb-primary-table-sorted-text: var(--rgb-primary-text);
+  --palette-primary-table-sorted-background: rgba(23, 146, 153, 0.05);
+  --rgb-primary-table-sorted-background: 23, 146, 153;
   --palette-primary-table-striped-background: var(--palette-base-surface);
+  --rgb-primary-table-striped-background: var(--rgb-base-surface);
   --palette-primary-table-hover-background: var(--palette-base-surface-hover);
+  --rgb-primary-table-hover-background: var(--rgb-base-surface-hover);
   --palette-primary-table-row-separator: var(--palette-base-separator);
-  --palette-primary-table-column-separator: rgb(from var(--palette-base-separator) r g b/0.5);
-  --palette-primary-table-section-separator: rgb(from var(--palette-shade) r g b/0.35);
+  --rgb-primary-table-row-separator: var(--rgb-base-separator);
+  --palette-primary-table-column-separator: rgba(var(--rgb-base-separator), 0.5);
+  --palette-primary-table-section-separator: rgba(var(--rgb-shade), 0.35);
   --palette-indigo-table-decorator: #5b5fc7;
+  --rgb-indigo-table-decorator: 91, 95, 199;
   --palette-indigo-text: rgb(29.7505882353%, 30.1176470588%, 80.9411764706%);
+  --rgb-indigo-text: 75.864, 76.8, 206.4;
   --palette-indigo-table-sorted-text: var(--palette-indigo-text);
-  --palette-indigo-table-sorted-background: rgb(from #5b5fc7 r g b/0.05);
+  --rgb-indigo-table-sorted-text: var(--rgb-indigo-text);
+  --palette-indigo-table-sorted-background: rgba(91, 95, 199, 0.05);
+  --rgb-indigo-table-sorted-background: 91, 95, 199;
   --palette-indigo-table-striped-background: var(--palette-base-surface);
+  --rgb-indigo-table-striped-background: var(--rgb-base-surface);
   --palette-indigo-table-hover-background: var(--palette-base-surface-hover);
+  --rgb-indigo-table-hover-background: var(--rgb-base-surface-hover);
   --palette-indigo-table-row-separator: var(--palette-base-separator);
-  --palette-indigo-table-column-separator: rgb(from var(--palette-base-separator) r g b/0.5);
-  --palette-indigo-table-section-separator: rgb(from var(--palette-shade) r g b/0.35);
+  --rgb-indigo-table-row-separator: var(--rgb-base-separator);
+  --palette-indigo-table-column-separator: rgba(var(--rgb-base-separator), 0.5);
+  --palette-indigo-table-section-separator: rgba(var(--rgb-shade), 0.35);
   --palette-indigo-foreground: rgb(95.2384313725%, 95.1862745098%, 98.9901960784%);
+  --rgb-indigo-foreground: 242.858, 242.725, 252.425;
   --palette-green-table-decorator: #76c893;
+  --rgb-green-table-decorator: 118, 200, 147;
   --palette-green-text: rgb(34.9882352941%, 81.1529411765%, 51.2094117647%);
+  --rgb-green-text: 89.22, 206.94, 130.584;
   --palette-green-table-sorted-text: var(--palette-green-text);
-  --palette-green-table-sorted-background: rgb(from #76c893 r g b/0.05);
+  --rgb-green-table-sorted-text: var(--rgb-green-text);
+  --palette-green-table-sorted-background: rgba(118, 200, 147, 0.05);
+  --rgb-green-table-sorted-background: 118, 200, 147;
   --palette-green-table-striped-background: var(--palette-base-surface);
+  --rgb-green-table-striped-background: var(--rgb-base-surface);
   --palette-green-table-hover-background: var(--palette-base-surface-hover);
+  --rgb-green-table-hover-background: var(--rgb-base-surface-hover);
   --palette-green-table-row-separator: var(--palette-base-separator);
-  --palette-green-table-column-separator: rgb(from var(--palette-base-separator) r g b/0.5);
-  --palette-green-table-section-separator: rgb(from var(--palette-shade) r g b/0.35);
+  --rgb-green-table-row-separator: var(--rgb-base-separator);
+  --palette-green-table-column-separator: rgba(var(--rgb-base-separator), 0.5);
+  --palette-green-table-section-separator: rgba(var(--rgb-shade), 0.35);
   --palette-green-foreground: rgb(95.231372549%, 98.9921568627%, 96.5482352941%);
+  --rgb-green-foreground: 242.84, 252.43, 246.198;
   --palette-maroon-table-decorator: #8b1e3f;
+  --rgb-maroon-table-decorator: 139, 30, 63;
   --palette-maroon-text: rgb(51.6752941176%, 16.3529411765%, 29.8691764706%);
+  --rgb-maroon-text: 131.772, 41.7, 76.1664;
   --palette-maroon-table-sorted-text: var(--palette-maroon-text);
-  --palette-maroon-table-sorted-background: rgb(from #8b1e3f r g b/0.05);
+  --rgb-maroon-table-sorted-text: var(--rgb-maroon-text);
+  --palette-maroon-table-sorted-background: rgba(139, 30, 63, 0.05);
+  --rgb-maroon-table-sorted-background: 139, 30, 63;
   --palette-maroon-table-striped-background: var(--palette-base-surface);
+  --rgb-maroon-table-striped-background: var(--rgb-base-surface);
   --palette-maroon-table-hover-background: var(--palette-base-surface-hover);
+  --rgb-maroon-table-hover-background: var(--rgb-base-surface-hover);
   --palette-maroon-table-row-separator: var(--palette-base-separator);
-  --palette-maroon-table-column-separator: rgb(from var(--palette-base-separator) r g b/0.5);
-  --palette-maroon-table-section-separator: rgb(from var(--palette-shade) r g b/0.35);
+  --rgb-maroon-table-row-separator: var(--rgb-base-separator);
+  --palette-maroon-table-column-separator: rgba(var(--rgb-base-separator), 0.5);
+  --palette-maroon-table-section-separator: rgba(var(--rgb-shade), 0.35);
   --palette-maroon-foreground: rgb(96.8025490196%, 95.0588235294%, 95.9395294118%);
+  --rgb-maroon-foreground: 246.8465, 242.4, 244.6458;
   --var-padding-container: 1.6em;
   --var-container-desktop: 960px;
   --var-container-widescreen: 1200px;
@@ -10836,35 +10924,64 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   --var-input-checkbox: 1.3em;
   --var-input-disabled-opacity: 0.45;
   --palette-base-input-accent: var(--palette-primary);
+  --rgb-base-input-accent: var(--rgb-primary);
   --palette-base-input-accent-foreground: var(--palette-primary-foreground);
+  --rgb-base-input-accent-foreground: var(--rgb-primary-foreground);
   --palette-base-input-border: var(--palette-base-separator);
+  --rgb-base-input-border: var(--rgb-base-separator);
   --palette-base-disabled-border: var(--palette-base-separator);
+  --rgb-base-disabled-border: var(--rgb-base-separator);
   --palette-base-input-disabled-border: var(--palette-base-disabled-border);
+  --rgb-base-input-disabled-border: var(--rgb-base-disabled-border);
   --palette-shade-muted: rgb(57.9437254902%, 63.6065%, 75.7983333333%);
+  --rgb-shade-muted: 147.7565, 162.196575, 193.28575;
   --palette-base-disabled-foreground: var(--palette-shade-muted);
+  --rgb-base-disabled-foreground: var(--rgb-shade-muted);
   --palette-base-input-disabled-foreground: var(--palette-base-disabled-foreground);
+  --rgb-base-input-disabled-foreground: var(--rgb-base-disabled-foreground);
   --palette-base-input-disabled-background: transparent;
+  --rgb-base-input-disabled-background: 0, 0, 0;
   --var-transition-delay: 100ms;
   --palette-shade-input-accent: #9199aa;
+  --rgb-shade-input-accent: 145, 153, 170;
   --palette-shade-input-accent-foreground: var(--palette-shade-foreground);
+  --rgb-shade-input-accent-foreground: var(--rgb-shade-foreground);
   --palette-error-input-accent: #c3324a;
+  --rgb-error-input-accent: 195, 50, 74;
   --palette-error-input-accent-foreground: var(--palette-error-foreground);
+  --rgb-error-input-accent-foreground: var(--rgb-error-foreground);
   --palette-primary-input-accent: #179299;
+  --rgb-primary-input-accent: 23, 146, 153;
   --palette-primary-input-accent-foreground: var(--palette-primary-foreground);
+  --rgb-primary-input-accent-foreground: var(--rgb-primary-foreground);
   --palette-indigo-input-accent: #5b5fc7;
+  --rgb-indigo-input-accent: 91, 95, 199;
   --palette-indigo-input-accent-foreground: var(--palette-indigo-foreground);
+  --rgb-indigo-input-accent-foreground: var(--rgb-indigo-foreground);
   --palette-green-input-accent: #76c893;
+  --rgb-green-input-accent: 118, 200, 147;
   --palette-green-input-accent-foreground: var(--palette-green-foreground);
+  --rgb-green-input-accent-foreground: var(--rgb-green-foreground);
   --palette-maroon-input-accent: #8b1e3f;
+  --rgb-maroon-input-accent: 139, 30, 63;
   --palette-maroon-input-accent-foreground: var(--palette-maroon-foreground);
+  --rgb-maroon-input-accent-foreground: var(--rgb-maroon-foreground);
   --palette-base-input-meta: var(--palette-shade-text);
+  --rgb-base-input-meta: var(--rgb-shade-text);
   --palette-base-input-accent-text: var(--palette-primary-text);
+  --rgb-base-input-accent-text: var(--rgb-primary-text);
   --palette-shade-input-accent-text: var(--palette-shade-text);
+  --rgb-shade-input-accent-text: var(--rgb-shade-text);
   --palette-error-input-accent-text: var(--palette-error-text);
+  --rgb-error-input-accent-text: var(--rgb-error-text);
   --palette-primary-input-accent-text: var(--palette-primary-text);
+  --rgb-primary-input-accent-text: var(--rgb-primary-text);
   --palette-indigo-input-accent-text: var(--palette-indigo-text);
+  --rgb-indigo-input-accent-text: var(--rgb-indigo-text);
   --palette-green-input-accent-text: var(--palette-green-text);
+  --rgb-green-input-accent-text: var(--rgb-green-text);
   --palette-maroon-input-accent-text: var(--palette-maroon-text);
+  --rgb-maroon-input-accent-text: var(--rgb-maroon-text);
   --var-input-legend-size: 0.875em;
   --var-input-legend-weight: 600;
   --var-overlay-opacity: 0.75;
@@ -10873,141 +10990,260 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   --var-box-overlay-opacity: var(--var-overlay-opacity);
   --var-box-overlay-filter: var(--var-overlay-filter);
   --palette-base-overlay-accent: var(--palette-base-foreground);
+  --rgb-base-overlay-accent: var(--rgb-base-foreground);
   --palette-base-box-overlay-accent: var(--palette-base-overlay-accent);
+  --rgb-base-box-overlay-accent: var(--rgb-base-overlay-accent);
   --palette-base-overlay-background: var(--palette-base);
+  --rgb-base-overlay-background: var(--rgb-base);
   --palette-base-box-overlay-background: var(--palette-base-overlay-background);
+  --rgb-base-box-overlay-background: var(--rgb-base-overlay-background);
   --var-input-placeholder-size: 0.875em;
   --var-input-placeholder-weight: 600;
   --palette-base-input-background: white;
+  --rgb-base-input-background: 255, 255, 255;
   --palette-shade-light: rgb(92.9215686275%, 93.95%, 96.1666666667%);
+  --rgb-shade-light: 236.95, 239.5725, 245.225;
   --palette-base-input-placeholder: var(--palette-shade-light);
+  --rgb-base-input-placeholder: var(--rgb-shade-light);
   --palette-base-input-hover-background: var(--palette-base-surface);
+  --rgb-base-input-hover-background: var(--rgb-base-surface);
   --var-component-weight: 500;
   --var-component-height: 2.2em;
   --var-component-meta-size: 0.9em;
   --var-component-meta-weight: 600;
   --palette-base-component-muted: var(--palette-shade-muted);
+  --rgb-base-component-muted: var(--rgb-shade-muted);
   --palette-shade-component-muted: var(--palette-shade-muted);
+  --rgb-shade-component-muted: var(--rgb-shade-muted);
   --palette-error-muted: rgb(64.0956568627%, 49.4784313725%, 51.608220098%);
+  --rgb-error-muted: 163.443925, 126.17, 131.60096125;
   --palette-error-component-muted: var(--palette-error-muted);
+  --rgb-error-component-muted: var(--rgb-error-muted);
   --palette-primary-muted: rgb(48.3173529412%, 59.4725446078%, 65.6301666667%);
+  --rgb-primary-muted: 123.20925, 151.65498875, 167.356925;
   --palette-primary-component-muted: var(--palette-primary-muted);
+  --rgb-primary-component-muted: var(--rgb-primary-muted);
   --palette-indigo-muted: rgb(49.9510196078%, 50.2240196078%, 83.8838235294%);
+  --rgb-indigo-muted: 127.3751, 128.07125, 213.90375;
   --palette-indigo-component-muted: var(--palette-indigo-muted);
+  --rgb-indigo-component-muted: var(--rgb-indigo-muted);
   --palette-green-muted: rgb(49.891372549%, 82.3837254902%, 63.249254902%);
+  --rgb-green-muted: 127.223, 210.0785, 161.2856;
   --palette-green-component-muted: var(--palette-green-muted);
+  --rgb-green-component-muted: var(--rgb-green-muted);
   --palette-maroon-muted: rgb(63.1678137255%, 49.1470588235%, 58.1056901961%);
+  --rgb-maroon-muted: 161.077925, 125.325, 148.16951;
   --palette-maroon-component-muted: var(--palette-maroon-muted);
+  --rgb-maroon-component-muted: var(--rgb-maroon-muted);
   --var-radius-rounded: 290486px;
   --var-component-light-opacity: 0.4;
   --var-component-outline-opacity: 0.2;
   --var-component-disabled-opacity: 0.45;
   --palette-base-component-light-accent: var(--palette-shade);
+  --rgb-base-component-light-accent: var(--rgb-shade);
   --palette-base-component-light-foreground: var(--palette-shade-text);
+  --rgb-base-component-light-foreground: var(--rgb-shade-text);
   --palette-base-component-light-background: var(--palette-shade-light);
+  --rgb-base-component-light-background: var(--rgb-shade-light);
   --palette-shade-light-hover: rgb(89.3823529412%, 90.925%, 94.25%);
+  --rgb-shade-light-hover: 227.925, 231.85875, 240.3375;
   --palette-base-component-light-hover: var(--palette-shade-light-hover);
+  --rgb-base-component-light-hover: var(--rgb-shade-light-hover);
   --palette-base-component-disabled-foreground: var(--palette-base-disabled-foreground);
+  --rgb-base-component-disabled-foreground: var(--rgb-base-disabled-foreground);
   --palette-base-disabled-background: var(--palette-base-surface);
+  --rgb-base-disabled-background: var(--rgb-base-surface);
   --palette-base-component-disabled-background: var(--palette-base-disabled-background);
+  --rgb-base-component-disabled-background: var(--rgb-base-disabled-background);
   --var-component-v-padding: 0;
   --var-component-h-padding: 1.2em;
   --palette-shade-component-light-accent: #9199aa;
+  --rgb-shade-component-light-accent: 145, 153, 170;
   --palette-shade-component-light-foreground: var(--palette-shade-text);
+  --rgb-shade-component-light-foreground: var(--rgb-shade-text);
   --palette-shade-component-light-background: var(--palette-shade-light);
+  --rgb-shade-component-light-background: var(--rgb-shade-light);
   --palette-shade-component-light-hover: var(--palette-shade-light-hover);
+  --rgb-shade-component-light-hover: var(--rgb-shade-light-hover);
   --palette-error-component-light-accent: #c3324a;
+  --rgb-error-component-light-accent: 195, 50, 74;
   --palette-error-component-light-foreground: var(--palette-error-text);
+  --rgb-error-component-light-foreground: var(--rgb-error-text);
   --palette-error-light: rgb(94.4617647059%, 90.4901960784%, 90.7679901961%);
+  --rgb-error-light: 240.8775, 230.75, 231.458375;
   --palette-error-component-light-background: var(--palette-error-light);
+  --rgb-error-component-light-background: var(--rgb-error-light);
   --palette-error-light-hover: rgb(91.6926470588%, 85.7352941176%, 86.1519852941%);
+  --rgb-error-light-hover: 233.81625, 218.625, 219.6875625;
   --palette-error-component-light-hover: var(--palette-error-light-hover);
+  --rgb-error-component-light-hover: var(--rgb-error-light-hover);
   --palette-primary-component-light-accent: #179299;
+  --rgb-primary-component-light-accent: 23, 146, 153;
   --palette-primary-component-light-foreground: var(--palette-primary-text);
+  --rgb-primary-component-light-foreground: var(--rgb-primary-text);
   --palette-primary-light: rgb(90.2254901961%, 93.088872549%, 94.05%);
+  --rgb-primary-light: 230.075, 237.376625, 239.8275;
   --palette-primary-component-light-background: var(--palette-primary-light);
+  --rgb-primary-component-light-background: var(--rgb-primary-light);
   --palette-primary-light-hover: rgb(85.3382352941%, 89.6333088235%, 91.075%);
+  --rgb-primary-light-hover: 217.6125, 228.5649375, 232.24125;
   --palette-primary-component-light-hover: var(--palette-primary-light-hover);
+  --rgb-primary-component-light-hover: var(--rgb-primary-light-hover);
   --palette-indigo-component-light-accent: #5b5fc7;
+  --rgb-indigo-component-light-accent: 91, 95, 199;
   --palette-indigo-component-light-foreground: var(--palette-indigo-text);
+  --rgb-indigo-component-light-foreground: var(--rgb-indigo-text);
   --palette-indigo-light: rgb(90.9921568627%, 90.931372549%, 97.9509803922%);
+  --rgb-indigo-light: 232.03, 231.875, 249.775;
   --palette-indigo-component-light-background: var(--palette-indigo-light);
+  --rgb-indigo-component-light-background: var(--rgb-indigo-light);
   --palette-indigo-light-hover: rgb(86.4882352941%, 86.3970588235%, 96.9264705882%);
+  --rgb-indigo-light-hover: 220.545, 220.3125, 247.1625;
   --palette-indigo-component-light-hover: var(--palette-indigo-light-hover);
+  --rgb-indigo-component-light-hover: var(--rgb-indigo-light-hover);
   --palette-green-component-light-accent: #76c893;
+  --rgb-green-component-light-accent: 118, 200, 147;
   --palette-green-component-light-foreground: var(--palette-green-text);
+  --rgb-green-component-light-foreground: var(--rgb-green-text);
   --palette-green-light: rgb(91.1568627451%, 97.9607843137%, 93.5411764706%);
+  --rgb-green-light: 232.45, 249.8, 238.53;
   --palette-green-component-light-background: var(--palette-green-light);
+  --rgb-green-component-light-background: var(--rgb-green-light);
   --palette-green-light-hover: rgb(86.7352941176%, 96.9411764706%, 90.3117647059%);
+  --rgb-green-light-hover: 221.175, 247.2, 230.295;
   --palette-green-component-light-hover: var(--palette-green-light-hover);
+  --rgb-green-component-light-hover: var(--rgb-green-light-hover);
   --palette-maroon-component-light-accent: #8b1e3f;
+  --rgb-maroon-component-light-accent: 139, 30, 63;
   --palette-maroon-component-light-foreground: var(--palette-maroon-text);
+  --rgb-maroon-component-light-foreground: var(--rgb-maroon-text);
   --palette-maroon-light: rgb(93.912745098%, 90.2941176471%, 91.9776470588%);
+  --rgb-maroon-light: 239.4775, 230.25, 234.543;
   --palette-maroon-component-light-background: var(--palette-maroon-light);
+  --rgb-maroon-component-light-background: var(--rgb-maroon-light);
   --palette-maroon-light-hover: rgb(90.8691176471%, 85.4411764706%, 87.9664705882%);
+  --rgb-maroon-light-hover: 231.71625, 217.875, 224.3145;
   --palette-maroon-component-light-hover: var(--palette-maroon-light-hover);
+  --rgb-maroon-component-light-hover: var(--rgb-maroon-light-hover);
   --var-component-button-opacity: 1;
   --palette-base-component-simple-accent: var(--palette-shade);
+  --rgb-base-component-simple-accent: var(--rgb-shade);
   --palette-base-component-simple-text: var(--palette-shade-text);
+  --rgb-base-component-simple-text: var(--rgb-shade-text);
   --palette-base-component-simple-hover: var(--palette-shade-light);
+  --rgb-base-component-simple-hover: var(--rgb-shade-light);
   --palette-shade-component-simple-accent: #9199aa;
+  --rgb-shade-component-simple-accent: 145, 153, 170;
   --palette-shade-component-simple-text: var(--palette-shade-text);
+  --rgb-shade-component-simple-text: var(--rgb-shade-text);
   --palette-shade-component-simple-hover: var(--palette-shade-light);
+  --rgb-shade-component-simple-hover: var(--rgb-shade-light);
   --palette-shade-component-accent: #9199aa;
+  --rgb-shade-component-accent: 145, 153, 170;
   --palette-shade-component-accent-foreground: var(--palette-shade-foreground);
+  --rgb-shade-component-accent-foreground: var(--rgb-shade-foreground);
   --palette-shade-component-accent-background: #9199aa;
+  --rgb-shade-component-accent-background: 145, 153, 170;
   --palette-shade-hover: rgb(42.1176470588%, 49.0666666667%, 64%);
+  --rgb-shade-hover: 107.4, 125.12, 163.2;
   --palette-shade-component-accent-hover: var(--palette-shade-hover);
+  --rgb-shade-component-accent-hover: var(--rgb-shade-hover);
   --palette-error-component-simple-accent: #c3324a;
+  --rgb-error-component-simple-accent: 195, 50, 74;
   --palette-error-component-simple-text: var(--palette-error-text);
+  --rgb-error-component-simple-text: var(--rgb-error-text);
   --palette-error-component-simple-hover: var(--palette-error-light);
+  --rgb-error-component-simple-hover: var(--rgb-error-light);
   --palette-error-component-accent: #c3324a;
+  --rgb-error-component-accent: 195, 50, 74;
   --palette-error-component-accent-foreground: var(--palette-error-foreground);
+  --rgb-error-component-accent-foreground: var(--rgb-error-foreground);
   --palette-error-component-accent-background: #c3324a;
+  --rgb-error-component-accent-background: 195, 50, 74;
   --palette-error-hover: rgb(59.4823529412%, 11.7647058824%, 17.6384313725%);
+  --rgb-error-hover: 151.68, 30, 44.978;
   --palette-error-component-accent-hover: var(--palette-error-hover);
+  --rgb-error-component-accent-hover: var(--rgb-error-hover);
   --palette-primary-component-simple-accent: #179299;
+  --rgb-primary-component-simple-accent: 23, 146, 153;
   --palette-primary-component-simple-text: var(--palette-primary-text);
+  --rgb-primary-component-simple-text: var(--rgb-primary-text);
   --palette-primary-component-simple-hover: var(--palette-primary-light);
+  --rgb-primary-component-simple-hover: var(--rgb-primary-light);
   --palette-primary-component-accent: #179299;
+  --rgb-primary-component-accent: 23, 146, 153;
   --palette-primary-component-accent-foreground: var(--palette-primary-foreground);
+  --rgb-primary-component-accent-foreground: var(--rgb-primary-foreground);
   --palette-primary-component-accent-background: #179299;
+  --rgb-primary-component-accent-background: 23, 146, 153;
   --palette-primary-hover: rgb(5.4117647059%, 43.1929411765%, 49.6%);
+  --rgb-primary-hover: 13.8, 110.142, 126.48;
   --palette-primary-component-accent-hover: var(--palette-primary-hover);
+  --rgb-primary-component-accent-hover: var(--rgb-primary-hover);
   --palette-indigo-component-simple-accent: #5b5fc7;
+  --rgb-indigo-component-simple-accent: 91, 95, 199;
   --palette-indigo-component-simple-text: var(--palette-indigo-text);
+  --rgb-indigo-component-simple-text: var(--rgb-indigo-text);
   --palette-indigo-component-simple-hover: var(--palette-indigo-light);
+  --rgb-indigo-component-simple-hover: var(--rgb-indigo-light);
   --palette-indigo-component-accent: #5b5fc7;
+  --rgb-indigo-component-accent: 91, 95, 199;
   --palette-indigo-component-accent-foreground: var(--palette-indigo-foreground);
+  --rgb-indigo-component-accent-foreground: var(--rgb-indigo-foreground);
   --palette-indigo-component-accent-background: #5b5fc7;
+  --rgb-indigo-component-accent-background: 91, 95, 199;
   --palette-indigo-hover: rgb(21.9450980392%, 22.3529411765%, 78.8235294118%);
+  --rgb-indigo-hover: 55.96, 57, 201;
   --palette-indigo-component-accent-hover: var(--palette-indigo-hover);
+  --rgb-indigo-component-accent-hover: var(--rgb-indigo-hover);
   --palette-green-component-simple-accent: #76c893;
+  --rgb-green-component-simple-accent: 118, 200, 147;
   --palette-green-component-simple-text: var(--palette-green-text);
+  --rgb-green-component-simple-text: var(--rgb-green-text);
   --palette-green-component-simple-hover: var(--palette-green-light);
+  --rgb-green-component-simple-hover: var(--rgb-green-light);
   --palette-green-component-accent: #76c893;
+  --rgb-green-component-accent: 118, 200, 147;
   --palette-green-component-accent-foreground: var(--palette-green-foreground);
+  --rgb-green-component-accent-foreground: var(--rgb-green-foreground);
   --palette-green-component-accent-background: #76c893;
+  --rgb-green-component-accent-background: 118, 200, 147;
   --palette-green-hover: rgb(27.7647058824%, 79.0588235294%, 45.7882352941%);
+  --rgb-green-hover: 70.8, 201.6, 116.76;
   --palette-green-component-accent-hover: var(--palette-green-hover);
+  --rgb-green-component-accent-hover: var(--rgb-green-hover);
   --palette-maroon-component-simple-accent: #8b1e3f;
+  --rgb-maroon-component-simple-accent: 139, 30, 63;
   --palette-maroon-component-simple-text: var(--palette-maroon-text);
+  --rgb-maroon-component-simple-text: var(--rgb-maroon-text);
   --palette-maroon-component-simple-hover: var(--palette-maroon-light);
+  --rgb-maroon-component-simple-hover: var(--rgb-maroon-light);
   --palette-maroon-component-accent: #8b1e3f;
+  --rgb-maroon-component-accent: 139, 30, 63;
   --palette-maroon-component-accent-foreground: var(--palette-maroon-foreground);
+  --rgb-maroon-component-accent-foreground: var(--rgb-maroon-foreground);
   --palette-maroon-component-accent-background: #8b1e3f;
+  --rgb-maroon-component-accent-background: 139, 30, 63;
   --palette-maroon-hover: rgb(46.3058823529%, 7.0588235294%, 22.0768627451%);
+  --rgb-maroon-hover: 118.08, 18, 56.296;
   --palette-maroon-component-accent-hover: var(--palette-maroon-hover);
+  --rgb-maroon-component-accent-hover: var(--rgb-maroon-hover);
   --palette-base-component-accent: var(--palette-primary);
+  --rgb-base-component-accent: var(--rgb-primary);
   --var-box-sizes: "small" 22em, "normal" 26em, "medium" 36em;
   --var-box-opacity: 1;
   --var-box-backdrop-filter: none;
-  --var-box-shadow: 0 1px 3px calc(-1 * 1px) rgb(from var(--palette-shade) r g b/0.1), 0 -1px 3px calc(-1 * 1px) rgb(from var(--palette-shade) r g b/0.1), 0 3px 9px calc(-1 * 3px) rgb(from var(--palette-shade) r g b/0.1);
+  --var-box-shadow: 0 1px 3px calc(-1 * 1px) rgba(var(--rgb-shade), 0.1), 0 -1px 3px calc(-1 * 1px) rgba(var(--rgb-shade), 0.1), 0 3px 9px calc(-1 * 3px) rgba(var(--rgb-shade), 0.1);
   --palette-base-box-background: var(--palette-base);
+  --rgb-base-box-background: var(--rgb-base);
   --palette-base-box-surface: var(--palette-base-surface);
+  --rgb-base-box-surface: var(--rgb-base-surface);
   --palette-base-box-separator: var(--palette-base-separator);
+  --rgb-base-box-separator: var(--rgb-base-separator);
   --palette-base-overlay-foreground: var(--palette-base-foreground);
+  --rgb-base-overlay-foreground: var(--rgb-base-foreground);
   --palette-base-box-overlay-foreground: var(--palette-base-overlay-foreground);
+  --rgb-base-box-overlay-foreground: var(--rgb-base-overlay-foreground);
   --var-card-sizes: var(--var-box-sizes);
   --var-card-opacity: 0.5;
   --var-card-backdrop-filter: var(--var-box-backdrop-filter);
@@ -11015,276 +11251,531 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   --var-card-overlay-opacity: var(--var-box-overlay-opacity);
   --var-card-overlay-filter: var(--var-box-overlay-filter);
   --palette-base-card-background: var(--palette-base-box-background);
+  --rgb-base-card-background: var(--rgb-base-box-background);
   --palette-base-card-surface: var(--palette-base-box-surface);
+  --rgb-base-card-surface: var(--rgb-base-box-surface);
   --palette-base-card-separator: var(--palette-base-box-separator);
+  --rgb-base-card-separator: var(--rgb-base-box-separator);
   --palette-base-card-overlay-accent: var(--palette-base-box-overlay-accent);
+  --rgb-base-card-overlay-accent: var(--rgb-base-box-overlay-accent);
   --palette-base-card-overlay-foreground: var(--palette-base-box-overlay-foreground);
+  --rgb-base-card-overlay-foreground: var(--rgb-base-box-overlay-foreground);
   --palette-base-card-overlay-background: var(--palette-base-box-overlay-background);
+  --rgb-base-card-overlay-background: var(--rgb-base-box-overlay-background);
   --palette-base-component-accent-text: var(--palette-primary-text);
+  --rgb-base-component-accent-text: var(--rgb-primary-text);
   --palette-base-component-disabled-text: var(--palette-shade-muted);
+  --rgb-base-component-disabled-text: var(--rgb-shade-muted);
   --palette-shade-component-accent-text: var(--palette-shade-text);
+  --rgb-shade-component-accent-text: var(--rgb-shade-text);
   --palette-error-component-accent-text: var(--palette-error-text);
+  --rgb-error-component-accent-text: var(--rgb-error-text);
   --palette-primary-component-accent-text: var(--palette-primary-text);
+  --rgb-primary-component-accent-text: var(--rgb-primary-text);
   --palette-indigo-component-accent-text: var(--palette-indigo-text);
+  --rgb-indigo-component-accent-text: var(--rgb-indigo-text);
   --palette-green-component-accent-text: var(--palette-green-text);
+  --rgb-green-component-accent-text: var(--rgb-green-text);
   --palette-maroon-component-accent-text: var(--palette-maroon-text);
+  --rgb-maroon-component-accent-text: var(--rgb-maroon-text);
   --palette-base-component-text: var(--palette-shade-text);
+  --rgb-base-component-text: var(--rgb-shade-text);
   --palette-base-component-separator: var(--palette-base-separator);
+  --rgb-base-component-separator: var(--rgb-base-separator);
   --var-component-action-opacity: 0.85;
   --palette-base-component-accent-foreground: var(--palette-primary-foreground);
+  --rgb-base-component-accent-foreground: var(--rgb-primary-foreground);
   --palette-base-component-accent-background: var(--palette-primary);
+  --rgb-base-component-accent-background: var(--rgb-primary);
   --palette-base-component-accent-hover: var(--palette-primary-hover);
-  --var-component-skeleton-opacity: 0.85;
+  --rgb-base-component-accent-hover: var(--rgb-primary-hover);
+  --var-component-skeleton-opacity: 0.4;
+  --palette-base-skeleton-background: var(--palette-shade-light);
+  --rgb-base-skeleton-background: var(--rgb-shade-light);
 }
 
 html[data-scheme=dark] {
   --palette-primary: #5fdae0;
+  --rgb-primary: 95, 218, 224;
   --palette-primary-text: rgb(63.4764397906%, 84.4882660918%, 84.9627656298%);
+  --rgb-primary-text: 161.864921466, 215.445078534, 216.655052356;
   --palette-primary-foreground: rgb(9.7616261164%, 10.4104327071%, 12.6155335694%);
+  --rgb-primary-foreground: 24.8921465969, 26.5466034031, 32.1696106021;
   --palette-base-foreground: white;
+  --rgb-base-foreground: 255, 255, 255;
   --palette-base: #0f0f15;
+  --rgb-base: 15, 15, 21;
   --palette-base-background: var(--palette-base);
+  --rgb-base-background: var(--rgb-base);
   --palette-base-surface: #26262c;
+  --rgb-base-surface: 38, 38, 44;
   --palette-base-separator: #32323e;
+  --rgb-base-separator: 50, 50, 62;
   --palette-base-scroll-track: var(--palette-base-surface);
+  --rgb-base-scroll-track: var(--rgb-base-surface);
   --palette-base-scroll-thumb: var(--palette-base-separator);
+  --rgb-base-scroll-thumb: var(--rgb-base-separator);
   --palette-base-table-decorator: var(--palette-primary);
+  --rgb-base-table-decorator: var(--rgb-primary);
   --palette-base-table-sorted-text: var(--palette-primary-text);
-  --palette-base-table-sorted-background: rgb(from var(--palette-primary) r g b/0.05);
+  --rgb-base-table-sorted-text: var(--rgb-primary-text);
+  --palette-base-table-sorted-background: rgba(var(--rgb-primary), 0.05);
   --palette-base-table-striped-background: var(--palette-base-surface);
+  --rgb-base-table-striped-background: var(--rgb-base-surface);
   --palette-base-surface-hover: #3d3d46;
+  --rgb-base-surface-hover: 61, 61, 70;
   --palette-base-table-hover-background: var(--palette-base-surface-hover);
+  --rgb-base-table-hover-background: var(--rgb-base-surface-hover);
   --palette-base-table-row-separator: var(--palette-base-separator);
-  --palette-base-table-column-separator: rgb(from var(--palette-base-separator) r g b/0.5);
-  --palette-base-table-section-separator: rgb(from var(--palette-shade) r g b/0.35);
+  --rgb-base-table-row-separator: var(--rgb-base-separator);
+  --palette-base-table-column-separator: rgba(var(--rgb-base-separator), 0.5);
+  --palette-base-table-section-separator: rgba(var(--rgb-shade), 0.35);
   --palette-indigo: #8b8edd;
+  --rgb-indigo: 139, 142, 221;
   --palette-green: #9dedb9;
+  --rgb-green: 157, 237, 185;
   --palette-maroon: #c96c88;
+  --rgb-maroon: 201, 108, 136;
   --palette-shade-table-decorator: #9199aa;
+  --rgb-shade-table-decorator: 145, 153, 170;
   --palette-shade-text: rgb(72.0126696833%, 73.592081448%, 76.4696832579%);
+  --rgb-shade-text: 183.6323076923, 187.6598076923, 194.9976923077;
   --palette-shade-table-sorted-text: var(--palette-shade-text);
-  --palette-shade-table-sorted-background: rgb(from #9199aa r g b/0.05);
+  --rgb-shade-table-sorted-text: var(--rgb-shade-text);
+  --palette-shade-table-sorted-background: rgba(145, 153, 170, 0.05);
+  --rgb-shade-table-sorted-background: 145, 153, 170;
   --palette-shade-table-striped-background: var(--palette-base-surface);
+  --rgb-shade-table-striped-background: var(--rgb-base-surface);
   --palette-shade-table-hover-background: var(--palette-base-surface-hover);
+  --rgb-shade-table-hover-background: var(--rgb-base-surface-hover);
   --palette-shade-table-row-separator: var(--palette-base-separator);
-  --palette-shade-table-column-separator: rgb(from var(--palette-base-separator) r g b/0.5);
-  --palette-shade-table-section-separator: rgb(from var(--palette-shade) r g b/0.35);
+  --rgb-shade-table-row-separator: var(--rgb-base-separator);
+  --palette-shade-table-column-separator: rgba(var(--rgb-base-separator), 0.5);
+  --palette-shade-table-section-separator: rgba(var(--rgb-shade), 0.35);
   --palette-shade-foreground: rgb(10.0249622926%, 10.083908371%, 12.3882730015%);
+  --rgb-shade-foreground: 25.5636538462, 25.7139663462, 31.5900961538;
   --palette-error-table-decorator: #c3324a;
+  --rgb-error-table-decorator: 195, 50, 74;
   --palette-error-text: rgb(81.0156062425%, 57.3490996399%, 61.9314045618%);
+  --rgb-error-text: 206.5897959184, 146.2402040816, 157.9250816327;
   --palette-error-table-sorted-text: var(--palette-error-text);
-  --palette-error-table-sorted-background: rgb(from #c3324a r g b/0.05);
+  --rgb-error-table-sorted-text: var(--rgb-error-text);
+  --palette-error-table-sorted-background: rgba(195, 50, 74, 0.05);
+  --rgb-error-table-sorted-background: 195, 50, 74;
   --palette-error-table-striped-background: var(--palette-base-surface);
+  --rgb-error-table-striped-background: var(--rgb-base-surface);
   --palette-error-table-hover-background: var(--palette-base-surface-hover);
+  --rgb-error-table-hover-background: var(--rgb-base-surface-hover);
   --palette-error-table-row-separator: var(--palette-base-separator);
-  --palette-error-table-column-separator: rgb(from var(--palette-base-separator) r g b/0.5);
-  --palette-error-table-section-separator: rgb(from var(--palette-shade) r g b/0.35);
+  --rgb-error-table-row-separator: var(--rgb-base-separator);
+  --palette-error-table-column-separator: rgba(var(--rgb-base-separator), 0.5);
+  --palette-error-table-section-separator: rgba(var(--rgb-shade), 0.35);
   --palette-error-foreground: rgb(10.325030012%, 9.6470288115%, 12.0283703481%);
+  --rgb-error-foreground: 26.3288265306, 24.5999234694, 30.6723443878;
   --palette-primary-table-decorator: #5fdae0;
+  --rgb-primary-table-decorator: 95, 218, 224;
   --palette-primary-table-sorted-text: var(--palette-primary-text);
-  --palette-primary-table-sorted-background: rgb(from #5fdae0 r g b/0.05);
+  --rgb-primary-table-sorted-text: var(--rgb-primary-text);
+  --palette-primary-table-sorted-background: rgba(95, 218, 224, 0.05);
+  --rgb-primary-table-sorted-background: 95, 218, 224;
   --palette-primary-table-striped-background: var(--palette-base-surface);
+  --rgb-primary-table-striped-background: var(--rgb-base-surface);
   --palette-primary-table-hover-background: var(--palette-base-surface-hover);
+  --rgb-primary-table-hover-background: var(--rgb-base-surface-hover);
   --palette-primary-table-row-separator: var(--palette-base-separator);
-  --palette-primary-table-column-separator: rgb(from var(--palette-base-separator) r g b/0.5);
-  --palette-primary-table-section-separator: rgb(from var(--palette-shade) r g b/0.35);
+  --rgb-primary-table-row-separator: var(--rgb-base-separator);
+  --palette-primary-table-column-separator: rgba(var(--rgb-base-separator), 0.5);
+  --palette-primary-table-section-separator: rgba(var(--rgb-shade), 0.35);
   --palette-indigo-table-decorator: #8b8edd;
+  --rgb-indigo-table-decorator: 139, 142, 221;
   --palette-indigo-text: rgb(70.0357647059%, 71.3940941176%, 84.7995294118%);
+  --rgb-indigo-text: 178.5912, 182.05494, 216.2388;
   --palette-indigo-table-sorted-text: var(--palette-indigo-text);
-  --palette-indigo-table-sorted-background: rgb(from #8b8edd r g b/0.05);
+  --rgb-indigo-table-sorted-text: var(--rgb-indigo-text);
+  --palette-indigo-table-sorted-background: rgba(139, 142, 221, 0.05);
+  --rgb-indigo-table-sorted-background: 139, 142, 221;
   --palette-indigo-table-striped-background: var(--palette-base-surface);
+  --rgb-indigo-table-striped-background: var(--rgb-base-surface);
   --palette-indigo-table-hover-background: var(--palette-base-surface-hover);
+  --rgb-indigo-table-hover-background: var(--rgb-base-surface-hover);
   --palette-indigo-table-row-separator: var(--palette-base-separator);
-  --palette-indigo-table-column-separator: rgb(from var(--palette-base-separator) r g b/0.5);
-  --palette-indigo-table-section-separator: rgb(from var(--palette-shade) r g b/0.35);
+  --rgb-indigo-table-row-separator: var(--rgb-base-separator);
+  --palette-indigo-table-column-separator: rgba(var(--rgb-base-separator), 0.5);
+  --palette-indigo-table-section-separator: rgba(var(--rgb-shade), 0.35);
   --palette-indigo-foreground: rgb(9.9183921569%, 10.0007879085%, 12.6271960784%);
+  --rgb-indigo-foreground: 25.2919, 25.5020091667, 32.19935;
   --palette-green-table-decorator: #9dedb9;
+  --rgb-green-table-decorator: 157, 237, 185;
   --palette-green-text: rgb(72.190872211%, 87.209127789%, 77.6825557809%);
+  --rgb-green-text: 184.0867241379, 222.3832758621, 198.0905172414;
   --palette-green-table-sorted-text: var(--palette-green-text);
-  --palette-green-table-sorted-background: rgb(from #9dedb9 r g b/0.05);
+  --rgb-green-table-sorted-text: var(--rgb-green-text);
+  --palette-green-table-sorted-background: rgba(157, 237, 185, 0.05);
+  --rgb-green-table-sorted-background: 157, 237, 185;
   --palette-green-table-striped-background: var(--palette-base-surface);
+  --rgb-green-table-striped-background: var(--rgb-base-surface);
   --palette-green-table-hover-background: var(--palette-base-surface-hover);
+  --rgb-green-table-hover-background: var(--rgb-base-surface-hover);
   --palette-green-table-row-separator: var(--palette-base-separator);
-  --palette-green-table-column-separator: rgb(from var(--palette-base-separator) r g b/0.5);
-  --palette-green-table-section-separator: rgb(from var(--palette-shade) r g b/0.35);
+  --rgb-green-table-row-separator: var(--rgb-base-separator);
+  --palette-green-table-column-separator: rgba(var(--rgb-base-separator), 0.5);
+  --palette-green-table-section-separator: rgba(var(--rgb-shade), 0.35);
   --palette-green-foreground: rgb(9.9409482759%, 10.4693458418%, 12.3611815416%);
+  --rgb-green-foreground: 25.3494181034, 26.6968318966, 31.521012931;
   --palette-maroon-table-decorator: #c96c88;
+  --rgb-maroon-table-decorator: 201, 108, 136;
   --palette-maroon-text: rgb(81.5139596137%, 65.8860403863%, 70.8238279192%);
+  --rgb-maroon-text: 207.8605970149, 168.0094029851, 180.600761194;
   --palette-maroon-table-sorted-text: var(--palette-maroon-text);
-  --palette-maroon-table-sorted-background: rgb(from #c96c88 r g b/0.05);
+  --rgb-maroon-table-sorted-text: var(--rgb-maroon-text);
+  --palette-maroon-table-sorted-background: rgba(201, 108, 136, 0.05);
+  --rgb-maroon-table-sorted-background: 201, 108, 136;
   --palette-maroon-table-striped-background: var(--palette-base-surface);
+  --rgb-maroon-table-striped-background: var(--rgb-base-surface);
   --palette-maroon-table-hover-background: var(--palette-base-surface-hover);
+  --rgb-maroon-table-hover-background: var(--rgb-base-surface-hover);
   --palette-maroon-table-row-separator: var(--palette-base-separator);
-  --palette-maroon-table-column-separator: rgb(from var(--palette-base-separator) r g b/0.5);
-  --palette-maroon-table-section-separator: rgb(from var(--palette-shade) r g b/0.35);
+  --rgb-maroon-table-row-separator: var(--rgb-base-separator);
+  --palette-maroon-table-column-separator: rgba(var(--rgb-base-separator), 0.5);
+  --palette-maroon-table-section-separator: rgba(var(--rgb-shade), 0.35);
   --palette-maroon-foreground: rgb(10.3152326602%, 9.8450614574%, 12.2217010536%);
+  --rgb-maroon-foreground: 26.3038432836, 25.1049067164, 31.1653376866;
   --palette-base-input-accent: var(--palette-primary);
+  --rgb-base-input-accent: var(--rgb-primary);
   --palette-base-input-accent-foreground: var(--palette-primary-foreground);
+  --rgb-base-input-accent-foreground: var(--rgb-primary-foreground);
   --palette-base-input-border: var(--palette-base-separator);
+  --rgb-base-input-border: var(--rgb-base-separator);
   --palette-base-disabled-border: var(--palette-base-separator);
+  --rgb-base-disabled-border: var(--rgb-base-separator);
   --palette-base-input-disabled-border: var(--palette-base-disabled-border);
+  --rgb-base-input-disabled-border: var(--rgb-base-disabled-border);
   --palette-shade-muted: rgb(52.4854411765%, 53.6972610294%, 56.6211029412%);
+  --rgb-shade-muted: 133.837875, 136.928015625, 144.3838125;
   --palette-base-disabled-foreground: var(--palette-shade-muted);
+  --rgb-base-disabled-foreground: var(--rgb-shade-muted);
   --palette-base-input-disabled-foreground: var(--palette-base-disabled-foreground);
+  --rgb-base-input-disabled-foreground: var(--rgb-base-disabled-foreground);
   --palette-base-input-disabled-background: transparent;
+  --rgb-base-input-disabled-background: 0, 0, 0;
   --palette-shade-input-accent: #9199aa;
+  --rgb-shade-input-accent: 145, 153, 170;
   --palette-shade-input-accent-foreground: var(--palette-shade-foreground);
+  --rgb-shade-input-accent-foreground: var(--rgb-shade-foreground);
   --palette-error-input-accent: #c3324a;
+  --rgb-error-input-accent: 195, 50, 74;
   --palette-error-input-accent-foreground: var(--palette-error-foreground);
+  --rgb-error-input-accent-foreground: var(--rgb-error-foreground);
   --palette-primary-input-accent: #5fdae0;
+  --rgb-primary-input-accent: 95, 218, 224;
   --palette-primary-input-accent-foreground: var(--palette-primary-foreground);
+  --rgb-primary-input-accent-foreground: var(--rgb-primary-foreground);
   --palette-indigo-input-accent: #8b8edd;
+  --rgb-indigo-input-accent: 139, 142, 221;
   --palette-indigo-input-accent-foreground: var(--palette-indigo-foreground);
+  --rgb-indigo-input-accent-foreground: var(--rgb-indigo-foreground);
   --palette-green-input-accent: #9dedb9;
+  --rgb-green-input-accent: 157, 237, 185;
   --palette-green-input-accent-foreground: var(--palette-green-foreground);
+  --rgb-green-input-accent-foreground: var(--rgb-green-foreground);
   --palette-maroon-input-accent: #c96c88;
+  --rgb-maroon-input-accent: 201, 108, 136;
   --palette-maroon-input-accent-foreground: var(--palette-maroon-foreground);
+  --rgb-maroon-input-accent-foreground: var(--rgb-maroon-foreground);
   --palette-base-input-meta: var(--palette-shade-text);
+  --rgb-base-input-meta: var(--rgb-shade-text);
   --palette-base-input-accent-text: var(--palette-primary-text);
+  --rgb-base-input-accent-text: var(--rgb-primary-text);
   --palette-shade-input-accent-text: var(--palette-shade-text);
+  --rgb-shade-input-accent-text: var(--rgb-shade-text);
   --palette-error-input-accent-text: var(--palette-error-text);
+  --rgb-error-input-accent-text: var(--rgb-error-text);
   --palette-primary-input-accent-text: var(--palette-primary-text);
+  --rgb-primary-input-accent-text: var(--rgb-primary-text);
   --palette-indigo-input-accent-text: var(--palette-indigo-text);
+  --rgb-indigo-input-accent-text: var(--rgb-indigo-text);
   --palette-green-input-accent-text: var(--palette-green-text);
+  --rgb-green-input-accent-text: var(--rgb-green-text);
   --palette-maroon-input-accent-text: var(--palette-maroon-text);
+  --rgb-maroon-input-accent-text: var(--rgb-maroon-text);
   --palette-base-overlay-accent: var(--palette-base-foreground);
+  --rgb-base-overlay-accent: var(--rgb-base-foreground);
   --palette-base-box-overlay-accent: var(--palette-base-overlay-accent);
+  --rgb-base-box-overlay-accent: var(--rgb-base-overlay-accent);
   --palette-base-overlay-background: var(--palette-base);
+  --rgb-base-overlay-background: var(--rgb-base);
   --palette-base-box-overlay-background: var(--palette-base-overlay-background);
+  --rgb-base-box-overlay-background: var(--rgb-base-overlay-background);
   --palette-base-input-background: #0f0f15;
+  --rgb-base-input-background: 15, 15, 21;
   --palette-shade-light: rgb(13.2301659125%, 13.4056561086%, 15.816892911%);
+  --rgb-shade-light: 33.7369230769, 34.1844230769, 40.3330769231;
   --palette-base-input-placeholder: var(--palette-shade-light);
+  --rgb-base-input-placeholder: var(--rgb-shade-light);
   --palette-base-input-hover-background: var(--palette-base-surface);
+  --rgb-base-input-hover-background: var(--rgb-base-surface);
   --palette-base-component-muted: var(--palette-shade-muted);
+  --rgb-base-component-muted: var(--rgb-shade-muted);
   --palette-shade-component-muted: var(--palette-shade-muted);
+  --rgb-shade-component-muted: var(--rgb-shade-muted);
   --palette-error-muted: rgb(55.0210134054%, 50.0056287515%, 53.5799255202%);
+  --rgb-error-muted: 140.3035841837, 127.5143533163, 136.6288100765;
   --palette-error-component-muted: var(--palette-error-muted);
+  --rgb-error-component-muted: var(--rgb-error-muted);
   --palette-primary-muted: rgb(50.2602504876%, 56.4563916692%, 58.5414547403%);
+  --rgb-primary-muted: 128.1636387435, 143.9637987565, 149.2807095877;
   --palette-primary-component-muted: var(--palette-primary-muted);
+  --rgb-primary-component-muted: var(--rgb-primary-muted);
   --palette-indigo-muted: rgb(51.5849235294%, 52.9948931209%, 58.6400029412%);
+  --rgb-indigo-muted: 131.541555, 135.1369774583, 149.5320075;
   --palette-indigo-component-muted: var(--palette-indigo-muted);
+  --rgb-indigo-component-muted: var(--rgb-indigo-muted);
   --palette-green-muted: rgb(51.775522735%, 56.9542076572%, 56.3921801048%);
+  --rgb-green-muted: 132.0275829741, 145.2332295259, 143.8000592672;
   --palette-green-component-muted: var(--palette-green-muted);
+  --rgb-green-component-muted: var(--rgb-green-muted);
   --palette-maroon-muted: rgb(54.9382257829%, 51.6790046093%, 55.213569981%);
+  --rgb-maroon-muted: 140.0924757463, 131.7814617537, 140.7946034515;
   --palette-maroon-component-muted: var(--palette-maroon-muted);
+  --rgb-maroon-component-muted: var(--rgb-maroon-muted);
   --palette-base-component-light-accent: var(--palette-shade);
+  --rgb-base-component-light-accent: var(--rgb-shade);
   --palette-base-component-light-foreground: var(--palette-shade-text);
+  --rgb-base-component-light-foreground: var(--rgb-shade-text);
   --palette-base-component-light-background: var(--palette-shade-light);
+  --rgb-base-component-light-background: var(--rgb-shade-light);
   --palette-shade-light-hover: rgb(16.9040723982%, 17.1673076923%, 19.6076923077%);
+  --rgb-shade-light-hover: 43.1053846154, 43.7766346154, 49.9996153846;
   --palette-base-component-light-hover: var(--palette-shade-light-hover);
+  --rgb-base-component-light-hover: var(--rgb-shade-light-hover);
   --palette-base-component-disabled-foreground: var(--palette-base-disabled-foreground);
+  --rgb-base-component-disabled-foreground: var(--rgb-base-disabled-foreground);
   --palette-base-disabled-background: var(--palette-base-surface);
+  --rgb-base-disabled-background: var(--rgb-base-surface);
   --palette-base-component-disabled-background: var(--palette-base-disabled-background);
+  --rgb-base-component-disabled-background: var(--rgb-base-disabled-background);
   --palette-shade-component-light-accent: #9199aa;
+  --rgb-shade-component-light-accent: 145, 153, 170;
   --palette-shade-component-light-foreground: var(--palette-shade-text);
+  --rgb-shade-component-light-foreground: var(--rgb-shade-text);
   --palette-shade-component-light-background: var(--palette-shade-light);
+  --rgb-shade-component-light-background: var(--rgb-shade-light);
   --palette-shade-component-light-hover: var(--palette-shade-light-hover);
+  --rgb-shade-component-light-hover: var(--rgb-shade-light-hover);
   --palette-error-component-light-accent: #c3324a;
+  --rgb-error-component-light-accent: 195, 50, 74;
   --palette-error-component-light-foreground: var(--palette-error-text);
+  --rgb-error-component-light-foreground: var(--rgb-error-text);
   --palette-error-light: rgb(14.2304921969%, 11.6008803521%, 14.2015286114%);
+  --rgb-error-light: 36.287755102, 29.582244898, 36.2138979592;
   --palette-error-component-light-background: var(--palette-error-light);
+  --rgb-error-component-light-background: var(--rgb-error-light);
   --palette-error-light-hover: rgb(18.4045618247%, 14.4601440576%, 17.1846458583%);
+  --rgb-error-light-hover: 46.9316326531, 36.8733673469, 43.8208469388;
   --palette-error-component-light-hover: var(--palette-error-light-hover);
+  --rgb-error-component-light-hover: var(--rgb-error-light-hover);
   --palette-primary-component-light-accent: #5fdae0;
+  --rgb-primary-component-light-accent: 95, 218, 224;
   --palette-primary-component-light-foreground: var(--palette-primary-text);
+  --rgb-primary-component-light-foreground: var(--rgb-primary-text);
   --palette-primary-light: rgb(12.2816959244%, 14.6163432912%, 16.7605687301%);
+  --rgb-primary-light: 31.3183246073, 37.2716753927, 42.7394502618;
   --palette-primary-component-light-background: var(--palette-primary-light);
+  --rgb-primary-component-light-background: var(--rgb-primary-light);
   --palette-primary-light-hover: rgb(15.4813674161%, 18.9833384663%, 21.0232060363%);
+  --rgb-primary-light-hover: 39.477486911, 48.407513089, 53.6091753927;
   --palette-primary-component-light-hover: var(--palette-primary-light-hover);
+  --rgb-primary-component-light-hover: var(--rgb-primary-light-hover);
   --palette-indigo-component-light-accent: #8b8edd;
+  --rgb-indigo-component-light-accent: 139, 142, 221;
   --palette-indigo-component-light-foreground: var(--palette-indigo-text);
+  --rgb-indigo-component-light-foreground: var(--rgb-indigo-text);
   --palette-indigo-light: rgb(13.0105098039%, 13.1614352941%, 16.7424313725%);
+  --rgb-indigo-light: 33.1768, 33.56166, 42.6932;
   --palette-indigo-component-light-background: var(--palette-indigo-light);
+  --rgb-indigo-component-light-background: var(--rgb-indigo-light);
   --palette-indigo-light-hover: rgb(16.5745882353%, 16.8009764706%, 20.996%);
+  --rgb-indigo-light-hover: 42.2652, 42.84249, 53.5398;
   --palette-indigo-component-light-hover: var(--palette-indigo-light-hover);
+  --rgb-indigo-component-light-hover: var(--rgb-indigo-light-hover);
   --palette-green-component-light-accent: #9dedb9;
+  --rgb-green-component-light-accent: 157, 237, 185;
   --palette-green-component-light-foreground: var(--palette-green-text);
+  --rgb-green-component-light-foreground: var(--rgb-green-text);
   --palette-green-light: rgb(13.2499661934%, 14.9186612576%, 15.9516565247%);
+  --rgb-green-light: 33.7874137931, 38.0425862069, 40.6767241379;
   --palette-green-component-light-background: var(--palette-green-light);
+  --rgb-green-component-light-background: var(--rgb-green-light);
   --palette-green-light-hover: rgb(16.9337728195%, 19.4368154158%, 19.8098377282%);
+  --rgb-green-light-hover: 43.1811206897, 49.5638793103, 50.5150862069;
   --palette-green-component-light-hover: var(--palette-green-light-hover);
+  --rgb-green-component-light-hover: var(--rgb-green-light-hover);
   --palette-maroon-component-light-accent: #c96c88;
+  --rgb-maroon-component-light-accent: 201, 108, 136;
   --palette-maroon-component-light-foreground: var(--palette-maroon-text);
+  --rgb-maroon-component-light-foreground: var(--rgb-maroon-text);
   --palette-maroon-light: rgb(14.2858647937%, 12.549429324%, 15.1895756512%);
+  --rgb-maroon-light: 36.4289552239, 32.0010447761, 38.7334179104;
   --palette-maroon-component-light-background: var(--palette-maroon-light);
+  --rgb-maroon-component-light-background: var(--rgb-maroon-light);
   --palette-maroon-light-hover: rgb(18.4876207199%, 15.8829675154%, 18.6667164179%);
+  --rgb-maroon-light-hover: 47.1434328358, 40.5015671642, 47.6001268657;
   --palette-maroon-component-light-hover: var(--palette-maroon-light-hover);
+  --rgb-maroon-component-light-hover: var(--rgb-maroon-light-hover);
   --palette-base-component-simple-accent: var(--palette-shade);
+  --rgb-base-component-simple-accent: var(--rgb-shade);
   --palette-base-component-simple-text: var(--palette-shade-text);
+  --rgb-base-component-simple-text: var(--rgb-shade-text);
   --palette-base-component-simple-hover: var(--palette-shade-light);
+  --rgb-base-component-simple-hover: var(--rgb-shade-light);
   --palette-shade-component-simple-accent: #9199aa;
+  --rgb-shade-component-simple-accent: 145, 153, 170;
   --palette-shade-component-simple-text: var(--palette-shade-text);
+  --rgb-shade-component-simple-text: var(--rgb-shade-text);
   --palette-shade-component-simple-hover: var(--palette-shade-light);
+  --rgb-shade-component-simple-hover: var(--rgb-shade-light);
   --palette-shade-component-accent: #9199aa;
+  --rgb-shade-component-accent: 145, 153, 170;
   --palette-shade-component-accent-foreground: var(--palette-shade-foreground);
+  --rgb-shade-component-accent-foreground: var(--rgb-shade-foreground);
   --palette-shade-component-accent-background: #9199aa;
+  --rgb-shade-component-accent-background: 145, 153, 170;
   --palette-shade-hover: rgb(69.9864253394%, 72.3173076923%, 76.8076923077%);
+  --rgb-shade-hover: 178.4653846154, 184.4091346154, 195.8596153846;
   --palette-shade-component-accent-hover: var(--palette-shade-hover);
+  --rgb-shade-component-accent-hover: var(--rgb-shade-hover);
   --palette-error-component-simple-accent: #c3324a;
+  --rgb-error-component-simple-accent: 195, 50, 74;
   --palette-error-component-simple-text: var(--palette-error-text);
+  --rgb-error-component-simple-text: var(--rgb-error-text);
   --palette-error-component-simple-hover: var(--palette-error-light);
+  --rgb-error-component-simple-hover: var(--rgb-error-light);
   --palette-error-component-accent: #c3324a;
+  --rgb-error-component-accent: 195, 50, 74;
   --palette-error-component-accent-foreground: var(--palette-error-foreground);
+  --rgb-error-component-accent-foreground: var(--rgb-error-foreground);
   --palette-error-component-accent-background: #c3324a;
+  --rgb-error-component-accent-background: 195, 50, 74;
   --palette-error-hover: rgb(83.9915966387%, 44.9593837535%, 51.6984593838%);
+  --rgb-error-hover: 214.1785714286, 114.6464285714, 131.8310714286;
   --palette-error-component-accent-hover: var(--palette-error-hover);
+  --rgb-error-component-accent-hover: var(--rgb-error-hover);
   --palette-primary-component-simple-accent: #5fdae0;
+  --rgb-primary-component-simple-accent: 95, 218, 224;
   --palette-primary-component-simple-text: var(--palette-primary-text);
+  --rgb-primary-component-simple-text: var(--rgb-primary-text);
   --palette-primary-component-simple-hover: var(--palette-primary-light);
+  --rgb-primary-component-simple-hover: var(--rgb-primary-light);
   --palette-primary-component-accent: #5fdae0;
+  --rgb-primary-component-accent: 95, 218, 224;
   --palette-primary-component-accent-foreground: var(--palette-primary-foreground);
+  --rgb-primary-component-accent-foreground: var(--rgb-primary-foreground);
   --palette-primary-component-accent-background: #5fdae0;
+  --rgb-primary-component-accent-background: 95, 218, 224;
   --palette-primary-hover: rgb(56.2837491017%, 90.0005646238%, 91.1359973309%);
+  --rgb-primary-hover: 143.5235602094, 229.5014397906, 232.3967931937;
   --palette-primary-component-accent-hover: var(--palette-primary-hover);
+  --rgb-primary-component-accent-hover: var(--rgb-primary-hover);
   --palette-indigo-component-simple-accent: #8b8edd;
+  --rgb-indigo-component-simple-accent: 139, 142, 221;
   --palette-indigo-component-simple-text: var(--palette-indigo-text);
+  --rgb-indigo-component-simple-text: var(--rgb-indigo-text);
   --palette-indigo-component-simple-hover: var(--palette-indigo-light);
+  --rgb-indigo-component-simple-hover: var(--rgb-indigo-light);
   --palette-indigo-component-accent: #8b8edd;
+  --rgb-indigo-component-accent: 139, 142, 221;
   --palette-indigo-component-accent-foreground: var(--palette-indigo-foreground);
+  --rgb-indigo-component-accent-foreground: var(--rgb-indigo-foreground);
   --palette-indigo-component-accent-background: #8b8edd;
+  --rgb-indigo-component-accent-background: 139, 142, 221;
   --palette-indigo-hover: rgb(67.7247058824%, 69.0953006536%, 90.54%);
+  --rgb-indigo-hover: 172.698, 176.1930166667, 230.877;
   --palette-indigo-component-accent-hover: var(--palette-indigo-hover);
+  --rgb-indigo-component-accent-hover: var(--rgb-indigo-hover);
   --palette-green-component-simple-accent: #9dedb9;
+  --rgb-green-component-simple-accent: 157, 237, 185;
   --palette-green-component-simple-text: var(--palette-green-text);
+  --rgb-green-component-simple-text: var(--rgb-green-text);
   --palette-green-component-simple-hover: var(--palette-green-light);
+  --rgb-green-component-simple-hover: var(--rgb-green-light);
   --palette-green-component-accent: #9dedb9;
+  --rgb-green-component-accent: 157, 237, 185;
   --palette-green-component-accent-foreground: var(--palette-green-foreground);
+  --rgb-green-component-accent-foreground: var(--rgb-green-foreground);
   --palette-green-component-accent-background: #9dedb9;
+  --rgb-green-component-accent-background: 157, 237, 185;
   --palette-green-hover: rgb(72.0627112914%, 94.8686612576%, 80.0447937796%);
+  --rgb-green-hover: 183.7599137931, 241.9150862069, 204.1142241379;
   --palette-green-component-accent-hover: var(--palette-green-hover);
+  --rgb-green-component-accent-hover: var(--rgb-green-hover);
   --palette-maroon-component-simple-accent: #c96c88;
+  --rgb-maroon-component-simple-accent: 201, 108, 136;
   --palette-maroon-component-simple-text: var(--palette-maroon-text);
+  --rgb-maroon-component-simple-text: var(--rgb-maroon-text);
   --palette-maroon-component-simple-hover: var(--palette-maroon-light);
+  --rgb-maroon-component-simple-hover: var(--rgb-maroon-light);
   --palette-maroon-component-accent: #c96c88;
+  --rgb-maroon-component-accent: 201, 108, 136;
   --palette-maroon-component-accent-foreground: var(--palette-maroon-foreground);
+  --rgb-maroon-component-accent-foreground: var(--rgb-maroon-foreground);
   --palette-maroon-component-accent-background: #c96c88;
+  --rgb-maroon-component-accent-background: 201, 108, 136;
   --palette-maroon-hover: rgb(85.2949956102%, 59.9697102722%, 67.5927860697%);
+  --rgb-maroon-hover: 217.502238806, 152.922761194, 172.3616044776;
   --palette-maroon-component-accent-hover: var(--palette-maroon-hover);
+  --rgb-maroon-component-accent-hover: var(--rgb-maroon-hover);
   --palette-base-component-accent: var(--palette-primary);
+  --rgb-base-component-accent: var(--rgb-primary);
   --palette-base-box-background: var(--palette-base);
+  --rgb-base-box-background: var(--rgb-base);
   --palette-base-box-surface: var(--palette-base-surface);
+  --rgb-base-box-surface: var(--rgb-base-surface);
   --palette-base-box-separator: var(--palette-base-separator);
+  --rgb-base-box-separator: var(--rgb-base-separator);
   --palette-base-overlay-foreground: var(--palette-base-foreground);
+  --rgb-base-overlay-foreground: var(--rgb-base-foreground);
   --palette-base-box-overlay-foreground: var(--palette-base-overlay-foreground);
+  --rgb-base-box-overlay-foreground: var(--rgb-base-overlay-foreground);
   --palette-base-card-background: var(--palette-base-box-background);
+  --rgb-base-card-background: var(--rgb-base-box-background);
   --palette-base-card-surface: var(--palette-base-box-surface);
+  --rgb-base-card-surface: var(--rgb-base-box-surface);
   --palette-base-card-separator: var(--palette-base-box-separator);
+  --rgb-base-card-separator: var(--rgb-base-box-separator);
   --palette-base-card-overlay-accent: var(--palette-base-box-overlay-accent);
+  --rgb-base-card-overlay-accent: var(--rgb-base-box-overlay-accent);
   --palette-base-card-overlay-foreground: var(--palette-base-box-overlay-foreground);
+  --rgb-base-card-overlay-foreground: var(--rgb-base-box-overlay-foreground);
   --palette-base-card-overlay-background: var(--palette-base-box-overlay-background);
+  --rgb-base-card-overlay-background: var(--rgb-base-box-overlay-background);
   --palette-base-component-accent-text: var(--palette-primary-text);
+  --rgb-base-component-accent-text: var(--rgb-primary-text);
   --palette-base-component-disabled-text: var(--palette-shade-muted);
+  --rgb-base-component-disabled-text: var(--rgb-shade-muted);
   --palette-shade-component-accent-text: var(--palette-shade-text);
+  --rgb-shade-component-accent-text: var(--rgb-shade-text);
   --palette-error-component-accent-text: var(--palette-error-text);
+  --rgb-error-component-accent-text: var(--rgb-error-text);
   --palette-primary-component-accent-text: var(--palette-primary-text);
+  --rgb-primary-component-accent-text: var(--rgb-primary-text);
   --palette-indigo-component-accent-text: var(--palette-indigo-text);
+  --rgb-indigo-component-accent-text: var(--rgb-indigo-text);
   --palette-green-component-accent-text: var(--palette-green-text);
+  --rgb-green-component-accent-text: var(--rgb-green-text);
   --palette-maroon-component-accent-text: var(--palette-maroon-text);
+  --rgb-maroon-component-accent-text: var(--rgb-maroon-text);
   --palette-base-component-text: var(--palette-shade-text);
+  --rgb-base-component-text: var(--rgb-shade-text);
   --palette-base-component-separator: var(--palette-base-separator);
+  --rgb-base-component-separator: var(--rgb-base-separator);
   --palette-base-component-accent-foreground: var(--palette-primary-foreground);
+  --rgb-base-component-accent-foreground: var(--rgb-primary-foreground);
   --palette-base-component-accent-background: var(--palette-primary);
+  --rgb-base-component-accent-background: var(--rgb-primary);
   --palette-base-component-accent-hover: var(--palette-primary-hover);
+  --rgb-base-component-accent-hover: var(--rgb-primary-hover);
+  --palette-base-skeleton-background: var(--palette-shade-light);
+  --rgb-base-skeleton-background: var(--rgb-shade-light);
 }
 
 /*# sourceMappingURL=termeh.css.map */

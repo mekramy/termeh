@@ -1,4 +1,4 @@
-@use "../core/module";
+@use "../core";
 
 /// Generates layout helper classes.
 ///
@@ -8,8 +8,8 @@
 ///
 /// @require {Variable<Color>} color("primary") - Accent color of the scrollbar in `.is-scrollable`
 @mixin use-layout-helper() {
-    @include module.define-module("layout-helper") {
-        $primary: module.color("primary");
+    @include core.define-module("layout-helper") {
+        $primary: core.color("primary");
 
         .is-ltr {
             direction: ltr !important;
@@ -37,21 +37,21 @@
         }
 
         .is-unselectable {
-            @include module.unselectable();
+            @include core.unselectable();
         }
 
         .is-selectable {
-            @include module.selectable();
+            @include core.selectable();
         }
 
         .is-locked {
-            @include module.locked();
+            @include core.locked();
         }
 
         .is-scrollable {
             overflow: hidden;
             overflow-y: auto;
-            @include module.scrollable($primary);
+            @include core.scrollable($primary);
         }
     }
 }

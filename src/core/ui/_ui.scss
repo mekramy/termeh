@@ -1,6 +1,7 @@
 @use "sass:list";
-@use "../utility";
-@use "../variable";
+@use "../util";
+@use "../var";
+@use "../palette";
 @use "../../animation";
 
 /// Removes the native look of an element and resets its box styles.
@@ -194,7 +195,7 @@
         position: absolute;
         z-index: 1;
         inset: 0;
-        background-color: utility.alpha($background, $opacity);
+        background-color: util.alpha($background, $opacity);
         backdrop-filter: $filter;
     }
 }
@@ -205,7 +206,7 @@
 ///
 /// @require {Variable<Direction>} var("document", "direction") - Document direction
 @mixin is-ltr() {
-    $direction: variable.var("document", "direction");
+    $direction: var.var("document", "direction");
 
     @if $direction == "ltr" {
         @content;
@@ -222,7 +223,7 @@
 ///
 /// @require {Variable<Direction>} var("document", "direction") - Document direction
 @mixin is-rtl() {
-    $direction: variable.var("document", "direction");
+    $direction: var.var("document", "direction");
 
     @if $direction == "rtl" {
         @content;
@@ -308,8 +309,8 @@
 /// @require {Variable<Length>} var("component", "v-padding") - Vertical padding of components
 /// @require {Variable<Length>} var("component", "h-padding") - Horizontal padding of components
 @function control-padding() {
-    $v-padding: variable.var("component", "v-padding");
-    $h-padding: variable.var("component", "h-padding");
+    $v-padding: var.var("component", "v-padding");
+    $h-padding: var.var("component", "h-padding");
 
     @return $v-padding $h-padding;
 }
@@ -320,9 +321,9 @@
 ///
 /// @require {Variable<Length>} var("padding", "control") - Control padding
 @function inline-padding() {
-    $control-padding: variable.var("padding", "control");
+    $control-padding: var.var("padding", "control");
 
-    @return utility.half($control-padding) $control-padding;
+    @return util.half($control-padding) $control-padding;
 }
 
 /// Sets the transition of the given properties with the theme easing and duration.
@@ -336,8 +337,8 @@
 @mixin transition($fields...) {
     $fields: list.append($fields, (), "comma");
 
-    $ease: variable.var("transition", "ease");
-    $duration: variable.var("transition", "duration");
+    $ease: var.var("transition", "ease");
+    $duration: var.var("transition", "duration");
 
     transition-property: $fields;
     transition-timing-function: $ease;
@@ -360,9 +361,9 @@
     // stylelint-disable declaration-block-no-redundant-longhand-properties
     $fields: list.append($fields, (), "comma");
 
-    $ease: variable.var("transition", "ease");
-    $duration: variable.var("transition", "duration");
-    $delay: variable.var("transition", "delay");
+    $ease: var.var("transition", "ease");
+    $duration: var.var("transition", "duration");
+    $delay: var.var("transition", "delay");
 
     transition-property: $fields;
     transition-timing-function: $ease;
@@ -399,10 +400,10 @@
 /// @require {Variable<Color>} color($name) - Background color of the selection
 /// @require {Variable<Color>} variant($name, "foreground") - Text color of the selection
 @mixin selection($name) {
-    $name: utility.assert-string($name, "selection", "name");
+    $name: util.assert-string($name, "selection", "name");
 
-    $background: variable.color($name);
-    $foreground: variable.variant($name, "foreground");
+    $background: palette.color($name);
+    $foreground: palette.variant($name, "foreground");
     &::selection,
     *::selection {
         color: $foreground;
@@ -419,12 +420,12 @@
 /// @require {Variable<Color>} variant-for("scroll", "base", "track") [variant("base", "surface")] - Track color
 /// @require {Variable<Color>} variant-for("scroll", "base", "thumb") [variant("base", "separator")] - Thumb color
 @mixin scrollable($color) {
-    $-surface: variable.variant("base", "surface");
-    $-separator: variable.variant("base", "separator");
+    $-surface: palette.variant("base", "surface");
+    $-separator: palette.variant("base", "separator");
 
-    $size: variable.var("document", "scroll-width");
-    $track: variable.variant-for("scroll", "base", "track", $-surface);
-    $thumb: variable.variant-for("scroll", "base", "thumb", $-separator);
+    $size: var.var("document", "scroll-width");
+    $track: palette.variant-for("scroll", "base", "track", $-surface);
+    $thumb: palette.variant-for("scroll", "base", "thumb", $-separator);
 
     @include scrollbar($size, $track, $thumb, $color);
 }

@@ -1,6 +1,6 @@
 @use "sass:map";
 @use "../scheme";
-@use "../utility";
+@use "../util";
 
 $-gaps: () !default;
 $-overrides: () !default;
@@ -10,7 +10,7 @@ $-overrides: () !default;
 }
 
 @function -fail($name) {
-    @return "Unknown gap '#{$name}'. Available: #{utility.print($-gaps)}.";
+    @return "Unknown gap '#{$name}'. Available: #{util.print($-gaps)}.";
 }
 
 /// Defines a gap that can be used in the theme.
@@ -19,8 +19,8 @@ $-overrides: () !default;
 /// @param {Length} $gap - Gap size
 /// @throw If `$name` is not a string or `$gap` is not a number
 @mixin define-gap($name, $gap) {
-    $name: utility.assert-string($name, "define-gap", "name");
-    $gap: utility.assert-number($gap, "define-gap", "gap");
+    $name: util.assert-string($name, "define-gap", "name");
+    $gap: util.assert-number($gap, "define-gap", "gap");
 
     $-gaps: map.set($-gaps, $name, $gap) !global;
 }
@@ -32,15 +32,15 @@ $-overrides: () !default;
 /// @param {Length} $gap - Gap size for the scheme
 /// @throw If `$scheme` or `$name` is not a string, `$gap` is not a number, or the gap is not defined
 @mixin override-gap($scheme, $name, $gap) {
-    $scheme: utility.assert-string($scheme, "override-gap", "scheme");
-    $name: utility.assert-string($name, "override-gap", "name");
-    $gap: utility.assert-number($gap, "override-gap", "gap");
+    $scheme: util.assert-string($scheme, "override-gap", "scheme");
+    $name: util.assert-string($name, "override-gap", "name");
+    $gap: util.assert-number($gap, "override-gap", "gap");
     @if -missing($name) {
         @error -fail($name);
     }
 
     $_: scheme.define-scheme($scheme);
-    $-overrides: utility.deep-set($-overrides, $gap, $scheme, $name) !global;
+    $-overrides: util.deep-set($-overrides, $gap, $scheme, $name) !global;
 }
 
 /// Returns the size of a defined gap.
@@ -49,7 +49,7 @@ $-overrides: () !default;
 /// @return {Length} Gap size
 /// @throw If `$name` is not a string or the gap is not defined
 @function gap-value($name) {
-    $name: utility.assert-string($name, "gap-value", "name");
+    $name: util.assert-string($name, "gap-value", "name");
     @if -missing($name) {
         @error -fail($name);
     }
@@ -64,8 +64,8 @@ $-overrides: () !default;
 /// @return {Length | null} Gap size for the scheme, or `null` if the scheme does not override it
 /// @throw If `$scheme` or `$name` is not a string, or the gap is not defined
 @function scheme-gap($scheme, $name) {
-    $scheme: utility.assert-string($scheme, "scheme-gap", "scheme");
-    $name: utility.assert-string($name, "scheme-gap", "name");
+    $scheme: util.assert-string($scheme, "scheme-gap", "scheme");
+    $name: util.assert-string($name, "scheme-gap", "name");
     @if -missing($name) {
         @error -fail($name);
     }
@@ -80,7 +80,7 @@ $-overrides: () !default;
 /// @return {Variable<Length>} CSS variable of the gap
 /// @throw If `$name` is not a string or the gap is not defined
 @function gap($name) {
-    $name: utility.assert-string($name, "gap", "name");
+    $name: util.assert-string($name, "gap", "name");
     @if -missing($name) {
         @error -fail($name);
     }
@@ -103,12 +103,12 @@ $-overrides: () !default;
 /// @param {List<String>} $excludes [null] - Gap names to exclude; none when not a list
 /// @return {Map<String, Variable<Length>>} Matching gaps and their CSS variables
 @function gaps($includes: null, $excludes: null) {
-    $includes: utility.assert-list($includes, "gaps", "includes", map.keys($-gaps));
-    $excludes: utility.assert-list($excludes, "gaps", "excludes", ());
+    $includes: util.assert-list($includes, "gaps", "includes", map.keys($-gaps));
+    $excludes: util.assert-list($excludes, "gaps", "excludes", ());
 
     $result: ();
     @each $name, $gap in $-gaps {
-        @if utility.should-include($name, $includes, $excludes) {
+        @if util.should-include($name, $includes, $excludes) {
             $token: "gap-#{$name}";
             $_: scheme.define-variable(null, $token, $gap);
 

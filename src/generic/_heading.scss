@@ -1,4 +1,4 @@
-@use "../core/module";
+@use "../core";
 
 /// Applies styles to heading elements `h1` to `h6`.
 /// Headings are bold, and each level gets its own font size and line height.
@@ -18,19 +18,19 @@
 ///
 /// @require reset
 @mixin use-heading() {
-    @include module.define-module("base-heading", "reset") {
-        $gap-macro: module.var("gap", "macro");
+    @include core.define-module("base-heading", "reset") {
+        $gap-macro: core.var("gap", "macro");
 
-        $line-large: module.var("line-height", "large");
-        $line-medium: module.var("line-height", "medium");
-        $line-normal: module.var("line-height", "normal");
+        $line-large: core.var("line-height", "large");
+        $line-medium: core.var("line-height", "medium");
+        $line-normal: core.var("line-height", "normal");
 
-        $size-massive: module.size("massive");
-        $size-huge: module.size("huge");
-        $size-big: module.size("big");
-        $size-large: module.size("large");
-        $size-medium: module.size("medium");
-        $size-normal: module.size("normal");
+        $size-massive: core.size("massive");
+        $size-huge: core.size("huge");
+        $size-big: core.size("big");
+        $size-large: core.size("large");
+        $size-medium: core.size("medium");
+        $size-normal: core.size("normal");
 
         h1,
         h2,
@@ -40,7 +40,7 @@
         h6 {
             font-weight: bold;
 
-            @include module.marged() {
+            @include core.marged() {
                 margin-bottom: $gap-macro;
             }
         }

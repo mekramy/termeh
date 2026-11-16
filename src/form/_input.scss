@@ -1,5 +1,5 @@
 @use "../animation";
-@use "../core/module";
+@use "../core";
 
 /// Applies input wrapper styles.
 ///
@@ -35,24 +35,24 @@
 @mixin use-input($gaps: (), $colors: ()) {
     @include animation.shake();
 
-    @include module.define-module("form-input", "reset") {
-        $radius-normal: module.var("radius", "normal");
+    @include core.define-module("form-input", "reset") {
+        $radius-normal: core.var("radius", "normal");
 
-        $height: module.var("input", "height");
-        $placeholder-size: module.var("input", "placeholder-size");
-        $placeholder-weight: module.var("input", "placeholder-weight");
-        $disabled-opacity: module.var("input", "disabled-opacity");
+        $height: core.var("input", "height");
+        $placeholder-size: core.var("input", "placeholder-size");
+        $placeholder-weight: core.var("input", "placeholder-weight");
+        $disabled-opacity: core.var("input", "disabled-opacity");
 
-        $error: module.color("error");
+        $error: core.color("error");
 
-        $accent: module.variant-for("input", "base", "accent");
-        $background: module.variant-for("input", "base", "background");
-        $border-color: module.variant-for("input", "base", "border");
-        $placeholder: module.variant-for("input", "base", "placeholder");
+        $accent: core.variant-for("input", "base", "accent");
+        $background: core.variant-for("input", "base", "background");
+        $border-color: core.variant-for("input", "base", "border");
+        $placeholder: core.variant-for("input", "base", "placeholder");
 
-        $disabled-border: module.variant-for("input", "base", "disabled-border");
-        $disabled-foreground: module.variant-for("input", "base", "disabled-foreground");
-        $disabled-background: module.variant-for("input", "base", "disabled-background");
+        $disabled-border: core.variant-for("input", "base", "disabled-border");
+        $disabled-foreground: core.variant-for("input", "base", "disabled-foreground");
+        $disabled-background: core.variant-for("input", "base", "disabled-background");
 
         @include animation.shake();
 
@@ -65,8 +65,8 @@
             border-radius: $radius-normal;
             border: 1px solid $border-color;
             background-color: $background;
-            padding: module.inline-padding();
-            @include module.transition(all);
+            padding: core.inline-padding();
+            @include core.transition(all);
 
             > .divider {
                 width: 1px;
@@ -88,7 +88,7 @@
             }
 
             input {
-                @include module.control();
+                @include core.control();
 
                 display: block;
                 flex: 1 1 0;
@@ -101,14 +101,14 @@
                 }
             }
 
-            @include module.is-field-focused() {
+            @include core.is-field-focused() {
                 border-color: $accent;
             }
 
-            @each $name, $gap in module.gaps($includes: $gaps) {
+            @each $name, $gap in core.gaps($includes: $gaps) {
                 &.is-#{$name}-gap {
                     > .divider {
-                        margin: 0 module.half($gap);
+                        margin: 0 core.half($gap);
                     }
 
                     > .gutter {
@@ -117,29 +117,29 @@
                 }
             }
 
-            @each $name, $color in module.colors($includes: $colors) {
-                $-accent: module.variant-for("input", $name, "accent");
+            @each $name, $color in core.colors($includes: $colors) {
+                $-accent: core.variant-for("input", $name, "accent");
 
                 &.is-#{$name} {
-                    @include module.is-field-focused() {
+                    @include core.is-field-focused() {
                         border-color: $-accent;
                     }
 
-                    @include module.selection($name);
+                    @include core.selection($name);
                 }
             }
 
-            @include module.is-invalid() {
+            @include core.is-invalid() {
                 border-color: $error;
                 animation: shake 0.5s ease;
             }
 
-            @include module.is-disabled() {
+            @include core.is-disabled() {
                 input::placeholder {
                     color: $disabled-foreground;
                 }
 
-                @include module.disabled(
+                @include core.disabled(
                     $disabled-foreground,
                     $disabled-background,
                     $disabled-border,

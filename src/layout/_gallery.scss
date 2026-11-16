@@ -1,4 +1,4 @@
-@use "../core/module";
+@use "../core";
 
 /// Generates the `.gallery` layout that fills each row with `.item` children.
 ///
@@ -16,11 +16,11 @@
 ///
 /// @require reset
 @mixin use-gallery($gaps: ()) {
-    @include module.define-module("gallery", "reset") {
-        $gap-micro: module.var("gap", "micro");
-        $height: module.var("gallery", "height");
-        $height-tablet: module.var("gallery", "height-tablet");
-        $height-mobile: module.var("gallery", "height-mobile");
+    @include core.define-module("gallery", "reset") {
+        $gap-micro: core.var("gap", "micro");
+        $height: core.var("gallery", "height");
+        $height-tablet: core.var("gallery", "height-tablet");
+        $height-mobile: core.var("gallery", "height-mobile");
 
         .gallery {
             display: flex;
@@ -68,17 +68,17 @@
                 }
             }
 
-            @include module.gapped() {
+            @include core.gapped() {
                 gap: $gap-micro;
 
-                @each $name, $gap in module.gaps($includes: $gaps) {
+                @each $name, $gap in core.gaps($includes: $gaps) {
                     &.is-#{$name}-gap {
                         gap: $gap;
                     }
                 }
             }
 
-            @include module.mobile() {
+            @include core.mobile() {
                 &.is-stackable {
                     > .item {
                         width: 100%;
@@ -92,7 +92,7 @@
                 }
             }
 
-            @include module.tablet() {
+            @include core.tablet() {
                 &::after {
                     min-width: $height-tablet;
                 }
@@ -107,7 +107,7 @@
                 }
             }
 
-            @include module.desktop() {
+            @include core.desktop() {
                 &::after {
                     min-width: $height;
                 }

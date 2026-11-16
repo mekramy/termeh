@@ -1,4 +1,4 @@
-@use "../core/module";
+@use "../core";
 
 /// Applies action bar styles and its action buttons.
 ///
@@ -39,30 +39,30 @@
 ///
 /// @require reset, element
 @mixin use-action($colors: ()) {
-    @include module.define-module("action", "reset", "element") {
-        $radius-normal: module.var("radius", "normal");
-        $radius-circle: module.var("radius", "circle");
-        $radius-rounded: module.var("radius", "rounded");
-        $decorator-thickness: module.var("decorator", "thickness");
+    @include core.define-module("action", "reset", "element") {
+        $radius-normal: core.var("radius", "normal");
+        $radius-circle: core.var("radius", "circle");
+        $radius-rounded: core.var("radius", "rounded");
+        $decorator-thickness: core.var("decorator", "thickness");
 
-        $height: module.var("component", "height");
-        $font-size: module.var("component", "meta-size");
-        $font-weight: module.var("component", "meta-weight");
-        $opacity: module.var("component", "action-opacity");
-        $outline-opacity: module.var("component", "outline-opacity");
-        $disabled-opacity: module.var("component", "disabled-opacity");
+        $height: core.var("component", "height");
+        $font-size: core.var("component", "meta-size");
+        $font-weight: core.var("component", "meta-weight");
+        $opacity: core.var("component", "action-opacity");
+        $outline-opacity: core.var("component", "outline-opacity");
+        $disabled-opacity: core.var("component", "disabled-opacity");
 
-        $simple-accent: module.variant-for("component", "base", "simple-accent");
-        $simple-text: module.variant-for("component", "base", "simple-text");
-        $simple-hover: module.variant-for("component", "base", "simple-hover");
+        $simple-accent: core.variant-for("component", "base", "simple-accent");
+        $simple-text: core.variant-for("component", "base", "simple-text");
+        $simple-hover: core.variant-for("component", "base", "simple-hover");
 
-        $accent: module.variant-for("component", "base", "accent");
-        $accent-foreground: module.variant-for("component", "base", "accent-foreground");
-        $accent-background: module.variant-for("component", "base", "accent-background");
-        $accent-hover: module.variant-for("component", "base", "accent-hover");
+        $accent: core.variant-for("component", "base", "accent");
+        $accent-foreground: core.variant-for("component", "base", "accent-foreground");
+        $accent-background: core.variant-for("component", "base", "accent-background");
+        $accent-hover: core.variant-for("component", "base", "accent-hover");
 
-        $disabled-foreground: module.variant-for("component", "base", "disabled-foreground");
-        $disabled-background: module.variant-for("component", "base", "disabled-background");
+        $disabled-foreground: core.variant-for("component", "base", "disabled-foreground");
+        $disabled-background: core.variant-for("component", "base", "disabled-background");
 
         .actions {
             display: flex;
@@ -70,20 +70,20 @@
             align-items: stretch;
             justify-content: flex-end;
             box-sizing: border-box;
-            gap: module.double($decorator-thickness);
-            padding: module.double($decorator-thickness);
+            gap: core.double($decorator-thickness);
+            padding: core.double($decorator-thickness);
 
             > .filler {
                 flex: 1 1 0;
             }
 
-            @include module.mobile() {
+            @include core.mobile() {
                 overflow: hidden;
                 overflow-x: auto;
             }
 
             > .action {
-                @include module.control();
+                @include core.control();
                 @extend .element;
 
                 cursor: pointer;
@@ -93,11 +93,11 @@
                 font-weight: $font-weight;
                 text-overflow: ellipsis;
                 color: $accent-foreground;
-                background-color: module.alpha($accent-background, $opacity);
+                background-color: core.alpha($accent-background, $opacity);
                 border-radius: $radius-normal;
-                padding: module.control-padding();
-                @include module.transition(all);
-                @include module.unselectable();
+                padding: core.control-padding();
+                @include core.transition(all);
+                @include core.unselectable();
 
                 &.is-icon {
                     flex: none;
@@ -122,35 +122,35 @@
                     }
                 }
 
-                @include module.is-focused() {
+                @include core.is-focused() {
                     outline-offset: 1px;
-                    outline: $decorator-thickness solid module.alpha($accent, $outline-opacity);
+                    outline: $decorator-thickness solid core.alpha($accent, $outline-opacity);
 
                     &.is-secondary {
-                        outline-color: module.alpha($simple-accent, $outline-opacity);
+                        outline-color: core.alpha($simple-accent, $outline-opacity);
                     }
                 }
 
                 &.is-loading {
-                    @include module.locked();
+                    @include core.locked();
 
                     &:not(.is-iconic) {
                         color: transparent;
-                        @include module.loader(1em, $accent-foreground, 1px);
+                        @include core.loader(1em, $accent-foreground, 1px);
 
                         &.is-secondary {
-                            @include module.loader-color($simple-text);
+                            @include core.loader-color($simple-text);
                         }
                     }
 
                     &.is-iconic {
                         .icon {
                             color: transparent;
-                            @include module.loader(1em, $accent-foreground, 1px);
+                            @include core.loader(1em, $accent-foreground, 1px);
                         }
 
                         &.is-secondary .icon {
-                            @include module.loader-color($simple-text);
+                            @include core.loader-color($simple-text);
                         }
                     }
                 }
@@ -168,36 +168,36 @@
                 }
             }
 
-            @each $name, $palette in module.colors($colors) {
-                $-accent: module.variant-for("component", $name, "accent");
-                $-accent-foreground: module.variant-for("component", $name, "accent-foreground");
-                $-accent-background: module.variant-for("component", $name, "accent-background");
-                $-accent-hover: module.variant-for("component", $name, "accent-hover");
+            @each $name, $palette in core.colors($colors) {
+                $-accent: core.variant-for("component", $name, "accent");
+                $-accent-foreground: core.variant-for("component", $name, "accent-foreground");
+                $-accent-background: core.variant-for("component", $name, "accent-background");
+                $-accent-hover: core.variant-for("component", $name, "accent-hover");
 
                 &.is-#{$name},
                 .is-#{$name} & {
                     > .action:not(.is-secondary) {
                         color: $-accent-foreground;
-                        background-color: module.alpha($-accent-background, $opacity);
+                        background-color: core.alpha($-accent-background, $opacity);
 
                         &:hover {
                             background-color: $-accent-hover;
                         }
 
-                        @include module.is-focused() {
-                            outline-color: module.alpha($-accent, $outline-opacity);
+                        @include core.is-focused() {
+                            outline-color: core.alpha($-accent, $outline-opacity);
                         }
 
                         &.is-loading {
                             &:not(.is-iconic) {
                                 color: transparent;
-                                @include module.loader-color($-accent-foreground);
+                                @include core.loader-color($-accent-foreground);
                             }
 
                             &.is-iconic {
                                 .icon {
                                     color: transparent;
-                                    @include module.loader-color($-accent-foreground);
+                                    @include core.loader-color($-accent-foreground);
                                 }
                             }
                         }
@@ -206,8 +206,8 @@
             }
 
             > .action {
-                @include module.is-disabled() {
-                    @include module.disabled(
+                @include core.is-disabled() {
+                    @include core.disabled(
                         $disabled-foreground,
                         $disabled-background,
                         null,

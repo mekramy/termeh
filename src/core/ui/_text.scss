@@ -1,5 +1,5 @@
 @use "sass:map";
-@use "../utility";
+@use "../util";
 
 $-aligns: (
     "start": start,
@@ -15,12 +15,12 @@ $-aligns: (
 /// @return {Map<String, TextAlign>} Matching alignment names and values
 /// @throw If `$includes` or `$excludes` is not a list
 @function text-aligns($includes: null, $excludes: null) {
-    $includes: utility.assert-list($includes, "text-aligns", "includes", map.keys($-aligns));
-    $excludes: utility.assert-list($excludes, "text-aligns", "excludes", ());
+    $includes: util.assert-list($includes, "text-aligns", "includes", map.keys($-aligns));
+    $excludes: util.assert-list($excludes, "text-aligns", "excludes", ());
 
     $result: ();
     @each $name, $align in $-aligns {
-        @if utility.should-include($name, $includes, $excludes) {
+        @if util.should-include($name, $includes, $excludes) {
             $result: map.set($result, $name, $align);
         }
     }

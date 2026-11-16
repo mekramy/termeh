@@ -1,5 +1,5 @@
 @use "../animation";
-@use "../core/module";
+@use "../core";
 
 /// Applies select styles.
 ///
@@ -41,32 +41,32 @@
 @mixin use-select($colors: ()) {
     @include animation.shake();
 
-    @include module.define-module("form-select", "reset") {
-        $gap-micro: module.var("gap", "micro");
-        $radius-normal: module.var("radius", "normal");
-        $strong-weight: module.var("text", "strong-weight");
+    @include core.define-module("form-select", "reset") {
+        $gap-micro: core.var("gap", "micro");
+        $radius-normal: core.var("radius", "normal");
+        $strong-weight: core.var("text", "strong-weight");
 
-        $height: module.var("input", "height");
-        $placeholder-size: module.var("input", "placeholder-size");
-        $placeholder-weight: module.var("input", "placeholder-weight");
-        $disabled-opacity: module.var("input", "disabled-opacity");
+        $height: core.var("input", "height");
+        $placeholder-size: core.var("input", "placeholder-size");
+        $placeholder-weight: core.var("input", "placeholder-weight");
+        $disabled-opacity: core.var("input", "disabled-opacity");
 
-        $error: module.color("error");
+        $error: core.color("error");
 
-        $accent: module.variant-for("input", "base", "accent");
-        $accent-text: module.variant-for("input", "base", "accent-text");
-        $accent-foreground: module.variant-for("input", "base", "accent-foreground");
-        $background: module.variant-for("input", "base", "background");
-        $border-color: module.variant-for("input", "base", "border");
-        $placeholder: module.variant-for("input", "base", "placeholder");
-        $hover-background: module.variant-for("input", "base", "hover-background");
+        $accent: core.variant-for("input", "base", "accent");
+        $accent-text: core.variant-for("input", "base", "accent-text");
+        $accent-foreground: core.variant-for("input", "base", "accent-foreground");
+        $background: core.variant-for("input", "base", "background");
+        $border-color: core.variant-for("input", "base", "border");
+        $placeholder: core.variant-for("input", "base", "placeholder");
+        $hover-background: core.variant-for("input", "base", "hover-background");
 
-        $disabled-border: module.variant-for("input", "base", "disabled-border");
-        $disabled-foreground: module.variant-for("input", "base", "disabled-foreground");
-        $disabled-background: module.variant-for("input", "base", "disabled-background");
+        $disabled-border: core.variant-for("input", "base", "disabled-border");
+        $disabled-foreground: core.variant-for("input", "base", "disabled-foreground");
+        $disabled-background: core.variant-for("input", "base", "disabled-background");
 
         select {
-            @include module.control();
+            @include core.control();
 
             display: flex;
             align-items: center;
@@ -78,8 +78,8 @@
             border-radius: $radius-normal;
             border: 1px solid $border-color;
             background-color: $background;
-            padding: module.inline-padding();
-            @include module.transition(all);
+            padding: core.inline-padding();
+            @include core.transition(all);
 
             &,
             &::picker(select) {
@@ -92,7 +92,7 @@
 
             &::picker-icon {
                 color: $placeholder;
-                @include module.transition(transform);
+                @include core.transition(transform);
             }
 
             &::placeholder {
@@ -112,7 +112,7 @@
                 align-items: center;
                 gap: $gap-micro;
                 cursor: pointer;
-                padding: module.inline-padding();
+                padding: core.inline-padding();
 
                 &:checked {
                     color: $accent-text;
@@ -133,7 +133,7 @@
                 }
             }
 
-            @include module.is-field-focused() {
+            @include core.is-field-focused() {
                 color: $accent-foreground;
                 background-color: $accent;
                 border-color: $accent;
@@ -147,10 +147,10 @@
                 }
             }
 
-            @each $name, $palette in module.colors($includes: $colors) {
-                $-accent: module.variant-for("input", $name, "accent");
-                $-accent-text: module.variant-for("input", $name, "accent-text");
-                $-accent-foreground: module.variant-for("input", $name, "accent-foreground");
+            @each $name, $palette in core.colors($includes: $colors) {
+                $-accent: core.variant-for("input", $name, "accent");
+                $-accent-text: core.variant-for("input", $name, "accent-text");
+                $-accent-foreground: core.variant-for("input", $name, "accent-foreground");
 
                 &.is-#{$name} {
                     option {
@@ -163,7 +163,7 @@
                         }
                     }
 
-                    @include module.is-field-focused() {
+                    @include core.is-field-focused() {
                         color: $-accent-foreground;
                         background-color: $-accent;
                         border-color: $-accent;
@@ -177,18 +177,18 @@
                         }
                     }
 
-                    @include module.selection($name);
+                    @include core.selection($name);
                 }
             }
 
-            @include module.is-invalid() {
+            @include core.is-invalid() {
                 &:not(:focus, :open) {
                     border-color: $error;
                     animation: shake 0.5s ease;
                 }
             }
 
-            @include module.is-disabled() {
+            @include core.is-disabled() {
                 &::picker-icon {
                     color: $disabled-foreground;
                 }
@@ -197,7 +197,7 @@
                     color: $disabled-foreground;
                 }
 
-                @include module.disabled(
+                @include core.disabled(
                     $disabled-foreground,
                     $disabled-background,
                     $disabled-border,

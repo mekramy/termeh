@@ -1,6 +1,6 @@
 @use "sass:map";
 @use "sass:list";
-@use "utility";
+@use "util";
 
 $-tokens: () !default;
 $-schemes: () !default;
@@ -10,7 +10,7 @@ $-schemes: () !default;
 }
 
 @function -error($name) {
-    @return "Unknown scheme '#{$name}'. Available: #{utility.print($-schemes)}.";
+    @return "Unknown scheme '#{$name}'. Available: #{util.print($-schemes)}.";
 }
 
 /// Defines a color scheme if it is not defined yet.
@@ -19,7 +19,7 @@ $-schemes: () !default;
 /// @return {null} Always `null`
 /// @throw If `$name` is not a string
 @function define-scheme($name) {
-    $name: utility.assert-string($name, "define-scheme", "name");
+    $name: util.assert-string($name, "define-scheme", "name");
 
     @if -missing($name) {
         $-schemes: list.append($-schemes, $name) !global;
@@ -43,12 +43,12 @@ $-schemes: () !default;
 /// @return {null} Always `null`
 /// @throw If `$scheme` is not a string or `null`, or `$name` is not a string
 @function define-variable($scheme, $name, $value) {
-    $scheme: utility.assert-nullable-string($scheme, "define-variable", "scheme", null);
-    $name: utility.assert-string($name, "define-variable", "name");
+    $scheme: util.assert-nullable-string($scheme, "define-variable", "scheme", null);
+    $name: util.assert-string($name, "define-variable", "name");
 
     @if $value {
-        $name: utility.tokenize($name);
-        $-tokens: utility.deep-set($-tokens, $value, $scheme, $name) !global;
+        $name: util.tokenize($name);
+        $-tokens: util.deep-set($-tokens, $value, $scheme, $name) !global;
     }
     @return null;
 }
@@ -61,13 +61,13 @@ $-schemes: () !default;
 /// @return {Variable<*> | null} A `var()` reference when `$value` is truthy; otherwise `null`
 /// @throw If `$name` is not a string
 @function variable($name, $value) {
-    $name: utility.assert-string($name, "variable", "name");
+    $name: util.assert-string($name, "variable", "name");
 
     @if not $value {
         @return null;
     }
 
-    @return var(utility.tokenize($name));
+    @return var(util.tokenize($name));
 }
 
 /// Outputs the CSS variables stored for a scheme.
@@ -77,7 +77,7 @@ $-schemes: () !default;
 /// @output A custom property declaration for each stored variable that has a value
 /// @throw If `$scheme` is not a string or `null`, or is not a defined scheme
 @mixin variables($scheme: null) {
-    $scheme: utility.assert-nullable-string($scheme, "variables", "scheme", null);
+    $scheme: util.assert-nullable-string($scheme, "variables", "scheme", null);
     @if $scheme != null and -missing($scheme) {
         @error -error($scheme);
     }

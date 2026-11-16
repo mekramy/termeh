@@ -1,4 +1,4 @@
-@use "../core/module";
+@use "../core";
 
 /// Generates the `.wrapper` layout that wraps children into rows with equal width.
 ///
@@ -11,8 +11,8 @@
 ///
 /// @require reset
 @mixin use-wrapper($gaps: ()) {
-    @include module.define-module("wrapper", "reset") {
-        $gap-micro: module.var("gap", "micro");
+    @include core.define-module("wrapper", "reset") {
+        $gap-micro: core.var("gap", "micro");
 
         .wrapper {
             display: flex;
@@ -29,17 +29,17 @@
                 flex: 1 1 0;
             }
 
-            @include module.gapped() {
+            @include core.gapped() {
                 gap: $gap-micro;
 
-                @each $name, $gap in module.gaps($includes: $gaps) {
+                @each $name, $gap in core.gaps($includes: $gaps) {
                     &.is-#{$name}-gap {
                         gap: $gap;
                     }
                 }
             }
 
-            @each $name, $justify in module.flex-justifies() {
+            @each $name, $justify in core.flex-justifies() {
                 &.is-#{$name}-justified {
                     justify-content: $justify;
                 }

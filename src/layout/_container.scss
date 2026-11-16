@@ -1,4 +1,4 @@
-@use "../core/module";
+@use "../core";
 
 /// Generates the `.container` layout with a maximum width for each breakpoint.
 ///
@@ -18,13 +18,13 @@
 ///
 /// @require reset
 @mixin use-container($paddings: ()) {
-    @include module.define-module("container", "reset") {
-        $gap-macro: module.var("gap", "macro");
-        $padding-container: module.var("padding", "container");
+    @include core.define-module("container", "reset") {
+        $gap-macro: core.var("gap", "macro");
+        $padding-container: core.var("padding", "container");
 
-        $desktop: module.var("container", "desktop");
-        $widescreen: module.var("container", "widescreen");
-        $ultrawide: module.var("container", "ultrawide");
+        $desktop: core.var("container", "desktop");
+        $widescreen: core.var("container", "widescreen");
+        $ultrawide: core.var("container", "ultrawide");
 
         .container {
             display: block;
@@ -33,29 +33,29 @@
             box-sizing: border-box;
 
             &:not(.is-fullwidth) {
-                @include module.desktop() {
+                @include core.desktop() {
                     margin-left: auto;
                     margin-right: auto;
                     max-width: $desktop;
                 }
 
-                @include module.widescreen() {
+                @include core.widescreen() {
                     max-width: $widescreen;
                 }
 
-                @include module.ultrawide() {
+                @include core.ultrawide() {
                     max-width: $ultrawide;
                 }
             }
 
-            @include module.marged() {
+            @include core.marged() {
                 margin-bottom: $gap-macro;
             }
 
-            @include module.padded() {
+            @include core.padded() {
                 padding: $padding-container;
 
-                @each $name, $gap in module.gaps($includes: $paddings) {
+                @each $name, $gap in core.gaps($includes: $paddings) {
                     &.is-#{$name}-padded {
                         padding: $gap;
                     }

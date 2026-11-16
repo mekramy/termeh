@@ -1,6 +1,7 @@
 @use "sass:map";
 @use "sass:list";
 @use "sass:color";
+@use "color" as col;
 @use "util";
 @use "validation";
 
@@ -123,5 +124,5 @@ $-color-mixes: (
 
     $amount: list.nth($data, 1);
     $base: util.iif(list.nth($data, 2) == brightest, -brightest($color), -darkest($color));
-    @return util.mix($color, $base, $amount);
+    @return col.mix($color, $base, $amount);
 }

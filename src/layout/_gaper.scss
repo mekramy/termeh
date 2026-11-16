@@ -1,4 +1,4 @@
-@use "../core/module";
+@use "../core";
 
 /// Generates the `.gaper` layout that puts children in a row with space between them.
 ///
@@ -14,9 +14,9 @@
 ///
 /// @require reset
 @mixin use-gaper($gaps: ()) {
-    @include module.define-module("gaper", "reset") {
-        $gap-micro: module.var("gap", "micro");
-        $separator: module.variant("base", "separator");
+    @include core.define-module("gaper", "reset") {
+        $gap-micro: core.var("gap", "micro");
+        $separator: core.variant("base", "separator");
 
         .gaper {
             display: flex;
@@ -61,19 +61,19 @@
                 }
             }
 
-            @each $name, $align in module.flex-aligns() {
+            @each $name, $align in core.flex-aligns() {
                 &.is-#{$name}-aligned {
                     align-items: $align;
                 }
             }
 
-            @each $name, $justify in module.flex-justifies() {
+            @each $name, $justify in core.flex-justifies() {
                 &.is-#{$name}-justified {
                     justify-content: $justify;
                 }
             }
 
-            @include module.gapped() {
+            @include core.gapped() {
                 > .divider,
                 > .gutter {
                     display: block;
@@ -82,7 +82,7 @@
                 &.is-auto {
                     gap: $gap-micro;
 
-                    @each $name, $gap in module.gaps($includes: $gaps) {
+                    @each $name, $gap in core.gaps($includes: $gaps) {
                         &.is-#{$name}-gap {
                             gap: $gap;
                         }
@@ -92,29 +92,29 @@
                 &:not(.is-auto) {
                     > .divider,
                     > .gutter {
-                        margin: 0 module.half($gap-micro);
+                        margin: 0 core.half($gap-micro);
                     }
 
                     &.is-stacked,
                     &.is-stacked-reverse {
                         > .divider,
                         > .gutter {
-                            margin: module.half($gap-micro) 0;
+                            margin: core.half($gap-micro) 0;
                         }
                     }
 
-                    @each $name, $gap in module.gaps($includes: $gaps) {
+                    @each $name, $gap in core.gaps($includes: $gaps) {
                         &.is-#{$name}-gap {
                             > .divider,
                             > .gutter {
-                                margin: 0 module.half($gap);
+                                margin: 0 core.half($gap);
                             }
 
                             &.is-stacked,
                             &.is-stacked-reverse {
                                 > .divider,
                                 > .gutter {
-                                    margin: module.half($gap) 0;
+                                    margin: core.half($gap) 0;
                                 }
                             }
                         }
@@ -122,7 +122,7 @@
                 }
             }
 
-            @each $device, $query in module.media-queries() {
+            @each $device, $query in core.media-queries() {
                 @media #{$query} {
                     &.is-#{$device}-stacked {
                         flex-direction: column;
@@ -141,34 +141,34 @@
                         }
                     }
 
-                    @each $name, $align in module.flex-aligns() {
+                    @each $name, $align in core.flex-aligns() {
                         &.is-#{$device}-#{$name}-aligned {
                             align-items: $align;
                         }
                     }
 
-                    @each $name, $justify in module.flex-justifies() {
+                    @each $name, $justify in core.flex-justifies() {
                         &.is-#{$device}-#{$name}-justified {
                             justify-content: $justify;
                         }
                     }
 
-                    @include module.gapped(".is-auto") {
+                    @include core.gapped(".is-auto") {
                         &.is-#{$device}-stacked,
                         &.is-#{$device}-stacked-reverse {
                             > .divider,
                             > .gutter {
-                                margin: module.half($gap-micro) 0;
+                                margin: core.half($gap-micro) 0;
                             }
                         }
 
-                        @each $name, $gap in module.gaps($includes: $gaps) {
+                        @each $name, $gap in core.gaps($includes: $gaps) {
                             &.is-#{$name}-gap {
                                 &.is-#{$device}-stacked,
                                 &.is-#{$device}-stacked-reverse {
                                     > .divider,
                                     > .gutter {
-                                        margin: module.half($gap) 0;
+                                        margin: core.half($gap) 0;
                                     }
                                 }
                             }

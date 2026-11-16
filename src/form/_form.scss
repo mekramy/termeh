@@ -1,4 +1,4 @@
-@use "../core/module";
+@use "../core";
 
 /// Applies form styles.
 ///
@@ -18,28 +18,28 @@
 ///
 /// @require reset
 @mixin use-form() {
-    $-overlay-opacity: module.var("overlay", "opacity");
-    $-overlay-filter: module.var("overlay", "filter");
+    $-overlay-opacity: core.var("overlay", "opacity");
+    $-overlay-filter: core.var("overlay", "filter");
 
-    @include module.define-module("form", "reset") {
-        $gap-macro: module.var("gap", "macro");
-        $decorator-thickness: module.var("decorator", "thickness");
-        $spinner-size: module.var("decorator", "spinner");
+    @include core.define-module("form", "reset") {
+        $gap-macro: core.var("gap", "macro");
+        $decorator-thickness: core.var("decorator", "thickness");
+        $spinner-size: core.var("decorator", "spinner");
 
-        $overlay-opacity: module.var("box", "overlay-opacity", $-overlay-opacity);
-        $overlay-filter: module.var("box", "overlay-filter", $-overlay-filter);
+        $overlay-opacity: core.var("box", "overlay-opacity", $-overlay-opacity);
+        $overlay-filter: core.var("box", "overlay-filter", $-overlay-filter);
 
-        $overlay-accent: module.variant-for("box", "base", "overlay-accent");
-        $overlay-background: module.variant-for("box", "base", "overlay-background");
+        $overlay-accent: core.variant-for("box", "base", "overlay-accent");
+        $overlay-background: core.variant-for("box", "base", "overlay-background");
 
         form {
-            @include module.marged() {
+            @include core.marged() {
                 margin-bottom: $gap-macro;
             }
 
             &.is-loading {
-                @include module.overlay($overlay-background, $overlay-opacity, $overlay-filter);
-                @include module.loader($spinner-size, $overlay-accent, $decorator-thickness);
+                @include core.overlay($overlay-background, $overlay-opacity, $overlay-filter);
+                @include core.loader($spinner-size, $overlay-accent, $decorator-thickness);
             }
         }
     }

@@ -1,4 +1,4 @@
-@use "../core/module";
+@use "../core";
 
 /// Applies tag styles.
 ///
@@ -36,29 +36,29 @@
 ///
 /// @require reset, element
 @mixin use-tag($colors: (), $sizes: ()) {
-    @include module.define-module("tag", "reset", "element") {
-        $radius-normal: module.var("radius", "normal");
-        $radius-circle: module.var("radius", "circle");
-        $radius-rounded: module.var("radius", "rounded");
-        $decorator-thickness: module.var("decorator", "thickness");
+    @include core.define-module("tag", "reset", "element") {
+        $radius-normal: core.var("radius", "normal");
+        $radius-circle: core.var("radius", "circle");
+        $radius-rounded: core.var("radius", "rounded");
+        $decorator-thickness: core.var("decorator", "thickness");
 
-        $height: module.var("component", "height");
-        $font-size: module.var("component", "meta-size");
-        $font-weight: module.var("component", "meta-weight");
-        $opacity: module.var("component", "light-opacity");
-        $outline-opacity: module.var("component", "outline-opacity");
-        $disabled-opacity: module.var("component", "disabled-opacity");
+        $height: core.var("component", "height");
+        $font-size: core.var("component", "meta-size");
+        $font-weight: core.var("component", "meta-weight");
+        $opacity: core.var("component", "light-opacity");
+        $outline-opacity: core.var("component", "outline-opacity");
+        $disabled-opacity: core.var("component", "disabled-opacity");
 
-        $accent: module.variant-for("component", "base", "light-accent");
-        $foreground: module.variant-for("component", "base", "light-foreground");
-        $background: module.variant-for("component", "base", "light-background");
-        $hover-background: module.variant-for("component", "base", "light-hover");
+        $accent: core.variant-for("component", "base", "light-accent");
+        $foreground: core.variant-for("component", "base", "light-foreground");
+        $background: core.variant-for("component", "base", "light-background");
+        $hover-background: core.variant-for("component", "base", "light-hover");
 
-        $disabled-foreground: module.variant-for("component", "base", "disabled-foreground");
-        $disabled-background: module.variant-for("component", "base", "disabled-background");
+        $disabled-foreground: core.variant-for("component", "base", "disabled-foreground");
+        $disabled-background: core.variant-for("component", "base", "disabled-background");
 
         .tag {
-            @include module.control();
+            @include core.control();
             @extend .element;
 
             cursor: default;
@@ -67,11 +67,11 @@
             font-weight: $font-weight;
             text-overflow: ellipsis;
             color: $foreground;
-            background-color: module.alpha($background, $opacity);
+            background-color: core.alpha($background, $opacity);
             border-radius: $radius-normal;
-            padding: module.control-padding();
-            @include module.transition(all);
-            @include module.unselectable();
+            padding: core.control-padding();
+            @include core.transition(all);
+            @include core.unselectable();
 
             &.is-icon {
                 align-items: center;
@@ -90,24 +90,24 @@
                     background-color: $hover-background;
                 }
 
-                @include module.is-focused() {
+                @include core.is-focused() {
                     outline-offset: 1px;
-                    outline: $decorator-thickness solid module.alpha($accent, $outline-opacity);
+                    outline: $decorator-thickness solid core.alpha($accent, $outline-opacity);
                 }
             }
 
             &.is-loading {
-                @include module.locked();
+                @include core.locked();
 
                 &:not(.is-iconic) {
                     color: transparent;
-                    @include module.loader(1em, $foreground, 1px);
+                    @include core.loader(1em, $foreground, 1px);
                 }
 
                 &.is-iconic {
                     .icon {
                         color: transparent;
-                        @include module.loader(1em, $foreground, 1px);
+                        @include core.loader(1em, $foreground, 1px);
                     }
                 }
             }
@@ -120,21 +120,21 @@
                 }
             }
 
-            @each $name, $size in module.sizes($sizes) {
+            @each $name, $size in core.sizes($sizes) {
                 &.is-#{$name} {
                     font-size: $size;
                 }
             }
 
-            @each $name, $_ in module.colors($colors) {
-                $-accent: module.variant-for("component", $name, "light-accent");
-                $-foreground: module.variant-for("component", $name, "light-foreground");
-                $-background: module.variant-for("component", $name, "light-background");
-                $-hover-background: module.variant-for("component", $name, "light-hover");
+            @each $name, $_ in core.colors($colors) {
+                $-accent: core.variant-for("component", $name, "light-accent");
+                $-foreground: core.variant-for("component", $name, "light-foreground");
+                $-background: core.variant-for("component", $name, "light-background");
+                $-hover-background: core.variant-for("component", $name, "light-hover");
 
                 &.is-#{$name} {
                     color: $-foreground;
-                    background-color: module.alpha($-background, $opacity);
+                    background-color: core.alpha($-background, $opacity);
 
                     &.is-action {
                         background-color: $-background;
@@ -143,29 +143,29 @@
                             background-color: $-hover-background;
                         }
 
-                        @include module.is-focused() {
-                            outline-color: module.alpha($-accent, $outline-opacity);
+                        @include core.is-focused() {
+                            outline-color: core.alpha($-accent, $outline-opacity);
                         }
                     }
 
                     &.is-loading {
                         &:not(.is-iconic) {
                             color: transparent;
-                            @include module.loader-color($-foreground);
+                            @include core.loader-color($-foreground);
                         }
 
                         &.is-iconic {
                             .icon {
                                 color: transparent;
-                                @include module.loader-color($-foreground);
+                                @include core.loader-color($-foreground);
                             }
                         }
                     }
                 }
             }
 
-            @include module.is-disabled() {
-                @include module.disabled(
+            @include core.is-disabled() {
+                @include core.disabled(
                     $disabled-foreground,
                     $disabled-background,
                     null,

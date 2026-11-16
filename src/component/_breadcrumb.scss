@@ -1,4 +1,4 @@
-@use "../core/module";
+@use "../core";
 
 /// Applies breadcrumb styles.
 ///
@@ -23,17 +23,17 @@
 ///
 /// @require reset
 @mixin use-breadcrumb($colors: ()) {
-    @include module.define-module("breadcrumb", "reset") {
-        $gap-micro: module.var("gap", "micro");
-        $strong-weight: module.var("text", "strong-weight");
+    @include core.define-module("breadcrumb", "reset") {
+        $gap-micro: core.var("gap", "micro");
+        $strong-weight: core.var("text", "strong-weight");
 
-        $height: module.var("component", "height");
-        $font-size: module.var("component", "meta-size");
-        $font-weight: module.var("component", "meta-weight");
+        $height: core.var("component", "height");
+        $font-size: core.var("component", "meta-size");
+        $font-weight: core.var("component", "meta-weight");
 
-        $text: module.variant-for("component", "base", "text");
-        $accent-text: module.variant-for("component", "base", "accent-text");
-        $separator: module.variant-for("component", "base", "separator");
+        $text: core.variant-for("component", "base", "text");
+        $accent-text: core.variant-for("component", "base", "accent-text");
+        $separator: core.variant-for("component", "base", "separator");
 
         .breadcrumb {
             display: flex;
@@ -59,15 +59,15 @@
                 font-weight: $strong-weight;
             }
 
-            @each $name, $_ in module.colors($includes: $colors) {
-                $-accent-text: module.variant-for("component", $name, "accent-text");
+            @each $name, $_ in core.colors($includes: $colors) {
+                $-accent-text: core.variant-for("component", $name, "accent-text");
 
                 &.is-#{$name} {
                     .active {
                         color: $-accent-text;
                     }
 
-                    @include module.selection($name);
+                    @include core.selection($name);
                 }
             }
         }

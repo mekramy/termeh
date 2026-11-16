@@ -1,4 +1,4 @@
-@use "../core/module";
+@use "../core";
 
 /// Applies icon styles.
 ///
@@ -13,7 +13,7 @@
 ///
 /// @require reset
 @mixin use-icon($colors: (), $sizes: ()) {
-    @include module.define-module("icon", "reset") {
+    @include core.define-module("icon", "reset") {
         .icon {
             display: inline-flex;
             flex-direction: row;
@@ -22,7 +22,7 @@
             width: 1em;
             height: 1em;
             aspect-ratio: 1;
-            @include module.unselectable();
+            @include core.unselectable();
 
             img {
                 display: block;
@@ -56,15 +56,15 @@
                 }
             }
 
-            @each $name, $size in module.sizes($sizes) {
+            @each $name, $size in core.sizes($sizes) {
                 &.is-#{$name} {
                     height: $size;
                     width: $size;
                 }
             }
 
-            @each $name, $palette in module.colors($colors) {
-                $-accent: module.variant-for("component", $name, "accent");
+            @each $name, $palette in core.colors($colors) {
+                $-accent: core.variant-for("component", $name, "accent");
 
                 &.is-#{$name} {
                     color: $-accent;

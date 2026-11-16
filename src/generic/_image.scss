@@ -1,4 +1,4 @@
-@use "../core/module";
+@use "../core";
 
 /// Applies image styles and width classes.
 /// It adds `.is-centered`, `.is-rounded`, `.is-circular` and an `.is-<size>` class for each size.
@@ -11,9 +11,9 @@
 ///
 /// @require reset
 @mixin use-image($sizes: ()) {
-    @include module.define-module("base-image", "reset") {
-        $radius-normal: module.var("radius", "normal");
-        $radius-circle: module.var("radius", "circle");
+    @include core.define-module("base-image", "reset") {
+        $radius-normal: core.var("radius", "normal");
+        $radius-circle: core.var("radius", "circle");
 
         img {
             &.is-centered {
@@ -28,7 +28,7 @@
                 border-radius: $radius-circle;
             }
 
-            @each $name, $size in module.sizes($includes: $sizes) {
+            @each $name, $size in core.sizes($includes: $sizes) {
                 &.is-#{$name} {
                     width: $size;
                 }

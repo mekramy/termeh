@@ -1,4 +1,4 @@
-@use "../core/module";
+@use "../core";
 
 /// Applies link styles.
 ///
@@ -23,18 +23,18 @@
 ///
 /// @require reset, element
 @mixin use-link($colors: (), $sizes: ()) {
-    @include module.define-module("link", "reset", "element") {
-        $height: module.var("component", "height");
-        $font-size: module.var("component", "meta-size");
-        $font-weight: module.var("component", "meta-weight");
-        $disabled-opacity: module.var("component", "disabled-opacity");
+    @include core.define-module("link", "reset", "element") {
+        $height: core.var("component", "height");
+        $font-size: core.var("component", "meta-size");
+        $font-weight: core.var("component", "meta-weight");
+        $disabled-opacity: core.var("component", "disabled-opacity");
 
-        $accent: module.variant-for("component", "base", "accent");
-        $accent-text: module.variant-for("component", "base", "accent-text");
-        $disabled-text: module.variant-for("component", "base", "disabled-text");
+        $accent: core.variant-for("component", "base", "accent");
+        $accent-text: core.variant-for("component", "base", "accent-text");
+        $disabled-text: core.variant-for("component", "base", "disabled-text");
 
         .link {
-            @include module.control();
+            @include core.control();
             @extend .element;
 
             cursor: pointer;
@@ -43,7 +43,7 @@
             font-weight: $font-weight;
             text-overflow: ellipsis;
             color: $accent-text;
-            @include module.transition(color);
+            @include core.transition(color);
 
             &::before {
                 content: " ";
@@ -54,7 +54,7 @@
                 height: 1px;
                 transform: translateX(-50%);
                 background-color: currentcolor;
-                @include module.transition(width);
+                @include core.transition(width);
             }
 
             &:hover {
@@ -67,34 +67,34 @@
 
             &.is-loading {
                 color: transparent;
-                @include module.locked();
-                @include module.loader(1em, $accent, 1px);
+                @include core.locked();
+                @include core.loader(1em, $accent, 1px);
             }
 
-            @each $name, $size in module.sizes($sizes) {
+            @each $name, $size in core.sizes($sizes) {
                 &.is-#{$name} {
                     font-size: $size;
                 }
             }
 
-            @each $name, $color in module.colors($colors) {
-                $-accent: module.variant-for("component", $name, "accent");
-                $-text: module.variant-for("component", $name, "accent-text");
+            @each $name, $color in core.colors($colors) {
+                $-accent: core.variant-for("component", $name, "accent");
+                $-text: core.variant-for("component", $name, "accent-text");
 
                 &.is-#{$name} {
                     color: $-text;
 
                     &.is-loading {
                         color: transparent;
-                        @include module.loader-color($-accent);
+                        @include core.loader-color($-accent);
                     }
 
-                    @include module.selection($name);
+                    @include core.selection($name);
                 }
             }
 
-            @include module.is-disabled() {
-                @include module.disabled($disabled-text, null, null, $disabled-opacity);
+            @include core.is-disabled() {
+                @include core.disabled($disabled-text, null, null, $disabled-opacity);
             }
         }
     }

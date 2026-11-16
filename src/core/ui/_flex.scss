@@ -1,5 +1,5 @@
 @use "sass:map";
-@use "../utility";
+@use "../util";
 
 $-aligns: (
     "stretch": stretch,
@@ -23,12 +23,12 @@ $-justifies: (
 /// @param {List<String>} $excludes [null] - Alignment names to exclude; none when not a list
 /// @return {Map<String, FlexAlign>} Matching alignment names and values
 @function flex-aligns($includes: null, $excludes: null) {
-    $includes: utility.assert-list($includes, "flex-aligns", "includes", map.keys($-aligns));
-    $excludes: utility.assert-list($excludes, "flex-aligns", "excludes", ());
+    $includes: util.assert-list($includes, "flex-aligns", "includes", map.keys($-aligns));
+    $excludes: util.assert-list($excludes, "flex-aligns", "excludes", ());
 
     $result: ();
     @each $name, $align in $-aligns {
-        @if utility.should-include($name, $includes, $excludes) {
+        @if util.should-include($name, $includes, $excludes) {
             $result: map.set($result, $name, $align);
         }
     }
@@ -41,12 +41,12 @@ $-justifies: (
 /// @param {List<String>} $excludes [null] - Justification names to exclude; none when not a list
 /// @return {Map<String, FlexJustify>} Matching justification names and values
 @function flex-justifies($includes: null, $excludes: null) {
-    $includes: utility.assert-list($includes, "flex-justifies", "includes", map.keys($-justifies));
-    $excludes: utility.assert-list($excludes, "flex-justifies", "excludes", ());
+    $includes: util.assert-list($includes, "flex-justifies", "includes", map.keys($-justifies));
+    $excludes: util.assert-list($excludes, "flex-justifies", "excludes", ());
 
     $result: ();
     @each $name, $justify in $-justifies {
-        @if utility.should-include($name, $includes, $excludes) {
+        @if util.should-include($name, $includes, $excludes) {
             $result: map.set($result, $name, $justify);
         }
     }

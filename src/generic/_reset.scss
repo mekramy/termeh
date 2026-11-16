@@ -1,4 +1,4 @@
-@use "../core/module";
+@use "../core";
 
 /// Applies a minimal reset, based on minireset.css v0.0.6 (https://github.com/jgthms/minireset.css),
 /// to the document and common HTML elements. It removes default margins, paddings and list styles,
@@ -40,39 +40,39 @@
 /// @require {Variable<Color>} variant-for("text", "base", "strong-text") - Text color of `strong`, `b` and table headers
 /// @require {Variable<Color>} variant-for("text", "base", "decorated-text") - Text color of `u`, `ins`, `s` and `del`
 @mixin use-reset() {
-    @include module.define-module("reset") {
-        $direction: module.var("document", "direction");
-        $min-width: module.var("document", "min-width");
+    @include core.define-module("reset") {
+        $direction: core.var("document", "direction");
+        $min-width: core.var("document", "min-width");
 
-        $gap-micro: module.var("gap", "micro");
-        $gap-macro: module.var("gap", "macro");
-        $padding-control: module.var("padding", "control");
+        $gap-micro: core.var("gap", "micro");
+        $gap-macro: core.var("gap", "macro");
+        $padding-control: core.var("padding", "control");
 
-        $radius-normal: module.var("radius", "normal");
-        $line-height: module.var("line-height", "normal");
+        $radius-normal: core.var("radius", "normal");
+        $line-height: core.var("line-height", "normal");
 
-        $font-family: module.var("text", "font-family");
-        $font-size: module.var("text", "font-size");
-        $font-weight: module.var("text", "font-weight");
-        $mono-family: module.var("text", "mono-family");
-        $mono-size: module.var("text", "mono-size");
-        $mono-weight: module.var("text", "mono-weight");
-        $small-size: module.var("text", "small-size");
-        $small-weight: module.var("text", "small-weight");
-        $strong-weight: module.var("text", "strong-weight");
-        $decorated-weight: module.var("text", "decorated-weight");
+        $font-family: core.var("text", "font-family");
+        $font-size: core.var("text", "font-size");
+        $font-weight: core.var("text", "font-weight");
+        $mono-family: core.var("text", "mono-family");
+        $mono-size: core.var("text", "mono-size");
+        $mono-weight: core.var("text", "mono-weight");
+        $small-size: core.var("text", "small-size");
+        $small-weight: core.var("text", "small-weight");
+        $strong-weight: core.var("text", "strong-weight");
+        $decorated-weight: core.var("text", "decorated-weight");
 
-        $primary: module.color("primary");
-        $primary-text: module.variant("primary", "text");
-        $primary-foreground: module.variant("primary", "foreground");
+        $primary: core.color("primary");
+        $primary-text: core.variant("primary", "text");
+        $primary-foreground: core.variant("primary", "foreground");
 
-        $foreground: module.variant("base", "foreground");
-        $background: module.variant("base", "background");
-        $surface: module.variant("base", "surface");
-        $separator: module.variant("base", "separator");
-        $small-text: module.variant-for("text", "base", "small-text");
-        $strong-text: module.variant-for("text", "base", "strong-text");
-        $decorated-text: module.variant-for("text", "base", "decorated-text");
+        $foreground: core.variant("base", "foreground");
+        $background: core.variant("base", "background");
+        $surface: core.variant("base", "surface");
+        $separator: core.variant("base", "separator");
+        $small-text: core.variant-for("text", "base", "small-text");
+        $strong-text: core.variant-for("text", "base", "strong-text");
+        $decorated-text: core.variant-for("text", "base", "decorated-text");
 
         :root {
             font-size: $font-size;
@@ -194,7 +194,7 @@
             color: $foreground;
             background-color: $background;
 
-            @include module.scrollable($primary);
+            @include core.scrollable($primary);
         }
 
         article,
@@ -274,7 +274,7 @@
             height: 1px;
             background-color: $separator;
 
-            @include module.marged() {
+            @include core.marged() {
                 margin: $gap-macro 0;
             }
         }
@@ -325,8 +325,8 @@
             overflow-wrap: normal;
             overflow-x: auto;
 
-            @include module.scrollable($primary);
-            @include module.overflow-touch();
+            @include core.scrollable($primary);
+            @include core.overflow-touch();
 
             code {
                 padding: 0;
@@ -339,7 +339,7 @@
         p,
         ol,
         ul {
-            @include module.marged() {
+            @include core.marged() {
                 margin-bottom: $gap-macro;
             }
         }
@@ -348,7 +348,7 @@
             position: relative;
             padding-inline-start: 2em;
 
-            @include module.marged() {
+            @include core.marged() {
                 margin-bottom: $gap-micro;
             }
 

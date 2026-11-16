@@ -1,9 +1,8 @@
 @use "sass:meta";
-@use "sass:math";
 @use "sass:map";
 @use "sass:list";
-@use "sass:color";
 @use "sass:string";
+@use "color";
 @use "validation";
 
 /// Returns one of two values based on a condition.
@@ -44,32 +43,6 @@
     @return calc(#{$value} * 2);
 }
 
-/// Sets the opacity of a color using CSS relative color syntax.
-///
-/// @param {Variable<Color> | Color} $value - Base color
-/// @param {Variable<Number> | Number} $opacity - Opacity, from 0 (transparent) to 1 (opaque)
-/// @return {Color} The color with the given opacity
-@function alpha($value, $opacity) {
-    @return rgb(from #{$value} r g b / #{$opacity});
-}
-
-/// Mixes two colors with a specified weight, keep the alpha of main color.
-///
-/// @param {Variable<Color> | Color} $color - The color to mix
-/// @param {Variable<Color> | Color} $base - The base color to mix with
-/// @param {Variable<Number> | Number} $weight - Weight of the mix, from 0 to 1
-/// @return {Color} The mixed color with the original alpha of `$color`
-@function mix($color, $base, $weight) {
-    $color: validation.assert-color($color, "mix", "color");
-    $base: validation.assert-color($base, "mix", "base");
-    $weight: validation.assert-number($weight, "mix", "weight");
-
-    $alpha: color.channel($color, "alpha");
-    $color: color.change($color, $alpha: 1);
-    $mixed: color.mix($color, $base, $weight);
-    @return color.change($mixed, $alpha: $alpha);
-}
-
 /// Calculates the border radius of a child element inside a parent.
 /// The result is the parent radius minus the padding.
 ///
@@ -88,7 +61,7 @@
 /// @param {Variable<Color> | Color} $color - Shadow color
 /// @return {BoxShadow} The shadow value
 @function shadow($x, $y, $depth, $color) {
-    @return $x $y calc($depth * 2) 0 alpha($color, 0.1);
+    @return $x $y calc($depth * 2) 0 color.alpha($color, 0.1);
 }
 
 /// Creates a soft box shadow with specified offset and depth.
@@ -99,7 +72,7 @@
 /// @param {Variable<Color> | Color} $color - Shadow color
 /// @return {BoxShadow} The shadow value
 @function soft-shadow($x, $y, $depth, $color) {
-    @return $x $y calc($depth * 3) negate($depth) alpha($color, 0.1);
+    @return $x $y calc($depth * 3) negate($depth) color.alpha($color, 0.1);
 }
 
 /// Creates a flat box shadow with no offset and no blur.
@@ -108,7 +81,7 @@
 /// @param {Variable<Color> | Color} $color - Shadow color
 /// @return {BoxShadow} The shadow value
 @function flat-shadow($size, $color) {
-    @return 0 0 0 $size alpha($color, 0.1);
+    @return 0 0 0 $size color.alpha($color, 0.1);
 }
 
 /// Checks whether a key passes the include and exclude lists.

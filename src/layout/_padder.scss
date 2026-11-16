@@ -1,4 +1,4 @@
-@use "../core/module";
+@use "../core";
 
 /// Generates the `.padder` class with padding from gap values.
 ///
@@ -9,12 +9,12 @@
 ///
 /// @require reset
 @mixin use-padder($gaps: ()) {
-    @include module.define-module("padder", "reset") {
+    @include core.define-module("padder", "reset") {
         .padder {
             display: block;
             box-sizing: border-box;
 
-            @each $name, $gap in module.gaps($includes: $gaps) {
+            @each $name, $gap in core.gaps($includes: $gaps) {
                 &.is-#{$name} {
                     padding: $gap;
                 }

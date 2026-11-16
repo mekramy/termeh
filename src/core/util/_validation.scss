@@ -5,6 +5,19 @@
     @return "#{$caller}: Invalid `#{$param}`. Expected #{$expected}, got #{meta.type-of($value)} (`#{meta.inspect($value)}`).";
 }
 
+/// Checks if a value is a CSS variable.
+///
+/// @param {*} $value - Value to check
+/// @return {Boolean} `true` if the value is a CSS variable, otherwise `false`
+@function is-css-var($value) {
+    @if meta.type-of($value) != "string" {
+        @return false;
+    }
+
+    $str: meta.inspect($value);
+    @return string.index($str, "var(--") == 1 and string.slice($str, -1) == ")";
+}
+
 /// Checks whether a value is a boolean.
 ///
 /// @param {*} $value - Value to check

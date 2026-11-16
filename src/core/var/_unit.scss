@@ -1,5 +1,5 @@
 @use "sass:map";
-@use "../utility";
+@use "../util";
 
 $-units: () !default;
 
@@ -8,7 +8,7 @@ $-units: () !default;
 }
 
 @function -fail($name) {
-    @return "Unknown unit '#{$name}'. Available: #{utility.print($-units)}.";
+    @return "Unknown unit '#{$name}'. Available: #{util.print($-units)}.";
 }
 
 /// Defines a grid unit that can be used in the theme.
@@ -17,8 +17,8 @@ $-units: () !default;
 /// @param {Length} $unit - Unit value
 /// @throw If `$name` is not a string or `$unit` is not a number
 @mixin define-unit($name, $unit) {
-    $name: utility.assert-string($name, "define-unit", "name");
-    $unit: utility.assert-number($unit, "define-unit", "unit");
+    $name: util.assert-string($name, "define-unit", "name");
+    $unit: util.assert-number($unit, "define-unit", "unit");
 
     $-units: map.set($-units, $name, $unit) !global;
 }
@@ -29,7 +29,7 @@ $-units: () !default;
 /// @return {Length} Unit value
 /// @throw If `$name` is not a string or the unit is not defined
 @function unit($name) {
-    $name: utility.assert-string($name, "unit", "name");
+    $name: util.assert-string($name, "unit", "name");
     @if -missing($name) {
         @error -fail($name);
     }
@@ -43,12 +43,12 @@ $-units: () !default;
 /// @param {List<String>} $excludes [null] - Unit names to exclude; none when not a list
 /// @return {Map<String, Length>} Matching units and their values
 @function units($includes: null, $excludes: null) {
-    $includes: utility.assert-list($includes, "units", "includes", map.keys($-units));
-    $excludes: utility.assert-list($excludes, "units", "excludes", ());
+    $includes: util.assert-list($includes, "units", "includes", map.keys($-units));
+    $excludes: util.assert-list($excludes, "units", "excludes", ());
 
     $result: ();
     @each $name, $unit in $-units {
-        @if utility.should-include($name, $includes, $excludes) {
+        @if util.should-include($name, $includes, $excludes) {
             $result: map.set($result, $name, $unit);
         }
     }

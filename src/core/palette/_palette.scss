@@ -1,0 +1,33 @@
+@use "sass:map";
+@use "../util";
+
+$-palettes: () !default;
+$-overrides: () !default;
+
+@function is-missing($name) {
+    @return not map.has-key($-palettes, $name);
+}
+
+@function fail($name) {
+    @return "Unknown palette '#{$name}'. Available: #{util.print(map.remove($palettes, "base"))}.";
+}
+
+@mixin set-color($name, $component, $variant, $color) {
+    $-palettes: util.deep-set($-palettes, $color, $name, $component, $variant) !global;
+}
+
+@mixin set-override($scheme, $name, $component, $variant, $color) {
+    $-overrides: util.deep-set($-overrides, $color, $scheme, $name, $component, $variant) !global;
+}
+
+@function get-color($name, $component, $variant) {
+    @return map.get($-palettes, $name, $component, $variant);
+}
+
+@function get-override($scheme, $name, $component, $variant) {
+    @return map.get($-overrides, $scheme, $name, $component, $variant);
+}
+
+@function all() {
+    @return $-palettes;
+}

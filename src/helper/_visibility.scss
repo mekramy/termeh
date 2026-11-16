@@ -1,4 +1,4 @@
-@use "../core/module";
+@use "../core";
 
 /// Generates visibility helper classes.
 ///
@@ -6,30 +6,30 @@
 ///
 /// @output Visibility helper classes inside breakpoint media queries
 @mixin use-visibility-helper() {
-    @include module.define-module("visibility-helper") {
+    @include core.define-module("visibility-helper") {
         .is-hidden {
             display: none !important;
         }
 
-        @include module.until-ultrawide() {
+        @include core.until-ultrawide() {
             .is-until-ultrawide-hidden {
                 display: none !important;
             }
         }
 
-        @include module.until-widescreen() {
+        @include core.until-widescreen() {
             .is-until-widescreen-hidden {
                 display: none !important;
             }
         }
 
-        @include module.until-desktop() {
+        @include core.until-desktop() {
             .is-until-desktop-hidden {
                 display: none !important;
             }
         }
 
-        @include module.tablet() {
+        @include core.tablet() {
             .is-mobile-only,
             .is-tablet-hidden,
             .is-desktop-only,
@@ -39,7 +39,7 @@
             }
         }
 
-        @include module.desktop() {
+        @include core.desktop() {
             .is-mobile-only,
             .is-tablet-only,
             .is-desktop-hidden,
@@ -49,7 +49,7 @@
             }
         }
 
-        @include module.widescreen() {
+        @include core.widescreen() {
             .is-mobile-only,
             .is-tablet-only,
             .is-desktop-only,
@@ -59,7 +59,7 @@
             }
         }
 
-        @include module.ultrawide() {
+        @include core.ultrawide() {
             .is-mobile-only,
             .is-tablet-only,
             .is-desktop-only,
@@ -69,7 +69,7 @@
             }
         }
 
-        @include module.mobile() {
+        @include core.mobile() {
             .is-mobile-hidden,
             .is-tablet-only,
             .is-desktop-only,
@@ -79,31 +79,31 @@
             }
         }
 
-        @include module.tablet-only() {
+        @include core.tablet-only() {
             .is-tablet-only-hidden {
                 display: none !important;
             }
         }
 
-        @include module.desktop-only() {
+        @include core.desktop-only() {
             .is-desktop-only-hidden {
                 display: none !important;
             }
         }
 
-        @include module.widescreen-only() {
+        @include core.widescreen-only() {
             .is-widescreen-only-hidden {
                 display: none !important;
             }
         }
 
-        @include module.non-touch() {
+        @include core.non-touch() {
             .is-touch-only {
                 display: none !important;
             }
         }
 
-        @include module.touch() {
+        @include core.touch() {
             .is-touch-hidden {
                 display: none !important;
             }

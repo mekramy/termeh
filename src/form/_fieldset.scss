@@ -1,4 +1,4 @@
-@use "../core/module";
+@use "../core";
 
 /// Applies fieldset styles.
 ///
@@ -16,23 +16,23 @@
 ///
 /// @require reset
 @mixin use-fieldset() {
-    @include module.define-module("form-fieldset", "reset") {
-        $gap-macro: module.var("gap", "macro");
-        $padding-container: module.var("padding", "container");
-        $radius-normal: module.var("radius", "normal");
+    @include core.define-module("form-fieldset", "reset") {
+        $gap-macro: core.var("gap", "macro");
+        $padding-container: core.var("padding", "container");
+        $radius-normal: core.var("radius", "normal");
 
-        $legend-size: module.var("input", "legend-size");
-        $legend-weight: module.var("input", "legend-weight");
-        $disabled-opacity: module.var("input", "disabled-opacity");
+        $legend-size: core.var("input", "legend-size");
+        $legend-weight: core.var("input", "legend-weight");
+        $disabled-opacity: core.var("input", "disabled-opacity");
 
-        $border-color: module.variant-for("input", "base", "border");
+        $border-color: core.variant-for("input", "base", "border");
 
         fieldset {
             padding: $padding-container;
             border-radius: $radius-normal;
             border: 1px solid $border-color;
 
-            @include module.marged() {
+            @include core.marged() {
                 margin-bottom: $gap-macro;
             }
 
@@ -40,10 +40,10 @@
                 line-height: 1em;
                 font-size: $legend-size;
                 font-weight: $legend-weight;
-                padding: module.inline-padding();
+                padding: core.inline-padding();
             }
 
-            @include module.is-disabled() {
+            @include core.is-disabled() {
                 legend {
                     opacity: $disabled-opacity;
                 }

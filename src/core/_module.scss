@@ -1,5 +1,5 @@
 @use "sass:list";
-@use "utility";
+@use "util";
 
 $-modules: () !default;
 
@@ -11,7 +11,7 @@ $-modules: () !default;
 /// @output The content block, once, at the root level
 /// @throw If `$module` is not a string or a required module is not registered
 @mixin define-module($module, $requirements...) {
-    $module: utility.assert-string($module, "define-module", "module");
+    $module: util.assert-string($module, "define-module", "module");
 
     @if list.index($-modules, $module) {
         @warn "Module `#{$module}` has already been presented!";
@@ -19,7 +19,7 @@ $-modules: () !default;
         // Check for missing required modules
         $missing: ();
         @each $requirement in $requirements {
-            @if utility.is-string($requirement) and not list.index($-modules, $requirement) {
+            @if util.is-string($requirement) and not list.index($-modules, $requirement) {
                 $missing: list.append($missing, $requirement, comma);
             }
         }

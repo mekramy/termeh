@@ -1,4 +1,5 @@
-@use "../core/module";
+@use "sass:list";
+@use "../core";
 
 /// Applies skeleton loading placeholder styles.
 ///
@@ -13,39 +14,33 @@
 /// @require {Variable<Length>} var("component", "height") - Placeholder height
 /// @require {Variable<Number>} var("component", "skeleton-opacity") - Placeholder opacity
 ///
-/// @require {Variable<Color>} variant("shade", "light") - Placeholder background color
-/// @require {Variable<Color>} variant("shade", "light-hover") - Highlight color of the shimmer
+/// @require {Variable<Color>} variant-for("skeleton", "base", "background") [variant("shade", "light")] - Highlight color of the shimmer
 ///
 /// @require reset
 @mixin use-skeleton($sizes: ()) {
-    @include module.define-module("skeleton", "reset") {
-        $radius-normal: module.var("radius", "normal");
-        $radius-circle: module.var("radius", "circle");
-        $radius-rounded: module.var("radius", "rounded");
+    $-fallback-background: core.variant("shade", "light");
 
-        $height: module.var("component", "height");
-        $opacity: module.var("component", "skeleton-opacity");
+    @include core.define-module("skeleton", "reset") {
+        $radius-normal: core.var("radius", "normal");
+        $radius-circle: core.var("radius", "circle");
+        $radius-rounded: core.var("radius", "rounded");
 
-        $light: module.variant("shade", "light");
-        $light-hover: module.variant("shade", "light-hover");
+        $height: core.var("component", "height");
+        $opacity: core.var("component", "skeleton-opacity");
+
+        $background: core.variant-for("skeleton", "base", "background", $-fallback-background);
 
         @at-root {
             @keyframes skeleton-pulse {
-                0%,
-                100% {
-                    opacity: calc($opacity * 0.5);
+                0% {
+                    opacity: 1;
                 }
                 50% {
                     opacity: $opacity;
                 }
-            }
 
-            @keyframes skeleton-shimmer {
-                0% {
-                    background-position-x: 200%;
-                }
                 100% {
-                    background-position-x: 0%;
+                    opacity: 1;
                 }
             }
         }
@@ -54,22 +49,11 @@
             display: block;
             overflow: hidden;
             opacity: $opacity;
-            background-color: $light;
-            background-size: 200% 100%;
-            background-image: linear-gradient(
-                100deg,
-                $light,
-                $light 30%,
-                $light-hover 50%,
-                $light 70%
-            );
-            animation:
-                skeleton-pulse 3s cubic-bezier(0.4, 0, 0.2, 1) infinite,
-                skeleton-shimmer 2s ease-in-out infinite;
-            animation-delay: var(--skeleton-delay, 0s);
             border-radius: $radius-normal;
-            @include module.unselectable();
-            @include module.prefers-reduced-motion() {
+            background-color: $background;
+            animation: skeleton-pulse 2s ease-in-out 0.5s infinite;
+            @include core.unselectable();
+            @include core.prefers-reduced-motion() {
                 animation: none;
             }
 
@@ -104,6 +88,21 @@
                 animation: none;
             }
 
+            &.is-block {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1 / 1;
+
+                @each $ratio in (1 2), (2 1), (3 2), (2 3), (4 3), (3 4), (16 9), (9 16) {
+                    $x: list.nth($ratio, 1);
+                    $y: list.nth($ratio, 2);
+
+                    &.is-#{$x}-#{$y} {
+                        aspect-ratio: #{$x} / #{$y};
+                    }
+                }
+            }
+
             &.is-rounded {
                 &.is-image {
                     border-radius: $radius-circle;
@@ -116,7 +115,7 @@
                 }
             }
 
-            @each $name, $size in module.sizes($sizes) {
+            @each $name, $size in core.sizes($sizes) {
                 &.is-#{$name} {
                     font-size: $size;
                 }

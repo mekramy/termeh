@@ -1,0 +1,132 @@
+@use "sass:map";
+@use "palette";
+@use "raw";
+@use "../scheme";
+@use "../util";
+
+/// Returns the CSS variable of a palette color.
+/// It also registers the base color and each scheme override as CSS variables.
+///
+/// @param {String} $name - Color name
+/// @return {Variable<Color>} CSS variable of the color
+/// @throw If `$name` is not a string or the palette color is not defined
+@function color($name) {
+    $name: util.assert-string($name, "color", "name");
+    @if palette.is-missing($name) {
+        @error palette.fail($name);
+    }
+
+    $token: "palette-#{$name}";
+    $token-rgb: "rgb-#{$name}";
+
+    $value: palette.get-color($name, null, "base");
+    $_: scheme.define-variable(null, $token, $value);
+    $_: scheme.define-variable(null, $token-rgb, -rgb($value));
+
+    @each $scheme in scheme.schemes() {
+        $override: palette.get-override($scheme, $name, null, "base");
+        $_: scheme.define-variable($scheme, $token, $override);
+        $_: scheme.define-variable($scheme, $token-rgb, -rgb($override));
+    }
+
+    @return scheme.variable($token, $value);
+}
+
+/// Returns the CSS variable of a palette color variant.
+/// It also registers the variant color and each scheme override as CSS variables.
+///
+/// @param {String} $name - Color name
+/// @param {String} $variant - Variant name
+/// @param {Variable<Color> | Color} $fallback [null] - Value used when the variant cannot be resolved
+/// @return {Variable<Color> | null} CSS variable of the variant or `null` if it cannot be resolved
+/// @throw If `$name` or `$variant` is not a string
+@function variant($name, $variant, $fallback: null) {
+    $name: util.assert-string($name, "variant", "name");
+    $variant: util.assert-string($variant, "variant", "variant");
+
+    $token: "palette-#{$name}-#{$variant}";
+    $token-rgb: "rgb-#{$name}-#{$variant}";
+
+    $value: raw.variant-value($name, $variant, $fallback);
+    $_: scheme.define-variable(null, $token, $value);
+    $_: scheme.define-variable(null, $token-rgb, -rgb($value));
+
+    @each $scheme in scheme.schemes() {
+        $override: raw.scheme-variant($scheme, $name, $variant, $fallback);
+        $_: scheme.define-variable($scheme, $token, $override);
+        $_: scheme.define-variable($scheme, $token-rgb, -rgb($override));
+    }
+
+    @return scheme.variable($token, $value);
+}
+
+/// Returns the CSS variable of a palette color variant for one component.
+/// It also registers the variant color and each scheme override as CSS variables.
+///
+/// @param {String} $component - Component name
+/// @param {String} $name - Color name
+/// @param {String} $variant - Variant name
+/// @param {Variable<Color> | Color} $fallback [null] - Value used when the variant cannot be resolved
+/// @return {Variable<Color> | null} CSS variable of the variant or `null` if it cannot be resolved
+/// @throw If `$component`, `$name` or `$variant` is not a string
+@function variant-for($component, $name, $variant, $fallback: null) {
+    $component: util.assert-string($component, "variant-for", "component");
+    $name: util.assert-string($name, "variant-for", "name");
+    $variant: util.assert-string($variant, "variant-for", "variant");
+
+    $token: "palette-#{$name}-#{$component}-#{$variant}";
+    $token-rgb: "rgb-#{$name}-#{$component}-#{$variant}";
+
+    $value: raw.variant-value-for($component, $name, $variant, $fallback);
+    $_: scheme.define-variable(null, $token, $value);
+    $_: scheme.define-variable(null, $token-rgb, -rgb($value));
+
+    @each $scheme in scheme.schemes() {
+        $override: raw.scheme-variant-for($scheme, $component, $name, $variant, $fallback);
+        $_: scheme.define-variable($scheme, $token, $override);
+        $_: scheme.define-variable($scheme, $token-rgb, -rgb($override));
+    }
+
+    @return scheme.variable($token, $value);
+}
+
+/// Returns a map of palette color names and their CSS variables, filtered by name.
+/// It also registers each base color and scheme override as CSS variables.
+///
+/// @param {List<String>} $includes [null] - Color names to include; all defined colors when not a list
+/// @param {List<String>} $excludes [null] - Color names to exclude; `"base"` and `""` when not a list
+/// @return {Map<String, Variable<Color>>} Matching colors and their CSS variables
+@function colors($includes: null, $excludes: null) {
+    $palettes: palette.all();
+    $includes: util.assert-list($includes, "colors", "includes", map.keys($palettes));
+    $excludes: util.assert-list($excludes, "colors", "excludes", ("base", ""));
+
+    $result: ();
+    @each $name in map.keys($palettes) {
+        @if util.should-include($name, $includes, $excludes) {
+            $token: "palette-#{$name}";
+            $token-rgb: "rgb-#{$name}";
+
+            $value: palette.get-color($name, null, "base");
+            $_: scheme.define-variable(null, $token, $value);
+            $_: scheme.define-variable(null, $token-rgb, -rgb($value));
+
+            @each $scheme in scheme.schemes() {
+                $override: palette.get-override($scheme, $name, null, "base");
+                $_: scheme.define-variable($scheme, $token, $override);
+                $_: scheme.define-variable($scheme, $token-rgb, -rgb($override));
+            }
+
+            $result: map.set($result, $name, scheme.variable($token, $value));
+        }
+    }
+    @return $result;
+}
+
+@function -rgb($value) {
+    @if util.is-css-var($value) {
+        @return util.palette-rgb($value);
+    } @else {
+        @return util.to-rgb($value);
+    }
+}

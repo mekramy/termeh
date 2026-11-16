@@ -1,4 +1,4 @@
-@use "../core/module";
+@use "../core";
 
 /// Applies base styles for inline elements.
 ///
@@ -12,14 +12,14 @@
 ///
 /// @require reset
 @mixin use-element() {
-    @include module.define-module("element", "reset") {
-        $gap-micro: module.var("gap", "micro");
-        $small-size: module.var("text", "small-size");
-        $small-weight: module.var("text", "small-weight");
-        $strong-weight: module.var("text", "strong-weight");
+    @include core.define-module("element", "reset") {
+        $gap-micro: core.var("gap", "micro");
+        $small-size: core.var("text", "small-size");
+        $small-weight: core.var("text", "small-weight");
+        $strong-weight: core.var("text", "strong-weight");
 
-        $weight: module.var("component", "weight");
-        $height: module.var("component", "height");
+        $weight: core.var("component", "weight");
+        $height: core.var("component", "height");
 
         @at-root {
             .element {
@@ -33,7 +33,7 @@
                 text-align: center;
                 white-space: nowrap;
                 text-decoration: none;
-                gap: module.half($gap-micro);
+                gap: core.half($gap-micro);
 
                 b,
                 strong,
@@ -79,7 +79,7 @@
                 .icon {
                     color: inherit;
                     &:not(:last-child) {
-                        margin-inline-end: module.half($gap-micro);
+                        margin-inline-end: core.half($gap-micro);
                     }
                 }
             }

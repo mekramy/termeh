@@ -1,4 +1,4 @@
-@use "../core/module";
+@use "../core";
 
 /// Applies header styles.
 ///
@@ -24,28 +24,28 @@
 ///
 /// @require reset, base-heading, element
 @mixin use-header($colors: (), $gaps: ()) {
-    @include module.define-module("header", "reset", "base-heading", "element") {
-        $gap-macro: module.var("gap", "macro");
-        $line-normal: module.var("line-height", "normal");
-        $strong-weight: module.var("text", "strong-weight");
-        $decorator-thickness: module.var("decorator", "thickness");
+    @include core.define-module("header", "reset", "base-heading", "element") {
+        $gap-macro: core.var("gap", "macro");
+        $line-normal: core.var("line-height", "normal");
+        $strong-weight: core.var("text", "strong-weight");
+        $decorator-thickness: core.var("decorator", "thickness");
 
-        $meta-size: module.var("component", "meta-size");
-        $meta-weight: module.var("component", "meta-weight");
+        $meta-size: core.var("component", "meta-size");
+        $meta-weight: core.var("component", "meta-weight");
 
-        $accent: module.variant-for("component", "base", "accent");
-        $muted: module.variant-for("component", "base", "muted");
+        $accent: core.variant-for("component", "base", "accent");
+        $muted: core.variant-for("component", "base", "muted");
 
         .header {
             display: flex;
             align-items: center;
             gap: $gap-macro;
 
-            @include module.padded() {
-                padding: module.control-padding();
+            @include core.padded() {
+                padding: core.control-padding();
             }
 
-            @include module.marged() {
+            @include core.marged() {
                 margin-bottom: $gap-macro;
             }
 
@@ -97,7 +97,7 @@
             }
 
             &.is-decorated {
-                margin-inline-start: module.half($decorator-thickness);
+                margin-inline-start: core.half($decorator-thickness);
                 border-inline-start: $decorator-thickness solid $accent;
             }
 
@@ -114,25 +114,25 @@
                 }
             }
 
-            @each $name, $gap in module.gaps($gaps) {
+            @each $name, $gap in core.gaps($gaps) {
                 &.is-#{$name}-gap {
                     gap: $gap;
 
-                    @include module.padded() {
-                        padding: module.half($gap) $gap;
+                    @include core.padded() {
+                        padding: core.half($gap) $gap;
                     }
                 }
             }
 
-            @each $name, $palette in module.colors($colors) {
-                $-accent: module.variant-for("component", $name, "accent");
+            @each $name, $palette in core.colors($colors) {
+                $-accent: core.variant-for("component", $name, "accent");
 
                 &.is-#{$name} {
                     &.is-decorated {
                         border-inline-start-color: $-accent;
                     }
 
-                    @include module.selection($name);
+                    @include core.selection($name);
                 }
             }
         }

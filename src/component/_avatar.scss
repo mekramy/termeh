@@ -1,4 +1,4 @@
-@use "../core/module";
+@use "../core";
 
 /// Applies avatar styles.
 ///
@@ -30,21 +30,21 @@
 ///
 /// @require reset
 @mixin use-avatar($colors: (), $sizes: ()) {
-    @include module.define-module("avatar", "reset") {
-        $radius-normal: module.var("radius", "normal");
-        $radius-circle: module.var("radius", "circle");
-        $strong-weight: module.var("text", "strong-weight");
-        $decorator-thickness: module.var("decorator", "thickness");
+    @include core.define-module("avatar", "reset") {
+        $radius-normal: core.var("radius", "normal");
+        $radius-circle: core.var("radius", "circle");
+        $strong-weight: core.var("text", "strong-weight");
+        $decorator-thickness: core.var("decorator", "thickness");
 
-        $height: module.var("component", "height");
-        $disabled-opacity: module.var("component", "disabled-opacity");
+        $height: core.var("component", "height");
+        $disabled-opacity: core.var("component", "disabled-opacity");
 
-        $accent: module.variant-for("component", "base", "light-accent");
-        $foreground: module.variant-for("component", "base", "light-foreground");
-        $background: module.variant-for("component", "base", "light-background");
+        $accent: core.variant-for("component", "base", "light-accent");
+        $foreground: core.variant-for("component", "base", "light-foreground");
+        $background: core.variant-for("component", "base", "light-background");
 
-        $disabled-foreground: module.variant-for("component", "base", "disabled-foreground");
-        $disabled-background: module.variant-for("component", "base", "disabled-background");
+        $disabled-foreground: core.variant-for("component", "base", "disabled-foreground");
+        $disabled-background: core.variant-for("component", "base", "disabled-background");
 
         .avatar {
             display: inline-flex;
@@ -57,7 +57,7 @@
             color: $foreground;
             background: $background;
             border-radius: $radius-circle;
-            @include module.unselectable();
+            @include core.unselectable();
 
             > span {
                 display: block;
@@ -100,8 +100,8 @@
 
             &.is-loading {
                 color: transparent;
-                @include module.locked();
-                @include module.loader(1em, $foreground, 1px);
+                @include core.locked();
+                @include core.loader(1em, $foreground, 1px);
 
                 > img,
                 > svg {
@@ -121,16 +121,16 @@
                 }
             }
 
-            @each $name, $size in module.sizes($sizes) {
+            @each $name, $size in core.sizes($sizes) {
                 &.is-#{$name} {
                     font-size: $size;
                 }
             }
 
-            @each $name, $_ in module.colors($colors) {
-                $-accent: module.variant-for("component", $name, "light-accent");
-                $-foreground: module.variant-for("component", $name, "light-foreground");
-                $-background: module.variant-for("component", $name, "light-background");
+            @each $name, $_ in core.colors($colors) {
+                $-accent: core.variant-for("component", $name, "light-accent");
+                $-foreground: core.variant-for("component", $name, "light-foreground");
+                $-background: core.variant-for("component", $name, "light-background");
 
                 &.is-#{$name} {
                     color: $-foreground;
@@ -147,13 +147,13 @@
 
                     &.is-loading {
                         color: transparent;
-                        @include module.loader-color($-foreground);
+                        @include core.loader-color($-foreground);
                     }
                 }
             }
 
-            @include module.is-disabled() {
-                @include module.disabled(
+            @include core.is-disabled() {
+                @include core.disabled(
                     $disabled-foreground,
                     $disabled-background,
                     null,

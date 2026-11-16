@@ -1,6 +1,6 @@
 @use "sass:map";
 @use "sass:math";
-@use "../utility";
+@use "../util";
 
 $-breakpoints: (
     "tablet": 768px,
@@ -14,7 +14,7 @@ $-breakpoints: (
 }
 
 @function -fail($name) {
-    @return "Unknown breakpoint '#{$name}'. Available: #{utility.print($-breakpoints)}.";
+    @return "Unknown breakpoint '#{$name}'. Available: #{util.print($-breakpoints)}.";
 }
 
 /// Returns the width of a defined breakpoint.
@@ -23,7 +23,7 @@ $-breakpoints: (
 /// @return {Length} Breakpoint width
 /// @throw If `$name` is not a string or is not a defined breakpoint
 @function breakpoint($name) {
-    $name: utility.assert-string($name, "breakpoint", "name");
+    $name: util.assert-string($name, "breakpoint", "name");
     @if -missing($name) {
         @error -fail($name);
     }
@@ -37,7 +37,7 @@ $-breakpoints: (
 /// @output The content inside a `min-width` media query for the breakpoint
 /// @throw If `$device` is not a string or is not a defined breakpoint
 @mixin from($device) {
-    $device: utility.assert-string($device, "from", "device");
+    $device: util.assert-string($device, "from", "device");
     @if -missing($device) {
         @error -fail($device);
     }
@@ -53,7 +53,7 @@ $-breakpoints: (
 /// @output The content inside a `max-width` media query, 1px below the breakpoint width
 /// @throw If `$device` is not a string or is not a defined breakpoint
 @mixin until($device) {
-    $device: utility.assert-string($device, "until", "device");
+    $device: util.assert-string($device, "until", "device");
     @if -missing($device) {
         @error -fail($device);
     }

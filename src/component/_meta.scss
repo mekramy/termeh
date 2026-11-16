@@ -1,4 +1,4 @@
-@use "../core/module";
+@use "../core";
 
 /// Applies meta text styles.
 ///
@@ -18,11 +18,11 @@
 ///
 /// @require reset, element
 @mixin use-meta($colors: (), $sizes: ()) {
-    @include module.define-module("meta", "reset", "element") {
-        $font-size: module.var("component", "meta-size");
-        $font-weight: module.var("component", "meta-weight");
+    @include core.define-module("meta", "reset", "element") {
+        $font-size: core.var("component", "meta-size");
+        $font-weight: core.var("component", "meta-weight");
 
-        $muted: module.variant-for("component", "base", "muted");
+        $muted: core.variant-for("component", "base", "muted");
 
         .meta {
             @extend .element;
@@ -31,16 +31,16 @@
             font-weight: $font-weight;
             text-overflow: ellipsis;
             color: $muted;
-            @include module.unselectable();
+            @include core.unselectable();
 
-            @each $name, $size in module.sizes($sizes) {
+            @each $name, $size in core.sizes($sizes) {
                 &.is-#{$name} {
                     font-size: $size;
                 }
             }
 
-            @each $name, $color in module.colors($colors) {
-                $-muted: module.variant-for("component", $name, "muted");
+            @each $name, $color in core.colors($colors) {
+                $-muted: core.variant-for("component", $name, "muted");
 
                 &.is-#{$name} {
                     color: $-muted;

@@ -1,5 +1,5 @@
 @use "../animation";
-@use "../core/module";
+@use "../core";
 
 /// Applies radio styles.
 ///
@@ -31,21 +31,21 @@
 @mixin use-radio($colors: ()) {
     @include animation.shake();
 
-    @include module.define-module("form-radio", "reset") {
-        $height: module.var("input", "height");
-        $size: module.var("input", "checkbox");
-        $disabled-opacity: module.var("input", "disabled-opacity");
+    @include core.define-module("form-radio", "reset") {
+        $height: core.var("input", "height");
+        $size: core.var("input", "checkbox");
+        $disabled-opacity: core.var("input", "disabled-opacity");
 
-        $gap-micro: module.var("gap", "micro");
-        $radius-circle: module.var("radius", "circle");
+        $gap-micro: core.var("gap", "micro");
+        $radius-circle: core.var("radius", "circle");
 
-        $error: module.color("error");
+        $error: core.color("error");
 
-        $accent: module.variant-for("input", "base", "accent");
-        $border-color: module.variant-for("input", "base", "border");
-        $disabled-border: module.variant-for("input", "base", "disabled-border");
-        $disabled-foreground: module.variant-for("input", "base", "disabled-foreground");
-        $disabled-background: module.variant-for("input", "base", "disabled-background");
+        $accent: core.variant-for("input", "base", "accent");
+        $border-color: core.variant-for("input", "base", "border");
+        $disabled-border: core.variant-for("input", "base", "disabled-border");
+        $disabled-foreground: core.variant-for("input", "base", "disabled-foreground");
+        $disabled-background: core.variant-for("input", "base", "disabled-background");
 
         label.radio {
             display: flex;
@@ -60,7 +60,7 @@
             box-sizing: border-box;
 
             input[type="radio"] {
-                @include module.control();
+                @include core.control();
 
                 display: grid;
                 place-content: center;
@@ -70,7 +70,7 @@
                 border: 1px solid $border-color;
                 cursor: pointer;
                 flex: 0 0 auto;
-                @include module.transition(all);
+                @include core.transition(all);
 
                 &::after {
                     content: "";
@@ -81,10 +81,10 @@
                     transform: scale(0);
                     border-radius: $radius-circle;
                     background-color: $accent;
-                    @include module.transition(transform);
+                    @include core.transition(transform);
                 }
 
-                @include module.is-field-focused() {
+                @include core.is-field-focused() {
                     border-color: $accent;
                 }
 
@@ -93,21 +93,21 @@
                 }
             }
 
-            @each $name, $palette in module.colors($includes: $colors) {
-                $-accent: module.variant-for("input", $name, "accent");
+            @each $name, $palette in core.colors($includes: $colors) {
+                $-accent: core.variant-for("input", $name, "accent");
 
                 &.is-#{$name} input[type="radio"] {
                     &::after {
                         background-color: $-accent;
                     }
 
-                    @include module.is-field-focused() {
+                    @include core.is-field-focused() {
                         border-color: $-accent;
                     }
                 }
             }
 
-            @include module.is-invalid() {
+            @include core.is-invalid() {
                 animation: shake 0.5s ease;
 
                 input[type="radio"] {
@@ -119,10 +119,10 @@
                 }
             }
 
-            @include module.is-disabled() {
+            @include core.is-disabled() {
                 color: $disabled-foreground !important;
                 opacity: $disabled-opacity !important;
-                @include module.locked();
+                @include core.locked();
 
                 input[type="radio"] {
                     border-color: $disabled-border !important;

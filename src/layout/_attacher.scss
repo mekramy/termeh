@@ -1,4 +1,4 @@
-@use "../core/module";
+@use "../core";
 
 /// Generates the `.attacher` layout that joins its children in one row.
 ///
@@ -12,8 +12,8 @@
 ///
 /// @require reset
 @mixin use-attacher() {
-    @include module.define-module("attacher", "reset") {
-        $separator: module.variant("base", "separator");
+    @include core.define-module("attacher", "reset") {
+        $separator: core.variant("base", "separator");
 
         .attacher {
             display: flex;
@@ -47,13 +47,13 @@
                 background-color: $separator;
             }
 
-            @each $name, $align in module.flex-aligns() {
+            @each $name, $align in core.flex-aligns() {
                 &.is-#{$name}-aligned {
                     align-items: $align;
                 }
             }
 
-            @each $name, $justify in module.flex-justifies() {
+            @each $name, $justify in core.flex-justifies() {
                 &.is-#{$name}-justified {
                     justify-content: $justify;
                 }

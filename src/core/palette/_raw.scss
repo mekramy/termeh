@@ -1,0 +1,131 @@
+@use "palette";
+@use "resolver";
+@use "../util";
+
+/// Returns the base color of a defined palette color.
+///
+/// @param {String} $name - Color name
+/// @return {Color} Base color
+/// @throw If `$name` is not a string or the palette color is not defined
+@function color-value($name) {
+    $name: util.assert-string($name, "color-value", "name");
+    @if palette.is-missing($name) {
+        @error palette.fail($name);
+    }
+
+    @return palette.get-color($name, null, "base");
+}
+
+/// Returns the base color of a palette color for one scheme.
+///
+/// @param {String} $scheme - Scheme name
+/// @param {String} $name - Color name
+/// @return {Color | null} Base color for the scheme, or `null` if the scheme does not override it
+/// @throw If `$scheme` or `$name` is not a string, or the palette color is not defined
+@function scheme-color($scheme, $name) {
+    $scheme: util.assert-string($scheme, "scheme-color", "scheme");
+    $name: util.assert-string($name, "scheme-color", "name");
+    @if palette.is-missing($name) {
+        @error palette.fail($name);
+    }
+
+    @return palette.get-override($scheme, $name, null, "base");
+}
+
+/// Returns the variant color of a palette color.
+/// If the variant is not defined, it is resolved from the base color. If that fails, the fallback is returned.
+///
+/// @param {String} $name - Color name
+/// @param {String} $variant - Variant name
+/// @param {Variable<Color> | Color} $fallback [null] - Value returned when the variant cannot be resolved
+/// @return {Variable<Color> | Color | null} The variant color, or the fallback
+/// @throw If `$name` or `$variant` is not a string
+@function variant-value($name, $variant, $fallback: null) {
+    $name: util.assert-string($name, "variant-value", "name");
+    $variant: util.assert-string($variant, "variant-value", "variant");
+
+    $explicit: palette.get-color($name, null, $variant);
+    @if $explicit {
+        @return $explicit;
+    }
+
+    $base: palette.get-color("base", null, "base");
+    $color: palette.get-color($name, null, "base");
+    @return resolver.resolve(null, null, $name, $base, $color, $variant) or $fallback;
+}
+
+/// Returns the variant color of a palette color for one component.
+/// If the variant is not defined, it is resolved from the base color. If that fails, the fallback is returned.
+///
+/// @param {String} $component - Component name
+/// @param {String} $name - Color name
+/// @param {String} $variant - Variant name
+/// @param {Variable<Color> | Color} $fallback [null] - Value returned when the variant cannot be resolved
+/// @return {Variable<Color> | Color | null} The variant color, or the fallback
+/// @throw If `$component`, `$name` or `$variant` is not a string
+@function variant-value-for($component, $name, $variant, $fallback: null) {
+    $component: util.assert-string($component, "variant-value-for", "component");
+    $name: util.assert-string($name, "variant-value-for", "name");
+    $variant: util.assert-string($variant, "variant-value-for", "variant");
+
+    $explicit: palette.get-color($name, $component, $variant);
+    @if $explicit {
+        @return $explicit;
+    }
+
+    $base: palette.get-color("base", null, "base");
+    $color: palette.get-color($name, null, "base");
+    @return resolver.resolve(null, $component, $name, $base, $color, $variant) or $fallback;
+}
+
+/// Returns the variant color of a palette color for one scheme.
+/// If the scheme does not define the variant, it is resolved from the scheme's colors. If that fails, the fallback is returned.
+///
+/// @param {String} $scheme - Scheme name
+/// @param {String} $name - Color name
+/// @param {String} $variant - Variant name
+/// @param {Variable<Color> | Color} $fallback [null] - Value returned when the variant cannot be resolved
+/// @return {Variable<Color> | Color | null} The variant color for the scheme, or the fallback
+/// @throw If `$scheme`, `$name` or `$variant` is not a string
+@function scheme-variant($scheme, $name, $variant, $fallback: null) {
+    $scheme: util.assert-string($scheme, "scheme-variant", "scheme");
+    $name: util.assert-string($name, "scheme-variant", "name");
+    $variant: util.assert-string($variant, "scheme-variant", "variant");
+
+    $explicit: palette.get-override($scheme, $name, null, $variant);
+    @if $explicit {
+        @return $explicit;
+    }
+
+    $base: palette.get-override($scheme, "base", null, "base");
+    $color: palette.get-override($scheme, $name, null, "base") or
+        palette.get-color($name, null, "base");
+    @return resolver.resolve($scheme, null, $name, $base, $color, $variant) or $fallback;
+}
+
+/// Returns the variant color of a palette color for one component and one scheme.
+/// If the scheme does not define the variant, it is resolved from the scheme's colors. If that fails, the fallback is returned.
+///
+/// @param {String} $scheme - Scheme name
+/// @param {String} $component - Component name
+/// @param {String} $name - Color name
+/// @param {String} $variant - Variant name
+/// @param {Variable<Color> | Color} $fallback [null] - Value returned when the variant cannot be resolved
+/// @return {Variable<Color> | Color | null} The variant color for the scheme, or the fallback
+/// @throw If `$scheme`, `$component`, `$name` or `$variant` is not a string
+@function scheme-variant-for($scheme, $component, $name, $variant, $fallback: null) {
+    $scheme: util.assert-string($scheme, "scheme-variant-for", "scheme");
+    $component: util.assert-string($component, "scheme-variant-for", "component");
+    $name: util.assert-string($name, "scheme-variant-for", "name");
+    $variant: util.assert-string($variant, "scheme-variant-for", "variant");
+
+    $explicit: palette.get-override($scheme, $name, $component, $variant);
+    @if $explicit {
+        @return $explicit;
+    }
+
+    $base: palette.get-override($scheme, "base", null, "base");
+    $color: palette.get-override($scheme, $name, null, "base") or
+        palette.get-color($name, null, "base");
+    @return resolver.resolve($scheme, $component, $name, $base, $color, $variant) or $fallback;
+}

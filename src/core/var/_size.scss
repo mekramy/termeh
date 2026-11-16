@@ -1,6 +1,6 @@
 @use "sass:map";
 @use "../scheme";
-@use "../utility";
+@use "../util";
 
 $-sizes: () !default;
 $-overrides: () !default;
@@ -10,7 +10,7 @@ $-overrides: () !default;
 }
 
 @function -fail($name) {
-    @return "Unknown size '#{$name}'. Available: #{utility.print($-sizes)}.";
+    @return "Unknown size '#{$name}'. Available: #{util.print($-sizes)}.";
 }
 
 /// Defines a size that can be used in the theme.
@@ -19,8 +19,8 @@ $-overrides: () !default;
 /// @param {Length} $size - Size value
 /// @throw If `$name` is not a string or `$size` is not a number
 @mixin define-size($name, $size) {
-    $name: utility.assert-string($name, "define-size", "name");
-    $size: utility.assert-number($size, "define-size", "size");
+    $name: util.assert-string($name, "define-size", "name");
+    $size: util.assert-number($size, "define-size", "size");
 
     $-sizes: map.set($-sizes, $name, $size) !global;
 }
@@ -32,15 +32,15 @@ $-overrides: () !default;
 /// @param {Length} $size - Size value for the scheme
 /// @throw If `$scheme` or `$name` is not a string, `$size` is not a number, or the size is not defined
 @mixin override-size($scheme, $name, $size) {
-    $scheme: utility.assert-string($scheme, "override-size", "scheme");
-    $name: utility.assert-string($name, "override-size", "name");
-    $size: utility.assert-number($size, "override-size", "size");
+    $scheme: util.assert-string($scheme, "override-size", "scheme");
+    $name: util.assert-string($name, "override-size", "name");
+    $size: util.assert-number($size, "override-size", "size");
     @if -missing($name) {
         @error -fail($name);
     }
 
     $_: scheme.define-scheme($scheme);
-    $-overrides: utility.deep-set($-overrides, $size, $scheme, $name) !global;
+    $-overrides: util.deep-set($-overrides, $size, $scheme, $name) !global;
 }
 
 /// Returns the value of a defined size.
@@ -49,7 +49,7 @@ $-overrides: () !default;
 /// @return {Length} Size value
 /// @throw If `$name` is not a string or the size is not defined
 @function size-value($name) {
-    $name: utility.assert-string($name, "size-value", "name");
+    $name: util.assert-string($name, "size-value", "name");
     @if -missing($name) {
         @error -fail($name);
     }
@@ -64,8 +64,8 @@ $-overrides: () !default;
 /// @return {Length | null} Size value for the scheme, or `null` if the scheme does not override it
 /// @throw If `$scheme` or `$name` is not a string, or the size is not defined
 @function scheme-size($scheme, $name) {
-    $scheme: utility.assert-string($scheme, "scheme-size", "scheme");
-    $name: utility.assert-string($name, "scheme-size", "name");
+    $scheme: util.assert-string($scheme, "scheme-size", "scheme");
+    $name: util.assert-string($name, "scheme-size", "name");
     @if -missing($name) {
         @error -fail($name);
     }
@@ -80,7 +80,7 @@ $-overrides: () !default;
 /// @return {Variable<Length>} CSS variable of the size
 /// @throw If `$name` is not a string or the size is not defined
 @function size($name) {
-    $name: utility.assert-string($name, "size", "name");
+    $name: util.assert-string($name, "size", "name");
     @if -missing($name) {
         @error -fail($name);
     }
@@ -103,12 +103,12 @@ $-overrides: () !default;
 /// @param {List<String>} $excludes [null] - Size names to exclude; none when not a list
 /// @return {Map<String, Variable<Length>>} Matching sizes and their CSS variables
 @function sizes($includes: null, $excludes: null) {
-    $includes: utility.assert-list($includes, "sizes", "includes", map.keys($-sizes));
-    $excludes: utility.assert-list($excludes, "sizes", "excludes", ());
+    $includes: util.assert-list($includes, "sizes", "includes", map.keys($-sizes));
+    $excludes: util.assert-list($excludes, "sizes", "excludes", ());
 
     $result: ();
     @each $name, $size in $-sizes {
-        @if utility.should-include($name, $includes, $excludes) {
+        @if util.should-include($name, $includes, $excludes) {
             $token: "size-#{$name}";
             $_: scheme.define-variable(null, $token, $size);
 

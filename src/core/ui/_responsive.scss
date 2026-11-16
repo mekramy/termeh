@@ -1,5 +1,5 @@
 @use "sass:map";
-@use "../utility";
+@use "../util";
 
 $-queries: (
     "until-ultrawide": "screen and (max-width: 1535.98px)",
@@ -20,7 +20,7 @@ $-queries: (
 }
 
 @function -fail($name) {
-    @return "Unknown media query '#{$name}'. Available: #{utility.print($-queries)}.";
+    @return "Unknown media query '#{$name}'. Available: #{util.print($-queries)}.";
 }
 
 /// Returns a defined media query.
@@ -29,7 +29,7 @@ $-queries: (
 /// @return {String} Media query
 /// @throw If `$name` is not a string or is not a defined media query
 @function media-query($name) {
-    $name: utility.assert-string($name, "media-query", "name");
+    $name: util.assert-string($name, "media-query", "name");
     @if -missing($name) {
         @error -fail($name);
     }
@@ -43,12 +43,12 @@ $-queries: (
 /// @param {List<String>} $excludes [null] - Query names to exclude; none when not a list
 /// @return {Map<String, String>} Matching query names and media queries
 @function media-queries($includes: null, $excludes: null) {
-    $includes: utility.assert-list($includes, "media-queries", "includes", map.keys($-queries));
-    $excludes: utility.assert-list($excludes, "media-queries", "excludes", ());
+    $includes: util.assert-list($includes, "media-queries", "includes", map.keys($-queries));
+    $excludes: util.assert-list($excludes, "media-queries", "excludes", ());
 
     $result: ();
     @each $name, $query in $-queries {
-        @if utility.should-include($name, $includes, $excludes) {
+        @if util.should-include($name, $includes, $excludes) {
             $result: map.set($result, $name, $query);
         }
     }

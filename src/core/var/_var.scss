@@ -1,6 +1,6 @@
 @use "sass:map";
 @use "../scheme";
-@use "../utility";
+@use "../util";
 
 $-vars: () !default;
 $-overrides: () !default;
@@ -12,10 +12,10 @@ $-overrides: () !default;
 /// @param {*} $value - Value of the property
 /// @throw If `$component` or `$property` is not a string
 @mixin define($component, $property, $value) {
-    $component: utility.assert-string($component, "define", "component");
-    $property: utility.assert-string($property, "define", "property");
+    $component: util.assert-string($component, "define", "component");
+    $property: util.assert-string($property, "define", "property");
 
-    $-vars: utility.deep-set($-vars, $value, $component, $property) !global;
+    $-vars: util.deep-set($-vars, $value, $component, $property) !global;
 }
 
 /// Sets the value of a component variable for one scheme.
@@ -26,12 +26,12 @@ $-overrides: () !default;
 /// @param {*} $value - Value of the property for the scheme
 /// @throw If `$scheme`, `$component` or `$property` is not a string
 @mixin override($scheme, $component, $property, $value) {
-    $scheme: utility.assert-string($scheme, "override", "scheme");
-    $component: utility.assert-string($component, "override", "component");
-    $property: utility.assert-string($property, "override", "property");
+    $scheme: util.assert-string($scheme, "override", "scheme");
+    $component: util.assert-string($component, "override", "component");
+    $property: util.assert-string($property, "override", "property");
 
     $_: scheme.define-scheme($scheme);
-    $-overrides: utility.deep-set($-overrides, $value, $scheme, $component, $property) !global;
+    $-overrides: util.deep-set($-overrides, $value, $scheme, $component, $property) !global;
 }
 
 /// Returns the value of a component variable.
@@ -42,8 +42,8 @@ $-overrides: () !default;
 /// @return {*} Value of the property, or the fallback
 /// @throw If `$component` or `$property` is not a string
 @function value($component, $property, $fallback: null) {
-    $component: utility.assert-string($component, "value", "component");
-    $property: utility.assert-string($property, "value", "property");
+    $component: util.assert-string($component, "value", "component");
+    $property: util.assert-string($property, "value", "property");
 
     @return map.get($-vars, $component, $property) or $fallback;
 }
@@ -57,9 +57,9 @@ $-overrides: () !default;
 /// @return {*} Value of the property for the scheme, or the fallback
 /// @throw If `$scheme`, `$component` or `$property` is not a string
 @function scheme-value($scheme, $component, $property, $fallback: null) {
-    $scheme: utility.assert-string($scheme, "scheme-value", "scheme");
-    $component: utility.assert-string($component, "scheme-value", "component");
-    $property: utility.assert-string($property, "scheme-value", "property");
+    $scheme: util.assert-string($scheme, "scheme-value", "scheme");
+    $component: util.assert-string($component, "scheme-value", "component");
+    $property: util.assert-string($property, "scheme-value", "property");
 
     @return map.get($-overrides, $scheme, $component, $property) or $fallback;
 }
@@ -73,8 +73,8 @@ $-overrides: () !default;
 /// @return {Variable<*> | null} CSS variable of the property or `null` if it cannot be resolved
 /// @throw If `$component` or `$property` is not a string
 @function var($component, $property, $fallback: null) {
-    $component: utility.assert-string($component, "var", "component");
-    $property: utility.assert-string($property, "var", "property");
+    $component: util.assert-string($component, "var", "component");
+    $property: util.assert-string($property, "var", "property");
 
     $token: "var-#{$component}-#{$property}";
     $value: map.get($-vars, $component, $property) or $fallback;

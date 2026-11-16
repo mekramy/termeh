@@ -1,4 +1,4 @@
-@use "../core/module";
+@use "../core";
 
 /// Applies field styles.
 ///
@@ -24,27 +24,27 @@
 ///
 /// @require reset
 @mixin use-field($colors: ()) {
-    @include module.define-module("form-field", "reset") {
-        $gap-micro: module.var("gap", "micro");
-        $gap-macro: module.var("gap", "macro");
-        $strong-weight: module.var("text", "strong-weight");
+    @include core.define-module("form-field", "reset") {
+        $gap-micro: core.var("gap", "micro");
+        $gap-macro: core.var("gap", "macro");
+        $strong-weight: core.var("text", "strong-weight");
 
-        $disabled-opacity: module.var("input", "disabled-opacity");
+        $disabled-opacity: core.var("input", "disabled-opacity");
 
-        $error-text: module.variant("error", "text");
-        $meta-text: module.variant-for("input", "base", "meta");
-        $accent-text: module.variant-for("input", "base", "accent-text");
-        $disabled-foreground: module.variant-for("input", "base", "disabled-foreground");
+        $error-text: core.variant("error", "text");
+        $meta-text: core.variant-for("input", "base", "meta");
+        $accent-text: core.variant-for("input", "base", "accent-text");
+        $disabled-foreground: core.variant-for("input", "base", "disabled-foreground");
 
         .field {
             display: block;
 
-            @include module.marged() {
+            @include core.marged() {
                 margin-bottom: $gap-macro;
             }
 
             > * {
-                @include module.marged(".help", ".error") {
+                @include core.marged(".help", ".error") {
                     margin-bottom: $gap-micro;
                 }
             }
@@ -72,8 +72,8 @@
                 }
             }
 
-            @each $name, $palette in module.colors($includes: $colors) {
-                $-accent-color: module.variant-for("input", $name, "accent-text");
+            @each $name, $palette in core.colors($includes: $colors) {
+                $-accent-color: core.variant-for("input", $name, "accent-text");
 
                 &.is-#{$name} {
                     &.is-required {
@@ -83,7 +83,7 @@
                         }
                     }
 
-                    @include module.selection($name);
+                    @include core.selection($name);
                 }
             }
 
@@ -94,7 +94,7 @@
                 }
             }
 
-            @include module.is-disabled() {
+            @include core.is-disabled() {
                 > label,
                 .help,
                 .error {

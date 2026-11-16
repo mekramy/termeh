@@ -1,0 +1,111 @@
+@use "palette";
+@use "../scheme";
+@use "../util";
+
+/// Defines a palette color.
+///
+/// @param {String} $name - Color name
+/// @param {Color} $color - Base color
+/// @throw If `$name` is not a string or `$color` is not a color
+@mixin define-palette($name, $color) {
+    $name: util.assert-string($name, "define-palette", "name");
+    $color: util.assert-color($color, "define-palette", "color");
+
+    @include palette.set-color($name, null, "base", $color);
+}
+
+/// Sets the base color of a defined palette color for one scheme.
+///
+/// @param {String} $scheme - Scheme name
+/// @param {String} $name - Color name
+/// @param {Color} $color - Base color for the scheme
+/// @throw If `$scheme` or `$name` is not a string, `$color` is not a color, or the palette color is not defined
+@mixin override-palette($scheme, $name, $color) {
+    $scheme: util.assert-string($scheme, "override-palette", "scheme");
+    $name: util.assert-string($name, "override-palette", "name");
+    $color: util.assert-color($color, "override-palette", "color");
+    @if palette.is-missing($name) {
+        @error palette.fail($name);
+    }
+
+    $_: scheme.define-scheme($scheme);
+    @include palette.set-override($scheme, $name, null, "base", $color);
+}
+
+/// Defines a variant color for a defined palette color.
+///
+/// @param {String} $name - Color name
+/// @param {String} $variant - Variant name
+/// @param {Color} $color - Color of the variant
+/// @throw If `$name` or `$variant` is not a string, `$color` is not a color, or the palette color is not defined
+@mixin define-variant($name, $variant, $color) {
+    $name: util.assert-string($name, "define-variant", "name");
+    $variant: util.assert-string($variant, "define-variant", "variant");
+    $color: util.assert-color($color, "define-variant", "color");
+    @if palette.is-missing($name) {
+        @error palette.fail($name);
+    }
+
+    @include palette.set-color($name, null, $variant, $color);
+}
+
+/// Defines a variant color of a defined palette color for one component.
+///
+/// @param {String} $component - Component name
+/// @param {String} $name - Color name
+/// @param {String} $variant - Variant name
+/// @param {Color} $color - Color of the variant
+/// @throw If `$component`, `$name` or `$variant` is not a string, `$color` is not a color, or the palette color is not defined
+@mixin define-component-variant($component, $name, $variant, $color) {
+    $component: util.assert-string($component, "define-component-variant", "component");
+    $name: util.assert-string($name, "define-component-variant", "name");
+    $variant: util.assert-string($variant, "define-component-variant", "variant");
+    $color: util.assert-color($color, "define-component-variant", "color");
+    @if palette.is-missing($name) {
+        @error palette.fail($name);
+    }
+
+    @include palette.set-color($name, $component, $variant, $color);
+}
+
+/// Sets a variant color of a defined palette color for one scheme.
+///
+/// @param {String} $scheme - Scheme name
+/// @param {String} $name - Color name
+/// @param {String} $variant - Variant name
+/// @param {Color} $color - Color of the variant for the scheme
+/// @throw If `$scheme`, `$name` or `$variant` is not a string, `$color` is not a color, or the palette color is not defined
+@mixin override-variant($scheme, $name, $variant, $color) {
+    $scheme: util.assert-string($scheme, "override-variant", "scheme");
+    $name: util.assert-string($name, "override-variant", "name");
+    $variant: util.assert-string($variant, "override-variant", "variant");
+    $color: util.assert-color($color, "override-variant", "color");
+    @if palette.is-missing($name) {
+        @error palette.fail($name);
+    }
+
+    $_: scheme.define-scheme($scheme);
+    @include palette.set-override($scheme, $name, null, $variant, $color);
+}
+
+/// Sets a variant color of a defined palette color for one component and one scheme.
+///
+/// @param {String} $scheme - Scheme name
+/// @param {String} $component - Component name
+/// @param {String} $name - Color name
+/// @param {String} $variant - Variant name
+/// @param {Color} $color - Color of the variant for the scheme
+/// @throw If `$scheme`, `$component`, `$name` or `$variant` is not a string, `$color` is not a color, or the palette color is not defined
+@mixin override-component-variant($scheme, $component, $name, $variant, $color) {
+    $scheme: util.assert-string($scheme, "override-component-variant", "scheme");
+    $component: util.assert-string($component, "override-component-variant", "component");
+    $name: util.assert-string($name, "override-component-variant", "name");
+    $variant: util.assert-string($variant, "override-component-variant", "variant");
+    $color: util.assert-color($color, "override-component-variant", "color");
+    @if palette.is-missing($name) {
+        @error palette.fail($name);
+    }
+
+    $_: scheme.define-scheme($scheme);
+    @include palette.set-override($scheme, $name, $component, $variant, $color);
+}

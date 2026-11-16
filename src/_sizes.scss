@@ -1,9 +1,9 @@
-@use "core/module";
+@use "core";
 
-@include module.define-size("small", 0.8em);
-@include module.define-size("normal", 1em);
-@include module.define-size("medium", 1.25em);
-@include module.define-size("large", 1.5em);
-@include module.define-size("big", 2em);
-@include module.define-size("huge", 2.5em);
-@include module.define-size("massive", 3em);
+@include core.define-size("small", 0.8em);
+@include core.define-size("normal", 1em);
+@include core.define-size("medium", 1.25em);
+@include core.define-size("large", 1.5em);
+@include core.define-size("big", 2em);
+@include core.define-size("huge", 2.5em);
+@include core.define-size("massive", 3em);

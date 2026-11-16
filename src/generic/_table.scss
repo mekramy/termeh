@@ -1,4 +1,4 @@
-@use "../core/module";
+@use "../core";
 
 /// Applies table styles and color classes.
 /// It adds a `.is-<color>` class for each color, and registers the table color resolver.
@@ -38,29 +38,29 @@
 ///
 /// @require reset
 @mixin use-table($colors: ()) {
-    @include module.define-module("base-table", "reset") {
-        $strong-weight: module.var("text", "strong-weight");
+    @include core.define-module("base-table", "reset") {
+        $strong-weight: core.var("text", "strong-weight");
 
-        $primary: module.color("primary");
+        $primary: core.color("primary");
 
-        $foreground: module.variant-for("table", "base", "foreground");
-        $background: module.variant-for("table", "base", "background");
-        $decorator: module.variant-for("table", "base", "decorator");
-        $sorted-text: module.variant-for("table", "base", "sorted-text");
+        $foreground: core.variant-for("table", "base", "foreground");
+        $background: core.variant-for("table", "base", "background");
+        $decorator: core.variant-for("table", "base", "decorator");
+        $sorted-text: core.variant-for("table", "base", "sorted-text");
 
-        $sorted-background: module.variant-for("table", "base", "sorted-background");
-        $striped-background: module.variant-for("table", "base", "striped-background");
-        $hover-background: module.variant-for("table", "base", "hover-background");
+        $sorted-background: core.variant-for("table", "base", "sorted-background");
+        $striped-background: core.variant-for("table", "base", "striped-background");
+        $hover-background: core.variant-for("table", "base", "hover-background");
 
-        $row-separator: module.variant-for("table", "base", "row-separator");
-        $column-separator: module.variant-for("table", "base", "column-separator");
-        $section-separator: module.variant-for("table", "base", "section-separator");
+        $row-separator: core.variant-for("table", "base", "row-separator");
+        $column-separator: core.variant-for("table", "base", "column-separator");
+        $section-separator: core.variant-for("table", "base", "section-separator");
 
         .table-container {
             display: block;
             overflow: auto visible;
-            @include module.overflow-touch();
-            @include module.scrollable($primary);
+            @include core.overflow-touch();
+            @include core.scrollable($primary);
         }
 
         table {
@@ -78,7 +78,7 @@
                     overflow: hidden;
                     white-space: nowrap;
                     background-color: $background;
-                    @include module.transition(all);
+                    @include core.transition(all);
 
                     &:not(:first-child) {
                         border-top: 1px solid $row-separator;
@@ -89,8 +89,8 @@
                         vertical-align: middle;
                         color: $foreground;
                         font-weight: $strong-weight;
-                        padding: module.inline-padding();
-                        @include module.transition(all);
+                        padding: core.inline-padding();
+                        @include core.transition(all);
 
                         &:not(:first-child) {
                             border-inline-start: 1px solid $column-separator;
@@ -143,7 +143,7 @@
             tfoot {
                 tr {
                     background-color: $background;
-                    @include module.transition(all);
+                    @include core.transition(all);
 
                     &:not(:last-child) {
                         border-bottom: 1px solid $row-separator;
@@ -154,8 +154,8 @@
                         font-weight: inherit;
                         vertical-align: middle;
                         color: $foreground;
-                        padding: module.inline-padding();
-                        @include module.transition(all);
+                        padding: core.inline-padding();
+                        @include core.transition(all);
 
                         &:not(:first-child) {
                             border-inline-start: 1px solid $column-separator;
@@ -206,10 +206,8 @@
                         display: none;
                     }
 
-                    &:not(.is-expanded):has(+ tr.extra) {
-                        + tr.extra {
-                            display: none;
-                        }
+                    &:not(.is-expanded) + tr.extra {
+                        display: none;
                     }
                 }
             }
@@ -230,22 +228,22 @@
                 background-color: $hover-background;
             }
 
-            @each $name, $palette in module.colors($includes: $colors) {
-                $-foreground: module.variant-for("table", $name, "foreground");
-                $-background: module.variant-for("table", $name, "background");
-                $-decorator: module.variant-for("table", $name, "decorator", $palette);
-                $-sorted-text: module.variant-for("table", $name, "sorted-text");
+            @each $name, $palette in core.colors($includes: $colors) {
+                $-foreground: core.variant-for("table", $name, "foreground");
+                $-background: core.variant-for("table", $name, "background");
+                $-decorator: core.variant-for("table", $name, "decorator", $palette);
+                $-sorted-text: core.variant-for("table", $name, "sorted-text");
 
-                $-sorted-background: module.variant-for("table", $name, "sorted-background");
-                $-striped-background: module.variant-for("table", $name, "striped-background");
-                $-hover-background: module.variant-for("table", $name, "hover-background");
+                $-sorted-background: core.variant-for("table", $name, "sorted-background");
+                $-striped-background: core.variant-for("table", $name, "striped-background");
+                $-hover-background: core.variant-for("table", $name, "hover-background");
 
-                $-row-separator: module.variant-for("table", $name, "row-separator");
-                $-column-separator: module.variant-for("table", $name, "column-separator");
-                $-section-separator: module.variant-for("table", $name, "section-separator");
+                $-row-separator: core.variant-for("table", $name, "row-separator");
+                $-column-separator: core.variant-for("table", $name, "column-separator");
+                $-section-separator: core.variant-for("table", $name, "section-separator");
 
                 &.is-#{$name} {
-                    @include module.selection($name);
+                    @include core.selection($name);
 
                     thead {
                         border-bottom-color: $-section-separator;

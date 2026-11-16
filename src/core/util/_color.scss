@@ -1,0 +1,71 @@
+@use "sass:meta";
+@use "sass:color";
+@use "sass:string";
+@use "validation";
+
+/// Converts a color to its RGB components.
+///
+/// @param {Color} $value - The color to convert
+/// @return {List<Number>} The RGB components of the color, or `null` if not a color
+@function to-rgb($value) {
+    @if validation.is-color($value) {
+        $r: color.channel($value, "red", $space: rgb);
+        $g: color.channel($value, "green", $space: rgb);
+        $b: color.channel($value, "blue", $space: rgb);
+
+        @return $r, $g, $b;
+    }
+
+    @return null;
+}
+
+/// Converts a palette CSS variable to its RGB counterpart.
+///
+/// @param {*} $value - Palette CSS variable (`var(--palette-*)`)
+/// @return {String} The matching `var(--rgb-*)` variable, or `null` if not a palette variable
+@function palette-rgb($value) {
+    $str: meta.inspect($value);
+    @if string.index($str, "var(--palette-") == 1 {
+        @return string.unquote("var(--rgb-#{string.slice($str, 15)}");
+    }
+
+    @return null;
+}
+
+/// Sets the alpha (opacity) of a color or palette CSS variable.
+///
+/// @param {Variable<Color> | Color} $value - Color or palette CSS variable
+/// @param {Variable<Number> | Number} $alpha - Alpha to apply, from 0 to 1
+/// @return {*} The color or palette variable with the applied alpha, or `null` if unsupported
+@function alpha($value, $alpha) {
+    @if $alpha {
+        @if validation.is-color($value) {
+            @return color.change($value, $alpha: $alpha);
+        } @else if validation.is-css-var($value) {
+            $rgb-var: palette-rgb($value);
+            @if $rgb-var {
+                // @return rgba($rgb-var, $alpha);
+                @return string.unquote("rgba(#{$rgb-var}, #{$alpha})");
+            }
+        }
+    }
+
+    @return null;
+}
+
+/// Mixes two colors by a given weight while preserving the alpha of `$color`.
+///
+/// @param {Variable<Color> | Color} $color - Color to mix
+/// @param {Variable<Color> | Color} $base - Color to mix with
+/// @param {Variable<Number> | Number} $weight - Mix weight, from 0 to 1
+/// @return {Color} The mixed color with the original alpha of `$color`
+@function mix($color, $base, $weight) {
+    $color: validation.assert-color($color, "mix", "color");
+    $base: validation.assert-color($base, "mix", "base");
+    $weight: validation.assert-number($weight, "mix", "weight");
+
+    $alpha: color.channel($color, "alpha");
+    $color: color.change($color, $alpha: 1);
+    $mixed: color.mix($color, $base, $weight);
+    @return color.change($mixed, $alpha: $alpha);
+}
