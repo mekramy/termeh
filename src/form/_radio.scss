@@ -120,16 +120,16 @@
             }
 
             @include core.is-disabled() {
-                color: $disabled-foreground !important;
-                opacity: $disabled-opacity !important;
+                color: core.important($disabled-foreground);
+                opacity: core.important($disabled-opacity);
                 @include core.locked();
 
                 input[type="radio"] {
-                    border-color: $disabled-border !important;
-                    background-color: $disabled-background !important;
+                    border-color: core.important($disabled-border);
+                    background-color: core.important($disabled-background);
 
                     &::after {
-                        background-color: $disabled-foreground !important;
+                        background-color: core.important($disabled-foreground);
                     }
                 }
             }

@@ -4,83 +4,83 @@
 ///
 /// Attached classes are created for all sides and corners, like `.is-attached`, `.is-left-attached` and `.is-top-right-attached`. Side classes also stretch the element with `align-self`.
 ///
-/// @output Border radius reset classes using `!important`
+/// @output Border radius reset classes
 @mixin use-attachment-helper() {
     @include core.define-module("attachment-helper") {
         .is-attached {
-            border-radius: 0 !important;
+            border-radius: core.important(0);
         }
 
         .is-left-attached {
-            border-start-end-radius: 0 !important;
-            border-end-end-radius: 0 !important;
+            border-start-end-radius: core.important(0);
+            border-end-end-radius: core.important(0);
             align-self: stretch;
         }
 
         .is-left-top-attached {
-            border-start-end-radius: 0 !important;
-            border-end-end-radius: 0 !important;
-            border-end-start-radius: 0 !important;
+            border-start-end-radius: core.important(0);
+            border-end-end-radius: core.important(0);
+            border-end-start-radius: core.important(0);
         }
 
         .is-left-bottom-attached {
-            border-start-end-radius: 0 !important;
-            border-end-end-radius: 0 !important;
-            border-start-start-radius: 0 !important;
+            border-start-end-radius: core.important(0);
+            border-end-end-radius: core.important(0);
+            border-start-start-radius: core.important(0);
         }
 
         .is-right-attached {
-            border-start-start-radius: 0 !important;
-            border-end-start-radius: 0 !important;
+            border-start-start-radius: core.important(0);
+            border-end-start-radius: core.important(0);
             align-self: stretch;
         }
 
         .is-right-top-attached {
-            border-start-start-radius: 0 !important;
-            border-end-start-radius: 0 !important;
-            border-end-end-radius: 0 !important;
+            border-start-start-radius: core.important(0);
+            border-end-start-radius: core.important(0);
+            border-end-end-radius: core.important(0);
         }
 
         .is-right-bottom-attached {
-            border-start-start-radius: 0 !important;
-            border-end-start-radius: 0 !important;
-            border-start-end-radius: 0 !important;
+            border-start-start-radius: core.important(0);
+            border-end-start-radius: core.important(0);
+            border-start-end-radius: core.important(0);
         }
 
         .is-top-attached {
-            border-end-end-radius: 0 !important;
-            border-end-start-radius: 0 !important;
+            border-end-end-radius: core.important(0);
+            border-end-start-radius: core.important(0);
             align-self: stretch;
         }
 
         .is-top-left-attached {
-            border-end-end-radius: 0 !important;
-            border-end-start-radius: 0 !important;
-            border-start-end-radius: 0 !important;
+            border-end-end-radius: core.important(0);
+            border-end-start-radius: core.important(0);
+            border-start-end-radius: core.important(0);
         }
 
         .is-top-right-attached {
-            border-end-end-radius: 0 !important;
-            border-end-start-radius: 0 !important;
-            border-start-start-radius: 0 !important;
+            border-end-end-radius: core.important(0);
+            border-end-start-radius: core.important(0);
+            border-start-start-radius: core.important(0);
         }
 
         .is-bottom-attached {
-            border-start-end-radius: 0 !important;
-            border-start-start-radius: 0 !important;
+            border-start-end-radius: core.important(0);
+            border-start-start-radius: core.important(0);
             align-self: stretch;
         }
 
         .is-bottom-left-attached {
-            border-start-end-radius: 0 !important;
-            border-start-start-radius: 0 !important;
-            border-end-end-radius: 0 !important;
+            border-start-end-radius: core.important(0);
+            border-start-start-radius: core.important(0);
+            border-end-end-radius: core.important(0);
         }
 
         .is-bottom-right-attached {
-            border-start-end-radius: 0 !important;
-            border-start-start-radius: 0 !important;
-            border-end-start-radius: 0 !important;
+            border-start-end-radius: core.important(0);
+            border-start-start-radius: core.important(0);
+            border-end-start-radius: core.important(0);
         }
     }
 }

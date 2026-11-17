@@ -172,8 +172,8 @@ html {
                 color: var(--vp-c-divider);
             }
 
-            mark {
-                text-decoration: none;
+            strong {
+                color: inherit;
             }
         }
     }

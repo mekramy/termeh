@@ -19,6 +19,18 @@
     @return $falsy;
 }
 
+/// Appends `!important` to a CSS value or ignore.
+///
+/// @param {*} $value - Value to make important
+/// @return {String} The value with `!important` appended
+@function important($value) {
+    @if $value {
+        @return #{$value} string.unquote("!important");
+    }
+
+    @return null;
+}
+
 /// Reverses the sign of a value using a CSS `calc()`.
 ///
 /// @param {Variable<Length> | Length} $value - Value to negate

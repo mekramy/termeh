@@ -8,31 +8,31 @@
 @mixin use-text-helper() {
     @include core.define-module("text-helper") {
         .is-italic {
-            font-style: italic !important;
+            font-style: core.important(italic);
         }
 
         .is-underline {
-            text-decoration: underline !important;
+            text-decoration: core.important(underline);
         }
 
         .is-line-through {
-            text-decoration: line-through !important;
+            text-decoration: core.important(line-through);
         }
 
         .is-undecorated {
-            text-decoration: none !important;
+            text-decoration: core.important(none);
         }
 
         .is-capitalized {
-            text-transform: capitalize !important;
+            text-transform: core.important(capitalize);
         }
 
         .is-lowercase {
-            text-transform: lowercase !important;
+            text-transform: core.important(lowercase);
         }
 
         .is-uppercase {
-            text-transform: uppercase !important;
+            text-transform: core.important(uppercase);
         }
 
         .is-ellipsis {
@@ -76,7 +76,7 @@
     @include core.define-module("text-sizes") {
         @each $name, $size in core.sizes($includes: $sizes) {
             .is-#{$name}-size {
-                font-size: $size !important;
+                font-size: core.important($size);
             }
         }
     }
@@ -92,7 +92,7 @@
     @include core.define-module("text-weights") {
         @each $name, $weight in core.weights($includes: $weights) {
             .is-#{$name}-weight {
-                font-weight: $weight !important;
+                font-weight: core.important($weight);
             }
         }
     }
@@ -108,7 +108,7 @@
     @include core.define-module("text-aligns") {
         @each $name, $align in core.text-aligns($includes: $aligns) {
             .is-#{$name}-align {
-                text-align: $align !important;
+                text-align: core.important($align);
             }
         }
     }

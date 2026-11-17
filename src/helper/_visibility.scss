@@ -8,24 +8,24 @@
 @mixin use-visibility-helper() {
     @include core.define-module("visibility-helper") {
         .is-hidden {
-            display: none !important;
+            display: core.important(none);
         }
 
         @include core.until-ultrawide() {
             .is-until-ultrawide-hidden {
-                display: none !important;
+                display: core.important(none);
             }
         }
 
         @include core.until-widescreen() {
             .is-until-widescreen-hidden {
-                display: none !important;
+                display: core.important(none);
             }
         }
 
         @include core.until-desktop() {
             .is-until-desktop-hidden {
-                display: none !important;
+                display: core.important(none);
             }
         }
 
@@ -35,7 +35,7 @@
             .is-desktop-only,
             .is-widescreen-only,
             .is-ultrawide-only {
-                display: none !important;
+                display: core.important(none);
             }
         }
 
@@ -45,7 +45,7 @@
             .is-desktop-hidden,
             .is-widescreen-only,
             .is-ultrawide-only {
-                display: none !important;
+                display: core.important(none);
             }
         }
 
@@ -55,7 +55,7 @@
             .is-desktop-only,
             .is-widescreen-hidden,
             .is-ultrawide-only {
-                display: none !important;
+                display: core.important(none);
             }
         }
 
@@ -65,7 +65,7 @@
             .is-desktop-only,
             .is-widescreen-only,
             .is-ultrawide-hidden {
-                display: none !important;
+                display: core.important(none);
             }
         }
 
@@ -75,37 +75,37 @@
             .is-desktop-only,
             .is-widescreen-only,
             .is-ultrawide-only {
-                display: none !important;
+                display: core.important(none);
             }
         }
 
         @include core.tablet-only() {
             .is-tablet-only-hidden {
-                display: none !important;
+                display: core.important(none);
             }
         }
 
         @include core.desktop-only() {
             .is-desktop-only-hidden {
-                display: none !important;
+                display: core.important(none);
             }
         }
 
         @include core.widescreen-only() {
             .is-widescreen-only-hidden {
-                display: none !important;
+                display: core.important(none);
             }
         }
 
         @include core.non-touch() {
             .is-touch-only {
-                display: none !important;
+                display: core.important(none);
             }
         }
 
         @include core.touch() {
             .is-touch-hidden {
-                display: none !important;
+                display: core.important(none);
             }
         }
     }

@@ -12,28 +12,28 @@
         $primary: core.color("primary");
 
         .is-ltr {
-            direction: ltr !important;
+            direction: core.important(ltr);
         }
 
         .is-rtl {
-            direction: rtl !important;
+            direction: core.important(rtl);
         }
 
         .is-clipped {
-            overflow: hidden !important;
+            overflow: core.important(hidden);
         }
 
         .is-radiusless {
-            border-radius: 0 !important;
+            border-radius: core.important(0);
         }
 
         .is-shadowless {
-            box-shadow: none !important;
+            box-shadow: core.important(none);
         }
 
         .is-clickable {
-            cursor: pointer !important;
-            pointer-events: all !important;
+            cursor: core.important(pointer);
+            pointer-events: core.important(all);
         }
 
         .is-unselectable {

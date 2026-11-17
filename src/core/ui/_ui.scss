@@ -383,12 +383,12 @@
 /// @param {Variable<Number> | Number | null} $opacity - Disabled opacity
 /// @output Declarations that block interaction and set the opacity, text color, background color and border color
 @mixin disabled($color, $background, $border, $opacity) {
-    user-select: none !important;
-    pointer-events: none !important;
-    opacity: $opacity !important;
-    color: $color !important;
-    background-color: $background !important;
-    border-color: $border !important;
+    user-select: util.important(none);
+    pointer-events: util.important(none);
+    opacity: util.important($opacity);
+    color: util.important($color);
+    background-color: util.important($background);
+    border-color: util.important($border);
 }
 
 /// Styles selected text with the colors of a palette color.

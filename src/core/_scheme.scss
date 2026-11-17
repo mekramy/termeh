@@ -1,9 +1,11 @@
 @use "sass:map";
 @use "sass:list";
+@use "sass:string";
 @use "util";
 
 $-tokens: () !default;
 $-schemes: () !default;
+$-names: () !default;
 
 @function -missing($name) {
     @return not list.index($-schemes, $name);
@@ -11,6 +13,42 @@ $-schemes: () !default;
 
 @function -error($name) {
     @return "Unknown scheme '#{$name}'. Available: #{util.print($-schemes)}.";
+}
+
+@function -prefix($name) {
+    $prefixes: (
+        "var": "v",
+        "size": "s",
+        "gap": "g",
+        "palette": "p",
+        "rgb": "r",
+    );
+
+    $prefix: $name;
+    $dash: string.index($name, "-");
+    @if $dash {
+        $prefix: string.slice($name, 1, $dash - 1);
+    }
+
+    @return map.get($prefixes, $prefix) or $prefix;
+}
+
+@function -rgb-to-palette($name) {
+    @if string.index($name, "rgb-") == 1 {
+        @return "palette-#{string.slice($name, 5)}";
+    }
+
+    @return $name;
+}
+
+@function -id($name) {
+    $normalized: -rgb-to-palette($name);
+    $i: list.index($-names, $normalized);
+    @if not $i {
+        $-names: list.append($-names, $normalized) !global;
+        $i: list.length($-names);
+    }
+    @return "#{-prefix($name)}-#{$i}";
 }
 
 /// Defines a color scheme if it is not defined yet.
@@ -47,7 +85,7 @@ $-schemes: () !default;
     $name: util.assert-string($name, "define-variable", "name");
 
     @if $value {
-        $name: util.tokenize($name);
+        $name: util.tokenize(-id($name));
         $-tokens: util.deep-set($-tokens, $value, $scheme, $name) !global;
     }
     @return null;
@@ -67,7 +105,7 @@ $-schemes: () !default;
         @return null;
     }
 
-    @return var(util.tokenize($name));
+    @return var(util.tokenize(-id($name)));
 }
 
 /// Outputs the CSS variables stored for a scheme.

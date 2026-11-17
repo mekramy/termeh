@@ -96,15 +96,23 @@
                             border-inline-start: 1px solid $column-separator;
                         }
 
-                        &.is-center-aligned {
+                        &.is-center-align {
                             text-align: center;
                         }
 
-                        &.is-right-aligned {
+                        &.is-start-align {
+                            text-align: start;
+                        }
+
+                        &.is-end-align {
+                            text-align: end;
+                        }
+
+                        &.is-right-align {
                             text-align: right;
                         }
 
-                        &.is-left-aligned {
+                        &.is-left-align {
                             text-align: left;
                         }
 
@@ -161,15 +169,23 @@
                             border-inline-start: 1px solid $column-separator;
                         }
 
-                        &.is-center-aligned {
+                        &.is-center-align {
                             text-align: center;
                         }
 
-                        &.is-right-aligned {
+                        &.is-start-align {
+                            text-align: start;
+                        }
+
+                        &.is-end-align {
+                            text-align: end;
+                        }
+
+                        &.is-right-align {
                             text-align: right;
                         }
 
-                        &.is-left-aligned {
+                        &.is-left-align {
                             text-align: left;
                         }
 

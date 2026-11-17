@@ -84,7 +84,7 @@
             }
 
             > * {
-                line-height: 1em !important;
+                line-height: core.important(1em);
             }
 
             input {
