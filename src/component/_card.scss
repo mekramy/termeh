@@ -17,7 +17,7 @@
 ///
 /// @require {Variable<Length>} var("padding", "container") - Card padding
 ///
-/// @require {List<List<String | Length>>} var("card", "sizes") [var("box", "sizes")] - List of size names and widths
+/// @require {List<List<String | Length>>} value("card", "sizes") [value("box", "sizes")] - List of size names and widths
 /// @require {Variable<Number>} var("card", "opacity") [var("box", "opacity")] - Background opacity
 /// @require {Variable<Filter>} var("card", "backdrop-filter") [var("box", "backdrop-filter")] - Backdrop filter
 /// @require {Variable<BoxShadow>} var("card", "shadow") [var("box", "shadow")] - Card shadow
@@ -41,7 +41,7 @@
     $-overlay-opacity: core.var("overlay", "opacity");
     $-overlay-filter: core.var("overlay", "filter");
 
-    $-box-sizes: core.var("box", "sizes");
+    $-box-sizes: core.value("box", "sizes");
     $-box-opacity: core.var("box", "opacity");
     $-box-filter: core.var("box", "backdrop-filter");
     $-box-shadow: core.var("box", "shadow");
@@ -64,7 +64,7 @@
 
         $padding-container: core.var("padding", "container");
 
-        $sizes: core.var("card", "sizes", $-box-sizes);
+        $sizes: core.value("card", "sizes", $-box-sizes);
         $opacity: core.var("card", "opacity", $-box-opacity);
         $filter: core.var("card", "backdrop-filter", $-box-filter);
         $shadow: core.var("card", "shadow", $-box-shadow);

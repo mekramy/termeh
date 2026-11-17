@@ -7,13 +7,14 @@
 /// Supports `align`, `justify`, `gap` and `device` variations.
 ///
 /// @param {List<String>} $gaps [()] - Gap names to include; `null` includes all defined gaps
+/// @param {List<String>} $breakpoints [()] - Breakpoint names to include; `null` includes all defined breakpoints
 /// @output The `.landscape` class and its variation classes
 ///
 /// @require {Variable<Length>} var("gap", "micro") - Default space between items
 /// @require {Variable<Color>} color("primary") - Accent color of the scrollbar
 ///
 /// @require reset
-@mixin use-landscape($gaps: ()) {
+@mixin use-landscape($gaps: (), $breakpoints: ()) {
     @include core.define-module("landscape", "reset") {
         $gap-micro: core.var("gap", "micro");
         $primary: core.color("primary");
@@ -77,7 +78,7 @@
                 }
             }
 
-            @each $device, $query in core.media-queries() {
+            @each $device, $query in core.media-queries($includes: $breakpoints) {
                 @media #{$query} {
                     @each $name, $align in core.flex-aligns() {
                         &.is-#{$device}-#{$name}-aligned {

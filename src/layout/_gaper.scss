@@ -7,13 +7,14 @@
 /// Supports `align`, `justify`, `gap` and `device` variations.
 ///
 /// @param {List<String>} $gaps [()] - Gap names to include; `null` includes all defined gaps
+/// @param {List<String>} $breakpoints [()] - Breakpoint names to include; `null` includes all defined breakpoints
 /// @output The `.gaper` class and its variation classes
 ///
 /// @require {Variable<Length>} var("gap", "micro") - Default space between items
 /// @require {Variable<Color>} variant("base", "separator") - Background color of `.divider`
 ///
 /// @require reset
-@mixin use-gaper($gaps: ()) {
+@mixin use-gaper($gaps: (), $breakpoints: ()) {
     @include core.define-module("gaper", "reset") {
         $gap-micro: core.var("gap", "micro");
         $separator: core.variant("base", "separator");
@@ -122,7 +123,7 @@
                 }
             }
 
-            @each $device, $query in core.media-queries() {
+            @each $device, $query in core.media-queries($includes: $breakpoints) {
                 @media #{$query} {
                     &.is-#{$device}-stacked {
                         flex-direction: column;

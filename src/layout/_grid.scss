@@ -8,12 +8,13 @@
 ///
 /// @param {List<String>} $gaps [()] - Gap names to include; `null` includes all defined gaps
 /// @param {List<String>} $units [()] - Unit names to include; `null` includes all defined units
+/// @param {List<String>} $breakpoints [()] - Breakpoint names to include; `null` includes all defined breakpoints
 /// @output The `.grid` class and its variation classes
 ///
 /// @require {Variable<Length>} var("gap", "macro") - Default space between rows and columns
 ///
 /// @require reset
-@mixin use-grid($gaps: (), $units: ()) {
+@mixin use-grid($gaps: (), $units: (), $breakpoints: ()) {
     @include core.define-module("grid", "reset") {
         $gap-macro: core.var("gap", "macro");
 
@@ -78,7 +79,7 @@
                 }
             }
 
-            @each $device, $query in core.media-queries() {
+            @each $device, $query in core.media-queries($includes: $breakpoints) {
                 @media #{$query} {
                     > .column {
                         @each $name, $unit in core.units($includes: $units) {

@@ -81,6 +81,11 @@
 @include core.define("component", "skeleton-opacity", 0.3); // Skeleton opacity
 @include core.define("component", "outline-opacity", 0.2); // Outline opacity
 @include core.define("component", "disabled-opacity", 0.45); // Opacity for disabled component
+@include core.define(
+    "component",
+    "skeleton-ratios",
+    ((4 3), (16 9))
+); // Skeleton block aspect ratios
 
 // Boxes
 @include core.define("box", "opacity", 1); // Background opacity
