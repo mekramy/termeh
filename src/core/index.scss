@@ -1,5 +1,5 @@
 @forward "module";
-@forward "scheme";
+@forward "scheme" hide define-scheme, schemes, define-variable, variable;
 @forward "palette" hide resolve;
 @forward "ui";
 @forward "util" hide to-rgb, palette-rgb, should-include, tokenize, deep-set, deep-append,
