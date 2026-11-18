@@ -1,5 +1,6 @@
 import type MarkdownIt from "markdown-it";
 import type { Highlighter } from "shiki";
+import theme from "../theme";
 
 export function inlineCode(md: MarkdownIt, highlighter: Highlighter) {
     md.inline.ruler.before("backticks", "inline_shiki", (state, silent) => {
@@ -31,10 +32,7 @@ export function inlineCode(md: MarkdownIt, highlighter: Highlighter) {
         const html = highlighter.codeToHtml(token.content, {
             defaultColor: false,
             lang: token.meta.lang,
-            themes: {
-                light: "one-light",
-                dark: "catppuccin-frappe",
-            },
+            themes: theme as never,
         });
 
         const code = html.match(/<code\b[^>]*>([\s\S]*?)<\/code>/);

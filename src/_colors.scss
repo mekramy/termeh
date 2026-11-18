@@ -278,9 +278,9 @@
     @return null;
 }
 
-@include core.define-fallback-resolver(meta.get-function("base-resolver"));
-@include core.define-fallback-resolver(meta.get-function("overlay-resolver"), "overlay");
-@include core.define-fallback-resolver(meta.get-function("box-resolver"), "box");
-@include core.define-fallback-resolver(meta.get-function("table-resolver"), "table");
-@include core.define-fallback-resolver(meta.get-function("input-resolver"), "input");
-@include core.define-fallback-resolver(meta.get-function("component-resolver"), "component");
+@include core.define-resolver(meta.get-function("base-resolver"));
+@include core.define-resolver(meta.get-function("overlay-resolver"), "overlay");
+@include core.define-resolver(meta.get-function("box-resolver"), "box");
+@include core.define-resolver(meta.get-function("table-resolver"), "table");
+@include core.define-resolver(meta.get-function("input-resolver"), "input");
+@include core.define-resolver(meta.get-function("component-resolver"), "component");

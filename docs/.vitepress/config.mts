@@ -7,6 +7,7 @@ import {
 } from "vitepress-plugin-group-icons";
 import llmstxt from "vitepress-plugin-llms";
 import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
+import theme from "./theme";
 
 import {
     inlineCode,
@@ -72,10 +73,7 @@ export default defineConfig({
     },
 
     markdown: {
-        theme: {
-            light: "one-light",
-            dark: "catppuccin-frappe",
-        },
+        theme: theme as never,
 
         shikiSetup(instance) {
             highlighter = instance;

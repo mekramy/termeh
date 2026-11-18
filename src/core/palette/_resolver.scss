@@ -11,9 +11,9 @@ $-resolvers: () !default;
 /// @param {Function} $resolver - Called with `$scheme, $palette, $is-light, $base, $color, $variant`
 /// @param {String | null} $component [null] - Component name or `null` for global resolver
 /// @throw If `$component` is neither a string nor `null`, or `$resolver` is not a function
-@mixin define-resolver($resolver, $component: null) {
-    $resolver: util.assert-function($resolver, "define-resolver", "resolver");
-    $component: util.assert-nullable-string($component, "define-resolver", "component", null);
+@mixin override-resolver($resolver, $component: null) {
+    $resolver: util.assert-function($resolver, "override-resolver", "resolver");
+    $component: util.assert-nullable-string($component, "override-resolver", "component", null);
 
     $-resolvers: util.deep-prepend($-resolvers, $resolver, $component) !global;
 }
@@ -25,14 +25,9 @@ $-resolvers: () !default;
 /// @param {Function} $resolver - Called with `$scheme, $palette, $is-light, $base, $color, $variant`
 /// @param {String | null} $component [null] - Component name or `null` for global resolver
 /// @throw If `$component` is neither a string nor `null`, or `$resolver` is not a function
-@mixin define-fallback-resolver($resolver, $component: null) {
-    $resolver: util.assert-function($resolver, "define-fallback-resolver", "resolver");
-    $component: util.assert-nullable-string(
-        $component,
-        "define-fallback-resolver",
-        "component",
-        null
-    );
+@mixin define-resolver($resolver, $component: null) {
+    $resolver: util.assert-function($resolver, "define-resolver", "resolver");
+    $component: util.assert-nullable-string($component, "define-resolver", "component", null);
 
     $-resolvers: util.deep-append($-resolvers, $resolver, $component) !global;
 }

@@ -1,6 +1,6 @@
 @forward "module";
 @forward "scheme";
-@forward "palette";
+@forward "palette" hide resolve;
 @forward "ui";
 @forward "util" hide to-rgb, palette-rgb, should-include, tokenize, deep-set, deep-append,
     deep-prepend, print;
