@@ -101,11 +101,11 @@ Component mixins (`use-*`) can have two extra features. Document each as its own
 
 ### Variations
 
-A variation is a set of generated classes (`.is-<name>`), created by looping with `@each` over a framework collection such as `sizes`, `colors`, `gaps`, or `units`.
+A variation is a set of generated classes (`.is-<name>`), created by looping with `@each` over a framework collection such as `colors`, `sizes`, or `gaps`.
 
 - Detect them only from `@each` loops over those framework functions in the mixin body. Never guess from parameter names alone.
 - Write one paragraph: ``Supports `size` and `color` variations.``
-- Use the singular name (`size`, `color`, `gap`, `unit`) in backticks, in the order the loops appear in the source.
+- Use the singular name (`color`, `size`, `gap`) in backticks, in the order the loops appear in the source.
 - The matching parameters (`$sizes`, `$colors`, ...) are still documented with `@param` as usual.
 
 ### Variants

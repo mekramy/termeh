@@ -59,6 +59,9 @@
 @include core.define("gallery", "height-tablet", 200px); // Tablet row height
 @include core.define("gallery", "height-mobile", 100px); // Mobile row height
 
+// Grid
+@include core.define("grid", "units", (5 12)); // Grid column units
+
 // Inputs
 @include core.define("input", "height", 2.8em); // Input height
 @include core.define("input", "checkbox", 1.3em); // Checkbox size

@@ -1,3 +1,5 @@
+@use "sass:list";
+@use "sass:math";
 @use "../core";
 
 /// Generates the `.grid` layout with `.column` and `.break` children.
@@ -7,16 +9,17 @@
 /// Supports `unit`, `align`, `justify`, `gap` and `device` variations.
 ///
 /// @param {List<String>} $gaps [()] - Gap names to include; `null` includes all defined gaps
-/// @param {List<String>} $units [()] - Unit names to include; `null` includes all defined units
 /// @param {List<String>} $breakpoints [()] - Breakpoint names to include; `null` includes all defined breakpoints
 /// @output The `.grid` class and its variation classes
 ///
 /// @require {Variable<Length>} var("gap", "macro") - Default space between rows and columns
+/// @require {Variable<List<Length>>} var("grid", "units") - Grid column units
 ///
 /// @require reset
-@mixin use-grid($gaps: (), $units: (), $breakpoints: ()) {
+@mixin use-grid($gaps: (), $breakpoints: ()) {
     @include core.define-module("grid", "reset") {
         $gap-macro: core.var("gap", "macro");
+        $units: list.join((), core.value("grid", "units", ()));
 
         .grid {
             display: flex;
@@ -36,11 +39,28 @@
                 max-width: 100%;
                 box-sizing: border-box;
 
-                @each $name, $unit in core.units($includes: $units) {
-                    &.is-#{$name} {
-                        width: $unit;
-                        flex: 0 0 auto;
+                @each $columns in $units {
+                    @if core.is-number($columns) and $columns > 2 {
+                        @for $i from 1 through $columns - 1 {
+                            $width: -percent($i, $columns);
+                            @if $width != 50% {
+                                &.is-#{$i}-of-#{$columns} {
+                                    width: $width;
+                                    flex: 0 0 auto;
+                                }
+                            }
+                        }
                     }
+                }
+
+                &.is-half {
+                    width: 50%;
+                    flex: 0 0 auto;
+                }
+
+                &.is-full {
+                    width: 100%;
+                    flex: 0 0 auto;
                 }
 
                 &.is-fit {
@@ -82,11 +102,28 @@
             @each $device, $query in core.media-queries($includes: $breakpoints) {
                 @media #{$query} {
                     > .column {
-                        @each $name, $unit in core.units($includes: $units) {
-                            &.is-#{$device}-#{$name} {
-                                width: $unit;
-                                flex: 0 0 auto;
+                        @each $columns in $units {
+                            @if core.is-number($columns) and $columns > 2 {
+                                @for $i from 1 through $columns - 1 {
+                                    $width: -percent($i, $columns);
+                                    @if $width != 50% {
+                                        &.is-#{$device}-#{$i}-of-#{$columns} {
+                                            width: $width;
+                                            flex: 0 0 auto;
+                                        }
+                                    }
+                                }
                             }
+                        }
+
+                        &.is-#{$device}-half {
+                            width: 50%;
+                            flex: 0 0 auto;
+                        }
+
+                        &.is-#{$device}-full {
+                            width: 100%;
+                            flex: 0 0 auto;
                         }
 
                         &.is-#{$device}-fit {
@@ -110,4 +147,10 @@
             }
         }
     }
+}
+
+@function -percent($numerator, $denominator) {
+    $value: math.div($numerator, $denominator) * 100%;
+    $factor: math.pow(10, 4);
+    @return math.div(math.round(math.div($value * $factor, 1%)), $factor) * 1%;
 }
