@@ -1,30 +1,25 @@
 ---
 outline: deep
+description: Introduction to Termeh, a modern, responsive, and modular CSS framework. This page includes installation and usage guide.
 ---
 
 # What Is Termeh?
 
-Termeh is a _modern_, _responsive_, _modular_, and _scheme-based_ CSS framework for building scalable user interfaces. Written entirely in _Sass_ and free of external dependencies, it gives you tools to manage colors, palettes, contrast, and responsive layouts—making it easier to create flexible, accessible interfaces.
-
-Termeh also includes a wide range of components and ready-to-use styles, so you can build interfaces faster and more consistently.
-
-::: tip
-Termeh uses modern CSS, including _CSS logical properties and values_. These help layouts adapt to different writing directions and support internationalization.
-:::
+Termeh provides a __modern__, __responsive__, and __modular__ CSS framework for building scalable user interfaces. Written entirely in @Sass@ with =no external dependencies=, it offers ready-to-use =components=, =palette generation= and =color functions=, =responsive design utilities=, =theming support=, and =size helpers= to help teams build interfaces consistently.
 
 ## Installation
 
 ::: code-group
 
-```npm
+```bash [npm]
 npm install -D termeh
 ```
 
-```yarn
+```bash [yarn]
 yarn add termeh -D
 ```
 
-```pnpm
+```bash [pnpm]
 pnpm add -D termeh
 ```
 
@@ -32,14 +27,13 @@ pnpm add -D termeh
 
 ## Usage
 
-To get started, import Termeh into a _Sass_ file, then use its functions and components:
+To get started, import Termeh into a __Sass__ file, then configure your design system and include the components you need.
 
-::: code-group
-
-```scss [app.scss]
+```scss
 @use "termeh";
 
-// Define and customize palettes
+// Define and customize variables and palettes
+@include termeh.define("text", "font-family", ("Ubuntu", "Verdana"));
 @include termeh.define-palette("primary", #2196f3);
 @include termeh.override-palette("dark", "primary", #5db1f7);
 
@@ -54,49 +48,88 @@ To get started, import Termeh into a _Sass_ file, then use its functions and com
 );
 
 // Output variables for each color scheme
-:root{
+:root {
   @include termeh.variables();
 }
 
-[data-scheme="dark"]{
+[data-scheme="dark"] {
   @include termeh.variables("dark");
 }
 ```
 
-:::
+## Extending
 
-## External Usage
-
-You can also use Termeh in your own components. Import its core functionality, then include your component in your app:
+You can __extend__ Termeh by adding your own @modules@ and using its =styles and definitions=, such as =variables=, =palettes=, and =core functions=. Custom components are registered alongside the built-in ones, so they follow the same theming and color schemes.
 
 ::: code-group
 
-```scss [component.scss]
+```scss [pill.scss]
+@use "sass:meta";
 @use "termeh";
 
-@mixin use-my-component(){
-  $fallback-background: termeh.var("base", "section");
-  $background: termeh.var("my-component", "background", $fallback-background);
+@mixin use-pill() {
+  $default: termeh.color("primary");
 
-  @at-root {
-    .my-component{
+  @include termeh.define-module("pill", "reset") {
+    @include termeh.define-resolver(meta.get-function("resolver"), "pill");
+
+    $accent: termeh.variant-for("pill", "base", "accent", $default);
+    $background: termeh.variant-for("pill", "base", "background");
+    $font-weight: termeh.var("pill", "font-weight", normal);
+    $radius-rounded: termeh.var("radius", "rounded");
+
+    .pill {
       @include termeh.control();
-      background-color: $background;
+      color: $accent;
+      background: $background;
+      font-weight: $font-weight;
+      border-radius: $radius-rounded;
     }
   }
+}
+
+@function resolver($scheme, $palette, $is-light, $base, $color, $variant) {
+  @if $variant == "accent"{
+    @return termeh.color("primary");
+  } @else if $variant == "background"{
+    @return transparent;
+  }
+
+  @return null;
 }
 ```
 
 ```scss [app.scss]
+@use "sass:meta";
 @use "termeh";
-@use "my-component";
+@use "pill";
 
-// Define a palette and include global styles
-@include termeh.define-palette("primary", #2196f3);
-// ...
+
+// Custom resolver for pill component
+@function pill-resolver(
+  $scheme, $palette, $is-light, $base, $color, $variant
+) {
+    @if $palette != "base" and $variant == "background" {
+      @if $is-light {
+        @return termeh.palette($color, "100");
+      } @else {
+        @return termeh.palette($color, "800");
+      }
+    }
+
+    @return null;
+}
+
+@include termeh.override-resolver(
+  meta.get-function("pill-resolver"),
+  "pill"
+);
 
 // use custom component
-@include my-component.use-my-component();
+@include termeh.use-reset();
+@include pill.use-pill();
+
+
 ```
 
 :::

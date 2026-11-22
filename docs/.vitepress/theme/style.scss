@@ -78,12 +78,7 @@ html {
                 display: none;
             }
 
-            padding: 0 4px;
             font-style: oblique;
-            text-decoration: underline;
-            text-decoration-style: dashed;
-            text-underline-offset: 6px;
-            text-decoration-color: var(--vp-c-border);
             color: var(--vp-c-text-1);
         }
 
@@ -92,7 +87,7 @@ html {
             font-size: 0.75rem;
             white-space: nowrap;
             text-transform: capitalize;
-            color: #a87ff8;
+            color: var(--ctp-latte-sky);
         }
 
         mark {
@@ -110,8 +105,9 @@ html {
             font-style: oblique;
             text-transform: none;
             text-decoration: underline;
+            text-decoration-style: dashed;
             text-underline-offset: 6px;
-            text-decoration-color: var(--ctp-latte-sky);
+            text-decoration-color: var(--vp-c-border);
             user-select: all;
         }
 

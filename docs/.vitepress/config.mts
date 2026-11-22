@@ -99,6 +99,14 @@ export default defineConfig({
         },
     },
     vite: {
-        plugins: [llmstxt(), groupIconVitePlugin()],
+        plugins: [
+            llmstxt({
+                ignoreFilesPerOutput: {
+                    llmsTxt: ["ai.md"],
+                    llmsFullTxt: ["ai.md"],
+                },
+            }),
+            groupIconVitePlugin(),
+        ],
     },
 });
