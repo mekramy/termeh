@@ -7,6 +7,36 @@
 @include core.define-palette("primary", #2196f3);
 
 @function base-resolver($scheme, $palette, $is-light, $base, $color, $variant) {
+    @if $palette != "base" {
+        @return null;
+    }
+
+    @if $variant == "foreground" {
+        @return #0d1b2a;
+    } @else if $variant == "background" {
+        @return core.color("base");
+    } @else if $variant == "separator" {
+        @return #e0e4eb;
+    } @else if $variant == "surface" {
+        @return #f8f9fa;
+    } @else if $variant == "surface-hover" {
+        @return #eef0f3;
+    } @else if $variant == "disabled-border" {
+        @return core.variant("base", "separator");
+    } @else if $variant == "disabled-foreground" {
+        @return core.variant("shade", "muted");
+    } @else if $variant == "disabled-background" {
+        @return core.variant("base", "surface");
+    }
+
+    @return null;
+}
+
+@function palette-resolver($scheme, $palette, $is-light, $base, $color, $variant) {
+    @if $palette == "base" {
+        @return null;
+    }
+
     $shade: core.color-value("shade");
     @if $scheme {
         $override: core.scheme-color($scheme, "shade");
@@ -15,59 +45,39 @@
         }
     }
 
-    @if $palette == "base" {
-        @if $variant == "foreground" {
-            @return #0d1b2a;
-        } @else if $variant == "background" {
-            @return core.color("base");
-        } @else if $variant == "separator" {
-            @return #e0e4eb;
-        } @else if $variant == "surface" {
-            @return #f8f9fa;
-        } @else if $variant == "surface-hover" {
-            @return #eef0f3;
-        } @else if $variant == "disabled-border" {
-            @return core.variant("base", "separator");
-        } @else if $variant == "disabled-foreground" {
-            @return core.variant("shade", "muted");
-        } @else if $variant == "disabled-background" {
-            @return core.variant("base", "surface");
-        }
-    } @else {
-        @if $variant == "text" {
-            $weight: core.iif($is-light, "700", "200");
-            $variation: core.palette($color, $weight);
-            @return core.mix($variation, $base, 90%);
-        } @else if $variant == "foreground" {
-            $weight: core.iif($is-light, "900", "100");
-            $variation: core.palette($color, $weight);
-            @return core.mix($variation, $base, 5%);
-        } @else if $variant == "decorator" {
-            $weight: core.iif($is-light, "800", "200");
-            $variation: core.palette($color, $weight);
-            @return core.mix($variation, $base, 60%);
-        } @else if $variant == "hover" {
-            $weight: core.iif($is-light, "700", "300");
-            @return core.palette($color, $weight);
-        } @else if $variant == "light" {
-            $weight: core.iif($is-light, "800", "200");
-            $variation: core.palette($color, $weight);
-            @return core.mix($variation, $base, 10%);
-        } @else if $variant == "light-hover" {
-            $weight: core.iif($is-light, "800", "200");
-            $variation: core.palette($color, $weight);
-            @return core.mix($variation, $base, 15%);
-        } @else if $variant == "muted" {
-            $weight: core.iif($is-light, "900", "100");
-            $variation: core.palette($color, $weight);
-            $grayscale: core.mix($variation, $shade, 65%);
-            @return core.mix($grayscale, $base, 65%);
-        } @else if $variant == "muted-hover" {
-            $weight: core.iif($is-light, "900", "100");
-            $variation: core.palette($color, $weight);
-            $grayscale: core.mix($variation, $shade, 65%);
-            @return core.mix($grayscale, $base, 85%);
-        }
+    @if $variant == "text" {
+        $weight: core.iif($is-light, "700", "200");
+        $variation: core.palette($color, $weight);
+        @return core.mix($variation, $base, 90%);
+    } @else if $variant == "foreground" {
+        $weight: core.iif($is-light, "900", "100");
+        $variation: core.palette($color, $weight);
+        @return core.mix($variation, $base, 5%);
+    } @else if $variant == "decorator" {
+        $weight: core.iif($is-light, "800", "200");
+        $variation: core.palette($color, $weight);
+        @return core.mix($variation, $base, 60%);
+    } @else if $variant == "hover" {
+        $weight: core.iif($is-light, "700", "300");
+        @return core.palette($color, $weight);
+    } @else if $variant == "light" {
+        $weight: core.iif($is-light, "800", "200");
+        $variation: core.palette($color, $weight);
+        @return core.mix($variation, $base, 10%);
+    } @else if $variant == "light-hover" {
+        $weight: core.iif($is-light, "800", "200");
+        $variation: core.palette($color, $weight);
+        @return core.mix($variation, $base, 15%);
+    } @else if $variant == "muted" {
+        $weight: core.iif($is-light, "900", "100");
+        $variation: core.palette($color, $weight);
+        $grayscale: core.mix($variation, $shade, 65%);
+        @return core.mix($grayscale, $base, 65%);
+    } @else if $variant == "muted-hover" {
+        $weight: core.iif($is-light, "900", "100");
+        $variation: core.palette($color, $weight);
+        $grayscale: core.mix($variation, $shade, 65%);
+        @return core.mix($grayscale, $base, 85%);
     }
 
     @return null;
@@ -279,6 +289,7 @@
 }
 
 @include core.define-resolver(meta.get-function("base-resolver"));
+@include core.define-resolver(meta.get-function("palette-resolver"));
 @include core.define-resolver(meta.get-function("overlay-resolver"), "overlay");
 @include core.define-resolver(meta.get-function("box-resolver"), "box");
 @include core.define-resolver(meta.get-function("table-resolver"), "table");

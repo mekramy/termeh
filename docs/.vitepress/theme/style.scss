@@ -138,6 +138,10 @@ html {
     }
 
     table {
+        display: table;
+        width: 100%;
+        table-layout: auto;
+
         td.is-fallback {
             line-height: 2;
             text-align: end;
