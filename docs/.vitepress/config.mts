@@ -20,6 +20,7 @@ import ModuleBlock from "./elements/quote.module";
 
 import Block from "./elements/block";
 import Appendix from "./elements/block.appendix";
+import Note from "./elements/block.note";
 import Resolver from "./elements/block.resolver";
 import Scheme from "./elements/scheme";
 import Signature from "./elements/signature";
@@ -94,6 +95,7 @@ export default defineConfig({
             md.use(container as never, "signature", Signature);
 
             md.use(container as never, "block", Block);
+            md.use(container as never, "note", Note);
             md.use(container as never, "appendix", Appendix);
             md.use(container as never, "resolver", Resolver);
         },

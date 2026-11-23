@@ -12,11 +12,11 @@ hero:
     dark: /assets/hero-dark.png
   actions:
     - theme: brand
-      text: What Is Termeh?
+      text: Get Started
       link: /guide/introduction
     - theme: alt
-      text: Get Started
-      link: /guide/core/intro
+      text: API Reference
+      link: /guide/reference/overview
 
 features:
   - title: Modular

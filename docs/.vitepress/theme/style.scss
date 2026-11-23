@@ -55,6 +55,11 @@ html {
         font-size: 1rem;
     }
 
+    a {
+        font-size: 0.9em;
+        text-underline-offset: 4px;
+    }
+
     p,
     ul,
     ol,
@@ -174,6 +179,20 @@ html {
 
             strong {
                 color: inherit;
+            }
+        }
+    }
+
+    ol {
+        font-size: 0.9rem;
+
+        li {
+            padding-inline-start: 8px;
+
+            &::marker {
+                font-size: 0.8rem;
+                font-weight: bold;
+                color: var(--ctp-latte-sky);
             }
         }
     }
