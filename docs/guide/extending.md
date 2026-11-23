@@ -15,7 +15,7 @@ For details on the =Termeh API=, see the [API Reference](/guide/reference/overvi
 @use "sass:meta";
 @use "termeh";
 
-@mixin use-pill($colors: ()) {
+@mixin use-pill($colors: null) {
   $default: termeh.color("primary");
 
   @include termeh.define-module("pill", "reset") {

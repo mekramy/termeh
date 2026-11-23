@@ -6,8 +6,8 @@
 ///
 /// Variants can be overridden by defining them explicitly or by registering a custom resolver for `component`.
 ///
-/// @param {List<String>} $colors [()] - Registered color names to include
-/// @param {List<String>} $sizes [()] - Registered size names to include
+/// @param {null | "all" | List<String>} $colors [null] - Registered color names to include
+/// @param {null | "all" | List<String>} $sizes [null] - Registered size names to include
 ///
 /// @require {Variable<Length>} var("component", "height") - Link height
 /// @require {Variable<Length>} var("component", "meta-size") - Link text size
@@ -22,7 +22,7 @@
 /// @require {Variable<Color>} variant-for("component", $name, "accent-text") - Link text color of each color variation
 ///
 /// @require reset, element
-@mixin use-link($colors: (), $sizes: ()) {
+@mixin use-link($colors: null, $sizes: null) {
     @include core.define-module("link", "reset", "element") {
         $height: core.var("component", "height");
         $font-size: core.var("component", "meta-size");

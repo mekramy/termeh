@@ -37,48 +37,48 @@
 
 @include termeh.use-reset();
 @include termeh.use-heading();
-@include termeh.use-image();
-@include termeh.use-table();
+@include termeh.use-image($sizes: "all");
+@include termeh.use-table($colors: "all");
 
 @include termeh.use-layout-helper();
 @include termeh.use-text-helper();
-@include termeh.use-text-colors($colors: ());
-@include termeh.use-text-sizes($sizes: ());
-@include termeh.use-text-weights($weights: ());
-@include termeh.use-text-aligns($aligns: ());
+@include termeh.use-text-colors($colors: "all");
+@include termeh.use-text-sizes($sizes: "all");
+@include termeh.use-text-weights($weights: "all");
+@include termeh.use-text-aligns($aligns: "all");
 @include termeh.use-visibility-helper();
 @include termeh.use-attachment-helper();
 
 @include termeh.use-attacher();
-@include termeh.use-container();
-@include termeh.use-gallery();
-@include termeh.use-gaper();
-@include termeh.use-grid();
-@include termeh.use-landscape();
-@include termeh.use-padder();
-@include termeh.use-wrapper();
+@include termeh.use-container($gaps: "all");
+@include termeh.use-gallery($gaps: "all");
+@include termeh.use-gaper($gaps: "all", $breakpoints: "all");
+@include termeh.use-grid($gaps: "all", $breakpoints: "all");
+@include termeh.use-landscape($gaps: "all", $breakpoints: "all");
+@include termeh.use-padder($gaps: "all");
+@include termeh.use-wrapper($gaps: "all");
 
-@include termeh.use-checkbox();
-@include termeh.use-field();
+@include termeh.use-checkbox($colors: "all");
+@include termeh.use-field($colors: "all");
 @include termeh.use-fieldset();
 @include termeh.use-form();
-@include termeh.use-input();
-@include termeh.use-radio();
-@include termeh.use-select();
-@include termeh.use-textarea();
+@include termeh.use-input($gaps: "all", $colors: "all");
+@include termeh.use-radio($colors: "all");
+@include termeh.use-select($colors: "all");
+@include termeh.use-textarea($colors: "all");
 
 @include termeh.use-element();
-@include termeh.use-meta();
-@include termeh.use-tag();
-@include termeh.use-button();
-@include termeh.use-header();
-@include termeh.use-card();
-@include termeh.use-icon();
-@include termeh.use-avatar();
-@include termeh.use-link();
-@include termeh.use-breadcrumb();
-@include termeh.use-action();
-@include termeh.use-skeleton();
+@include termeh.use-meta($colors: "all", $sizes: "all");
+@include termeh.use-tag($colors: "all", $sizes: "all");
+@include termeh.use-button($colors: "all", $sizes: "all");
+@include termeh.use-header($colors: "all", $gaps: "all");
+@include termeh.use-card($colors: "all", $gaps: "all");
+@include termeh.use-icon($colors: "all", $sizes: "all");
+@include termeh.use-avatar($colors: "all", $sizes: "all");
+@include termeh.use-link($colors: "all", $sizes: "all");
+@include termeh.use-breadcrumb($colors: "all");
+@include termeh.use-action($colors: "all");
+@include termeh.use-skeleton($sizes: "all");
 
 .placeholder {
     display: flex;

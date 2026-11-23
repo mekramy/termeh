@@ -99,12 +99,13 @@ $-overrides: () !default;
 /// Returns a map of gap names and their CSS variables, filtered by name.
 /// It also registers each gap value and scheme override as CSS variables.
 ///
-/// @param {List<String>} $includes [null] - Gap names to include; all defined gaps when not a list
-/// @param {List<String>} $excludes [null] - Gap names to exclude; none when not a list
+/// @param {null | "all" | List<String>} $includes [null] - Gap names to include
+/// @param {null | "all" | List<String>} $excludes [null] - Gap names to exclude
 /// @return {Map<String, Variable<Length>>} Matching gaps and their CSS variables
 @function gaps($includes: null, $excludes: null) {
-    $includes: util.assert-list($includes, "gaps", "includes", map.keys($-gaps));
-    $excludes: util.assert-list($excludes, "gaps", "excludes", ());
+    $all: map.keys($-gaps);
+    $includes: util.normalize-filter($includes, $all);
+    $excludes: util.normalize-filter($excludes, $all);
 
     $result: ();
     @each $name, $gap in $-gaps {

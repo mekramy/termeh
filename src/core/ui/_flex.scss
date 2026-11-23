@@ -19,12 +19,13 @@ $-justifies: (
 
 /// Returns `align-items` values for flex layouts, filtered by name.
 ///
-/// @param {List<String>} $includes [null] - Alignment names to include; all alignments when not a list
-/// @param {List<String>} $excludes [null] - Alignment names to exclude; none when not a list
+/// @param {null | "all" | List<String>} $includes [null] - Alignment names to include
+/// @param {null | "all" | List<String>} $excludes [null] - Alignment names to exclude
 /// @return {Map<String, FlexAlign>} Matching alignment names and values
 @function flex-aligns($includes: null, $excludes: null) {
-    $includes: util.assert-list($includes, "flex-aligns", "includes", map.keys($-aligns));
-    $excludes: util.assert-list($excludes, "flex-aligns", "excludes", ());
+    $all: map.keys($-aligns);
+    $includes: util.normalize-filter($includes, $all);
+    $excludes: util.normalize-filter($excludes, $all);
 
     $result: ();
     @each $name, $align in $-aligns {
@@ -37,12 +38,13 @@ $-justifies: (
 
 /// Returns `justify-content` values for flex layouts, filtered by name.
 ///
-/// @param {List<String>} $includes [null] - Justification names to include; all values when not a list
-/// @param {List<String>} $excludes [null] - Justification names to exclude; none when not a list
+/// @param {null | "all" | List<String>} $includes [null] - Justification names to include
+/// @param {null | "all" | List<String>} $excludes [null] - Justification names to exclude
 /// @return {Map<String, FlexJustify>} Matching justification names and values
 @function flex-justifies($includes: null, $excludes: null) {
-    $includes: util.assert-list($includes, "flex-justifies", "includes", map.keys($-justifies));
-    $excludes: util.assert-list($excludes, "flex-justifies", "excludes", ());
+    $all: map.keys($-justifies);
+    $includes: util.normalize-filter($includes, $all);
+    $excludes: util.normalize-filter($excludes, $all);
 
     $result: ();
     @each $name, $justify in $-justifies {

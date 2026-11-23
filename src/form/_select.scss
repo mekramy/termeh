@@ -7,7 +7,7 @@
 ///
 /// Variants can be overridden by defining them explicitly or by registering a custom resolver for `input`.
 ///
-/// @param {List<String>} $colors [()] - Color names to include in the color variations
+/// @param {null | "all" | List<String>} $colors [null] - Color names to include in the color variations
 /// @output Select styles for options, focus, invalid, disabled, and color variation states
 ///
 /// @require {Variable<Length>} var("gap", "micro") - Gap between contents in an option
@@ -38,7 +38,7 @@
 /// @require {Variable<Color>} variant-for("input", $name, "accent-foreground") - Focus text and picker-icon color for each color variation
 ///
 /// @require reset
-@mixin use-select($colors: ()) {
+@mixin use-select($colors: null) {
     @include animation.shake();
 
     @include core.define-module("form-select", "reset") {

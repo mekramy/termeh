@@ -4,11 +4,11 @@
 ///
 /// Supports `gap` variations.
 ///
-/// @param {List<String>} $gaps [()] - Gap names to include; `null` includes all defined gaps
+/// @param {null | "all" | List<String>} $gaps [null] - Gap names to include
 /// @output The `.padder` class and a `.is-<name>` class for each gap
 ///
 /// @require reset
-@mixin use-padder($gaps: ()) {
+@mixin use-padder($gaps: null) {
     @include core.define-module("padder", "reset") {
         .padder {
             display: block;

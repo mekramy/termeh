@@ -49,11 +49,11 @@
 ///
 /// Supports `color` variations.
 ///
-/// @param {List<String>} $colors [()] - Color names to include; `null` includes all defined colors
+/// @param {null | "all" | List<String>} $colors [null] - Color names to include
 /// @output A `.is-<name>-color` class for each color
 ///
 /// @require {Variable<Color>} variant($name, "readable") - Text color of each color name
-@mixin use-text-colors($colors: ()) {
+@mixin use-text-colors($colors: null) {
     @include core.define-module("text-colors") {
         @each $name, $palette in core.colors($includes: $colors) {
             $readable: core.variant($name, "readable");
@@ -70,9 +70,9 @@
 ///
 /// Supports `size` variations.
 ///
-/// @param {List<String>} $sizes [()] - Size names to include; `null` includes all defined sizes
+/// @param {null | "all" | List<String>} $sizes [null] - Size names to include
 /// @output A `.is-<name>-size` class for each size
-@mixin use-text-sizes($sizes: ()) {
+@mixin use-text-sizes($sizes: null) {
     @include core.define-module("text-sizes") {
         @each $name, $size in core.sizes($includes: $sizes) {
             .is-#{$name}-size {
@@ -86,9 +86,9 @@
 ///
 /// Supports `weight` variations.
 ///
-/// @param {List<String>} $weights [()] - Weight names to include; `null` includes all defined weights
+/// @param {null | "all" | List<String>} $weights [null] - Weight names to include
 /// @output A `.is-<name>-weight` class for each weight
-@mixin use-text-weights($weights: ()) {
+@mixin use-text-weights($weights: null) {
     @include core.define-module("text-weights") {
         @each $name, $weight in core.weights($includes: $weights) {
             .is-#{$name}-weight {
@@ -102,9 +102,9 @@
 ///
 /// Supports `align` variations.
 ///
-/// @param {List<String>} $aligns [()] - Alignment names to include; `null` includes all defined alignments
+/// @param {null | "all" | List<String>} $aligns [null] - Alignment names to include
 /// @output A `.is-<name>-align` class for each alignment
-@mixin use-text-aligns($aligns: ()) {
+@mixin use-text-aligns($aligns: null) {
     @include core.define-module("text-aligns") {
         @each $name, $align in core.text-aligns($includes: $aligns) {
             .is-#{$name}-align {

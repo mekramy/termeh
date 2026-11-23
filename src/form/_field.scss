@@ -6,7 +6,7 @@
 ///
 /// Variants can be overridden by defining them explicitly or by registering a custom resolver for `input`.
 ///
-/// @param {List<String>} $colors [()] - Color names to include in the color variations
+/// @param {null | "all" | List<String>} $colors [null] - Color names to include in the color variations
 /// @output Field styles for labels, help text, required indicators, errors, and disabled states
 ///
 /// @require {Variable<Length>} var("gap", "micro") - Spacing between field contents
@@ -23,7 +23,7 @@
 /// @require {Variable<Color>} variant-for("input", $name, "accent-text") - Required-field indicator color for each color variation
 ///
 /// @require reset
-@mixin use-field($colors: ()) {
+@mixin use-field($colors: null) {
     @include core.define-module("form-field", "reset") {
         $gap-micro: core.var("gap", "micro");
         $gap-macro: core.var("gap", "macro");

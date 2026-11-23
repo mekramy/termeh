@@ -6,7 +6,7 @@
 ///
 /// Variants can be overridden by defining them explicitly or by registering a custom resolver for `component`.
 ///
-/// @param {List<String>} $colors [()] - Registered color names to include
+/// @param {null | "all" | List<String>} $colors [null] - Registered color names to include
 ///
 /// @require {Variable<Length>} var("gap", "micro") - Space around dividers
 /// @require {Variable<FontWeight>} var("text", "strong-weight") - Active item text weight
@@ -22,7 +22,7 @@
 /// @require {Variable<Color>} variant-for("component", $name, "accent-text") - Active item text color of each color variation
 ///
 /// @require reset
-@mixin use-breadcrumb($colors: ()) {
+@mixin use-breadcrumb($colors: null) {
     @include core.define-module("breadcrumb", "reset") {
         $gap-micro: core.var("gap", "micro");
         $strong-weight: core.var("text", "strong-weight");

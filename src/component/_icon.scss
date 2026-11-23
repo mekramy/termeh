@@ -6,13 +6,13 @@
 ///
 /// Variants can be overridden by defining them explicitly or by registering a custom resolver for `component`.
 ///
-/// @param {List<String>} $colors [()] - Registered color names to include
-/// @param {List<String>} $sizes [()] - Registered size names to include
+/// @param {null | "all" | List<String>} $colors [null] - Registered color names to include
+/// @param {null | "all" | List<String>} $sizes [null] - Registered size names to include
 ///
 /// @require {Variable<Color>} variant-for("component", $name, "accent") - Icon color of each color variation
 ///
 /// @require reset
-@mixin use-icon($colors: (), $sizes: ()) {
+@mixin use-icon($colors: null, $sizes: null) {
     @include core.define-module("icon", "reset") {
         .icon {
             display: inline-flex;

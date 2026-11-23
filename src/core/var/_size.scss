@@ -99,12 +99,13 @@ $-overrides: () !default;
 /// Returns a map of size names and their CSS variables, filtered by name.
 /// It also registers each size value and scheme override as CSS variables.
 ///
-/// @param {List<String>} $includes [null] - Size names to include; all defined sizes when not a list
-/// @param {List<String>} $excludes [null] - Size names to exclude; none when not a list
+/// @param {null | "all" | List<String>} $includes [null] - Size names to include
+/// @param {null | "all" | List<String>} $excludes [null] - Size names to exclude
 /// @return {Map<String, Variable<Length>>} Matching sizes and their CSS variables
 @function sizes($includes: null, $excludes: null) {
-    $includes: util.assert-list($includes, "sizes", "includes", map.keys($-sizes));
-    $excludes: util.assert-list($excludes, "sizes", "excludes", ());
+    $all: map.keys($-sizes);
+    $includes: util.normalize-filter($includes, $all);
+    $excludes: util.normalize-filter($excludes, $all);
 
     $result: ();
     @each $name, $size in $-sizes {

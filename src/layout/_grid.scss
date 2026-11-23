@@ -8,15 +8,15 @@
 ///
 /// Supports `unit`, `align`, `justify`, `gap` and `device` variations.
 ///
-/// @param {List<String>} $gaps [()] - Gap names to include; `null` includes all defined gaps
-/// @param {List<String>} $breakpoints [()] - Breakpoint names to include; `null` includes all defined breakpoints
+/// @param {null | "all" | List<String>} $gaps [null] - Gap names to include
+/// @param {null | "all" | List<String>} $breakpoints [null] - Breakpoint names to include
 /// @output The `.grid` class and its variation classes
 ///
 /// @require {Variable<Length>} var("gap", "macro") - Default space between rows and columns
 /// @require {Variable<List<Length>>} var("grid", "units") - Grid column units
 ///
 /// @require reset
-@mixin use-grid($gaps: (), $breakpoints: ()) {
+@mixin use-grid($gaps: null, $breakpoints: null) {
     @include core.define-module("grid", "reset") {
         $gap-macro: core.var("gap", "macro");
         $units: list.join((), core.value("grid", "units", ()));

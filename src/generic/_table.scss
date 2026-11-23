@@ -3,7 +3,7 @@
 /// Applies table styles and color classes.
 /// It adds a `.is-<color>` class for each color, and registers the table color resolver.
 ///
-/// @param {List<String>} $colors [()] - Color names to add color classes for; all defined colors when empty
+/// @param {null | "all" | List<String>} $colors [null] - Color names to add color classes for
 /// @output The table styles, emitted once
 ///
 /// @require {Variable<FontWeight>} var("text", "strong-weight") - Font weight of table headers
@@ -37,7 +37,7 @@
 /// @require {Variable<Color>} variant-for("table", $palette, "section-separator") - Header and footer separator color of the color class
 ///
 /// @require reset
-@mixin use-table($colors: ()) {
+@mixin use-table($colors: null) {
     @include core.define-module("base-table", "reset") {
         $strong-weight: core.var("text", "strong-weight");
 

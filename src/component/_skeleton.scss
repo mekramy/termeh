@@ -5,7 +5,7 @@
 ///
 /// Supports `size` variations.
 ///
-/// @param {List<String>} $sizes [()] - Registered size names to include
+/// @param {null | "all" | List<String>} $sizes [null] - Registered size names to include
 ///
 /// @require {Variable<Length>} var("radius", "normal") - Corner radius
 /// @require {Variable<Length>} var("radius", "circle") - Corner radius of rounded image placeholders
@@ -18,7 +18,7 @@
 /// @require {Variable<Color>} variant-for("skeleton", "base", "background") [variant("shade", "light")] - Highlight color of the shimmer
 ///
 /// @require reset
-@mixin use-skeleton($sizes: ()) {
+@mixin use-skeleton($sizes: null) {
     $-fallback-background: core.variant("shade", "light");
 
     @include core.define-module("skeleton", "reset") {

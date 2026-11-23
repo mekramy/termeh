@@ -6,7 +6,7 @@
 ///
 /// Supports `gap` variations.
 ///
-/// @param {List<String>} $gaps [()] - Gap names to include; `null` includes all defined gaps
+/// @param {null | "all" | List<String>} $gaps [null] - Gap names to include
 /// @output The `.gallery` class and its gap classes
 ///
 /// @require {Variable<Length>} var("gap", "micro") - Default gap between items
@@ -15,7 +15,7 @@
 /// @require {Variable<Length>} var("gallery", "height-mobile") - Item height on mobile
 ///
 /// @require reset
-@mixin use-gallery($gaps: ()) {
+@mixin use-gallery($gaps: null) {
     @include core.define-module("gallery", "reset") {
         $gap-micro: core.var("gap", "micro");
         $height: core.var("gallery", "height");

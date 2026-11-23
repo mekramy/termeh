@@ -96,6 +96,21 @@
     @return 0 0 0 $size color.alpha($color, 0.1);
 }
 
+/// Normalizes a filter list that can be `"all"`, `"none"`, or a list of items.
+///
+/// @param {all | none | List<String>} $items - Items to normalize
+/// @param {List<String>} $all - All possible items
+/// @return {List<String>} Normalized list of items
+@function normalize-filter($items, $all) {
+    @if $items == "all" and validation.is-list($all) {
+        @return $all;
+    } @else if validation.is-list($items) {
+        @return $items;
+    } @else {
+        @return ("", "");
+    }
+}
+
 /// Checks whether a key passes the include and exclude lists.
 ///
 /// @param {String} $key - Key to check

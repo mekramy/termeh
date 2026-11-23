@@ -6,7 +6,7 @@
 ///
 /// Variants can be overridden by defining them explicitly or by registering a custom resolver for `component`.
 ///
-/// @param {List<String>} $colors [()] - Registered color names to include
+/// @param {null | "all" | List<String>} $colors [null] - Registered color names to include
 ///
 /// @require {Variable<Length>} var("radius", "normal") - Corner radius of actions
 /// @require {Variable<Length>} var("radius", "circle") - Corner radius of rounded icon actions
@@ -38,7 +38,7 @@
 /// @require {Variable<Color>} variant-for("component", $name, "accent-hover") - Hover background color of each color variation
 ///
 /// @require reset, element
-@mixin use-action($colors: ()) {
+@mixin use-action($colors: null) {
     @include core.define-module("action", "reset", "element") {
         $radius-normal: core.var("radius", "normal");
         $radius-circle: core.var("radius", "circle");

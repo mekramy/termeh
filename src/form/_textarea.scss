@@ -7,7 +7,7 @@
 ///
 /// Variants can be overridden by defining them explicitly or by registering a custom resolver for `input`.
 ///
-/// @param {List<String>} $colors [()] - Color names to include in the color variations
+/// @param {null | "all" | List<String>} $colors [null] - Color names to include in the color variations
 /// @output Textarea styles for focus, invalid, disabled, and color variation states
 ///
 /// @require {Variable<Length>} var("padding", "control") - Textarea padding
@@ -32,7 +32,7 @@
 /// @require {Variable<Color>} variant-for("input", $name, "accent") - Focus border and scrollbar accent color for each color variation
 ///
 /// @require reset
-@mixin use-textarea($colors: ()) {
+@mixin use-textarea($colors: null) {
     @include animation.shake();
 
     @include core.define-module("form-textarea", "reset") {

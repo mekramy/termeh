@@ -39,12 +39,13 @@ $-queries: (
 
 /// Returns a map of query names and media queries, filtered by name.
 ///
-/// @param {List<String>} $includes [null] - Query names to include; all queries when not a list
-/// @param {List<String>} $excludes [null] - Query names to exclude; none when not a list
+/// @param {null | "all" | List<String>} $includes [null] - Query names to include
+/// @param {null | "all" | List<String>} $excludes [null] - Query names to exclude
 /// @return {Map<String, String>} Matching query names and media queries
 @function media-queries($includes: null, $excludes: null) {
-    $includes: util.assert-list($includes, "media-queries", "includes", map.keys($-queries));
-    $excludes: util.assert-list($excludes, "media-queries", "excludes", ());
+    $all: map.keys($-queries);
+    $includes: util.normalize-filter($includes, $all);
+    $excludes: util.normalize-filter($excludes, $all);
 
     $result: ();
     @each $name, $query in $-queries {

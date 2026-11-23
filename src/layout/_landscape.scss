@@ -6,15 +6,15 @@
 ///
 /// Supports `align`, `justify`, `gap` and `device` variations.
 ///
-/// @param {List<String>} $gaps [()] - Gap names to include; `null` includes all defined gaps
-/// @param {List<String>} $breakpoints [()] - Breakpoint names to include; `null` includes all defined breakpoints
+/// @param {null | "all" | List<String>} $gaps [null] - Gap names to include
+/// @param {null | "all" | List<String>} $breakpoints [null] - Breakpoint names to include
 /// @output The `.landscape` class and its variation classes
 ///
 /// @require {Variable<Length>} var("gap", "micro") - Default space between items
 /// @require {Variable<Color>} color("primary") - Accent color of the scrollbar
 ///
 /// @require reset
-@mixin use-landscape($gaps: (), $breakpoints: ()) {
+@mixin use-landscape($gaps: null, $breakpoints: null) {
     @include core.define-module("landscape", "reset") {
         $gap-micro: core.var("gap", "micro");
         $primary: core.color("primary");

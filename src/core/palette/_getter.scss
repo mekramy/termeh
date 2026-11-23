@@ -93,16 +93,16 @@
 /// Returns a map of palette color names and their CSS variables, filtered by name.
 /// It also registers each base color and scheme override as CSS variables.
 ///
-/// @param {List<String>} $includes [null] - Color names to include; all defined colors when not a list
-/// @param {List<String>} $excludes [null] - Color names to exclude; `"base"` and `""` when not a list
+/// @param {null | "all" | List<String>} $includes [null] - Color names to include
+/// @param {null | "all" | List<String>} $excludes [null] - Color names to exclude
 /// @return {Map<String, Variable<Color>>} Matching colors and their CSS variables
 @function colors($includes: null, $excludes: null) {
-    $palettes: palette.all();
-    $includes: util.assert-list($includes, "colors", "includes", map.keys($palettes));
-    $excludes: util.assert-list($excludes, "colors", "excludes", ("base", ""));
+    $all: map.keys(palette.all());
+    $includes: util.normalize-filter($includes, $all);
+    $excludes: util.normalize-filter($excludes, $all);
 
     $result: ();
-    @each $name in map.keys($palettes) {
+    @each $name in $all {
         @if util.should-include($name, $includes, $excludes) {
             $token: "palette-#{$name}";
             $token-rgb: "rgb-#{$name}";

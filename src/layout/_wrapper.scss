@@ -4,13 +4,13 @@
 ///
 /// Supports `gap` and `justify` variations.
 ///
-/// @param {List<String>} $gaps [()] - Gap names to include; `null` includes all defined gaps
+/// @param {null | "all" | List<String>} $gaps [null] - Gap names to include;
 /// @output The `.wrapper` class and its gap classes
 ///
 /// @require {Variable<Length>} var("gap", "micro") - Default space between items
 ///
 /// @require reset
-@mixin use-wrapper($gaps: ()) {
+@mixin use-wrapper($gaps: null) {
     @include core.define-module("wrapper", "reset") {
         $gap-micro: core.var("gap", "micro");
 

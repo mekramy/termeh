@@ -3,14 +3,14 @@
 /// Applies image styles and width classes.
 /// It adds `.is-centered`, `.is-rounded`, `.is-circular` and an `.is-<size>` class for each size.
 ///
-/// @param {List<String>} $sizes [()] - Size names to add width classes for; all defined sizes when empty
+/// @param {null | "all" | List<String>} $sizes [null] - Size names to add width classes for
 /// @output The image styles, emitted once
 ///
 /// @require {Variable<Length>} var("radius", "normal") - Border radius of rounded images
 /// @require {Variable<Length>} var("radius", "circle") - Border radius of circular images
 ///
 /// @require reset
-@mixin use-image($sizes: ()) {
+@mixin use-image($sizes: null) {
     @include core.define-module("base-image", "reset") {
         $radius-normal: core.var("radius", "normal");
         $radius-circle: core.var("radius", "circle");

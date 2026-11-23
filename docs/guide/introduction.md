@@ -45,12 +45,8 @@ To get started, import Termeh into a __Sass__ file, define your design tokens, i
 // 2. Include components
 @include termeh.use-generic();
 @include termeh.use-container();
-@include termeh.use-grid(
-  $gaps: ("mini", "normal", "large")
-);
-@include termeh.use-button(
-  $colors: ("primary", "success", "error")
-);
+@include termeh.use-button($colors: "all");
+@include termeh.use-grid($gaps: ("mini", "normal", "large"));
 
 // 3. Output variables for each scheme
 :root {

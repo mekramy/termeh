@@ -7,8 +7,8 @@
 ///
 /// Variants can be overridden by defining them explicitly or by registering a custom resolver for `input`.
 ///
-/// @param {List<String>} $gaps [()] - Gap names to include in the gap variations
-/// @param {List<String>} $colors [()] - Color names to include in the color variations
+/// @param {null | "all" | List<String>} $gaps [null] - Gap names to include in the gap variations
+/// @param {null | "all" | List<String>} $colors [null] - Color names to include in the color variations
 /// @output Input wrapper styles with focus, invalid, disabled, gap, and color states
 ///
 /// @require {Variable<Length>} var("radius", "normal") - Input wrapper border radius
@@ -32,7 +32,7 @@
 /// @require {Variable<Color>} variant-for("input", $name, "accent") - Focus border color for each color variation
 ///
 /// @require reset
-@mixin use-input($gaps: (), $colors: ()) {
+@mixin use-input($gaps: null, $colors: null) {
     @include animation.shake();
 
     @include core.define-module("form-input", "reset") {

@@ -10,13 +10,14 @@ $-aligns: (
 
 /// Returns text alignment values, filtered by name.
 ///
-/// @param {List<String>} $includes [null] - Alignment names to include; all alignments when omitted
-/// @param {List<String>} $excludes [null] - Alignment names to exclude; none when omitted
+/// @param {null | "all" | List<String>} $includes [null] - Alignment names to include
+/// @param {null | "all" | List<String>} $excludes [null] - Alignment names to exclude
 /// @return {Map<String, TextAlign>} Matching alignment names and values
 /// @throw If `$includes` or `$excludes` is not a list
 @function text-aligns($includes: null, $excludes: null) {
-    $includes: util.assert-list($includes, "text-aligns", "includes", map.keys($-aligns));
-    $excludes: util.assert-list($excludes, "text-aligns", "excludes", ());
+    $all: map.keys($-aligns);
+    $includes: util.normalize-filter($includes, $all);
+    $excludes: util.normalize-filter($excludes, $all);
 
     $result: ();
     @each $name, $align in $-aligns {

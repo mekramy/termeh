@@ -35,12 +35,13 @@ $-weights: (
 
 /// Returns a map of weight names and font weights, filtered by name.
 ///
-/// @param {List<String>} $includes [null] - Weight names to include; all weights when not a list
-/// @param {List<String>} $excludes [null] - Weight names to exclude; none when not a list
+/// @param {null | "all" | List<String>} $includes [null] - Weight names to include
+/// @param {null | "all" | List<String>} $excludes [null] - Weight names to exclude
 /// @return {Map<String, FontWeight>} Matching weight names and font weights
 @function weights($includes: null, $excludes: null) {
-    $includes: util.assert-list($includes, "weights", "includes", map.keys($-weights));
-    $excludes: util.assert-list($excludes, "weights", "excludes", ());
+    $all: map.keys($-weights);
+    $includes: util.normalize-filter($includes, $all);
+    $excludes: util.normalize-filter($excludes, $all);
 
     $result: ();
     @each $name, $weight in $-weights {

@@ -6,8 +6,8 @@
 ///
 /// Variants can be overridden by defining them explicitly or by registering a custom resolver for `component`.
 ///
-/// @param {List<String>} $colors [()] - Registered color names to include
-/// @param {List<String>} $sizes [()] - Registered size names to include
+/// @param {null | "all" | List<String>} $colors [null] - Registered color names to include
+/// @param {null | "all" | List<String>} $sizes [null] - Registered size names to include
 ///
 /// @require {Variable<Length>} var("radius", "normal") - Corner radius of square avatars
 /// @require {Variable<Length>} var("radius", "circle") - Corner radius of round avatars and status dot
@@ -29,7 +29,7 @@
 /// @require {Variable<Color>} variant-for("component", $name, "light-background") - Background color of each color variation
 ///
 /// @require reset
-@mixin use-avatar($colors: (), $sizes: ()) {
+@mixin use-avatar($colors: null, $sizes: null) {
     @include core.define-module("avatar", "reset") {
         $radius-normal: core.var("radius", "normal");
         $radius-circle: core.var("radius", "circle");

@@ -6,7 +6,7 @@
 ///
 /// Supports `gap` variations.
 ///
-/// @param {List<String>} $paddings [()] - Gap names to use as padding classes; `null` includes all defined gaps
+/// @param {null | "all" | List<String>} $gaps [null] - Gap names to use as padding classes
 /// @output The `.container` class and its padding classes
 ///
 /// @require {Variable<Length>} var("gap", "macro") - Bottom margin
@@ -17,7 +17,7 @@
 /// @require {Variable<Length>} var("container", "ultrawide") - Maximum width on ultrawide
 ///
 /// @require reset
-@mixin use-container($paddings: ()) {
+@mixin use-container($gaps: null) {
     @include core.define-module("container", "reset") {
         $gap-macro: core.var("gap", "macro");
         $padding-container: core.var("padding", "container");
@@ -55,7 +55,7 @@
             @include core.padded() {
                 padding: $padding-container;
 
-                @each $name, $gap in core.gaps($includes: $paddings) {
+                @each $name, $gap in core.gaps($includes: $gaps) {
                     &.is-#{$name}-padded {
                         padding: $gap;
                     }

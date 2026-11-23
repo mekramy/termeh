@@ -6,8 +6,8 @@
 ///
 /// Variants can be overridden by defining them explicitly or by registering a custom resolver for `component`.
 ///
-/// @param {List<String>} $colors [()] - Registered color names to include
-/// @param {List<String>} $gaps [()] - Registered gap names to include
+/// @param {null | "all" | List<String>} $colors [null] - Registered color names to include
+/// @param {null | "all" | List<String>} $gaps [null] - Registered gap names to include
 ///
 /// @require {Variable<Length>} var("gap", "macro") - Header gap and bottom margin
 /// @require {Variable<Length>} var("line-height", "normal") - Title line height
@@ -23,7 +23,7 @@
 /// @require {Variable<Color>} variant-for("component", $name, "accent") - Decorator color of each color variation
 ///
 /// @require reset, base-heading, element
-@mixin use-header($colors: (), $gaps: ()) {
+@mixin use-header($colors: null, $gaps: null) {
     @include core.define-module("header", "reset", "base-heading", "element") {
         $gap-macro: core.var("gap", "macro");
         $line-normal: core.var("line-height", "normal");

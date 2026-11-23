@@ -7,8 +7,8 @@
 ///
 /// Variants can be overridden by defining them explicitly or by registering a custom resolver for `box`, `card`, and `component`.
 ///
-/// @param {List<String>} $colors [()] - Registered color names to include
-/// @param {List<String>} $gaps [()] - Registered gap names to include
+/// @param {null | "all" | List<String>} $colors [null] - Registered color names to include
+/// @param {null | "all" | List<String>} $gaps [null] - Registered gap names to include
 ///
 /// @require {Variable<Length>} var("gap", "macro") - Bottom margin of the card
 /// @require {Variable<Length>} var("radius", "normal") - Corner radius
@@ -37,7 +37,7 @@
 /// @require {Variable<Color>} variant-for("component", $name, "accent") - Scrollbar, decorator, and loader color of each color variation
 ///
 /// @require reset
-@mixin use-card($colors: (), $gaps: ()) {
+@mixin use-card($colors: null, $gaps: null) {
     $-overlay-opacity: core.var("overlay", "opacity");
     $-overlay-filter: core.var("overlay", "filter");
 
