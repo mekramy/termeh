@@ -1343,19 +1343,19 @@ table.is-maroon.is-hoverable > tbody > tr:hover {
 .container:not(.is-paddingless) {
   padding: var(--v-113);
 }
-.container:not(.is-paddingless).is-mini-padded {
+.container:not(.is-paddingless).is-small-padded {
   padding: var(--g-117);
 }
-.container:not(.is-paddingless).is-small-padded {
+.container:not(.is-paddingless).is-normal-padded {
   padding: var(--g-118);
 }
-.container:not(.is-paddingless).is-normal-padded {
+.container:not(.is-paddingless).is-medium-padded {
   padding: var(--g-119);
 }
-.container:not(.is-paddingless).is-medium-padded {
+.container:not(.is-paddingless).is-large-padded {
   padding: var(--g-120);
 }
-.container:not(.is-paddingless).is-large-padded {
+.container:not(.is-paddingless).is-big-padded {
   padding: var(--g-121);
 }
 .container:not(.is-paddingless).is-huge-padded {
@@ -1407,19 +1407,19 @@ table.is-maroon.is-hoverable > tbody > tr:hover {
 .gallery:not(.is-gapless) {
   gap: var(--v-4);
 }
-.gallery:not(.is-gapless).is-mini-gap {
+.gallery:not(.is-gapless).is-small-gap {
   gap: var(--g-117);
 }
-.gallery:not(.is-gapless).is-small-gap {
+.gallery:not(.is-gapless).is-normal-gap {
   gap: var(--g-118);
 }
-.gallery:not(.is-gapless).is-normal-gap {
+.gallery:not(.is-gapless).is-medium-gap {
   gap: var(--g-119);
 }
-.gallery:not(.is-gapless).is-medium-gap {
+.gallery:not(.is-gapless).is-large-gap {
   gap: var(--g-120);
 }
-.gallery:not(.is-gapless).is-large-gap {
+.gallery:not(.is-gapless).is-big-gap {
   gap: var(--g-121);
 }
 .gallery:not(.is-gapless).is-huge-gap {
@@ -1504,19 +1504,19 @@ table.is-maroon.is-hoverable > tbody > tr:hover {
 .gaper:not(.is-gapless).is-auto {
   gap: var(--v-4);
 }
-.gaper:not(.is-gapless).is-auto.is-mini-gap {
+.gaper:not(.is-gapless).is-auto.is-small-gap {
   gap: var(--g-117);
 }
-.gaper:not(.is-gapless).is-auto.is-small-gap {
+.gaper:not(.is-gapless).is-auto.is-normal-gap {
   gap: var(--g-118);
 }
-.gaper:not(.is-gapless).is-auto.is-normal-gap {
+.gaper:not(.is-gapless).is-auto.is-medium-gap {
   gap: var(--g-119);
 }
-.gaper:not(.is-gapless).is-auto.is-medium-gap {
+.gaper:not(.is-gapless).is-auto.is-large-gap {
   gap: var(--g-120);
 }
-.gaper:not(.is-gapless).is-auto.is-large-gap {
+.gaper:not(.is-gapless).is-auto.is-big-gap {
   gap: var(--g-121);
 }
 .gaper:not(.is-gapless).is-auto.is-huge-gap {
@@ -1534,49 +1534,49 @@ table.is-maroon.is-hoverable > tbody > tr:hover {
 .gaper:not(.is-gapless):not(.is-auto).is-stacked-reverse > .gutter {
   margin: calc(var(--v-4) / 2) 0;
 }
-.gaper:not(.is-gapless):not(.is-auto).is-mini-gap > .divider,
-.gaper:not(.is-gapless):not(.is-auto).is-mini-gap > .gutter {
-  margin: 0 calc(var(--g-117) / 2);
-}
-.gaper:not(.is-gapless):not(.is-auto).is-mini-gap.is-stacked > .divider,
-.gaper:not(.is-gapless):not(.is-auto).is-mini-gap.is-stacked > .gutter, .gaper:not(.is-gapless):not(.is-auto).is-mini-gap.is-stacked-reverse > .divider,
-.gaper:not(.is-gapless):not(.is-auto).is-mini-gap.is-stacked-reverse > .gutter {
-  margin: calc(var(--g-117) / 2) 0;
-}
 .gaper:not(.is-gapless):not(.is-auto).is-small-gap > .divider,
 .gaper:not(.is-gapless):not(.is-auto).is-small-gap > .gutter {
-  margin: 0 calc(var(--g-118) / 2);
+  margin: 0 calc(var(--g-117) / 2);
 }
 .gaper:not(.is-gapless):not(.is-auto).is-small-gap.is-stacked > .divider,
 .gaper:not(.is-gapless):not(.is-auto).is-small-gap.is-stacked > .gutter, .gaper:not(.is-gapless):not(.is-auto).is-small-gap.is-stacked-reverse > .divider,
 .gaper:not(.is-gapless):not(.is-auto).is-small-gap.is-stacked-reverse > .gutter {
-  margin: calc(var(--g-118) / 2) 0;
+  margin: calc(var(--g-117) / 2) 0;
 }
 .gaper:not(.is-gapless):not(.is-auto).is-normal-gap > .divider,
 .gaper:not(.is-gapless):not(.is-auto).is-normal-gap > .gutter {
-  margin: 0 calc(var(--g-119) / 2);
+  margin: 0 calc(var(--g-118) / 2);
 }
 .gaper:not(.is-gapless):not(.is-auto).is-normal-gap.is-stacked > .divider,
 .gaper:not(.is-gapless):not(.is-auto).is-normal-gap.is-stacked > .gutter, .gaper:not(.is-gapless):not(.is-auto).is-normal-gap.is-stacked-reverse > .divider,
 .gaper:not(.is-gapless):not(.is-auto).is-normal-gap.is-stacked-reverse > .gutter {
-  margin: calc(var(--g-119) / 2) 0;
+  margin: calc(var(--g-118) / 2) 0;
 }
 .gaper:not(.is-gapless):not(.is-auto).is-medium-gap > .divider,
 .gaper:not(.is-gapless):not(.is-auto).is-medium-gap > .gutter {
-  margin: 0 calc(var(--g-120) / 2);
+  margin: 0 calc(var(--g-119) / 2);
 }
 .gaper:not(.is-gapless):not(.is-auto).is-medium-gap.is-stacked > .divider,
 .gaper:not(.is-gapless):not(.is-auto).is-medium-gap.is-stacked > .gutter, .gaper:not(.is-gapless):not(.is-auto).is-medium-gap.is-stacked-reverse > .divider,
 .gaper:not(.is-gapless):not(.is-auto).is-medium-gap.is-stacked-reverse > .gutter {
-  margin: calc(var(--g-120) / 2) 0;
+  margin: calc(var(--g-119) / 2) 0;
 }
 .gaper:not(.is-gapless):not(.is-auto).is-large-gap > .divider,
 .gaper:not(.is-gapless):not(.is-auto).is-large-gap > .gutter {
-  margin: 0 calc(var(--g-121) / 2);
+  margin: 0 calc(var(--g-120) / 2);
 }
 .gaper:not(.is-gapless):not(.is-auto).is-large-gap.is-stacked > .divider,
 .gaper:not(.is-gapless):not(.is-auto).is-large-gap.is-stacked > .gutter, .gaper:not(.is-gapless):not(.is-auto).is-large-gap.is-stacked-reverse > .divider,
 .gaper:not(.is-gapless):not(.is-auto).is-large-gap.is-stacked-reverse > .gutter {
+  margin: calc(var(--g-120) / 2) 0;
+}
+.gaper:not(.is-gapless):not(.is-auto).is-big-gap > .divider,
+.gaper:not(.is-gapless):not(.is-auto).is-big-gap > .gutter {
+  margin: 0 calc(var(--g-121) / 2);
+}
+.gaper:not(.is-gapless):not(.is-auto).is-big-gap.is-stacked > .divider,
+.gaper:not(.is-gapless):not(.is-auto).is-big-gap.is-stacked > .gutter, .gaper:not(.is-gapless):not(.is-auto).is-big-gap.is-stacked-reverse > .divider,
+.gaper:not(.is-gapless):not(.is-auto).is-big-gap.is-stacked-reverse > .gutter {
   margin: calc(var(--g-121) / 2) 0;
 }
 .gaper:not(.is-gapless):not(.is-auto).is-huge-gap > .divider,
@@ -1615,29 +1615,29 @@ table.is-maroon.is-hoverable > tbody > tr:hover {
   .gaper:not(.is-gapless, .is-auto).is-until-ultrawide-stacked-reverse > .gutter {
     margin: calc(var(--v-4) / 2) 0;
   }
-  .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-until-ultrawide-stacked > .divider,
-  .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-until-ultrawide-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-until-ultrawide-stacked-reverse > .divider,
-  .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-until-ultrawide-stacked-reverse > .gutter {
-    margin: calc(var(--g-117) / 2) 0;
-  }
   .gaper:not(.is-gapless, .is-auto).is-small-gap.is-until-ultrawide-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-small-gap.is-until-ultrawide-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-small-gap.is-until-ultrawide-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-small-gap.is-until-ultrawide-stacked-reverse > .gutter {
-    margin: calc(var(--g-118) / 2) 0;
+    margin: calc(var(--g-117) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-until-ultrawide-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-until-ultrawide-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-until-ultrawide-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-until-ultrawide-stacked-reverse > .gutter {
-    margin: calc(var(--g-119) / 2) 0;
+    margin: calc(var(--g-118) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-until-ultrawide-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-until-ultrawide-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-until-ultrawide-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-until-ultrawide-stacked-reverse > .gutter {
-    margin: calc(var(--g-120) / 2) 0;
+    margin: calc(var(--g-119) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-large-gap.is-until-ultrawide-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-large-gap.is-until-ultrawide-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-large-gap.is-until-ultrawide-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-large-gap.is-until-ultrawide-stacked-reverse > .gutter {
+    margin: calc(var(--g-120) / 2) 0;
+  }
+  .gaper:not(.is-gapless, .is-auto).is-big-gap.is-until-ultrawide-stacked > .divider,
+  .gaper:not(.is-gapless, .is-auto).is-big-gap.is-until-ultrawide-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-big-gap.is-until-ultrawide-stacked-reverse > .divider,
+  .gaper:not(.is-gapless, .is-auto).is-big-gap.is-until-ultrawide-stacked-reverse > .gutter {
     margin: calc(var(--g-121) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-huge-gap.is-until-ultrawide-stacked > .divider,
@@ -1669,29 +1669,29 @@ table.is-maroon.is-hoverable > tbody > tr:hover {
   .gaper:not(.is-gapless, .is-auto).is-until-widescreen-stacked-reverse > .gutter {
     margin: calc(var(--v-4) / 2) 0;
   }
-  .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-until-widescreen-stacked > .divider,
-  .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-until-widescreen-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-until-widescreen-stacked-reverse > .divider,
-  .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-until-widescreen-stacked-reverse > .gutter {
-    margin: calc(var(--g-117) / 2) 0;
-  }
   .gaper:not(.is-gapless, .is-auto).is-small-gap.is-until-widescreen-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-small-gap.is-until-widescreen-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-small-gap.is-until-widescreen-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-small-gap.is-until-widescreen-stacked-reverse > .gutter {
-    margin: calc(var(--g-118) / 2) 0;
+    margin: calc(var(--g-117) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-until-widescreen-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-until-widescreen-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-until-widescreen-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-until-widescreen-stacked-reverse > .gutter {
-    margin: calc(var(--g-119) / 2) 0;
+    margin: calc(var(--g-118) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-until-widescreen-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-until-widescreen-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-until-widescreen-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-until-widescreen-stacked-reverse > .gutter {
-    margin: calc(var(--g-120) / 2) 0;
+    margin: calc(var(--g-119) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-large-gap.is-until-widescreen-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-large-gap.is-until-widescreen-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-large-gap.is-until-widescreen-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-large-gap.is-until-widescreen-stacked-reverse > .gutter {
+    margin: calc(var(--g-120) / 2) 0;
+  }
+  .gaper:not(.is-gapless, .is-auto).is-big-gap.is-until-widescreen-stacked > .divider,
+  .gaper:not(.is-gapless, .is-auto).is-big-gap.is-until-widescreen-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-big-gap.is-until-widescreen-stacked-reverse > .divider,
+  .gaper:not(.is-gapless, .is-auto).is-big-gap.is-until-widescreen-stacked-reverse > .gutter {
     margin: calc(var(--g-121) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-huge-gap.is-until-widescreen-stacked > .divider,
@@ -1723,29 +1723,29 @@ table.is-maroon.is-hoverable > tbody > tr:hover {
   .gaper:not(.is-gapless, .is-auto).is-until-desktop-stacked-reverse > .gutter {
     margin: calc(var(--v-4) / 2) 0;
   }
-  .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-until-desktop-stacked > .divider,
-  .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-until-desktop-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-until-desktop-stacked-reverse > .divider,
-  .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-until-desktop-stacked-reverse > .gutter {
-    margin: calc(var(--g-117) / 2) 0;
-  }
   .gaper:not(.is-gapless, .is-auto).is-small-gap.is-until-desktop-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-small-gap.is-until-desktop-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-small-gap.is-until-desktop-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-small-gap.is-until-desktop-stacked-reverse > .gutter {
-    margin: calc(var(--g-118) / 2) 0;
+    margin: calc(var(--g-117) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-until-desktop-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-until-desktop-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-until-desktop-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-until-desktop-stacked-reverse > .gutter {
-    margin: calc(var(--g-119) / 2) 0;
+    margin: calc(var(--g-118) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-until-desktop-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-until-desktop-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-until-desktop-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-until-desktop-stacked-reverse > .gutter {
-    margin: calc(var(--g-120) / 2) 0;
+    margin: calc(var(--g-119) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-large-gap.is-until-desktop-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-large-gap.is-until-desktop-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-large-gap.is-until-desktop-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-large-gap.is-until-desktop-stacked-reverse > .gutter {
+    margin: calc(var(--g-120) / 2) 0;
+  }
+  .gaper:not(.is-gapless, .is-auto).is-big-gap.is-until-desktop-stacked > .divider,
+  .gaper:not(.is-gapless, .is-auto).is-big-gap.is-until-desktop-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-big-gap.is-until-desktop-stacked-reverse > .divider,
+  .gaper:not(.is-gapless, .is-auto).is-big-gap.is-until-desktop-stacked-reverse > .gutter {
     margin: calc(var(--g-121) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-huge-gap.is-until-desktop-stacked > .divider,
@@ -1777,29 +1777,29 @@ table.is-maroon.is-hoverable > tbody > tr:hover {
   .gaper:not(.is-gapless, .is-auto).is-tablet-stacked-reverse > .gutter {
     margin: calc(var(--v-4) / 2) 0;
   }
-  .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-tablet-stacked > .divider,
-  .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-tablet-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-tablet-stacked-reverse > .divider,
-  .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-tablet-stacked-reverse > .gutter {
-    margin: calc(var(--g-117) / 2) 0;
-  }
   .gaper:not(.is-gapless, .is-auto).is-small-gap.is-tablet-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-small-gap.is-tablet-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-small-gap.is-tablet-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-small-gap.is-tablet-stacked-reverse > .gutter {
-    margin: calc(var(--g-118) / 2) 0;
+    margin: calc(var(--g-117) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-tablet-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-tablet-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-tablet-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-tablet-stacked-reverse > .gutter {
-    margin: calc(var(--g-119) / 2) 0;
+    margin: calc(var(--g-118) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-tablet-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-tablet-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-tablet-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-tablet-stacked-reverse > .gutter {
-    margin: calc(var(--g-120) / 2) 0;
+    margin: calc(var(--g-119) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-large-gap.is-tablet-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-large-gap.is-tablet-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-large-gap.is-tablet-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-large-gap.is-tablet-stacked-reverse > .gutter {
+    margin: calc(var(--g-120) / 2) 0;
+  }
+  .gaper:not(.is-gapless, .is-auto).is-big-gap.is-tablet-stacked > .divider,
+  .gaper:not(.is-gapless, .is-auto).is-big-gap.is-tablet-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-big-gap.is-tablet-stacked-reverse > .divider,
+  .gaper:not(.is-gapless, .is-auto).is-big-gap.is-tablet-stacked-reverse > .gutter {
     margin: calc(var(--g-121) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-huge-gap.is-tablet-stacked > .divider,
@@ -1831,29 +1831,29 @@ table.is-maroon.is-hoverable > tbody > tr:hover {
   .gaper:not(.is-gapless, .is-auto).is-desktop-stacked-reverse > .gutter {
     margin: calc(var(--v-4) / 2) 0;
   }
-  .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-desktop-stacked > .divider,
-  .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-desktop-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-desktop-stacked-reverse > .divider,
-  .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-desktop-stacked-reverse > .gutter {
-    margin: calc(var(--g-117) / 2) 0;
-  }
   .gaper:not(.is-gapless, .is-auto).is-small-gap.is-desktop-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-small-gap.is-desktop-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-small-gap.is-desktop-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-small-gap.is-desktop-stacked-reverse > .gutter {
-    margin: calc(var(--g-118) / 2) 0;
+    margin: calc(var(--g-117) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-desktop-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-desktop-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-desktop-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-desktop-stacked-reverse > .gutter {
-    margin: calc(var(--g-119) / 2) 0;
+    margin: calc(var(--g-118) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-desktop-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-desktop-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-desktop-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-desktop-stacked-reverse > .gutter {
-    margin: calc(var(--g-120) / 2) 0;
+    margin: calc(var(--g-119) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-large-gap.is-desktop-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-large-gap.is-desktop-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-large-gap.is-desktop-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-large-gap.is-desktop-stacked-reverse > .gutter {
+    margin: calc(var(--g-120) / 2) 0;
+  }
+  .gaper:not(.is-gapless, .is-auto).is-big-gap.is-desktop-stacked > .divider,
+  .gaper:not(.is-gapless, .is-auto).is-big-gap.is-desktop-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-big-gap.is-desktop-stacked-reverse > .divider,
+  .gaper:not(.is-gapless, .is-auto).is-big-gap.is-desktop-stacked-reverse > .gutter {
     margin: calc(var(--g-121) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-huge-gap.is-desktop-stacked > .divider,
@@ -1885,29 +1885,29 @@ table.is-maroon.is-hoverable > tbody > tr:hover {
   .gaper:not(.is-gapless, .is-auto).is-widescreen-stacked-reverse > .gutter {
     margin: calc(var(--v-4) / 2) 0;
   }
-  .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-widescreen-stacked > .divider,
-  .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-widescreen-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-widescreen-stacked-reverse > .divider,
-  .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-widescreen-stacked-reverse > .gutter {
-    margin: calc(var(--g-117) / 2) 0;
-  }
   .gaper:not(.is-gapless, .is-auto).is-small-gap.is-widescreen-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-small-gap.is-widescreen-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-small-gap.is-widescreen-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-small-gap.is-widescreen-stacked-reverse > .gutter {
-    margin: calc(var(--g-118) / 2) 0;
+    margin: calc(var(--g-117) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-widescreen-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-widescreen-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-widescreen-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-widescreen-stacked-reverse > .gutter {
-    margin: calc(var(--g-119) / 2) 0;
+    margin: calc(var(--g-118) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-widescreen-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-widescreen-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-widescreen-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-widescreen-stacked-reverse > .gutter {
-    margin: calc(var(--g-120) / 2) 0;
+    margin: calc(var(--g-119) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-large-gap.is-widescreen-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-large-gap.is-widescreen-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-large-gap.is-widescreen-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-large-gap.is-widescreen-stacked-reverse > .gutter {
+    margin: calc(var(--g-120) / 2) 0;
+  }
+  .gaper:not(.is-gapless, .is-auto).is-big-gap.is-widescreen-stacked > .divider,
+  .gaper:not(.is-gapless, .is-auto).is-big-gap.is-widescreen-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-big-gap.is-widescreen-stacked-reverse > .divider,
+  .gaper:not(.is-gapless, .is-auto).is-big-gap.is-widescreen-stacked-reverse > .gutter {
     margin: calc(var(--g-121) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-huge-gap.is-widescreen-stacked > .divider,
@@ -1939,29 +1939,29 @@ table.is-maroon.is-hoverable > tbody > tr:hover {
   .gaper:not(.is-gapless, .is-auto).is-ultrawide-stacked-reverse > .gutter {
     margin: calc(var(--v-4) / 2) 0;
   }
-  .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-ultrawide-stacked > .divider,
-  .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-ultrawide-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-ultrawide-stacked-reverse > .divider,
-  .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-ultrawide-stacked-reverse > .gutter {
-    margin: calc(var(--g-117) / 2) 0;
-  }
   .gaper:not(.is-gapless, .is-auto).is-small-gap.is-ultrawide-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-small-gap.is-ultrawide-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-small-gap.is-ultrawide-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-small-gap.is-ultrawide-stacked-reverse > .gutter {
-    margin: calc(var(--g-118) / 2) 0;
+    margin: calc(var(--g-117) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-ultrawide-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-ultrawide-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-ultrawide-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-ultrawide-stacked-reverse > .gutter {
-    margin: calc(var(--g-119) / 2) 0;
+    margin: calc(var(--g-118) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-ultrawide-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-ultrawide-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-ultrawide-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-ultrawide-stacked-reverse > .gutter {
-    margin: calc(var(--g-120) / 2) 0;
+    margin: calc(var(--g-119) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-large-gap.is-ultrawide-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-large-gap.is-ultrawide-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-large-gap.is-ultrawide-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-large-gap.is-ultrawide-stacked-reverse > .gutter {
+    margin: calc(var(--g-120) / 2) 0;
+  }
+  .gaper:not(.is-gapless, .is-auto).is-big-gap.is-ultrawide-stacked > .divider,
+  .gaper:not(.is-gapless, .is-auto).is-big-gap.is-ultrawide-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-big-gap.is-ultrawide-stacked-reverse > .divider,
+  .gaper:not(.is-gapless, .is-auto).is-big-gap.is-ultrawide-stacked-reverse > .gutter {
     margin: calc(var(--g-121) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-huge-gap.is-ultrawide-stacked > .divider,
@@ -1993,29 +1993,29 @@ table.is-maroon.is-hoverable > tbody > tr:hover {
   .gaper:not(.is-gapless, .is-auto).is-mobile-stacked-reverse > .gutter {
     margin: calc(var(--v-4) / 2) 0;
   }
-  .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-mobile-stacked > .divider,
-  .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-mobile-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-mobile-stacked-reverse > .divider,
-  .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-mobile-stacked-reverse > .gutter {
-    margin: calc(var(--g-117) / 2) 0;
-  }
   .gaper:not(.is-gapless, .is-auto).is-small-gap.is-mobile-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-small-gap.is-mobile-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-small-gap.is-mobile-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-small-gap.is-mobile-stacked-reverse > .gutter {
-    margin: calc(var(--g-118) / 2) 0;
+    margin: calc(var(--g-117) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-mobile-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-mobile-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-mobile-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-mobile-stacked-reverse > .gutter {
-    margin: calc(var(--g-119) / 2) 0;
+    margin: calc(var(--g-118) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-mobile-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-mobile-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-mobile-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-mobile-stacked-reverse > .gutter {
-    margin: calc(var(--g-120) / 2) 0;
+    margin: calc(var(--g-119) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-large-gap.is-mobile-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-large-gap.is-mobile-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-large-gap.is-mobile-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-large-gap.is-mobile-stacked-reverse > .gutter {
+    margin: calc(var(--g-120) / 2) 0;
+  }
+  .gaper:not(.is-gapless, .is-auto).is-big-gap.is-mobile-stacked > .divider,
+  .gaper:not(.is-gapless, .is-auto).is-big-gap.is-mobile-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-big-gap.is-mobile-stacked-reverse > .divider,
+  .gaper:not(.is-gapless, .is-auto).is-big-gap.is-mobile-stacked-reverse > .gutter {
     margin: calc(var(--g-121) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-huge-gap.is-mobile-stacked > .divider,
@@ -2047,29 +2047,29 @@ table.is-maroon.is-hoverable > tbody > tr:hover {
   .gaper:not(.is-gapless, .is-auto).is-tablet-only-stacked-reverse > .gutter {
     margin: calc(var(--v-4) / 2) 0;
   }
-  .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-tablet-only-stacked > .divider,
-  .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-tablet-only-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-tablet-only-stacked-reverse > .divider,
-  .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-tablet-only-stacked-reverse > .gutter {
-    margin: calc(var(--g-117) / 2) 0;
-  }
   .gaper:not(.is-gapless, .is-auto).is-small-gap.is-tablet-only-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-small-gap.is-tablet-only-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-small-gap.is-tablet-only-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-small-gap.is-tablet-only-stacked-reverse > .gutter {
-    margin: calc(var(--g-118) / 2) 0;
+    margin: calc(var(--g-117) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-tablet-only-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-tablet-only-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-tablet-only-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-tablet-only-stacked-reverse > .gutter {
-    margin: calc(var(--g-119) / 2) 0;
+    margin: calc(var(--g-118) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-tablet-only-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-tablet-only-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-tablet-only-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-tablet-only-stacked-reverse > .gutter {
-    margin: calc(var(--g-120) / 2) 0;
+    margin: calc(var(--g-119) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-large-gap.is-tablet-only-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-large-gap.is-tablet-only-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-large-gap.is-tablet-only-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-large-gap.is-tablet-only-stacked-reverse > .gutter {
+    margin: calc(var(--g-120) / 2) 0;
+  }
+  .gaper:not(.is-gapless, .is-auto).is-big-gap.is-tablet-only-stacked > .divider,
+  .gaper:not(.is-gapless, .is-auto).is-big-gap.is-tablet-only-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-big-gap.is-tablet-only-stacked-reverse > .divider,
+  .gaper:not(.is-gapless, .is-auto).is-big-gap.is-tablet-only-stacked-reverse > .gutter {
     margin: calc(var(--g-121) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-huge-gap.is-tablet-only-stacked > .divider,
@@ -2101,29 +2101,29 @@ table.is-maroon.is-hoverable > tbody > tr:hover {
   .gaper:not(.is-gapless, .is-auto).is-desktop-only-stacked-reverse > .gutter {
     margin: calc(var(--v-4) / 2) 0;
   }
-  .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-desktop-only-stacked > .divider,
-  .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-desktop-only-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-desktop-only-stacked-reverse > .divider,
-  .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-desktop-only-stacked-reverse > .gutter {
-    margin: calc(var(--g-117) / 2) 0;
-  }
   .gaper:not(.is-gapless, .is-auto).is-small-gap.is-desktop-only-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-small-gap.is-desktop-only-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-small-gap.is-desktop-only-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-small-gap.is-desktop-only-stacked-reverse > .gutter {
-    margin: calc(var(--g-118) / 2) 0;
+    margin: calc(var(--g-117) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-desktop-only-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-desktop-only-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-desktop-only-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-desktop-only-stacked-reverse > .gutter {
-    margin: calc(var(--g-119) / 2) 0;
+    margin: calc(var(--g-118) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-desktop-only-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-desktop-only-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-desktop-only-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-desktop-only-stacked-reverse > .gutter {
-    margin: calc(var(--g-120) / 2) 0;
+    margin: calc(var(--g-119) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-large-gap.is-desktop-only-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-large-gap.is-desktop-only-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-large-gap.is-desktop-only-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-large-gap.is-desktop-only-stacked-reverse > .gutter {
+    margin: calc(var(--g-120) / 2) 0;
+  }
+  .gaper:not(.is-gapless, .is-auto).is-big-gap.is-desktop-only-stacked > .divider,
+  .gaper:not(.is-gapless, .is-auto).is-big-gap.is-desktop-only-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-big-gap.is-desktop-only-stacked-reverse > .divider,
+  .gaper:not(.is-gapless, .is-auto).is-big-gap.is-desktop-only-stacked-reverse > .gutter {
     margin: calc(var(--g-121) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-huge-gap.is-desktop-only-stacked > .divider,
@@ -2155,29 +2155,29 @@ table.is-maroon.is-hoverable > tbody > tr:hover {
   .gaper:not(.is-gapless, .is-auto).is-widescreen-only-stacked-reverse > .gutter {
     margin: calc(var(--v-4) / 2) 0;
   }
-  .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-widescreen-only-stacked > .divider,
-  .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-widescreen-only-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-widescreen-only-stacked-reverse > .divider,
-  .gaper:not(.is-gapless, .is-auto).is-mini-gap.is-widescreen-only-stacked-reverse > .gutter {
-    margin: calc(var(--g-117) / 2) 0;
-  }
   .gaper:not(.is-gapless, .is-auto).is-small-gap.is-widescreen-only-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-small-gap.is-widescreen-only-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-small-gap.is-widescreen-only-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-small-gap.is-widescreen-only-stacked-reverse > .gutter {
-    margin: calc(var(--g-118) / 2) 0;
+    margin: calc(var(--g-117) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-widescreen-only-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-widescreen-only-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-widescreen-only-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-normal-gap.is-widescreen-only-stacked-reverse > .gutter {
-    margin: calc(var(--g-119) / 2) 0;
+    margin: calc(var(--g-118) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-widescreen-only-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-widescreen-only-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-widescreen-only-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-medium-gap.is-widescreen-only-stacked-reverse > .gutter {
-    margin: calc(var(--g-120) / 2) 0;
+    margin: calc(var(--g-119) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-large-gap.is-widescreen-only-stacked > .divider,
   .gaper:not(.is-gapless, .is-auto).is-large-gap.is-widescreen-only-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-large-gap.is-widescreen-only-stacked-reverse > .divider,
   .gaper:not(.is-gapless, .is-auto).is-large-gap.is-widescreen-only-stacked-reverse > .gutter {
+    margin: calc(var(--g-120) / 2) 0;
+  }
+  .gaper:not(.is-gapless, .is-auto).is-big-gap.is-widescreen-only-stacked > .divider,
+  .gaper:not(.is-gapless, .is-auto).is-big-gap.is-widescreen-only-stacked > .gutter, .gaper:not(.is-gapless, .is-auto).is-big-gap.is-widescreen-only-stacked-reverse > .divider,
+  .gaper:not(.is-gapless, .is-auto).is-big-gap.is-widescreen-only-stacked-reverse > .gutter {
     margin: calc(var(--g-121) / 2) 0;
   }
   .gaper:not(.is-gapless, .is-auto).is-huge-gap.is-widescreen-only-stacked > .divider,
@@ -2283,34 +2283,34 @@ table.is-maroon.is-hoverable > tbody > tr:hover {
 .grid:not(.is-gapless) > .column {
   padding: calc(var(--v-5) / 2);
 }
-.grid:not(.is-gapless).is-mini-gap {
+.grid:not(.is-gapless).is-small-gap {
   margin: calc(-1 * calc(var(--g-117) / 2));
 }
-.grid:not(.is-gapless).is-mini-gap > .column {
+.grid:not(.is-gapless).is-small-gap > .column {
   padding: calc(var(--g-117) / 2);
 }
-.grid:not(.is-gapless).is-small-gap {
+.grid:not(.is-gapless).is-normal-gap {
   margin: calc(-1 * calc(var(--g-118) / 2));
 }
-.grid:not(.is-gapless).is-small-gap > .column {
+.grid:not(.is-gapless).is-normal-gap > .column {
   padding: calc(var(--g-118) / 2);
 }
-.grid:not(.is-gapless).is-normal-gap {
+.grid:not(.is-gapless).is-medium-gap {
   margin: calc(-1 * calc(var(--g-119) / 2));
 }
-.grid:not(.is-gapless).is-normal-gap > .column {
+.grid:not(.is-gapless).is-medium-gap > .column {
   padding: calc(var(--g-119) / 2);
 }
-.grid:not(.is-gapless).is-medium-gap {
+.grid:not(.is-gapless).is-large-gap {
   margin: calc(-1 * calc(var(--g-120) / 2));
 }
-.grid:not(.is-gapless).is-medium-gap > .column {
+.grid:not(.is-gapless).is-large-gap > .column {
   padding: calc(var(--g-120) / 2);
 }
-.grid:not(.is-gapless).is-large-gap {
+.grid:not(.is-gapless).is-big-gap {
   margin: calc(-1 * calc(var(--g-121) / 2));
 }
-.grid:not(.is-gapless).is-large-gap > .column {
+.grid:not(.is-gapless).is-big-gap > .column {
   padding: calc(var(--g-121) / 2);
 }
 .grid:not(.is-gapless).is-huge-gap {
@@ -3142,19 +3142,19 @@ table.is-maroon.is-hoverable > tbody > tr:hover {
 .landscape:not(.is-gapless) {
   gap: var(--v-4);
 }
-.landscape:not(.is-gapless).is-mini-gap {
+.landscape:not(.is-gapless).is-small-gap {
   gap: var(--g-117);
 }
-.landscape:not(.is-gapless).is-small-gap {
+.landscape:not(.is-gapless).is-normal-gap {
   gap: var(--g-118);
 }
-.landscape:not(.is-gapless).is-normal-gap {
+.landscape:not(.is-gapless).is-medium-gap {
   gap: var(--g-119);
 }
-.landscape:not(.is-gapless).is-medium-gap {
+.landscape:not(.is-gapless).is-large-gap {
   gap: var(--g-120);
 }
-.landscape:not(.is-gapless).is-large-gap {
+.landscape:not(.is-gapless).is-big-gap {
   gap: var(--g-121);
 }
 .landscape:not(.is-gapless).is-huge-gap {
@@ -3278,19 +3278,19 @@ table.is-maroon.is-hoverable > tbody > tr:hover {
   display: block;
   box-sizing: border-box;
 }
-.padder.is-mini {
+.padder.is-small {
   padding: var(--g-117);
 }
-.padder.is-small {
+.padder.is-normal {
   padding: var(--g-118);
 }
-.padder.is-normal {
+.padder.is-medium {
   padding: var(--g-119);
 }
-.padder.is-medium {
+.padder.is-large {
   padding: var(--g-120);
 }
-.padder.is-large {
+.padder.is-big {
   padding: var(--g-121);
 }
 .padder.is-huge {
@@ -3316,19 +3316,19 @@ table.is-maroon.is-hoverable > tbody > tr:hover {
 .wrapper:not(.is-gapless) {
   gap: var(--v-4);
 }
-.wrapper:not(.is-gapless).is-mini-gap {
+.wrapper:not(.is-gapless).is-small-gap {
   gap: var(--g-117);
 }
-.wrapper:not(.is-gapless).is-small-gap {
+.wrapper:not(.is-gapless).is-normal-gap {
   gap: var(--g-118);
 }
-.wrapper:not(.is-gapless).is-normal-gap {
+.wrapper:not(.is-gapless).is-medium-gap {
   gap: var(--g-119);
 }
-.wrapper:not(.is-gapless).is-medium-gap {
+.wrapper:not(.is-gapless).is-large-gap {
   gap: var(--g-120);
 }
-.wrapper:not(.is-gapless).is-large-gap {
+.wrapper:not(.is-gapless).is-big-gap {
   gap: var(--g-121);
 }
 .wrapper:not(.is-gapless).is-huge-gap {
@@ -3693,34 +3693,34 @@ form.is-loading::after {
 .input:not(:disabled, .is-disabled, .is-loading, [inert], :is(:disabled, .is-disabled, .is-loading, [inert]) *):is(:focus-visible, :focus-within, :open) {
   border-color: var(--p-131);
 }
-.input.is-mini-gap > .divider {
+.input.is-small-gap > .divider {
   margin: 0 calc(var(--g-117) / 2);
 }
-.input.is-mini-gap > .gutter {
+.input.is-small-gap > .gutter {
   width: var(--g-117);
 }
-.input.is-small-gap > .divider {
+.input.is-normal-gap > .divider {
   margin: 0 calc(var(--g-118) / 2);
 }
-.input.is-small-gap > .gutter {
+.input.is-normal-gap > .gutter {
   width: var(--g-118);
 }
-.input.is-normal-gap > .divider {
+.input.is-medium-gap > .divider {
   margin: 0 calc(var(--g-119) / 2);
 }
-.input.is-normal-gap > .gutter {
+.input.is-medium-gap > .gutter {
   width: var(--g-119);
 }
-.input.is-medium-gap > .divider {
+.input.is-large-gap > .divider {
   margin: 0 calc(var(--g-120) / 2);
 }
-.input.is-medium-gap > .gutter {
+.input.is-large-gap > .gutter {
   width: var(--g-120);
 }
-.input.is-large-gap > .divider {
+.input.is-big-gap > .divider {
   margin: 0 calc(var(--g-121) / 2);
 }
-.input.is-large-gap > .gutter {
+.input.is-big-gap > .gutter {
   width: var(--g-121);
 }
 .input.is-huge-gap > .divider {
@@ -5782,34 +5782,34 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
 .header.is-centered h6 {
   justify-content: center;
 }
-.header.is-mini-gap {
+.header.is-small-gap {
   gap: var(--g-117);
 }
-.header.is-mini-gap:not(.is-paddingless) {
+.header.is-small-gap:not(.is-paddingless) {
   padding: calc(var(--g-117) / 2) var(--g-117);
 }
-.header.is-small-gap {
+.header.is-normal-gap {
   gap: var(--g-118);
 }
-.header.is-small-gap:not(.is-paddingless) {
+.header.is-normal-gap:not(.is-paddingless) {
   padding: calc(var(--g-118) / 2) var(--g-118);
 }
-.header.is-normal-gap {
+.header.is-medium-gap {
   gap: var(--g-119);
 }
-.header.is-normal-gap:not(.is-paddingless) {
+.header.is-medium-gap:not(.is-paddingless) {
   padding: calc(var(--g-119) / 2) var(--g-119);
 }
-.header.is-medium-gap {
+.header.is-large-gap {
   gap: var(--g-120);
 }
-.header.is-medium-gap:not(.is-paddingless) {
+.header.is-large-gap:not(.is-paddingless) {
   padding: calc(var(--g-120) / 2) var(--g-120);
 }
-.header.is-large-gap {
+.header.is-big-gap {
   gap: var(--g-121);
 }
-.header.is-large-gap:not(.is-paddingless) {
+.header.is-big-gap:not(.is-paddingless) {
   padding: calc(var(--g-121) / 2) var(--g-121);
 }
 .header.is-huge-gap {
@@ -6015,139 +6015,139 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   bottom: calc(-1 * var(--v-113));
   background-color: rgba(var(--r-311), var(--v-306));
 }
-.card.is-mini-gap {
-  padding: var(--g-117);
-}
-.card.is-mini-gap > .separator.is-attached {
-  margin: 0 calc(-1 * var(--g-117));
-}
-.card.is-mini-gap > .section {
-  margin: 0 calc(-1 * var(--g-117));
-}
-.card.is-mini-gap > .section:first-child, .card.is-mini-gap > .section.is-header {
-  margin-top: calc(-1 * var(--g-117));
-}
-.card.is-mini-gap > .section:last-child, .card.is-mini-gap > .section.is-footer {
-  margin-bottom: calc(-1 * var(--g-117));
-}
-.card.is-mini-gap > .section:not(.is-attached) {
-  padding: var(--g-117);
-}
-.card.is-mini-gap > .overlay {
-  padding: var(--g-117);
-}
-.card.is-mini-gap:not(.is-overlaid, .is-loading) > .section.top-sticky {
-  top: calc(-1 * var(--g-117));
-}
-.card.is-mini-gap:not(.is-overlaid, .is-loading) > .section.bottom-sticky {
-  bottom: calc(-1 * var(--g-117));
-}
 .card.is-small-gap {
-  padding: var(--g-118);
+  padding: var(--g-117);
 }
 .card.is-small-gap > .separator.is-attached {
-  margin: 0 calc(-1 * var(--g-118));
+  margin: 0 calc(-1 * var(--g-117));
 }
 .card.is-small-gap > .section {
-  margin: 0 calc(-1 * var(--g-118));
+  margin: 0 calc(-1 * var(--g-117));
 }
 .card.is-small-gap > .section:first-child, .card.is-small-gap > .section.is-header {
-  margin-top: calc(-1 * var(--g-118));
+  margin-top: calc(-1 * var(--g-117));
 }
 .card.is-small-gap > .section:last-child, .card.is-small-gap > .section.is-footer {
-  margin-bottom: calc(-1 * var(--g-118));
+  margin-bottom: calc(-1 * var(--g-117));
 }
 .card.is-small-gap > .section:not(.is-attached) {
-  padding: var(--g-118);
+  padding: var(--g-117);
 }
 .card.is-small-gap > .overlay {
-  padding: var(--g-118);
+  padding: var(--g-117);
 }
 .card.is-small-gap:not(.is-overlaid, .is-loading) > .section.top-sticky {
-  top: calc(-1 * var(--g-118));
+  top: calc(-1 * var(--g-117));
 }
 .card.is-small-gap:not(.is-overlaid, .is-loading) > .section.bottom-sticky {
-  bottom: calc(-1 * var(--g-118));
+  bottom: calc(-1 * var(--g-117));
 }
 .card.is-normal-gap {
-  padding: var(--g-119);
+  padding: var(--g-118);
 }
 .card.is-normal-gap > .separator.is-attached {
-  margin: 0 calc(-1 * var(--g-119));
+  margin: 0 calc(-1 * var(--g-118));
 }
 .card.is-normal-gap > .section {
-  margin: 0 calc(-1 * var(--g-119));
+  margin: 0 calc(-1 * var(--g-118));
 }
 .card.is-normal-gap > .section:first-child, .card.is-normal-gap > .section.is-header {
-  margin-top: calc(-1 * var(--g-119));
+  margin-top: calc(-1 * var(--g-118));
 }
 .card.is-normal-gap > .section:last-child, .card.is-normal-gap > .section.is-footer {
-  margin-bottom: calc(-1 * var(--g-119));
+  margin-bottom: calc(-1 * var(--g-118));
 }
 .card.is-normal-gap > .section:not(.is-attached) {
-  padding: var(--g-119);
+  padding: var(--g-118);
 }
 .card.is-normal-gap > .overlay {
-  padding: var(--g-119);
+  padding: var(--g-118);
 }
 .card.is-normal-gap:not(.is-overlaid, .is-loading) > .section.top-sticky {
-  top: calc(-1 * var(--g-119));
+  top: calc(-1 * var(--g-118));
 }
 .card.is-normal-gap:not(.is-overlaid, .is-loading) > .section.bottom-sticky {
-  bottom: calc(-1 * var(--g-119));
+  bottom: calc(-1 * var(--g-118));
 }
 .card.is-medium-gap {
-  padding: var(--g-120);
+  padding: var(--g-119);
 }
 .card.is-medium-gap > .separator.is-attached {
-  margin: 0 calc(-1 * var(--g-120));
+  margin: 0 calc(-1 * var(--g-119));
 }
 .card.is-medium-gap > .section {
-  margin: 0 calc(-1 * var(--g-120));
+  margin: 0 calc(-1 * var(--g-119));
 }
 .card.is-medium-gap > .section:first-child, .card.is-medium-gap > .section.is-header {
-  margin-top: calc(-1 * var(--g-120));
+  margin-top: calc(-1 * var(--g-119));
 }
 .card.is-medium-gap > .section:last-child, .card.is-medium-gap > .section.is-footer {
-  margin-bottom: calc(-1 * var(--g-120));
+  margin-bottom: calc(-1 * var(--g-119));
 }
 .card.is-medium-gap > .section:not(.is-attached) {
-  padding: var(--g-120);
+  padding: var(--g-119);
 }
 .card.is-medium-gap > .overlay {
-  padding: var(--g-120);
+  padding: var(--g-119);
 }
 .card.is-medium-gap:not(.is-overlaid, .is-loading) > .section.top-sticky {
-  top: calc(-1 * var(--g-120));
+  top: calc(-1 * var(--g-119));
 }
 .card.is-medium-gap:not(.is-overlaid, .is-loading) > .section.bottom-sticky {
-  bottom: calc(-1 * var(--g-120));
+  bottom: calc(-1 * var(--g-119));
 }
 .card.is-large-gap {
-  padding: var(--g-121);
+  padding: var(--g-120);
 }
 .card.is-large-gap > .separator.is-attached {
-  margin: 0 calc(-1 * var(--g-121));
+  margin: 0 calc(-1 * var(--g-120));
 }
 .card.is-large-gap > .section {
-  margin: 0 calc(-1 * var(--g-121));
+  margin: 0 calc(-1 * var(--g-120));
 }
 .card.is-large-gap > .section:first-child, .card.is-large-gap > .section.is-header {
-  margin-top: calc(-1 * var(--g-121));
+  margin-top: calc(-1 * var(--g-120));
 }
 .card.is-large-gap > .section:last-child, .card.is-large-gap > .section.is-footer {
-  margin-bottom: calc(-1 * var(--g-121));
+  margin-bottom: calc(-1 * var(--g-120));
 }
 .card.is-large-gap > .section:not(.is-attached) {
-  padding: var(--g-121);
+  padding: var(--g-120);
 }
 .card.is-large-gap > .overlay {
-  padding: var(--g-121);
+  padding: var(--g-120);
 }
 .card.is-large-gap:not(.is-overlaid, .is-loading) > .section.top-sticky {
-  top: calc(-1 * var(--g-121));
+  top: calc(-1 * var(--g-120));
 }
 .card.is-large-gap:not(.is-overlaid, .is-loading) > .section.bottom-sticky {
+  bottom: calc(-1 * var(--g-120));
+}
+.card.is-big-gap {
+  padding: var(--g-121);
+}
+.card.is-big-gap > .separator.is-attached {
+  margin: 0 calc(-1 * var(--g-121));
+}
+.card.is-big-gap > .section {
+  margin: 0 calc(-1 * var(--g-121));
+}
+.card.is-big-gap > .section:first-child, .card.is-big-gap > .section.is-header {
+  margin-top: calc(-1 * var(--g-121));
+}
+.card.is-big-gap > .section:last-child, .card.is-big-gap > .section.is-footer {
+  margin-bottom: calc(-1 * var(--g-121));
+}
+.card.is-big-gap > .section:not(.is-attached) {
+  padding: var(--g-121);
+}
+.card.is-big-gap > .overlay {
+  padding: var(--g-121);
+}
+.card.is-big-gap:not(.is-overlaid, .is-loading) > .section.top-sticky {
+  top: calc(-1 * var(--g-121));
+}
+.card.is-big-gap:not(.is-overlaid, .is-loading) > .section.bottom-sticky {
   bottom: calc(-1 * var(--g-121));
 }
 .card.is-huge-gap {
@@ -7563,9 +7563,9 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   --v-114: 960px;
   --v-115: 1200px;
   --v-116: 1500px;
-  --g-117: 0.5em;
-  --g-118: 0.85em;
-  --g-119: 1em;
+  --g-117: 0.8em;
+  --g-118: 1em;
+  --g-119: 1.25em;
   --g-120: 1.5em;
   --g-121: 2em;
   --g-122: 2.5em;

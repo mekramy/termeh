@@ -83,7 +83,8 @@
 
     &.note,
     &.tip,
-    &.info {
+    &.info,
+    &.warning {
         padding: 0.6rem 1.2rem;
         box-sizing: border-box;
         border-radius: 2px;
@@ -113,5 +114,10 @@
     &.info {
         --cb-border: var(--ctp-latte-sapphire);
         --cb-accent: var(--ctp-latte-sapphire);
+    }
+
+    &.warning {
+        --cb-border: var(--ctp-latte-yellow);
+        --cb-accent: var(--ctp-latte-yellow);
     }
 }

@@ -75,6 +75,7 @@ export default defineConfig({
 
     markdown: {
         theme: theme as never,
+        defaultHighlightLang: "scss",
 
         shikiSetup(instance) {
             highlighter = instance;
