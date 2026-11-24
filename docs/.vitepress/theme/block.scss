@@ -96,14 +96,15 @@
         border-left: 2px solid var(--cb-border);
         background-color: rgb(from var(--cb-border) r g b / 0.05);
 
-        .custom-block-title {
+        .custom-block-title,
+        a {
             color: var(--cb-accent);
         }
     }
 
     &.note {
-        --cb-border: var(--vp-c-text-1);
-        --cb-accent: var(--vp-c-text-1);
+        --cb-border: var(--ctp-latte-sky);
+        --cb-accent: var(--ctp-latte-sky);
     }
 
     &.tip {

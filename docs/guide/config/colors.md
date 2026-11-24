@@ -105,16 +105,16 @@ Use a resolver when you want to =create variants by rule= instead of fixing each
     @return null;
 }
 
-@include termeh.define-resolver(
+@include termeh.fallback-resolver(
     meta.get-function("brand-resolver")
 );
 ```
 
-- `define-resolver` =adds= the resolver after the existing ones. It is used only for variants the built-in resolvers cannot create.
-- `override-resolver` =adds= the resolver before the existing ones, so it can replace a color that a built-in resolver creates.
+- `fallback-resolver` =adds= the resolver as a last resort. It is called only if the other resolvers cannot create the requested variant.
+- `define-resolver` =adds= a resolver that is tried before previously defined resolvers. Resolvers are tried in reverse definition order, so the most recently defined resolver has priority and can replace a color produced by an earlier one.
 
 ```scss
-@include termeh.override-resolver(
+@include termeh.define-resolver(
     meta.get-function("table-resolver"),
     "table"
 );

@@ -288,10 +288,10 @@
     @return null;
 }
 
-@include core.define-resolver(meta.get-function("base-resolver"));
-@include core.define-resolver(meta.get-function("palette-resolver"));
-@include core.define-resolver(meta.get-function("overlay-resolver"), "overlay");
-@include core.define-resolver(meta.get-function("box-resolver"), "box");
-@include core.define-resolver(meta.get-function("table-resolver"), "table");
-@include core.define-resolver(meta.get-function("input-resolver"), "input");
-@include core.define-resolver(meta.get-function("component-resolver"), "component");
+@include core.fallback-resolver(meta.get-function("base-resolver"));
+@include core.fallback-resolver(meta.get-function("palette-resolver"));
+@include core.fallback-resolver(meta.get-function("overlay-resolver"), "overlay");
+@include core.fallback-resolver(meta.get-function("box-resolver"), "box");
+@include core.fallback-resolver(meta.get-function("table-resolver"), "table");
+@include core.fallback-resolver(meta.get-function("input-resolver"), "input");
+@include core.fallback-resolver(meta.get-function("component-resolver"), "component");

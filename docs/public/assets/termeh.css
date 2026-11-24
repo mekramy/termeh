@@ -7436,8 +7436,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   --r-45: var(--r-44);
   --p-46: var(--p-26);
   --r-46: var(--r-26);
-  --p-47: transparent;
-  --r-47: 0, 0, 0;
+  --p-47: rgba(var(--r-26), 0.5);
   --p-48: rgba(var(--r-1), 0.35);
   --v-49: ease;
   --v-50: 250ms;
@@ -7463,8 +7462,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   --r-60: var(--r-44);
   --p-61: var(--p-26);
   --r-61: var(--r-26);
-  --p-62: transparent;
-  --r-62: 0, 0, 0;
+  --p-62: rgba(var(--r-26), 0.5);
   --p-63: rgba(var(--r-1), 0.35);
   --p-64: rgb(96.1843137255%, 96.77%, 98.0333333333%);
   --r-64: 245.27, 246.7635, 249.985;
@@ -7482,8 +7480,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   --r-70: var(--r-44);
   --p-71: var(--p-26);
   --r-71: var(--r-26);
-  --p-72: transparent;
-  --r-72: 0, 0, 0;
+  --p-72: rgba(var(--r-26), 0.5);
   --p-73: rgba(var(--r-1), 0.35);
   --p-74: rgb(96.9123529412%, 95.0980392157%, 95.1705980392%);
   --r-74: 247.1265, 242.5, 242.685025;
@@ -7499,8 +7496,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   --r-79: var(--r-44);
   --p-80: var(--p-26);
   --r-80: var(--r-26);
-  --p-81: transparent;
-  --r-81: 0, 0, 0;
+  --p-81: rgba(var(--r-26), 0.5);
   --p-82: rgba(var(--r-1), 0.35);
   --p-83: #5b5fc7;
   --r-83: 91, 95, 199;
@@ -7516,8 +7512,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   --r-88: var(--r-44);
   --p-89: var(--p-26);
   --r-89: var(--r-26);
-  --p-90: transparent;
-  --r-90: 0, 0, 0;
+  --p-90: rgba(var(--r-26), 0.5);
   --p-91: rgba(var(--r-1), 0.35);
   --p-92: rgb(95.2384313725%, 95.1862745098%, 98.9901960784%);
   --r-92: 242.858, 242.725, 252.425;
@@ -7535,8 +7530,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   --r-98: var(--r-44);
   --p-99: var(--p-26);
   --r-99: var(--r-26);
-  --p-100: transparent;
-  --r-100: 0, 0, 0;
+  --p-100: rgba(var(--r-26), 0.5);
   --p-101: rgba(var(--r-1), 0.35);
   --p-102: rgb(95.231372549%, 98.9921568627%, 96.5482352941%);
   --r-102: 242.84, 252.43, 246.198;
@@ -7554,8 +7548,7 @@ textarea:is(:disabled, .is-disabled), :is(:disabled, .is-disabled) textarea {
   --r-108: var(--r-44);
   --p-109: var(--p-26);
   --r-109: var(--r-26);
-  --p-110: transparent;
-  --r-110: 0, 0, 0;
+  --p-110: rgba(var(--r-26), 0.5);
   --p-111: rgba(var(--r-1), 0.35);
   --p-112: rgb(96.8025490196%, 95.0588235294%, 95.9395294118%);
   --r-112: 246.8465, 242.4, 244.6458;
@@ -7980,8 +7973,7 @@ html[data-scheme=dark] {
   --r-45: var(--r-44);
   --p-46: var(--p-26);
   --r-46: var(--r-26);
-  --p-47: transparent;
-  --r-47: 0, 0, 0;
+  --p-47: rgba(var(--r-26), 0.5);
   --p-48: rgba(var(--r-1), 0.35);
   --p-52: #8b8edd;
   --r-52: 139, 142, 221;
@@ -8003,8 +7995,7 @@ html[data-scheme=dark] {
   --r-60: var(--r-44);
   --p-61: var(--p-26);
   --r-61: var(--r-26);
-  --p-62: transparent;
-  --r-62: 0, 0, 0;
+  --p-62: rgba(var(--r-26), 0.5);
   --p-63: rgba(var(--r-1), 0.35);
   --p-64: rgb(10.0249622926%, 10.083908371%, 12.3882730015%);
   --r-64: 25.5636538462, 25.7139663462, 31.5900961538;
@@ -8022,8 +8013,7 @@ html[data-scheme=dark] {
   --r-70: var(--r-44);
   --p-71: var(--p-26);
   --r-71: var(--r-26);
-  --p-72: transparent;
-  --r-72: 0, 0, 0;
+  --p-72: rgba(var(--r-26), 0.5);
   --p-73: rgba(var(--r-1), 0.35);
   --p-74: rgb(10.325030012%, 9.6470288115%, 12.0283703481%);
   --r-74: 26.3288265306, 24.5999234694, 30.6723443878;
@@ -8039,8 +8029,7 @@ html[data-scheme=dark] {
   --r-79: var(--r-44);
   --p-80: var(--p-26);
   --r-80: var(--r-26);
-  --p-81: transparent;
-  --r-81: 0, 0, 0;
+  --p-81: rgba(var(--r-26), 0.5);
   --p-82: rgba(var(--r-1), 0.35);
   --p-83: #8b8edd;
   --r-83: 139, 142, 221;
@@ -8056,8 +8045,7 @@ html[data-scheme=dark] {
   --r-88: var(--r-44);
   --p-89: var(--p-26);
   --r-89: var(--r-26);
-  --p-90: transparent;
-  --r-90: 0, 0, 0;
+  --p-90: rgba(var(--r-26), 0.5);
   --p-91: rgba(var(--r-1), 0.35);
   --p-92: rgb(9.9183921569%, 10.0007879085%, 12.6271960784%);
   --r-92: 25.2919, 25.5020091667, 32.19935;
@@ -8075,8 +8063,7 @@ html[data-scheme=dark] {
   --r-98: var(--r-44);
   --p-99: var(--p-26);
   --r-99: var(--r-26);
-  --p-100: transparent;
-  --r-100: 0, 0, 0;
+  --p-100: rgba(var(--r-26), 0.5);
   --p-101: rgba(var(--r-1), 0.35);
   --p-102: rgb(9.9409482759%, 10.4693458418%, 12.3611815416%);
   --r-102: 25.3494181034, 26.6968318966, 31.521012931;
@@ -8094,8 +8081,7 @@ html[data-scheme=dark] {
   --r-108: var(--r-44);
   --p-109: var(--p-26);
   --r-109: var(--r-26);
-  --p-110: transparent;
-  --r-110: 0, 0, 0;
+  --p-110: rgba(var(--r-26), 0.5);
   --p-111: rgba(var(--r-1), 0.35);
   --p-112: rgb(10.3152326602%, 9.8450614574%, 12.2217010536%);
   --r-112: 26.3038432836, 25.1049067164, 31.1653376866;

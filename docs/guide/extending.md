@@ -19,7 +19,7 @@ For details on the =Termeh API=, see the [API Reference](/guide/reference/overvi
   $default: termeh.color("primary");
 
   @include termeh.define-module("pill", "reset") {
-    @include termeh.define-resolver(meta.get-function("resolver"), "pill");
+    @include termeh.fallback-resolver(meta.get-function("resolver"), "pill");
 
     $accent: termeh.variant-for("pill", "base", "accent", $default);
     $background: termeh.variant-for("pill", "base", "background");
@@ -84,7 +84,7 @@ And use your component in your application styles as shown below:
     @return null;
 }
 
-@include termeh.override-resolver(
+@include termeh.define-resolver(
   meta.get-function("pill-resolver"),
   "pill"
 );
