@@ -64,7 +64,7 @@
 
         $padding-container: core.var("padding", "container");
 
-        $sizes: core.value("card", "sizes", $-box-sizes);
+        $sizes: core.value("card", "sizes") or $-box-sizes;
         $opacity: core.var("card", "opacity", $-box-opacity);
         $filter: core.var("card", "backdrop-filter", $-box-filter);
         $shadow: core.var("card", "shadow", $-box-shadow);

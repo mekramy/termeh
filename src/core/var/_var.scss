@@ -38,14 +38,13 @@ $-overrides: () !default;
 ///
 /// @param {String} $component - Component name
 /// @param {String} $property - Property name
-/// @param {*} $fallback [null] - Value returned when the property has no value
-/// @return {*} Value of the property, or the fallback
+/// @return {*} Value of the property or `null` if it is not defined
 /// @throw If `$component` or `$property` is not a string
-@function value($component, $property, $fallback: null) {
+@function value($component, $property) {
     $component: util.assert-string($component, "value", "component");
     $property: util.assert-string($property, "value", "property");
 
-    @return map.get($-vars, $component, $property) or $fallback;
+    @return map.get($-vars, $component, $property);
 }
 
 /// Returns the value of a component variable for one scheme.
@@ -53,15 +52,14 @@ $-overrides: () !default;
 /// @param {String} $scheme - Scheme name
 /// @param {String} $component - Component name
 /// @param {String} $property - Property name
-/// @param {*} $fallback [null] - Value returned when the scheme has no value for the property
-/// @return {*} Value of the property for the scheme, or the fallback
+/// @return {*} Value of the property for the scheme or `null` if it is not defined
 /// @throw If `$scheme`, `$component` or `$property` is not a string
-@function scheme-value($scheme, $component, $property, $fallback: null) {
+@function scheme-value($scheme, $component, $property) {
     $scheme: util.assert-string($scheme, "scheme-value", "scheme");
     $component: util.assert-string($component, "scheme-value", "component");
     $property: util.assert-string($property, "scheme-value", "property");
 
-    @return map.get($-overrides, $scheme, $component, $property) or $fallback;
+    @return map.get($-overrides, $scheme, $component, $property);
 }
 
 /// Returns the CSS variable of a component property.

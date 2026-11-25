@@ -5,6 +5,14 @@ description: Introduction to Termeh, a modern, responsive, and modular CSS frame
 
 # What Is Termeh?
 
+<!-- markdownlint-disable MD033 -->
+<llm-only>
+
+> __Note for AI agents:__ `=`, `~` and `@` wrapping text are presentation markers, not content. Ignore them.
+
+</llm-only>
+<!-- markdownlint-enable MD033 -->
+
 Termeh is a __modern__, __responsive__, and __modular__ CSS framework for building scalable user interfaces. Written entirely in @Sass@ with =no external dependencies=, it offers ready-to-use =components=, =palette generation= and =color functions=, =responsive design utilities=, =theming=, and =modifier generator helpers=, so teams can build consistent interfaces without writing the same styles again and again.
 
 ## Installation
@@ -66,7 +74,7 @@ Termeh works in three steps:
 2. =Include= the components you need.
 3. =Output= the CSS variables for each scheme.
 
-Components never hard-code colors, spacing or sizes. They read them as __CSS variables__, so changing a value (or switching to another scheme) restyles every component without recompiling or touching your own styles.
+Components never hard-code _variables_, _colors_, _spacing_, or _sizes_. Instead, they read these values as __CSS variables__. As a result, switching to another scheme restyles every component without recompiling or changing your own styles.
 
 ### Define Values
 
@@ -81,7 +89,7 @@ __Variables__ store =component-specific values=, such as a _font family_ or a _b
 @mixin override($scheme, $component, $property, $value);
 ```
 
-__Palettes__ store the =colors= of your theme. Every theme needs a __base__ palette, which holds its main color and decides whether the theme is light or dark. Every other palette (`primary`, `success`, `error` and so on) is used to generate modifiers such as `is-primary`.
+__Palettes__ store the =colors= of your theme. Every theme needs a __base__ palette, which holds its main color and decides whether the theme is light or dark. Every other palette (_primary_, _success_, _error_ and so on) is used to generate modifiers such as `is-primary`.
 
 ::: note
 See [Palette Reference](/guide/reference/palette) for more details.
@@ -92,7 +100,11 @@ See [Palette Reference](/guide/reference/palette) for more details.
 @mixin override-palette($scheme, $name, $color);
 ```
 
-Each palette can have __variants__, such as a hover or a surface shade. Define a variant yourself, or leave it out and let @resolvers@ generate it from the palette color. A variant can also be limited to a single component:
+Each palette can have __variants__, such as a _hover_ or a _surface_ shade. Define a variant yourself, or leave it out and let @resolvers@ generate it from the palette color. A variant can also be limited to a single component:
+
+::: note
+See [Resolvers](/guide/reference/resolver) for more details.
+:::
 
 ```scss
 @mixin define-variant($palette, $variant, $color);

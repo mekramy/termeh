@@ -28,7 +28,7 @@
 
         $height: core.var("component", "height");
         $opacity: core.var("component", "skeleton-opacity");
-        $ratios: core.value("component", "skeleton-ratios", ());
+        $ratios: core.value("component", "skeleton-ratios") or ();
 
         $background: core.variant-for("skeleton", "base", "background", $-fallback-background);
 

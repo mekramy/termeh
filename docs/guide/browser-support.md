@@ -20,6 +20,8 @@ Termeh suggest use =last versions= of __modern browsers__ for the =best experien
 
 The table below lists all =CSS features= used in Termeh along with their priority. Features marked @High@ are required for Termeh to work correctly.
 
+::: signature
+
 | Feature | Supported Since | Priority |
 | -- | -- | -- |
 | `var()` function | _2017 Apr_ | @High@ |
@@ -41,3 +43,5 @@ The table below lists all =CSS features= used in Termeh along with their priorit
 | `prefers-contrast` media feature | _2022 May_ | Only if use =responsive= mixin |
 | `dynamic-range` media feature | _2022 Feb_ | Only if use =responsive= mixin |
 | `hover` and `pointer` media features | _2018 Dec_ | Only if use =responsive= mixin |
+
+:::

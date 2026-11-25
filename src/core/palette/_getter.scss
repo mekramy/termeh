@@ -47,12 +47,12 @@
     $token: "palette-#{$name}-#{$variant}";
     $token-rgb: "rgb-#{$name}-#{$variant}";
 
-    $value: raw.variant-value($name, $variant, $fallback);
+    $value: raw.variant-value($name, $variant) or $fallback;
     $_: scheme.define-variable(null, $token, $value);
     $_: scheme.define-variable(null, $token-rgb, -rgb($value));
 
     @each $scheme in scheme.schemes() {
-        $override: raw.scheme-variant($scheme, $name, $variant, $fallback);
+        $override: raw.scheme-variant($scheme, $name, $variant);
         $_: scheme.define-variable($scheme, $token, $override);
         $_: scheme.define-variable($scheme, $token-rgb, -rgb($override));
     }
@@ -77,12 +77,12 @@
     $token: "palette-#{$name}-#{$component}-#{$variant}";
     $token-rgb: "rgb-#{$name}-#{$component}-#{$variant}";
 
-    $value: raw.variant-value-for($component, $name, $variant, $fallback);
+    $value: raw.variant-value-for($component, $name, $variant) or $fallback;
     $_: scheme.define-variable(null, $token, $value);
     $_: scheme.define-variable(null, $token-rgb, -rgb($value));
 
     @each $scheme in scheme.schemes() {
-        $override: raw.scheme-variant-for($scheme, $component, $name, $variant, $fallback);
+        $override: raw.scheme-variant-for($scheme, $component, $name, $variant);
         $_: scheme.define-variable($scheme, $token, $override);
         $_: scheme.define-variable($scheme, $token-rgb, -rgb($override));
     }

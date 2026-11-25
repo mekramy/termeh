@@ -1,9 +1,0 @@
-@use "core";
-
-@include core.define-gap("small", 0.8em);
-@include core.define-gap("normal", 1em);
-@include core.define-gap("medium", 1.25em);
-@include core.define-gap("large", 1.5em);
-@include core.define-gap("big", 2em);
-@include core.define-gap("huge", 2.5em);
-@include core.define-gap("massive", 3em);

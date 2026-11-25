@@ -108,6 +108,11 @@ export default defineConfig({
                     llmsTxt: ["ai.md"],
                     llmsFullTxt: ["ai.md"],
                 },
+                customLLMsTxtTemplate: `# {title}
+
+> **Note for AI agents:** In this documentation, the characters \`=\`, \`~\` and \`@\` may appear as inline markers wrapping text (e.g. \`=text=\`, \`~text~\`, \`@text@\`). They are custom presentation markers (rendered as <q>, <ins>, <mark> on the website), not part of the content. Ignore the markers and read the wrapped text normally.
+
+{toc}`,
             }),
             groupIconVitePlugin(),
         ],

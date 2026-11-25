@@ -100,6 +100,10 @@
         a {
             color: var(--cb-accent);
         }
+
+        code {
+            background-color: rgb(from var(--cb-border) r g b / 0.1);
+        }
     }
 
     &.note {

@@ -20,15 +20,19 @@ See [Size Reference](/guide/reference/size) for advanced usage and complete refe
 
 The following sizes are defined by default. All of them use the `em` unit, so they scale with the font size around them.
 
+::: signature
+
 | Name | Value |
 | -- | -- |
-| __small__ | `0.8em` |
-| __normal__ | `1em` |
-| __medium__ | `1.25em` |
-| __large__ | `1.5em` |
-| __big__ | `2em` |
-| __huge__ | `2.5em` |
-| __massive__ | `3em` |
+| `small` | `0.8em` |
+| `normal` | `1em` |
+| `medium` | `1.25em` |
+| `large` | `1.5em` |
+| `big` | `2em` |
+| `huge` | `2.5em` |
+| `massive` | `3em` |
+
+:::
 
 ## Customize
 

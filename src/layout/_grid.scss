@@ -19,7 +19,7 @@
 @mixin use-grid($gaps: null, $breakpoints: null) {
     @include core.define-module("grid", "reset") {
         $gap-macro: core.var("gap", "macro");
-        $units: list.join((), core.value("grid", "units", ()));
+        $units: list.join((), core.value("grid", "units"));
 
         .grid {
             display: flex;
