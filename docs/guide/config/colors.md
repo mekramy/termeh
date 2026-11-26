@@ -166,7 +166,7 @@ This is a __general resolver__ for the `"base"`{scss} palette. It ignores all ot
 }
 ```
 
-- __foreground__ *color* - Text and icon color on the base background.
+- __foreground__ *color* - Text color on the base background.
 - __background__ *color* - Theme background, usually the page background.
 - __separator__ *color* - Borders and dividers.
 - __surface__ *color* - Background of raised areas, such as cards and `<code>`.
@@ -235,7 +235,7 @@ This is a __general resolver__ for the __non-base__ palettes. Light and dark the
 ```
 
 - __text__ *color* - Text color of the palette on a plain background.
-- __foreground__ *color* - Text and icon color on the palette color.
+- __foreground__ *color* - Text color on the palette color.
 - __decorator__ *color* - Decorative accent, such as borders and small details.
 - __hover__ *color* - Hover state of the palette color.
 - __light__ *color* - Soft tinted background of the palette color.
@@ -270,7 +270,7 @@ This resolver is registered for the `"overlay"`{scss} component.
 ```
 
 - __accent__ *color* - Accent of the overlay. Uses the palette text variant, or the base foreground for the `base` palette.
-- __foreground__ *color* - Text and icon color on the overlay.
+- __foreground__ *color* - Text color on the overlay.
 - __background__ *color* - Background of the overlay.
 
 ### Box Resolver
@@ -303,7 +303,7 @@ This resolver is registered for the `"box"`{scss} component.
 - __surface__ *color* - Background of raised areas inside the box.
 - __separator__ *color* - Borders and dividers of the box.
 - __overlay-accent__ *color* - Accent of the overlay inside the box.
-- __overlay-foreground__ *color* - Text and icon color of the overlay inside the box.
+- __overlay-foreground__ *color* - Text color of the overlay inside the box.
 - __overlay-background__ *color* - Background of the overlay inside the box.
 
 ### Table Resolver
@@ -407,7 +407,7 @@ This resolver is registered for the `"input"`{scss} component. The `base` palett
 
 - __accent__ *color* - Accent of the focused input.
 - __accent-text__ *color* - Text color on the accent.
-- __accent-foreground__ *color* - Text and icon color on top of the accent.
+- __accent-foreground__ *color* - Text color on top of the accent.
 - __meta__ *color* - Color of helper texts, such as hints and legends.
 - __placeholder__ *color* - Color of placeholder text.
 - __border__ *color* - Border of the input.
@@ -529,15 +529,15 @@ This resolver is registered for the `"component"`{scss} component. The `base` pa
 - __simple-text__ *color* - Text color of the simple style.
 - __simple-hover__ *color* - Hover background of the simple style.
 - __light-accent__ *color* - Accent of the light style.
-- __light-foreground__ *color* - Text and icon color of the light style.
+- __light-foreground__ *color* - Text color of the light style.
 - __light-background__ *color* - Background of the light style.
 - __light-hover__ *color* - Hover background of the light style.
 - __accent__ *color* - Accent of the solid style.
 - __accent-text__ *color* - Text color on the accent.
-- __accent-foreground__ *color* - Text and icon color on top of the accent background.
+- __accent-foreground__ *color* - Text color on top of the accent background.
 - __accent-background__ *color* - Background of the solid style.
 - __accent-hover__ *color* - Hover background of the solid style.
 - __disabled-text__ *color* - Text color of the disabled component.
 - __disabled-border__ *color* - Border of the disabled component.
-- __disabled-foreground__ *color* - Text and icon color of the disabled component.
+- __disabled-foreground__ *color* - Text color of the disabled component.
 - __disabled-background__ *color* - Background of the disabled component.

@@ -32,23 +32,7 @@ export default defineConfig({
     title: "Termeh",
     description: "Modern, responsive, and modular CSS framework.",
 
-    head: [
-        ["link", { rel: "icon", href: "/assets/logo.png" }],
-        [
-            "script",
-            {},
-            `
-                document.addEventListener("click", (event) => {
-                    const target = event.target;
-                    if (!(target instanceof Element)) return;
-                    if (!target.closest("h1 + blockquote a")) return;
-
-                    event.preventDefault();
-                    event.stopImmediatePropagation();
-                }, true);
-            `,
-        ],
-    ],
+    head: [["link", { rel: "icon", href: "/assets/logo.png" }]],
 
     // https://vitepress.dev/reference/default-theme-config
     themeConfig: {

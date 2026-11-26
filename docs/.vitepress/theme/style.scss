@@ -281,12 +281,11 @@ html {
             gap: 8px;
         }
 
-        a {
-            display: inline-block;
+        strong {
             cursor: help;
             user-select: none;
+            display: inline-block;
             padding: 0.6em 1.2em;
-            border-radius: 999px;
             border-radius: 3px;
             transition: background-color 300ms ease;
 
@@ -308,7 +307,7 @@ html {
                 background-color: rgb(from var(--ctp-latte-overlay1) r g b / 0.25);
             }
 
-            &[href="#scheme-var"] {
+            &[data-type="scheme-var"] {
                 color: var(--ctp-latte-lavender);
                 background-color: rgb(from var(--ctp-latte-lavender) r g b / 0.1);
 
@@ -318,7 +317,7 @@ html {
                 }
             }
 
-            &[href="#colorize"] {
+            &[data-type="colorize"] {
                 color: var(--ctp-latte-rosewater);
                 background-color: rgb(from var(--ctp-latte-rosewater) r g b / 0.1);
 
@@ -328,7 +327,7 @@ html {
                 }
             }
 
-            &[href="#sizes"] {
+            &[data-type="sizes"] {
                 color: var(--ctp-latte-green);
                 background-color: rgb(from var(--ctp-latte-green) r g b / 0.1);
 
@@ -338,7 +337,7 @@ html {
                 }
             }
 
-            &[href="#gaps"] {
+            &[data-type="gaps"] {
                 color: var(--ctp-latte-yellow);
                 background-color: rgb(from var(--ctp-latte-yellow) r g b / 0.1);
 
