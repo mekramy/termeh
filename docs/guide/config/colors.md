@@ -5,45 +5,49 @@ description: Default color palettes and variants that Termeh registers, how colo
 
 # Default Colors
 
-__Palettes__ are the =only source of color= in Termeh. Every color the UI generates, such as text, backgrounds, borders, hover states, and modifiers like `is-primary`, is created from a palette. Because components never hard-code colors, changing the @scheme@ restyles every component that uses it.
+*__Palettes__* are the __only source of color__ in Termeh. Every color the UI generates, such as *text*, *backgrounds*, *borders*, *hover states*, and modifiers like `is-primary`, is created from a palette. Because components never hard-code colors, changing the __*scheme*__ restyles every component that uses it.
 
-Termeh already defines a default set of palettes and a default set of __variants__ (such as _hover_, _muted_, or _surface_) for them, so the framework looks consistent out of the box. You can =change= a palette color, =add= new palettes, =fix= a variant to a color you choose, or write your own @resolvers@ to change how variants are created.
+Termeh already defines a default set of palettes and a default set of *__variants__* (such as *hover*, *muted*, or *surface*) for them, so the framework looks consistent out of the box. You can __change__ a palette color, __add__ new palettes, __fix__ a variant to a color you choose, or write your own __*resolvers*__ to change how variants are created.
 
-::: tip Note
-Define your colors and resolvers =before= you include any component module, so that components pick up your custom values.
+::: tip
+Define your colors and resolvers __before__ you include any component module, so that components pick up your custom values.
 :::
 
-::: warning
-Avoid the default color functions. Use `termeh.mix` to blend two colors and `termeh.alpha` to change a color's opacity. `termeh.alpha` also accepts CSS variables returned by getter functions.
+::: warn Warning
+Avoid the default sass color functions. Use `termeh.mix` to blend two colors and `termeh.alpha` to change a color's opacity.
 :::
 
-::: note
+::: info
 See [Palette Reference](/guide/reference/palette) for advanced usage and complete reference.
 :::
 
 ## How Colors Work
 
-A palette is a named base color, such as _primary_ or _error_. The special __base__ palette is the main color of the theme: it is usually the document background, and it decides whether the theme is =light= or =dark=. All other palettes are accent colors.
+A palette is a named base color, such as *primary* or *error*. The special *__base__* palette is the main color of the theme: it is usually the document background, and it decides whether the theme is *light* or *dark*. All other palettes are __accent colors__.
 
-The default variants are usually derived from the `base` palette too, so they match the light or dark mode of the theme.
+All default variants are derived from the `base` palette. Other palettes are mainly used for color modifiers, such as `is-primary`.
 
-A __variant__ is a color derived from a palette for a specific purpose, such as `hover`, `light`, or `foreground`. When a component asks for a variant, Termeh finds it in this order:
+A *__variant__* is a color derived from a palette for a specific purpose, such as `hover`, `light`, or `foreground`. When a component asks for a variant, Termeh finds it in this order:
 
-1. An =explicitly defined= variant color. If you defined it, it is used and no resolver runs.
-2. A color created by a @resolver@. Resolvers are functions that build the variant from the palette color and the base color.
-3. The =fallback= value passed by the component, if there is one.
+1. An __explicitly defined__ variant color. If you defined it, it is used and no resolver runs.
+2. A color created by a __*resolver*__.
+3. The __fallback__ value passed by the component to getter functions.
 
-Resolvers receive the _scheme_, the _palette name_, whether the base color _is light_, the _base color_, the _palette color_, and the _variant name_. They return a =color=, or `null` when they do not know the variant so the next resolver can try. The =first color returned wins=.
+::: tip
+A __resolver__ is a function that builds a variant from the *__palette color__* and the *__base color__*. If it can build the variant, it returns a `color`; otherwise it returns `null`, and the next resolver is tried. The __first returned color wins__.
+:::
 
-The `palette` function generates shades of a color across =weights= from __50__ to __900__, where __500__ is the original color. The built-in resolvers choose different weights for light and dark themes, so variants keep good contrast in both.
+::: info
+The `palette` function generates shades of a color across __weights__ from *50* to *900*, where *500* is the original color. The built-in resolvers choose different weights for light and dark themes, so variants keep good contrast in both.
+:::
 
-::: warning
-Variants are resolved for a scheme only when that scheme overrides the =base palette=, because the base color decides whether the scheme is light or dark. When you add a scheme, override `base` for it as well.
+::: warn
+Variants are resolved for a scheme only when that scheme overrides the __base palette__, because the base color decides whether the scheme is light or dark. When you add a scheme, override `base` for it as well.
 :::
 
 ## Default Palettes
 
-Termeh registers these palettes by default. Each palette is a base color that =variant colors are created from=.
+Termeh registers these palettes by default. Each palette is a base color that __variant colors are created from__.
 
 ```scss
 @include termeh.define-palette("base", white);
@@ -52,35 +56,35 @@ Termeh registers these palettes by default. Each palette is a base color that =v
 @include termeh.define-palette("error", #c00021);
 ```
 
-- __base__ ~color~ - Base theme color and document background.
-- __shade__ ~color~ - Neutral gray palette.
-- __primary__ ~color~ - Main accent color palette.
-- __error__ ~color~ - Error and danger color palette.
+- __base__ *color* - Base theme color and document background.
+- __shade__ *color* - Neutral gray palette.
+- __primary__ *color* - Main accent color palette.
+- __error__ *color* - Error and danger color palette.
 
 ## Customize
 
-Use `define-palette` to =change= the color of a default palette or =add= a new palette. A new palette gets all the general variants automatically.
+Use `define-palette` to __change__ the color of a default palette or __add__ a new palette. A new palette gets all the general variants automatically.
 
 ```scss
 @include termeh.define-palette("primary", #6750a4);
 @include termeh.define-palette("success", #4caf50);
 ```
 
-Use `override-palette` to change a color only for a specific @scheme@. _Remember to override `base` for the scheme, so its variants are resolved_.
+Use `override-palette` to change a color only for a specific __*scheme*__. *Remember to override `base` for the scheme, so its variants are resolved*.
 
 ```scss
 @include termeh.override-palette("dark", "base", #0d1b2a);
 @include termeh.override-palette("dark", "primary", #5db1f7);
 ```
 
-Use `define-variant` to fix a variant to a =specific color= instead of letting resolvers create it. Use `override-variant` to do it for one scheme only.
+Use `define-variant` to fix a variant to a __specific color__ instead of letting resolvers create it. Use `override-variant` to do it for one scheme only.
 
 ```scss
 @include termeh.define-variant("primary", "hover", #1976d2);
 @include termeh.override-variant("dark", "base", "surface", #1b263b);
 ```
 
-Use `define-component-variant` and `override-component-variant` when only =one component= needs a different shade.
+Use `define-component-variant` and `override-component-variant` when only __one component__ needs a different shade.
 
 ```scss
 @include termeh.define-component-variant(
@@ -93,15 +97,24 @@ Use `define-component-variant` and `override-component-variant` when only =one c
 
 ### Custom Resolvers
 
-Use a resolver when you want to =create variants by rule= instead of fixing each one by hand, or when you need a variant that Termeh does not provide. A resolver is a function that receives `$scheme`, `$palette`, `$is-light`, `$base`, `$color`, and `$variant`, and returns a color or `null`. The [default resolvers](#default-resolvers) below are complete examples.
+Use a resolver when you want to __create variants by rule__ instead of fixing each one by hand, or when you need a variant that Termeh does not provide. A resolver is a function that returns a `color` or `null`. The [default resolvers](#default-resolvers) below are complete examples.
 
-Use `fallback-resolver` to =add= a resolver as a last resort. It is called only if the other resolvers cannot create the requested variant.
+Every resolver receives the same parameters:
+
+- __$scheme__ *string* - Name of the scheme being resolved, or `null` for the default scheme.
+- __$palette__ *string* - Name of the palette the variant belongs to, such as `primary`.
+- __$is-light__ *bool* - `true` when the base color is light.
+- __$base__ *color* - Base color of the scheme.
+- __$color__ *color* - Color of the palette itself.
+- __$variant__ *string* - Name of the variant being requested, such as `hover`.
+
+Use `fallback-resolver` to __add__ a resolver as a last resort. It is called only if the other resolvers cannot create the requested variant.
 
 ```scss
 @include termeh.fallback-resolver($resolver, $component: null);
 ```
 
-Use `define-resolver` to =add= a resolver that is tried before all existing ones, so it can replace a color that a default resolver creates. The most recently defined resolver has priority.
+Use `define-resolver` to __add__ a resolver that is tried before all existing ones, so it can replace a color that a default resolver creates. The most recently defined resolver has priority.
 
 ```scss
 @include termeh.define-resolver($resolver, $component: null);
@@ -109,19 +122,19 @@ Use `define-resolver` to =add= a resolver that is tried before all existing ones
 
 Pass the `$component` name to apply a resolver to that component only; without it, the resolver applies to the general variants of every palette.
 
-::: note
-Resolvers run only for variants that have =no explicitly defined color=. A variant defined with `define-variant` is always returned directly. See [Resolvers](/guide/reference/resolver) for more details.
+::: info
+Resolvers run only for variants that have __no explicitly defined color__. A variant defined with `define-variant` is always returned directly. See [Resolvers](/guide/reference/resolver) for more details.
 :::
 
 ## Default Resolvers
 
-Termeh provides =built-in resolvers= for the general variants of palettes and for the _overlay_, _box_, _table_, _input_, and _component_ components. Each section below shows the resolver code and lists the variants it creates.
+Termeh provides __built-in resolvers__ for the general variants of palettes and for the *overlay*, *box*, *table*, *input*, and *component* components. Each section below shows the resolver code and lists the variants it creates.
 
 All of them are registered with `fallback-resolver`, so a resolver you add with `define-resolver` is always tried first and can replace any of these colors.
 
 ### Base Resolver
 
-This is a =general resolver=. It only processes the `base` palette and ignores all others.
+This is a __general resolver__ for the `"base"`{scss} palette. It ignores all other palettes.
 
 ```scss
 @function base-resolver(
@@ -153,18 +166,18 @@ This is a =general resolver=. It only processes the `base` palette and ignores a
 }
 ```
 
-- __foreground__ ~color~ - Text and icon color on the base background.
-- __background__ ~color~ - Background of the theme (usually the page background ).
-- __separator__ ~color~ - Borders and dividers.
-- __surface__ ~color~ - Background of raised areas, such as cards, `<code>`, ... .
-- __surface-hover__ ~color~ - Hover state of the surface.
-- __disabled-border__ ~color~ - Border of disabled elements.
-- __disabled-foreground__ ~color~ - Text of disabled elements.
-- __disabled-background__ ~color~ - Background of disabled elements.
+- __foreground__ *color* - Text and icon color on the base background.
+- __background__ *color* - Theme background, usually the page background.
+- __separator__ *color* - Borders and dividers.
+- __surface__ *color* - Background of raised areas, such as cards and `<code>`.
+- __surface-hover__ *color* - Hover state of the surface.
+- __disabled-border__ *color* - Border of disabled elements.
+- __disabled-foreground__ *color* - Text of disabled elements.
+- __disabled-background__ *color* - Background of disabled elements.
 
 ### Palette Resolver
 
-This is a =general resolver=. It only processes the =non-base= palettes and ignores the `base` palette. Light and dark themes use different color weights, from `50` to `900`.
+This is a __general resolver__ for the __non-base__ palettes. Light and dark themes use different color weights.
 
 ```scss
 @function palette-resolver(
@@ -221,18 +234,18 @@ This is a =general resolver=. It only processes the =non-base= palettes and igno
 }
 ```
 
-- __text__ ~color~ - Text color of the palette on a plain background.
-- __foreground__ ~color~ - Text and icon color on top of the palette color.
-- __decorator__ ~color~ - Decorative accent, such as borders and small details.
-- __hover__ ~color~ - Hover state of the palette color.
-- __light__ ~color~ - Soft tinted background of the palette color.
-- __light-hover__ ~color~ - Hover state of the light variant.
-- __muted__ ~color~ - Subdued, less saturated version of the palette color.
-- __muted-hover__ ~color~ - Hover state of the muted variant.
+- __text__ *color* - Text color of the palette on a plain background.
+- __foreground__ *color* - Text and icon color on the palette color.
+- __decorator__ *color* - Decorative accent, such as borders and small details.
+- __hover__ *color* - Hover state of the palette color.
+- __light__ *color* - Soft tinted background of the palette color.
+- __light-hover__ *color* - Hover state of the light variant.
+- __muted__ *color* - Subdued, less saturated version of the palette color.
+- __muted-hover__ *color* - Hover state of the muted variant.
 
 ### Overlay Resolver
 
-This resolver is registered for the `"overlay"` component.
+This resolver is registered for the `"overlay"`{scss} component.
 
 ```scss
 @function overlay-resolver(
@@ -256,13 +269,13 @@ This resolver is registered for the `"overlay"` component.
 }
 ```
 
-- __accent__ ~color~ - Accent of the overlay, which is the text variant of the palette or the base foreground for the `base` palette.
-- __foreground__ ~color~ - Text and icon color on the overlay.
-- __background__ ~color~ - Background of the overlay.
+- __accent__ *color* - Accent of the overlay. Uses the palette text variant, or the base foreground for the `base` palette.
+- __foreground__ *color* - Text and icon color on the overlay.
+- __background__ *color* - Background of the overlay.
 
 ### Box Resolver
 
-This resolver is registered for the `"box"` component.
+This resolver is registered for the `"box"`{scss} component.
 
 ```scss
 @function box-resolver(
@@ -286,16 +299,16 @@ This resolver is registered for the `"box"` component.
 }
 ```
 
-- __background__ ~color~ - Background of the box.
-- __surface__ ~color~ - Background of raised areas inside the box.
-- __separator__ ~color~ - Borders and dividers of the box.
-- __overlay-accent__ ~color~ - Accent of the overlay inside the box.
-- __overlay-foreground__ ~color~ - Text and icon color of the overlay inside the box.
-- __overlay-background__ ~color~ - Background of the overlay inside the box.
+- __background__ *color* - Background of the box.
+- __surface__ *color* - Background of raised areas inside the box.
+- __separator__ *color* - Borders and dividers of the box.
+- __overlay-accent__ *color* - Accent of the overlay inside the box.
+- __overlay-foreground__ *color* - Text and icon color of the overlay inside the box.
+- __overlay-background__ *color* - Background of the overlay inside the box.
 
 ### Table Resolver
 
-This resolver is registered for the `"table"` component. The `base` palette uses the `primary` palette for the decorator and the sorted column.
+This resolver is registered for the `"table"`{scss} component. The `base` palette uses the `primary` palette for the decorator and sorted column.
 
 ```scss
 @function table-resolver(
@@ -333,18 +346,18 @@ This resolver is registered for the `"table"` component. The `base` palette uses
 }
 ```
 
-- __decorator__ ~color~ - Decorative lines of the table.
-- __sorted-text__ ~color~ - Text color of the sorted column.
-- __sorted-background__ ~color~ - Background of the sorted column.
-- __striped-background__ ~color~ - Background of striped rows.
-- __hover-background__ ~color~ - Background of the hovered row.
-- __row-separator__ ~color~ - Separator between rows.
-- __column-separator__ ~color~ - Separator between columns.
-- __section-separator__ ~color~ - Separator between table sections.
+- __decorator__ *color* - Decorative lines of the table.
+- __sorted-text__ *color* - Text color of the sorted column.
+- __sorted-background__ *color* - Background of the sorted column.
+- __striped-background__ *color* - Background of striped rows.
+- __hover-background__ *color* - Background of the hovered row.
+- __row-separator__ *color* - Separator between rows.
+- __column-separator__ *color* - Separator between columns.
+- __section-separator__ *color* - Separator between table sections.
 
 ### Input Resolver
 
-This resolver is registered for the `"input"` component. The `base` palette uses the `primary` palette for the accent variants.
+This resolver is registered for the `"input"`{scss} component. The `base` palette uses the `primary` palette for the accent variants.
 
 ```scss
 @function input-resolver(
@@ -392,21 +405,21 @@ This resolver is registered for the `"input"` component. The `base` palette uses
 }
 ```
 
-- __accent__ ~color~ - Accent of the focused input.
-- __accent-text__ ~color~ - Text color on the accent.
-- __accent-foreground__ ~color~ - Text and icon color on top of the accent.
-- __meta__ ~color~ - Color of helper texts, such as hints and legends.
-- __placeholder__ ~color~ - Color of placeholder text.
-- __border__ ~color~ - Border of the input.
-- __background__ ~color~ - Background of the input, which is white in light themes and the base color in dark themes.
-- __hover-background__ ~color~ - Background of the hovered input.
-- __disabled-border__ ~color~ - Border of the disabled input.
-- __disabled-foreground__ ~color~ - Text color of the disabled input.
-- __disabled-background__ ~color~ - Background of the disabled input.
+- __accent__ *color* - Accent of the focused input.
+- __accent-text__ *color* - Text color on the accent.
+- __accent-foreground__ *color* - Text and icon color on top of the accent.
+- __meta__ *color* - Color of helper texts, such as hints and legends.
+- __placeholder__ *color* - Color of placeholder text.
+- __border__ *color* - Border of the input.
+- __background__ *color* - Background of the input. White in light themes, base color in dark themes.
+- __hover-background__ *color* - Background of the hovered input.
+- __disabled-border__ *color* - Border of the disabled input.
+- __disabled-foreground__ *color* - Text color of the disabled input.
+- __disabled-background__ *color* - Background of the disabled input.
 
 ### Component Resolver
 
-This resolver is registered for the `"component"` component. The `base` palette uses the `shade` palette for the simple and light styles, and the `primary` palette for the accent style.
+This resolver is registered for the `"component"`{scss} component. The `base` palette uses the `shade` palette for the simple and light styles, and the `primary` palette for the accent style.
 
 ```scss
 @function component-resolver(
@@ -509,22 +522,22 @@ This resolver is registered for the `"component"` component. The `base` palette 
 }
 ```
 
-- __text__ ~color~ - Text color of the component.
-- __separator__ ~color~ - Borders and dividers of the component.
-- __muted__ ~color~ - Subdued color of the component.
-- __simple-accent__ ~color~ - Accent of the simple style.
-- __simple-text__ ~color~ - Text color of the simple style.
-- __simple-hover__ ~color~ - Hover background of the simple style.
-- __light-accent__ ~color~ - Accent of the light style.
-- __light-foreground__ ~color~ - Text and icon color of the light style.
-- __light-background__ ~color~ - Background of the light style.
-- __light-hover__ ~color~ - Hover background of the light style.
-- __accent__ ~color~ - Accent of the solid style.
-- __accent-text__ ~color~ - Text color on the accent.
-- __accent-foreground__ ~color~ - Text and icon color on top of the accent background.
-- __accent-background__ ~color~ - Background of the solid style.
-- __accent-hover__ ~color~ - Hover background of the solid style.
-- __disabled-text__ ~color~ - Text color of the disabled component.
-- __disabled-border__ ~color~ - Border of the disabled component.
-- __disabled-foreground__ ~color~ - Text and icon color of the disabled component.
-- __disabled-background__ ~color~ - Background of the disabled component.
+- __text__ *color* - Text color of the component.
+- __separator__ *color* - Borders and dividers of the component.
+- __muted__ *color* - Subdued color of the component.
+- __simple-accent__ *color* - Accent of the simple style.
+- __simple-text__ *color* - Text color of the simple style.
+- __simple-hover__ *color* - Hover background of the simple style.
+- __light-accent__ *color* - Accent of the light style.
+- __light-foreground__ *color* - Text and icon color of the light style.
+- __light-background__ *color* - Background of the light style.
+- __light-hover__ *color* - Hover background of the light style.
+- __accent__ *color* - Accent of the solid style.
+- __accent-text__ *color* - Text color on the accent.
+- __accent-foreground__ *color* - Text and icon color on top of the accent background.
+- __accent-background__ *color* - Background of the solid style.
+- __accent-hover__ *color* - Hover background of the solid style.
+- __disabled-text__ *color* - Text color of the disabled component.
+- __disabled-border__ *color* - Border of the disabled component.
+- __disabled-foreground__ *color* - Text and icon color of the disabled component.
+- __disabled-background__ *color* - Background of the disabled component.

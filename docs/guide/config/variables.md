@@ -4,19 +4,19 @@ description: Default variables that Termeh registers for layout, typography and 
 
 # Default Variables
 
-__Variables__ are the =general-purpose values= that control how Termeh looks and behaves. Any value used in the UI, such as _text settings_, _border radius_, _transitions_, _container widths_, and _component options_, is read from a variable. Because components never hard-code these values, changing the @scheme@ restyles every component that uses it.
+*__Variables__* are the __general-purpose values__ that control how Termeh looks and behaves. Any value used in the UI, such as *text settings*, *border radius*, *transitions*, *container widths*, and *component options*, is read from a variable. Because components never hard-code these values, changing the __*scheme*__ restyles every component that uses it.
 
-Termeh already defines a default value for every variable, so the framework looks consistent out of the box. You can =change= any of these values to match your design.
+Termeh already defines a default value for every variable, so the framework looks consistent out of the box. You can __change__ any of these values to match your design.
 
-When a variable is set to `null` or not defined, Termeh ignores it and uses the =fallback= value, if one is passed to the getter function.
+When a variable is set to `null` or not defined, Termeh ignores it and uses the __fallback__ value, if one is passed to the getter function.
 
 The sections below list each group of variables with its default values and what each one does.
 
-::: tip Note
-Define your variables =before= you include any component module, so that components pick up your custom values.
+::: tip
+Define your variables __before__ you include any component module, so that components pick up your custom values.
 :::
 
-::: note
+::: info
 See [Variables Reference](/guide/reference/variable) for advanced usage and complete reference.
 :::
 
@@ -28,9 +28,9 @@ See [Variables Reference](/guide/reference/variable) for advanced usage and comp
 @include termeh.define("document", "scroll-width", 0.75rem);
 ```
 
-- __direction__ ~direction~ - Text direction of the document.
-- __min-width__ ~length~ - Minimum page width.
-- __scroll-width__ ~length~ - Scrollbars width.
+- __direction__ *direction* - Text direction of the document.
+- __min-width__ *length* - Minimum page width.
+- __scroll-width__ *length* - Scrollbars width.
 
 ## Spacing
 
@@ -39,8 +39,8 @@ See [Variables Reference](/guide/reference/variable) for advanced usage and comp
 @include termeh.define("gap", "macro", 1.8rem);
 ```
 
-- __micro__ ~length~ - Small gap between related components.
-- __macro__ ~length~ - Large gap between layout sections.
+- __micro__ *length* - Small gap between related components.
+- __macro__ *length* - Large gap between layout sections.
 
 ## Padding
 
@@ -50,9 +50,9 @@ See [Variables Reference](/guide/reference/variable) for advanced usage and comp
 @include termeh.define("padding", "section", 2.2em);
 ```
 
-- __control__ ~length~ - Padding for inline controls.
-- __container__ ~length~ - Padding for containers.
-- __section__ ~length~ - Padding for sections.
+- __control__ *length* - Padding for inline controls.
+- __container__ *length* - Padding for containers.
+- __section__ *length* - Padding for sections.
 
 ## Border Radius
 
@@ -62,9 +62,9 @@ See [Variables Reference](/guide/reference/variable) for advanced usage and comp
 @include termeh.define("radius", "rounded", 290486px);
 ```
 
-- __normal__ ~length~ - Default corner radius.
-- __circle__ ~length~ - Fully circular corners.
-- __rounded__ ~length~ - Pill-shaped corners.
+- __normal__ *length* - Default corner radius.
+- __circle__ *length* - Fully circular corners.
+- __rounded__ *length* - Pill-shaped corners.
 
 ## Line Heights
 
@@ -74,9 +74,9 @@ See [Variables Reference](/guide/reference/variable) for advanced usage and comp
 @include termeh.define("line-height", "large", 1.2em);
 ```
 
-- __normal__ ~length~ - Default line height for normal text.
-- __medium__ ~length~ - Line height for medium text.
-- __large__ ~length~ - Line height for large text.
+- __normal__ *length* - Default line height for normal text.
+- __medium__ *length* - Line height for medium text.
+- __large__ *length* - Line height for large text.
 
 ## Text
 
@@ -93,16 +93,16 @@ See [Variables Reference](/guide/reference/variable) for advanced usage and comp
 @include termeh.define("text", "decorated-weight", normal);
 ```
 
-- __font-family__ ~string~ - Main font family stack.
-- __font-size__ ~length~ - Main font size.
-- __font-weight__ ~number~ - Main font weight.
-- __mono-family__ ~string~ - Monospace font family stack.
-- __mono-size__ ~length~ - Monospace font size.
-- __mono-weight__ ~number~ - Monospace font weight.
-- __small-size__ ~length~ - Size of small text.
-- __small-weight__ ~number~ - Weight of small text.
-- __strong-weight__ ~number~ - Weight of strong text.
-- __decorated-weight__ ~number~ - Weight of decorated text.
+- __font-family__ *string* - Main font family stack.
+- __font-size__ *length* - Main font size.
+- __font-weight__ *number* - Main font weight.
+- __mono-family__ *string* - Monospace font family stack.
+- __mono-size__ *length* - Monospace font size.
+- __mono-weight__ *number* - Monospace font weight.
+- __small-size__ *length* - Size of small text.
+- __small-weight__ *number* - Weight of small text.
+- __strong-weight__ *number* - Weight of strong text.
+- __decorated-weight__ *number* - Weight of decorated text.
 
 ## Transitions
 
@@ -112,9 +112,9 @@ See [Variables Reference](/guide/reference/variable) for advanced usage and comp
 @include termeh.define("transition", "delay", 100ms);
 ```
 
-- __ease__ ~string~ - Default easing function.
-- __duration__ ~duration~ - Default animation duration.
-- __delay__ ~duration~ - Delay for staggered animations.
+- __ease__ *string* - Default easing function.
+- __duration__ *duration* - Default animation duration.
+- __delay__ *duration* - Delay for staggered animations.
 
 ## Decorators
 
@@ -123,8 +123,8 @@ See [Variables Reference](/guide/reference/variable) for advanced usage and comp
 @include termeh.define("decorator", "spinner", 2em);
 ```
 
-- __thickness__ ~length~ - Thickness of decorative lines.
-- __spinner__ ~length~ - Size of overlaid loading spinners.
+- __thickness__ *length* - Thickness of decorative lines.
+- __spinner__ *length* - Size of overlaid loading spinners.
 
 ## Overlay
 
@@ -133,8 +133,8 @@ See [Variables Reference](/guide/reference/variable) for advanced usage and comp
 @include termeh.define("overlay", "filter", none);
 ```
 
-- __opacity__ ~number~ - Background opacity of overlays.
-- __filter__ ~string~ - Backdrop filter for overlays.
+- __opacity__ *number* - Background opacity of overlays.
+- __filter__ *string* - Backdrop filter for overlays.
 
 ## Containers
 
@@ -146,9 +146,9 @@ Maximum container widths at each breakpoint.
 @include termeh.define("container", "ultrawide", 1500px);
 ```
 
-- __desktop__ ~length~ - Maximum width on desktop.
-- __widescreen__ ~length~ - Maximum width on widescreen displays.
-- __ultrawide__ ~length~ - Maximum width on ultrawide displays.
+- __desktop__ *length* - Maximum width on desktop.
+- __widescreen__ *length* - Maximum width on widescreen displays.
+- __ultrawide__ *length* - Maximum width on ultrawide displays.
 
 ## Gallery
 
@@ -160,17 +160,19 @@ Settings for image galleries and similar grid layouts.
 @include termeh.define("gallery", "height-mobile", 100px);
 ```
 
-- __height__ ~length~ - Default row height.
-- __height-tablet__ ~length~ - Row height on tablets.
-- __height-mobile__ ~length~ - Row height on mobile devices.
+- __height__ *length* - Default row height.
+- __height-tablet__ *length* - Row height on tablets.
+- __height-mobile__ *length* - Row height on mobile devices.
 
 ## Grid
 
 Settings for grid layouts, including column units.
 
 ```scss
-@include core.define("grid", "units", (5 12));
+@include termeh.define("grid", "units", (5 12));
 ```
+
+- __units__ *list\<number\>* - Column units for the grid layout.
 
 ## Inputs
 
@@ -186,13 +188,13 @@ Shared settings for form inputs, checkboxes, and related elements.
 @include termeh.define("input", "disabled-opacity", 0.45);
 ```
 
-- __height__ ~length~ - Height of input fields.
-- __checkbox__ ~length~ - Size of checkboxes and radio buttons.
-- __legend-size__ ~length~ - Font size of fieldset legends.
-- __legend-weight__ ~number~ - Font weight of fieldset legends.
-- __placeholder-size__ ~length~ - Font size of placeholder text.
-- __placeholder-weight__ ~number~ - Font weight of placeholder text.
-- __disabled-opacity__ ~number~ - Opacity of disabled inputs.
+- __height__ *length* - Height of input fields.
+- __checkbox__ *length* - Size of checkboxes and radio buttons.
+- __legend-size__ *length* - Font size of fieldset legends.
+- __legend-weight__ *number* - Font weight of fieldset legends.
+- __placeholder-size__ *length* - Font size of placeholder text.
+- __placeholder-weight__ *number* - Font weight of placeholder text.
+- __disabled-opacity__ *number* - Opacity of disabled inputs.
 
 ## Components
 
@@ -214,19 +216,19 @@ Shared settings for buttons, links, badges, and similar components.
 @include termeh.define("component", "skeleton-ratios", ((4 3), (16 9)));
 ```
 
-- __weight__ ~number~ - Font weight.
-- __height__ ~length~ - Height.
-- __v-padding__ ~length~ - Vertical padding.
-- __h-padding__ ~length~ - Horizontal padding.
-- __meta-size__ ~length~ - Size of meta-like text (meta, tag, action, breadcrumb, ...).
-- __meta-weight__ ~number~ - Weight of meta-like text (meta, tag, action, breadcrumb, ...).
-- __light-opacity__ ~number~ - Opacity of tags.
-- __action-opacity__ ~number~ - Opacity of actions.
-- __button-opacity__ ~number~ - Opacity of buttons.
-- __skeleton-opacity__ ~number~ - Opacity of skeleton placeholders.
-- __outline-opacity__ ~number~ - Opacity of focused outlines.
-- __disabled-opacity__ ~number~ - Opacity of disabled components.
-- __skeleton-ratios__ ~list\<tuple\>~ - Aspect ratios of skeleton blocks, each defined as a tuple of width and height.
+- __weight__ *number* - Font weight.
+- __height__ *length* - Height.
+- __v-padding__ *length* - Vertical padding.
+- __h-padding__ *length* - Horizontal padding.
+- __meta-size__ *length* - Size of meta-like text (meta, tag, action, breadcrumb, ...).
+- __meta-weight__ *number* - Weight of meta-like text (meta, tag, action, breadcrumb, ...).
+- __light-opacity__ *number* - Opacity of tags.
+- __action-opacity__ *number* - Opacity of actions.
+- __button-opacity__ *number* - Opacity of buttons.
+- __skeleton-opacity__ *number* - Opacity of skeleton placeholders.
+- __outline-opacity__ *number* - Opacity of focused outlines.
+- __disabled-opacity__ *number* - Opacity of disabled components.
+- __skeleton-ratios__ *list\<tuple\>* - Aspect ratios of skeleton blocks, each defined as a tuple of width and height.
 
 ## Boxes
 
@@ -253,9 +255,9 @@ Defaults for cards, modals, and other box-like components.
 );
 ```
 
-- __opacity__ ~number~ - Background opacity of boxes.
-- __backdrop-filter__ ~string~ - Backdrop filter of boxes.
-- __overlay-opacity__ ~number~ - Opacity of box overlays.
-- __overlay-filter__ ~string~ - Filter of box overlays.
-- __shadow__ ~list~ - Box-Shadow of boxes.
-- __sizes__ ~list\<tuple\>~ - Available box sizes, each defined as a tuple of name and size.
+- __opacity__ *number* - Background opacity of boxes.
+- __backdrop-filter__ *string* - Backdrop filter of boxes.
+- __overlay-opacity__ *number* - Opacity of box overlays.
+- __overlay-filter__ *string* - Filter of box overlays.
+- __shadow__ *list* - Box-Shadow of boxes.
+- __sizes__ *list\<tuple\>* - Available box sizes, each defined as a tuple of name and size.

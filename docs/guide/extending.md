@@ -5,10 +5,10 @@ description: Extending Termeh with custom modules and components.
 
 # Extending
 
-You can __extend__ Termeh by adding your own @modules@ and using its =styles and definitions=, such as =variables=, =palettes=, and =core functions=. Custom components are registered alongside the built-in ones, so they follow the same theming and color schemes.
+You can *__extend__* Termeh by adding your own __*modules*__ and using its __styles and definitions__, such as *variables*, *palettes*, and *core functions*. Custom components are registered alongside the built-in ones, so *they follow the same theming and color schemes*.
 
-::: note
-For details on the =Termeh API=, see the [API Reference](/guide/reference/overview).
+::: info
+For details on the __Termeh API__, see the [API Reference](/guide/reference/overview).
 :::
 
 ```scss [pill.scss]
@@ -16,11 +16,18 @@ For details on the =Termeh API=, see the [API Reference](/guide/reference/overvi
 @use "termeh";
 
 @mixin use-pill($colors: null) {
-  $default: termeh.color("primary");
-
+  // Define module with the "pill" name and "reset" module requirement
   @include termeh.define-module("pill", "reset") {
-    @include termeh.fallback-resolver(meta.get-function("resolver"), "pill");
+    // Default resolver for the pill component
+    @include termeh.fallback-resolver(
+      meta.get-function("resolver"),
+      "pill"
+    );
 
+    // Fallback values
+    $default: termeh.color("primary");
+
+    // Variables for the pill component
     $accent: termeh.variant-for("pill", "base", "accent", $default);
     $background: termeh.variant-for("pill", "base", "background");
     $font-weight: termeh.var("pill", "font-weight", normal);
@@ -33,6 +40,7 @@ For details on the =Termeh API=, see the [API Reference](/guide/reference/overvi
       font-weight: $font-weight;
       border-radius: $radius-rounded;
 
+      // Generate color modifier classes for each color in the palette
       @each $name, $_ in core.colors($includes: $colors) {
         $fallback-color: termeh.variant($name, "text");
         $fallback-background: termeh.variant($name, "light");
@@ -50,7 +58,9 @@ For details on the =Termeh API=, see the [API Reference](/guide/reference/overvi
   }
 }
 
-@function resolver($scheme, $palette, $is-light, $base, $color, $variant) {
+@function resolver(
+  $scheme, $palette, $is-light, $base, $color, $variant
+) {
   @if $variant == "accent"{
     @return termeh.color("primary");
   } @else if $variant == "background"{
@@ -61,7 +71,7 @@ For details on the =Termeh API=, see the [API Reference](/guide/reference/overvi
 }
 ```
 
-And use your component in your application styles as shown below:
+You can now use and customize the component in your application styles, as shown below:
 
 ```scss [app.scss]
 @use "sass:meta";

@@ -5,15 +5,7 @@ description: Introduction to Termeh, a modern, responsive, and modular CSS frame
 
 # What Is Termeh?
 
-<!-- markdownlint-disable MD033 -->
-<llm-only>
-
-> __Note for AI agents:__ `=`, `~` and `@` wrapping text are presentation markers, not content. Ignore them.
-
-</llm-only>
-<!-- markdownlint-enable MD033 -->
-
-Termeh is a __modern__, __responsive__, and __modular__ CSS framework for building scalable user interfaces. Written entirely in @Sass@ with =no external dependencies=, it offers ready-to-use =components=, =palette generation= and =color functions=, =responsive design utilities=, =theming=, and =modifier generator helpers=, so teams can build consistent interfaces without writing the same styles again and again.
+Termeh is a *__modern__*, *__responsive__*, and *__modular__* CSS framework for building scalable user interfaces. Written entirely in __*Sass*__ with __no external dependencies__, it offers *ready-to-use components*, *responsive design utilities*, *theming*, *palette and color utilities*, *modifier generator helpers*, and *utility functions and mixins*, so teams can build consistent interfaces without writing the same styles again and again.
 
 ## Installation
 
@@ -35,7 +27,7 @@ pnpm add -D termeh
 
 ## Usage
 
-To get started, import Termeh into a __Sass__ file, define your design tokens, include the components you need, and output the CSS variables.
+To get started, import Termeh into a *__Sass__* file, *define your design tokens*, *include the components you need*, and *output the CSS variables*.
 
 ```scss
 @use "termeh";
@@ -70,28 +62,28 @@ To get started, import Termeh into a __Sass__ file, define your design tokens, i
 
 Termeh works in three steps:
 
-1. =Define= your values.
-2. =Include= the components you need.
-3. =Output= the CSS variables for each scheme.
+1. __Define__ your values.
+2. __Include__ the components you need.
+3. __Output__ the CSS variables for each scheme.
 
-Components never hard-code _variables_, _colors_, _spacing_, or _sizes_. Instead, they read these values as __CSS variables__. As a result, switching to another scheme restyles every component without recompiling or changing your own styles.
+Components never hard-code *variables*, *colors*, *spacing*, or *sizes*. Instead, they read these values as *__CSS variables__*. As a result, *switching* to another scheme restyles every component without recompiling or changing your own styles.
 
 ### Define Values
 
-Termeh stores your design system in four token groups: __variables__, __palettes__, __gaps__, and __sizes__. Each group has a `define-*` mixin to =set a value= and an `override-*` mixin to =replace it= for a specific @scheme@.
+Termeh stores your design system in four token groups: __variables__, __palettes__, __gaps__, and __sizes__. Each group has a `define-*` mixin to *set a value* and an `override-*` mixin to *replace it* for a specific __*scheme*__.
 
-A @scheme@ is a named theme, such as `dark`. Values you define belong to the =default scheme=. A scheme only needs to override what is different, and everything else falls back to the default value.
+A *__scheme__* is a named theme, such as `"dark"`{scss}. Values you define belong to the __default scheme__. A scheme only needs to override what is different, and everything else *falls back to the default value*.
 
-__Variables__ store =component-specific values=, such as a _font family_ or a _border radius_. Each component has its own variables that control its appearance and behavior. See the documentation of each component for the variables it uses.
+*__Variables__* store __component-specific__ values, such as a *font family* or a *border radius*. Each component has its own variables that control its appearance and behavior. See the documentation of each component for the variables it uses.
 
 ```scss
 @mixin define($component, $property, $value);
 @mixin override($scheme, $component, $property, $value);
 ```
 
-__Palettes__ store the =colors= of your theme. Every theme needs a __base__ palette, which holds its main color and decides whether the theme is light or dark. Every other palette (_primary_, _success_, _error_ and so on) is used to generate modifiers such as `is-primary`.
+*__Palettes__* store the __colors__ of your theme. Every theme needs a __*base palette*__, which holds its main color and decides whether the theme is *light* or *dark*. Every other palette (*primary*, *success*, *error* and so on) is used to generate modifiers such as `is-primary`.
 
-::: note
+::: info
 See [Palette Reference](/guide/reference/palette) for more details.
 :::
 
@@ -100,9 +92,9 @@ See [Palette Reference](/guide/reference/palette) for more details.
 @mixin override-palette($scheme, $name, $color);
 ```
 
-Each palette can have __variants__, such as a _hover_ or a _surface_ shade. Define a variant yourself, or leave it out and let @resolvers@ generate it from the palette color. A variant can also be limited to a single component:
+Each palette can have *__variants__*, such as a *hover* or a *surface* shade. Define a variant yourself, or leave it out and let __*resolvers*__ generate it from the palette color. A variant can also be limited to a single component:
 
-::: note
+::: info
 See [Resolvers](/guide/reference/resolver) for more details.
 :::
 
@@ -118,14 +110,14 @@ See [Resolvers](/guide/reference/resolver) for more details.
 );
 ```
 
-__Gaps__ store =spacing values= shared by components, such as _padding_, _margin_, and _grid gaps_. Prefer the `em` unit, so spacing scales with the font size of each component.
+*__Gaps__* store __spacing values__ shared by components, such as *padding*, *margin*, and *grid gaps*. Prefer the `em`{scss} unit, so spacing scales with the font size of each component.
 
 ```scss
 @mixin define-gap($name, $value);
 @mixin override-gap($scheme, $name, $value);
 ```
 
-__Sizes__ store =dimension values= shared by elements, such as _text_, _buttons_, _avatars_, and _icons_.
+*__Sizes__* store __dimension values__ shared by elements, such as *text*, *button*, *avatar*, and *icon*.
 
 ```scss
 @mixin define-size($name, $value);
@@ -134,16 +126,16 @@ __Sizes__ store =dimension values= shared by elements, such as _text_, _buttons_
 
 ### Use Components
 
-Each `use-*` mixin emits the styles of one component, such as `use-button` or `use-grid`. Many of them accept a list of __variations__, such as `$colors`, `$gaps`, or `$sizes`, and generate a =modifier class= for each value.
+Each `use-*` mixin emits the styles of one component, such as `use-button` or `use-grid`. Many of them accept a list of *__variations__*, such as `$colors`{scss}, `$gaps`{scss}, or `$sizes`{scss}, and generate a __modifier class__ for each value.
 
-:::note
-You can create your own components with `use-*` mixins that follow the same pattern as the built-in ones. See [Extending Section](./extending) for more details.
+::: tip
+You can create your own components with `use-*` mixins that follow the same pattern as the built-in ones. See [Extending Section](/guide/extending) for more details.
 :::
 
 ### Output Variables
 
-Termeh collects the values that your components use while they are included. Then `variables()` writes them as CSS custom properties. Include it in `:root` to output the default scheme, and pass a scheme name, such as `"dark"`, to output that scheme under its own selector.
+Termeh collects the values that your components use while they are included. Then `variables()` writes them as CSS custom properties. Include it in `:root` to output the default scheme, and pass a scheme name, such as `"dark"`{scss}, to output that scheme under its own selector.
 
-::: tip
+::: tip Tip
 Call `variables()` after you include all your components, otherwise the values they use are not output.
 :::

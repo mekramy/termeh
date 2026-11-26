@@ -104,7 +104,7 @@ html {
 
             > strong {
                 color: inherit;
-                font-style: normal;
+                text-shadow: none;
                 color: var(--ctp-latte-sky);
             }
 
@@ -116,16 +116,17 @@ html {
         strong {
             padding: 0 2px;
             font-weight: 600;
-            font-style: oblique;
-            font-size: 0.875em;
+            font-size: 0.825em;
             font-family: var(--font-code);
             text-transform: capitalize;
+            text-shadow: inherit;
 
             > em {
                 font-style: normal;
                 font-weight: inherit;
                 text-transform: inherit;
                 text-decoration: none;
+                text-shadow: none;
                 color: var(--ctp-latte-flamingo);
             }
         }
@@ -137,10 +138,6 @@ html {
         li {
             &::marker {
                 color: var(--ctp-latte-sky);
-            }
-
-            strong {
-                color: inherit;
             }
         }
     }
