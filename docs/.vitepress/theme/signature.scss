@@ -13,62 +13,12 @@
     }
 
     > table {
-        border: none;
         margin: 0 0 2rem;
+    }
 
-        thead {
-            tr {
-                border-top: none;
-                background-color: transparent;
-
-                th {
-                    font-size: 0.75rem;
-                    font-weight: 500;
-                    border-top: none;
-                    color: var(--vp-c-text-3);
-                    background-color: transparent;
-
-                    &:first-child {
-                        border-inline-start: none;
-                    }
-
-                    &:last-child {
-                        border-inline-end: none;
-                    }
-                }
-            }
-        }
-
-        tr {
-            background-color: transparent;
-
-            td {
-                border-bottom: none;
-                background-color: transparent;
-
-                &:first-child {
-                    border-inline-start: none;
-                }
-
-                &:last-child {
-                    border-inline-end: none;
-                }
-            }
-        }
-
-        code {
-            font-weight: 500;
-            font-size: 0.875rem;
-            white-space: nowrap;
-            background-color: transparent;
-        }
-
-        td:first-child {
-            code {
-                color: var(--vp-c-text-1);
-                background-color: var(--vp-c-bg-elv);
-                user-select: all;
-            }
-        }
+    div[class*="language-"]:first-child {
+        border-radius: 4px;
+        margin-inline: -1rem;
+        background: var(--vp-c-bg-elv);
     }
 }

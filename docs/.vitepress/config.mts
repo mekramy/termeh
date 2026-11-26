@@ -7,24 +7,20 @@ import {
 } from "vitepress-plugin-group-icons";
 import llmstxt from "vitepress-plugin-llms";
 import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
+
+import Sidebar from "./sidebar";
 import theme from "./theme";
 
-import {
-    inlineCode,
-    inline_marks_plugin,
-    tableFallbackPlugin,
-} from "./plugins";
-
-import ErrorBlock from "./elements/quote.error";
-import ModuleBlock from "./elements/quote.module";
+import Error from "./elements/block.error";
+import Info from "./elements/block.info";
+import Tip from "./elements/block.tip";
+import Warn from "./elements/block.warn";
 
 import Block from "./elements/block";
 import Appendix from "./elements/block.appendix";
-import Note from "./elements/block.note";
-import Resolver from "./elements/block.resolver";
-import Scheme from "./elements/scheme";
-import Signature from "./elements/signature";
-import Sidebar from "./sidebar";
+import Signature from "./elements/block.signature";
+
+import { inlineCode, tableFallbackPlugin } from "./plugins";
 
 // https://vitepress.dev/reference/site-config
 let highlighter: Highlighter;
@@ -85,20 +81,17 @@ export default defineConfig({
             md.use(groupIconMdPlugin as never);
             md.use(tabsMarkdownPlugin as never);
 
-            md.use(inlineCode as never, highlighter);
-            md.use(tableFallbackPlugin);
-            md.use(inline_marks_plugin);
-
-            md.use(container as never, "error", ErrorBlock);
-            md.use(container as never, "module", ModuleBlock);
-
-            md.use(container as never, "scheme", Scheme);
-            md.use(container as never, "signature", Signature);
+            md.use(container as never, "tip", Tip);
+            md.use(container as never, "info", Info);
+            md.use(container as never, "warn", Warn);
+            md.use(container as never, "error", Error);
 
             md.use(container as never, "block", Block);
-            md.use(container as never, "note", Note);
             md.use(container as never, "appendix", Appendix);
-            md.use(container as never, "resolver", Resolver);
+            md.use(container as never, "signature", Signature);
+
+            md.use(tableFallbackPlugin);
+            md.use(inlineCode as never, () => highlighter);
         },
     },
     vite: {
@@ -108,11 +101,6 @@ export default defineConfig({
                     llmsTxt: ["ai.md"],
                     llmsFullTxt: ["ai.md"],
                 },
-                customLLMsTxtTemplate: `# {title}
-
-> **Note for AI agents:** In this documentation, the characters \`=\`, \`~\` and \`@\` may appear as inline markers wrapping text (e.g. \`=text=\`, \`~text~\`, \`@text@\`). They are custom presentation markers (rendered as <q>, <ins>, <mark> on the website), not part of the content. Ignore the markers and read the wrapped text normally.
-
-{toc}`,
             }),
             groupIconVitePlugin(),
         ],

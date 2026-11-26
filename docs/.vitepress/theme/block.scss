@@ -1,128 +1,37 @@
-.vp-doc .custom-block {
+.vp-doc .custom-block.is-block {
+    position: relative;
+    padding: 1rem;
+    margin: 1rem 0;
+    margin-top: 3rem;
+    border-top-left-radius: 0;
+    border: 1px solid var(--vp-button-alt-text);
+
     .custom-block-title {
-        font-family: var(--font-title);
-    }
-
-    p {
-        font-family: var(--font-text);
-        text-shadow: none;
-    }
-
-    &.is-block {
-        position: relative;
-        padding: 1rem;
-        margin: 1rem 0;
-        margin-top: 3rem;
-        border-top-left-radius: 0;
-        border: 1px solid var(--vp-button-alt-text);
-
-        h1 {
-            display: block;
-            position: absolute;
-            top: 1px;
-            left: -1px;
-            line-height: 1;
-            padding: 0.5rem 1em;
-            border-radius: 2px;
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-            transform: translateY(-100%);
-
-            font-weight: 900;
-            font-size: 0.65rem;
-            font-family: var(--font-text);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-
-            color: var(--vp-button-alt-bg);
-            background-color: var(--vp-button-alt-text);
-        }
-
-        table {
-            strong {
-                font-weight: 500;
-                white-space: nowrap;
-            }
-
-            mark {
-                padding: 0.3em 0.7em;
-                font-size: 0.65rem;
-                letter-spacing: 1px;
-                text-transform: uppercase;
-                white-space: nowrap;
-
-                border-radius: 999px;
-                color: var(--vp-custom-block-caution-text);
-                background-color: var(--vp-custom-block-caution-bg);
-            }
-
-            code {
-                font-weight: 500;
-                font-size: 0.875rem;
-                white-space: nowrap;
-                background-color: transparent;
-            }
-        }
-
-        .demo-container {
-            width: calc(100% + 2rem);
-            margin: -1rem;
-            margin-bottom: 1rem;
-            border-top-left-radius: inherit;
-            border-top-right-radius: inherit;
-        }
-
-        &.is-resolver {
-            border-color: var(--ctp-latte-green);
-
-            h1 {
-                background-color: var(--ctp-latte-green);
-            }
-        }
-    }
-
-    &.note,
-    &.tip,
-    &.info,
-    &.warning {
-        padding: 0.6rem 1.2rem;
-        box-sizing: border-box;
+        display: block;
+        position: absolute;
+        top: 1px;
+        left: -1px;
+        line-height: 1;
+        padding: 0.5rem 1em;
         border-radius: 2px;
-        border-start-start-radius: 0;
-        border-end-start-radius: 0;
-        background: none;
-        box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        transform: translateY(-100%);
 
-        border-left: 2px solid var(--cb-border);
-        background-color: rgb(from var(--cb-border) r g b / 0.05);
+        font-weight: 900;
+        font-size: 0.65rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
 
-        .custom-block-title,
-        a {
-            color: var(--cb-accent);
-        }
-
-        code {
-            background-color: rgb(from var(--cb-border) r g b / 0.1);
-        }
+        color: var(--vp-button-alt-bg);
+        background-color: var(--vp-button-alt-text);
     }
 
-    &.note {
-        --cb-border: var(--ctp-latte-sky);
-        --cb-accent: var(--ctp-latte-sky);
-    }
-
-    &.tip {
-        --cb-border: var(--ctp-latte-green);
-        --cb-accent: var(--ctp-latte-green);
-    }
-
-    &.info {
-        --cb-border: var(--ctp-latte-sapphire);
-        --cb-accent: var(--ctp-latte-sapphire);
-    }
-
-    &.warning {
-        --cb-border: var(--ctp-latte-yellow);
-        --cb-accent: var(--ctp-latte-yellow);
+    .demo-container {
+        width: calc(100% + 2rem);
+        margin: -1rem;
+        margin-bottom: 1rem;
+        border-top-left-radius: inherit;
+        border-top-right-radius: inherit;
     }
 }
