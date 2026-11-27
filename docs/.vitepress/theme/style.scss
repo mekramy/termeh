@@ -13,7 +13,7 @@
     --vp-c-brand-1: #2196f3;
     --vp-c-brand-2: #2191f3;
     --vp-c-brand-3: #2183f3;
-    --vp-type: #df8e1d;
+    --vp-type: #cf7f17;
 }
 
 html {
@@ -166,9 +166,9 @@ html {
     ul,
     table {
         em {
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 0.875em;
             font-family: var(--font-code);
-            font-style: oblique;
             text-decoration: none;
             color: var(--vp-type);
 
