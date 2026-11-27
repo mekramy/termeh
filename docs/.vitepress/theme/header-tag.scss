@@ -1,0 +1,90 @@
+.vp-doc {
+    h1 + blockquote {
+        --header-tag-color: var(--ctp-latte-overlay1);
+
+        padding: 0;
+        border: none;
+
+        p {
+            display: flex;
+            gap: 8px;
+        }
+
+        strong {
+            cursor: help;
+            user-select: none;
+            display: inline-block;
+            padding: 0.6em 1.2em;
+            border-radius: 3px;
+            transition: background-color 300ms ease;
+
+            font-weight: 600;
+            font-size: 0.65em;
+            font-family: var(--font-code);
+            line-height: 1em;
+            letter-spacing: 1px;
+            white-space: nowrap;
+            text-transform: uppercase;
+            text-decoration: none;
+            text-shadow: none;
+
+            color: var(--vp-c-brand-3);
+            background-color: rgb(from var(--vp-c-brand-3) r g b / 0.1);
+
+            &:hover {
+                color: var(--vp-c-brand-3);
+                background-color: rgb(from var(--vp-c-brand-3) r g b / 0.25);
+            }
+
+            &[data-type="utils"] {
+                color: var(--ctp-latte-teal);
+                background-color: rgb(from var(--ctp-latte-teal) r g b / 0.1);
+
+                &:hover {
+                    color: var(--ctp-latte-teal);
+                    background-color: rgb(from var(--ctp-latte-teal) r g b / 0.25);
+                }
+            }
+
+            &[data-type="scheme-var"] {
+                color: var(--ctp-latte-lavender);
+                background-color: rgb(from var(--ctp-latte-lavender) r g b / 0.1);
+
+                &:hover {
+                    color: var(--ctp-latte-lavender);
+                    background-color: rgb(from var(--ctp-latte-lavender) r g b / 0.25);
+                }
+            }
+
+            &[data-type="colorize"] {
+                color: var(--ctp-latte-rosewater);
+                background-color: rgb(from var(--ctp-latte-rosewater) r g b / 0.1);
+
+                &:hover {
+                    color: var(--ctp-latte-rosewater);
+                    background-color: rgb(from var(--ctp-latte-rosewater) r g b / 0.25);
+                }
+            }
+
+            &[data-type="sizes"] {
+                color: var(--ctp-latte-green);
+                background-color: rgb(from var(--ctp-latte-green) r g b / 0.1);
+
+                &:hover {
+                    color: var(--ctp-latte-green);
+                    background-color: rgb(from var(--ctp-latte-green) r g b / 0.25);
+                }
+            }
+
+            &[data-type="gaps"] {
+                color: var(--ctp-latte-yellow);
+                background-color: rgb(from var(--ctp-latte-yellow) r g b / 0.1);
+
+                &:hover {
+                    color: var(--ctp-latte-yellow);
+                    background-color: rgb(from var(--ctp-latte-yellow) r g b / 0.25);
+                }
+            }
+        }
+    }
+}

@@ -68,22 +68,14 @@ Pass the keyframe rules as the content block.
 
 __Emits__ the default *__spin__* keyframes, which rotate an element a full turn. If __spin__ is already defined with `define-spin`, this mixin emits nothing.
 
-::: signature
-
 ```scss
 @mixin spin();
 ```
-
-:::
 
 ## Shake
 
 __Emits__ the default *__shake__* keyframes, which move an element from side to side. If __shake__ is already defined with `define-shake`, this mixin emits nothing.
 
-::: signature
-
 ```scss
 @mixin shake();
 ```
-
-:::

@@ -204,9 +204,9 @@
 ///
 /// @output The content when the document direction is `"ltr"`, and again inside `&.is-ltr`
 ///
-/// @require {Variable<Direction>} var("document", "direction") - Document direction
+/// @require {Direction} value("document", "direction") - Document direction
 @mixin is-ltr() {
-    $direction: var.var("document", "direction");
+    $direction: var.value("document", "direction");
 
     @if $direction == "ltr" {
         @content;
@@ -221,9 +221,9 @@
 ///
 /// @output The content when the document direction is `"rtl"`, and again inside `&.is-rtl`
 ///
-/// @require {Variable<Direction>} var("document", "direction") - Document direction
+/// @require {Direction} value("document", "direction") - Document direction
 @mixin is-rtl() {
-    $direction: var.var("document", "direction");
+    $direction: var.value("document", "direction");
 
     @if $direction == "rtl" {
         @content;

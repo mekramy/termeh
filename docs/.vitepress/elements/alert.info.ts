@@ -6,9 +6,9 @@ export default {
         const title = token.info.trim().slice(4).trim();
         if (token.nesting === 1) {
             return title
-                ? `<div class="warn custom-block">\n
+                ? `<div class="custom-block alert info">\n
                     <p class="custom-block-title">${title}</p>`
-                : `<div class="warn custom-block">\n`;
+                : `<div class="custom-block alert info">\n`;
         } else {
             return "</div>\n";
         }

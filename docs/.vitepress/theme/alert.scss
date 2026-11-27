@@ -1,46 +1,50 @@
-.vp-doc .custom-block {
-    &.tip,
-    &.info,
-    &.warn,
-    &.error {
-        padding: 0.6rem 1.2rem;
-        box-sizing: border-box;
-        font-weight: 500;
-        border-radius: 2px;
-        border-start-start-radius: 0;
-        border-end-start-radius: 0;
-        box-shadow: rgba(33, 35, 38, 0.15) 0px 5px 5px -5px;
+.vp-doc .custom-block.alert {
+    --cb-border: var(--vp-c-text-2);
+    --cb-accent: var(--vp-c-text-2);
 
+    padding: 0.6rem 1.2rem;
+    box-sizing: border-box;
+    font-weight: 500;
+    font-size: 0.825em;
+    border-radius: 2px;
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+    box-shadow: rgba(33, 35, 38, 0.15) 0px 5px 5px -5px;
+
+    color: var(--vp-c-text-1);
+    border-inline-start: 2px solid var(--cb-border);
+    background-color: rgb(from var(--cb-border) r g b / 0.05);
+
+    .custom-block-title {
+        text-transform: uppercase;
+        color: var(--cb-accent);
+    }
+
+    code {
+        text-shadow: inherit;
         color: var(--vp-c-text-1);
-        border-inline-start: 2px solid var(--cb-border);
-        background-color: rgb(from var(--cb-border) r g b / 0.05);
+        background-color: rgb(from var(--cb-border) r g b / 0.1);
+    }
 
-        .custom-block-title {
-            text-transform: uppercase;
+    a {
+        font-weight: 600;
+        font-size: 0.925em;
+        font-family: var(--font-code);
+        color: var(--cb-accent);
+    }
+
+    em {
+        font-size: inherit;
+        font-weight: 600;
+        letter-spacing: 1px;
+        font-family: var(--font-code);
+        text-decoration-style: dashed;
+        text-decoration-thickness: 1px;
+
+        > strong {
+            font-size: inherit;
+            letter-spacing: -1px;
             color: var(--cb-accent);
-        }
-
-        code {
-            text-shadow: inherit;
-            color: var(--vp-c-text-1);
-            background-color: rgb(from var(--cb-border) r g b / 0.1);
-        }
-
-        a {
-            font-weight: 600;
-            font-size: 0.925em;
-            font-family: var(--font-code);
-            color: var(--cb-accent);
-        }
-
-        em {
-            font-weight: 600;
-            font-family: var(--font-code);
-            text-decoration-style: solid;
-
-            > strong {
-                color: var(--cb-accent);
-            }
         }
     }
 

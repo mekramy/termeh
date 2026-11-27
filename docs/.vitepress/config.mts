@@ -11,10 +11,11 @@ import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
 import Sidebar from "./sidebar";
 import theme from "./theme";
 
-import Error from "./elements/block.error";
-import Info from "./elements/block.info";
-import Tip from "./elements/block.tip";
-import Warn from "./elements/block.warn";
+import Alert from "./elements/alert";
+import Error from "./elements/alert.error";
+import Info from "./elements/alert.info";
+import Tip from "./elements/alert.tip";
+import Warn from "./elements/alert.warn";
 
 import Block from "./elements/block";
 import Appendix from "./elements/block.appendix";
@@ -65,6 +66,7 @@ export default defineConfig({
             md.use(groupIconMdPlugin as never);
             md.use(tabsMarkdownPlugin as never);
 
+            md.use(container as never, "alert", Alert);
             md.use(container as never, "tip", Tip);
             md.use(container as never, "info", Info);
             md.use(container as never, "warn", Warn);

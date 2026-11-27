@@ -7,6 +7,7 @@ import "virtual:group-icons.css";
 import "./alert.scss";
 import "./appendix.scss";
 import "./block.scss";
+import "./header-tag.scss";
 import "./signature.scss";
 import "./style.scss";
 
